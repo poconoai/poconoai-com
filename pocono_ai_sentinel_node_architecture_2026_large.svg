@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="3840" height="2160" viewBox="0 0 3840 2160" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="3840" y2="2160">
+      <stop offset="0%" stop-color="#071014"/>
+      <stop offset="45%" stop-color="#0B1C22"/>
+      <stop offset="100%" stop-color="#102C32"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#152B32"/>
+      <stop offset="100%" stop-color="#0B1A20"/>
+    </linearGradient>
+    <linearGradient id="data" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#173C41"/>
+      <stop offset="100%" stop-color="#0C2529"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="24" stdDeviation="26" flood-color="#000000" flood-opacity="0.35"/>
+    </filter>
+    <marker id="arrow" markerWidth="18" markerHeight="18" refX="16" refY="9" orient="auto">
+      <path d="M2,2 L16,9 L2,16 Z" fill="#74D7C4"/>
+    </marker>
+    <style>
+      .title { font-family: Inter, Arial, sans-serif; font-size: 86px; font-weight: 800; fill: #F4FAF8; letter-spacing: -2px; }
+      .subtitle { font-family: Inter, Arial, sans-serif; font-size: 36px; font-weight: 500; fill: #B9D6D1; }
+      .kicker { font-family: Inter, Arial, sans-serif; font-size: 26px; font-weight: 700; fill: #7BE2CD; letter-spacing: 5px; text-transform: uppercase; }
+      .section { font-family: Inter, Arial, sans-serif; font-size: 38px; font-weight: 800; fill: #F2FBF8; }
+      .label { font-family: Inter, Arial, sans-serif; font-size: 28px; font-weight: 700; fill: #F3FAF7; }
+      .small { font-family: Inter, Arial, sans-serif; font-size: 23px; font-weight: 500; fill: #BBD4D0; }
+      .tiny { font-family: Inter, Arial, sans-serif; font-size: 20px; font-weight: 600; fill: #9FC4BE; }
+      .badge { font-family: Inter, Arial, sans-serif; font-size: 24px; font-weight: 800; fill: #071014; }
+      .muted { fill: #789C98; }
+      .line { stroke: #74D7C4; stroke-width: 6; stroke-linecap: round; marker-end: url(#arrow); opacity: 0.88; }
+      .thin { stroke: #31575D; stroke-width: 3; stroke-dasharray: 14 16; }
+      .boundary { stroke: #7BE2CD; stroke-width: 7; stroke-dasharray: 24 20; opacity: .95; }
+      .box { fill: url(#panel); stroke: #31575D; stroke-width: 3; rx: 34; filter: url(#shadow); }
+      .box2 { fill: #0E2228; stroke: #31575D; stroke-width: 3; rx: 28; }
+      .dataBox { fill: url(#data); stroke: #7BE2CD; stroke-width: 3; rx: 30; filter: url(#shadow); }
+      .nativeBox { fill: #17252D; stroke: #4F7E86; stroke-width: 3; rx: 30; filter: url(#shadow); }
+      .redline { stroke: #F2B8A2; stroke-width: 5; stroke-dasharray: 18 18; opacity: .7; }
+    </style>
+  </defs>
+
+  <rect width="3840" height="2160" fill="url(#bg)"/>
+  <circle cx="3540" cy="170" r="420" fill="#1E6A65" opacity="0.12"/>
+  <circle cx="270" cy="1950" r="520" fill="#64D6C7" opacity="0.08"/>
+
+  <text x="180" y="150" class="kicker">POCONO AI SENTINEL NODE ARCHITECTURE</text>
+  <text x="180" y="245" class="title">Sovereign Local AI Infrastructure</text>
+  <text x="180" y="305" class="subtitle">Containerized application plane • native hardware/runtime plane • persistent encrypted data plane</text>
+
+  <rect x="150" y="390" width="3540" height="1450" rx="58" fill="none" class="boundary"/>
+  <text x="205" y="450" class="badge">
+    <tspan fill="#071014">.</tspan>
+  </text>
+  <rect x="205" y="405" width="525" height="58" rx="29" fill="#7BE2CD"/>
+  <text x="240" y="444" class="badge">CLIENT TRUST BOUNDARY — LOCAL ENVIRONMENT</text>
+
+  <rect x="2850" y="405" width="735" height="58" rx="29" fill="#142B31" stroke="#7BE2CD" stroke-width="2"/>
+  <text x="2890" y="444" class="small">No cloud inference • No outbound data telemetry • Local custody</text>
+
+  <!-- External users -->
+  <rect x="225" y="550" width="520" height="1010" class="box"/>
+  <text x="285" y="620" class="section">User Plane</text>
+  <text x="285" y="666" class="small">Authorized local staff access the appliance through</text>
+  <text x="285" y="699" class="small">secure thin-client workflows.</text>
+
+  <rect x="295" y="780" width="380" height="120" class="box2"/>
+  <text x="335" y="830" class="label">Clinical Staff</text>
+  <text x="335" y="868" class="small">Physicians, nurses, admins</text>
+
+  <rect x="295" y="945" width="380" height="120" class="box2"/>
+  <text x="335" y="995" class="label">Legal Staff</text>
+  <text x="335" y="1033" class="small">Attorneys, paralegals</text>
+
+  <rect x="295" y="1110" width="380" height="120" class="box2"/>
+  <text x="335" y="1160" class="label">Admin Users</text>
+  <text x="335" y="1198" class="small">Local operations team</text>
+
+  <rect x="295" y="1350" width="380" height="110" rx="55" fill="#7BE2CD"/>
+  <text x="350" y="1418" class="badge">Local Web / Mobile UI</text>
+
+  <!-- Application Plane -->
+  <rect x="910" y="550" width="720" height="1010" class="box"/>
+  <text x="970" y="620" class="section">Application Plane</text>
+  <text x="970" y="666" class="small">Replaceable containerized services managed</text>
+  <text x="970" y="699" class="small">through a deterministic deployment layer.</text>
+
+  <rect x="980" y="770" width="280" height="105" class="box2"/>
+  <text x="1020" y="835" class="label">UI Service</text>
+  <rect x="1280" y="770" width="280" height="105" class="box2"/>
+  <text x="1318" y="835" class="label">API Gateway</text>
+
+  <rect x="980" y="910" width="280" height="105" class="box2"/>
+  <text x="1020" y="975" class="label">Workflow</text>
+  <rect x="1280" y="910" width="280" height="105" class="box2"/>
+  <text x="1320" y="975" class="label">Audit Service</text>
+
+  <rect x="980" y="1050" width="280" height="105" class="box2"/>
+  <text x="1020" y="1115" class="label">Ingestion</text>
+  <rect x="1280" y="1050" width="280" height="105" class="box2"/>
+  <text x="1320" y="1115" class="label">Scheduler</text>
+
+  <rect x="980" y="1225" width="580" height="115" rx="34" fill="#123139" stroke="#7BE2CD" stroke-width="3"/>
+  <text x="1032" y="1295" class="label">Container Orchestration Layer</text>
+  <text x="1040" y="1331" class="small">Docker Compose now • K3s/systemd-ready later</text>
+
+  <rect x="980" y="1390" width="580" height="82" rx="28" fill="#0A191E" stroke="#31575D" stroke-width="3"/>
+  <text x="1030" y="1444" class="small">Ephemeral services: patched, replaced, rolled back</text>
+
+  <!-- Inference Plane -->
+  <rect x="1785" y="550" width="720" height="1010" class="nativeBox"/>
+  <text x="1845" y="620" class="section">Native Runtime Plane</text>
+  <text x="1845" y="666" class="small">Hardware-adjacent services run natively where</text>
+  <text x="1845" y="699" class="small">GPU and memory stability matter most.</text>
+
+  <rect x="1860" y="780" width="570" height="125" class="box2"/>
+  <text x="1905" y="835" class="label">Local LLM Runtime</text>
+  <text x="1905" y="873" class="small">Ollama / vLLM / llama.cpp / future runtimes</text>
+
+  <rect x="1860" y="950" width="570" height="125" class="box2"/>
+  <text x="1905" y="1005" class="label">GPU Runtime + Drivers</text>
+  <text x="1905" y="1043" class="small">NVIDIA drivers, CUDA stack, health watchdogs</text>
+
+  <rect x="1860" y="1120" width="570" height="125" class="box2"/>
+  <text x="1905" y="1175" class="label">Model Cache</text>
+  <text x="1905" y="1213" class="small">Local model weights, quantized variants, manifests</text>
+
+  <rect x="1860" y="1290" width="570" height="125" class="box2"/>
+  <text x="1905" y="1345" class="label">Systemd Managed Services</text>
+  <text x="1905" y="1383" class="small">Restart policies, boot ordering, host monitoring</text>
+
+  <rect x="1860" y="1450" width="570" height="82" rx="28" fill="#0A191E" stroke="#4F7E86" stroke-width="3"/>
+  <text x="1910" y="1504" class="small">Inference remains local inside the client boundary</text>
+
+  <!-- Data Plane -->
+  <rect x="2660" y="550" width="810" height="1010" class="dataBox"/>
+  <text x="2720" y="620" class="section">Sovereign Data Plane</text>
+  <text x="2720" y="666" class="small">Persistent encrypted storage on dedicated</text>
+  <text x="2720" y="699" class="small">local SSD/RAID media. This is not inside images.</text>
+
+  <rect x="2735" y="765" width="660" height="110" class="box2"/>
+  <text x="2780" y="832" class="label">Vector Database Storage</text>
+
+  <rect x="2735" y="905" width="660" height="110" class="box2"/>
+  <text x="2780" y="972" class="label">Source Document Repository</text>
+
+  <rect x="2735" y="1045" width="660" height="110" class="box2"/>
+  <text x="2780" y="1112" class="label">Embeddings + Retrieval Indexes</text>
+
+  <rect x="2735" y="1185" width="660" height="110" class="box2"/>
+  <text x="2780" y="1252" class="label">Audit Logs + Evidence Receipts</text>
+
+  <rect x="2735" y="1325" width="660" height="110" class="box2"/>
+  <text x="2780" y="1392" class="label">Backups + Retention Archives</text>
+
+  <rect x="2735" y="1465" width="660" height="75" rx="28" fill="#7BE2CD"/>
+  <text x="2830" y="1514" class="badge">Persistent, encrypted, locally retained</text>
+
+  <!-- Infrastructure plane -->
+  <rect x="225" y="1685" width="3245" height="225" rx="42" fill="#08181D" stroke="#31575D" stroke-width="3" filter="url(#shadow)"/>
+  <text x="285" y="1760" class="section">Infrastructure Plane</text>
+  <text x="285" y="1810" class="small">Ubuntu Server LTS • systemd • container runtime • local network controls • storage health monitoring • update/rollback services</text>
+  <text x="285" y="1860" class="small">The software layer is replaceable. The institutional memory, audit record, source corpus, and retrieval indexes remain local and persistent.</text>
+
+  <!-- Connectors -->
+  <line x1="745" y1="1405" x2="905" y2="1280" class="line"/>
+  <line x1="1630" y1="1120" x2="1780" y2="865" class="line"/>
+  <line x1="1630" y1="1285" x2="2660" y2="1130" class="line"/>
+  <line x1="2505" y1="845" x2="2660" y2="820" class="line"/>
+  <line x1="2505" y1="1180" x2="2660" y2="1100" class="line"/>
+
+  <!-- No cloud exfiltration redline -->
+  <line x1="3480" y1="960" x2="3690" y2="960" class="redline"/>
+  <text x="2855" y="1665" class="small">Outbound policy: updates may be staged and approved; client data does not leave the local trust boundary.</text>
+
+  <!-- Bottom callout -->
+  <rect x="720" y="1970" width="2400" height="105" rx="52" fill="#7BE2CD"/>
+  <text x="890" y="2038" class="badge" style="font-size:32px;">Canonical principle: containers are disposable; sovereign data disks are sacred.</text>
+</svg>

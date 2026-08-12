@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp -->
+<head>
+<meta charset="UTF-8">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Installer training for Sentinel Node deployment: pre-install readiness, hardware custody, local network, approved sources, egress verification, audit log, Day Zero/Day One, and handoff checklist. For Pocono AI staff, technical partners, and MSPs acting as installers.">
+<title>Installer Training: Deployment, Local Controls, and Handoff Readiness | Pocono AI</title>
+<meta property="og:title" content="Installer Training: Deployment, Local Controls, and Handoff Readiness | Pocono AI">
+<meta property="og:description" content="Sentinel Node installer training: pre-install readiness, hardware custody, local network configuration, approved sources, no-egress verification, audit log, and installer go/no-go checklist.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Pocono AI">
+<meta property="og:url" content="https://poconoai.com/installer-training.html">
+<meta property="og:image" content="https://poconoai.com/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Installer Training | Pocono AI">
+<meta name="twitter:description" content="Deployment installer training: pre-install, egress verification, audit log, Day Zero/Day One, and handoff. For Pocono AI staff, partners, and MSPs.">
+<link rel="stylesheet" href="styles.css?v=402">
+<link rel="stylesheet" href="nav-v2026.css?v=402">
+<link rel="stylesheet" href="brand-v292.css?v=402">
+<link rel="canonical" href="https://poconoai.com/installer-training.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="favicon.ico">
+<style>
+/* Training page local styles */
+.tr-wrap { max-width: 980px; margin: 0 auto; padding: clamp(24px,4vw,52px) 24px clamp(48px,7vw,96px); }
+
+/* Hero */
+.tr-hero {
+  background: linear-gradient(165deg, #061018 0%, #04111a 100%);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  padding: clamp(52px,7vw,88px) 24px clamp(40px,5vw,60px);
+  text-align: center;
+}
+.tr-hero-inner { max-width: 900px; margin: 0 auto; }
+.tr-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 0.73rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+  color: #00c2a8; border: 1px solid rgba(0,194,168,0.4); border-radius: 999px;
+  padding: 5px 14px; margin-bottom: 20px;
+}
+.tr-hero h1 {
+  font-size: clamp(2rem,5vw,3.1rem); line-height: 1.08; color: #fff;
+  margin: 0 0 14px; letter-spacing: -0.02em; font-weight: 800;
+}
+.tr-hero .sub {
+  font-size: clamp(1.05rem,2.4vw,1.3rem); color: #cfe0ea; max-width: 660px;
+  margin: 0 auto 24px; line-height: 1.55; font-weight: 600;
+}
+.tr-hero .lede { font-size: 1.06rem; color: #90a8ba; max-width: 680px; margin: 0 auto 28px; line-height: 1.65; }
+.tr-cta-row { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+.tr-btn {
+  display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px;
+  border-radius: 8px; background: #00c2a8; color: #04111a;
+  font-weight: 700; font-size: 0.96rem; text-decoration: none;
+  border: 1px solid #00c2a8; transition: background 0.2s, transform 0.2s;
+}
+.tr-btn:hover { background: #00d9bb; transform: translateY(-1px); }
+.tr-btn.ghost {
+  background: transparent; color: #00c2a8;
+  border: 1px solid rgba(0,194,168,0.5);
+}
+.tr-btn.ghost:hover { background: rgba(0,194,168,0.1); border-color: rgba(0,194,168,0.85); color: #fff; }
+
+/* Jump nav */
+.tr-jump {
+  display: flex; flex-wrap: wrap; gap: 8px 6px; margin: 24px 0 0;
+  justify-content: center; font-size: 0.8rem;
+}
+.tr-jump a { color: #90a8ba; text-decoration: none; padding: 4px 10px;
+  border: 1px solid rgba(255,255,255,0.08); border-radius: 999px; }
+.tr-jump a:hover { color: #00c2a8; border-color: rgba(0,194,168,0.4); }
+
+/* Section styles */
+.tr-section { margin: clamp(40px,5vw,64px) 0 0; }
+.tr-section h2 {
+  font-size: clamp(1.5rem,3vw,2.05rem); color: #fff; margin: 0 0 8px;
+  letter-spacing: -0.01em; line-height: 1.15; scroll-margin-top: 80px;
+}
+.tr-section .section-label {
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+  color: #00c2a8; margin: 0 0 12px; display: block;
+}
+.tr-section p { font-size: 1rem; line-height: 1.72; color: #90a8ba; margin: 0 0 16px; }
+.tr-section p.em { color: #cfe0ea; }
+.tr-section a:not([class]) { color: #5dade2; text-underline-offset: 2px; }
+
+/* Cards */
+.tr-grid { display: grid; gap: 16px; margin: 20px 0; }
+.tr-g2 { grid-template-columns: repeat(auto-fit, minmax(300px,1fr)); }
+.tr-g3 { grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); }
+.tr-g4 { grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); }
+.tr-card {
+  background: #0a1f2e; border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px; padding: 20px 22px;
+}
+.tr-card.teal { border-color: rgba(0,194,168,0.25); background: linear-gradient(160deg,#0c2433,#0a1f2e); }
+.tr-card h3 { font-size: 1.06rem; color: #fff; margin: 0 0 8px; }
+.tr-card h3.teal { color: #00c2a8; }
+.tr-card p { font-size: 0.92rem; line-height: 1.6; color: #90a8ba; margin: 0; }
+.tr-card ul { margin: 6px 0 0; padding-left: 18px; font-size: 0.92rem; line-height: 1.72; color: #90a8ba; }
+
+/* Callouts */
+.tr-callout {
+  background: rgba(0,194,168,0.06); border: 1px solid rgba(0,194,168,0.22);
+  border-left: 4px solid #00c2a8; border-radius: 0 10px 10px 0;
+  padding: 18px 22px; margin: 20px 0; font-size: 1.01rem; line-height: 1.68; color: #cfe0ea;
+}
+.tr-callout strong { color: #fff; }
+.tr-callout.amber {
+  background: rgba(240,200,80,0.05); border-color: rgba(240,200,80,0.3);
+  border-left-color: #f0d47d; color: #c9b870;
+}
+.tr-callout.amber strong { color: #f0d47d; }
+.tr-callout.red {
+  background: rgba(220,80,80,0.05); border-color: rgba(220,80,80,0.25);
+  border-left-color: #e08a8a; color: #d8c2c2;
+}
+.tr-callout.red strong { color: #e08a8a; }
+
+/* Checklist */
+.tr-check { list-style: none; margin: 16px 0; padding: 0; }
+.tr-check li { padding: 7px 0 7px 26px; position: relative; font-size: 0.97rem; color: #90a8ba; line-height: 1.55; }
+.tr-check li::before { content: "✓"; position: absolute; left: 0; top: 7px; color: #00c2a8; font-weight: 800; }
+.tr-check.x li { color: #d8c2c2; }
+.tr-check.x li::before { content: "✕"; color: #e08a8a; }
+
+/* Steps */
+.tr-steps { counter-reset: step; }
+.tr-step { display: flex; gap: 16px; margin-bottom: 20px; }
+.tr-step-num {
+  flex-shrink: 0; width: 36px; height: 36px; border-radius: 8px;
+  background: #00c2a8; color: #04111a; font-weight: 800; font-size: 1.1rem;
+  display: flex; align-items: center; justify-content: center;
+}
+.tr-step-body h3 { font-size: 1.05rem; color: #fff; margin: 0 0 4px; }
+.tr-step-body p { font-size: 0.92rem; color: #90a8ba; margin: 0; line-height: 1.58; }
+
+/* Divider */
+.tr-divider { border: none; border-top: 1px solid rgba(255,255,255,0.07); margin: clamp(36px,5vw,56px) 0 0; }
+
+/* Closer */
+.tr-closer {
+  text-align: center;
+  background: linear-gradient(160deg, #061018, #04111a);
+  border: 1px solid rgba(0,194,168,0.2); border-radius: 16px;
+  padding: clamp(32px,5vw,56px) 24px; margin: clamp(40px,5vw,60px) 0 0;
+}
+.tr-closer h2 { font-size: clamp(1.6rem,3.8vw,2.4rem); color: #fff; margin: 0 0 12px; letter-spacing: -0.02em; }
+.tr-closer p { max-width: 62ch; margin: 0 auto 20px; color: #90a8ba; font-size: 1.06rem; line-height: 1.68; }
+.tr-closer .trio {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+  gap: 12px; max-width: 720px; margin: 0 auto 24px;
+}
+.tr-closer .trio-item {
+  background: rgba(0,194,168,0.08); border: 1px solid rgba(0,194,168,0.2);
+  border-radius: 10px; padding: 16px 18px;
+  font-size: 1.06rem; font-weight: 700; color: #00c2a8;
+}
+
+/* Also see row */
+.tr-also {
+  font-size: 0.88rem; color: #7d8c9a; margin-top: 20px; text-align: center;
+}
+.tr-also a { color: #90a8ba; text-underline-offset: 2px; }
+.tr-also a:hover { color: #00c2a8; }
+
+@media (max-width: 640px) {
+  .tr-cta-row .tr-btn { width: 100%; justify-content: center; }
+  .tr-jump { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- INCLUDE:HEADER -->
+<div id="hitl-notice" style="background:#0a1929;padding:4px 16px;text-align:center;font-size:12px;color:#4a5568;border-bottom:1px solid rgba(255,255,255,0.06);letter-spacing:0.01em;">Human-in-the-Loop required: licensed professionals verify all outputs before clinical or legal action</div>
+<header role="banner">
+  <div class="header-inner">
+    <a href="/index.html" class="logo" aria-label="Pocono AI Home">
+      <img src="/logo.svg?v=402" alt="" width="36" height="36" decoding="async" loading="eager" aria-hidden="true" style="display:inline-block;">
+      Pocono <span>AI</span>
+    </a>
+    <nav id="desktop-nav" aria-label="Main navigation">
+      <div class="nav-item"><a href="/index.html" class="nav-direct">Home</a></div>
+      <div class="nav-item"><a href="/for-physicians.html" class="nav-direct">Physicians</a></div>
+      <div class="nav-item"><a href="/for-attorneys.html" class="nav-direct">Attorneys</a></div>
+      <div class="nav-item"><a href="/sentinel-node.html" class="nav-direct nav-hub" style="color:#d5a94f;border:1px solid rgba(213,169,79,0.45);border-radius:999px;padding:6px 13px;">Sentinel Node</a></div>
+      <div class="nav-item"><a href="/living-memorials/" class="nav-direct">Living Echo</a></div>
+      <div class="nav-item"><a href="/contact.html" class="nav-direct">Contact</a></div>
+      <div class="nav-item" data-dropdown="menu-more">
+        <button type="button" class="nav-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="menu-more">More <span class="nav-chevron" aria-hidden="true">&#9662;</span></button>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <a href="/contact.html#pilot" class="nav-cta nav-cta-primary">Request a Pilot</a>
+      <button type="button" class="pa-search-trigger" data-search-open aria-label="Search (press / or Ctrl-K)" aria-haspopup="dialog" aria-expanded="false">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span class="pa-st-label">Search</span><kbd data-pa-keyhint>Ctrl K</kbd>
+      </button>
+      <button type="button" class="header-icon-btn" id="mobile-menu" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav-panel">
+        <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- "More" overflow dropdown — sibling of <header> so position:fixed escapes header's stacking context. Wired by nav.js via data-dropdown="menu-more". -->
+<div class="nav-dropdown" id="menu-more" aria-label="More navigation">
+  <p class="nav-dd-section">Products</p>
+  <a href="/engineering-drafting/">Drafting &amp; Engineering Edition</a>
+  <a href="/sentinel-home/">Sentinel Home Edition</a>
+  <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability — Assistive Tools &#x2605;</a>
+  <a href="/living-memorials/enterprise-estate-continuity.html">Enterprise Estate Continuity</a>
+  <p class="nav-dd-section">Capabilities</p>
+  <a href="/evidence-room.html">Evidence Room</a>
+  <a href="/push-button-deliverables.html">Push-Button Deliverables</a>
+  <a href="/pilot-readiness-kit.html">Pilot Kit</a>
+  <a href="/pilot-program.html">Pilot Program</a>
+  <a href="/how-it-works.html">How It Works</a>
+  <p class="nav-dd-section">Hubs &amp; Company</p>
+  <a href="/training.html">Training Hub</a>
+  <a href="/documentation-hub/">Document Hub</a>
+  <a href="/global/">Global Hub</a>
+  <a href="/investors-hub.html">Investor Hub</a>
+  <a href="/valuation-dashboard.html">Valuation Dashboard</a>
+  <a href="/about.html">About</a>
+  <p class="nav-dd-section">Trust &amp; Legal</p>
+  <a href="/transparency.html">Transparency</a>
+  <a href="/audit.html">Audit Log</a>
+  <a href="/privacy.html">Privacy</a>
+  <a href="/sitemap.html">Sitemap</a>
+</div>
+<!-- Site search is provided by the self-contained search.js asset (command palette: / or Ctrl/Cmd-K). -->
+
+<!-- Mobile panel: full-screen slide-in. v396 nav — hub tiles + grouped links + Sentinel Node + Engineering. -->
+<nav id="mobile-nav-panel" aria-label="Mobile navigation" aria-hidden="true" role="dialog" aria-modal="true">
+
+  <!-- Hub tiles: Sentinel Node, Documentation Hub, Training Hub, Global Hub -->
+  <div style="padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,0.07);">
+    <p style="font-size:0.65em;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.28);margin:0 0 10px;padding:0 2px;">Hubs</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <a href="/sentinel-node.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(213,169,79,0.1);border:1px solid rgba(213,169,79,0.35);border-radius:10px;color:#d5a94f;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Sentinel Node</a>
+      <a href="/documentation-hub/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(0,194,168,0.1);border:1px solid rgba(0,194,168,0.35);border-radius:10px;color:#00c2a8;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Docs Hub</a>
+      <a href="/training.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.35);border-radius:10px;color:#a78bfa;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Training Hub</a>
+      <a href="/global/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(122,240,220,0.07);border:1px solid rgba(122,240,220,0.3);border-radius:10px;color:#7af0dc;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Global Hub</a>
+    </div>
+  </div>
+
+  <!-- Core paths -->
+  <div class="mob-static-links">
+    <a href="/index.html">Home</a>
+    <a href="/for-physicians.html">Physicians</a>
+    <a href="/for-attorneys.html">Attorneys</a>
+    <a href="/engineering-drafting/">Engineering &amp; Drafting</a>
+    <a href="/pilot-program.html">Pilot Program</a>
+    <a href="/how-it-works.html">How It Works</a>
+    <a href="/trust.html">Trust &amp; Audit</a>
+    <a href="/pricing.html">Pricing</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/living-memorials/">Living Echo</a>
+    <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability</a>
+    <a href="/about.html">About</a>
+    <a href="/team.html" style="color:rgba(255,255,255,0.6);">Team &amp; Leadership</a>
+    <a href="/valuation-dashboard.html" style="color:rgba(255,255,255,0.6);">Valuation Dashboard</a>
+    <a href="/careers.html" style="color:rgba(255,255,255,0.6);">Careers</a>
+    <a href="/sentinel-demo.html" style="color:rgba(255,255,255,0.6);">Demo</a>
+    <a href="/sitemap.html" style="color:rgba(255,255,255,0.45);">Sitemap</a>
+    <a href="/transparency.html" style="color:rgba(255,255,255,0.45);">Transparency</a>
+    <a href="/privacy.html" style="color:rgba(255,255,255,0.45);">Privacy</a>
+  </div>
+
+  <a href="/contact.html#pilot" class="mob-cta">Request a Pilot</a>
+</nav>
+<!-- /INCLUDE:HEADER -->
+<main id="main">
+  <!-- HERO -->
+  <section class="tr-hero">
+    <div class="tr-hero-inner">
+      <span class="tr-eyebrow">Installer Training &middot; Sentinel Node Deployment</span>
+      <h1>Installer Training: Deployment, Local Controls, and Handoff Readiness</h1>
+      <p class="sub">For Pocono AI deployment staff, technical partners, implementation partners, and MSPs when acting as installers.</p>
+      <p class="lede">Installer Training is separate from Customer Training. Customer staff are not expected to perform installer responsibilities. Installers are not clinical or legal reviewers. These are distinct roles with distinct training requirements.</p>
+      <div class="tr-cta-row">
+        <a href="training.html" class="tr-btn ghost">&larr; Training Overview</a>
+        <a href="customer-training.html" class="tr-btn ghost">Customer Training &rarr;</a>
+        <a href="contact.html" class="tr-btn">Discuss Deployment</a>
+      </div>
+      <nav class="tr-jump" aria-label="Jump to section">
+        <a href="#who-installs">Who Installs</a>
+        <a href="#pre-install">Pre-Install</a>
+        <a href="#hardware">Hardware</a>
+        <a href="#network">Network</a>
+        <a href="#sources">Approved Sources</a>
+        <a href="#local-only">Local-Only Verification</a>
+        <a href="#audit-log">Audit Log</a>
+        <a href="#day-zero">Day Zero / Day One</a>
+        <a href="#handoff">Handoff</a>
+        <a href="#checklist">Installer Checklist</a>
+      </nav>
+    </div>
+  </section>
+
+  <div class="tr-wrap">
+
+    <section class="tr-section" id="who-installs">
+      <span class="section-label">Roles</span>
+      <h2>Who This Training Is For</h2>
+      <div class="tr-callout amber"><strong>Installer Training is not Customer Training.</strong> These tracks are separate by design. Installers configure the system. Customers learn to use it safely. Neither role performs the other&rsquo;s responsibilities during the pilot.</div>
+      <div class="tr-grid tr-g3" style="margin-top:18px;">
+        <div class="tr-card teal"><h3 class="teal">Pocono AI deployment staff</h3><p>The primary installer for direct-deployment pilots. Brings the physical appliance, performs installation, verifies local operation, and completes the handoff checklist before handing off to the Practice Administrator.</p></div>
+        <div class="tr-card teal"><h3 class="teal">Technical / implementation partners</h3><p>Qualified technical partners who deploy the Sentinel Node appliance on behalf of Pocono AI or the practice. Follow the same installer checklist and handoff requirements as Pocono AI direct staff.</p></div>
+        <div class="tr-card teal"><h3 class="teal">MSPs acting as installers</h3><p>Managed service providers who provide IT support for the practice and perform physical installation or network configuration. MSPs follow the installer track; their regular IT support role is separate from the installer role.</p></div>
+      </div>
+    </section>
+
+    <hr class="tr-divider">
+
+    <section class="tr-section" id="pre-install">
+      <span class="section-label">Pre-Install Readiness</span>
+      <h2>Pre-Install Review</h2>
+      <p class="em">No installation begins without a completed pre-install review. The pre-install review is not a sales process. It is a technical readiness gate.</p>
+      <div class="tr-grid tr-g2">
+        <ul class="tr-check">
+          <li>Pilot scope confirmed: one workflow, one location, one appliance</li>
+          <li>Practice IT contact identified and briefed</li>
+          <li>Physical location for appliance confirmed and accessible</li>
+          <li>Approved source folders identified and accessible</li>
+          <li>Network requirements reviewed with practice IT</li>
+        </ul>
+        <ul class="tr-check">
+          <li>No external dependency requirements confirmed with practice</li>
+          <li>Backup and rollback plan documented</li>
+          <li>Reviewer role assigned (not the installer role)</li>
+          <li>Practice Administrator / Pilot Lead identified</li>
+          <li>Training schedule for customer team confirmed</li>
+        </ul>
+      </div>
+    </section>
+
+    <hr class="tr-divider">
+
+    <section class="tr-section" id="hardware">
+      <span class="section-label">Hardware</span>
+      <h2>Hardware Custody and Physical Placement</h2>
+      <div class="tr-grid tr-g2">
+        <div class="tr-card">
+          <h3>Physical placement</h3>
+          <ul>
+            <li>Appliance is placed in a controlled-access area within the practice</li>
+            <li>Physical access is documented and limited to authorized staff</li>
+            <li>Power, cooling, and connectivity requirements confirmed on-site</li>
+            <li>Hardware serial number and asset tag recorded</li>
+          </ul>
+        </div>
+        <div class="tr-card">
+          <h3>Hardware custody</h3>
+          <ul>
+            <li>Chain of custody documented from delivery to installation</li>
+            <li>Appliance is not shared across locations in v1</li>
+            <li>Hardware removal or replacement follows documented procedure</li>
+            <li>Disposal or return follows Pocono AI data-handling procedure</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <hr class="tr-divider">
+
+    <section class="tr-section" id="network">
+      <span class="section-label">Network</span>
+      <h2>Local Network Configuration</h2>
+      <div class="tr-callout red"><strong>v1 assumption: single office, single appliance, local network segment.</strong> Multi-location deployments require additional planning and are not covered by the v1 installer track. Do not assume a v1 installer checklist applies to multi-location deployments.</div>
+      <div class="tr-grid tr-g2" style="margin-top:16px;">
+        <div class="tr-card">
+          <h3>Network assumptions</h3>
+          <ul>
+            <li>Appliance operates on the practice local network</li>
+            <li>VLAN and firewall configuration reviewed with practice IT</li>
+            <li>Outbound egress rules configured to prevent routine external data transfer</li>
+            <li>No routine cloud API calls during inference (local model only)</li>
+          </ul>
+        </div>
+        <div class="tr-card">
+          <h3>No-egress verification</h3>
+          <ul>
+            <li>Packet capture or egress monitoring run during test inference</li>
+            <li>Zero outbound data transfer to external AI services confirmed</li>
+            <li>External service exceptions (update channels) documented if present</li>
+            <li>Egress verification result logged in installer handoff record</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <hr class="tr-divider">
+
+    <section class="tr-section" id="sources">
+      <span class="section-label">Approved Sources</span>
+      <h2>Approved Source Folders and Ingestion</h2>
+      <div class="tr-grid tr-g2">
+        <div class="tr-card">
+          <h3>Ingestion setup</h3>
+          <ul>
+            <li>Approved source folders defined and confirmed with Practice Administrator</li>
+            <li>Ingestion path is local — no external data transmission</li>
+            <li>OCR and quality gate configured and tested</li>
+            <li>Unreadable documents are refused or flagged, not silently skipped</li>
+            <li>Ingestion audit log verified before pilot use</li>
+          </ul>
+        </div>
+        <div class="tr-card">
+          <h3>Source custody</h3>
+          <ul>
+            <li>Only approved, in-scope records are ingested</li>
+            <li>Scope is defined per pilot workflow, not open-ended</li>
+            <li>Out-of-scope document rejections are visible and logged</li>
+            <li>Practice staff understand what is and is not in scope</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <hr class="tr-divider">
+
+    <section class="tr-section" id="local-only">
+      <span class="section-label">Local-Only Verification</span>
+      <h2>Model, Retrieval, and No-External-Dependency Audit</h2>
+      <p class="em">The installer is responsible for verifying that the system operates locally before pilot use begins. This is not a customer responsibility.</p>
+      <div class="tr-grid tr-g3">
+        <div class="tr-card"><h3>Local model runtime</h3><p>On-premises model is loaded and functional. No cloud inference API is called during normal operation. Model version and configuration are documented.</p></div>
+        <div class="tr-card"><h3>Retrieval engine</h3><p>Vector database is populated from approved local sources. Hybrid search (dense + sparse) is verified on a test query. Access control is confirmed at the retrieval layer.</p></div>
+        <div class="tr-card"><h3>Audit proxy</h3><p>Audit Proxy is functioning. Every test query generates a logged entry in the reviewable audit trail. Hash-chain integrity verification arrives with the Stage 2 audit-layer.</p></div>
+        <div class="tr-card"><h3>No external dependency audit</h3><p>Active scan for external API calls, remote logging, cloud model endpoints, or undisclosed telemetry. Result documented and signed in installer record.</p></div>
+        <div class="tr-card"><h3>Backup and rollback</h3><p>Backup procedure confirmed. Rollback path documented. Rollback capability tested if practical before go-live.</p></div>
+        <div class="tr-card"><h3>Update path</h3><p>Software update mechanism understood. Update process documented. Update policy aligned with practice IT requirements.</p></div>
+      </div>
+    </section>
+
+    <hr class="tr-divider">
+
+    <section class="tr-section" id="audit-log">
+      <span class="section-label">Audit Log</span>
+      <h2>Audit Log Verification</h2>
+      <div class="tr-callout">
+        <strong>The audit log must be verified before pilot use begins.</strong> An installation without a confirmed audit log is not a completed installation.
+      </div>
+      <div class="tr-grid tr-g2" style="margin-top:16px;">
+        <ul class="tr-check">
+          <li>Audit log is writing entries during test queries</li>
+          <li>Reviewable audit log active on test sequence (hash-chain integrity: Stage 2)</li>
+          <li>All required fields are present per entry (user, timestamp, scope, prompt hash, retrieval IDs, response hash, verification flags)</li>
+          <li>Log retention policy confirmed and configured</li>
+        </ul>
+        <ul class="tr-check">
+          <li>Log is stored locally, not transmitted externally</li>
+          <li>Log is readable by the Practice Administrator and Responsible Reviewer</li>
+          <li>Log is append-only and reviewable today; Stage 2 hash chaining makes any edit break the chain</li>
+          <li>Audit log sample reviewed and signed in installer record</li>
+        </ul>
+      </div>
+    </section>
+
+    <hr class="tr-divider">
+
+    <section class="tr-section" id="day-zero">
+      <span class="section-label">Day Zero / Day One</span>
+      <h2>Day Zero and Day One Validation</h2>
+      <div class="tr-grid tr-g2">
+        <div class="tr-card">
+          <h3>Day Zero (installer)</h3>
+          <ul>
+            <li>Hardware placed and powered</li>
+            <li>Network configured and egress verified</li>
+            <li>Source folders ingested</li>
+            <li>Local model confirmed operational</li>
+            <li>Retrieval confirmed on test query</li>
+            <li>Audit proxy confirmed logging</li>
+            <li>No-external-dependency audit passed</li>
+            <li>Audit log sample verified</li>
+            <li>Go/no-go checklist completed and signed</li>
+          </ul>
+        </div>
+        <div class="tr-card">
+          <h3>Day One (installer confirms, customer begins)</h3>
+          <ul>
+            <li>Practice Administrator briefed on system status</li>
+            <li>Approved source set confirmed with Practice Administrator</li>
+            <li>Customer Training session scheduled or completed</li>
+            <li>First test packet run with Practice Administrator present</li>
+            <li>Installer available for Day One support queries</li>
+            <li>Escalation path to Pocono AI technical support confirmed</li>
+            <li>Installer handoff document signed by Practice Administrator</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <hr class="tr-divider">
+
+    <section class="tr-section" id="handoff">
+      <span class="section-label">Handoff</span>
+      <h2>Handoff to Customer Training and Pilot Lead</h2>
+      <p class="em">The installer&rsquo;s role ends at handoff. The Practice Administrator / Pilot Lead owns the pilot from that point.</p>
+      <div class="tr-grid tr-g2">
+        <div class="tr-card teal">
+          <h3 class="teal">Installer delivers to Practice Administrator</h3>
+          <ul>
+            <li>Completed installer checklist</li>
+            <li>Audit log sample and verification result</li>
+            <li>Egress verification result</li>
+            <li>Approved source folder documentation</li>
+            <li>Software version and configuration record</li>
+            <li>Escalation contacts for technical support</li>
+            <li>Signed installer handoff document</li>
+          </ul>
+        </div>
+        <div class="tr-card">
+          <h3>Practice Administrator confirms</h3>
+          <ul>
+            <li>Understands system scope and approved sources</li>
+            <li>Customer Training session completed or scheduled</li>
+            <li>Responsible Reviewer identified and briefed</li>
+            <li>Pilot friction log owner named</li>
+            <li>Pilot metrics baseline established</li>
+            <li>Escalation path confirmed</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <hr class="tr-divider">
+
+    <section class="tr-section" id="checklist">
+      <span class="section-label">Installer Checklist</span>
+      <h2>Installer Go/No-Go Checklist</h2>
+      <p class="em">All items must be completed and documented before pilot use begins. Incomplete items block go-live.</p>
+      <div class="tr-grid tr-g2">
+        <ul class="tr-check">
+          <li>Pre-install review completed and documented</li>
+          <li>Hardware placed, powered, and chain of custody logged</li>
+          <li>Network configured: VLAN, firewall, egress rules</li>
+          <li>Egress verification: zero outbound AI inference confirmed</li>
+          <li>Approved source folders defined and ingested</li>
+          <li>OCR and quality gate tested</li>
+          <li>Local model operational: version and config documented</li>
+          <li>Retrieval engine verified: test query returns expected results</li>
+          <li>Audit Proxy confirmed: logging active on test queries</li>
+        </ul>
+        <ul class="tr-check">
+          <li>Reviewable audit log active on test log sequence (hash-chain integrity: Stage 2)</li>
+          <li>No-external-dependency audit passed and documented</li>
+          <li>Backup and rollback path documented</li>
+          <li>Update path documented</li>
+          <li>Practice Administrator briefed on system status</li>
+          <li>Customer Training completed or formally scheduled</li>
+          <li>Installer handoff document signed</li>
+          <li>Escalation path to Pocono AI technical support confirmed</li>
+          <li>Go/no-go decision: <strong style="color:#00c2a8;">Approved for pilot use</strong></li>
+        </ul>
+      </div>
+    </section>
+
+    </section>
+
+    <!-- INSTALLATION SIMULATOR CARD — v378 -->
+    <section class="tr-section" id="installation-simulator">
+      <span class="section-label">Tools</span>
+      <h2>Installation Simulator</h2>
+      <p>Use the simulator to walk through the controlled installation sequence before or during a deployment: network discovery, subnet/VLAN planning, firewall boundaries, appliance bootstrap, approved-source loading, human review, and audit verification.</p>
+      <div style="display:grid;grid-template-columns:1fr;gap:16px;margin-top:16px;">
+        <div class="tr-card teal">
+          <h3 class="teal">Sentinel Node Installation Simulator</h3>
+          <p>An interactive deployment walkthrough covering DHCP discovery, isolated subnet/VLAN planning, router/firewall trust boundaries, appliance bootstrap, approved-source ingestion, draft-only workflows, human review, audit verification, and go-live reporting. Beta training artifact — pilot details will evolve.</p>
+          <p style="margin-top:10px;"><strong style="color:#bcd4e2;">Practice the install before the install.</strong> The new <strong style="color:#bcd4e2;">Configuration Practice</strong> mode lets you configure a deployment (subnet/VLAN, firewall boundaries, governance) and run verification that returns pass / warning / critical findings and a go-live readiness decision. Load a Safe Baseline, a Common Failure, or a Dangerous Flat Network to see how the checks respond. Guided and Manual walkthroughs support adjustable pacing — slow by default, with &minus; / + controls and pause.</p>
+          <p style="margin-top:12px;font-size:0.86em;color:#6f8295;">Training artifact only. Network configuration requires an authorized IT administrator or MSP. Sentinel Node discovers and recommends; it does not take over DHCP, silently modify router/firewall policy, or bypass human approval.</p>
+          <div class="tr-cta-row" style="margin-top:16px;">
+            <a href="sentinel-node/installation-simulator.html" class="tr-btn">Open Installer Simulation &rarr;</a>
+            <a href="sentinel-node/installation-simulator.html#practice" class="tr-btn">Configuration Practice &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="tr-closer">
+      <h2>Install. Verify. Hand off.<br>Do not go live without the checklist.</h2>
+      <p>Installer Training ends at handoff. Customer Training begins at handoff. The two tracks are distinct by design &mdash; to protect both the practice and the integrity of the pilot results.</p>
+      <div class="tr-cta-row" style="justify-content:center;">
+        <a href="training.html" class="tr-btn ghost">&larr; Training Overview</a>
+        <a href="customer-training.html" class="tr-btn ghost">Customer Training &rarr;</a>
+        <a href="deployment-guide.html" class="tr-btn">Deployment Guide &rarr;</a>
+      </div>
+    </section>
+
+  </div>
+</main>
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 root-relative nav fix, Living Echo rebrand, Engineering & Drafting + Enterprise Estate Continuity links added (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- INCLUDE:FOOTER -->
+<footer role="contentinfo" style="background:#051622;border-top:1px solid rgba(255,255,255,0.08);padding:40px 24px 28px;font-size:0.85em;color:#8899aa;">
+  <div style="max-width:1180px;margin:0 auto;">
+
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:0 0 28px;margin-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.07);">
+      <div style="max-width:560px;">
+        <p style="margin:0 0 6px;font-size:1.05em;font-weight:700;color:#fff;">Local AI infrastructure for regulated practices.</p>
+        <p style="margin:0;font-size:0.95em;line-height:1.5;">Drafts with citations. Human review required. Sensitive documents stay under practice control. Simple path, deep proof.</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="/contact.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;background:#00c2a8;color:#04111a;font-weight:700;text-decoration:none;font-size:0.95em;">Request Pilot</a>
+        <a href="/sentinel-demo.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;border:1px solid rgba(0,194,168,0.55);color:#00c2a8;font-weight:700;text-decoration:none;font-size:0.95em;">Watch Demo</a>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px 32px;margin-bottom:32px;text-align:left;">
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">For You</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/start-here.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Start Here (3 min)</a>
+          <a href="/for-physicians.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Physicians</a>
+          <a href="/for-attorneys.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Attorneys</a>
+          <a href="/engineering-drafting/" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Engineering &amp; Drafting Teams</a>
+          <a href="/pilot-program.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Pilot Program</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Installer Training</a>
+          <a href="/how-it-works.html" style="color:#8899aa;text-decoration:none;">How It Works</a>
+          <a href="/trust.html" style="color:#8899aa;text-decoration:none;">Trust &amp; Audit</a>
+          <a href="/pricing.html" style="color:#8899aa;text-decoration:none;">Pricing</a>
+          <a href="/sentinel-demo.html" style="color:#8899aa;text-decoration:none;">See the Demo</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Documentation Hub</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/documentation-hub/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Hub Home &mdash; Deep Proof</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">Installer Training</a>
+          <a href="/sentinel-node/installation-simulator.html" style="color:#8899aa;text-decoration:none;">&#8627; Installation Simulator</a>
+          <a href="/documentation-hub/clinical/" style="color:#8899aa;text-decoration:none;">Clinical Documentation</a>
+          <a href="/documentation-hub/legal/" style="color:#8899aa;text-decoration:none;">Legal Documentation</a>
+          <a href="/documentation-hub/technical/" style="color:#8899aa;text-decoration:none;">Technical Documentation</a>
+          <a href="/documentation-hub/governance/" style="color:#8899aa;text-decoration:none;">Governance &amp; Audit</a>
+          <a href="/documentation-hub/tools/" style="color:#8899aa;text-decoration:none;">Tools &amp; Simulators</a>
+          <a href="/documentation-hub/research/" style="color:#8899aa;text-decoration:none;">Research &amp; Essays</a>
+          <a href="/documentation-hub/transparency/" style="color:#8899aa;text-decoration:none;">Transparency</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Global Federated AI</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/global/" style="color:#7af0dc;text-decoration:none;font-weight:600;">Global Federated Hub</a>
+          <a href="/global/australia/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Australia</a>
+          <a href="/global/singapore/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Singapore</a>
+          <a href="/global/taiwan/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Taiwan</a>
+          <a href="/global/europe/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Europe</a>
+          <a href="/contact.html" style="color:#8899aa;text-decoration:none;">Partner Inquiry</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Company</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/about.html" style="color:#8899aa;text-decoration:none;">About Pocono AI</a>
+          <a href="/team.html" style="color:#8899aa;text-decoration:none;">Team &amp; Leadership</a>
+          <a href="/why-pocono-ai.html" style="color:#8899aa;text-decoration:none;">Why Pocono AI</a>
+          <a href="/founding-commercial-leadership.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Join Us</a>
+          <a href="/careers.html" style="color:#8899aa;text-decoration:none;">Careers</a>
+          <a href="/how-we-hire.html" style="color:#8899aa;text-decoration:none;">How We Hire</a>
+          <a href="/channel-partners.html" style="color:#8899aa;text-decoration:none;">Technical Partners (MSPs)</a>
+          <a href="/partners.html" style="color:#8899aa;text-decoration:none;">Academic Partnerships</a>
+          <a href="/contact.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Contact</a>
+          <a href="https://forms.gle/VQahnkjMfY6QNEMy8" target="_blank" rel="noopener noreferrer" style="color:#d5a94f;text-decoration:none;font-weight:600;">Interest List &#8599;</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Founder Projects</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/rehability/" style="color:#a78bfa;text-decoration:none;font-weight:700;">Rehability &#x2605;</a>
+          <a href="/rehability/marcus-memory-helper/" style="color:#a78bfa;text-decoration:none;font-weight:600;">&#8627; Marcus's Memory Helper</a>
+          <a href="/sentinel-home/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Sentinel Home Edition</a>
+          <a href="/living-memorials/" style="color:#8899aa;text-decoration:none;">Living Echo</a>
+          <a href="/living-memorials/marcus-odell/" style="color:#8899aa;text-decoration:none;">Marcus&rsquo;s Living Echo</a>
+          <a href="/living-memorials/enterprise-estate-continuity.html" style="color:#8899aa;text-decoration:none;">Enterprise Estate Continuity</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Resources &amp; Legal</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/sitemap.html" style="color:#8899aa;text-decoration:none;">All Pages (Sitemap)</a>
+          <a href="/audit.html" style="color:#8899aa;text-decoration:none;">Transparency &amp; Audit Log</a>
+          <a href="/maturity-disclosure.html" style="color:#8899aa;text-decoration:none;">What We Have / Don&rsquo;t Claim</a>
+          <a href="/plain.html" style="color:#8899aa;text-decoration:none;">Plain Language Guide</a>
+          <a href="/privacy.html" style="color:#8899aa;text-decoration:none;">Privacy</a>
+          <a href="/terms.html" style="color:#8899aa;text-decoration:none;">Terms</a>
+          <a href="/sla.html" style="color:#8899aa;text-decoration:none;">SLA</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:18px;margin-bottom:14px;">
+      <p style="margin:0;font-size:0.82em;line-height:1.6;color:#6f8295;max-width:1000px;">Pocono AI does not provide medical, legal, or engineering advice, does not practice medicine, law, or licensed engineering, and does not make clinical, legal, or engineering decisions. Outputs are drafts or support materials that require review by a qualified professional; final professional judgment remains with the licensed physician, attorney, or engineer. Tools and simulations on this site are educational and use synthetic data.</p>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:20px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+      <p style="margin:0;font-size:0.9em;">&copy; 2026 Pocono AI, LLC &nbsp;&#183;&nbsp; East Stroudsburg, PA &nbsp;&#183;&nbsp; <a href="mailto:marcus@poconoai.com" style="color:#8899aa;">marcus@poconoai.com</a> &nbsp;&#183;&nbsp; <a href="tel:+15705340602" style="color:#8899aa;">(570) 534-0602</a></p>
+      <p style="margin:0;font-size:0.88em;"><a href="/audit.html" style="color:#5dade2;text-decoration:none;">Transparency v402</a></p>
+    </div>
+  </div>
+</footer>
+<script src="/search.js?v=402" defer></script>
+<!-- /INCLUDE:FOOTER -->
+<script src="search-index.js?v=402" defer></script>
+<script src="nav.js?v=402" defer></script>
+<script src="pilot-cta.js?v=402" defer></script>
+</body>
+</html>

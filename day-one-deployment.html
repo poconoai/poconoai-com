@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day One Deployment Guide — Sentinel Node | Pocono AI</title>
+    <meta name="description" content="What happens when the Sentinel Node arrives on-site. Plain-language guide to hardware setup, document ingestion, staff training, governance, and human review for medical practices and law firms.">
+    <meta name="keywords" content="Sentinel Node deployment, on-premises AI deployment, local AI deployment guide, healthcare AI deployment, legal AI deployment, document ingestion AI, AI staff training, AI governance audit, human-in-the-loop deployment, day one deployment, Pocono AI deployment, deployment realism, role-based AI access, citation verification, local-first AI">
+    <meta property="og:title" content="Day One Deployment Guide — Sentinel Node | Pocono AI">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Pocono AI">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:description" content="What Day One looks like inside your practice or firm. Hardware setup, document ingestion, staff training, governance, and human review — explained in plain language."><meta name="theme-color" content="#051622">
+    
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="alternate icon" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon-180x180.png">
+    <link rel="stylesheet" href="styles.css?v=402">    <!-- SEO: Canonical URL + XML Sitemap reference -->
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+    <link rel="canonical" href="https://poconoai.com/day-one-deployment.html">
+    <!-- Open Graph: ensures social sharing pulls correct page -->
+    <meta property="og:url" content="https://poconoai.com/day-one-deployment.html">
+    <meta property="og:image" content="https://poconoai.com/day-one-deployment-infographic.png">
+    <meta property="og:image:width" content="1536">
+    <meta property="og:image:height" content="1024">
+    <meta property="og:image:alt" content="Pocono AI — Day One Deployment Guide six-step infographic">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Day One Deployment Guide — Sentinel Node | Pocono AI">
+    <meta name="twitter:description" content="What happens when the Sentinel Node arrives on-site. Hardware setup, document ingestion, staff training, governance, and human review in plain language.">
+    <meta name="twitter:image" content="https://poconoai.com/day-one-deployment-infographic.png">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Pocono AI, LLC",
+      "url": "https://poconoai.com",
+      "logo": "https://poconoai.com/logo.svg",
+      "description": "Sovereign, on-premises local AI infrastructure for healthcare and legal professionals. Zero data exfiltration. Hardware-custody deployment.",
+      "foundingDate": "2024",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "East Stroudsburg",
+        "addressRegion": "PA",
+        "addressCountry": "US"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+1-570-534-0602",
+        "contactType": "sales",
+        "email": "marcus@poconoai.com"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/company/pocono-ai"
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+  "@context": "https://schema.org",
+  "@type": "MedicalWebPage",
+  "name": "EHR Documentation Burden \u2014 5.9 Hours | Pocono AI",
+  "description": "Sinsky et al. Annals of Family Medicine 2016: physicians spend 5.9 hours daily in EHR. Full citation and research context.",
+  "url": "https://poconoai.com/ehr-burden-research.html",
+  "isPartOf": {
+    "@type": "WebSite",
+    "url": "https://poconoai.com",
+    "name": "Pocono AI, LLC"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Pocono AI, LLC",
+    "url": "https://poconoai.com"
+  }
+}
+    </script>
+<link rel="stylesheet" href="nav-v2026.css?v=402">
+<script>
+// Pocono AI v169 — Zero-flash banner dismissal.
+// Strategy: inject <style> tag synchronously BEFORE banner HTML parses,
+// so dismissed banners never render at all (no flash). DOM removal still
+// happens for safety. ?showbanners=1 URL param re-shows everything.
+(function(){
+  var ids=[];
+
+  // Escape hatch: ?showbanners=1 clears all dismiss flags for testing
+  try {
+    if (location.search.indexOf('showbanners=1') !== -1) {
+      ids.forEach(function(id){ localStorage.removeItem('pai_dismissed_'+id); });
+      localStorage.removeItem('poconoPilot');
+      localStorage.removeItem('advisoryBarDismissed');
+    }
+  } catch(e) {}
+
+  // Migrate legacy localStorage keys
+  try {
+    if (localStorage.getItem('poconoPilot') === 'dismissed') {
+      localStorage.setItem('pai_dismissed_'1');
+      localStorage.removeItem('poconoPilot');
+    }
+    if (localStorage.getItem('advisoryBarDismissed') === '1') {
+      localStorage.setItem('pai_dismissed_'1');
+      localStorage.removeItem('advisoryBarDismissed');
+    }
+  } catch(e) {}
+
+  // Build CSS rule list for dismissed banners and inject synchronously.
+  // This runs in <head> BEFORE banner HTML is parsed, so dismissed bars
+  // never paint — eliminating the flash entirely.
+  var hideRules = [];
+  ids.forEach(function(id){
+    try {
+      if (localStorage.getItem('pai_dismissed_'+id) === '1') {
+        hideRules.push('#'+id+'{display:none !important;}');
+      }
+    } catch(e) {}
+  });
+  if (hideRules.length) {
+    var style = document.createElement('style');
+    style.id = 'pai-banner-hide';
+    style.textContent = hideRules.join('');
+    (document.head || document.documentElement).appendChild(style);
+  }
+
+  function dismiss(id){
+    try { localStorage.setItem('pai_dismissed_'+id,'1'); } catch(e) {}
+    var el = document.getElementById(id);
+    if (el) {
+      el.style.setProperty('display','none','important');
+      el.setAttribute('aria-hidden','true');
+      if (el.parentNode) {
+        el.parentNode.removeChild(el);
+      }
+    }
+  }
+
+  // Cleanup pass — remove dismissed banners from DOM after parse,
+  // belt-and-suspenders alongside the CSS hide.
+  function cleanup(){
+    ids.forEach(function(id){
+      try {
+        if (localStorage.getItem('pai_dismissed_'+id) === '1') {
+          var el = document.getElementById(id);
+          if (el && el.parentNode) {
+            el.parentNode.removeChild(el);
+          }
+        }
+      } catch(e) {}
+    });
+  }
+
+  function bind(){
+    ids.forEach(function(id){
+      var btn = document.getElementById(id+'-close');
+      if (btn && !btn.dataset.boundDismiss) {
+        btn.dataset.boundDismiss = '1';
+        btn.addEventListener('click', function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          dismiss(id);
+        });
+        btn.addEventListener('touchend', function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          dismiss(id);
+        }, {passive:false});
+      }
+    });
+    cleanup();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bind);
+  } else {
+    bind();
+  }
+})();
+</script>
+</head>
+<body>
+<div id="hitl-notice" style="background:#0a1929;padding:4px 16px;text-align:center;font-size:12px;color:#4a5568;border-bottom:1px solid rgba(255,255,255,0.06);letter-spacing:0.01em;">Human-in-the-Loop required: licensed professionals verify all outputs before clinical or legal action</div>
+<a href="#main" class="skip-link">Skip to content</a>
+<div id="reading-progress" aria-hidden="true"></div>
+
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- INCLUDE:HEADER -->
+<div id="hitl-notice" style="background:#0a1929;padding:4px 16px;text-align:center;font-size:12px;color:#4a5568;border-bottom:1px solid rgba(255,255,255,0.06);letter-spacing:0.01em;">Human-in-the-Loop required: licensed professionals verify all outputs before clinical or legal action</div>
+<header role="banner">
+  <div class="header-inner">
+    <a href="/index.html" class="logo" aria-label="Pocono AI Home">
+      <img src="/logo.svg?v=402" alt="" width="36" height="36" decoding="async" loading="eager" aria-hidden="true" style="display:inline-block;">
+      Pocono <span>AI</span>
+    </a>
+    <nav id="desktop-nav" aria-label="Main navigation">
+      <div class="nav-item"><a href="/index.html" class="nav-direct">Home</a></div>
+      <div class="nav-item"><a href="/for-physicians.html" class="nav-direct">Physicians</a></div>
+      <div class="nav-item"><a href="/for-attorneys.html" class="nav-direct">Attorneys</a></div>
+      <div class="nav-item"><a href="/sentinel-node.html" class="nav-direct nav-hub" style="color:#d5a94f;border:1px solid rgba(213,169,79,0.45);border-radius:999px;padding:6px 13px;">Sentinel Node</a></div>
+      <div class="nav-item"><a href="/living-memorials/" class="nav-direct">Living Echo</a></div>
+      <div class="nav-item"><a href="/contact.html" class="nav-direct">Contact</a></div>
+      <div class="nav-item" data-dropdown="menu-more">
+        <button type="button" class="nav-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="menu-more">More <span class="nav-chevron" aria-hidden="true">&#9662;</span></button>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <a href="/contact.html#pilot" class="nav-cta nav-cta-primary">Request a Pilot</a>
+      <button type="button" class="pa-search-trigger" data-search-open aria-label="Search (press / or Ctrl-K)" aria-haspopup="dialog" aria-expanded="false">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span class="pa-st-label">Search</span><kbd data-pa-keyhint>Ctrl K</kbd>
+      </button>
+      <button type="button" class="header-icon-btn" id="mobile-menu" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav-panel">
+        <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- "More" overflow dropdown — sibling of <header> so position:fixed escapes header's stacking context. Wired by nav.js via data-dropdown="menu-more". -->
+<div class="nav-dropdown" id="menu-more" aria-label="More navigation">
+  <p class="nav-dd-section">Products</p>
+  <a href="/engineering-drafting/">Drafting &amp; Engineering Edition</a>
+  <a href="/sentinel-home/">Sentinel Home Edition</a>
+  <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability — Assistive Tools &#x2605;</a>
+  <a href="/living-memorials/enterprise-estate-continuity.html">Enterprise Estate Continuity</a>
+  <p class="nav-dd-section">Capabilities</p>
+  <a href="/evidence-room.html">Evidence Room</a>
+  <a href="/push-button-deliverables.html">Push-Button Deliverables</a>
+  <a href="/pilot-readiness-kit.html">Pilot Kit</a>
+  <a href="/pilot-program.html">Pilot Program</a>
+  <a href="/how-it-works.html">How It Works</a>
+  <p class="nav-dd-section">Hubs &amp; Company</p>
+  <a href="/training.html">Training Hub</a>
+  <a href="/documentation-hub/">Document Hub</a>
+  <a href="/global/">Global Hub</a>
+  <a href="/investors-hub.html">Investor Hub</a>
+  <a href="/valuation-dashboard.html">Valuation Dashboard</a>
+  <a href="/about.html">About</a>
+  <p class="nav-dd-section">Trust &amp; Legal</p>
+  <a href="/transparency.html">Transparency</a>
+  <a href="/audit.html">Audit Log</a>
+  <a href="/privacy.html">Privacy</a>
+  <a href="/sitemap.html">Sitemap</a>
+</div>
+<!-- Site search is provided by the self-contained search.js asset (command palette: / or Ctrl/Cmd-K). -->
+
+<!-- Mobile panel: full-screen slide-in. v396 nav — hub tiles + grouped links + Sentinel Node + Engineering. -->
+<nav id="mobile-nav-panel" aria-label="Mobile navigation" aria-hidden="true" role="dialog" aria-modal="true">
+
+  <!-- Hub tiles: Sentinel Node, Documentation Hub, Training Hub, Global Hub -->
+  <div style="padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,0.07);">
+    <p style="font-size:0.65em;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.28);margin:0 0 10px;padding:0 2px;">Hubs</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <a href="/sentinel-node.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(213,169,79,0.1);border:1px solid rgba(213,169,79,0.35);border-radius:10px;color:#d5a94f;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Sentinel Node</a>
+      <a href="/documentation-hub/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(0,194,168,0.1);border:1px solid rgba(0,194,168,0.35);border-radius:10px;color:#00c2a8;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Docs Hub</a>
+      <a href="/training.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.35);border-radius:10px;color:#a78bfa;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Training Hub</a>
+      <a href="/global/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(122,240,220,0.07);border:1px solid rgba(122,240,220,0.3);border-radius:10px;color:#7af0dc;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Global Hub</a>
+    </div>
+  </div>
+
+  <!-- Core paths -->
+  <div class="mob-static-links">
+    <a href="/index.html">Home</a>
+    <a href="/for-physicians.html">Physicians</a>
+    <a href="/for-attorneys.html">Attorneys</a>
+    <a href="/engineering-drafting/">Engineering &amp; Drafting</a>
+    <a href="/pilot-program.html">Pilot Program</a>
+    <a href="/how-it-works.html">How It Works</a>
+    <a href="/trust.html">Trust &amp; Audit</a>
+    <a href="/pricing.html">Pricing</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/living-memorials/">Living Echo</a>
+    <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability</a>
+    <a href="/about.html">About</a>
+    <a href="/team.html" style="color:rgba(255,255,255,0.6);">Team &amp; Leadership</a>
+    <a href="/valuation-dashboard.html" style="color:rgba(255,255,255,0.6);">Valuation Dashboard</a>
+    <a href="/careers.html" style="color:rgba(255,255,255,0.6);">Careers</a>
+    <a href="/sentinel-demo.html" style="color:rgba(255,255,255,0.6);">Demo</a>
+    <a href="/sitemap.html" style="color:rgba(255,255,255,0.45);">Sitemap</a>
+    <a href="/transparency.html" style="color:rgba(255,255,255,0.45);">Transparency</a>
+    <a href="/privacy.html" style="color:rgba(255,255,255,0.45);">Privacy</a>
+  </div>
+
+  <a href="/contact.html#pilot" class="mob-cta">Request a Pilot</a>
+</nav>
+<!-- /INCLUDE:HEADER -->
+
+<main class="container" id="main-content" tabindex="-1">
+<span id="main" aria-hidden="true"></span>
+
+<!-- VISIBLE VERSION STAMP — if you see this banner, you ARE looking at v244b.
+     If you do NOT see this banner, your browser/CDN is serving a cached version. -->
+<div style="background:#00c2a8;color:#03060c;text-align:center;padding:8px 16px;font-weight:700;font-size:0.82em;letter-spacing:0.06em;text-transform:uppercase;margin:0 0 24px;border-radius:6px;">
+  Build v244b &middot; Stacked Layout &middot; Cache-Busted
+</div>
+<div class="page-back-link"><a href="architecture.html" class="back-link-anchor">&#8592; Architecture</a></div>
+
+<!-- =================================================================
+     DAY ONE DEPLOYMENT GUIDE — v244b
+     Stacked long-form layout. No tab widget, no JS-gated visibility.
+     Every section flows in document order. Cannot overlap.
+================================================================= -->
+
+<article style="max-width:980px;margin:0 auto;padding-top:24px;">
+
+  <!-- HERO -->
+  <header style="text-align:center;max-width:880px;margin:0 auto 48px;padding:0 16px;">
+    <span style="display:inline-block;color:var(--teal);font-weight:700;letter-spacing:1.4px;text-transform:uppercase;font-size:0.76rem;margin-bottom:14px;">Operational Guide</span>
+    <h1 style="color:var(--white);font-size:clamp(1.7rem,3.4vw,2.5rem);line-height:1.15;margin:0 0 16px;">Day One Deployment Guide</h1>
+    <p style="color:#a8cce8;font-size:clamp(1.0rem,1.6vw,1.15rem);line-height:1.55;max-width:760px;margin:0 auto 22px;font-style:italic;">What happens when the Sentinel Node arrives on-site &mdash; from hardware setup to document ingestion, staff training, governance, and human review.</p>
+    <p style="color:var(--light-text);font-size:1.0em;line-height:1.85;max-width:740px;margin:0 auto;">Most AI companies explain models. Pocono AI explains deployment. The Sentinel Node is designed to become local, governed infrastructure inside your practice or firm &mdash; not another cloud tool your staff has to worry about. This guide walks through what Day One looks like, what happens after the appliance is connected, how documents are ingested, how staff are trained, and how human review stays central to every workflow.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:28px;">
+      <a href="mailto:marcus@poconoai.com?subject=Sentinel%20Node%20Deployment%20Conversation" class="cta-button">Schedule a Deployment Conversation</a>
+      <a href="architecture.html" class="cta-button cta-button-light">View Sentinel Node Architecture</a>
+    </div>
+  </header>
+
+  <!-- HERO INFOGRAPHIC -->
+  <figure style="margin:0 auto 48px;background:#02101a;border:1px solid rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;box-shadow:0 28px 70px rgba(0,0,0,0.5);">
+    <a href="day-one-deployment-infographic.png" target="_blank" rel="noopener" title="View full size" style="display:block;cursor:zoom-in;">
+      <picture>
+        <source srcset="day-one-deployment-infographic.webp" type="image/webp">
+        <img src="day-one-deployment-infographic.png"
+             alt="Day 1 Deployment infographic — Pocono AI Sentinel Node. Six-step deployment workflow: Hardware Arrives, Connected and Isolated, Data Indexed Locally, Search Naturally, Citations Returned, Human Approval. Built-in governance pillars: Local First, Auditable, Role Based, Compliant, Physician Led."
+             width="1536" height="1024"
+             loading="lazy" decoding="async"
+             style="width:100%;height:auto;display:block;">
+      </picture>
+    </a>
+    <figcaption style="padding:12px 20px;font-size:0.78em;color:#8899aa;text-align:center;border-top:1px solid rgba(255,255,255,0.05);">Six steps from delivery to first cited answer. Click to view full size.</figcaption>
+  </figure>
+
+  <!-- IN-PAGE NAV (anchor links, not tabs) -->
+  <nav aria-label="On this page" style="margin:0 auto 40px;max-width:880px;padding:18px 22px;background:rgba(5,22,34,0.55);border:1px solid rgba(255,255,255,0.07);border-radius:10px;">
+    <p style="color:#a8cce8;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;font-size:0.74em;margin:0 0 10px;">On this page</p>
+    <div style="display:flex;flex-wrap:wrap;gap:8px 18px;font-size:0.92em;">
+      <a href="#day-one" style="color:var(--teal);text-decoration:none;font-weight:600;">Day One</a>
+      <a href="#ingestion" style="color:var(--teal);text-decoration:none;font-weight:600;">Document Ingestion</a>
+      <a href="#training" style="color:var(--teal);text-decoration:none;font-weight:600;">Staff Training</a>
+      <a href="#architecture" style="color:var(--teal);text-decoration:none;font-weight:600;">Data Architecture</a>
+      <a href="#governance" style="color:var(--teal);text-decoration:none;font-weight:600;">Governance &amp; Audit</a>
+    </div>
+  </nav>
+
+  <!-- SECTION 1 — DAY ONE -->
+  <section id="day-one" style="margin:48px 0;">
+    <h2 style="color:var(--white);font-size:clamp(1.2rem,2.4vw,1.6rem);margin:0 0 14px;border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:10px;">What Happens on Day One</h2>
+    <p style="color:var(--light-text);line-height:1.85;margin:0 0 18px;">Deployment begins with coordination &mdash; not configuration screens. Before the appliance arrives, we work with your team to confirm the operational environment and the human workflow it will support.</p>
+
+    <ul style="list-style:none;padding:0;margin:18px 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;">
+      <li style="color:var(--light-text);padding:10px 14px 10px 36px;background:rgba(5,22,34,0.5);border:1px solid rgba(255,255,255,0.06);border-radius:8px;position:relative;font-size:0.92em;line-height:1.5;"><span style="position:absolute;left:14px;top:10px;color:var(--teal);font-weight:700;">&#10003;</span>Confirm deployment location</li>
+      <li style="color:var(--light-text);padding:10px 14px 10px 36px;background:rgba(5,22,34,0.5);border:1px solid rgba(255,255,255,0.06);border-radius:8px;position:relative;font-size:0.92em;line-height:1.5;"><span style="position:absolute;left:14px;top:10px;color:var(--teal);font-weight:700;">&#10003;</span>Coordinate with IT or MSP</li>
+      <li style="color:var(--light-text);padding:10px 14px 10px 36px;background:rgba(5,22,34,0.5);border:1px solid rgba(255,255,255,0.06);border-radius:8px;position:relative;font-size:0.92em;line-height:1.5;"><span style="position:absolute;left:14px;top:10px;color:var(--teal);font-weight:700;">&#10003;</span>Configure local network isolation</li>
+      <li style="color:var(--light-text);padding:10px 14px 10px 36px;background:rgba(5,22,34,0.5);border:1px solid rgba(255,255,255,0.06);border-radius:8px;position:relative;font-size:0.92em;line-height:1.5;"><span style="position:absolute;left:14px;top:10px;color:var(--teal);font-weight:700;">&#10003;</span>Identify authorized users</li>
+      <li style="color:var(--light-text);padding:10px 14px 10px 36px;background:rgba(5,22,34,0.5);border:1px solid rgba(255,255,255,0.06);border-radius:8px;position:relative;font-size:0.92em;line-height:1.5;"><span style="position:absolute;left:14px;top:10px;color:var(--teal);font-weight:700;">&#10003;</span>Configure ingestion paths</li>
+      <li style="color:var(--light-text);padding:10px 14px 10px 36px;background:rgba(5,22,34,0.5);border:1px solid rgba(255,255,255,0.06);border-radius:8px;position:relative;font-size:0.92em;line-height:1.5;"><span style="position:absolute;left:14px;top:10px;color:var(--teal);font-weight:700;">&#10003;</span>Introduce human review workflow</li>
+      <li style="color:var(--light-text);padding:10px 14px 10px 36px;background:rgba(5,22,34,0.5);border:1px solid rgba(255,255,255,0.06);border-radius:8px;position:relative;font-size:0.92em;line-height:1.5;"><span style="position:absolute;left:14px;top:10px;color:var(--teal);font-weight:700;">&#10003;</span>Walk through governance expectations</li>
+      <li style="color:var(--light-text);padding:10px 14px 10px 36px;background:rgba(5,22,34,0.5);border:1px solid rgba(255,255,255,0.06);border-radius:8px;position:relative;font-size:0.92em;line-height:1.5;"><span style="position:absolute;left:14px;top:10px;color:var(--teal);font-weight:700;">&#10003;</span>Schedule staff training</li>
+    </ul>
+
+    <h3 style="color:var(--white);margin:32px 0 14px;font-size:1.02em;">Six steps from delivery to first cited answer</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin:18px 0;">
+      <div style="background:rgba(5,22,34,0.6);border:1px solid rgba(0,194,168,0.18);border-radius:10px;padding:18px 16px;text-align:center;"><div style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:rgba(0,194,168,0.18);color:var(--teal);font-weight:700;font-size:0.9em;margin-bottom:10px;">1</div><h4 style="color:var(--white);font-size:0.95em;margin:0 0 6px;letter-spacing:0.02em;">Hardware Arrives</h4><p style="color:#a8cce8;font-size:0.82em;line-height:1.5;margin:0;">Appliance ships to your practice or firm.</p></div>
+      <div style="background:rgba(5,22,34,0.6);border:1px solid rgba(0,194,168,0.18);border-radius:10px;padding:18px 16px;text-align:center;"><div style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:rgba(0,194,168,0.18);color:var(--teal);font-weight:700;font-size:0.9em;margin-bottom:10px;">2</div><h4 style="color:var(--white);font-size:0.95em;margin:0 0 6px;letter-spacing:0.02em;">Connected &amp; Isolated</h4><p style="color:#a8cce8;font-size:0.82em;line-height:1.5;margin:0;">Local network only. No public cloud path.</p></div>
+      <div style="background:rgba(5,22,34,0.6);border:1px solid rgba(0,194,168,0.18);border-radius:10px;padding:18px 16px;text-align:center;"><div style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:rgba(0,194,168,0.18);color:var(--teal);font-weight:700;font-size:0.9em;margin-bottom:10px;">3</div><h4 style="color:var(--white);font-size:0.95em;margin:0 0 6px;letter-spacing:0.02em;">Data Indexed Locally</h4><p style="color:#a8cce8;font-size:0.82em;line-height:1.5;margin:0;">Approved sources indexed inside your environment.</p></div>
+      <div style="background:rgba(5,22,34,0.6);border:1px solid rgba(0,194,168,0.18);border-radius:10px;padding:18px 16px;text-align:center;"><div style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:rgba(0,194,168,0.18);color:var(--teal);font-weight:700;font-size:0.9em;margin-bottom:10px;">4</div><h4 style="color:var(--white);font-size:0.95em;margin:0 0 6px;letter-spacing:0.02em;">Search Naturally</h4><p style="color:#a8cce8;font-size:0.82em;line-height:1.5;margin:0;">Staff query in plain language.</p></div>
+      <div style="background:rgba(5,22,34,0.6);border:1px solid rgba(0,194,168,0.18);border-radius:10px;padding:18px 16px;text-align:center;"><div style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:rgba(0,194,168,0.18);color:var(--teal);font-weight:700;font-size:0.9em;margin-bottom:10px;">5</div><h4 style="color:var(--white);font-size:0.95em;margin:0 0 6px;letter-spacing:0.02em;">Citations Returned</h4><p style="color:#a8cce8;font-size:0.82em;line-height:1.5;margin:0;">Every answer is source-linked.</p></div>
+      <div style="background:rgba(5,22,34,0.6);border:1px solid rgba(0,194,168,0.18);border-radius:10px;padding:18px 16px;text-align:center;"><div style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:rgba(0,194,168,0.18);color:var(--teal);font-weight:700;font-size:0.9em;margin-bottom:10px;">6</div><h4 style="color:var(--white);font-size:0.95em;margin:0 0 6px;letter-spacing:0.02em;">Human Approval</h4><p style="color:#a8cce8;font-size:0.82em;line-height:1.5;margin:0;">Licensed professional reviews before action.</p></div>
+    </div>
+
+    <div style="background:rgba(0,194,168,0.06);border:1px solid rgba(0,194,168,0.22);border-radius:12px;padding:20px 24px;margin:24px 0;">
+      <p style="margin:0;color:var(--light-text);line-height:1.75;"><strong style="color:var(--white);font-weight:600;">Day One outcome.</strong> By the end of Day One, your team should understand what the Sentinel Node is, where it lives, what data it can access, what it cannot access, who can use it, and how AI-assisted outputs are reviewed.</p>
+    </div>
+  </section>
+
+  <!-- SECTION 2 — DOCUMENT INGESTION -->
+  <section id="ingestion" style="margin:48px 0;">
+    <h2 style="color:var(--white);font-size:clamp(1.2rem,2.4vw,1.6rem);margin:0 0 14px;border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:10px;">Clean Data In. Cited Answers Out.</h2>
+    <p style="color:var(--light-text);line-height:1.85;margin:0 0 18px;">The Sentinel Node only retrieves from material you have approved for ingestion. Documents are indexed locally, never sent to a public cloud, and every answer is linked back to its source.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin:20px 0;">
+      <div style="background:rgba(5,22,34,0.55);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:20px 22px;">
+        <h3 style="color:var(--white);font-size:1em;margin:0 0 12px;letter-spacing:0.02em;">Medical ingestion examples</h3>
+        <ul style="color:var(--light-text);padding-left:20px;margin:0;line-height:1.85;font-size:0.92em;">
+          <li>Chart packets</li><li>Prior authorizations</li><li>Denial letters</li><li>Lab reports</li><li>Imaging reports</li><li>Scanned PDFs</li><li>Policy documents</li>
+        </ul>
+      </div>
+      <div style="background:rgba(5,22,34,0.55);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:20px 22px;">
+        <h3 style="color:var(--white);font-size:1em;margin:0 0 12px;letter-spacing:0.02em;">Legal ingestion examples</h3>
+        <ul style="color:var(--light-text);padding-left:20px;margin:0;line-height:1.85;font-size:0.92em;">
+          <li>Pleadings</li><li>Contracts</li><li>Discovery</li><li>Deposition transcripts</li><li>Client correspondence</li><li>Research memos</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 style="color:var(--white);margin:24px 0 10px;font-size:1.02em;">Ingestion principles</h3>
+    <ul style="list-style:none;padding:0;margin:18px 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;">
+      <li style="color:var(--light-text);padding:10px 14px 10px 36px;background:rgba(5,22,34,0.5);border:1px solid rgba(255,255,255,0.06);border-radius:8px;position:relative;font-size:0.92em;line-height:1.5;"><span style="position:absolute;left:14px;top:10px;color:var(--teal);font-weight:700;">&#10003;</span>Approved sources only</li>
+      <li style="color:var(--light-text);padding:10px 14px 10px 36px;background:rgba(5,22,34,0.5);border:1px solid rgba(255,255,255,0.06);border-radius:8px;position:relative;font-size:0.92em;line-height:1.5;"><span style="position:absolute;left:14px;top:10px;color:var(--teal);font-weight:700;">&#10003;</span>Local indexing</li>
+      <li style="color:var(--light-text);padding:10px 14px 10px 36px;background:rgba(5,22,34,0.5);border:1px solid rgba(255,255,255,0.06);border-radius:8px;position:relative;font-size:0.92em;line-height:1.5;"><span style="position:absolute;left:14px;top:10px;color:var(--teal);font-weight:700;">&#10003;</span>No public cloud dependency</li>
+      <li style="color:var(--light-text);padding:10px 14px 10px 36px;background:rgba(5,22,34,0.5);border:1px solid rgba(255,255,255,0.06);border-radius:8px;position:relative;font-size:0.92em;line-height:1.5;"><span style="position:absolute;left:14px;top:10px;color:var(--teal);font-weight:700;">&#10003;</span>Citations required</li>
+      <li style="color:var(--light-text);padding:10px 14px 10px 36px;background:rgba(5,22,34,0.5);border:1px solid rgba(255,255,255,0.06);border-radius:8px;position:relative;font-size:0.92em;line-height:1.5;"><span style="position:absolute;left:14px;top:10px;color:var(--teal);font-weight:700;">&#10003;</span>Human verification required</li>
+    </ul>
+
+    <div style="background:rgba(5,22,34,0.55);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:18px 20px;margin-top:24px;">
+      <p style="color:var(--white);font-weight:600;font-size:0.94em;margin:0 0 4px;line-height:1.4;">Document Ingestion Guide.pdf</p>
+      <span style="display:inline-block;color:#a8a8b8;font-size:0.78em;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;padding:2px 8px;background:rgba(255,255,255,0.06);border-radius:4px;">Coming Soon</span>
+    </div>
+  </section>
+
+  <!-- SECTION 3 — STAFF TRAINING -->
+  <section id="training" style="margin:48px 0;">
+    <h2 style="color:var(--white);font-size:clamp(1.2rem,2.4vw,1.6rem);margin:0 0 14px;border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:10px;">Training Built for Real People</h2>
+    <p style="color:var(--light-text);line-height:1.85;margin:0 0 14px;">Pocono AI training is designed around how people actually learn under pressure. The training approach draws from Marcus O&rsquo;Dell&rsquo;s background in psychology, IT instruction, and organizational training development. The goal is not to turn physicians or attorneys into AI engineers.</p>
+    <p style="color:var(--light-text);line-height:1.85;margin:0 0 14px;">The goal is <strong style="color:var(--white);font-weight:600;">confidence, verification habits, role-based understanding, operational safety, and human judgment</strong>.</p>
+
+    <h3 style="color:var(--white);margin:24px 0 10px;font-size:1.02em;">Training modules</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:18px 0;">
+      <div style="background:rgba(5,22,34,0.55);border:1px solid rgba(0,163,255,0.16);border-radius:10px;padding:16px 18px;"><div style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:rgba(0,163,255,0.18);color:#5dade2;font-weight:700;font-size:0.78em;margin-bottom:8px;">1</div><h4 style="color:var(--white);font-size:0.95em;margin:0;font-weight:600;letter-spacing:0.02em;line-height:1.4;">What the Sentinel Node Is</h4></div>
+      <div style="background:rgba(5,22,34,0.55);border:1px solid rgba(0,163,255,0.16);border-radius:10px;padding:16px 18px;"><div style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:rgba(0,163,255,0.18);color:#5dade2;font-weight:700;font-size:0.78em;margin-bottom:8px;">2</div><h4 style="color:var(--white);font-size:0.95em;margin:0;font-weight:600;letter-spacing:0.02em;line-height:1.4;">What the Sentinel Node Is Not</h4></div>
+      <div style="background:rgba(5,22,34,0.55);border:1px solid rgba(0,163,255,0.16);border-radius:10px;padding:16px 18px;"><div style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:rgba(0,163,255,0.18);color:#5dade2;font-weight:700;font-size:0.78em;margin-bottom:8px;">3</div><h4 style="color:var(--white);font-size:0.95em;margin:0;font-weight:600;letter-spacing:0.02em;line-height:1.4;">How to Ask Better Questions</h4></div>
+      <div style="background:rgba(5,22,34,0.55);border:1px solid rgba(0,163,255,0.16);border-radius:10px;padding:16px 18px;"><div style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:rgba(0,163,255,0.18);color:#5dade2;font-weight:700;font-size:0.78em;margin-bottom:8px;">4</div><h4 style="color:var(--white);font-size:0.95em;margin:0;font-weight:600;letter-spacing:0.02em;line-height:1.4;">How to Verify Citations</h4></div>
+      <div style="background:rgba(5,22,34,0.55);border:1px solid rgba(0,163,255,0.16);border-radius:10px;padding:16px 18px;"><div style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:rgba(0,163,255,0.18);color:#5dade2;font-weight:700;font-size:0.78em;margin-bottom:8px;">5</div><h4 style="color:var(--white);font-size:0.95em;margin:0;font-weight:600;letter-spacing:0.02em;line-height:1.4;">Role-Based Use</h4></div>
+      <div style="background:rgba(5,22,34,0.55);border:1px solid rgba(0,163,255,0.16);border-radius:10px;padding:16px 18px;"><div style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:rgba(0,163,255,0.18);color:#5dade2;font-weight:700;font-size:0.78em;margin-bottom:8px;">6</div><h4 style="color:var(--white);font-size:0.95em;margin:0;font-weight:600;letter-spacing:0.02em;line-height:1.4;">Escalation and Human Review</h4></div>
+    </div>
+
+    <h3 style="color:var(--white);margin:32px 0 10px;font-size:1.02em;">Training library</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:18px 0;">
+      <div style="background:rgba(5,22,34,0.55);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:18px 20px;"><p style="color:var(--white);font-weight:600;font-size:0.94em;margin:0 0 4px;line-height:1.4;">Physician Quick Start Guide.pdf</p><span style="display:inline-block;color:#a8a8b8;font-size:0.78em;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;padding:2px 8px;background:rgba(255,255,255,0.06);border-radius:4px;">Coming Soon</span></div>
+      <div style="background:rgba(5,22,34,0.55);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:18px 20px;"><p style="color:var(--white);font-weight:600;font-size:0.94em;margin:0 0 4px;line-height:1.4;">Nursing Staff Guide.pdf</p><span style="display:inline-block;color:#a8a8b8;font-size:0.78em;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;padding:2px 8px;background:rgba(255,255,255,0.06);border-radius:4px;">Coming Soon</span></div>
+      <div style="background:rgba(5,22,34,0.55);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:18px 20px;"><p style="color:var(--white);font-weight:600;font-size:0.94em;margin:0 0 4px;line-height:1.4;">Administrative Staff Guide.pdf</p><span style="display:inline-block;color:#a8a8b8;font-size:0.78em;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;padding:2px 8px;background:rgba(255,255,255,0.06);border-radius:4px;">Coming Soon</span></div>
+      <div style="background:rgba(5,22,34,0.55);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:18px 20px;"><p style="color:var(--white);font-weight:600;font-size:0.94em;margin:0 0 4px;line-height:1.4;">Attorney / Paralegal Guide.pdf</p><span style="display:inline-block;color:#a8a8b8;font-size:0.78em;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;padding:2px 8px;background:rgba(255,255,255,0.06);border-radius:4px;">Coming Soon</span></div>
+      <div style="background:rgba(5,22,34,0.55);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:18px 20px;"><p style="color:var(--white);font-weight:600;font-size:0.94em;margin:0 0 4px;line-height:1.4;">IT / MSP Deployment Guide.pdf</p><span style="display:inline-block;color:#a8a8b8;font-size:0.78em;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;padding:2px 8px;background:rgba(255,255,255,0.06);border-radius:4px;">Coming Soon</span></div>
+      <div style="background:rgba(5,22,34,0.55);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:18px 20px;"><p style="color:var(--white);font-weight:600;font-size:0.94em;margin:0 0 4px;line-height:1.4;">Citation Verification Guide.pdf</p><span style="display:inline-block;color:#a8a8b8;font-size:0.78em;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;padding:2px 8px;background:rgba(255,255,255,0.06);border-radius:4px;">Coming Soon</span></div>
+    </div>
+  </section>
+
+  <!-- SECTION 4 — DATA ARCHITECTURE -->
+  <section id="architecture" style="margin:48px 0;">
+    <h2 style="color:var(--white);font-size:clamp(1.2rem,2.4vw,1.6rem);margin:0 0 14px;border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:10px;">Local-First Infrastructure</h2>
+    <p style="color:var(--light-text);line-height:1.85;margin:0 0 14px;">The Sentinel Node is designed around a simple principle: <strong style="color:var(--white);font-weight:600;">sensitive data should stay where it belongs</strong>.</p>
+
+    <h3 style="color:var(--white);margin:24px 0 10px;font-size:1.02em;">Architecture principles</h3>
+    <ul style="list-style:none;padding:0;margin:18px 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;">
+      <li style="color:var(--light-text);padding:10px 14px 10px 36px;background:rgba(5,22,34,0.5);border:1px solid rgba(255,255,255,0.06);border-radius:8px;position:relative;font-size:0.92em;line-height:1.5;"><span style="position:absolute;left:14px;top:10px;color:var(--teal);font-weight:700;">&#10003;</span>Local-first deployment</li>
+      <li style="color:var(--light-text);padding:10px 14px 10px 36px;background:rgba(5,22,34,0.5);border:1px solid rgba(255,255,255,0.06);border-radius:8px;position:relative;font-size:0.92em;line-height:1.5;"><span style="position:absolute;left:14px;top:10px;color:var(--teal);font-weight:700;">&#10003;</span>Role-based access</li>
+      <li style="color:var(--light-text);padding:10px 14px 10px 36px;background:rgba(5,22,34,0.5);border:1px solid rgba(255,255,255,0.06);border-radius:8px;position:relative;font-size:0.92em;line-height:1.5;"><span style="position:absolute;left:14px;top:10px;color:var(--teal);font-weight:700;">&#10003;</span>Local indexing</li>
+      <li style="color:var(--light-text);padding:10px 14px 10px 36px;background:rgba(5,22,34,0.5);border:1px solid rgba(255,255,255,0.06);border-radius:8px;position:relative;font-size:0.92em;line-height:1.5;"><span style="position:absolute;left:14px;top:10px;color:var(--teal);font-weight:700;">&#10003;</span>Retrieval from approved source material</li>
+      <li style="color:var(--light-text);padding:10px 14px 10px 36px;background:rgba(5,22,34,0.5);border:1px solid rgba(255,255,255,0.06);border-radius:8px;position:relative;font-size:0.92em;line-height:1.5;"><span style="position:absolute;left:14px;top:10px;color:var(--teal);font-weight:700;">&#10003;</span>Reviewable, append-only audit trail</li>
+      <li style="color:var(--light-text);padding:10px 14px 10px 36px;background:rgba(5,22,34,0.5);border:1px solid rgba(255,255,255,0.06);border-radius:8px;position:relative;font-size:0.92em;line-height:1.5;"><span style="position:absolute;left:14px;top:10px;color:var(--teal);font-weight:700;">&#10003;</span>Human approval before use</li>
+      <li style="color:var(--light-text);padding:10px 14px 10px 36px;background:rgba(5,22,34,0.5);border:1px solid rgba(255,255,255,0.06);border-radius:8px;position:relative;font-size:0.92em;line-height:1.5;"><span style="position:absolute;left:14px;top:10px;color:var(--teal);font-weight:700;">&#10003;</span>No public cloud dependency</li>
+    </ul>
+
+    <p style="margin-top:24px;"><a href="architecture.html" class="cta-button cta-button-light">View Full Architecture Overview &rarr;</a></p>
+  </section>
+
+  <!-- SECTION 5 — GOVERNANCE & AUDIT -->
+  <section id="governance" style="margin:48px 0;">
+    <h2 style="color:var(--white);font-size:clamp(1.2rem,2.4vw,1.6rem);margin:0 0 14px;border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:10px;">Governance Is Not an Add-On</h2>
+    <p style="color:var(--light-text);line-height:1.85;margin:0 0 14px;">In high-liability environments, AI cannot simply generate an answer and disappear. The system must show:</p>
+
+    <ul style="list-style:none;padding:0;margin:18px 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;">
+      <li style="color:var(--light-text);padding:10px 14px 10px 36px;background:rgba(5,22,34,0.5);border:1px solid rgba(255,255,255,0.06);border-radius:8px;position:relative;font-size:0.92em;line-height:1.5;"><span style="position:absolute;left:14px;top:10px;color:var(--teal);font-weight:700;">&#10003;</span>What was asked</li>
+      <li style="color:var(--light-text);padding:10px 14px 10px 36px;background:rgba(5,22,34,0.5);border:1px solid rgba(255,255,255,0.06);border-radius:8px;position:relative;font-size:0.92em;line-height:1.5;"><span style="position:absolute;left:14px;top:10px;color:var(--teal);font-weight:700;">&#10003;</span>What was retrieved</li>
+      <li style="color:var(--light-text);padding:10px 14px 10px 36px;background:rgba(5,22,34,0.5);border:1px solid rgba(255,255,255,0.06);border-radius:8px;position:relative;font-size:0.92em;line-height:1.5;"><span style="position:absolute;left:14px;top:10px;color:var(--teal);font-weight:700;">&#10003;</span>What was generated</li>
+      <li style="color:var(--light-text);padding:10px 14px 10px 36px;background:rgba(5,22,34,0.5);border:1px solid rgba(255,255,255,0.06);border-radius:8px;position:relative;font-size:0.92em;line-height:1.5;"><span style="position:absolute;left:14px;top:10px;color:var(--teal);font-weight:700;">&#10003;</span>Who reviewed it</li>
+      <li style="color:var(--light-text);padding:10px 14px 10px 36px;background:rgba(5,22,34,0.5);border:1px solid rgba(255,255,255,0.06);border-radius:8px;position:relative;font-size:0.92em;line-height:1.5;"><span style="position:absolute;left:14px;top:10px;color:var(--teal);font-weight:700;">&#10003;</span>What action was taken</li>
+    </ul>
+
+    <h3 style="color:var(--white);margin:24px 0 10px;font-size:1.02em;">Governance checklist</h3>
+    <ul style="list-style:none;padding:0;margin:18px 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;">
+      <li style="color:var(--light-text);padding:10px 14px 10px 36px;background:rgba(5,22,34,0.5);border:1px solid rgba(255,255,255,0.06);border-radius:8px;position:relative;font-size:0.92em;line-height:1.5;"><span style="position:absolute;left:14px;top:10px;color:var(--teal);font-weight:700;">&#10003;</span>Role-based permissions</li>
+      <li style="color:var(--light-text);padding:10px 14px 10px 36px;background:rgba(5,22,34,0.5);border:1px solid rgba(255,255,255,0.06);border-radius:8px;position:relative;font-size:0.92em;line-height:1.5;"><span style="position:absolute;left:14px;top:10px;color:var(--teal);font-weight:700;">&#10003;</span>Cited outputs</li>
+      <li style="color:var(--light-text);padding:10px 14px 10px 36px;background:rgba(5,22,34,0.5);border:1px solid rgba(255,255,255,0.06);border-radius:8px;position:relative;font-size:0.92em;line-height:1.5;"><span style="position:absolute;left:14px;top:10px;color:var(--teal);font-weight:700;">&#10003;</span>Review tracking</li>
+      <li style="color:var(--light-text);padding:10px 14px 10px 36px;background:rgba(5,22,34,0.5);border:1px solid rgba(255,255,255,0.06);border-radius:8px;position:relative;font-size:0.92em;line-height:1.5;"><span style="position:absolute;left:14px;top:10px;color:var(--teal);font-weight:700;">&#10003;</span>Local audit records</li>
+      <li style="color:var(--light-text);padding:10px 14px 10px 36px;background:rgba(5,22,34,0.5);border:1px solid rgba(255,255,255,0.06);border-radius:8px;position:relative;font-size:0.92em;line-height:1.5;"><span style="position:absolute;left:14px;top:10px;color:var(--teal);font-weight:700;">&#10003;</span>Escalation workflows</li>
+      <li style="color:var(--light-text);padding:10px 14px 10px 36px;background:rgba(5,22,34,0.5);border:1px solid rgba(255,255,255,0.06);border-radius:8px;position:relative;font-size:0.92em;line-height:1.5;"><span style="position:absolute;left:14px;top:10px;color:var(--teal);font-weight:700;">&#10003;</span>Human approval</li>
+    </ul>
+
+    <div style="background:rgba(5,22,34,0.55);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:18px 20px;margin-top:24px;">
+      <p style="color:var(--white);font-weight:600;font-size:0.94em;margin:0 0 4px;line-height:1.4;">Human-in-the-Loop Governance Guide.pdf</p>
+      <span style="display:inline-block;color:#a8a8b8;font-size:0.78em;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;padding:2px 8px;background:rgba(255,255,255,0.06);border-radius:4px;">Coming Soon</span>
+    </div>
+
+    <div style="background:rgba(0,194,168,0.06);border:1px solid rgba(0,194,168,0.22);border-radius:12px;padding:20px 24px;margin:24px 0;">
+      <p style="margin:0;color:var(--light-text);line-height:1.75;">Related: <a href="trust.html" style="color:var(--teal);text-decoration:none;font-weight:600;">Trust &amp; auditability model</a> &nbsp;|&nbsp; <a href="fragmented-legal-information.html" style="color:var(--teal);text-decoration:none;font-weight:600;">Governed retrieval research brief</a> &nbsp;|&nbsp; <a href="compliance.html" style="color:var(--teal);text-decoration:none;font-weight:600;">AI Sovereignty Attestation</a></p>
+    </div>
+  </section>
+
+  <!-- TRAINING LIBRARY -->
+  <section style="margin:64px 0 48px;">
+    <div style="text-align:center;margin-bottom:28px;">
+      <span style="display:inline-block;color:var(--teal);font-weight:700;letter-spacing:1.4px;text-transform:uppercase;font-size:0.76rem;margin-bottom:14px;">Resources</span>
+      <h2 style="color:var(--white);font-size:clamp(1.3rem,2.6vw,1.7rem);margin:8px 0 10px;border-bottom:none;">Training Library</h2>
+      <p style="color:var(--light-text);max-width:680px;margin:0 auto;line-height:1.7;">Role-based deployment and training resources. Available to pilot and production customers as they are released.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;">
+      <div style="background:rgba(5,22,34,0.55);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:18px 20px;"><p style="color:var(--white);font-weight:600;font-size:0.94em;margin:0 0 4px;line-height:1.4;">Day One Orientation Guide</p><span style="display:inline-block;color:#a8a8b8;font-size:0.78em;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;padding:2px 8px;background:rgba(255,255,255,0.06);border-radius:4px;">Coming Soon</span></div>
+      <div style="background:rgba(5,22,34,0.55);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:18px 20px;"><p style="color:var(--white);font-weight:600;font-size:0.94em;margin:0 0 4px;line-height:1.4;">Document Ingestion Guide</p><span style="display:inline-block;color:#a8a8b8;font-size:0.78em;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;padding:2px 8px;background:rgba(255,255,255,0.06);border-radius:4px;">Coming Soon</span></div>
+      <div style="background:rgba(5,22,34,0.55);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:18px 20px;"><p style="color:var(--white);font-weight:600;font-size:0.94em;margin:0 0 4px;line-height:1.4;">Citation Verification Guide</p><span style="display:inline-block;color:#a8a8b8;font-size:0.78em;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;padding:2px 8px;background:rgba(255,255,255,0.06);border-radius:4px;">Coming Soon</span></div>
+      <div style="background:rgba(5,22,34,0.55);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:18px 20px;"><p style="color:var(--white);font-weight:600;font-size:0.94em;margin:0 0 4px;line-height:1.4;">Physician Workflow Guide</p><span style="display:inline-block;color:#a8a8b8;font-size:0.78em;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;padding:2px 8px;background:rgba(255,255,255,0.06);border-radius:4px;">Coming Soon</span></div>
+      <div style="background:rgba(5,22,34,0.55);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:18px 20px;"><p style="color:var(--white);font-weight:600;font-size:0.94em;margin:0 0 4px;line-height:1.4;">Legal Workflow Guide</p><span style="display:inline-block;color:#a8a8b8;font-size:0.78em;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;padding:2px 8px;background:rgba(255,255,255,0.06);border-radius:4px;">Coming Soon</span></div>
+      <div style="background:rgba(5,22,34,0.55);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:18px 20px;"><p style="color:var(--white);font-weight:600;font-size:0.94em;margin:0 0 4px;line-height:1.4;">IT / MSP Deployment Guide</p><span style="display:inline-block;color:#a8a8b8;font-size:0.78em;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;padding:2px 8px;background:rgba(255,255,255,0.06);border-radius:4px;">Coming Soon</span></div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section style="max-width:880px;margin:48px auto 32px;padding:32px;background:linear-gradient(160deg,rgba(0,194,168,0.08),rgba(5,22,34,0.6));border:1px solid rgba(0,194,168,0.22);border-radius:14px;text-align:center;">
+    <h2 style="color:var(--white);border-bottom:none;margin:0 0 14px;font-size:clamp(1.2rem,2.4vw,1.55rem);">Ready to see what deployment looks like in your environment?</h2>
+    <p style="color:var(--light-text);line-height:1.75;margin:0 auto 22px;max-width:620px;">Pocono AI can walk through your workflow, document sources, governance requirements, and deployment environment to determine whether a Sentinel Node pilot is appropriate.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;">
+      <a href="mailto:marcus@poconoai.com?subject=Sentinel%20Node%20Deployment%20Conversation" class="cta-button">Schedule a Deployment Conversation</a>
+      <a href="architecture.html" class="cta-button cta-button-light">View Architecture Overview</a>
+      <a href="sentinel-demo.html" class="cta-button cta-button-light">Watch Sentinel Demo</a>
+      <a href="mailto:marcus@poconoai.com" class="cta-button cta-button-light">Contact Pocono AI</a>
+    </div>
+  </section>
+
+</article>
+
+    </main>
+
+
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 root-relative nav fix, Living Echo rebrand, Engineering & Drafting + Enterprise Estate Continuity links added (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- INCLUDE:FOOTER -->
+<footer role="contentinfo" style="background:#051622;border-top:1px solid rgba(255,255,255,0.08);padding:40px 24px 28px;font-size:0.85em;color:#8899aa;">
+  <div style="max-width:1180px;margin:0 auto;">
+
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:0 0 28px;margin-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.07);">
+      <div style="max-width:560px;">
+        <p style="margin:0 0 6px;font-size:1.05em;font-weight:700;color:#fff;">Local AI infrastructure for regulated practices.</p>
+        <p style="margin:0;font-size:0.95em;line-height:1.5;">Drafts with citations. Human review required. Sensitive documents stay under practice control. Simple path, deep proof.</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="/contact.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;background:#00c2a8;color:#04111a;font-weight:700;text-decoration:none;font-size:0.95em;">Request Pilot</a>
+        <a href="/sentinel-demo.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;border:1px solid rgba(0,194,168,0.55);color:#00c2a8;font-weight:700;text-decoration:none;font-size:0.95em;">Watch Demo</a>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px 32px;margin-bottom:32px;text-align:left;">
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">For You</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/start-here.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Start Here (3 min)</a>
+          <a href="/for-physicians.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Physicians</a>
+          <a href="/for-attorneys.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Attorneys</a>
+          <a href="/engineering-drafting/" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Engineering &amp; Drafting Teams</a>
+          <a href="/pilot-program.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Pilot Program</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Installer Training</a>
+          <a href="/how-it-works.html" style="color:#8899aa;text-decoration:none;">How It Works</a>
+          <a href="/trust.html" style="color:#8899aa;text-decoration:none;">Trust &amp; Audit</a>
+          <a href="/pricing.html" style="color:#8899aa;text-decoration:none;">Pricing</a>
+          <a href="/sentinel-demo.html" style="color:#8899aa;text-decoration:none;">See the Demo</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Documentation Hub</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/documentation-hub/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Hub Home &mdash; Deep Proof</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">Installer Training</a>
+          <a href="/sentinel-node/installation-simulator.html" style="color:#8899aa;text-decoration:none;">&#8627; Installation Simulator</a>
+          <a href="/documentation-hub/clinical/" style="color:#8899aa;text-decoration:none;">Clinical Documentation</a>
+          <a href="/documentation-hub/legal/" style="color:#8899aa;text-decoration:none;">Legal Documentation</a>
+          <a href="/documentation-hub/technical/" style="color:#8899aa;text-decoration:none;">Technical Documentation</a>
+          <a href="/documentation-hub/governance/" style="color:#8899aa;text-decoration:none;">Governance &amp; Audit</a>
+          <a href="/documentation-hub/tools/" style="color:#8899aa;text-decoration:none;">Tools &amp; Simulators</a>
+          <a href="/documentation-hub/research/" style="color:#8899aa;text-decoration:none;">Research &amp; Essays</a>
+          <a href="/documentation-hub/transparency/" style="color:#8899aa;text-decoration:none;">Transparency</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Global Federated AI</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/global/" style="color:#7af0dc;text-decoration:none;font-weight:600;">Global Federated Hub</a>
+          <a href="/global/australia/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Australia</a>
+          <a href="/global/singapore/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Singapore</a>
+          <a href="/global/taiwan/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Taiwan</a>
+          <a href="/global/europe/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Europe</a>
+          <a href="/contact.html" style="color:#8899aa;text-decoration:none;">Partner Inquiry</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Company</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/about.html" style="color:#8899aa;text-decoration:none;">About Pocono AI</a>
+          <a href="/team.html" style="color:#8899aa;text-decoration:none;">Team &amp; Leadership</a>
+          <a href="/why-pocono-ai.html" style="color:#8899aa;text-decoration:none;">Why Pocono AI</a>
+          <a href="/founding-commercial-leadership.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Join Us</a>
+          <a href="/careers.html" style="color:#8899aa;text-decoration:none;">Careers</a>
+          <a href="/how-we-hire.html" style="color:#8899aa;text-decoration:none;">How We Hire</a>
+          <a href="/channel-partners.html" style="color:#8899aa;text-decoration:none;">Technical Partners (MSPs)</a>
+          <a href="/partners.html" style="color:#8899aa;text-decoration:none;">Academic Partnerships</a>
+          <a href="/contact.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Contact</a>
+          <a href="https://forms.gle/VQahnkjMfY6QNEMy8" target="_blank" rel="noopener noreferrer" style="color:#d5a94f;text-decoration:none;font-weight:600;">Interest List &#8599;</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Founder Projects</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/rehability/" style="color:#a78bfa;text-decoration:none;font-weight:700;">Rehability &#x2605;</a>
+          <a href="/rehability/marcus-memory-helper/" style="color:#a78bfa;text-decoration:none;font-weight:600;">&#8627; Marcus's Memory Helper</a>
+          <a href="/sentinel-home/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Sentinel Home Edition</a>
+          <a href="/living-memorials/" style="color:#8899aa;text-decoration:none;">Living Echo</a>
+          <a href="/living-memorials/marcus-odell/" style="color:#8899aa;text-decoration:none;">Marcus&rsquo;s Living Echo</a>
+          <a href="/living-memorials/enterprise-estate-continuity.html" style="color:#8899aa;text-decoration:none;">Enterprise Estate Continuity</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Resources &amp; Legal</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/sitemap.html" style="color:#8899aa;text-decoration:none;">All Pages (Sitemap)</a>
+          <a href="/audit.html" style="color:#8899aa;text-decoration:none;">Transparency &amp; Audit Log</a>
+          <a href="/maturity-disclosure.html" style="color:#8899aa;text-decoration:none;">What We Have / Don&rsquo;t Claim</a>
+          <a href="/plain.html" style="color:#8899aa;text-decoration:none;">Plain Language Guide</a>
+          <a href="/privacy.html" style="color:#8899aa;text-decoration:none;">Privacy</a>
+          <a href="/terms.html" style="color:#8899aa;text-decoration:none;">Terms</a>
+          <a href="/sla.html" style="color:#8899aa;text-decoration:none;">SLA</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:18px;margin-bottom:14px;">
+      <p style="margin:0;font-size:0.82em;line-height:1.6;color:#6f8295;max-width:1000px;">Pocono AI does not provide medical, legal, or engineering advice, does not practice medicine, law, or licensed engineering, and does not make clinical, legal, or engineering decisions. Outputs are drafts or support materials that require review by a qualified professional; final professional judgment remains with the licensed physician, attorney, or engineer. Tools and simulations on this site are educational and use synthetic data.</p>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:20px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+      <p style="margin:0;font-size:0.9em;">&copy; 2026 Pocono AI, LLC &nbsp;&#183;&nbsp; East Stroudsburg, PA &nbsp;&#183;&nbsp; <a href="mailto:marcus@poconoai.com" style="color:#8899aa;">marcus@poconoai.com</a> &nbsp;&#183;&nbsp; <a href="tel:+15705340602" style="color:#8899aa;">(570) 534-0602</a></p>
+      <p style="margin:0;font-size:0.88em;"><a href="/audit.html" style="color:#5dade2;text-decoration:none;">Transparency v402</a></p>
+    </div>
+  </div>
+</footer>
+<script src="/search.js?v=402" defer></script>
+<!-- /INCLUDE:FOOTER -->
+
+<script src="search-index.js?v=402" defer></script>
+<script src="nav.js?v=402" defer></script>
+</body>
+</html>

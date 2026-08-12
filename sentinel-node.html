@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp -->
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sentinel Node — Local AI Appliance for Healthcare and Law | Pocono AI</title>
+<meta name="description" content="Sentinel Node is a locally deployed AI appliance for medical practices and law firms. Zero cloud routing, full audit trail, human review gating.">
+<meta name="keywords" content="Sentinel Node, local AI appliance, on-premises AI appliance, healthcare AI appliance, law firm AI appliance, local AI inference device, private AI healthcare, regulated AI hardware, Pocono AI Sentinel Node">
+<meta name="theme-color" content="#0B0F13">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="favicon-180x180.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+<link rel="canonical" href="https://poconoai.com/sentinel-node.html">
+<link rel="stylesheet" href="styles.css?v=402">
+<link rel="stylesheet" href="nav-v2026.css?v=402">
+<link rel="stylesheet" href="brand-v292.css?v=402">
+<meta property="og:title" content="Sentinel Node — Local AI Appliance for Healthcare and Law | Pocono AI">
+<meta property="og:type" content="article">
+<meta property="og:description" content="Sentinel Node is a locally deployed AI inference appliance for independent medical practices and small law firms. Zero cloud routing, full audit trail, human review gating.">
+<meta property="og:url" content="https://poconoai.com/sentinel-node.html">
+<meta property="og:image" content="https://poconoai.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="Pocono AI">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Sentinel Node — Local AI Appliance | Pocono AI">
+<meta name="twitter:description" content="Locally deployed AI inference appliance for independent medical practices and small law firms. Zero cloud routing. Full audit trail. Human review gating.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Sentinel Node: Local AI Infrastructure for Regulated Practices",
+  "description": "Sentinel Node is Pocono AI's locally deployed AI inference appliance. All processing is on-premises — zero cloud routing, full local audit trail, human-gated review designed for regulated medical and legal environments.",
+  "url": "https://poconoai.com/sentinel-node.html",
+  "publisher": { "@type": "Organization", "name": "Pocono AI, LLC", "url": "https://poconoai.com" },
+  "datePublished": "2026-06-01",
+  "dateModified": "2026-06-01"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Sentinel Node",
+  "description": "Sentinel Node is a locally deployed AI inference appliance for independent medical practices and small law firms. All AI inference runs on hardware inside your network — no cloud routing, no external data transmission, full local audit trail.",
+  "brand": { "@type": "Brand", "name": "Pocono AI" },
+  "manufacturer": { "@type": "Organization", "name": "Pocono AI, LLC", "url": "https://poconoai.com" },
+  "url": "https://poconoai.com/sentinel-node.html",
+  "offers": {
+    "@type": "AggregateOffer",
+    "priceCurrency": "USD",
+    "lowPrice": "950",
+    "highPrice": "2995",
+    "priceSpecification": {
+      "@type": "PriceSpecification",
+      "description": "Monthly managed service. Phase I from $950/mo, Phase II $1,495/mo, Phase III $2,995/mo."
+    }
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is Sentinel Node?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sentinel Node is a locally deployed AI inference appliance built by Pocono AI for independent medical practices and small law firms. It runs an open-weight language model on dedicated GPU hardware physically located inside your network. All AI inference is on-premises — no query content is transmitted to external cloud endpoints. It ships as a managed service appliance: hardware, model, software, and support are included in the monthly service fee."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is Sentinel Node different from a cloud AI subscription?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Cloud AI subscriptions route your queries to a vendor's infrastructure. Sentinel Node runs the model on hardware inside your network. Your patient notes, case content, and privileged communications never leave your perimeter during inference. Cloud AI is convenient and scalable; Sentinel Node trades scale for data sovereignty and local accountability."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What does the Sentinel Node service include?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Sentinel Node managed service includes: the inference appliance hardware, the open-weight language model, the Audit Proxy and governance layer software, onboarding and configuration support, SLA-backed uptime, Ed25519-signed software updates, and a Business Associate Agreement (BAA) for healthcare deployments. Hardware is replaced or upgraded as part of the service."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What does Sentinel Node cost?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sentinel Node is offered as a monthly managed service. Phase I starts at $950/month, Phase II at $1,495/month, and Phase III at $2,995/month. Pricing reflects hardware tier, model capability, and support scope. Contact Pocono AI to discuss which phase fits your workflow volume and requirements."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What workflows does Sentinel Node support?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For medical practices: prior authorization drafts, clinical documentation, referral coordination, patient message drafts, care gap summaries, and administrative correspondence. For law firms: legal research queries against matter context, document summarization, deposition prep, motion drafting support, and client communication drafts. All output is draft-only and requires human review before use."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+:root { --teal: #00c2a8; }
+.page-wrap { max-width: 1100px; margin: 0 auto; padding: clamp(28px,4vw,60px) 24px; color: #cfdfeb; }
+.kicker { display: inline-flex; align-items: center; gap: 10px; color: #2dd4bf; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; font-size: .76rem; margin-bottom: 14px; padding: 6px 14px; border: 1px solid rgba(45,212,191,.34); border-radius: 100px; background: rgba(0,194,168,.06); }
+.page-title { font-size: clamp(2rem,5vw,3.4rem); line-height: 1.06; letter-spacing: -.025em; color: #fff; margin: 0 0 18px; font-weight: 800; }
+.page-title em { font-style: normal; color: #2dd4bf; }
+.page-lede { font-size: clamp(1.04rem,1.7vw,1.2rem); line-height: 1.65; color: #b9d9ee; max-width: 860px; margin: 0 0 32px; }
+.disclosure { border: 1px solid rgba(148,163,184,.22); background: rgba(148,163,184,.06); border-radius: 14px; padding: 16px 18px; margin: 0 0 36px; font-size: .92rem; line-height: 1.6; color: #9bb3c4; }
+.section-title { font-size: clamp(1.3rem,2.5vw,1.8rem); font-weight: 700; color: #fff; margin: 0 0 16px; letter-spacing: -.015em; }
+.body-text { font-size: 1rem; line-height: 1.75; color: #b9d9ee; margin: 0 0 24px; }
+
+/* Spec table */
+.spec-table { width: 100%; border-collapse: collapse; margin: 24px 0 36px; font-size: .94rem; }
+.spec-table tr { border-bottom: 1px solid rgba(255,255,255,.07); }
+.spec-table tr:hover td { background: rgba(255,255,255,.02); }
+.spec-table td { padding: 13px 16px; vertical-align: top; }
+.spec-table td:first-child { color: #7a98b0; font-weight: 600; width: 36%; font-size: .9rem; }
+.spec-table td:last-child { color: #b9d9ee; }
+
+/* Pricing tiers */
+.tier-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin: 24px 0 36px; }
+@media(max-width:640px){ .tier-grid { grid-template-columns: 1fr; } }
+.tier { border-radius: 16px; padding: 24px 20px; border: 1px solid rgba(255,255,255,.1); background: rgba(15,23,42,.5); }
+.tier.featured { border-color: rgba(0,194,168,.4); background: rgba(0,194,168,.06); }
+.tier-phase { font-size: .72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .12em; color: #7a98b0; margin: 0 0 8px; }
+.tier.featured .tier-phase { color: #2dd4bf; }
+.tier-price { font-size: 1.8rem; font-weight: 800; color: #fff; margin: 0 0 4px; }
+.tier-price span { font-size: .9rem; font-weight: 500; color: #7a98b0; }
+.tier-desc { font-size: .88rem; color: #7a98b0; line-height: 1.5; margin: 0 0 14px; }
+.tier ul { margin: 0; padding-left: 16px; font-size: .87rem; color: #b9d9ee; line-height: 1.7; }
+
+/* Workflow list */
+.workflow-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; margin: 24px 0 36px; }
+@media(max-width:560px){ .workflow-cols { grid-template-columns: 1fr; } }
+.workflow-col h3 { font-size: 1rem; font-weight: 700; margin: 0 0 12px; }
+.workflow-col.med h3 { color: #38bdf8; }
+.workflow-col.leg h3 { color: #a78bfa; }
+.workflow-col.eng h3 { color: #00c2a8; }
+.workflow-col ul { margin: 0; padding-left: 18px; color: #b9d9ee; font-size: .92rem; line-height: 1.75; }
+
+.faq-block { border: 1px solid rgba(255,255,255,.08); border-radius: 14px; padding: 20px 22px; margin-bottom: 14px; background: rgba(15,23,42,.3); }
+.faq-q { font-weight: 700; color: #fff; font-size: 1rem; margin: 0 0 10px; }
+.faq-a { color: #9eb9cc; font-size: .96rem; line-height: 1.7; margin: 0; }
+
+.related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px,1fr)); gap: 16px; margin: 24px 0 40px; }
+.related-card { border: 1px solid rgba(255,255,255,.1); border-radius: 14px; padding: 18px 20px; background: rgba(15,23,42,.4); text-decoration: none; display: block; transition: border-color .2s; }
+.related-card:hover { border-color: var(--teal); }
+.related-card-title { color: #fff; font-weight: 700; font-size: .97rem; margin: 0 0 6px; }
+.related-card-desc { color: #7a98b0; font-size: .86rem; line-height: 1.5; margin: 0; }
+.cta-band { background: rgba(0,194,168,.08); border: 1px solid rgba(0,194,168,.25); border-radius: 18px; padding: 36px 32px; text-align: center; margin: 48px 0 0; }
+.cta-band h2 { color: #fff; font-size: clamp(1.3rem,2.5vw,1.8rem); margin: 0 0 12px; }
+.cta-band p { color: #9eb9cc; font-size: 1rem; margin: 0 0 24px; line-height: 1.6; }
+.interest-strip { text-align:center; margin:22px 0 0; padding:22px 24px; background:rgba(213,169,79,.07); border:1px solid rgba(213,169,79,.25); border-radius:14px; }
+.interest-strip p { color:#9eb9cc; font-size:.96rem; margin:0 0 16px; line-height:1.6; }
+.interest-strip .interest-note { font-size:.8rem; color:#6f8295; margin:14px auto 0; max-width:58ch; }
+a.interest-list-cta { display:inline-flex; align-items:center; justify-content:center; min-height:48px; padding:.85rem 1.5rem; border-radius:10px; background:var(--gold,#d5a94f); color:#1b1305; font-weight:800; font-size:.95rem; line-height:1.2; white-space:normal; text-decoration:none; }
+a.interest-list-cta:hover, a.interest-list-cta:visited, a.interest-list-cta:active { color:#1b1305; }
+.cta-btn { display: inline-block; background: var(--teal); color: #0b0f13; font-weight: 800; font-size: .97rem; padding: 14px 28px; border-radius: 10px; text-decoration: none; }
+.cta-btn-sec { display: inline-block; border: 1px solid rgba(0,194,168,.4); color: var(--teal); font-weight: 700; font-size: .94rem; padding: 13px 26px; border-radius: 10px; text-decoration: none; margin-left: 12px; }
+@media(max-width:500px){ .cta-btn-sec { margin: 12px 0 0; display: block; } }
+.sep { border: none; border-top: 1px solid rgba(255,255,255,.08); margin: 40px 0; }
+</style>
+</head>
+<body>
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- INCLUDE:HEADER -->
+<div id="hitl-notice" style="background:#0a1929;padding:4px 16px;text-align:center;font-size:12px;color:#4a5568;border-bottom:1px solid rgba(255,255,255,0.06);letter-spacing:0.01em;">Human-in-the-Loop required: licensed professionals verify all outputs before clinical or legal action</div>
+<header role="banner">
+  <div class="header-inner">
+    <a href="/index.html" class="logo" aria-label="Pocono AI Home">
+      <img src="/logo.svg?v=402" alt="" width="36" height="36" decoding="async" loading="eager" aria-hidden="true" style="display:inline-block;">
+      Pocono <span>AI</span>
+    </a>
+    <nav id="desktop-nav" aria-label="Main navigation">
+      <div class="nav-item"><a href="/index.html" class="nav-direct">Home</a></div>
+      <div class="nav-item"><a href="/for-physicians.html" class="nav-direct">Physicians</a></div>
+      <div class="nav-item"><a href="/for-attorneys.html" class="nav-direct">Attorneys</a></div>
+      <div class="nav-item"><a href="/sentinel-node.html" class="nav-direct nav-hub" style="color:#d5a94f;border:1px solid rgba(213,169,79,0.45);border-radius:999px;padding:6px 13px;">Sentinel Node</a></div>
+      <div class="nav-item"><a href="/living-memorials/" class="nav-direct">Living Echo</a></div>
+      <div class="nav-item"><a href="/contact.html" class="nav-direct">Contact</a></div>
+      <div class="nav-item" data-dropdown="menu-more">
+        <button type="button" class="nav-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="menu-more">More <span class="nav-chevron" aria-hidden="true">&#9662;</span></button>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <a href="/contact.html#pilot" class="nav-cta nav-cta-primary">Request a Pilot</a>
+      <button type="button" class="pa-search-trigger" data-search-open aria-label="Search (press / or Ctrl-K)" aria-haspopup="dialog" aria-expanded="false">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span class="pa-st-label">Search</span><kbd data-pa-keyhint>Ctrl K</kbd>
+      </button>
+      <button type="button" class="header-icon-btn" id="mobile-menu" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav-panel">
+        <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- "More" overflow dropdown — sibling of <header> so position:fixed escapes header's stacking context. Wired by nav.js via data-dropdown="menu-more". -->
+<div class="nav-dropdown" id="menu-more" aria-label="More navigation">
+  <p class="nav-dd-section">Products</p>
+  <a href="/engineering-drafting/">Drafting &amp; Engineering Edition</a>
+  <a href="/sentinel-home/">Sentinel Home Edition</a>
+  <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability — Assistive Tools &#x2605;</a>
+  <a href="/living-memorials/enterprise-estate-continuity.html">Enterprise Estate Continuity</a>
+  <p class="nav-dd-section">Capabilities</p>
+  <a href="/evidence-room.html">Evidence Room</a>
+  <a href="/push-button-deliverables.html">Push-Button Deliverables</a>
+  <a href="/pilot-readiness-kit.html">Pilot Kit</a>
+  <a href="/pilot-program.html">Pilot Program</a>
+  <a href="/how-it-works.html">How It Works</a>
+  <p class="nav-dd-section">Hubs &amp; Company</p>
+  <a href="/training.html">Training Hub</a>
+  <a href="/documentation-hub/">Document Hub</a>
+  <a href="/global/">Global Hub</a>
+  <a href="/investors-hub.html">Investor Hub</a>
+  <a href="/valuation-dashboard.html">Valuation Dashboard</a>
+  <a href="/about.html">About</a>
+  <p class="nav-dd-section">Trust &amp; Legal</p>
+  <a href="/transparency.html">Transparency</a>
+  <a href="/audit.html">Audit Log</a>
+  <a href="/privacy.html">Privacy</a>
+  <a href="/sitemap.html">Sitemap</a>
+</div>
+<!-- Site search is provided by the self-contained search.js asset (command palette: / or Ctrl/Cmd-K). -->
+
+<!-- Mobile panel: full-screen slide-in. v396 nav — hub tiles + grouped links + Sentinel Node + Engineering. -->
+<nav id="mobile-nav-panel" aria-label="Mobile navigation" aria-hidden="true" role="dialog" aria-modal="true">
+
+  <!-- Hub tiles: Sentinel Node, Documentation Hub, Training Hub, Global Hub -->
+  <div style="padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,0.07);">
+    <p style="font-size:0.65em;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.28);margin:0 0 10px;padding:0 2px;">Hubs</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <a href="/sentinel-node.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(213,169,79,0.1);border:1px solid rgba(213,169,79,0.35);border-radius:10px;color:#d5a94f;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Sentinel Node</a>
+      <a href="/documentation-hub/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(0,194,168,0.1);border:1px solid rgba(0,194,168,0.35);border-radius:10px;color:#00c2a8;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Docs Hub</a>
+      <a href="/training.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.35);border-radius:10px;color:#a78bfa;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Training Hub</a>
+      <a href="/global/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(122,240,220,0.07);border:1px solid rgba(122,240,220,0.3);border-radius:10px;color:#7af0dc;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Global Hub</a>
+    </div>
+  </div>
+
+  <!-- Core paths -->
+  <div class="mob-static-links">
+    <a href="/index.html">Home</a>
+    <a href="/for-physicians.html">Physicians</a>
+    <a href="/for-attorneys.html">Attorneys</a>
+    <a href="/engineering-drafting/">Engineering &amp; Drafting</a>
+    <a href="/pilot-program.html">Pilot Program</a>
+    <a href="/how-it-works.html">How It Works</a>
+    <a href="/trust.html">Trust &amp; Audit</a>
+    <a href="/pricing.html">Pricing</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/living-memorials/">Living Echo</a>
+    <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability</a>
+    <a href="/about.html">About</a>
+    <a href="/team.html" style="color:rgba(255,255,255,0.6);">Team &amp; Leadership</a>
+    <a href="/valuation-dashboard.html" style="color:rgba(255,255,255,0.6);">Valuation Dashboard</a>
+    <a href="/careers.html" style="color:rgba(255,255,255,0.6);">Careers</a>
+    <a href="/sentinel-demo.html" style="color:rgba(255,255,255,0.6);">Demo</a>
+    <a href="/sitemap.html" style="color:rgba(255,255,255,0.45);">Sitemap</a>
+    <a href="/transparency.html" style="color:rgba(255,255,255,0.45);">Transparency</a>
+    <a href="/privacy.html" style="color:rgba(255,255,255,0.45);">Privacy</a>
+  </div>
+
+  <a href="/contact.html#pilot" class="mob-cta">Request a Pilot</a>
+</nav>
+<!-- /INCLUDE:HEADER -->
+<!-- /nav-injected by v347 -->
+<main>
+<div class="page-wrap">
+
+  <div class="kicker">&#9679; The Appliance</div>
+  <h1 class="page-title">Sentinel Node — <em>AI on Your Hardware</em></h1>
+  <p class="page-lede">Sentinel Node is a locally deployed AI inference appliance built specifically for independent medical practices and small law firms. It runs a capable open-weight language model on dedicated GPU hardware inside your network — not a cloud vendor's data center. Your staff uses AI. Your data doesn't move.</p>
+
+  <div class="disclosure">
+    <b>Status note:</b> Pocono AI is in active pilot discussions. Sentinel Node is a pre-commercial product. Specifications, pricing, and capabilities described here reflect the current design and are subject to change. Pilot design partners are welcome — <a href="contact.html" style="color:var(--teal);">contact us</a> to discuss fit. Human review remains the gatekeeper on all AI-assisted output.
+  </div>
+
+  <h2 class="section-title">What Sentinel Node Is</h2>
+  <p class="body-text">Sentinel Node ships as a managed service appliance. Hardware, model, software, governance layer, and support are all included in the monthly service fee. You do not provision cloud accounts, select GPU instances, or manage model installation. The appliance arrives configured, connects to your internal network, and your staff begins using it through a local interface.</p>
+  <p class="body-text">The underlying AI model is an open-weight language model running on dedicated GPU hardware. All inference is on-premises. No query content — no patient notes, no case strategy, no privileged communications — traverses the internet during normal operation.</p>
+
+  <hr class="sep">
+
+  <h2 class="section-title">Core Specifications</h2>
+  <table class="spec-table">
+    <tr><td>Deployment model</td><td>Physical appliance, customer premises. Managed service — hardware included.</td></tr>
+    <tr><td>Inference location</td><td>On-device GPU. Zero cloud routing during inference by default.</td></tr>
+    <tr><td>Internet requirement</td><td>Optional. Air-gapped deployment supported after provisioning.</td></tr>
+    <tr><td>Audit trail</td><td>Reviewable local audit log. Stays in your possession.</td></tr>
+    <tr><td>Human review</td><td>All output is draft-only. Staff sign-off required before operational use.</td></tr>
+    <tr><td>Scope isolation</td><td>Queries scoped by patient ID or matter ID. Cross-record bleed prevented architecturally.</td></tr>
+    <tr><td>Software updates</td><td>Ed25519-signed. Delivered on your schedule. Model behavior changes are attributable.</td></tr>
+    <tr><td>Data retention</td><td>SSD data repository stays with your practice after service termination.</td></tr>
+    <tr><td>BAA</td><td>Draft available &mdash; under review by healthcare counsel. Pocono AI is structured to operate as Business Associate for healthcare deployments.</td></tr>
+    <tr><td>Target organization size</td><td>Independent medical practices (1–10 physicians); small law firms (1–15 attorneys).</td></tr>
+  </table>
+
+  <hr class="sep">
+
+  <h2 class="section-title">Service Tiers</h2>
+  <div class="tier-grid">
+    <div class="tier">
+      <p class="tier-phase">Phase I</p>
+      <p class="tier-price">$950<span>/mo</span></p>
+      <p class="tier-desc">Entry-tier appliance. Core inference capability for high-value workflow tasks.</p>
+      <ul>
+        <li>Local GPU inference</li>
+        <li>Audit Proxy + log</li>
+        <li>Draft-only envelope</li>
+        <li>BAA draft available</li>
+        <li>Standard SLA</li>
+      </ul>
+    </div>
+    <div class="tier featured">
+      <p class="tier-phase">Phase II — Most Common</p>
+      <p class="tier-price">$1,495<span>/mo</span></p>
+      <p class="tier-desc">Mid-tier appliance with expanded model capability and governance receipts.</p>
+      <ul>
+        <li>Everything in Phase I</li>
+        <li>Higher-capability model</li>
+        <li>Governance receipts</li>
+        <li>OCR confidence gating</li>
+        <li>Enhanced SLA</li>
+      </ul>
+    </div>
+    <div class="tier">
+      <p class="tier-phase">Phase III</p>
+      <p class="tier-price">$2,995<span>/mo</span></p>
+      <p class="tier-desc">High-performance appliance for multi-user practices and complex document workflows.</p>
+      <ul>
+        <li>Everything in Phase II</li>
+        <li>High-performance GPU</li>
+        <li>Multi-user concurrent</li>
+        <li>Priority support</li>
+        <li>Custom workflow config</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr class="sep">
+
+  <h2 class="section-title">Supported Workflows</h2>
+  <div class="workflow-cols">
+    <div class="workflow-col med">
+      <h3>&#9877; Medical Practices</h3>
+      <ul>
+        <li>Prior authorization letter drafts</li>
+        <li>After-visit summary drafts</li>
+        <li>Referral coordination letters</li>
+        <li>Patient message drafts</li>
+        <li>Care gap summary generation</li>
+        <li>Administrative correspondence</li>
+        <li>Clinical documentation support</li>
+      </ul>
+    </div>
+    <div class="workflow-col leg">
+      <h3>&#9878; Law Firms</h3>
+      <ul>
+        <li>Legal research against matter context</li>
+        <li>Document and transcript summarization</li>
+        <li>Deposition preparation support</li>
+        <li>Motion drafting assistance</li>
+        <li>Client communication drafts</li>
+        <li>Discovery document review</li>
+        <li>Case timeline extraction</li>
+      </ul>
+    </div>
+    <div class="workflow-col eng">
+      <h3>&#128208; Drafting &amp; Engineering</h3>
+      <ul>
+        <li>Redline summaries &amp; revision comparison</li>
+        <li>RFI and submittal drafting support</li>
+        <li>Change-order &amp; discrepancy reports</li>
+        <li>Specification and drawing-note lookup</li>
+        <li>QA/QC checklist assistance</li>
+        <li>Project record custody</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr class="sep">
+
+  <h2 class="section-title">Frequently Asked Questions</h2>
+  <div class="faq-block">
+    <p class="faq-q">What is Sentinel Node?</p>
+    <p class="faq-a">Sentinel Node is a locally deployed AI inference appliance built by Pocono AI for independent medical practices and small law firms. It runs an open-weight language model on dedicated GPU hardware physically inside your network. All AI inference is on-premises — no query content is transmitted to external cloud endpoints. It ships as a managed service: hardware, model, software, and support are included in the monthly fee.</p>
+  </div>
+  <div class="faq-block">
+    <p class="faq-q">How is Sentinel Node different from a cloud AI subscription?</p>
+    <p class="faq-a">Cloud AI subscriptions route your queries to a vendor's infrastructure. Sentinel Node runs the model on hardware inside your network. Your patient notes, case content, and privileged communications never leave your perimeter during inference. Cloud AI is convenient and scalable; Sentinel Node trades scale for data sovereignty and local accountability — properties that matter in regulated environments.</p>
+  </div>
+  <div class="faq-block">
+    <p class="faq-q">What does the Sentinel Node service include?</p>
+    <p class="faq-a">The managed service includes: the inference appliance hardware, the open-weight language model, the Audit Proxy and governance layer software, onboarding and configuration support, SLA-backed uptime, Ed25519-signed software updates, and a Business Associate Agreement for healthcare deployments. Hardware is replaced or upgraded as part of the service relationship.</p>
+  </div>
+  <div class="faq-block">
+    <p class="faq-q">What does Sentinel Node cost?</p>
+    <p class="faq-a">Phase I starts at $950/month, Phase II at $1,495/month, and Phase III at $2,995/month. Pricing reflects hardware tier, model capability, and support scope. Contact Pocono AI to discuss which phase fits your workflow volume and requirements.</p>
+  </div>
+  <div class="faq-block">
+    <p class="faq-q">Is Sentinel Node available now?</p>
+    <p class="faq-a">Pocono AI is in active pilot discussions and seeking design partners. Sentinel Node is a pre-commercial product. If you are a medical practice or law firm interested in piloting local AI infrastructure, reach out through the contact page or download the Pilot Readiness Kit to assess fit.</p>
+  </div>
+
+  <hr class="sep">
+
+  <h2 class="section-title">Related Resources</h2>
+  <div class="related-grid">
+    <a class="related-card" href="regulated-ai-infrastructure.html">
+      <p class="related-card-title">Regulated AI Infrastructure</p>
+      <p class="related-card-desc">The broader infrastructure argument — why regulated environments need more than a model.</p>
+    </a>
+    <a class="related-card" href="day-in-the-clinic.html">
+      <p class="related-card-title">A Day in the Clinic</p>
+      <p class="related-card-desc">A realistic walkthrough of how a medical practice uses Sentinel Node across a workday.</p>
+    </a>
+    <a class="related-card" href="architecture.html">
+      <p class="related-card-title">Architecture Overview</p>
+      <p class="related-card-desc">The full Sentinel Node data pipeline — sovereign by design, from intake to audit log.</p>
+    </a>
+    <a class="related-card" href="sentinel-node/installation-simulator.html" style="border-color:rgba(0,194,168,0.4)">
+      <p class="related-card-title" style="color:#00c2a8">Installation Simulator ↗</p>
+      <p class="related-card-desc">Walk through network discovery, isolated subnet/VLAN planning, firewall rules, approved-source loading, human review, and audit verification — 26 phases, interactive.</p>
+    </a>
+    <a class="related-card" href="sentinel-specs.html">
+      <p class="related-card-title">Technical Specs</p>
+      <p class="related-card-desc">Detailed hardware specifications, model parameters, and deployment requirements.</p>
+    </a>
+    <a class="related-card" href="engineering-drafting/" style="border-color:rgba(0,194,168,0.4)">
+      <p class="related-card-title" style="color:#00c2a8">Drafting &amp; Engineering Edition ↗</p>
+      <p class="related-card-desc">Governed AI for drawings, specs, RFIs, submittals, and project knowledge &mdash; local-first, human-reviewed.</p>
+    </a>
+    <a class="related-card" href="living-memorials/enterprise-estate-continuity.html" style="border-color:rgba(213,169,79,0.4)">
+      <p class="related-card-title" style="color:#d5a94f">Enterprise Estate Continuity ↗</p>
+      <p class="related-card-desc">Founder intent and institutional memory preservation for businesses and family enterprises facing key-person risk.</p>
+    </a>
+    <a class="related-card" href="ai-governance-layer.html">
+      <p class="related-card-title">AI Governance Layer</p>
+      <p class="related-card-desc">How Sentinel Node creates accountability between AI output and human decision-making.</p>
+    </a>
+    <a class="related-card" href="local-ai-inference.html">
+      <p class="related-card-title">Local AI Inference</p>
+      <p class="related-card-desc">The technical foundation — why on-premises inference matters for regulated environments.</p>
+    </a>
+    <a class="related-card" href="pricing.html">
+      <p class="related-card-title">Pricing</p>
+      <p class="related-card-desc">Full pricing breakdown for all three service phases with feature comparison.</p>
+    </a>
+    <a class="related-card" href="pilot-readiness-kit.html">
+      <p class="related-card-title">Pilot Readiness Kit</p>
+      <p class="related-card-desc">Assess whether your practice or firm is ready for a Sentinel Node pilot deployment.</p>
+    </a>
+  </div>
+
+  <div class="cta-band">
+    <h2>Ready to evaluate Sentinel Node?</h2>
+    <p>Download the Pilot Readiness Kit to assess fit, or reach out to discuss a design partner engagement.</p>
+    <a class="cta-btn" href="pilot-readiness-kit.html">Pilot Readiness Kit</a>
+    <a class="cta-btn-sec" href="contact.html">Contact Us</a>
+  </div>
+
+  <!-- v397 · INTEREST LIST -->
+  <div class="interest-strip">
+    <p>Interested in this product track? Join the Pocono AI interest list and tell us where you fit.</p>
+    <a class="interest-list-cta" href="https://forms.gle/VQahnkjMfY6QNEMy8" target="_blank" rel="noopener noreferrer">Join the Interest List</a>
+    <p class="interest-note">Disclosed external Google Form. Please do not submit private medical records, legal files, confidential client materials, or sensitive documents through this form.</p>
+  </div>
+
+</div>
+</main>
+
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 root-relative nav fix, Living Echo rebrand, Engineering & Drafting + Enterprise Estate Continuity links added (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- INCLUDE:FOOTER -->
+<footer role="contentinfo" style="background:#051622;border-top:1px solid rgba(255,255,255,0.08);padding:40px 24px 28px;font-size:0.85em;color:#8899aa;">
+  <div style="max-width:1180px;margin:0 auto;">
+
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:0 0 28px;margin-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.07);">
+      <div style="max-width:560px;">
+        <p style="margin:0 0 6px;font-size:1.05em;font-weight:700;color:#fff;">Local AI infrastructure for regulated practices.</p>
+        <p style="margin:0;font-size:0.95em;line-height:1.5;">Drafts with citations. Human review required. Sensitive documents stay under practice control. Simple path, deep proof.</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="/contact.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;background:#00c2a8;color:#04111a;font-weight:700;text-decoration:none;font-size:0.95em;">Request Pilot</a>
+        <a href="/sentinel-demo.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;border:1px solid rgba(0,194,168,0.55);color:#00c2a8;font-weight:700;text-decoration:none;font-size:0.95em;">Watch Demo</a>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px 32px;margin-bottom:32px;text-align:left;">
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">For You</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/start-here.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Start Here (3 min)</a>
+          <a href="/for-physicians.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Physicians</a>
+          <a href="/for-attorneys.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Attorneys</a>
+          <a href="/engineering-drafting/" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Engineering &amp; Drafting Teams</a>
+          <a href="/pilot-program.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Pilot Program</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Installer Training</a>
+          <a href="/how-it-works.html" style="color:#8899aa;text-decoration:none;">How It Works</a>
+          <a href="/trust.html" style="color:#8899aa;text-decoration:none;">Trust &amp; Audit</a>
+          <a href="/pricing.html" style="color:#8899aa;text-decoration:none;">Pricing</a>
+          <a href="/sentinel-demo.html" style="color:#8899aa;text-decoration:none;">See the Demo</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Documentation Hub</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/documentation-hub/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Hub Home &mdash; Deep Proof</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">Installer Training</a>
+          <a href="/sentinel-node/installation-simulator.html" style="color:#8899aa;text-decoration:none;">&#8627; Installation Simulator</a>
+          <a href="/documentation-hub/clinical/" style="color:#8899aa;text-decoration:none;">Clinical Documentation</a>
+          <a href="/documentation-hub/legal/" style="color:#8899aa;text-decoration:none;">Legal Documentation</a>
+          <a href="/documentation-hub/technical/" style="color:#8899aa;text-decoration:none;">Technical Documentation</a>
+          <a href="/documentation-hub/governance/" style="color:#8899aa;text-decoration:none;">Governance &amp; Audit</a>
+          <a href="/documentation-hub/tools/" style="color:#8899aa;text-decoration:none;">Tools &amp; Simulators</a>
+          <a href="/documentation-hub/research/" style="color:#8899aa;text-decoration:none;">Research &amp; Essays</a>
+          <a href="/documentation-hub/transparency/" style="color:#8899aa;text-decoration:none;">Transparency</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Global Federated AI</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/global/" style="color:#7af0dc;text-decoration:none;font-weight:600;">Global Federated Hub</a>
+          <a href="/global/australia/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Australia</a>
+          <a href="/global/singapore/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Singapore</a>
+          <a href="/global/taiwan/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Taiwan</a>
+          <a href="/global/europe/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Europe</a>
+          <a href="/contact.html" style="color:#8899aa;text-decoration:none;">Partner Inquiry</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Company</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/about.html" style="color:#8899aa;text-decoration:none;">About Pocono AI</a>
+          <a href="/team.html" style="color:#8899aa;text-decoration:none;">Team &amp; Leadership</a>
+          <a href="/why-pocono-ai.html" style="color:#8899aa;text-decoration:none;">Why Pocono AI</a>
+          <a href="/founding-commercial-leadership.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Join Us</a>
+          <a href="/careers.html" style="color:#8899aa;text-decoration:none;">Careers</a>
+          <a href="/how-we-hire.html" style="color:#8899aa;text-decoration:none;">How We Hire</a>
+          <a href="/channel-partners.html" style="color:#8899aa;text-decoration:none;">Technical Partners (MSPs)</a>
+          <a href="/partners.html" style="color:#8899aa;text-decoration:none;">Academic Partnerships</a>
+          <a href="/contact.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Contact</a>
+          <a href="https://forms.gle/VQahnkjMfY6QNEMy8" target="_blank" rel="noopener noreferrer" style="color:#d5a94f;text-decoration:none;font-weight:600;">Interest List &#8599;</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Founder Projects</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/rehability/" style="color:#a78bfa;text-decoration:none;font-weight:700;">Rehability &#x2605;</a>
+          <a href="/rehability/marcus-memory-helper/" style="color:#a78bfa;text-decoration:none;font-weight:600;">&#8627; Marcus's Memory Helper</a>
+          <a href="/sentinel-home/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Sentinel Home Edition</a>
+          <a href="/living-memorials/" style="color:#8899aa;text-decoration:none;">Living Echo</a>
+          <a href="/living-memorials/marcus-odell/" style="color:#8899aa;text-decoration:none;">Marcus&rsquo;s Living Echo</a>
+          <a href="/living-memorials/enterprise-estate-continuity.html" style="color:#8899aa;text-decoration:none;">Enterprise Estate Continuity</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Resources &amp; Legal</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/sitemap.html" style="color:#8899aa;text-decoration:none;">All Pages (Sitemap)</a>
+          <a href="/audit.html" style="color:#8899aa;text-decoration:none;">Transparency &amp; Audit Log</a>
+          <a href="/maturity-disclosure.html" style="color:#8899aa;text-decoration:none;">What We Have / Don&rsquo;t Claim</a>
+          <a href="/plain.html" style="color:#8899aa;text-decoration:none;">Plain Language Guide</a>
+          <a href="/privacy.html" style="color:#8899aa;text-decoration:none;">Privacy</a>
+          <a href="/terms.html" style="color:#8899aa;text-decoration:none;">Terms</a>
+          <a href="/sla.html" style="color:#8899aa;text-decoration:none;">SLA</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:18px;margin-bottom:14px;">
+      <p style="margin:0;font-size:0.82em;line-height:1.6;color:#6f8295;max-width:1000px;">Pocono AI does not provide medical, legal, or engineering advice, does not practice medicine, law, or licensed engineering, and does not make clinical, legal, or engineering decisions. Outputs are drafts or support materials that require review by a qualified professional; final professional judgment remains with the licensed physician, attorney, or engineer. Tools and simulations on this site are educational and use synthetic data.</p>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:20px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+      <p style="margin:0;font-size:0.9em;">&copy; 2026 Pocono AI, LLC &nbsp;&#183;&nbsp; East Stroudsburg, PA &nbsp;&#183;&nbsp; <a href="mailto:marcus@poconoai.com" style="color:#8899aa;">marcus@poconoai.com</a> &nbsp;&#183;&nbsp; <a href="tel:+15705340602" style="color:#8899aa;">(570) 534-0602</a></p>
+      <p style="margin:0;font-size:0.88em;"><a href="/audit.html" style="color:#5dade2;text-decoration:none;">Transparency v402</a></p>
+    </div>
+  </div>
+</footer>
+<script src="/search.js?v=402" defer></script>
+<!-- /INCLUDE:FOOTER -->
+<script src="search-index.js?v=402" defer></script>
+<script src="nav.js?v=402" defer></script>
+<script src="pilot-cta.js?v=402" defer></script>
+</body>
+</html>

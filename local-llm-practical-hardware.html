@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Founder field notes on running local LLMs with practical hardware, Linux, Docker, and retrieval pipelines — lessons from the Pocono AI build.">
+    <meta name="keywords" content="local LLM, on-premises AI, local AI infrastructure, Dell Latitude 5420, Thunderbolt 4 eGPU, RTX 2080 Ti, Linux Docker, retrieval pipeline, reranker, governance audit layer, founder field note, Pocono AI engineering, sovereign AI, HIPAA AI, legal AI, on-premises inference, Marcus O'Dell">
+    <title>Engineering Field Note: Running Local LLMs on Practical Hardware | Pocono AI</title>
+    <meta property="og:title" content="Engineering Field Note: Running Local LLMs on Practical Hardware | Pocono AI">
+    <meta property="og:description" content="A founder engineering field note on local LLM inference with practical hardware, Linux, Docker, retrieval pipelines, and where governance and audit layers belong.">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Pocono AI">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:url" content="https://poconoai.com/local-llm-practical-hardware.html">
+    <meta property="og:image" content="https://poconoai.com/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Pocono AI — Engineering Field Note: Local LLMs on Practical Hardware">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Engineering Field Note: Running Local LLMs on Practical Hardware | Pocono AI">
+    <meta name="twitter:description" content="Local LLM inference with practical hardware, Linux, Docker, retrieval, and audit-layer architecture. A founder engineering field note.">
+    <meta name="twitter:image" content="https://poconoai.com/og-image.jpg"><meta name="theme-color" content="#0B0F13">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="alternate icon" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon-180x180.png">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="alternate icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles.css?v=402">
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+    <link rel="canonical" href="https://poconoai.com/local-llm-practical-hardware.html">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Engineering Field Note: Running Local LLMs on Practical Hardware",
+      "description": "A founder engineering field note on running local LLM inference with practical hardware, Linux stability, Docker, retrieval pipelines, and governance/audit-layer architecture.",
+      "author": {
+        "@type": "Person",
+        "name": "Marcus O'Dell",
+        "jobTitle": "Founder & Chief Technologist",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Pocono AI, LLC"
+        }
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Pocono AI, LLC",
+        "url": "https://poconoai.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://poconoai.com/logo.svg"
+        }
+      },
+      "datePublished": "2026-05-25",
+      "dateModified": "2026-05-25",
+      "url": "https://poconoai.com/local-llm-practical-hardware.html",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://poconoai.com/local-llm-practical-hardware.html"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/pulse/you-dont-need-claude-old-hardware-linux-elbow-grease-marcus-o-dell-sjg6e"
+      ]
+    }
+    </script>
+<link rel="stylesheet" href="nav-v2026.css?v=402">
+<link rel="stylesheet" href="brand-v292.css?v=402">
+
+<style>
+/* ── Engineering Field Note page styles — v309 ──────────────── */
+.efn-wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: clamp(28px, 4vw, 56px) 24px clamp(48px, 7vw, 96px);
+}
+
+.efn-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 0.68em; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+  color: #5dade2; padding: 5px 13px; background: rgba(0,163,255,0.07);
+  border: 1px solid rgba(0,163,255,0.3); border-radius: 100px; margin-bottom: 20px;
+}
+
+.efn-title {
+  font-size: clamp(1.85rem, 4.5vw, 2.7rem);
+  font-weight: 800; letter-spacing: -0.02em; line-height: 1.12;
+  color: #f0f4f8; margin: 0 0 12px; border: 0;
+}
+.efn-subtitle {
+  font-size: 1.05em; color: #a8cce8; font-weight: 400;
+  margin: 0 0 32px; line-height: 1.5;
+}
+
+.efn-byline {
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 40px; padding-bottom: 28px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.efn-byline-avatar {
+  width: 42px; height: 42px; border-radius: 50%;
+  background: linear-gradient(135deg, #5dade2 0%, #0a67a3 100%);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 0.95rem; color: #051622; flex-shrink: 0;
+}
+.efn-byline-text { font-size: 0.84em; color: #a8cce8; line-height: 1.5; }
+.efn-byline-text strong { display: block; color: #e8f0f8; font-weight: 600; }
+
+/* Anti-claim / scope disclaimer */
+.efn-scope-banner {
+  margin: 0 0 36px;
+  padding: 16px 20px;
+  background: rgba(255,193,7,0.05);
+  border: 1px solid rgba(255,193,7,0.25);
+  border-left: 3px solid #ffc107;
+  border-radius: 0 8px 8px 0;
+  color: #cdb472;
+  font-size: 0.86em;
+  line-height: 1.6;
+}
+.efn-scope-banner strong { color: #f0d480; }
+
+.efn-body { color: #c6d4e3; font-size: 1.04em; line-height: 1.78; }
+.efn-body p { margin: 0 0 22px; }
+.efn-body h2 {
+  font-size: clamp(1.25rem, 2.8vw, 1.55rem);
+  color: #f0f4f8; font-weight: 700; letter-spacing: -0.01em;
+  margin: 44px 0 16px; border: 0; line-height: 1.25;
+}
+.efn-body h3 {
+  font-size: 1.05rem;
+  color: #e0eaf4; font-weight: 600;
+  margin: 28px 0 10px; border: 0;
+}
+.efn-body code {
+  background: rgba(0,163,255,0.08); color: #9dd0f4;
+  padding: 2px 7px; border-radius: 4px;
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: 0.88em;
+}
+.efn-body ul { margin: 0 0 22px; padding: 0 0 0 22px; color: #c6d4e3; }
+.efn-body ul li { margin-bottom: 10px; line-height: 1.7; }
+
+.efn-spec {
+  margin: 28px 0;
+  padding: 22px 26px;
+  background: rgba(5,22,34,0.55);
+  border: 1px solid rgba(93,173,226,0.22);
+  border-radius: 10px;
+  font-size: 0.92em;
+  line-height: 1.7;
+}
+.efn-spec h3 {
+  margin: 0 0 12px;
+  font-size: 0.72em; letter-spacing: 0.16em; text-transform: uppercase;
+  color: #5dade2; font-weight: 700;
+}
+.efn-spec dl { margin: 0; }
+.efn-spec dt {
+  display: inline-block; min-width: 130px;
+  color: #8aa8c0; font-weight: 600;
+}
+.efn-spec dd { display: inline; margin: 0; color: #d8e4f0; }
+.efn-spec dd::after { content: ""; display: block; height: 6px; }
+
+.efn-lesson {
+  margin: 32px 0; padding: 20px 24px;
+  background: rgba(0,163,255,0.05); border-left: 3px solid #5dade2;
+  border-radius: 0 8px 8px 0; color: #e0eaf4;
+  font-size: 1.04em; line-height: 1.65; font-weight: 500;
+}
+
+.efn-divider { margin: 40px 0; border: none; border-top: 1px solid rgba(255,255,255,0.06); }
+
+.efn-cta {
+  margin-top: 52px; padding: 30px 26px;
+  background: linear-gradient(135deg, rgba(0,163,255,0.06) 0%, rgba(0,194,168,0.04) 100%);
+  border: 1px solid rgba(0,163,255,0.18); border-radius: 12px; text-align: center;
+}
+.efn-cta p { color: #a8cce8; font-size: 0.95em; margin: 0 0 18px; line-height: 1.6; }
+.efn-cta a.efn-cta-btn {
+  display: inline-block; padding: 12px 24px;
+  background: #5dade2; color: #051622; font-weight: 700; font-size: 0.9em;
+  border-radius: 7px; text-decoration: none; transition: background 0.15s;
+  margin: 4px;
+}
+.efn-cta a.efn-cta-btn-alt {
+  background: transparent; color: #5dade2;
+  border: 1px solid rgba(93,173,226,0.4);
+}
+.efn-cta a.efn-cta-btn:hover { background: #7ebde7; }
+
+.efn-external-note {
+  margin-top: 40px;
+  padding: 18px 22px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 8px;
+  font-size: 0.84em;
+  color: #8aa8c0;
+  line-height: 1.6;
+}
+.efn-external-note a { color: #5dade2; text-decoration: none; }
+.efn-external-note a:hover { text-decoration: underline; }
+
+@media (max-width: 600px) {
+  .efn-wrap { padding-left: 18px; padding-right: 18px; }
+  .efn-lesson, .efn-spec, .efn-scope-banner { padding: 16px 18px; }
+  .efn-cta { padding: 24px 18px; }
+  .efn-spec dt { display: block; min-width: 0; margin-bottom: 2px; }
+  .efn-spec dd { display: block; margin-bottom: 10px; }
+  .efn-spec dd::after { display: none; }
+}
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+<div id="reading-progress" aria-hidden="true"></div>
+
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- INCLUDE:HEADER -->
+<div id="hitl-notice" style="background:#0a1929;padding:4px 16px;text-align:center;font-size:12px;color:#4a5568;border-bottom:1px solid rgba(255,255,255,0.06);letter-spacing:0.01em;">Human-in-the-Loop required: licensed professionals verify all outputs before clinical or legal action</div>
+<header role="banner">
+  <div class="header-inner">
+    <a href="/index.html" class="logo" aria-label="Pocono AI Home">
+      <img src="/logo.svg?v=402" alt="" width="36" height="36" decoding="async" loading="eager" aria-hidden="true" style="display:inline-block;">
+      Pocono <span>AI</span>
+    </a>
+    <nav id="desktop-nav" aria-label="Main navigation">
+      <div class="nav-item"><a href="/index.html" class="nav-direct">Home</a></div>
+      <div class="nav-item"><a href="/for-physicians.html" class="nav-direct">Physicians</a></div>
+      <div class="nav-item"><a href="/for-attorneys.html" class="nav-direct">Attorneys</a></div>
+      <div class="nav-item"><a href="/sentinel-node.html" class="nav-direct nav-hub" style="color:#d5a94f;border:1px solid rgba(213,169,79,0.45);border-radius:999px;padding:6px 13px;">Sentinel Node</a></div>
+      <div class="nav-item"><a href="/living-memorials/" class="nav-direct">Living Echo</a></div>
+      <div class="nav-item"><a href="/contact.html" class="nav-direct">Contact</a></div>
+      <div class="nav-item" data-dropdown="menu-more">
+        <button type="button" class="nav-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="menu-more">More <span class="nav-chevron" aria-hidden="true">&#9662;</span></button>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <a href="/contact.html#pilot" class="nav-cta nav-cta-primary">Request a Pilot</a>
+      <button type="button" class="pa-search-trigger" data-search-open aria-label="Search (press / or Ctrl-K)" aria-haspopup="dialog" aria-expanded="false">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span class="pa-st-label">Search</span><kbd data-pa-keyhint>Ctrl K</kbd>
+      </button>
+      <button type="button" class="header-icon-btn" id="mobile-menu" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav-panel">
+        <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- "More" overflow dropdown — sibling of <header> so position:fixed escapes header's stacking context. Wired by nav.js via data-dropdown="menu-more". -->
+<div class="nav-dropdown" id="menu-more" aria-label="More navigation">
+  <p class="nav-dd-section">Products</p>
+  <a href="/engineering-drafting/">Drafting &amp; Engineering Edition</a>
+  <a href="/sentinel-home/">Sentinel Home Edition</a>
+  <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability — Assistive Tools &#x2605;</a>
+  <a href="/living-memorials/enterprise-estate-continuity.html">Enterprise Estate Continuity</a>
+  <p class="nav-dd-section">Capabilities</p>
+  <a href="/evidence-room.html">Evidence Room</a>
+  <a href="/push-button-deliverables.html">Push-Button Deliverables</a>
+  <a href="/pilot-readiness-kit.html">Pilot Kit</a>
+  <a href="/pilot-program.html">Pilot Program</a>
+  <a href="/how-it-works.html">How It Works</a>
+  <p class="nav-dd-section">Hubs &amp; Company</p>
+  <a href="/training.html">Training Hub</a>
+  <a href="/documentation-hub/">Document Hub</a>
+  <a href="/global/">Global Hub</a>
+  <a href="/investors-hub.html">Investor Hub</a>
+  <a href="/valuation-dashboard.html">Valuation Dashboard</a>
+  <a href="/about.html">About</a>
+  <p class="nav-dd-section">Trust &amp; Legal</p>
+  <a href="/transparency.html">Transparency</a>
+  <a href="/audit.html">Audit Log</a>
+  <a href="/privacy.html">Privacy</a>
+  <a href="/sitemap.html">Sitemap</a>
+</div>
+<!-- Site search is provided by the self-contained search.js asset (command palette: / or Ctrl/Cmd-K). -->
+
+<!-- Mobile panel: full-screen slide-in. v396 nav — hub tiles + grouped links + Sentinel Node + Engineering. -->
+<nav id="mobile-nav-panel" aria-label="Mobile navigation" aria-hidden="true" role="dialog" aria-modal="true">
+
+  <!-- Hub tiles: Sentinel Node, Documentation Hub, Training Hub, Global Hub -->
+  <div style="padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,0.07);">
+    <p style="font-size:0.65em;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.28);margin:0 0 10px;padding:0 2px;">Hubs</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <a href="/sentinel-node.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(213,169,79,0.1);border:1px solid rgba(213,169,79,0.35);border-radius:10px;color:#d5a94f;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Sentinel Node</a>
+      <a href="/documentation-hub/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(0,194,168,0.1);border:1px solid rgba(0,194,168,0.35);border-radius:10px;color:#00c2a8;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Docs Hub</a>
+      <a href="/training.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.35);border-radius:10px;color:#a78bfa;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Training Hub</a>
+      <a href="/global/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(122,240,220,0.07);border:1px solid rgba(122,240,220,0.3);border-radius:10px;color:#7af0dc;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Global Hub</a>
+    </div>
+  </div>
+
+  <!-- Core paths -->
+  <div class="mob-static-links">
+    <a href="/index.html">Home</a>
+    <a href="/for-physicians.html">Physicians</a>
+    <a href="/for-attorneys.html">Attorneys</a>
+    <a href="/engineering-drafting/">Engineering &amp; Drafting</a>
+    <a href="/pilot-program.html">Pilot Program</a>
+    <a href="/how-it-works.html">How It Works</a>
+    <a href="/trust.html">Trust &amp; Audit</a>
+    <a href="/pricing.html">Pricing</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/living-memorials/">Living Echo</a>
+    <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability</a>
+    <a href="/about.html">About</a>
+    <a href="/team.html" style="color:rgba(255,255,255,0.6);">Team &amp; Leadership</a>
+    <a href="/valuation-dashboard.html" style="color:rgba(255,255,255,0.6);">Valuation Dashboard</a>
+    <a href="/careers.html" style="color:rgba(255,255,255,0.6);">Careers</a>
+    <a href="/sentinel-demo.html" style="color:rgba(255,255,255,0.6);">Demo</a>
+    <a href="/sitemap.html" style="color:rgba(255,255,255,0.45);">Sitemap</a>
+    <a href="/transparency.html" style="color:rgba(255,255,255,0.45);">Transparency</a>
+    <a href="/privacy.html" style="color:rgba(255,255,255,0.45);">Privacy</a>
+  </div>
+
+  <a href="/contact.html#pilot" class="mob-cta">Request a Pilot</a>
+</nav>
+<!-- /INCLUDE:HEADER -->
+
+
+<main id="main-content" tabindex="-1">
+<span id="main" aria-hidden="true"></span>
+<div class="page-back-link"><a href="research.html" class="back-link-anchor">&#8592; Research &amp; Insights</a></div>
+
+  <article class="efn-wrap">
+
+    <span class="efn-eyebrow">Engineering Field Note &nbsp;&middot;&nbsp; Local AI Infrastructure &nbsp;&middot;&nbsp; May 2026</span>
+
+    <h1 class="efn-title">Running Local LLMs on Practical Hardware</h1>
+    <p class="efn-subtitle">A founder engineering field note on the path from capability to accountable infrastructure &mdash; with the lab notebook open.</p>
+
+    <div class="efn-byline">
+      <div class="efn-byline-avatar" aria-hidden="true">MO</div>
+      <div class="efn-byline-text">
+        <strong>Marcus O'Dell</strong>
+        Founder &amp; Chief Technologist, Pocono AI &mdash; May 25, 2026
+      </div>
+    </div>
+
+    <div class="efn-scope-banner">
+      <strong>Scope note.</strong> This is a founder engineering field note, not a Sentinel Node&trade; production hardware specification. The hardware described here is the lab bench &mdash; the place where I work out what local AI infrastructure actually demands of the people who run it. Production Sentinel Node deployments use purpose-selected hardware, controlled installation, service monitoring, signed updates, and governance/audit-layer integration that this lab bench is not designed to provide.
+    </div>
+
+    <div class="efn-body">
+
+      <p>Before local AI becomes an appliance, it has to become understandable.</p>
+
+      <p>That sentence is the whole reason this lab exists. Long before a customer ever sees a Sentinel Node, the engineering questions have to be answered by hand &mdash; on hardware that is honest about its limits, with software stacks that fail in ways you can see and fix. That is what this field note documents.</p>
+
+      <p>The hardware is unimpressive on purpose. The lessons are not.</p>
+
+      <h2>The lab bench</h2>
+
+      <div class="efn-spec">
+        <h3>Hardware profile</h3>
+        <dl>
+          <dt>Host</dt><dd>Dell Latitude 5420 (Intel, Thunderbolt&nbsp;4)</dd>
+          <dt>Memory</dt><dd>32&nbsp;GB DDR4</dd>
+          <dt>Interconnect</dt><dd>Thunderbolt&nbsp;4 (40&nbsp;Gbps), Riitop TB4 dock / eGPU enclosure</dd>
+          <dt>GPU</dt><dd>NVIDIA RTX&nbsp;2080&nbsp;Ti, 11&nbsp;GB VRAM (used, prior-generation)</dd>
+          <dt>OS</dt><dd>Linux (Ubuntu LTS), CUDA stack, Docker</dd>
+          <dt>Cost class</dt><dd>Used-enterprise hardware, well under new-workstation pricing</dd>
+        </dl>
+      </div>
+
+      <p>None of this is exotic. That is the point. A retired enterprise laptop, an external GPU enclosure, and a previous-generation card with 11&nbsp;GB of VRAM is enough hardware to run usefully sized local language models for retrieval and drafting work &mdash; provided everything around it is built with intent.</p>
+
+      <p>The first lesson of running local AI on practical hardware is that the model is not the hard part. The hard part is everything else.</p>
+
+      <h2>Linux is load-bearing</h2>
+
+      <p>Local inference is a long-running, GPU-bound, memory-pressured workload. It needs an operating system that does not surprise you. That eliminates a lot of options very quickly.</p>
+
+      <p>Stable Linux distributions earn their place here for reasons that have nothing to do with ideology and everything to do with what happens at 2&nbsp;AM when a service stops. You need:</p>
+
+      <ul>
+        <li>A predictable init system you can read (<code>systemd</code> unit files that say exactly what is going to run and when).</li>
+        <li>A package manager whose dependency resolution you can audit.</li>
+        <li>NVIDIA driver and CUDA versions you control &mdash; not the ones a vendor pushes overnight.</li>
+        <li>A kernel that does not reboot itself for telemetry.</li>
+      </ul>
+
+      <p>This is not a Linux advocacy section. It is a debugging-cost section. Every hour spent fighting the operating system is an hour not spent on the parts of local AI that actually matter.</p>
+
+      <h2>Docker, but for the right reasons</h2>
+
+      <p>Containers carry a reputation in some quarters as overkill for single-host deployments. In a regulated context, the calculus reverses. Containers are how you give every component of a local AI system a knowable, reproducible boundary &mdash; which is precisely what governance and audit work requires.</p>
+
+      <p>On the lab bench, the pattern is unremarkable: an inference container, a retrieval container, a reranker container, an index store, and an observability sidecar. Each has its own resource limits. Each is restartable in isolation. Each can be replaced with a different implementation without rewiring the others.</p>
+
+      <div class="efn-lesson">
+        Local AI is not one program. It is a small choir of services, each doing one job well, each capable of being audited on its own terms. The container boundary is what makes that choir governable.
+      </div>
+
+      <h2>Retrieval is the actual product</h2>
+
+      <p>Spend a few weeks running local LLMs and one thing becomes obvious in a way no benchmark conveys: the LLM is the cheapest, most replaceable component in the system. The expensive, durable, hard-won part is retrieval.</p>
+
+      <p>A retrieval pipeline worth running locally has at least five layers, and on the lab bench you can feel the cost of every one:</p>
+
+      <ul>
+        <li><strong>Ingestion.</strong> Documents arrive as PDFs, scans, exported records, faxes. They need parsing, OCR where required, and structural normalization before anything else touches them.</li>
+        <li><strong>Sanitization.</strong> In regulated contexts, you do not put raw documents into a vector index. You scrub identifiers, normalize sensitive fields, and keep a record of what you scrubbed and why.</li>
+        <li><strong>Chunking.</strong> Naive chunking is the silent killer of local retrieval quality. Real chunking respects document structure &mdash; sections, claims, citations, signatures.</li>
+        <li><strong>Embedding and indexing.</strong> A vector store (Qdrant on the lab bench) holds the searchable representation. The choice of embedding model matters; the choice of distance metric matters; the choice of index type matters.</li>
+        <li><strong>Reranking.</strong> A first-pass retrieval returns dozens of candidates. A reranker &mdash; a smaller, specialized model &mdash; sorts them by actual relevance to the query, not just embedding proximity. This is the step most local-AI tutorials skip and most production systems require.</li>
+      </ul>
+
+      <p>The LLM sits at the end of this pipeline and writes a citation-grounded draft from the top-ranked retrieved chunks. If the pipeline before it is sloppy, no amount of model size compensates. If the pipeline before it is good, even a modest local model produces useful output.</p>
+
+      <h2>Testing is not optional</h2>
+
+      <p>Local AI without an evaluation harness is not engineering. It is performance art.</p>
+
+      <p>The lab bench runs a small but serious suite of retrieval and generation tests on every change to the pipeline: known queries with known correct answers, known queries that the system should refuse, known adversarial prompts, and known degraded conditions (corrupted input, partial index, slow GPU). Nothing ships from the lab until the suite is green.</p>
+
+      <p>The suite is what makes the difference between a demo and infrastructure. A demo runs once for an audience. Infrastructure runs ten thousand times for people who never see it.</p>
+
+      <h2>Where governance and audit layers belong</h2>
+
+      <p>The lab bench is also where I work out where the governance and audit layers attach to the technical stack. This is not theoretical. In a regulated deployment, every retrieval, every generation, every human review decision needs to be recorded in a reviewable audit trail today &mdash; with tamper-evident hash chaining as the next audit-layer release.</p>
+
+      <p>On the bench, that looks like:</p>
+
+      <ul>
+        <li>A query log that records the prompt, the retrieved chunks, the model output, and the reviewer&rsquo;s decision in a reviewable audit trail &mdash; with hash chaining planned for the next audit-layer release so any later tampering becomes detectable.</li>
+        <li>A citation gate that refuses to release output if the claims do not map back to retrieved sources.</li>
+        <li>A refusal layer that says &ldquo;out of scope&rdquo; rather than improvising when the retrieval confidence is low.</li>
+        <li>An export path that lets an auditor reconstruct any historical query end-to-end without touching the live system.</li>
+      </ul>
+
+      <p>None of these are research projects. They are operational features. The lab bench exists so I can be sure they work before they end up in front of a clinician or an attorney.</p>
+
+      <h2>What this lab is not</h2>
+
+      <p>It is worth being explicit about the gap between this field note and what we sell.</p>
+
+      <p>A Dell Latitude with an eGPU is a wonderful place to think. It is not a production deployment. A production Sentinel Node uses purpose-selected workstation or server hardware, with controlled installation by a Pocono AI deployment engineer, service-level monitoring, signed update bundles, hardened OS configuration, role-aware access, and audit-layer integration into the customer&rsquo;s governance regime. The lab bench informs that work. It does not replace it.</p>
+
+      <p>If you take one thing from this note, take this:</p>
+
+      <div class="efn-lesson">
+        Local AI infrastructure is reachable. It is not magic, it is not expensive in the way the cloud-first narrative implies, and it is not beyond the capability of any serious engineering team. What it requires is patience, Linux discipline, Docker hygiene, retrieval craft, testing rigor, and an honest answer to the question of where governance and audit responsibilities live in the stack.
+      </div>
+
+      <p>You do not need Claude.</p>
+
+      <p>You need old hardware, Linux, and elbow grease.</p>
+
+      <p>And, eventually &mdash; when the lessons accumulate, when the architecture matures, when the audit chain is sealed and the human review is in the loop &mdash; you need the part of the work that turns a lab bench into accountable infrastructure.</p>
+
+      <p>That is what we build.</p>
+
+    </div><!-- /.efn-body -->
+
+    <div class="efn-external-note">
+      <strong>Discussion copy on LinkedIn.</strong> A shorter, more conversational version of this field note was published on LinkedIn as <em>&ldquo;You Don&rsquo;t Need Claude. You Need Old Hardware, Linux, and Elbow Grease.&rdquo;</em> &mdash; <a href="https://www.linkedin.com/pulse/you-dont-need-claude-old-hardware-linux-elbow-grease-marcus-o-dell-sjg6e" target="_blank" rel="noopener noreferrer">read the LinkedIn version &rarr;</a>. The canonical version is the one you&rsquo;re reading now.
+    </div>
+
+    <div class="efn-cta">
+      <p>The lab bench informs the architecture. The architecture informs the deployment.</p>
+      <a href="architecture.html" class="efn-cta-btn">See the architecture &rarr;</a>
+      <a href="trust.html" class="efn-cta-btn efn-cta-btn-alt">Read the trust model &rarr;</a>
+    </div>
+
+  </article><!-- /.efn-wrap -->
+
+</main>
+
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 root-relative nav fix, Living Echo rebrand, Engineering & Drafting + Enterprise Estate Continuity links added (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- INCLUDE:FOOTER -->
+<footer role="contentinfo" style="background:#051622;border-top:1px solid rgba(255,255,255,0.08);padding:40px 24px 28px;font-size:0.85em;color:#8899aa;">
+  <div style="max-width:1180px;margin:0 auto;">
+
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:0 0 28px;margin-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.07);">
+      <div style="max-width:560px;">
+        <p style="margin:0 0 6px;font-size:1.05em;font-weight:700;color:#fff;">Local AI infrastructure for regulated practices.</p>
+        <p style="margin:0;font-size:0.95em;line-height:1.5;">Drafts with citations. Human review required. Sensitive documents stay under practice control. Simple path, deep proof.</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="/contact.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;background:#00c2a8;color:#04111a;font-weight:700;text-decoration:none;font-size:0.95em;">Request Pilot</a>
+        <a href="/sentinel-demo.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;border:1px solid rgba(0,194,168,0.55);color:#00c2a8;font-weight:700;text-decoration:none;font-size:0.95em;">Watch Demo</a>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px 32px;margin-bottom:32px;text-align:left;">
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">For You</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/start-here.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Start Here (3 min)</a>
+          <a href="/for-physicians.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Physicians</a>
+          <a href="/for-attorneys.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Attorneys</a>
+          <a href="/engineering-drafting/" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Engineering &amp; Drafting Teams</a>
+          <a href="/pilot-program.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Pilot Program</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Installer Training</a>
+          <a href="/how-it-works.html" style="color:#8899aa;text-decoration:none;">How It Works</a>
+          <a href="/trust.html" style="color:#8899aa;text-decoration:none;">Trust &amp; Audit</a>
+          <a href="/pricing.html" style="color:#8899aa;text-decoration:none;">Pricing</a>
+          <a href="/sentinel-demo.html" style="color:#8899aa;text-decoration:none;">See the Demo</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Documentation Hub</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/documentation-hub/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Hub Home &mdash; Deep Proof</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">Installer Training</a>
+          <a href="/sentinel-node/installation-simulator.html" style="color:#8899aa;text-decoration:none;">&#8627; Installation Simulator</a>
+          <a href="/documentation-hub/clinical/" style="color:#8899aa;text-decoration:none;">Clinical Documentation</a>
+          <a href="/documentation-hub/legal/" style="color:#8899aa;text-decoration:none;">Legal Documentation</a>
+          <a href="/documentation-hub/technical/" style="color:#8899aa;text-decoration:none;">Technical Documentation</a>
+          <a href="/documentation-hub/governance/" style="color:#8899aa;text-decoration:none;">Governance &amp; Audit</a>
+          <a href="/documentation-hub/tools/" style="color:#8899aa;text-decoration:none;">Tools &amp; Simulators</a>
+          <a href="/documentation-hub/research/" style="color:#8899aa;text-decoration:none;">Research &amp; Essays</a>
+          <a href="/documentation-hub/transparency/" style="color:#8899aa;text-decoration:none;">Transparency</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Global Federated AI</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/global/" style="color:#7af0dc;text-decoration:none;font-weight:600;">Global Federated Hub</a>
+          <a href="/global/australia/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Australia</a>
+          <a href="/global/singapore/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Singapore</a>
+          <a href="/global/taiwan/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Taiwan</a>
+          <a href="/global/europe/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Europe</a>
+          <a href="/contact.html" style="color:#8899aa;text-decoration:none;">Partner Inquiry</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Company</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/about.html" style="color:#8899aa;text-decoration:none;">About Pocono AI</a>
+          <a href="/team.html" style="color:#8899aa;text-decoration:none;">Team &amp; Leadership</a>
+          <a href="/why-pocono-ai.html" style="color:#8899aa;text-decoration:none;">Why Pocono AI</a>
+          <a href="/founding-commercial-leadership.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Join Us</a>
+          <a href="/careers.html" style="color:#8899aa;text-decoration:none;">Careers</a>
+          <a href="/how-we-hire.html" style="color:#8899aa;text-decoration:none;">How We Hire</a>
+          <a href="/channel-partners.html" style="color:#8899aa;text-decoration:none;">Technical Partners (MSPs)</a>
+          <a href="/partners.html" style="color:#8899aa;text-decoration:none;">Academic Partnerships</a>
+          <a href="/contact.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Contact</a>
+          <a href="https://forms.gle/VQahnkjMfY6QNEMy8" target="_blank" rel="noopener noreferrer" style="color:#d5a94f;text-decoration:none;font-weight:600;">Interest List &#8599;</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Founder Projects</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/rehability/" style="color:#a78bfa;text-decoration:none;font-weight:700;">Rehability &#x2605;</a>
+          <a href="/rehability/marcus-memory-helper/" style="color:#a78bfa;text-decoration:none;font-weight:600;">&#8627; Marcus's Memory Helper</a>
+          <a href="/sentinel-home/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Sentinel Home Edition</a>
+          <a href="/living-memorials/" style="color:#8899aa;text-decoration:none;">Living Echo</a>
+          <a href="/living-memorials/marcus-odell/" style="color:#8899aa;text-decoration:none;">Marcus&rsquo;s Living Echo</a>
+          <a href="/living-memorials/enterprise-estate-continuity.html" style="color:#8899aa;text-decoration:none;">Enterprise Estate Continuity</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Resources &amp; Legal</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/sitemap.html" style="color:#8899aa;text-decoration:none;">All Pages (Sitemap)</a>
+          <a href="/audit.html" style="color:#8899aa;text-decoration:none;">Transparency &amp; Audit Log</a>
+          <a href="/maturity-disclosure.html" style="color:#8899aa;text-decoration:none;">What We Have / Don&rsquo;t Claim</a>
+          <a href="/plain.html" style="color:#8899aa;text-decoration:none;">Plain Language Guide</a>
+          <a href="/privacy.html" style="color:#8899aa;text-decoration:none;">Privacy</a>
+          <a href="/terms.html" style="color:#8899aa;text-decoration:none;">Terms</a>
+          <a href="/sla.html" style="color:#8899aa;text-decoration:none;">SLA</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:18px;margin-bottom:14px;">
+      <p style="margin:0;font-size:0.82em;line-height:1.6;color:#6f8295;max-width:1000px;">Pocono AI does not provide medical, legal, or engineering advice, does not practice medicine, law, or licensed engineering, and does not make clinical, legal, or engineering decisions. Outputs are drafts or support materials that require review by a qualified professional; final professional judgment remains with the licensed physician, attorney, or engineer. Tools and simulations on this site are educational and use synthetic data.</p>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:20px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+      <p style="margin:0;font-size:0.9em;">&copy; 2026 Pocono AI, LLC &nbsp;&#183;&nbsp; East Stroudsburg, PA &nbsp;&#183;&nbsp; <a href="mailto:marcus@poconoai.com" style="color:#8899aa;">marcus@poconoai.com</a> &nbsp;&#183;&nbsp; <a href="tel:+15705340602" style="color:#8899aa;">(570) 534-0602</a></p>
+      <p style="margin:0;font-size:0.88em;"><a href="/audit.html" style="color:#5dade2;text-decoration:none;">Transparency v402</a></p>
+    </div>
+  </div>
+</footer>
+<script src="/search.js?v=402" defer></script>
+<!-- /INCLUDE:FOOTER -->
+
+<script src="search-index.js?v=402" defer></script>
+<script src="nav.js?v=402" defer></script>
+<script src="pilot-cta.js?v=402" defer></script>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp -->
+<head>
+<meta charset="UTF-8">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta name="description" content="Clinical documentation library: physician workflows, prior authorization, denials and appeals, pre-visit packets, staff burden, and clinical safety boundaries.">
+<title>Clinical Documentation — Physician Workflows | Pocono AI Docs</title>
+<meta property="og:title" content="Clinical Documentation — Physician Workflows | Pocono AI Docs">
+<meta property="og:description" content="Clinical documentation library: physician workflows, prior authorization, denials and appeals, pre-visit packets, staff burden, and clinical safety boundaries.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Pocono AI">
+<meta property="og:url" content="https://poconoai.com/documentation-hub/clinical/">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="/styles.css?v=402">
+<link rel="stylesheet" href="/brand-v292.css?v=402">
+<link rel="canonical" href="https://poconoai.com/documentation-hub/clinical/">
+<style>
+  :root{ --hub-bg:#04111a; --hub-bg2:#061b29; --hub-card:#0a1f2e; --teal:#00c2a8; --ink:#e7f1f7; --mut:#90a8ba; --line:rgba(255,255,255,0.09); }
+  *{ box-sizing:border-box; }
+  body.hub{ margin:0; background:var(--hub-bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; line-height:1.6; -webkit-font-smoothing:antialiased; }
+  a{ color:var(--teal); }
+  .hub-skip{ position:absolute;left:-9999px; }
+  .hub-skip:focus{ left:12px;top:12px;background:var(--teal);color:#04111a;padding:8px 14px;border-radius:8px;z-index:100; }
+  /* Header */
+  .hub-header{ position:sticky;top:0;z-index:50;background:rgba(4,17,26,0.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line); }
+  .hub-header-inner{ max-width:1140px;margin:0 auto;display:flex;align-items:center;gap:18px;padding:12px 22px;flex-wrap:wrap; }
+  .hub-logo{ display:inline-flex;align-items:center;gap:8px;font-weight:800;color:#fff;text-decoration:none;font-size:1.05em;letter-spacing:-0.01em; }
+  .hub-logo span{ color:var(--teal); }
+  .hub-badge{ font-size:0.62em;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--teal);border:1px solid rgba(0,194,168,0.4);border-radius:999px;padding:3px 8px;margin-left:2px; }
+  .hub-nav{ display:flex;flex-wrap:wrap;gap:4px 6px;margin-left:auto;align-items:center; }
+  .hub-nav a{ color:var(--mut);text-decoration:none;font-size:0.86em;font-weight:600;padding:6px 10px;border-radius:8px; }
+  .hub-nav a:hover{ color:#fff;background:rgba(255,255,255,0.05); }
+  .hub-nav a.active{ color:#04111a;background:var(--teal); }
+  .hub-nav a.hub-main{ color:var(--teal);border:1px solid rgba(0,194,168,0.45); }
+  .hub-nav a.hub-main:hover{ background:rgba(0,194,168,0.12);color:var(--teal); }
+  /* Hero */
+  .hub-hero{ max-width:1140px;margin:0 auto;padding:54px 22px 30px; }
+  .hub-eyebrow{ margin:0 0 12px;font-size:0.74em;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--teal); }
+  .hub-hero h1{ margin:0 0 14px;font-size:2.3em;line-height:1.12;color:#fff;letter-spacing:-0.015em; }
+  .hub-hero p{ margin:0;max-width:680px;font-size:1.12em;color:var(--mut); }
+  .hub-crumb{ max-width:1140px;margin:0 auto;padding:18px 22px 0;font-size:0.84em;color:var(--mut); }
+  .hub-crumb a{ color:var(--mut);text-decoration:none; }
+  .hub-crumb a:hover{ color:var(--teal); }
+  /* Grid + cards */
+  .hub-wrap{ max-width:1140px;margin:0 auto;padding:26px 22px 60px; }
+  .hub-grid{ display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px; }
+  .hub-card{ display:flex;flex-direction:column;background:var(--hub-card);border:1px solid var(--line);border-radius:14px;padding:20px 20px 18px;text-decoration:none;transition:border-color .15s,transform .15s; }
+  .hub-card:hover{ border-color:rgba(0,194,168,0.5);transform:translateY(-2px); }
+  .hub-card h3{ margin:0 0 7px;color:#fff;font-size:1.06em; }
+  .hub-card.feature{ border-color:rgba(0,194,168,0.4);background:linear-gradient(180deg,#0c2433,#0a1f2e); }
+  .hub-card.feature h3{ color:var(--teal); }
+  .hub-card p{ margin:0;color:var(--mut);font-size:0.92em;line-height:1.55; }
+  .hub-card .go{ margin-top:12px;color:var(--teal);font-size:0.85em;font-weight:700; }
+  .hub-sec-title{ margin:0 0 4px;color:#fff;font-size:1.5em; }
+  .hub-sec-intro{ margin:0 0 26px;max-width:760px;color:var(--mut); }
+  .hub-note{ margin:22px 0 0;padding:16px 18px;background:rgba(255,255,255,0.03);border:1px solid var(--line);border-radius:12px;font-size:0.9em;color:var(--mut); }
+  /* Footer */
+  .hub-footer{ background:#030d14;border-top:1px solid var(--line);padding:40px 22px 30px;color:var(--mut);font-size:0.88em; }
+  .hub-footer-inner{ max-width:1140px;margin:0 auto; }
+  .hub-footer-cta{ display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding-bottom:24px;margin-bottom:22px;border-bottom:1px solid var(--line); }
+  .hub-footer-cta p{ margin:0;color:#fff;font-weight:700;font-size:1.02em; }
+  .hub-btn{ display:inline-flex;align-items:center;padding:10px 20px;border-radius:999px;background:var(--teal);color:#04111a;font-weight:700;text-decoration:none;font-size:0.92em; }
+  .hub-btn.ghost{ background:transparent;border:1px solid rgba(0,194,168,0.5);color:var(--teal); }
+  .hub-foot-links{ display:flex;flex-wrap:wrap;gap:8px 20px;margin-bottom:18px; }
+  .hub-foot-links a{ color:var(--mut);text-decoration:none; }
+  .hub-foot-links a:hover{ color:var(--teal); }
+  .hub-disc{ font-size:0.86em;line-height:1.7;max-width:880px; }
+  @media (max-width:640px){ .hub-hero h1{ font-size:1.8em; } .hub-nav{ width:100%;margin-left:0; } }
+</style>
+</head>
+<body class="hub">
+<div id="hitl-notice" style="background:#0a1929;padding:4px 16px;text-align:center;font-size:12px;color:#4a5568;border-bottom:1px solid rgba(255,255,255,0.06);letter-spacing:0.01em;">Human-in-the-Loop required: licensed professionals verify all outputs before clinical or legal action</div>
+<a class="hub-skip" href="#hub-main">Skip to content</a>
+<header class="hub-header">
+  <div class="hub-header-inner">
+    <a href="/index.html" class="hub-logo">Pocono <span>AI</span></a>
+    <span class="hub-badge">Documentation Hub</span>
+    <nav class="hub-nav" aria-label="Documentation Hub navigation">
+        <a href="/documentation-hub/" class="">Hub Home</a>
+        <a href="/documentation-hub/clinical/" class="active">Clinical</a>
+        <a href="/documentation-hub/legal/" class="">Legal</a>
+        <a href="/documentation-hub/technical/" class="">Technical</a>
+        <a href="/documentation-hub/governance/" class="">Governance</a>
+        <a href="/documentation-hub/tools/" class="">Tools</a>
+        <a href="/documentation-hub/investors/" class="">Investors</a>
+        <a href="/documentation-hub/research/" class="">Research</a>
+        <a href="/documentation-hub/transparency/" class="">Transparency</a>
+        <a href="/index.html" class="hub-main">&larr; Main Site</a>
+        <button type="button" class="pa-search-trigger" data-search-open aria-label="Search (press / or Ctrl-K)" aria-haspopup="dialog" aria-expanded="false"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><span class="pa-st-label">Search</span><kbd data-pa-keyhint>Ctrl K</kbd></button>
+    </nav>
+  </div>
+</header>
+<main id="hub-main">
+<div class="hub-crumb"><a href="/documentation-hub/">Documentation Hub</a> &rsaquo; Clinical Documentation</div>
+<section class="hub-hero">
+  <p class="hub-eyebrow">Clinical Documentation</p>
+  <h1>Clinical documentation</h1>
+  <p>How Sentinel Node supports physician and clinic document work &mdash; always as drafts a clinician reviews, never as autonomous clinical decisions.</p>
+</section>
+<div class="hub-wrap"><div class="hub-grid">
+<a class="hub-card feature" href="/for-physicians.html"><h3>For Physicians</h3><p>Local AI for prior authorization, denials, and documentation. The physician overview.</p><span class="go">Open &rarr;</span></a>
+<a class="hub-card" href="/physicians-hub.html"><h3>Physician Knowledge Hub</h3><p>Navigator for physician workflows, governance, training, and deployment.</p><span class="go">Open &rarr;</span></a>
+<a class="hub-card" href="/ai-prior-authorization-without-cloud-exposure.html"><h3>Prior Authorization Support</h3><p>Assemble prior-auth packets from the record without routing PHI to the cloud.</p><span class="go">Open &rarr;</span></a>
+<a class="hub-card" href="/prior-auth-case-study.html"><h3>Prior Authorization Walkthrough</h3><p>A worked prior-authorization documentation example.</p><span class="go">Open &rarr;</span></a>
+<a class="hub-card" href="/physicians-denials-appeals.html"><h3>Denials &amp; Appeals</h3><p>Draft denial responses and appeal support, reviewed by the clinician.</p><span class="go">Open &rarr;</span></a>
+<a class="hub-card" href="/ai-documentation-support-independent-clinics.html"><h3>Documentation Support</h3><p>Reduce after-hours charting burden for independent clinics.</p><span class="go">Open &rarr;</span></a>
+<a class="hub-card" href="/support-staff-clinic-workflows.html"><h3>Support-Staff &amp; Inbox Relief</h3><p>Where staff time goes, and how reviewed drafts reduce it.</p><span class="go">Open &rarr;</span></a>
+<a class="hub-card" href="/cardiology-inbox-workflow.html"><h3>Clinical Documentation Packet (Demo)</h3><p>An interactive cardiology inbox / packet workflow simulator.</p><span class="go">Open &rarr;</span></a>
+<a class="hub-card" href="/hipaa-local-ai-independent-medical-practices.html"><h3>HIPAA-Aware Local AI</h3><p>How on-premises design is built to support HIPAA obligations.</p><span class="go">Open &rarr;</span></a>
+<a class="hub-card" href="/clinical-collaboration-framework.html"><h3>Clinical Collaboration</h3><p>How the clinical advisory relationship is structured.</p><span class="go">Open &rarr;</span></a>
+<a class="hub-card" href="/day-in-the-clinic.html"><h3>A Day in the Clinic</h3><p>A narrative walkthrough of a clinic day with Sentinel Node.</p><span class="go">Open &rarr;</span></a>
+<a class="hub-card" href="/nurses-ai-briefing.html"><h3>Nurses&rsquo; AI Briefing</h3><p>What nursing staff should know about the workflow.</p><span class="go">Open &rarr;</span></a>
+<a class="hub-card" href="/patient-advocacy.html"><h3>AI, Prior Auth &amp; Patients</h3><p>What administrative burden and prior-auth delays cost patients.</p><span class="go">Open &rarr;</span></a>
+<a class="hub-card" href="/administrators-hub.html"><h3>Administrator Hub</h3><p>For practice administrators evaluating deployment.</p><span class="go">Open &rarr;</span></a>
+</div></div>
+<div class="hub-wrap" style="padding-top:0;"><p class="hub-note">Clinical safety boundary: Sentinel Node produces drafts, summaries, and packets for clinician review. It does not diagnose, does not make treatment decisions, and does not act autonomously. The physician remains the responsible reviewer.</p></div></main>
+<footer class="hub-footer">
+  <div class="hub-footer-inner">
+    <div class="hub-footer-cta">
+      <p>Simple path. Deep proof.</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a class="hub-btn" href="/contact.html">Start a pilot</a>
+        <a class="hub-btn ghost" href="/how-it-works.html">How it works</a>
+        <a class="hub-btn ghost" href="/index.html">Main site</a>
+      </div>
+    </div>
+    <div class="hub-foot-links">
+      <a href="/documentation-hub/clinical/">Clinical</a>
+      <a href="/documentation-hub/legal/">Legal</a>
+      <a href="/documentation-hub/technical/">Technical</a>
+      <a href="/documentation-hub/governance/">Governance</a>
+      <a href="/documentation-hub/tools/">Tools</a>
+      <a href="/documentation-hub/investors/">Investors</a>
+      <a href="/documentation-hub/research/">Research</a>
+      <a href="/documentation-hub/transparency/">Transparency</a>
+      <a href="/sitemap.html">All pages</a>
+    </div>
+    <p class="hub-disc">Pocono AI builds local-first AI infrastructure for regulated professional work. Outputs are drafts and support materials that require review by a qualified professional. Pocono AI does not provide medical or legal advice, does not practice medicine or law, and does not make clinical or legal decisions. Final professional judgment remains with the licensed physician or attorney. Tools and simulations on this site are educational and use synthetic data; they are not production systems and do not guarantee any outcome.</p>
+    <p style="margin:16px 0 0;">&copy; 2026 Pocono AI, LLC &middot; East Stroudsburg, PA &middot; <a href="mailto:marcus@poconoai.com">marcus@poconoai.com</a> &middot; <a href="/audit.html">Transparency v402</a></p>
+  </div>
+</footer>
+<script src="/search-index.js?v=402" defer></script>
+<script src="/search.js?v=402" defer></script>
+</body>
+</html>

@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="index, follow">
+<meta name="description" content="A small collection of browser games built for fun by the people behind Pocono AI. No tracking, no accounts, no data collection — just games to play and share with friends.">
+<title>Games — Built for Fun · Pocono AI</title>
+
+<meta property="og:title" content="Games — Built for Fun">
+<meta property="og:description" content="A small collection of free browser games. No accounts, no tracking — just fun to play and share.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://poconoai.com/games/">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  /* Pocono AI brand anchors */
+  --pai-navy: #051622;
+  --pai-card: #071d2e;
+  --pai-teal: #188B96;
+  --pai-blue: #0A73D2;
+  --pai-light: #D0DDE6;
+  --pai-muted: #8a9baa;
+
+  /* Playful layer — these games are the warm side of the brand */
+  --bg: #0c1118;
+  --bg-grad-1: #0e1a24;
+  --bg-grad-2: #0a0f16;
+  --surface: #131c26;
+  --surface-2: #18232f;
+  --border: rgba(255,255,255,0.08);
+  --text: #eef3f7;
+  --muted: #8a9baa;
+
+  --warm: #f0a77d;
+  --pink: #f07dd8;
+  --mint: #7df0c4;
+  --sky: #7dc4f0;
+  --gold: #f0d47d;
+
+  --radius: 18px;
+  --radius-sm: 11px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: 'Space Mono', ui-monospace, monospace;
+  background: var(--bg);
+  background-image:
+    radial-gradient(ellipse 80% 60% at 20% -10%, rgba(24,139,150,0.12), transparent 60%),
+    radial-gradient(ellipse 70% 50% at 90% 10%, rgba(240,125,216,0.08), transparent 55%),
+    linear-gradient(170deg, var(--bg-grad-1), var(--bg-grad-2));
+  background-attachment: fixed;
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* subtle grain */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.025;
+  z-index: 1;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.wrap {
+  position: relative;
+  z-index: 2;
+  max-width: 940px;
+  margin: 0 auto;
+  padding: 0 20px 80px;
+}
+
+/* ---- Top bar ---- */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 0 0;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.brand-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  text-decoration: none;
+  color: var(--pai-light);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  transition: color 0.2s;
+}
+.brand-link:hover { color: #fff; }
+.brand-dot {
+  width: 26px; height: 26px;
+  border-radius: 7px;
+  background: linear-gradient(135deg, var(--pai-teal), var(--pai-blue));
+  display: grid; place-items: center;
+  font-weight: 700; font-size: 0.8rem; color: #fff;
+  box-shadow: 0 2px 10px rgba(10,115,210,0.4);
+}
+.back-link {
+  font-size: 0.74rem;
+  color: var(--muted);
+  text-decoration: none;
+  border: 1px solid var(--border);
+  padding: 7px 14px;
+  border-radius: 999px;
+  transition: all 0.2s;
+}
+.back-link:hover { color: #fff; border-color: var(--pai-teal); }
+
+/* ---- Hero ---- */
+.hero {
+  padding: 54px 0 14px;
+  text-align: center;
+}
+.hero .eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--mint);
+  margin-bottom: 18px;
+}
+.hero h1 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 600;
+  font-size: clamp(2.3rem, 8vw, 4rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  color: #fff;
+  margin-bottom: 16px;
+}
+.hero h1 .accent {
+  background: linear-gradient(100deg, var(--mint), var(--sky), var(--pink));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.hero p {
+  max-width: 540px;
+  margin: 0 auto;
+  color: var(--pai-light);
+  font-size: 0.96rem;
+}
+
+/* ---- Disclaimer banner ---- */
+.disclaimer {
+  margin: 30px auto 8px;
+  max-width: 660px;
+  background: rgba(7,29,46,0.7);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: var(--radius-sm);
+  padding: 16px 20px;
+  font-size: 0.8rem;
+  line-height: 1.65;
+  color: var(--pai-light);
+}
+.disclaimer strong { color: var(--gold); font-weight: 700; }
+
+/* ---- Game grid ---- */
+.games {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+  margin-top: 44px;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.28s cubic-bezier(0.2,0.8,0.2,1), border-color 0.28s, box-shadow 0.28s;
+  isolation: isolate;
+}
+.card:hover, .card:focus-visible {
+  transform: translateY(-6px);
+  border-color: rgba(255,255,255,0.2);
+  box-shadow: 0 18px 50px rgba(0,0,0,0.5);
+  outline: none;
+}
+.card:focus-visible { box-shadow: 0 0 0 3px var(--sky), 0 18px 50px rgba(0,0,0,0.5); }
+
+.card-art {
+  height: 150px;
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+/* Wired Different art */
+.art-wired {
+  background:
+    radial-gradient(circle at 30% 30%, rgba(125,240,196,0.4), transparent 50%),
+    radial-gradient(circle at 75% 65%, rgba(240,125,216,0.4), transparent 50%),
+    radial-gradient(circle at 55% 40%, rgba(125,196,240,0.35), transparent 55%),
+    linear-gradient(135deg, #1a1426, #16161f);
+}
+/* Homestead art */
+.art-homestead {
+  background:
+    radial-gradient(circle at 50% 120%, rgba(68,255,136,0.35), transparent 55%),
+    linear-gradient(170deg, #0f1f12, #0a150a);
+}
+/* Loopit / Pop Your Fun art */
+.art-loopit {
+  background:
+    radial-gradient(circle at 38% 35%, rgba(162,89,255,0.45), transparent 55%),
+    radial-gradient(circle at 72% 68%, rgba(240,125,216,0.35), transparent 50%),
+    linear-gradient(135deg, #110920, #07050e);
+}
+.card.loopit .card-cta { background: linear-gradient(100deg, #a259ff, #f07dd8); }
+
+/* Sentinel Node FPS art */
+.art-sentinel {
+  background:
+    radial-gradient(circle at 50% 60%, rgba(24,139,150,0.4), transparent 55%),
+    repeating-linear-gradient(0deg, rgba(125,240,196,0.05) 0 2px, transparent 2px 6px),
+    linear-gradient(165deg, #06202e, #02101a);
+}
+.card.sentinel .card-cta { background: linear-gradient(100deg, var(--mint), var(--teal)); }
+.art-emoji {
+  font-size: 3.1rem;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4));
+  transition: transform 0.4s cubic-bezier(0.2,0.8,0.2,1);
+  z-index: 2;
+}
+.card:hover .art-emoji { transform: scale(1.12) rotate(-4deg); }
+
+.badge {
+  position: absolute;
+  top: 12px; left: 12px;
+  z-index: 3;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--mint);
+  color: #08110d;
+}
+.badge.alt { background: var(--gold); }
+
+/* Multiple small badges shown in the card body (used by Sentinel Node) */
+.badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0 0 11px;
+}
+.badge-chip {
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--pai-light);
+  background: rgba(255,255,255,0.03);
+  white-space: nowrap;
+}
+.badge-chip.is-new   { background: var(--mint); color: #08110d; border-color: transparent; }
+.badge-chip.is-tele  { color: var(--mint); border-color: rgba(125,240,196,0.4); }
+.badge-chip.is-mob   { color: var(--sky);  border-color: rgba(125,196,240,0.4); }
+.badge-chip.is-gov   { color: var(--gold); border-color: rgba(240,212,125,0.4); }
+
+.card-body {
+  padding: 20px 20px 22px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.card-cat {
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 9px;
+}
+.card-title {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 600;
+  font-size: 1.32rem;
+  color: #fff;
+  line-height: 1.12;
+  margin-bottom: 9px;
+}
+.card-tagline {
+  font-size: 0.83rem;
+  color: var(--pai-light);
+  line-height: 1.55;
+  margin-bottom: 16px;
+  flex: 1;
+}
+.card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #08110d;
+  background: linear-gradient(100deg, var(--mint), var(--sky));
+  padding: 11px 20px;
+  border-radius: 999px;
+  transition: gap 0.2s, filter 0.2s;
+}
+.card.homestead .card-cta { background: linear-gradient(100deg, #4f8, #7df0c4); }
+.card:hover .card-cta { gap: 13px; filter: brightness(1.08); }
+
+/* ---- Footer ---- */
+.foot {
+  margin-top: 56px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.76rem;
+  line-height: 1.8;
+}
+.foot a { color: var(--pai-light); text-decoration: none; border-bottom: 1px dotted var(--muted); }
+.foot a:hover { color: #fff; }
+
+/* ---- Mobile ---- */
+@media (max-width: 600px) {
+  .games { grid-template-columns: 1fr; gap: 18px; }
+  .hero { padding: 38px 0 8px; }
+  .card-art { height: 130px; }
+  .disclaimer { font-size: 0.78rem; padding: 14px 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+  html { scroll-behavior: auto; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <a class="brand-link" href="../index.html">
+      <span class="brand-dot">P</span>
+      <span>Pocono&nbsp;AI</span>
+    </a>
+    <a class="back-link" href="../index.html">&larr; Back to main site</a>
+  </div>
+
+  <header class="hero">
+    <div class="eyebrow">Pocono AI Game Lab</div>
+    <h1>Built for <span class="accent">fun.</span></h1>
+    <p>Welcome to the Pocono AI Game Lab. This is the playground, not the product. Pocono AI builds serious local AI infrastructure for medical and legal workflows. The /games/ directory is where we keep playful experiments, interface tests, cognitive-sustainability ideas, and small prototypes that remind us that sustainable builders still need play.</p>
+  </header>
+
+  <div class="disclaimer" role="note" aria-label="About these games">
+    <strong>A quick note:</strong> These games are a side project &mdash; made for fun, for friends, and for the joy of building something together. They are <strong>not</strong> a Pocono&nbsp;AI product or service, they don't represent the company's commercial work, and they collect no data, use no accounts, and track nothing. Just play.
+  </div>
+
+  <main class="games">
+
+    <!-- Wired Different -->
+    <a class="card wired" href="wired-different.html" aria-label="Play Wired Different — a neurodiverse life simulation game">
+      <div class="card-art art-wired">
+        <span class="badge">New</span>
+        <span class="art-emoji" aria-hidden="true">&#129504;</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">Neurodiversity &middot; Life Sim</div>
+        <h2 class="card-title">Wired Different</h2>
+        <p class="card-tagline">A neurodiverse life sim about energy, overload, flow, and building a life that works for you.</p>
+        <span class="card-cta">Play Game &rarr;</span>
+      </div>
+    </a>
+
+    <!-- Sentinel Node: Breach Protocol -->
+    <a class="card sentinel" href="sentinel-node-breach-protocol.html" aria-label="Play Sentinel Node: Breach Protocol — a mobile-first retro sci-fi defense game">
+      <div class="card-art art-sentinel">
+        <span class="badge">New</span>
+        <span class="art-emoji" aria-hidden="true">&#128737;&#65039;</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">Governance Arcade &middot; Retro Defense</div>
+        <h2 class="card-title">Sentinel Node: Breach Protocol</h2>
+        <div class="badge-row" aria-hidden="true">
+          <span class="badge-chip is-new">New</span>
+          <span class="badge-chip is-mob">Mobile Friendly</span>
+          <span class="badge-chip is-tele">Zero Telemetry</span>
+          <span class="badge-chip is-gov">Governance Arcade</span>
+        </div>
+        <p class="card-tagline">Defend the Sentinel Node from cloud exfiltration, telemetry daemons, hallucination crawlers, and unsafe execution paths. Seal the breach with audit chains, human-review gates, and zero-telemetry defenses.</p>
+        <span class="card-cta">Play Breach Protocol &rarr;</span>
+      </div>
+    </a>
+
+    <!-- Homestead Survival -->
+    <a class="card homestead" href="homestead-survival.html" aria-label="Play Homestead Survival — a survival crafting game">
+      <div class="card-art art-homestead">
+        <span class="badge alt">New</span>
+        <span class="art-emoji" aria-hidden="true">&#127794;</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">Survival &middot; Crafting</div>
+        <h2 class="card-title">Homestead Survival</h2>
+        <p class="card-tagline">Forage, build, and outlast the seasons. A cozy-but-tense survival sim you can pick up in a spare moment.</p>
+        <span class="card-cta">Play Game &rarr;</span>
+      </div>
+    </a>
+
+
+    <!-- Pop Your Fun — Loopit game by Tanya R W -->
+    <a class="card loopit" href="loopit-pop-your-fun.html" aria-label="Play Blue's Worry Walk — help your friends heal from toxic energy, a Loopit game by Tanya R W">
+      <div class="card-art art-loopit">
+        <span class="badge" style="background:#a259ff;color:#fff;">New</span>
+        <span class="art-emoji" aria-hidden="true">&#128156;</span>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">Emotional Wellness &middot; Loopit Playable</div>
+        <h2 class="card-title">Blue&rsquo;s Worry Walk</h2>
+        <div class="badge-row" aria-hidden="true">
+          <span class="badge-chip" style="color:#a259ff;border-color:rgba(162,89,255,0.4);">Loopit</span>
+          <span class="badge-chip" style="color:#f07dd8;border-color:rgba(240,125,216,0.4);">By Tanya R W</span>
+          <span class="badge-chip is-mob">Mobile Friendly</span>
+        </div>
+        <p class="card-tagline">An emotional speedrun &mdash; help your friends heal from toxic energy, one step at a time. A Loopit playable by game developer Tanya R W.</p>
+        <span class="card-cta">Play Game &rarr;</span>
+      </div>
+    </a>
+
+  </main>
+
+  <footer class="foot">
+    <p>Made with care by the people behind <a href="../index.html">Pocono&nbsp;AI</a> &mdash; just for fun.</p>
+    <p>No tracking &middot; No accounts &middot; No data collected &middot; Play freely</p>
+  </footer>
+
+</div>
+</body>
+</html>

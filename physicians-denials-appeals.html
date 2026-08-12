@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp -->
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Denials &amp; Appeals — AI-Assisted Letter Drafting | Pocono AI</title>
+<meta name="description" content="How Pocono AI assists with prior authorization denials and clinical appeals — cited evidence, local drafts, physician sign-off.">
+<meta name="keywords" content="prior authorization denial appeal, clinical appeal letter AI, denial letter drafting, citation grounded appeal, medical necessity AI, peer review letter, prior auth case study">
+
+<meta property="og:title" content="Denials &amp; Appeals — Pocono AI">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Pocono AI">
+<meta property="og:locale" content="en_US">
+<meta property="og:description" content="Citation-grounded language for prior authorization denials and clinical appeals. Physician remains the author.">
+<meta property="og:url" content="https://poconoai.com/physicians-denials-appeals.html">
+<meta property="og:image" content="https://poconoai.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Denials &amp; Appeals — Pocono AI">
+<meta name="twitter:description" content="Citation-grounded language for prior authorization denials and clinical appeals. Physician remains the author.">
+<meta name="theme-color" content="#0B0F13">
+
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="favicon-180x180.png">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="alternate icon" href="favicon.ico">
+<link rel="canonical" href="https://poconoai.com/physicians-denials-appeals.html">
+<link rel="stylesheet" href="styles.css?v=402">
+<link rel="stylesheet" href="nav-v2026.css?v=402">
+<link rel="stylesheet" href="brand-v292.css?v=402">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Denials and Appeals: AI-Assisted Letter Drafting",
+  "url": "https://poconoai.com/physicians-denials-appeals.html",
+  "publisher": { "@type": "Organization", "name": "Pocono AI, LLC", "url": "https://poconoai.com" },
+  "datePublished": "2026-05-18",
+  "description": "How Pocono AI assists with prior authorization denials and clinical appeals using citation-grounded language."
+}
+</script>
+
+<style>
+/* physicians-denials-appeals.html — v250 Stage 5 Pass D
+   Voice: governance-first, restrained. Stage 1 rules: normal flow,
+   no abs positioning, mobile-first. Uses global utility layer. */
+
+.gap-hero {
+  padding-top: 2.5rem;
+}
+.gap-hero .eyebrow {
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin: 0 0 1rem;
+}
+.gap-hero h1 {
+  font-size: clamp(1.7rem, 3.4vw, 2.5rem);
+  line-height: 1.15;
+  color: var(--white);
+  margin: 0 0 1rem;
+  border: none;
+}
+.gap-hero .lede {
+  color: #a8cce8;
+  font-size: clamp(1.0rem, 1.55vw, 1.15rem);
+  line-height: 1.6;
+  font-style: italic;
+  margin: 0 0 1.25rem;
+  max-width: 740px;
+}
+
+.gap-section {
+  margin: 3rem 0;
+}
+.gap-section h2 {
+  color: var(--white);
+  font-size: clamp(1.2rem, 2.2vw, 1.55rem);
+  margin: 0 0 1rem;
+  padding-bottom: 0.55rem;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.gap-section h3 {
+  color: var(--white);
+  font-size: 1.02rem;
+  margin: 1.5rem 0 0.6rem;
+  letter-spacing: 0.02em;
+}
+.gap-section p {
+  color: var(--light-text);
+  line-height: 1.8;
+  margin: 0 0 1rem;
+}
+.gap-section ul, .gap-section ol {
+  color: var(--light-text);
+  line-height: 1.85;
+  padding-left: 1.4rem;
+  margin: 0 0 1rem;
+}
+
+.gap-card {
+  background: rgba(15,23,42,0.55);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: 0.85rem;
+  padding: 1.4rem 1.6rem;
+  margin: 1rem 0;
+}
+.gap-card h3 { margin-top: 0; }
+
+.gap-twocol {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.1rem;
+  margin: 1.25rem 0;
+}
+
+.gap-references {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 0.85rem;
+  padding: 1.5rem 1.8rem;
+  margin: 2rem 0;
+}
+.gap-references h3 {
+  margin-top: 0;
+  color: var(--white);
+  font-size: 1.0rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.gap-references ul {
+  margin: 0;
+  padding-left: 1.3rem;
+  font-size: 0.92rem;
+  line-height: 1.85;
+  color: var(--light-text);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .gap-hero h1 { font-size: clamp(1.5rem, 7vw, 2rem); }
+  .gap-section h2 { font-size: 1.2rem; }
+}
+</style>
+
+</head>
+<body>
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- INCLUDE:HEADER -->
+<div id="hitl-notice" style="background:#0a1929;padding:4px 16px;text-align:center;font-size:12px;color:#4a5568;border-bottom:1px solid rgba(255,255,255,0.06);letter-spacing:0.01em;">Human-in-the-Loop required: licensed professionals verify all outputs before clinical or legal action</div>
+<header role="banner">
+  <div class="header-inner">
+    <a href="/index.html" class="logo" aria-label="Pocono AI Home">
+      <img src="/logo.svg?v=402" alt="" width="36" height="36" decoding="async" loading="eager" aria-hidden="true" style="display:inline-block;">
+      Pocono <span>AI</span>
+    </a>
+    <nav id="desktop-nav" aria-label="Main navigation">
+      <div class="nav-item"><a href="/index.html" class="nav-direct">Home</a></div>
+      <div class="nav-item"><a href="/for-physicians.html" class="nav-direct">Physicians</a></div>
+      <div class="nav-item"><a href="/for-attorneys.html" class="nav-direct">Attorneys</a></div>
+      <div class="nav-item"><a href="/sentinel-node.html" class="nav-direct nav-hub" style="color:#d5a94f;border:1px solid rgba(213,169,79,0.45);border-radius:999px;padding:6px 13px;">Sentinel Node</a></div>
+      <div class="nav-item"><a href="/living-memorials/" class="nav-direct">Living Echo</a></div>
+      <div class="nav-item"><a href="/contact.html" class="nav-direct">Contact</a></div>
+      <div class="nav-item" data-dropdown="menu-more">
+        <button type="button" class="nav-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="menu-more">More <span class="nav-chevron" aria-hidden="true">&#9662;</span></button>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <a href="/contact.html#pilot" class="nav-cta nav-cta-primary">Request a Pilot</a>
+      <button type="button" class="pa-search-trigger" data-search-open aria-label="Search (press / or Ctrl-K)" aria-haspopup="dialog" aria-expanded="false">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span class="pa-st-label">Search</span><kbd data-pa-keyhint>Ctrl K</kbd>
+      </button>
+      <button type="button" class="header-icon-btn" id="mobile-menu" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav-panel">
+        <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- "More" overflow dropdown — sibling of <header> so position:fixed escapes header's stacking context. Wired by nav.js via data-dropdown="menu-more". -->
+<div class="nav-dropdown" id="menu-more" aria-label="More navigation">
+  <p class="nav-dd-section">Products</p>
+  <a href="/engineering-drafting/">Drafting &amp; Engineering Edition</a>
+  <a href="/sentinel-home/">Sentinel Home Edition</a>
+  <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability — Assistive Tools &#x2605;</a>
+  <a href="/living-memorials/enterprise-estate-continuity.html">Enterprise Estate Continuity</a>
+  <p class="nav-dd-section">Capabilities</p>
+  <a href="/evidence-room.html">Evidence Room</a>
+  <a href="/push-button-deliverables.html">Push-Button Deliverables</a>
+  <a href="/pilot-readiness-kit.html">Pilot Kit</a>
+  <a href="/pilot-program.html">Pilot Program</a>
+  <a href="/how-it-works.html">How It Works</a>
+  <p class="nav-dd-section">Hubs &amp; Company</p>
+  <a href="/training.html">Training Hub</a>
+  <a href="/documentation-hub/">Document Hub</a>
+  <a href="/global/">Global Hub</a>
+  <a href="/investors-hub.html">Investor Hub</a>
+  <a href="/valuation-dashboard.html">Valuation Dashboard</a>
+  <a href="/about.html">About</a>
+  <p class="nav-dd-section">Trust &amp; Legal</p>
+  <a href="/transparency.html">Transparency</a>
+  <a href="/audit.html">Audit Log</a>
+  <a href="/privacy.html">Privacy</a>
+  <a href="/sitemap.html">Sitemap</a>
+</div>
+<!-- Site search is provided by the self-contained search.js asset (command palette: / or Ctrl/Cmd-K). -->
+
+<!-- Mobile panel: full-screen slide-in. v396 nav — hub tiles + grouped links + Sentinel Node + Engineering. -->
+<nav id="mobile-nav-panel" aria-label="Mobile navigation" aria-hidden="true" role="dialog" aria-modal="true">
+
+  <!-- Hub tiles: Sentinel Node, Documentation Hub, Training Hub, Global Hub -->
+  <div style="padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,0.07);">
+    <p style="font-size:0.65em;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.28);margin:0 0 10px;padding:0 2px;">Hubs</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <a href="/sentinel-node.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(213,169,79,0.1);border:1px solid rgba(213,169,79,0.35);border-radius:10px;color:#d5a94f;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Sentinel Node</a>
+      <a href="/documentation-hub/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(0,194,168,0.1);border:1px solid rgba(0,194,168,0.35);border-radius:10px;color:#00c2a8;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Docs Hub</a>
+      <a href="/training.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.35);border-radius:10px;color:#a78bfa;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Training Hub</a>
+      <a href="/global/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(122,240,220,0.07);border:1px solid rgba(122,240,220,0.3);border-radius:10px;color:#7af0dc;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Global Hub</a>
+    </div>
+  </div>
+
+  <!-- Core paths -->
+  <div class="mob-static-links">
+    <a href="/index.html">Home</a>
+    <a href="/for-physicians.html">Physicians</a>
+    <a href="/for-attorneys.html">Attorneys</a>
+    <a href="/engineering-drafting/">Engineering &amp; Drafting</a>
+    <a href="/pilot-program.html">Pilot Program</a>
+    <a href="/how-it-works.html">How It Works</a>
+    <a href="/trust.html">Trust &amp; Audit</a>
+    <a href="/pricing.html">Pricing</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/living-memorials/">Living Echo</a>
+    <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability</a>
+    <a href="/about.html">About</a>
+    <a href="/team.html" style="color:rgba(255,255,255,0.6);">Team &amp; Leadership</a>
+    <a href="/valuation-dashboard.html" style="color:rgba(255,255,255,0.6);">Valuation Dashboard</a>
+    <a href="/careers.html" style="color:rgba(255,255,255,0.6);">Careers</a>
+    <a href="/sentinel-demo.html" style="color:rgba(255,255,255,0.6);">Demo</a>
+    <a href="/sitemap.html" style="color:rgba(255,255,255,0.45);">Sitemap</a>
+    <a href="/transparency.html" style="color:rgba(255,255,255,0.45);">Transparency</a>
+    <a href="/privacy.html" style="color:rgba(255,255,255,0.45);">Privacy</a>
+  </div>
+
+  <a href="/contact.html#pilot" class="mob-cta">Request a Pilot</a>
+</nav>
+<!-- /INCLUDE:HEADER -->
+
+
+<main id="main-content" tabindex="-1">
+<span id="main" aria-hidden="true"></span>
+
+  <section class="section-tight gap-hero">
+    <div class="container">
+      <a class="back-link" href="physicians-hub.html">&larr; Back to Physician Knowledge Hub</a>
+      <div class="sentinel-lockup" aria-label="Sentinel Node — Denials & Appeals">
+              <svg class="sentinel-lockup-mark" viewBox="0 0 64 64" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
+          <!-- v311b: rotated diamond + C-curve loop + summit dot. Inherits currentColor from CSS context. -->
+          <g transform="rotate(45 32 32)">
+            <rect x="12" y="12" width="40" height="40" rx="8" ry="8"/>
+            <path d="M43 22 L26 22 A6 6 0 0 0 20 28 L20 36 A6 6 0 0 0 26 42 L41 42"/>
+          </g>
+          <circle cx="32" cy="9" r="3" fill="currentColor" stroke="none"/>
+        </svg>
+              <div class="sentinel-lockup-rule"></div>
+              <div class="sentinel-lockup-text">
+                <span class="sentinel-lockup-name">Sentinel Node</span>
+                <span class="sentinel-lockup-tag">Clinical Workflow</span>
+              </div>
+            </div>
+      <h1>Denials and appeals, with citation-grounded language.</h1>
+      <p class="lede">Drafting an appeal is rarely about new clinical reasoning. It is about finding the documented evidence already in the chart and presenting it back to a reviewer in language that maps to medical-necessity criteria. Pocono AI does the finding. The physician does the deciding.</p>
+    </div>
+  </section>
+
+  <section class="section-tight" style="padding-top:0;">
+    <div class="container">
+      <section class="gap-section">
+        <h2>What an appeal actually requires</h2>
+        <p>A denial response is a constrained writing task with three reliable inputs: the payer's stated reason for denial, the clinical record that supports continued care, and the language patterns reviewers respond to. Each is already in the firm's environment. The bottleneck is finding it.</p>
+        <p>The Sentinel Node treats appeal drafting as a retrieval problem. The physician describes the case; the system surfaces the relevant chart entries with citations and assembles a draft that mirrors the payer's own criteria. Nothing is invented. Every assertion is traceable to a source line in the chart.</p>
+      </section>
+
+      <section class="gap-section">
+        <h2>Four checkpoints in an AI-assisted appeal</h2>
+        <div class="gap-twocol">
+          <article class="gap-card">
+            <h3>1. Identify the denial reason</h3>
+            <p>The system reads the denial letter and isolates the specific clinical criterion the payer cites — not boilerplate, the actual gating phrase. Common patterns: "not medically necessary," "step therapy not documented," "alternative covered service available."</p>
+          </article>
+          <article class="gap-card">
+            <h3>2. Retrieve supporting evidence</h3>
+            <p>The Sentinel Node searches the patient record for documentation that addresses the cited criterion. Lab values, imaging interpretations, prior failed therapies, specialist consultations. Every retrieved item carries a chart citation.</p>
+          </article>
+          <article class="gap-card">
+            <h3>3. Draft with cited language</h3>
+            <p>The draft assembles the retrieved evidence into the structure the payer's own utilization-management policy expects. Each clinical claim is followed by an inline citation to the chart source. The physician sees both the draft and the evidence chain.</p>
+          </article>
+          <article class="gap-card">
+            <h3>4. Physician review and attestation</h3>
+            <p>The physician edits, accepts, or rejects each cited claim. The system records the final attested version, which clinician signed it, and the exact moment of attestation. The submission carries the physician's authority, not the AI's.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="gap-section">
+        <h2>What this does and does not do</h2>
+        <div class="gap-twocol">
+          <article class="gap-card">
+            <h3>It does</h3>
+            <ul>
+              <li>Reduce the search-and-find portion of appeal drafting</li>
+              <li>Surface evidence the physician already documented but may have forgotten</li>
+              <li>Apply consistent language patterns across appeals so reviewers see uniform argument structure</li>
+              <li>Preserve every citation so the appeal is auditable end-to-end</li>
+            </ul>
+          </article>
+          <article class="gap-card">
+            <h3>It does not</h3>
+            <ul>
+              <li>Invent clinical history that is not in the chart</li>
+              <li>Decide whether the appeal is medically warranted</li>
+              <li>Submit anything without physician attestation</li>
+              <li>Replace the clinician&rsquo;s judgment about case strategy</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="gap-section">
+        <h2>Operational realism</h2>
+        <p>An appeal-drafting workflow that takes a physician 30&ndash;45 minutes today (search the chart, find the labs, find the prior trials, write the prose, format for the payer) compresses to 5&ndash;10 minutes of review and attestation. That is the operational gain. The clinical decision is unchanged.</p>
+        <p>This is a retrieval and synthesis task, not a clinical reasoning task. The physician's expertise is on what was tried, what worked, what failed, and what the patient needs. The Sentinel Node's role is to make that documented expertise findable on demand.</p>
+      </section>
+
+      <div class="gap-references">
+        <h3>Related reading</h3>
+        <ul>
+          <li><a href="prior-auth-case-study.html" style="color:var(--teal);text-decoration:none;font-weight:600;">Prior Authorization Case Study</a> &mdash; the detailed walk-through with real time-savings figures</li>
+          <li><a href="patient-advocacy.html" style="color:var(--teal);text-decoration:none;font-weight:600;">Patient Advocacy</a> &mdash; what administrative burden costs patients</li>
+          <li><a href="governance.html" style="color:var(--teal);text-decoration:none;font-weight:600;">AI Governance Model</a> &mdash; how attestation and audit logging work</li>
+          <li><a href="operational-artifacts.html" style="color:var(--teal);text-decoration:none;font-weight:600;">Operational Artifacts</a> &mdash; what auditors see from an appeal workflow</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container">
+      <aside class="next-step" aria-label="Recommended next step">
+        <div>
+          <span class="next-step-label">Recommended next step</span>
+          <div class="next-step-title">See the prior authorization case study with real time savings.</div>
+        </div>
+        <a href="prior-auth-case-study.html" class="next-step-cta">Read Case Study &rarr;</a>
+      </aside>
+    </div>
+  </section>
+
+
+  <section class="section-tight">
+    <div class="container">
+
+      <aside class="related-rail" aria-label="Related clinical authority">
+        <p class="related-rail-eyebrow">Continue investigating</p>
+        <h2 class="related-rail-title">Related clinical authority</h2>
+        <ul class="related-rail-list">
+          <li class="related-rail-item">
+            <a href="prior-auth-case-study.html">
+              <span class="related-rail-tag">Research</span>
+              <span class="related-rail-link-title">Prior Auth Case Study</span>
+              <span class="related-rail-blurb">The 14-hours-per-week burden and the 16-step process. The evidence base behind the workflow.</span>
+            </a>
+          </li>
+          <li class="related-rail-item">
+            <a href="ehr-burden-research.html">
+              <span class="related-rail-tag">Research</span>
+              <span class="related-rail-link-title">EHR Burden Research</span>
+              <span class="related-rail-blurb">Sinsky et al. on the 5.9-hour daily documentation burden. The broader clinical context.</span>
+            </a>
+          </li>
+          <li class="related-rail-item">
+            <a href="physicians-training.html">
+              <span class="related-rail-tag">Training</span>
+              <span class="related-rail-link-title">Staff Training Curriculum</span>
+              <span class="related-rail-blurb">Two-session training (60-min clinician, 45-min admin). Verification habits before live use.</span>
+            </a>
+          </li>
+          <li class="related-rail-item">
+            <a href="governance.html">
+              <span class="related-rail-tag">Governance</span>
+              <span class="related-rail-link-title">AI Governance</span>
+              <span class="related-rail-blurb">The four-pillar framing that the appeal workflow operates within.</span>
+            </a>
+          </li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+</main>
+
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 root-relative nav fix, Living Echo rebrand, Engineering & Drafting + Enterprise Estate Continuity links added (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- INCLUDE:FOOTER -->
+<footer role="contentinfo" style="background:#051622;border-top:1px solid rgba(255,255,255,0.08);padding:40px 24px 28px;font-size:0.85em;color:#8899aa;">
+  <div style="max-width:1180px;margin:0 auto;">
+
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:0 0 28px;margin-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.07);">
+      <div style="max-width:560px;">
+        <p style="margin:0 0 6px;font-size:1.05em;font-weight:700;color:#fff;">Local AI infrastructure for regulated practices.</p>
+        <p style="margin:0;font-size:0.95em;line-height:1.5;">Drafts with citations. Human review required. Sensitive documents stay under practice control. Simple path, deep proof.</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="/contact.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;background:#00c2a8;color:#04111a;font-weight:700;text-decoration:none;font-size:0.95em;">Request Pilot</a>
+        <a href="/sentinel-demo.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;border:1px solid rgba(0,194,168,0.55);color:#00c2a8;font-weight:700;text-decoration:none;font-size:0.95em;">Watch Demo</a>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px 32px;margin-bottom:32px;text-align:left;">
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">For You</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/start-here.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Start Here (3 min)</a>
+          <a href="/for-physicians.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Physicians</a>
+          <a href="/for-attorneys.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Attorneys</a>
+          <a href="/engineering-drafting/" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Engineering &amp; Drafting Teams</a>
+          <a href="/pilot-program.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Pilot Program</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Installer Training</a>
+          <a href="/how-it-works.html" style="color:#8899aa;text-decoration:none;">How It Works</a>
+          <a href="/trust.html" style="color:#8899aa;text-decoration:none;">Trust &amp; Audit</a>
+          <a href="/pricing.html" style="color:#8899aa;text-decoration:none;">Pricing</a>
+          <a href="/sentinel-demo.html" style="color:#8899aa;text-decoration:none;">See the Demo</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Documentation Hub</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/documentation-hub/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Hub Home &mdash; Deep Proof</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">Installer Training</a>
+          <a href="/sentinel-node/installation-simulator.html" style="color:#8899aa;text-decoration:none;">&#8627; Installation Simulator</a>
+          <a href="/documentation-hub/clinical/" style="color:#8899aa;text-decoration:none;">Clinical Documentation</a>
+          <a href="/documentation-hub/legal/" style="color:#8899aa;text-decoration:none;">Legal Documentation</a>
+          <a href="/documentation-hub/technical/" style="color:#8899aa;text-decoration:none;">Technical Documentation</a>
+          <a href="/documentation-hub/governance/" style="color:#8899aa;text-decoration:none;">Governance &amp; Audit</a>
+          <a href="/documentation-hub/tools/" style="color:#8899aa;text-decoration:none;">Tools &amp; Simulators</a>
+          <a href="/documentation-hub/research/" style="color:#8899aa;text-decoration:none;">Research &amp; Essays</a>
+          <a href="/documentation-hub/transparency/" style="color:#8899aa;text-decoration:none;">Transparency</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Global Federated AI</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/global/" style="color:#7af0dc;text-decoration:none;font-weight:600;">Global Federated Hub</a>
+          <a href="/global/australia/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Australia</a>
+          <a href="/global/singapore/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Singapore</a>
+          <a href="/global/taiwan/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Taiwan</a>
+          <a href="/global/europe/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Europe</a>
+          <a href="/contact.html" style="color:#8899aa;text-decoration:none;">Partner Inquiry</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Company</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/about.html" style="color:#8899aa;text-decoration:none;">About Pocono AI</a>
+          <a href="/team.html" style="color:#8899aa;text-decoration:none;">Team &amp; Leadership</a>
+          <a href="/why-pocono-ai.html" style="color:#8899aa;text-decoration:none;">Why Pocono AI</a>
+          <a href="/founding-commercial-leadership.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Join Us</a>
+          <a href="/careers.html" style="color:#8899aa;text-decoration:none;">Careers</a>
+          <a href="/how-we-hire.html" style="color:#8899aa;text-decoration:none;">How We Hire</a>
+          <a href="/channel-partners.html" style="color:#8899aa;text-decoration:none;">Technical Partners (MSPs)</a>
+          <a href="/partners.html" style="color:#8899aa;text-decoration:none;">Academic Partnerships</a>
+          <a href="/contact.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Contact</a>
+          <a href="https://forms.gle/VQahnkjMfY6QNEMy8" target="_blank" rel="noopener noreferrer" style="color:#d5a94f;text-decoration:none;font-weight:600;">Interest List &#8599;</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Founder Projects</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/rehability/" style="color:#a78bfa;text-decoration:none;font-weight:700;">Rehability &#x2605;</a>
+          <a href="/rehability/marcus-memory-helper/" style="color:#a78bfa;text-decoration:none;font-weight:600;">&#8627; Marcus's Memory Helper</a>
+          <a href="/sentinel-home/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Sentinel Home Edition</a>
+          <a href="/living-memorials/" style="color:#8899aa;text-decoration:none;">Living Echo</a>
+          <a href="/living-memorials/marcus-odell/" style="color:#8899aa;text-decoration:none;">Marcus&rsquo;s Living Echo</a>
+          <a href="/living-memorials/enterprise-estate-continuity.html" style="color:#8899aa;text-decoration:none;">Enterprise Estate Continuity</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Resources &amp; Legal</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/sitemap.html" style="color:#8899aa;text-decoration:none;">All Pages (Sitemap)</a>
+          <a href="/audit.html" style="color:#8899aa;text-decoration:none;">Transparency &amp; Audit Log</a>
+          <a href="/maturity-disclosure.html" style="color:#8899aa;text-decoration:none;">What We Have / Don&rsquo;t Claim</a>
+          <a href="/plain.html" style="color:#8899aa;text-decoration:none;">Plain Language Guide</a>
+          <a href="/privacy.html" style="color:#8899aa;text-decoration:none;">Privacy</a>
+          <a href="/terms.html" style="color:#8899aa;text-decoration:none;">Terms</a>
+          <a href="/sla.html" style="color:#8899aa;text-decoration:none;">SLA</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:18px;margin-bottom:14px;">
+      <p style="margin:0;font-size:0.82em;line-height:1.6;color:#6f8295;max-width:1000px;">Pocono AI does not provide medical, legal, or engineering advice, does not practice medicine, law, or licensed engineering, and does not make clinical, legal, or engineering decisions. Outputs are drafts or support materials that require review by a qualified professional; final professional judgment remains with the licensed physician, attorney, or engineer. Tools and simulations on this site are educational and use synthetic data.</p>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:20px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+      <p style="margin:0;font-size:0.9em;">&copy; 2026 Pocono AI, LLC &nbsp;&#183;&nbsp; East Stroudsburg, PA &nbsp;&#183;&nbsp; <a href="mailto:marcus@poconoai.com" style="color:#8899aa;">marcus@poconoai.com</a> &nbsp;&#183;&nbsp; <a href="tel:+15705340602" style="color:#8899aa;">(570) 534-0602</a></p>
+      <p style="margin:0;font-size:0.88em;"><a href="/audit.html" style="color:#5dade2;text-decoration:none;">Transparency v402</a></p>
+    </div>
+  </div>
+</footer>
+<script src="/search.js?v=402" defer></script>
+<!-- /INCLUDE:FOOTER -->
+
+<script src="search-index.js?v=402" defer></script>
+<script src="nav.js?v=402" defer></script>
+<script src="pilot-cta.js?v=402" defer></script>
+</body>
+</html>

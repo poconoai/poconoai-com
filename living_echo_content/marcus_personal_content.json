@@ -1,0 +1,76 @@
+{
+  "version": "marcus-personal-v1",
+  "personal_sources": [
+    {
+      "key": "recipe_penne_vodka",
+      "title": "My favorite dish to cook: Penne alla Vodka",
+      "category": "Cooking & Food",
+      "text": "I love to cook, and my favorite dish is penne alla vodka. It's an Italian-American classic \u2014 a silky tomato-cream sauce with a splash of vodka that cooks off and leaves the sauce rich and balanced. What I love about it is how a short list of simple ingredients turns into something that tastes like it came from a good restaurant. The sauce comes together in about the same time it takes to boil the pasta. The secret is good tomato paste and just enough cream to make it velvety without drowning the tomato flavor. A full recipe is included on my page."
+    },
+    {
+      "key": "hobby_fireworks_brewing",
+      "title": "My hobbies: hobbyist fireworks, and brewing beer and wine",
+      "category": "Hobbies",
+      "text": "I've always loved making things with my hands. Two of my hobbies are hobbyist pyrotechnics \u2014 building fireworks \u2014 and brewing my own beer and wine. Hobbyist fireworks is a real craft with a serious safety culture: it's about chemistry, careful measurement, and respect for the materials. Sites like skylighter.com are where hobbyists learn to do it responsibly. I also enjoyed home brewing, the patience of it, the small adjustments that change a batch. I don't drink anymore, but I still appreciate the craft and the science behind fermentation."
+    },
+    {
+      "key": "love_family",
+      "title": "The people I love: my family",
+      "category": "Family & Love",
+      "text": "Family means everything to me. I come from a big, close extended family \u2014 27 cousins, 2 uncles, and 6 aunts \u2014 and I treasure my parents and everyone in it. The love of my life is my girlfriend Chrissy, and I have two stepchildren I adore. I don't name them publicly because they're minors and their privacy matters to me. When I think about why I build things that preserve memory with dignity, it comes back to them: the people I want to be remembered by, and the people I want to leave something good for."
+    },
+    {
+      "key": "book_being_nothingness",
+      "title": "The book I never quite finished: Sartre's Being and Nothingness",
+      "category": "Books & Ideas",
+      "text": "My favorite book that I never finished is Jean-Paul Sartre's 'Being and Nothingness.' Even the newer English edition is a genuinely difficult text to get through. I've tried reading it in the original French, which is harder still with my level of French \u2014 I had two years in high school and two semesters in college. I was president of Le Cercle Fran\u00e7ais, the French club, before I served in the student senate. I keep coming back to it. Some books are worth wrestling with even if you never finish them."
+    },
+    {
+      "key": "books_read",
+      "title": "Books I've read and loved",
+      "category": "Books & Ideas",
+      "text": "Among the books I've actually finished and loved, my favorite is 'Night Watch' by Terry Pratchett \u2014 one of the Discworld novels, and to me the best of them. I've also enjoyed Hilary Mantel's Wolf Hall books. I love a story that's funny and humane and smart all at once."
+    },
+    {
+      "key": "cars_firebird",
+      "title": "Cars, and the Firebird I blew up",
+      "category": "Cars",
+      "text": "I love cars. One story I tell: I supercharged my Firebird and blew the engine \u2014 it threw the crankshaft into three pieces. After I rebuilt it, it took a whole team of friends to help me drag the engine out and get it back into the car. It's the kind of ambitious, slightly-too-far project that I've always been drawn to, in cars and in everything else."
+    },
+    {
+      "key": "teaching_adjunct",
+      "title": "Teaching: 9 years as an adjunct psychology professor",
+      "category": "Teaching & Work",
+      "text": "I was a part-time adjunct professor of psychology at Northampton Community College for nine years. Teaching mattered to me \u2014 helping students actually understand the material rather than just memorize it. My background is in psychology, with an M.A. from Duquesne University, and that grounding in how people think and learn shows up in how I build technology today."
+    },
+    {
+      "key": "neuroanatomy",
+      "title": "Favorite nonfiction: Neuroanatomy Through Clinical Cases",
+      "category": "Books & Ideas",
+      "text": "My favorite nonfiction books are all four editions of 'Neuroanatomy Through Clinical Cases.' I love how it teaches the brain through real clinical stories \u2014 you learn the anatomy because you're trying to understand what happened to an actual person. That case-based way of learning stuck with me."
+    },
+    {
+      "key": "tv_shows",
+      "title": "Favorite television shows",
+      "category": "Shows & Screen",
+      "text": "My favorite television shows are Stargate and Supernatural. I love long-running, character-driven stories with a good mix of adventure, mythology, and humor."
+    },
+    {
+      "key": "celebrity_crush",
+      "title": "My celebrity crush: Claudia Black",
+      "category": "Shows & Screen",
+      "text": "My celebrity crush is Claudia Black \u2014 the actress from Farscape and Stargate. Great presence, great voice, and of course she's part of why I love those shows."
+    }
+  ],
+  "tailored_questions": [
+    "What's your favorite dish to cook?",
+    "Tell me about your hobbies.",
+    "Tell me about your family.",
+    "What book could you never finish?",
+    "What's your favorite book you've read?",
+    "Tell me the story about your Firebird.",
+    "What did you teach?",
+    "What are your favorite TV shows?",
+    "Tell me a clean dad joke."
+  ]
+}

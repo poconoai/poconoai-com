@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="description" content="Model your return on a 60-day Sentinel Node pilot using EHR burden, prior auth overhead, and legal admin time data. Practice-specific ROI calculator.">
+<title>ROI Calculator | Pocono AI</title>
+<meta property="og:title" content="Sentinel Node ROI &amp; TCO Calculator | Pocono AI">
+<meta property="og:description" content="Calculate your 3-year return on the Sentinel Node. Compare HaaS cost against scribe spend, prior-auth overhead, and EHR documentation loss. Runs locally — no data sent.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Pocono AI">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://poconoai.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Pocono AI — Sovereign on-premises AI">
+<meta property="og:url" content="https://poconoai.com/roi.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ROI Calculator | Pocono AI">
+<meta name="twitter:description" content="Compare 3-year HaaS cost against scribe and prior-auth overhead. Runs in your browser — zero data transmitted.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="favicon.ico">
+<link rel="stylesheet" href="styles.css?v=402">
+<link rel="stylesheet" href="nav-v2026.css?v=402">
+<link rel="stylesheet" href="brand-v292.css?v=402">
+<link rel="canonical" href="https://poconoai.com/roi.html">
+
+<style>
+/* roi.html — page-level only, zero external assets */
+.roi-wrap {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 48px 24px 96px;
+}
+.roi-wrap h1 { margin: 0 0 6px; }
+.roi-intro   { color: var(--light-text, #D0DDE6); margin: 0 0 32px; line-height: 1.65; }
+
+/* Tier toggle */
+.tier-toggle {
+  display: flex;
+  gap: 0;
+  margin: 0 0 32px;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 6px;
+  overflow: hidden;
+  max-width: 440px;
+}
+.tier-btn {
+  flex: 1;
+  padding: 12px 16px;
+  background: transparent;
+  border: none;
+  color: var(--light-text, #D0DDE6);
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: 0.92em;
+  font-weight: 600;
+  text-align: center;
+  transition: background 0.2s, color 0.2s;
+  line-height: 1.3;
+}
+.tier-btn.active-I  { background: var(--teal,   #00c2a8); color: #051622; }
+.tier-btn.active-II { background: var(--ai-blue, #00a3ff); color: #051622; }
+.tier-btn:not(.active-I):not(.active-II):hover { background: rgba(255,255,255,0.06); }
+
+/* Sliders */
+.slider-group { margin: 0 0 22px; }
+.slider-group label {
+  display: block;
+  font-size: 0.92em;
+  color: var(--light-text, #D0DDE6);
+  margin: 0 0 6px;
+  font-weight: 600;
+}
+.slider-group label span { color: var(--white, #fff); }
+input[type="range"] {
+  width: 100%;
+  accent-color: var(--teal, #00c2a8);
+  cursor: pointer;
+}
+
+/* Results */
+.result-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+  margin: 28px 0;
+}
+.result-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 16px 18px;
+}
+.result-card.highlight {
+  border-color: var(--teal, #00c2a8);
+  background: rgba(0,194,168,0.07);
+}
+.result-label {
+  font-size: 0.75em;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--light-text, #D0DDE6);
+  margin: 0 0 4px;
+  display: block;
+}
+.result-value {
+  font-size: 1.5em;
+  font-weight: 700;
+  color: var(--white, #fff);
+  margin: 0;
+  line-height: 1.15;
+}
+.result-sub {
+  font-size: 0.8em;
+  color: var(--light-text, #D0DDE6);
+  margin: 4px 0 0;
+}
+
+/* Warning strips */
+.calc-warning {
+  border-radius: 6px;
+  padding: 10px 14px;
+  margin: 4px 0;
+  font-size: 0.88em;
+  display: none;
+}
+.calc-warning.show { display: block; }
+.calc-warning.orange { background: rgba(255,160,0,0.12); border-left: 3px solid #ffa000; color: #ffd54f; }
+.calc-warning.red    { background: rgba(220, 50, 50, 0.12); border-left: 3px solid #e53935; color: #ef9a9a; }
+
+/* Assumptions */
+.assumptions {
+  margin: 28px 0;
+  padding: 18px 22px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 8px;
+  font-size: 0.88em;
+  color: var(--light-text, #D0DDE6);
+  line-height: 1.6;
+}
+.assumptions h3 { margin: 0 0 10px; font-size: 1em; color: var(--white, #fff); }
+.assumptions ul { padding-left: 18px; margin: 0; }
+.assumptions li { margin-bottom: 5px; }
+
+/* Disclaimer */
+.disclaimer {
+  margin: 32px 0 0;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  font-size: 0.82em;
+  color: var(--light-text, #D0DDE6);
+  line-height: 1.65;
+}
+.disclaimer p { margin: 0 0 10px; }
+.disclaimer strong { color: var(--white, #fff); }
+</style>
+<script>
+// Pocono AI v169 — Zero-flash banner dismissal.
+// Strategy: inject <style> tag synchronously BEFORE banner HTML parses,
+// so dismissed banners never render at all (no flash). DOM removal still
+// happens for safety. ?showbanners=1 URL param re-shows everything.
+(function(){
+  var ids=[];
+
+  // Escape hatch: ?showbanners=1 clears all dismiss flags for testing
+  try {
+    if (location.search.indexOf('showbanners=1') !== -1) {
+      ids.forEach(function(id){ localStorage.removeItem('pai_dismissed_'+id); });
+      localStorage.removeItem('poconoPilot');
+      localStorage.removeItem('advisoryBarDismissed');
+    }
+  } catch(e) {}
+
+  // v246 Stage 1 — Legacy migration block removed.
+  // Was dead code containing a JS syntax error (adjacent string literals)
+  // that broke the entire banner-dismiss IIFE on ~46 pages.
+
+  // Build CSS rule list for dismissed banners and inject synchronously.
+  // This runs in <head> BEFORE banner HTML is parsed, so dismissed bars
+  // never paint — eliminating the flash entirely.
+  var hideRules = [];
+  ids.forEach(function(id){
+    try {
+      if (localStorage.getItem('pai_dismissed_'+id) === '1') {
+        hideRules.push('#'+id+'{display:none !important;}');
+      }
+    } catch(e) {}
+  });
+  if (hideRules.length) {
+    var style = document.createElement('style');
+    style.id = 'pai-banner-hide';
+    style.textContent = hideRules.join('');
+    (document.head || document.documentElement).appendChild(style);
+  }
+
+  function dismiss(id){
+    try { localStorage.setItem('pai_dismissed_'+id,'1'); } catch(e) {}
+    var el = document.getElementById(id);
+    if (el) {
+      el.style.setProperty('display','none','important');
+      el.setAttribute('aria-hidden','true');
+      if (el.parentNode) {
+        el.parentNode.removeChild(el);
+      }
+    }
+  }
+
+  // Cleanup pass — remove dismissed banners from DOM after parse,
+  // belt-and-suspenders alongside the CSS hide.
+  function cleanup(){
+    ids.forEach(function(id){
+      try {
+        if (localStorage.getItem('pai_dismissed_'+id) === '1') {
+          var el = document.getElementById(id);
+          if (el && el.parentNode) {
+            el.parentNode.removeChild(el);
+          }
+        }
+      } catch(e) {}
+    });
+  }
+
+  function bind(){
+    ids.forEach(function(id){
+      var btn = document.getElementById(id+'-close');
+      if (btn && !btn.dataset.boundDismiss) {
+        btn.dataset.boundDismiss = '1';
+        btn.addEventListener('click', function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          dismiss(id);
+        });
+        btn.addEventListener('touchend', function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          dismiss(id);
+        }, {passive:false});
+      }
+    });
+    cleanup();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bind);
+  } else {
+    bind();
+  }
+})();
+</script>
+
+<!-- JSON-LD: WebApplication — v327 structured-data pass -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://poconoai.com/roi.html",
+      "url": "https://poconoai.com/roi.html",
+      "datePublished": "2026-06-01",
+      "dateModified": "2026-06-01"
+      ,
+      "name": "Sentinel Node ROI & TCO Calculator",
+      "description": "Browser-based calculator comparing 3-year total cost of ownership for Sentinel Node HaaS deployment against current scribe costs, prior authorization overhead, and EHR documentation loss. All calculations run locally — no data transmitted.",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Any (browser-based)",
+      "isPartOf": { "@id": "https://poconoai.com/#website" },
+      "publisher": { "@id": "https://poconoai.com/#organization" },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "description": "Free to use — no registration required"
+      },
+      "featureList": [
+        "3-year TCO comparison (Phase I vs Phase II vs current spend)",
+        "Prior authorization overhead modeling (AMA 2024 / MGMA 2024 data)",
+        "EHR documentation time value calculation (Sinsky 2016 baseline)",
+        "Scribe cost offset calculation",
+        "All computation client-side — zero data transmitted"
+      ],
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://poconoai.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Pricing", "item": "https://poconoai.com/pricing.html" },
+        { "@type": "ListItem", "position": 3, "name": "ROI Calculator", "item": "https://poconoai.com/roi.html" }
+      ]
+    }
+  ]
+}
+</script>
+
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to content</a>
+<div id="reading-progress" aria-hidden="true"></div>
+
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- INCLUDE:HEADER -->
+<div id="hitl-notice" style="background:#0a1929;padding:4px 16px;text-align:center;font-size:12px;color:#4a5568;border-bottom:1px solid rgba(255,255,255,0.06);letter-spacing:0.01em;">Human-in-the-Loop required: licensed professionals verify all outputs before clinical or legal action</div>
+<header role="banner">
+  <div class="header-inner">
+    <a href="/index.html" class="logo" aria-label="Pocono AI Home">
+      <img src="/logo.svg?v=402" alt="" width="36" height="36" decoding="async" loading="eager" aria-hidden="true" style="display:inline-block;">
+      Pocono <span>AI</span>
+    </a>
+    <nav id="desktop-nav" aria-label="Main navigation">
+      <div class="nav-item"><a href="/index.html" class="nav-direct">Home</a></div>
+      <div class="nav-item"><a href="/for-physicians.html" class="nav-direct">Physicians</a></div>
+      <div class="nav-item"><a href="/for-attorneys.html" class="nav-direct">Attorneys</a></div>
+      <div class="nav-item"><a href="/sentinel-node.html" class="nav-direct nav-hub" style="color:#d5a94f;border:1px solid rgba(213,169,79,0.45);border-radius:999px;padding:6px 13px;">Sentinel Node</a></div>
+      <div class="nav-item"><a href="/living-memorials/" class="nav-direct">Living Echo</a></div>
+      <div class="nav-item"><a href="/contact.html" class="nav-direct">Contact</a></div>
+      <div class="nav-item" data-dropdown="menu-more">
+        <button type="button" class="nav-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="menu-more">More <span class="nav-chevron" aria-hidden="true">&#9662;</span></button>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <a href="/contact.html#pilot" class="nav-cta nav-cta-primary">Request a Pilot</a>
+      <button type="button" class="pa-search-trigger" data-search-open aria-label="Search (press / or Ctrl-K)" aria-haspopup="dialog" aria-expanded="false">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span class="pa-st-label">Search</span><kbd data-pa-keyhint>Ctrl K</kbd>
+      </button>
+      <button type="button" class="header-icon-btn" id="mobile-menu" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav-panel">
+        <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- "More" overflow dropdown — sibling of <header> so position:fixed escapes header's stacking context. Wired by nav.js via data-dropdown="menu-more". -->
+<div class="nav-dropdown" id="menu-more" aria-label="More navigation">
+  <p class="nav-dd-section">Products</p>
+  <a href="/engineering-drafting/">Drafting &amp; Engineering Edition</a>
+  <a href="/sentinel-home/">Sentinel Home Edition</a>
+  <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability — Assistive Tools &#x2605;</a>
+  <a href="/living-memorials/enterprise-estate-continuity.html">Enterprise Estate Continuity</a>
+  <p class="nav-dd-section">Capabilities</p>
+  <a href="/evidence-room.html">Evidence Room</a>
+  <a href="/push-button-deliverables.html">Push-Button Deliverables</a>
+  <a href="/pilot-readiness-kit.html">Pilot Kit</a>
+  <a href="/pilot-program.html">Pilot Program</a>
+  <a href="/how-it-works.html">How It Works</a>
+  <p class="nav-dd-section">Hubs &amp; Company</p>
+  <a href="/training.html">Training Hub</a>
+  <a href="/documentation-hub/">Document Hub</a>
+  <a href="/global/">Global Hub</a>
+  <a href="/investors-hub.html">Investor Hub</a>
+  <a href="/valuation-dashboard.html">Valuation Dashboard</a>
+  <a href="/about.html">About</a>
+  <p class="nav-dd-section">Trust &amp; Legal</p>
+  <a href="/transparency.html">Transparency</a>
+  <a href="/audit.html">Audit Log</a>
+  <a href="/privacy.html">Privacy</a>
+  <a href="/sitemap.html">Sitemap</a>
+</div>
+<!-- Site search is provided by the self-contained search.js asset (command palette: / or Ctrl/Cmd-K). -->
+
+<!-- Mobile panel: full-screen slide-in. v396 nav — hub tiles + grouped links + Sentinel Node + Engineering. -->
+<nav id="mobile-nav-panel" aria-label="Mobile navigation" aria-hidden="true" role="dialog" aria-modal="true">
+
+  <!-- Hub tiles: Sentinel Node, Documentation Hub, Training Hub, Global Hub -->
+  <div style="padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,0.07);">
+    <p style="font-size:0.65em;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.28);margin:0 0 10px;padding:0 2px;">Hubs</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <a href="/sentinel-node.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(213,169,79,0.1);border:1px solid rgba(213,169,79,0.35);border-radius:10px;color:#d5a94f;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Sentinel Node</a>
+      <a href="/documentation-hub/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(0,194,168,0.1);border:1px solid rgba(0,194,168,0.35);border-radius:10px;color:#00c2a8;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Docs Hub</a>
+      <a href="/training.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.35);border-radius:10px;color:#a78bfa;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Training Hub</a>
+      <a href="/global/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(122,240,220,0.07);border:1px solid rgba(122,240,220,0.3);border-radius:10px;color:#7af0dc;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Global Hub</a>
+    </div>
+  </div>
+
+  <!-- Core paths -->
+  <div class="mob-static-links">
+    <a href="/index.html">Home</a>
+    <a href="/for-physicians.html">Physicians</a>
+    <a href="/for-attorneys.html">Attorneys</a>
+    <a href="/engineering-drafting/">Engineering &amp; Drafting</a>
+    <a href="/pilot-program.html">Pilot Program</a>
+    <a href="/how-it-works.html">How It Works</a>
+    <a href="/trust.html">Trust &amp; Audit</a>
+    <a href="/pricing.html">Pricing</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/living-memorials/">Living Echo</a>
+    <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability</a>
+    <a href="/about.html">About</a>
+    <a href="/team.html" style="color:rgba(255,255,255,0.6);">Team &amp; Leadership</a>
+    <a href="/valuation-dashboard.html" style="color:rgba(255,255,255,0.6);">Valuation Dashboard</a>
+    <a href="/careers.html" style="color:rgba(255,255,255,0.6);">Careers</a>
+    <a href="/sentinel-demo.html" style="color:rgba(255,255,255,0.6);">Demo</a>
+    <a href="/sitemap.html" style="color:rgba(255,255,255,0.45);">Sitemap</a>
+    <a href="/transparency.html" style="color:rgba(255,255,255,0.45);">Transparency</a>
+    <a href="/privacy.html" style="color:rgba(255,255,255,0.45);">Privacy</a>
+  </div>
+
+  <a href="/contact.html#pilot" class="mob-cta">Request a Pilot</a>
+</nav>
+<!-- /INCLUDE:HEADER -->
+
+
+<main id="main-content" tabindex="-1">
+<span id="main" aria-hidden="true"></span>
+<div class="roi-wrap">
+
+  <div class="sentinel-lockup" aria-label="Sentinel Node — ROI Calculator" style="margin-bottom:18px;">
+  <svg class="sentinel-lockup-mark" viewBox="0 0 64 64" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
+          <!-- v311b: rotated diamond + C-curve loop + summit dot. Inherits currentColor from CSS context. -->
+          <g transform="rotate(45 32 32)">
+            <rect x="12" y="12" width="40" height="40" rx="8" ry="8"/>
+            <path d="M43 22 L26 22 A6 6 0 0 0 20 28 L20 36 A6 6 0 0 0 26 42 L41 42"/>
+          </g>
+          <circle cx="32" cy="9" r="3" fill="currentColor" stroke="none"/>
+        </svg>
+  <div class="sentinel-lockup-rule"></div>
+  <div class="sentinel-lockup-text">
+    <span class="sentinel-lockup-name">Sentinel Node</span>
+    <span class="sentinel-lockup-tag">ROI Calculator</span>
+  </div>
+</div>
+<h1>Sentinel Node ROI Calculator</h1>
+  <p class="roi-intro">Compare your 3-year total cost against cloud AI and scribe spend. All calculations run locally in your browser &mdash; no data leaves your device.</p>
+
+  <!-- ROI Delta Infographic — v199 -->
+  <div style="max-width:540px;margin:0 auto 32px;" aria-label="Fixed Sovereignty vs Variable Cloud ROI comparison infographic">
+      <p style="text-align:center;margin:0 0 4px;font-size:0.68em;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--teal,#00c2a8);font-family:'DM Mono',monospace;">The ROI Delta: Fixed Sovereignty vs. Variable Cloud</p>
+      <div style="border:1px solid rgba(0,194,168,0.2);border-radius:10px;overflow:hidden;background:#040f1a;">
+          <a href="infographic-roi-ingest-v199.png" target="_blank" rel="noopener"
+             style="display:block;cursor:zoom-in;" aria-label="Click to view full-size ROI comparison infographic">
+              <img src="infographic-roi-ingest-v199.png"
+                   alt="Universal Sovereign Ingest ROI comparison: Cloud AI has variable token costs, unauthorized AI use, data leaks, hidden liability insurance, perpetual cost escalation, malpractice and HIPAA breach penalties. Pocono AI Sentinel Node offers predictable fixed subscription, sovereignty filter, sentinel node with physical reader and NVIDIA eGPU, zero-trust tunnels, human-in-the-loop, fixed hardware lease, proprietary data equity and private knowledge base. Long-term costs: cloud escalates; Pocono AI stays flat."
+                   width="768" height="1376"
+                   loading="lazy" decoding="async"
+                   style="width:100%;height:auto;display:block;">
+          </a>
+          <div style="padding:8px 14px;border-top:1px solid rgba(0,194,168,0.1);display:flex;justify-content:space-between;align-items:center;background:rgba(4,15,26,0.9);">
+              <span style="font-size:0.7em;color:#8899aa;font-style:italic;">Predictable Fixed Cost vs. Cloud Token Inflation</span>
+              <a href="infographic-roi-ingest-v199.png" target="_blank" rel="noopener" style="font-size:0.72em;color:var(--teal,#00c2a8);font-weight:700;text-decoration:none;">&#128269; Full size</a>
+          </div>
+      </div>
+  </div>
+
+  <!-- Tier selector -->
+  <div class="tier-toggle" role="group" aria-label="Select HaaS tier">
+    <button class="tier-btn active-I" id="btnI" onclick="setTier('I')">
+      Phase I Phase I Phase I &mdash; Intromdash; Founding Ratemdash; Founding Rate<br>
+      <span style="font-size:0.85em;font-weight:400;">$5,000 impl + $950/mo</span>
+    </button>
+    <button class="tier-btn" id="btnII" onclick="setTier('II')">
+      Phase II &mdash; Mid-Tier &#11088;<br>
+      <span style="font-size:0.85em;font-weight:400;">$5,000 impl + $1,495/mo</span>
+    </button>
+  </div>
+
+  <!-- Sliders -->
+  <div class="slider-group">
+    <label>Monthly cloud AI / scribe spend: $<span id="cloudVal">1200</span></label>
+    <input type="range" id="cloud" min="0" max="5000" value="1200" step="100">
+  </div>
+
+  <div class="slider-group">
+    <label>Physicians in practice: <span id="physVal">4</span></label>
+    <input type="range" id="phys" min="1" max="10" value="4" step="1">
+  </div>
+
+  <div class="slider-group">
+    <label>Hours per physician per day on EHR and admin: <span id="ehrVal">5.9</span></label>
+    <input type="range" id="ehr" min="1" max="8" value="5.9" step="0.1">
+  </div>
+
+  <div class="slider-group">
+    <label>Nurse hours per week on prior auth: <span id="nurseVal">13</span></label>
+    <input type="range" id="nurse" min="0" max="40" value="13" step="1">
+  </div>
+
+  <div class="slider-group">
+    <label>Physician fully-loaded hourly cost: $<span id="physCostVal">150</span></label>
+    <input type="range" id="physCost" min="75" max="300" value="150" step="5">
+  </div>
+
+  <div class="slider-group">
+    <label>Nurse hourly cost: $<span id="nurseCostVal">45</span></label>
+    <input type="range" id="nurseCost" min="30" max="80" value="45" step="1">
+  </div>
+
+  <!-- Results -->
+  <div class="result-grid">
+    <div class="result-card">
+      <span class="result-label">3-yr Sentinel Node TCO</span>
+      <p class="result-value" id="sentinelTCO">--</p>
+      <p class="result-sub" id="sentinelBreakdown">--</p>
+    </div>
+    <div class="result-card">
+      <span class="result-label">3-yr Status Quo Cost</span>
+      <p class="result-value" id="statusQuoTCO">--</p>
+      <p class="result-sub">Cloud / scribe + admin burden</p>
+    </div>
+    <div class="result-card highlight">
+      <span class="result-label">3-yr Estimated Savings</span>
+      <p class="result-value" id="savings">--</p>
+      <p class="result-sub">vs. continuing current spend</p>
+    </div>
+    <div class="result-card">
+      <span class="result-label">Break-even</span>
+      <p class="result-value" id="breakeven">--</p>
+      <p class="result-sub">months to recover investment</p>
+    </div>
+    <div class="result-card">
+      <span class="result-label">Hours back per week</span>
+      <p class="result-value" id="hoursBack">--</p>
+      <p class="result-sub">across physician + nursing team</p>
+    </div>
+    <div class="result-card">
+      <span class="result-label">Monthly value recovered</span>
+      <p class="result-value" id="monthlyValue">--</p>
+      <p class="result-sub">labor + cloud savings</p>
+    </div>
+  </div>
+
+  <div class="calc-warning orange" id="warnPayback">Payback over 24 months at current inputs. May not fit your budget cycle. Adjust spend or provider count.</div>
+  <div class="calc-warning red"    id="warnScale">Sentinel Node is built for 2 to 10 providers. Contact us for larger practice options.</div>
+
+  <!-- Assumptions -->
+  <div class="assumptions">
+    <h3>What the calculator assumes</h3>
+    <ul>
+      <li><strong>30% physician time reduction</strong> on EHR and admin tasks (conservative; pilot modeling basis)</li>
+      <li><strong>50% nurse time reduction</strong> on prior auth processing (conservative; pilot modeling basis)</li>
+      <li><strong>260 working days/year</strong> for physician cost basis</li>
+      <li><strong>52 weeks/year</strong> for nurse prior auth basis</li>
+      <li>Status quo cost includes your current cloud/scribe spend plus the dollar value of physician and nurse time currently lost to admin burden</li>
+      <li>Sentinel Node TCO is implementation fee + (monthly rate x 36 months). No hidden fees.</li>
+    </ul>
+  </div>
+
+  <!-- Disclaimer -->
+  <div class="disclaimer">
+    <p><strong>Estimate, not guarantee.</strong> Based on published research: 5.9 hrs/day EHR work [Sinsky et al., <em>Annals of Family Medicine</em>, 2016 (PMC5593724)]; 13+ nurse-hours/week on prior auth [AMA Prior Authorization Survey, 2024]; $82,975/yr physician admin cost [Casalino et al., <em>Health Affairs</em>, 2009]. Time-reduction assumptions (30% physician, 50% nurse) are conservative estimates from workflow modeling. Actual results vary by EHR system, specialty, and practice size.</p>
+    <p>Pilot data will be published with partner permission once our first deployment is active. Until then, all figures are research-backed estimates, not measured pilot results.</p>
+    <p><strong>Human-in-the-loop required:</strong> Licensed professionals verify all outputs before clinical or legal action. The Sentinel Node is a research assistant, not a decision-maker.</p>
+    <p>Questions? <a href="mailto:marcus@poconoai.com?subject=ROI Calculator Question" style="color:var(--teal,#00c2a8);">Email Marcus directly.</a></p>
+  </div>
+
+</div>
+</main>
+
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 root-relative nav fix, Living Echo rebrand, Engineering & Drafting + Enterprise Estate Continuity links added (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- INCLUDE:FOOTER -->
+<footer role="contentinfo" style="background:#051622;border-top:1px solid rgba(255,255,255,0.08);padding:40px 24px 28px;font-size:0.85em;color:#8899aa;">
+  <div style="max-width:1180px;margin:0 auto;">
+
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:0 0 28px;margin-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.07);">
+      <div style="max-width:560px;">
+        <p style="margin:0 0 6px;font-size:1.05em;font-weight:700;color:#fff;">Local AI infrastructure for regulated practices.</p>
+        <p style="margin:0;font-size:0.95em;line-height:1.5;">Drafts with citations. Human review required. Sensitive documents stay under practice control. Simple path, deep proof.</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="/contact.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;background:#00c2a8;color:#04111a;font-weight:700;text-decoration:none;font-size:0.95em;">Request Pilot</a>
+        <a href="/sentinel-demo.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;border:1px solid rgba(0,194,168,0.55);color:#00c2a8;font-weight:700;text-decoration:none;font-size:0.95em;">Watch Demo</a>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px 32px;margin-bottom:32px;text-align:left;">
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">For You</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/start-here.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Start Here (3 min)</a>
+          <a href="/for-physicians.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Physicians</a>
+          <a href="/for-attorneys.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Attorneys</a>
+          <a href="/engineering-drafting/" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Engineering &amp; Drafting Teams</a>
+          <a href="/pilot-program.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Pilot Program</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Installer Training</a>
+          <a href="/how-it-works.html" style="color:#8899aa;text-decoration:none;">How It Works</a>
+          <a href="/trust.html" style="color:#8899aa;text-decoration:none;">Trust &amp; Audit</a>
+          <a href="/pricing.html" style="color:#8899aa;text-decoration:none;">Pricing</a>
+          <a href="/sentinel-demo.html" style="color:#8899aa;text-decoration:none;">See the Demo</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Documentation Hub</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/documentation-hub/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Hub Home &mdash; Deep Proof</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">Installer Training</a>
+          <a href="/sentinel-node/installation-simulator.html" style="color:#8899aa;text-decoration:none;">&#8627; Installation Simulator</a>
+          <a href="/documentation-hub/clinical/" style="color:#8899aa;text-decoration:none;">Clinical Documentation</a>
+          <a href="/documentation-hub/legal/" style="color:#8899aa;text-decoration:none;">Legal Documentation</a>
+          <a href="/documentation-hub/technical/" style="color:#8899aa;text-decoration:none;">Technical Documentation</a>
+          <a href="/documentation-hub/governance/" style="color:#8899aa;text-decoration:none;">Governance &amp; Audit</a>
+          <a href="/documentation-hub/tools/" style="color:#8899aa;text-decoration:none;">Tools &amp; Simulators</a>
+          <a href="/documentation-hub/research/" style="color:#8899aa;text-decoration:none;">Research &amp; Essays</a>
+          <a href="/documentation-hub/transparency/" style="color:#8899aa;text-decoration:none;">Transparency</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Global Federated AI</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/global/" style="color:#7af0dc;text-decoration:none;font-weight:600;">Global Federated Hub</a>
+          <a href="/global/australia/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Australia</a>
+          <a href="/global/singapore/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Singapore</a>
+          <a href="/global/taiwan/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Taiwan</a>
+          <a href="/global/europe/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Europe</a>
+          <a href="/contact.html" style="color:#8899aa;text-decoration:none;">Partner Inquiry</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Company</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/about.html" style="color:#8899aa;text-decoration:none;">About Pocono AI</a>
+          <a href="/team.html" style="color:#8899aa;text-decoration:none;">Team &amp; Leadership</a>
+          <a href="/why-pocono-ai.html" style="color:#8899aa;text-decoration:none;">Why Pocono AI</a>
+          <a href="/founding-commercial-leadership.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Join Us</a>
+          <a href="/careers.html" style="color:#8899aa;text-decoration:none;">Careers</a>
+          <a href="/how-we-hire.html" style="color:#8899aa;text-decoration:none;">How We Hire</a>
+          <a href="/channel-partners.html" style="color:#8899aa;text-decoration:none;">Technical Partners (MSPs)</a>
+          <a href="/partners.html" style="color:#8899aa;text-decoration:none;">Academic Partnerships</a>
+          <a href="/contact.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Contact</a>
+          <a href="https://forms.gle/VQahnkjMfY6QNEMy8" target="_blank" rel="noopener noreferrer" style="color:#d5a94f;text-decoration:none;font-weight:600;">Interest List &#8599;</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Founder Projects</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/rehability/" style="color:#a78bfa;text-decoration:none;font-weight:700;">Rehability &#x2605;</a>
+          <a href="/rehability/marcus-memory-helper/" style="color:#a78bfa;text-decoration:none;font-weight:600;">&#8627; Marcus's Memory Helper</a>
+          <a href="/sentinel-home/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Sentinel Home Edition</a>
+          <a href="/living-memorials/" style="color:#8899aa;text-decoration:none;">Living Echo</a>
+          <a href="/living-memorials/marcus-odell/" style="color:#8899aa;text-decoration:none;">Marcus&rsquo;s Living Echo</a>
+          <a href="/living-memorials/enterprise-estate-continuity.html" style="color:#8899aa;text-decoration:none;">Enterprise Estate Continuity</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Resources &amp; Legal</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/sitemap.html" style="color:#8899aa;text-decoration:none;">All Pages (Sitemap)</a>
+          <a href="/audit.html" style="color:#8899aa;text-decoration:none;">Transparency &amp; Audit Log</a>
+          <a href="/maturity-disclosure.html" style="color:#8899aa;text-decoration:none;">What We Have / Don&rsquo;t Claim</a>
+          <a href="/plain.html" style="color:#8899aa;text-decoration:none;">Plain Language Guide</a>
+          <a href="/privacy.html" style="color:#8899aa;text-decoration:none;">Privacy</a>
+          <a href="/terms.html" style="color:#8899aa;text-decoration:none;">Terms</a>
+          <a href="/sla.html" style="color:#8899aa;text-decoration:none;">SLA</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:18px;margin-bottom:14px;">
+      <p style="margin:0;font-size:0.82em;line-height:1.6;color:#6f8295;max-width:1000px;">Pocono AI does not provide medical, legal, or engineering advice, does not practice medicine, law, or licensed engineering, and does not make clinical, legal, or engineering decisions. Outputs are drafts or support materials that require review by a qualified professional; final professional judgment remains with the licensed physician, attorney, or engineer. Tools and simulations on this site are educational and use synthetic data.</p>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:20px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+      <p style="margin:0;font-size:0.9em;">&copy; 2026 Pocono AI, LLC &nbsp;&#183;&nbsp; East Stroudsburg, PA &nbsp;&#183;&nbsp; <a href="mailto:marcus@poconoai.com" style="color:#8899aa;">marcus@poconoai.com</a> &nbsp;&#183;&nbsp; <a href="tel:+15705340602" style="color:#8899aa;">(570) 534-0602</a></p>
+      <p style="margin:0;font-size:0.88em;"><a href="/audit.html" style="color:#5dade2;text-decoration:none;">Transparency v402</a></p>
+    </div>
+  </div>
+</footer>
+<script src="/search.js?v=402" defer></script>
+<!-- /INCLUDE:FOOTER -->
+
+<script>
+// All math runs client-side. No network calls. No data collection.
+(function() {
+  'use strict';
+
+  var tier = 'I';
+  var IMPL_FEE   = 5000;
+  var MONTHLY_I  = 950;
+  var MONTHLY_II = 1495;
+  var MONTHS     = 36;
+
+  // Phase I: $5,000 + $950 * 36 = $39,200
+  // Phase II: $5,000 + $1,495 * 36 = $58,820
+  function sentinelCost(t) {
+    return IMPL_FEE + ((t === 'I' ? MONTHLY_I : MONTHLY_II) * MONTHS);
+  }
+
+  function fmt(n) {
+    return '$' + Math.round(n).toLocaleString();
+  }
+
+  function calc() {
+    var cloud     = parseInt(document.getElementById('cloud').value,    10) || 0;
+    var phys      = parseInt(document.getElementById('phys').value,     10) || 1;
+    var ehr       = parseFloat(document.getElementById('ehr').value)        || 0;
+    var nurse     = parseInt(document.getElementById('nurse').value,    10) || 0;
+    var physCost  = parseInt(document.getElementById('physCost').value, 10) || 150;
+    var nurseCost = parseInt(document.getElementById('nurseCost').value,10) || 45;
+
+    // Update display values
+    document.getElementById('cloudVal').textContent    = cloud;
+    document.getElementById('physVal').textContent     = phys;
+    document.getElementById('ehrVal').textContent      = ehr.toFixed(1);
+    document.getElementById('nurseVal').textContent    = nurse;
+    document.getElementById('physCostVal').textContent = physCost;
+    document.getElementById('nurseCostVal').textContent= nurseCost;
+
+    // Labour value currently lost per year
+    var physBurdenYr  = phys  * ehr   * 260  * physCost  * 0.30; // 30% reduction target
+    var nurseBurdenYr = nurse * 52    * nurseCost         * 0.50; // 50% reduction target
+    var laborSavingsYr = physBurdenYr + nurseBurdenYr;
+
+    // 3-year totals
+    var cloud3yr     = cloud * MONTHS;
+    var laborValue3yr= laborSavingsYr * 3;
+    var statusQuoCost= cloud3yr + laborValue3yr; // what you keep spending + value of lost time
+
+    var snCost       = sentinelCost(tier);
+    var savings      = Math.round(statusQuoCost - snCost);
+
+    // Monthly value recovered (cloud savings + monthly labour value recovered)
+    var monthlyValue = cloud + (laborSavingsYr / 12);
+    var breakeven    = monthlyValue > 0 ? Math.ceil((snCost / monthlyValue) * 10) / 10 : 999;
+
+    // Hours back per week (physician + nurse)
+    var physHrsWk  = phys  * ehr   * 5   * 0.30;  // 5-day week
+    var nurseHrsWk = nurse * 0.50;
+    var hoursBack  = Math.round((physHrsWk + nurseHrsWk) * 10) / 10;
+
+    // Monthly rate for selected tier
+    var monthlyRate = tier === 'I' ? MONTHLY_I : MONTHLY_II;
+    var tierLabel   = tier === 'I' ? 'Phase I'  : 'Phase II';
+
+    document.getElementById('sentinelTCO').textContent     = fmt(snCost);
+    document.getElementById('sentinelBreakdown').textContent =
+      '$5,000 impl + $' + monthlyRate + '/mo \u00d7 36 (' + tierLabel + ')';
+    document.getElementById('statusQuoTCO').textContent    = fmt(statusQuoCost);
+    document.getElementById('savings').textContent         = (savings >= 0 ? '' : '-') + fmt(Math.abs(savings));
+    document.getElementById('breakeven').textContent       = breakeven < 999 ? breakeven + ' mo' : '>5 yrs';
+    document.getElementById('hoursBack').textContent       = hoursBack + ' hrs';
+    document.getElementById('monthlyValue').textContent    = fmt(monthlyValue);
+
+    // Warnings
+    var warnP = document.getElementById('warnPayback');
+    var warnS = document.getElementById('warnScale');
+    warnP.classList.toggle('show', breakeven > 24 && breakeven < 999);
+    warnS.classList.toggle('show', phys > 10);
+  }
+
+  window.setTier = function(t) {
+    tier = t;
+    document.getElementById('btnI').className  = 'tier-btn' + (t === 'I'  ? ' active-I'  : '');
+    document.getElementById('btnII').className = 'tier-btn' + (t === 'II' ? ' active-II' : '');
+    calc();
+  };
+
+  document.querySelectorAll('input[type="range"]').forEach(function(el) {
+    el.addEventListener('input', calc);
+  });
+
+  calc();
+})();
+</script>
+
+
+<script src="search-index.js?v=402" defer></script>
+<script src="nav.js?v=402" defer></script>
+<script src="pilot-cta.js?v=402" defer></script>
+</body>
+</html>

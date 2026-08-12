@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A Pocono AI white paper showing how Sentinel Node applies local AI, evidence retrieval, audit logging, and physician review to prior authorization workflows.">
+    <meta name="keywords" content="applied AI, prior authorization, preauthorization, pre-authorization, medical necessity, denial appeal, payer policy, physician workflow, Sentinel Node, Audit Proxy, retrieval, RAG, reranking, citation verification, human review, hash chain, audit trail, local AI, on-prem AI, pilot, 60-day pilot, proof of value, workflow AI, Bret Taylor, Pocono AI, HIPAA-aware, reviewable audit">
+    <title>Applied AI for Prior Authorization | Pocono AI</title>
+    <meta property="og:title" content="Applied AI for Prior Authorization | Pocono AI">
+    <meta property="og:description" content="A Pocono AI white paper showing how Sentinel Node applies local AI, evidence retrieval, audit logging, and physician review to prior authorization workflows. One node. One workflow. Sixty days.">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Pocono AI">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:url" content="https://poconoai.com/applied-ai-prior-authorization.html">
+<meta property="og:image" content="https://poconoai.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Applied AI for Prior Authorization | Pocono AI">
+    <meta name="twitter:description" content="How Sentinel Node turns local AI, retrieval, audit logging, and physician review into a real prior authorization workflow. Pilot-stage, architecture-grounded.">
+    <meta name="theme-color" content="#0B0F13">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="alternate icon" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon-180x180.png">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="alternate icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles.css?v=402">
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+    <link rel="canonical" href="https://poconoai.com/applied-ai-prior-authorization.html">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Applied AI for Prior Authorization: One Node, One Workflow, Sixty Days",
+      "description": "A Pocono AI white paper showing how Sentinel Node applies local AI, evidence retrieval, audit logging, and physician review to prior authorization workflows.",
+      "author": {
+        "@type": "Organization",
+        "name": "Pocono AI, LLC"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Pocono AI, LLC",
+        "url": "https://poconoai.com"
+      },
+      "datePublished": "2026-06-15",
+      "url": "https://poconoai.com/applied-ai-prior-authorization.html"
+    }
+    </script>
+<link rel="stylesheet" href="nav-v2026.css?v=402">
+<link rel="stylesheet" href="brand-v292.css?v=402">
+
+<style>
+.ap-wrap { max-width: 980px; margin: 0 auto; padding: clamp(28px,4vw,56px) 24px clamp(48px,7vw,96px); }
+
+/* Hero */
+.ap-hero {
+  background: linear-gradient(165deg, #0a1622 0%, #061018 100%);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  padding: clamp(48px,7vw,88px) 24px clamp(40px,5vw,64px);
+}
+.ap-hero-inner { max-width: 980px; margin: 0 auto; }
+.ap-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em;
+  text-transform: uppercase; color: #00c2a8;
+  border: 1px solid rgba(0,194,168,0.4); border-radius: 999px;
+  padding: 6px 14px; margin-bottom: 22px;
+}
+.ap-hero h1 {
+  font-size: clamp(2rem,5vw,3.1rem); line-height: 1.08;
+  color: #fff; margin: 0 0 16px; letter-spacing: -0.02em; font-weight: 800;
+}
+.ap-hero .sub {
+  font-size: clamp(1.02rem,2.2vw,1.28rem); line-height: 1.55;
+  color: #c2ccd6; max-width: 60ch; margin: 0 0 28px;
+}
+.ap-cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 22px; }
+.ap-btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: #00c2a8; color: #04221d; font-weight: 700;
+  font-size: 0.98rem; padding: 14px 28px; border-radius: 8px;
+  text-decoration: none; border: 1px solid #00c2a8;
+  transition: background 0.2s, transform 0.2s;
+}
+.ap-btn-primary:hover { background: #00d9bb; transform: translateY(-1px); }
+.ap-btn-ghost {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent; color: #00c2a8; font-weight: 700;
+  font-size: 0.98rem; padding: 14px 28px; border-radius: 8px;
+  text-decoration: none; border: 1px solid rgba(0,194,168,0.5);
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.ap-btn-ghost:hover { background: rgba(0,194,168,0.1); border-color: rgba(0,194,168,0.85); color: #fff; }
+.ap-trustline {
+  font-size: 0.85rem; color: #7d8c9a; letter-spacing: 0.02em;
+  display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center;
+}
+.ap-trustline span { white-space: nowrap; }
+.ap-trustline span::before { content: "\2713\00a0"; color: #00c2a8; }
+
+/* Sections */
+.ap-section { margin: clamp(40px,5vw,64px) 0 0; }
+.ap-section h2 {
+  font-size: clamp(1.5rem,3vw,2.05rem); color: #fff;
+  margin: 0 0 18px; letter-spacing: -0.01em; line-height: 1.15;
+}
+.ap-section h3 {
+  font-size: clamp(1.1rem,2vw,1.32rem); color: #00c2a8;
+  margin: 28px 0 10px;
+}
+.ap-section p { font-size: 1.02rem; line-height: 1.72; color: #c2ccd6; margin: 0 0 16px; }
+.ap-section p.lead { font-size: 1.12rem; color: #d8e0e8; }
+.ap-section a:not([class]) { color: #5dade2; text-decoration: underline; text-underline-offset: 2px; }
+
+/* Executive summary card */
+.ap-exec {
+  background: #0e1a26; border: 1px solid rgba(0,194,168,0.22);
+  border-left: 4px solid #00c2a8; border-radius: 12px;
+  padding: clamp(22px,3vw,34px); margin: clamp(28px,4vw,40px) 0 0;
+}
+.ap-exec h2 { margin-top: 0; }
+.ap-exec ul { margin: 0; padding-left: 0; list-style: none; }
+.ap-exec li {
+  font-size: 1.02rem; line-height: 1.6; color: #c2ccd6;
+  padding: 8px 0 8px 28px; position: relative;
+}
+.ap-exec li::before {
+  content: "\2192"; position: absolute; left: 0; top: 8px;
+  color: #00c2a8; font-weight: 700;
+}
+
+/* Callout */
+.ap-callout {
+  background: rgba(0,194,168,0.06); border: 1px solid rgba(0,194,168,0.25);
+  border-radius: 10px; padding: 20px 24px; margin: 24px 0;
+  font-size: 1.06rem; line-height: 1.6; color: #d8e0e8;
+}
+.ap-callout strong { color: #fff; }
+.ap-callout.amber {
+  background: rgba(240,200,80,0.06); border-color: rgba(240,200,80,0.3);
+}
+.ap-callout.amber strong { color: #f0d47d; }
+
+/* Comparison grid */
+.ap-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 24px 0; }
+.ap-compare-col {
+  border-radius: 12px; padding: 24px; border: 1px solid rgba(255,255,255,0.09);
+}
+.ap-compare-col.old { background: #1a1012; border-color: rgba(220,120,120,0.25); }
+.ap-compare-col.new { background: #0d1a14; border-color: rgba(0,194,168,0.3); }
+.ap-compare-col h3 { margin-top: 0; font-size: 1.08rem; }
+.ap-compare-col.old h3 { color: #e08a8a; }
+.ap-compare-col.new h3 { color: #00c2a8; }
+.ap-compare-col ul { margin: 0; padding-left: 0; list-style: none; }
+.ap-compare-col li {
+  font-size: 0.96rem; line-height: 1.5; color: #c2ccd6;
+  padding: 7px 0 7px 24px; position: relative;
+}
+.ap-compare-col.old li::before { content: "\2715"; position: absolute; left: 0; color: #c87878; }
+.ap-compare-col.new li::before { content: "\2713"; position: absolute; left: 0; color: #00c2a8; }
+
+/* Numbered workflow cards */
+.ap-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 28px 0; }
+.ap-step {
+  background: #0d1620; border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px; padding: 22px; position: relative;
+}
+.ap-step-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; border-radius: 8px;
+  background: #00c2a8; color: #04221d; font-weight: 800; font-size: 1rem;
+  margin-bottom: 12px;
+}
+.ap-step h3 { margin: 0 0 8px; font-size: 1.05rem; color: #fff; }
+.ap-step p { font-size: 0.94rem; line-height: 1.55; color: #aab6c2; margin: 0; }
+
+/* Architecture chips */
+.ap-arch-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; margin: 24px 0; }
+.ap-arch-item {
+  background: #0c141d; border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px; padding: 16px 18px;
+}
+.ap-arch-item .label { font-weight: 700; color: #00c2a8; font-size: 0.95rem; display: block; margin-bottom: 4px; }
+.ap-arch-item .desc { font-size: 0.88rem; color: #99a6b2; line-height: 1.5; }
+
+/* Logged table */
+.ap-logged-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin: 24px 0; }
+.ap-logged-item {
+  background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 8px; padding: 13px 16px; font-size: 0.92rem; color: #c2ccd6;
+}
+.ap-logged-item strong { display: block; color: #fff; font-size: 0.86rem; margin-bottom: 2px; font-weight: 700; }
+
+/* Does NOT do */
+.ap-not { background: #16100f; border: 1px solid rgba(220,120,120,0.25); border-radius: 12px; padding: clamp(22px,3vw,32px); margin: 24px 0; }
+.ap-not h2 { margin-top: 0; }
+.ap-not ul { margin: 0; padding-left: 0; list-style: none; }
+.ap-not li { font-size: 1.02rem; line-height: 1.55; color: #d8c2c2; padding: 8px 0 8px 30px; position: relative; }
+.ap-not li::before { content: "\2715"; position: absolute; left: 0; top: 8px; color: #e08a8a; font-weight: 700; }
+
+/* Pilot banner */
+.ap-pilot-banner {
+  text-align: center; background: linear-gradient(165deg, #0a1f1a, #06120e);
+  border: 1px solid rgba(0,194,168,0.3); border-radius: 16px;
+  padding: clamp(32px,5vw,56px) 24px; margin: clamp(36px,5vw,56px) 0 0;
+}
+.ap-pilot-banner .big {
+  font-size: clamp(1.8rem,4vw,2.6rem); font-weight: 800; color: #fff;
+  line-height: 1.1; margin: 0 0 8px; letter-spacing: -0.01em;
+}
+.ap-pilot-banner .big span { color: #00c2a8; display: block; }
+
+/* Final CTA */
+.ap-final {
+  background: #0e1a26; border: 1px solid rgba(0,194,168,0.25);
+  border-radius: 16px; padding: clamp(28px,4vw,44px); margin: clamp(36px,5vw,56px) 0 0;
+  text-align: center;
+}
+.ap-final h2 { margin-top: 0; }
+.ap-final p { max-width: 60ch; margin-left: auto; margin-right: auto; }
+
+/* References */
+.ap-refs { margin: clamp(40px,5vw,64px) 0 0; }
+.ap-refs ol { margin: 0; padding-left: 24px; }
+.ap-refs li { font-size: 0.92rem; line-height: 1.6; color: #aab6c2; margin-bottom: 12px; }
+.ap-refs a { color: #5dade2; text-decoration: none; word-break: break-word; }
+.ap-refs a:hover { text-decoration: underline; }
+
+/* Disclaimer note */
+.ap-disclaimer {
+  background: rgba(240,200,80,0.05); border: 1px solid rgba(240,200,80,0.25);
+  border-left: 4px solid #f0d47d; border-radius: 10px;
+  padding: 18px 22px; margin: 28px 0 0; font-size: 0.92rem;
+  line-height: 1.6; color: #d4cba8;
+}
+.ap-disclaimer strong { color: #f0d47d; }
+
+@media (max-width: 640px) {
+  .ap-compare { grid-template-columns: 1fr; }
+  .ap-cta-row .ap-btn-primary, .ap-cta-row .ap-btn-ghost { width: 100%; justify-content: center; }
+}
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- INCLUDE:HEADER -->
+<div id="hitl-notice" style="background:#0a1929;padding:4px 16px;text-align:center;font-size:12px;color:#4a5568;border-bottom:1px solid rgba(255,255,255,0.06);letter-spacing:0.01em;">Human-in-the-Loop required: licensed professionals verify all outputs before clinical or legal action</div>
+<header role="banner">
+  <div class="header-inner">
+    <a href="/index.html" class="logo" aria-label="Pocono AI Home">
+      <img src="/logo.svg?v=402" alt="" width="36" height="36" decoding="async" loading="eager" aria-hidden="true" style="display:inline-block;">
+      Pocono <span>AI</span>
+    </a>
+    <nav id="desktop-nav" aria-label="Main navigation">
+      <div class="nav-item"><a href="/index.html" class="nav-direct">Home</a></div>
+      <div class="nav-item"><a href="/for-physicians.html" class="nav-direct">Physicians</a></div>
+      <div class="nav-item"><a href="/for-attorneys.html" class="nav-direct">Attorneys</a></div>
+      <div class="nav-item"><a href="/sentinel-node.html" class="nav-direct nav-hub" style="color:#d5a94f;border:1px solid rgba(213,169,79,0.45);border-radius:999px;padding:6px 13px;">Sentinel Node</a></div>
+      <div class="nav-item"><a href="/living-memorials/" class="nav-direct">Living Echo</a></div>
+      <div class="nav-item"><a href="/contact.html" class="nav-direct">Contact</a></div>
+      <div class="nav-item" data-dropdown="menu-more">
+        <button type="button" class="nav-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="menu-more">More <span class="nav-chevron" aria-hidden="true">&#9662;</span></button>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <a href="/contact.html#pilot" class="nav-cta nav-cta-primary">Request a Pilot</a>
+      <button type="button" class="pa-search-trigger" data-search-open aria-label="Search (press / or Ctrl-K)" aria-haspopup="dialog" aria-expanded="false">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span class="pa-st-label">Search</span><kbd data-pa-keyhint>Ctrl K</kbd>
+      </button>
+      <button type="button" class="header-icon-btn" id="mobile-menu" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav-panel">
+        <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- "More" overflow dropdown — sibling of <header> so position:fixed escapes header's stacking context. Wired by nav.js via data-dropdown="menu-more". -->
+<div class="nav-dropdown" id="menu-more" aria-label="More navigation">
+  <p class="nav-dd-section">Products</p>
+  <a href="/engineering-drafting/">Drafting &amp; Engineering Edition</a>
+  <a href="/sentinel-home/">Sentinel Home Edition</a>
+  <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability — Assistive Tools &#x2605;</a>
+  <a href="/living-memorials/enterprise-estate-continuity.html">Enterprise Estate Continuity</a>
+  <p class="nav-dd-section">Capabilities</p>
+  <a href="/evidence-room.html">Evidence Room</a>
+  <a href="/push-button-deliverables.html">Push-Button Deliverables</a>
+  <a href="/pilot-readiness-kit.html">Pilot Kit</a>
+  <a href="/pilot-program.html">Pilot Program</a>
+  <a href="/how-it-works.html">How It Works</a>
+  <p class="nav-dd-section">Hubs &amp; Company</p>
+  <a href="/training.html">Training Hub</a>
+  <a href="/documentation-hub/">Document Hub</a>
+  <a href="/global/">Global Hub</a>
+  <a href="/investors-hub.html">Investor Hub</a>
+  <a href="/valuation-dashboard.html">Valuation Dashboard</a>
+  <a href="/about.html">About</a>
+  <p class="nav-dd-section">Trust &amp; Legal</p>
+  <a href="/transparency.html">Transparency</a>
+  <a href="/audit.html">Audit Log</a>
+  <a href="/privacy.html">Privacy</a>
+  <a href="/sitemap.html">Sitemap</a>
+</div>
+<!-- Site search is provided by the self-contained search.js asset (command palette: / or Ctrl/Cmd-K). -->
+
+<!-- Mobile panel: full-screen slide-in. v396 nav — hub tiles + grouped links + Sentinel Node + Engineering. -->
+<nav id="mobile-nav-panel" aria-label="Mobile navigation" aria-hidden="true" role="dialog" aria-modal="true">
+
+  <!-- Hub tiles: Sentinel Node, Documentation Hub, Training Hub, Global Hub -->
+  <div style="padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,0.07);">
+    <p style="font-size:0.65em;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.28);margin:0 0 10px;padding:0 2px;">Hubs</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <a href="/sentinel-node.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(213,169,79,0.1);border:1px solid rgba(213,169,79,0.35);border-radius:10px;color:#d5a94f;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Sentinel Node</a>
+      <a href="/documentation-hub/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(0,194,168,0.1);border:1px solid rgba(0,194,168,0.35);border-radius:10px;color:#00c2a8;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Docs Hub</a>
+      <a href="/training.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.35);border-radius:10px;color:#a78bfa;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Training Hub</a>
+      <a href="/global/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(122,240,220,0.07);border:1px solid rgba(122,240,220,0.3);border-radius:10px;color:#7af0dc;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Global Hub</a>
+    </div>
+  </div>
+
+  <!-- Core paths -->
+  <div class="mob-static-links">
+    <a href="/index.html">Home</a>
+    <a href="/for-physicians.html">Physicians</a>
+    <a href="/for-attorneys.html">Attorneys</a>
+    <a href="/engineering-drafting/">Engineering &amp; Drafting</a>
+    <a href="/pilot-program.html">Pilot Program</a>
+    <a href="/how-it-works.html">How It Works</a>
+    <a href="/trust.html">Trust &amp; Audit</a>
+    <a href="/pricing.html">Pricing</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/living-memorials/">Living Echo</a>
+    <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability</a>
+    <a href="/about.html">About</a>
+    <a href="/team.html" style="color:rgba(255,255,255,0.6);">Team &amp; Leadership</a>
+    <a href="/valuation-dashboard.html" style="color:rgba(255,255,255,0.6);">Valuation Dashboard</a>
+    <a href="/careers.html" style="color:rgba(255,255,255,0.6);">Careers</a>
+    <a href="/sentinel-demo.html" style="color:rgba(255,255,255,0.6);">Demo</a>
+    <a href="/sitemap.html" style="color:rgba(255,255,255,0.45);">Sitemap</a>
+    <a href="/transparency.html" style="color:rgba(255,255,255,0.45);">Transparency</a>
+    <a href="/privacy.html" style="color:rgba(255,255,255,0.45);">Privacy</a>
+  </div>
+
+  <a href="/contact.html#pilot" class="mob-cta">Request a Pilot</a>
+</nav>
+<!-- /INCLUDE:HEADER -->
+
+<main id="main">
+
+<!-- HERO -->
+<section class="ap-hero">
+  <div class="ap-hero-inner">
+    <span class="ap-eyebrow">White Paper &middot; Applied AI Workflow</span>
+    <h1>Applied AI for Prior Authorization</h1>
+    <p class="sub">How Pocono AI&rsquo;s Sentinel Node turns local AI, retrieval, audit logging, and physician review into a real medical-practice workflow. One node. One workflow. Sixty days.</p>
+    <div class="ap-cta-row">
+      <a href="pilot-readiness-kit.html" class="ap-btn-primary">Start a 60-Day Pilot &rarr;</a>
+      <a href="architecture.html" class="ap-btn-ghost">View Architecture</a>
+    </div>
+    <p class="ap-trustline">
+      <span>Local AI appliance</span>
+      <span>Evidence-grounded</span>
+      <span>Human-reviewed</span>
+      <span>Audit-ready</span>
+    </p>
+  </div>
+</section>
+
+<div class="ap-wrap">
+
+  <!-- EXECUTIVE SUMMARY -->
+  <section class="ap-exec">
+    <h2>Executive summary</h2>
+    <p class="lead">Bret Taylor, Chairman of OpenAI and co-founder of Sierra, recently said something that should stop a lot of founders in their tracks: too many entrepreneurs are working on AI directly rather than on applications of AI.</p>
+    <ul>
+      <li>Pocono AI is not building a frontier foundation model. We build in the application layer &mdash; where real professionals, real records, real liability, and real workflows collide.</li>
+      <li>Our first application is regulated professional work: independent medical practices and small law firms. The system is called Sentinel Node, a local AI appliance.</li>
+      <li>Prior authorization is the concrete example: retrieve approved evidence, draft from citations, log the full path, and require a licensed professional to review before any action.</li>
+      <li>The honest claim is narrow and strong: the architecture is ready for a bounded proof-of-value. One node. One workflow. Sixty days.</li>
+    </ul>
+  </section>
+
+  <!-- WHY THIS MATTERS -->
+  <section class="ap-section">
+    <h2>Why this matters: prior authorization is an operational problem</h2>
+    <p>Prior authorization is one of the most painful administrative workflows in medicine. A physician decides that a medication, imaging study, procedure, or therapy is clinically appropriate &mdash; but before the patient can receive it, the practice may need payer approval.</p>
+    <p>That often means staff have to find the right payer requirement, locate the correct portal or fax process, search the chart for supporting documentation, identify prior treatments, document failed therapies, pull imaging or lab evidence, draft a medical-necessity justification, route it back to the physician, revise it, submit it, and then respond again if it is denied.</p>
+    <div class="ap-callout">
+      The American Medical Association has reported that the large majority of physicians say prior authorization delays access to necessary care. CMS has treated prior authorization as a major interoperability and burden-reduction issue, including through its Interoperability and Prior Authorization Final Rule. See references <a href="#ref">3 and 4</a>.
+    </div>
+    <p>The practice already has the facts. The problem is that those facts are scattered across notes, PDFs, scans, faxes, lab reports, medication lists, imaging reports, payer criteria, and old clinical documentation. <strong style="color:#fff;">The burden is reconstruction.</strong> That is where applied AI belongs.</p>
+  </section>
+
+  <!-- OLD VS NEW -->
+  <section class="ap-section">
+    <h2>The old workflow vs. the Sentinel Node workflow</h2>
+    <p>A generic chatbot does not solve a fragile reconstruction workflow. A governed workflow system might. The difference is not the model &mdash; it is the boundaries, the evidence grounding, the review gate, and the record.</p>
+    <div class="ap-compare">
+      <div class="ap-compare-col old">
+        <h3>The old workflow</h3>
+        <ul>
+          <li>Staff manually search the chart for the original diagnosis</li>
+          <li>Fragments copied from notes, PDFs, scans, and faxes</li>
+          <li>Failed conservative treatment reconstructed under time pressure</li>
+          <li>The physician is interrupted to confirm facts</li>
+          <li>The draft is revised, submitted, and sometimes denied for a missing detail</li>
+        </ul>
+      </div>
+      <div class="ap-compare-col new">
+        <h3>The Sentinel Node workflow</h3>
+        <ul>
+          <li>Scope first: one patient, one workflow, approved sources</li>
+          <li>Local retrieval finds the specific evidence chunks</li>
+          <li>The local model drafts from cited evidence, not memory</li>
+          <li>Citations are verified; missing facts are flagged, not invented</li>
+          <li>A physician accepts, edits, or rejects &mdash; and the path is logged</li>
+        </ul>
+      </div>
+    </div>
+    <div class="ap-callout amber">
+      This is not because staff are bad. It is because the workflow is fragile. It asks humans to reconstruct a patient&rsquo;s evidence trail under time pressure, using fragmented systems, while still protecting privacy and professional responsibility.
+    </div>
+  </section>
+
+  <!-- THE 10 STEPS -->
+  <section class="ap-section">
+    <h2>The Sentinel Node workflow, step by step</h2>
+    <p>A governed AI system starts with boundaries: which patient, which workflow, which document sources, which reviewer, which output type, which success metric. That is the application layer. Here is the full path a prior authorization request travels.</p>
+    <div class="ap-steps">
+      <div class="ap-step">
+        <span class="ap-step-num">1</span>
+        <h3>Local ingestion</h3>
+        <p>Approved documents enter a controlled local path. The system records what arrived, whether OCR was needed, whether confidence was acceptable, and whether it was in scope. Unreadable scans are refused or flagged &mdash; not guessed. Clean data in, cited drafts out.</p>
+      </div>
+      <div class="ap-step">
+        <span class="ap-step-num">2</span>
+        <h3>User request</h3>
+        <p>A staff member asks for a draft medical-necessity justification, using only approved chart records and the payer policy in scope, with citations and flagged missing facts.</p>
+      </div>
+      <div class="ap-step">
+        <span class="ap-step-num">3</span>
+        <h3>Audit Proxy (gateway)</h3>
+        <p>The request passes through the governance layer first. It captures who asked, when, in what role, for which patient or matter scope, and which workflow. It can hash the prompt and enforce access. A request for Patient A cannot retrieve Patient B.</p>
+      </div>
+      <div class="ap-step">
+        <span class="ap-step-num">4</span>
+        <h3>Retrieval</h3>
+        <p>The system searches the approved local corpus &mdash; dense vector search, sparse keyword retrieval, hybrid retrieval. It returns candidate evidence: the diagnosis note, medication history, therapy notes, imaging reports, payer criteria. Each chunk carries metadata and access status.</p>
+      </div>
+      <div class="ap-step">
+        <span class="ap-step-num">5</span>
+        <h3>Reranking</h3>
+        <p>Reranking sorts the most relevant chunks from the merely related ones &mdash; before generation. The model receives the best evidence context, not the whole haystack. Retrieval finds possible evidence; reranking prioritizes it.</p>
+      </div>
+      <div class="ap-step">
+        <span class="ap-step-num">6</span>
+        <h3>Local LLM drafting</h3>
+        <p>Only after scoping, logging, retrieval, and reranking does the prompt reach the local model. It drafts a medical-necessity summary, a treatment timeline, a payer-criteria checklist, or a denial-response draft &mdash; from bounded context. The record is the authority, not the model.</p>
+      </div>
+      <div class="ap-step">
+        <span class="ap-step-num">7</span>
+        <h3>Citation verification</h3>
+        <p>The draft is checked against its citations. If a claim says &ldquo;six weeks of physical therapy,&rdquo; the system identifies where that appears in the record. If the cited page does not support the claim, the mismatch is flagged. If the fact is absent: &ldquo;Required fact not found.&rdquo;</p>
+      </div>
+      <div class="ap-step">
+        <span class="ap-step-num">8</span>
+        <h3>Human review (physician)</h3>
+        <p>The physician accepts, edits, or rejects. Staff can route back for missing documentation. The output remains a draft until a qualified human makes the final call. That is not a weakness &mdash; that is the point.</p>
+      </div>
+      <div class="ap-step">
+        <span class="ap-step-num">9</span>
+        <h3>Audit-chain append</h3>
+        <p>Every stage writes to a reviewable local audit log: prompt, retrieval, response, citation verification, human review, append, retention. Each entry includes the previous entry&rsquo;s hash. Change one entry and the chain breaks.</p>
+      </div>
+      <div class="ap-step">
+        <span class="ap-step-num">10</span>
+        <h3>Final packet after approval</h3>
+        <p>Only after a licensed professional approves does the draft become a usable prior authorization packet &mdash; with the full, reviewable record of how it was produced behind it.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARCHITECTURE IN PLAIN ENGLISH -->
+  <section class="ap-section">
+    <h2>Architecture in plain English</h2>
+    <p>Good architecture is not just a list of buzzwords. A good pipeline knows what each layer is responsible for. Sentinel Node is designed around local processing rather than routine cloud transmission.</p>
+    <div class="ap-arch-grid">
+      <div class="ap-arch-item"><span class="label">Approved data sources</span><span class="desc">Chart exports, prior notes, payer policy documents, templates, scanned PDFs, referral and procedure notes &mdash; defined per pilot, in scope by design.</span></div>
+      <div class="ap-arch-item"><span class="label">Local ingestion daemon</span><span class="desc">A controlled intake path inside the practice environment that answers what arrived, from where, and whether it was readable.</span></div>
+      <div class="ap-arch-item"><span class="label">OCR / quality gate</span><span class="desc">Scans and faxes pass an OCR confidence check. Low-quality input is refused or flagged for staff verification.</span></div>
+      <div class="ap-arch-item"><span class="label">Document store</span><span class="desc">Local custody of the in-scope records, access-controlled within the practice environment.</span></div>
+      <div class="ap-arch-item"><span class="label">Metadata store</span><span class="desc">Document IDs, page ranges, source files, scope tags, and access status &mdash; the connective tissue for citations.</span></div>
+      <div class="ap-arch-item"><span class="label">Vector database / hybrid search</span><span class="desc">Dense and sparse retrieval over the approved corpus to surface candidate evidence.</span></div>
+      <div class="ap-arch-item"><span class="label">Reranker</span><span class="desc">Prioritizes the most relevant chunks before they reach the model.</span></div>
+      <div class="ap-arch-item"><span class="label">Local LLM runtime</span><span class="desc">An on-premises model that drafts from bounded, retrieved context.</span></div>
+      <div class="ap-arch-item"><span class="label">Audit Proxy</span><span class="desc">The control point between human intent and AI execution &mdash; logging, hashing, and access enforcement.</span></div>
+      <div class="ap-arch-item"><span class="label">Hash-chained append-only log</span><span class="desc">A reviewable audit record where each entry binds to the previous one&rsquo;s hash.</span></div>
+      <div class="ap-arch-item"><span class="label">Human approval gate</span><span class="desc">No output becomes a usable packet until a licensed professional reviews and approves it.</span></div>
+    </div>
+  </section>
+
+  <!-- WHAT GETS LOGGED -->
+  <section class="ap-section">
+    <h2>What gets logged</h2>
+    <p>This is where AI becomes auditable &mdash; not because someone says &ldquo;trust us,&rdquo; but because the system can produce the record. Every prior authorization run can show its full chain of custody.</p>
+    <div class="ap-logged-grid">
+      <div class="ap-logged-item"><strong>User / session</strong>Who made the request, on which workstation</div>
+      <div class="ap-logged-item"><strong>Timestamp</strong>When the request was made</div>
+      <div class="ap-logged-item"><strong>Workflow scope</strong>Which workflow was invoked</div>
+      <div class="ap-logged-item"><strong>Patient / matter scope</strong>Which patient or matter the request applies to</div>
+      <div class="ap-logged-item"><strong>Prompt hash</strong>A fingerprint of the exact request</div>
+      <div class="ap-logged-item"><strong>Retrieved document / chunk IDs</strong>Which evidence was pulled</div>
+      <div class="ap-logged-item"><strong>Source metadata</strong>Document, page range, and access status</div>
+      <div class="ap-logged-item"><strong>Response hash</strong>A fingerprint of the model output</div>
+      <div class="ap-logged-item"><strong>Citation verification flags</strong>Any claim/source mismatches detected</div>
+      <div class="ap-logged-item"><strong>Reviewer decision</strong>Accepted, edited, or rejected &mdash; and why</div>
+      <div class="ap-logged-item"><strong>Final output / action</strong>What the approved packet contained</div>
+      <div class="ap-logged-item"><strong>Previous hash / current hash</strong>The append-only chain link</div>
+    </div>
+    <div class="ap-callout">
+      In regulated professional work, the better questions are not just &ldquo;what did the AI say?&rdquo; They are: <strong>Who asked? What was it allowed to see? What did it retrieve? What did it cite? Who reviewed it? What changed? What was approved? Can we prove the sequence later?</strong>
+    </div>
+  </section>
+
+  <!-- WHAT THE AI DOES NOT DO -->
+  <section class="ap-section">
+    <div class="ap-not">
+      <h2>What the AI does <em>not</em> do</h2>
+      <p style="color:#d8c2c2;">In the Sentinel Node version of the prior authorization workflow, the physician&rsquo;s clinical decision does not change. This is a professional-responsibility boundary, by design.</p>
+      <ul>
+        <li>Does not practice medicine</li>
+        <li>Does not make coverage decisions</li>
+        <li>Does not submit the authorization without human approval</li>
+        <li>Does not communicate with the insurer</li>
+        <li>Does not replace physician judgment</li>
+        <li>Does not train cloud models on practice data</li>
+        <li>Does not routinely transfer PHI to cloud AI</li>
+      </ul>
+      <p style="color:#d8c2c2;margin-top:16px;margin-bottom:0;">Instead, the system supports the part of the workflow where time is often lost: finding the evidence, formatting the evidence, citing the evidence, flagging missing evidence, and preparing a draft a human can review. That is applied AI &mdash; not &ldquo;AI for healthcare&rdquo; as a slogan, but AI for a specific workflow inside a specific environment with specific constraints.</p>
+    </div>
+  </section>
+
+  <!-- WHY THIS MATTERS (BROADER) -->
+  <section class="ap-section">
+    <h2>Why the application layer is the real bottleneck</h2>
+    <p>The next wave of value in AI will not come only from bigger models. It will come from connecting models to work. OpenAI itself is now describing enterprise AI value in terms of use-case selection, workflow redesign, integration, governance, deployment, and measurable outcomes (reference <a href="#ref">2</a>).</p>
+    <p>In medicine and law, workflow fit requires more than a prompt box. It requires local custody, evidence grounding, human review, auditability, role boundaries, no routine telemetry, no silent cloud dependency, and no autonomous professional judgment. A practice does not need a magic chatbot. It needs a trustworthy system that helps the staff and physician do the work they already know how to do &mdash; with less administrative drag and better evidence discipline.</p>
+  </section>
+
+  <!-- PILOT BANNER -->
+  <section class="ap-pilot-banner">
+    <p class="big">One node.<span>One workflow. Sixty days.</span></p>
+    <p style="color:#aab6c2;font-size:1.02rem;max-width:54ch;margin:14px auto 0;line-height:1.6;">Pocono AI is early, and that matters. We do not pretend there is completed production validation before it exists. The right claim is narrower and stronger: the architecture is ready for a bounded proof-of-value.</p>
+  </section>
+
+  <!-- PILOT STRUCTURE -->
+  <section class="ap-section">
+    <h2>How a pilot is structured</h2>
+    <p>That is how applied AI should be evaluated &mdash; against your real workflow, not a demo.</p>
+    <div class="ap-steps">
+      <div class="ap-step"><span class="ap-step-num">A</span><h3>Measure current state</h3><p>Establish the baseline workflow and its time burden before anything is deployed.</p></div>
+      <div class="ap-step"><span class="ap-step-num">B</span><h3>Deploy locally</h3><p>Stand up the system beside the existing process, using approved local documents.</p></div>
+      <div class="ap-step"><span class="ap-step-num">C</span><h3>Run side by side</h3><p>Operate the Sentinel Node workflow alongside the current one for direct comparison.</p></div>
+      <div class="ap-step"><span class="ap-step-num">D</span><h3>Review weekly</h3><p>Track retrieval quality, review behavior, audit completeness, time burden, misses, and exceptions.</p></div>
+      <div class="ap-step"><span class="ap-step-num">E</span><h3>Evaluate honestly</h3><p>Assess what the system catches and what it misses against the baseline you measured.</p></div>
+      <div class="ap-step"><span class="ap-step-num">F</span><h3>Convert, extend, or end</h3><p>Make a real decision based on real evidence from your own practice.</p></div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="ap-final">
+    <h2>Ready to test applied AI on one real workflow?</h2>
+    <p>If your practice wants to reduce prior authorization burden without routine cloud AI transfer, Pocono AI is opening 60-day paid proof-of-value pilot conversations. We need one paid pilot. One bounded workflow. Sixty days. Let us prove, in the real world, whether the system works the way the architecture says it should.</p>
+    <div class="ap-cta-row" style="justify-content:center;margin-top:8px;">
+      <a href="pilot-readiness-kit.html" class="ap-btn-primary">Start Pilot Readiness Kit &rarr;</a>
+      <a href="evidence-room.html" class="ap-btn-ghost">Read the Evidence Room</a>
+    </div>
+    <p style="font-size:0.92rem;color:#7d8c9a;margin-top:20px;margin-bottom:0;">Also see: <a href="pilot-brief.html">60-Day Paid Proof-of-Value Brief</a> &middot; <a href="for-physicians.html">Physician Pathway</a> &middot; <a href="architecture.html">Architecture</a> &middot; <a href="audit-lifecycle.html">Audit Lifecycle</a></p>
+  </section>
+
+  <!-- DISCLAIMER -->
+  <div class="ap-disclaimer">
+    <strong>Pilot-stage disclosure.</strong> This white paper describes intended architecture and workflow. It is not a completed clinical validation claim, and it does not describe completed customer pilots or measured clinical outcomes. Pocono AI does not practice medicine, does not make coverage or clinical decisions, and does not submit authorizations. Outputs are drafts that require review by a licensed professional. PDF version coming soon.
+  </div>
+
+  <!-- REFERENCES -->
+  <section class="ap-refs" id="ref">
+    <h2 style="font-size:clamp(1.3rem,2.5vw,1.7rem);color:#fff;margin:0 0 18px;">References</h2>
+    <ol>
+      <li>Sierra / CNN clip transcript: Bret Taylor on entrepreneurs focusing on applications of AI. <a href="https://www.linkedin.com/posts/sierra_the-biggest-opportunity-in-ai-isnt-building-activity-7468725548819677184-e3Qe" target="_blank" rel="noopener noreferrer">linkedin.com/posts/sierra</a></li>
+      <li>OpenAI Partner Network: workflow redesign, use cases, integration, and deployment as the bottleneck. <a href="https://openai.com/index/introducing-openai-partner-network/" target="_blank" rel="noopener noreferrer">openai.com/index/introducing-openai-partner-network</a></li>
+      <li>AMA prior authorization physician survey / press release. <a href="https://www.ama-assn.org/press-center/ama-press-releases/ama-survey-indicates-prior-authorization-wreaks-havoc-patient-care" target="_blank" rel="noopener noreferrer">ama-assn.org</a></li>
+      <li>CMS Interoperability and Prior Authorization Final Rule CMS-0057-F. <a href="https://www.cms.gov/initiatives/burden-reduction/overview/interoperability/policies-regulations/cms-interoperability-prior-authorization-final-rule-cms-0057-f" target="_blank" rel="noopener noreferrer">cms.gov</a></li>
+      <li>HHS HIPAA minimum necessary standard. <a href="https://www.hhs.gov/hipaa/for-professionals/privacy/guidance/minimum-necessary-requirement/index.html" target="_blank" rel="noopener noreferrer">hhs.gov</a></li>
+      <li>NIST AI Risk Management Framework. <a href="https://www.nist.gov/itl/ai-risk-management-framework" target="_blank" rel="noopener noreferrer">nist.gov/itl/ai-risk-management-framework</a></li>
+      <li>Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks. <a href="https://arxiv.org/abs/2005.11401" target="_blank" rel="noopener noreferrer">arxiv.org/abs/2005.11401</a></li>
+      <li>Microsoft overview of retrieval-augmented generation. <a href="https://learn.microsoft.com/en-us/azure/search/retrieval-augmented-generation-overview" target="_blank" rel="noopener noreferrer">learn.microsoft.com</a></li>
+    </ol>
+    <p style="font-size:0.88rem;color:#7d8c9a;margin-top:18px;">Related Pocono AI pages: <a href="index.html">Home</a> &middot; <a href="architecture.html">Architecture</a> &middot; <a href="audit-lifecycle.html">Audit Lifecycle</a> &middot; <a href="for-physicians.html">Physician Pathway</a> &middot; <a href="pilot-readiness-kit.html">Pilot Readiness Kit</a> &middot; <a href="pilot-brief.html">Proof-of-Value Brief</a> &middot; <a href="evidence-room.html">Evidence Room</a></p>
+  </section>
+
+</div>
+</main>
+
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 root-relative nav fix, Living Echo rebrand, Engineering & Drafting + Enterprise Estate Continuity links added (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- INCLUDE:FOOTER -->
+<footer role="contentinfo" style="background:#051622;border-top:1px solid rgba(255,255,255,0.08);padding:40px 24px 28px;font-size:0.85em;color:#8899aa;">
+  <div style="max-width:1180px;margin:0 auto;">
+
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:0 0 28px;margin-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.07);">
+      <div style="max-width:560px;">
+        <p style="margin:0 0 6px;font-size:1.05em;font-weight:700;color:#fff;">Local AI infrastructure for regulated practices.</p>
+        <p style="margin:0;font-size:0.95em;line-height:1.5;">Drafts with citations. Human review required. Sensitive documents stay under practice control. Simple path, deep proof.</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="/contact.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;background:#00c2a8;color:#04111a;font-weight:700;text-decoration:none;font-size:0.95em;">Request Pilot</a>
+        <a href="/sentinel-demo.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;border:1px solid rgba(0,194,168,0.55);color:#00c2a8;font-weight:700;text-decoration:none;font-size:0.95em;">Watch Demo</a>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px 32px;margin-bottom:32px;text-align:left;">
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">For You</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/start-here.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Start Here (3 min)</a>
+          <a href="/for-physicians.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Physicians</a>
+          <a href="/for-attorneys.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Attorneys</a>
+          <a href="/engineering-drafting/" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Engineering &amp; Drafting Teams</a>
+          <a href="/pilot-program.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Pilot Program</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Installer Training</a>
+          <a href="/how-it-works.html" style="color:#8899aa;text-decoration:none;">How It Works</a>
+          <a href="/trust.html" style="color:#8899aa;text-decoration:none;">Trust &amp; Audit</a>
+          <a href="/pricing.html" style="color:#8899aa;text-decoration:none;">Pricing</a>
+          <a href="/sentinel-demo.html" style="color:#8899aa;text-decoration:none;">See the Demo</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Documentation Hub</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/documentation-hub/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Hub Home &mdash; Deep Proof</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">Installer Training</a>
+          <a href="/sentinel-node/installation-simulator.html" style="color:#8899aa;text-decoration:none;">&#8627; Installation Simulator</a>
+          <a href="/documentation-hub/clinical/" style="color:#8899aa;text-decoration:none;">Clinical Documentation</a>
+          <a href="/documentation-hub/legal/" style="color:#8899aa;text-decoration:none;">Legal Documentation</a>
+          <a href="/documentation-hub/technical/" style="color:#8899aa;text-decoration:none;">Technical Documentation</a>
+          <a href="/documentation-hub/governance/" style="color:#8899aa;text-decoration:none;">Governance &amp; Audit</a>
+          <a href="/documentation-hub/tools/" style="color:#8899aa;text-decoration:none;">Tools &amp; Simulators</a>
+          <a href="/documentation-hub/research/" style="color:#8899aa;text-decoration:none;">Research &amp; Essays</a>
+          <a href="/documentation-hub/transparency/" style="color:#8899aa;text-decoration:none;">Transparency</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Global Federated AI</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/global/" style="color:#7af0dc;text-decoration:none;font-weight:600;">Global Federated Hub</a>
+          <a href="/global/australia/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Australia</a>
+          <a href="/global/singapore/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Singapore</a>
+          <a href="/global/taiwan/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Taiwan</a>
+          <a href="/global/europe/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Europe</a>
+          <a href="/contact.html" style="color:#8899aa;text-decoration:none;">Partner Inquiry</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Company</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/about.html" style="color:#8899aa;text-decoration:none;">About Pocono AI</a>
+          <a href="/team.html" style="color:#8899aa;text-decoration:none;">Team &amp; Leadership</a>
+          <a href="/why-pocono-ai.html" style="color:#8899aa;text-decoration:none;">Why Pocono AI</a>
+          <a href="/founding-commercial-leadership.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Join Us</a>
+          <a href="/careers.html" style="color:#8899aa;text-decoration:none;">Careers</a>
+          <a href="/how-we-hire.html" style="color:#8899aa;text-decoration:none;">How We Hire</a>
+          <a href="/channel-partners.html" style="color:#8899aa;text-decoration:none;">Technical Partners (MSPs)</a>
+          <a href="/partners.html" style="color:#8899aa;text-decoration:none;">Academic Partnerships</a>
+          <a href="/contact.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Contact</a>
+          <a href="https://forms.gle/VQahnkjMfY6QNEMy8" target="_blank" rel="noopener noreferrer" style="color:#d5a94f;text-decoration:none;font-weight:600;">Interest List &#8599;</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Founder Projects</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/rehability/" style="color:#a78bfa;text-decoration:none;font-weight:700;">Rehability &#x2605;</a>
+          <a href="/rehability/marcus-memory-helper/" style="color:#a78bfa;text-decoration:none;font-weight:600;">&#8627; Marcus's Memory Helper</a>
+          <a href="/sentinel-home/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Sentinel Home Edition</a>
+          <a href="/living-memorials/" style="color:#8899aa;text-decoration:none;">Living Echo</a>
+          <a href="/living-memorials/marcus-odell/" style="color:#8899aa;text-decoration:none;">Marcus&rsquo;s Living Echo</a>
+          <a href="/living-memorials/enterprise-estate-continuity.html" style="color:#8899aa;text-decoration:none;">Enterprise Estate Continuity</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Resources &amp; Legal</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/sitemap.html" style="color:#8899aa;text-decoration:none;">All Pages (Sitemap)</a>
+          <a href="/audit.html" style="color:#8899aa;text-decoration:none;">Transparency &amp; Audit Log</a>
+          <a href="/maturity-disclosure.html" style="color:#8899aa;text-decoration:none;">What We Have / Don&rsquo;t Claim</a>
+          <a href="/plain.html" style="color:#8899aa;text-decoration:none;">Plain Language Guide</a>
+          <a href="/privacy.html" style="color:#8899aa;text-decoration:none;">Privacy</a>
+          <a href="/terms.html" style="color:#8899aa;text-decoration:none;">Terms</a>
+          <a href="/sla.html" style="color:#8899aa;text-decoration:none;">SLA</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:18px;margin-bottom:14px;">
+      <p style="margin:0;font-size:0.82em;line-height:1.6;color:#6f8295;max-width:1000px;">Pocono AI does not provide medical, legal, or engineering advice, does not practice medicine, law, or licensed engineering, and does not make clinical, legal, or engineering decisions. Outputs are drafts or support materials that require review by a qualified professional; final professional judgment remains with the licensed physician, attorney, or engineer. Tools and simulations on this site are educational and use synthetic data.</p>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:20px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+      <p style="margin:0;font-size:0.9em;">&copy; 2026 Pocono AI, LLC &nbsp;&#183;&nbsp; East Stroudsburg, PA &nbsp;&#183;&nbsp; <a href="mailto:marcus@poconoai.com" style="color:#8899aa;">marcus@poconoai.com</a> &nbsp;&#183;&nbsp; <a href="tel:+15705340602" style="color:#8899aa;">(570) 534-0602</a></p>
+      <p style="margin:0;font-size:0.88em;"><a href="/audit.html" style="color:#5dade2;text-decoration:none;">Transparency v402</a></p>
+    </div>
+  </div>
+</footer>
+<script src="/search.js?v=402" defer></script>
+<!-- /INCLUDE:FOOTER -->
+
+<script src="search-index.js?v=402" defer></script>
+<script src="nav.js?v=402" defer></script>
+<script src="pilot-cta.js?v=402" defer></script>
+</body>
+</html>

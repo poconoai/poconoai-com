@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 480" role="img" aria-labelledby="title desc">
+  <title id="title">Operational Impact — Where Time Goes Back to Professionals</title>
+  <desc id="desc">Bar visualization of operational hours saved per week across four workflows: prior authorization, clinical documentation, contract review, and discovery analysis.</desc>
+
+  <defs>
+    <linearGradient id="riBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fafbfc"/>
+      <stop offset="100%" stop-color="#f0f3f7"/>
+    </linearGradient>
+    <linearGradient id="barG1" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#5b9cf6"/>
+      <stop offset="100%" stop-color="#3fbf82"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1100" height="480" fill="url(#riBg)"/>
+
+  <!-- Header -->
+  <text x="60" y="48" font-family="'IBM Plex Sans', system-ui, sans-serif" font-size="22" font-weight="700" fill="#0d1d35" letter-spacing="-0.01em">Where Time Goes Back to Professionals</text>
+  <text x="60" y="72" font-family="'IBM Plex Mono', monospace" font-size="11" fill="#5b9cf6" letter-spacing="0.18em">ILLUSTRATIVE HOURS / WEEK · PILOT-RANGE ESTIMATES</text>
+
+  <!-- Chart area -->
+  <g transform="translate(280, 120)">
+    <!-- Grid lines -->
+    <g stroke="#dde2e8" stroke-width="0.5">
+      <line x1="0" y1="0" x2="0" y2="280"/>
+      <line x1="160" y1="0" x2="160" y2="280"/>
+      <line x1="320" y1="0" x2="320" y2="280"/>
+      <line x1="480" y1="0" x2="480" y2="280"/>
+      <line x1="640" y1="0" x2="640" y2="280"/>
+      <line x1="0" y1="280" x2="640" y2="280" stroke="#0d1d35" stroke-width="1.5"/>
+    </g>
+
+    <!-- X labels -->
+    <g font-family="'IBM Plex Mono', monospace" font-size="10" fill="#5a6a7a" letter-spacing="0.1em" text-anchor="middle">
+      <text x="0" y="302">0H</text>
+      <text x="160" y="302">10H</text>
+      <text x="320" y="302">20H</text>
+      <text x="480" y="302">30H</text>
+      <text x="640" y="302">40H</text>
+    </g>
+
+    <!-- Bar 1: Prior Auth -->
+    <g transform="translate(0, 16)">
+      <rect width="320" height="40" rx="3" fill="url(#barG1)" opacity="0.92"/>
+      <text x="-12" y="26" text-anchor="end" font-family="'IBM Plex Sans', sans-serif" font-size="13" font-weight="600" fill="#0d1d35">Prior Authorization</text>
+      <text x="-12" y="42" text-anchor="end" font-family="'IBM Plex Sans', sans-serif" font-size="11" fill="#5a6a7a">Healthcare</text>
+      <text x="332" y="26" font-family="'IBM Plex Mono', monospace" font-size="13" font-weight="700" fill="#0d1d35">~20 hrs</text>
+    </g>
+
+    <!-- Bar 2: Clinical Doc -->
+    <g transform="translate(0, 80)">
+      <rect width="240" height="40" rx="3" fill="url(#barG1)" opacity="0.92"/>
+      <text x="-12" y="26" text-anchor="end" font-family="'IBM Plex Sans', sans-serif" font-size="13" font-weight="600" fill="#0d1d35">Clinical Documentation</text>
+      <text x="-12" y="42" text-anchor="end" font-family="'IBM Plex Sans', sans-serif" font-size="11" fill="#5a6a7a">Healthcare</text>
+      <text x="252" y="26" font-family="'IBM Plex Mono', monospace" font-size="13" font-weight="700" fill="#0d1d35">~15 hrs</text>
+    </g>
+
+    <!-- Bar 3: Contract Review -->
+    <g transform="translate(0, 144)">
+      <rect width="384" height="40" rx="3" fill="url(#barG1)" opacity="0.92"/>
+      <text x="-12" y="26" text-anchor="end" font-family="'IBM Plex Sans', sans-serif" font-size="13" font-weight="600" fill="#0d1d35">Contract Review</text>
+      <text x="-12" y="42" text-anchor="end" font-family="'IBM Plex Sans', sans-serif" font-size="11" fill="#5a6a7a">Legal</text>
+      <text x="396" y="26" font-family="'IBM Plex Mono', monospace" font-size="13" font-weight="700" fill="#0d1d35">~24 hrs</text>
+    </g>
+
+    <!-- Bar 4: Discovery -->
+    <g transform="translate(0, 208)">
+      <rect width="448" height="40" rx="3" fill="url(#barG1)" opacity="0.92"/>
+      <text x="-12" y="26" text-anchor="end" font-family="'IBM Plex Sans', sans-serif" font-size="13" font-weight="600" fill="#0d1d35">Discovery Analysis</text>
+      <text x="-12" y="42" text-anchor="end" font-family="'IBM Plex Sans', sans-serif" font-size="11" fill="#5a6a7a">Legal</text>
+      <text x="460" y="26" font-family="'IBM Plex Mono', monospace" font-size="13" font-weight="700" fill="#0d1d35">~28 hrs</text>
+    </g>
+  </g>
+
+  <!-- Footnote -->
+  <text x="60" y="445" font-family="'IBM Plex Mono', monospace" font-size="10" fill="#5a6a7a" letter-spacing="0.05em">Illustrative pilot-range estimates. Actual results vary by workflow, team size, and document volume.</text>
+  <text x="60" y="462" font-family="'IBM Plex Mono', monospace" font-size="10" fill="#5a6a7a" letter-spacing="0.05em">Human review remains mandatory at every step. AI accelerates; people decide.</text>
+</svg>

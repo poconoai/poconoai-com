@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp -->
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sentinel Trial Room™ — Watch Governance Stop Harm Before It Happens | Pocono AI</title>
+<meta name="description" content="Step inside a fictional Pocono AI governance simulation and watch Sentinel Node stop risky AI output, require human review, record an audit sequence, and block export until evidence is resolved.">
+<meta name="keywords" content="Sentinel Trial Room, AI governance demonstration, human-in-the-loop AI, audit trail demo, local AI infrastructure, regulated AI workflow, evidence-bound AI, export control, Pocono AI">
+<meta name="theme-color" content="#0B0F13">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="favicon-180x180.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+<link rel="canonical" href="https://poconoai.com/sentinel-trial-room.html">
+<link rel="stylesheet" href="styles.css?v=402">
+<link rel="stylesheet" href="nav-v2026.css?v=402">
+<link rel="stylesheet" href="brand-v292.css?v=402">
+<meta property="og:title" content="Sentinel Trial Room™ — Watch Governance Stop Harm Before It Happens | Pocono AI">
+<meta property="og:type" content="website">
+<meta property="og:description" content="A fictional interactive governance simulation. Watch a risky AI draft get stopped, audited, corrected, and converted into a defensible human-reviewed output before it can leave the workflow.">
+<meta property="og:url" content="https://poconoai.com/sentinel-trial-room.html">
+<meta property="og:image" content="https://poconoai.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="Pocono AI">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Sentinel Trial Room™ | Pocono AI">
+<meta name="twitter:description" content="A fictional interactive demonstration of governed local AI: evidence gaps surfaced, human review required, audit trail recorded, export blocked until resolved.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Sentinel Trial Room — Interactive Governance Demonstration",
+  "description": "A fictional interactive demonstration showing how Pocono AI's Sentinel Node surfaces an evidence gap, requires human review, records a local audit sequence, and blocks export until a qualified reviewer resolves the issue. Uses synthetic demonstration data only.",
+  "url": "https://poconoai.com/sentinel-trial-room.html",
+  "publisher": { "@type": "Organization", "name": "Pocono AI, LLC", "url": "https://poconoai.com" },
+  "isAccessibleForFree": true,
+  "datePublished": "2026-06-07",
+  "dateModified": "2026-06-07"
+}
+</script>
+<style>
+/* =====================================================================
+   SENTINEL TRIAL ROOM — page-scoped styles (self-contained, v349)
+   No external dependencies. Plain CSS. GitHub-Pages safe.
+   Aesthetic: governance cockpit / local black-box recorder.
+   ===================================================================== */
+.str-scope {
+  --str-bg:        #060d16;
+  --str-panel:     #0a1825;
+  --str-panel-2:   #081320;
+  --str-line:      rgba(120,160,190,.16);
+  --str-line-2:    rgba(120,160,190,.28);
+  --str-ink:       #e8f1f7;
+  --str-body:      #b3cddd;
+  --str-muted:     #7a98b0;
+  --str-faint:     #5b7488;
+  --str-teal:      #00c2a8;
+  --str-teal-br:   #2dd4bf;
+  --str-blue:      #38bdf8;
+  --str-violet:    #a78bfa;
+  --str-amber:     #fbbf24;
+  --str-red:       #f87171;
+  --str-green:     #34d399;
+  --str-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  color: var(--str-body);
+}
+.str-wrap { max-width: 1180px; margin: 0 auto; padding: 0 22px; }
+
+/* ---- HERO ---------------------------------------------------------- */
+.str-hero {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(900px 480px at 78% -8%, rgba(0,194,168,.12), transparent 60%),
+    radial-gradient(700px 420px at 8% 110%, rgba(56,189,248,.10), transparent 60%),
+    linear-gradient(180deg, #050b13, #060d16 60%, #07111c);
+  border-bottom: 1px solid var(--str-line);
+}
+.str-hero::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .5;
+  background-image:
+    linear-gradient(rgba(120,160,190,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(120,160,190,.05) 1px, transparent 1px);
+  background-size: 46px 46px;
+  -webkit-mask-image: radial-gradient(70% 80% at 50% 30%, #000 40%, transparent 100%);
+          mask-image: radial-gradient(70% 80% at 50% 30%, #000 40%, transparent 100%);
+}
+.str-hero-inner { position: relative; display: grid; grid-template-columns: 1.05fr .95fr; gap: 44px; align-items: center; padding: clamp(48px,7vw,92px) 0 clamp(44px,6vw,76px); }
+@media (max-width: 920px){ .str-hero-inner { grid-template-columns: 1fr; gap: 36px; } }
+.str-kicker {
+  display: inline-flex; align-items: center; gap: 9px; font-family: var(--str-mono);
+  font-size: .72rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--str-teal-br); padding: 6px 13px; border: 1px solid rgba(45,212,191,.34);
+  border-radius: 100px; background: rgba(0,194,168,.06); margin-bottom: 20px;
+}
+.str-kicker .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--str-teal-br); box-shadow: 0 0 0 4px rgba(45,212,191,.18); }
+.str-h1 { font-size: clamp(2.2rem,5.4vw,3.7rem); line-height: 1.04; letter-spacing: -.03em; color: #fff; font-weight: 800; margin: 0 0 18px; }
+.str-h1 .tm { font-size: .42em; vertical-align: super; color: var(--str-teal-br); font-weight: 700; }
+.str-sub { font-size: clamp(1.05rem,1.9vw,1.32rem); line-height: 1.5; color: var(--str-ink); font-weight: 600; margin: 0 0 18px; max-width: 36ch; }
+.str-support { font-size: 1rem; line-height: 1.7; color: var(--str-body); margin: 0 0 30px; max-width: 52ch; }
+.str-support b { color: var(--str-ink); font-weight: 700; }
+.str-cta-row { display: flex; flex-wrap: wrap; gap: 13px; }
+.str-btn {
+  display: inline-flex; align-items: center; gap: 9px; font-weight: 800; font-size: .98rem;
+  padding: 14px 26px; border-radius: 11px; text-decoration: none; cursor: pointer; border: 1px solid transparent;
+  transition: transform .15s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease;
+}
+.str-btn.primary { background: var(--str-teal); color: #04221d; box-shadow: 0 12px 30px rgba(0,194,168,.22); }
+.str-btn.primary:hover { transform: translateY(-2px); box-shadow: 0 16px 38px rgba(0,194,168,.32); }
+.str-btn.ghost { border-color: rgba(45,212,191,.42); color: var(--str-teal-br); background: rgba(0,194,168,.04); }
+.str-btn.ghost:hover { border-color: var(--str-teal-br); background: rgba(0,194,168,.1); }
+.str-btn:focus-visible { outline: 3px solid var(--str-blue); outline-offset: 3px; }
+
+/* ---- HERO STORYBOARD (cinematic frame stack) ---------------------- */
+.str-board {
+  border: 1px solid var(--str-line-2); border-radius: 18px; overflow: hidden;
+  background: linear-gradient(165deg, #0a1825, #060f1a);
+  box-shadow: 0 30px 70px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.04);
+}
+.str-board-bar {
+  display: flex; align-items: center; gap: 8px; padding: 11px 16px;
+  border-bottom: 1px solid var(--str-line); background: rgba(255,255,255,.015);
+  font-family: var(--str-mono); font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; color: var(--str-faint);
+}
+.str-board-bar .rec { width: 9px; height: 9px; border-radius: 50%; background: var(--str-red); }
+.str-board-bar .grow { flex: 1; }
+.str-board-stage { padding: 18px; display: grid; gap: 10px; }
+.str-frame {
+  display: grid; grid-template-columns: 30px 1fr auto; align-items: center; gap: 13px;
+  padding: 12px 14px; border: 1px solid var(--str-line); border-radius: 11px;
+  background: rgba(255,255,255,.02); opacity: 0;
+}
+.str-frame .ic { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 8px; background: rgba(56,189,248,.1); color: var(--str-blue); }
+.str-frame .ic svg { width: 17px; height: 17px; }
+.str-frame .ftxt { font-size: .88rem; color: var(--str-body); line-height: 1.35; }
+.str-frame .ftxt b { color: var(--str-ink); font-weight: 700; }
+.str-frame .ftag { font-family: var(--str-mono); font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; color: var(--str-faint); white-space: nowrap; }
+.str-frame.warn .ic { background: rgba(251,191,36,.12); color: var(--str-amber); }
+.str-frame.block .ic { background: rgba(248,113,113,.12); color: var(--str-red); }
+.str-frame.block { border-color: rgba(248,113,113,.3); }
+.str-frame.gate .ic { background: rgba(0,194,168,.12); color: var(--str-teal-br); }
+@media (prefers-reduced-motion: no-preference) {
+  .str-frame { animation: strFrameIn .55s cubic-bezier(.2,.7,.2,1) forwards; }
+  .str-frame:nth-child(1){animation-delay:.15s}.str-frame:nth-child(2){animation-delay:.55s}
+  .str-frame:nth-child(3){animation-delay:.95s}.str-frame:nth-child(4){animation-delay:1.35s}
+  .str-frame:nth-child(5){animation-delay:1.75s}.str-frame:nth-child(6){animation-delay:2.15s}
+  .str-frame:nth-child(7){animation-delay:2.55s}.str-frame:nth-child(8){animation-delay:2.95s}
+  .str-board-bar .rec { animation: strPulse 1.6s ease-in-out infinite; }
+}
+@media (prefers-reduced-motion: reduce) { .str-frame { opacity: 1; } }
+@keyframes strFrameIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes strPulse { 0%,100%{opacity:1} 50%{opacity:.25} }
+
+/* ---- SECTION SCAFFOLD --------------------------------------------- */
+.str-section { padding: clamp(46px,6vw,78px) 0; border-bottom: 1px solid var(--str-line); }
+.str-eyebrow { font-family: var(--str-mono); font-size: .72rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--str-teal-br); margin: 0 0 12px; }
+.str-h2 { font-size: clamp(1.5rem,3vw,2.2rem); line-height: 1.12; letter-spacing: -.02em; color: #fff; font-weight: 800; margin: 0 0 14px; }
+.str-lede { font-size: 1.05rem; line-height: 1.65; color: var(--str-body); max-width: 70ch; margin: 0 0 6px; }
+
+/* ---- SCENARIO SELECTOR -------------------------------------------- */
+.str-scenarios { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin: 30px 0 8px; }
+@media (max-width: 880px){ .str-scenarios { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 480px){ .str-scenarios { grid-template-columns: 1fr; } }
+.str-scn {
+  text-align: left; cursor: pointer; border: 1px solid var(--str-line-2); border-radius: 15px;
+  padding: 18px 18px 16px; background: linear-gradient(160deg, var(--str-panel), var(--str-panel-2));
+  color: var(--str-body); font: inherit; transition: border-color .18s, transform .18s, box-shadow .2s;
+}
+.str-scn:hover { transform: translateY(-3px); border-color: var(--str-line-2); box-shadow: 0 14px 30px rgba(0,0,0,.35); }
+.str-scn:focus-visible { outline: 3px solid var(--str-blue); outline-offset: 3px; }
+.str-scn[aria-pressed="true"] { border-color: var(--str-teal-br); box-shadow: 0 0 0 1px var(--str-teal-br), 0 14px 34px rgba(0,194,168,.16); background: linear-gradient(160deg, rgba(0,194,168,.1), var(--str-panel-2)); }
+.str-scn-tag { font-family: var(--str-mono); font-size: .62rem; letter-spacing: .14em; text-transform: uppercase; color: var(--str-faint); margin: 0 0 10px; }
+.str-scn-ic { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 9px; margin-bottom: 11px; background: rgba(56,189,248,.1); color: var(--str-blue); }
+.str-scn.med .str-scn-ic { background: rgba(56,189,248,.1); color: var(--str-blue); }
+.str-scn.safe .str-scn-ic { background: rgba(52,211,153,.1); color: var(--str-green); }
+.str-scn.legal .str-scn-ic { background: rgba(167,139,250,.12); color: var(--str-violet); }
+.str-scn.gov .str-scn-ic { background: rgba(0,194,168,.12); color: var(--str-teal-br); }
+.str-scn-ic svg { width: 19px; height: 19px; }
+.str-scn-title { font-size: 1rem; font-weight: 800; color: #fff; margin: 0 0 5px; line-height: 1.2; }
+.str-scn-desc { font-size: .84rem; line-height: 1.45; color: var(--str-muted); margin: 0; }
+.str-scn-active { display: none; margin-top: 12px; font-family: var(--str-mono); font-size: .63rem; letter-spacing: .12em; text-transform: uppercase; color: var(--str-teal-br); }
+.str-scn[aria-pressed="true"] .str-scn-active { display: block; }
+.str-fic-note { font-family: var(--str-mono); font-size: .72rem; letter-spacing: .04em; color: var(--str-faint); margin: 16px 0 0; display: inline-flex; align-items: center; gap: 8px; }
+.str-fic-note .pip { width: 6px; height: 6px; border-radius: 50%; background: var(--str-amber); }
+
+/* ---- ENGINE: three-panel cockpit ---------------------------------- */
+.str-engine { display: grid; grid-template-columns: 1fr 1.12fr 1fr; gap: 16px; margin: 26px 0 0; align-items: start; }
+@media (max-width: 1040px){ .str-engine { grid-template-columns: 1fr 1fr; } .str-panel.gate { grid-column: 1 / -1; } }
+@media (max-width: 720px){ .str-engine { grid-template-columns: 1fr; } .str-panel.gate { grid-column: auto; } }
+.str-panel { border: 1px solid var(--str-line-2); border-radius: 16px; background: linear-gradient(165deg, var(--str-panel), var(--str-panel-2)); overflow: hidden; }
+.str-panel-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 13px 16px; border-bottom: 1px solid var(--str-line); background: rgba(255,255,255,.015); }
+.str-panel-head h3 { margin: 0; font-size: .82rem; font-weight: 800; letter-spacing: .04em; color: var(--str-ink); text-transform: uppercase; }
+.str-panel-head .meta { font-family: var(--str-mono); font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; color: var(--str-faint); }
+.str-panel-body { padding: 16px; }
+
+/* input packet docs */
+.str-doc { border: 1px solid var(--str-line); border-radius: 11px; padding: 11px 13px; margin-bottom: 10px; background: rgba(255,255,255,.02); }
+.str-doc:last-child { margin-bottom: 0; }
+.str-doc-label { font-family: var(--str-mono); font-size: .6rem; letter-spacing: .12em; text-transform: uppercase; color: var(--str-faint); margin: 0 0 5px; display: flex; align-items: center; gap: 7px; }
+.str-doc-label .fic { color: var(--str-amber); border: 1px solid rgba(251,191,36,.34); border-radius: 100px; padding: 0 6px; font-size: .9em; }
+.str-doc-text { font-size: .84rem; line-height: 1.5; color: var(--str-body); margin: 0; }
+
+/* draft */
+.str-draft { font-size: .96rem; line-height: 1.7; color: var(--str-ink); margin: 0 0 14px; }
+.str-draft .flag { background: rgba(248,113,113,.16); border-bottom: 2px solid var(--str-red); border-radius: 3px; padding: 1px 4px; color: #ffd9d9; font-weight: 600; }
+.str-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 14px; }
+.str-chip { display: inline-flex; align-items: center; gap: 7px; font-family: var(--str-mono); font-size: .68rem; letter-spacing: .03em; padding: 5px 10px; border-radius: 100px; border: 1px solid var(--str-line-2); background: rgba(255,255,255,.02); color: var(--str-muted); }
+.str-chip.ok { border-color: rgba(52,211,153,.34); color: var(--str-green); }
+.str-chip.bad { border-color: rgba(248,113,113,.4); color: var(--str-red); }
+.str-chip .gly { font-weight: 800; }
+.str-confidence { display: flex; align-items: center; gap: 9px; font-size: .82rem; color: var(--str-amber); border: 1px solid rgba(251,191,36,.3); background: rgba(251,191,36,.07); border-radius: 10px; padding: 9px 12px; }
+.str-confidence svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+/* gate checks */
+.str-check { display: grid; grid-template-columns: 1fr auto; gap: 8px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--str-line); }
+.str-check:last-child { border-bottom: none; }
+.str-check-name { font-size: .85rem; color: var(--str-body); }
+.str-status { display: inline-flex; align-items: center; gap: 6px; font-family: var(--str-mono); font-size: .64rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 4px 9px; border-radius: 100px; border: 1px solid; white-space: nowrap; }
+.str-status .gly { font-size: .9em; }
+.str-status.pass { color: var(--str-green); border-color: rgba(52,211,153,.4); background: rgba(52,211,153,.08); }
+.str-status.review { color: var(--str-amber); border-color: rgba(251,191,36,.4); background: rgba(251,191,36,.08); }
+.str-status.block { color: var(--str-red); border-color: rgba(248,113,113,.45); background: rgba(248,113,113,.1); }
+
+/* ---- GOVERNANCE INTERRUPTION -------------------------------------- */
+.str-interrupt {
+  margin: 22px 0 0; border: 1px solid rgba(248,113,113,.4); border-radius: 16px; overflow: hidden;
+  background: linear-gradient(160deg, rgba(248,113,113,.1), rgba(8,15,28,.7));
+}
+.str-interrupt.cleared { border-color: rgba(52,211,153,.4); background: linear-gradient(160deg, rgba(52,211,153,.1), rgba(8,15,28,.7)); }
+.str-interrupt-head { display: flex; align-items: center; gap: 13px; padding: 16px 20px; border-bottom: 1px solid var(--str-line); }
+.str-interrupt-head .badge { width: 38px; height: 38px; flex-shrink: 0; display: grid; place-items: center; border-radius: 10px; background: rgba(248,113,113,.16); color: var(--str-red); }
+.str-interrupt.cleared .str-interrupt-head .badge { background: rgba(52,211,153,.16); color: var(--str-green); }
+.str-interrupt-head .badge svg { width: 20px; height: 20px; }
+.str-interrupt-head h3 { margin: 0; font-size: 1.06rem; font-weight: 800; color: #fff; }
+.str-interrupt-head p { margin: 3px 0 0; font-size: .85rem; color: var(--str-muted); }
+.str-interrupt-body { padding: 16px 20px; }
+.str-interrupt-body > p { margin: 0 0 14px; font-size: .94rem; line-height: 1.65; color: var(--str-body); }
+.str-flags { display: grid; grid-template-columns: repeat(auto-fit,minmax(190px,1fr)); gap: 10px; }
+.str-flagcard { display: flex; align-items: center; gap: 9px; font-size: .82rem; color: var(--str-body); border: 1px solid var(--str-line); border-radius: 10px; padding: 10px 12px; background: rgba(255,255,255,.02); }
+.str-flagcard .gly { font-family: var(--str-mono); font-weight: 800; }
+.str-flagcard.locked .gly { color: var(--str-red); }
+.str-flagcard.req .gly { color: var(--str-amber); }
+.str-flagcard.rec .gly { color: var(--str-blue); }
+.str-flagcard.ok .gly { color: var(--str-green); }
+
+/* ---- REVIEW + OUTPUT + AUDIT split -------------------------------- */
+.str-grid2 { display: grid; grid-template-columns: 1.1fr 1fr; gap: 18px; margin: 22px 0 0; align-items: start; }
+@media (max-width: 860px){ .str-grid2 { grid-template-columns: 1fr; } }
+.str-card { border: 1px solid var(--str-line-2); border-radius: 16px; background: linear-gradient(165deg, var(--str-panel), var(--str-panel-2)); overflow: hidden; }
+.str-card-head { padding: 13px 16px; border-bottom: 1px solid var(--str-line); background: rgba(255,255,255,.015); display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.str-card-head h3 { margin: 0; font-size: .82rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: var(--str-ink); }
+.str-card-body { padding: 16px; }
+.str-review-help { font-size: .85rem; line-height: 1.6; color: var(--str-muted); margin: 0 0 14px; }
+.str-review-btns { display: flex; flex-direction: column; gap: 10px; }
+.str-rbtn {
+  display: flex; align-items: center; gap: 11px; width: 100%; text-align: left; cursor: pointer; font: inherit;
+  padding: 13px 15px; border-radius: 12px; border: 1px solid var(--str-line-2); background: rgba(255,255,255,.02);
+  color: var(--str-ink); font-weight: 700; font-size: .92rem; transition: border-color .16s, background .16s, transform .12s;
+}
+.str-rbtn .rb-ic { width: 28px; height: 28px; flex-shrink: 0; display: grid; place-items: center; border-radius: 8px; }
+.str-rbtn .rb-ic svg { width: 16px; height: 16px; }
+.str-rbtn small { display: block; font-weight: 500; font-size: .76rem; color: var(--str-muted); margin-top: 2px; }
+.str-rbtn:hover { transform: translateY(-1px); }
+.str-rbtn:focus-visible { outline: 3px solid var(--str-blue); outline-offset: 3px; }
+.str-rbtn.approve .rb-ic { background: rgba(52,211,153,.14); color: var(--str-green); }
+.str-rbtn.approve:hover { border-color: rgba(52,211,153,.5); background: rgba(52,211,153,.06); }
+.str-rbtn.revise .rb-ic { background: rgba(56,189,248,.14); color: var(--str-blue); }
+.str-rbtn.revise:hover { border-color: rgba(56,189,248,.5); background: rgba(56,189,248,.06); }
+.str-rbtn.reject .rb-ic { background: rgba(248,113,113,.14); color: var(--str-red); }
+.str-rbtn.reject:hover { border-color: rgba(248,113,113,.5); background: rgba(248,113,113,.06); }
+.str-rbtn[disabled] { opacity: .42; cursor: not-allowed; transform: none; }
+
+/* output panel */
+.str-output { margin: 16px 0 0; border: 1px dashed var(--str-line-2); border-radius: 12px; padding: 14px 15px; background: rgba(255,255,255,.015); }
+.str-output-state { display: flex; align-items: center; gap: 9px; font-family: var(--str-mono); font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; margin: 0 0 9px; color: var(--str-red); }
+.str-output-state .lk { width: 15px; height: 15px; }
+.str-output.permitted { border-style: solid; border-color: rgba(52,211,153,.4); background: rgba(52,211,153,.05); }
+.str-output.permitted .str-output-state { color: var(--str-green); }
+.str-output.rejected { border-color: rgba(248,113,113,.4); background: rgba(248,113,113,.06); }
+.str-output-text { font-size: .9rem; line-height: 1.6; color: var(--str-body); margin: 0; }
+
+/* audit timeline */
+.str-audit-body { padding: 8px 16px 16px; max-height: 380px; overflow: auto; }
+.str-event { display: grid; grid-template-columns: auto 1fr; gap: 12px; padding: 9px 0; position: relative; }
+.str-event .ts { font-family: var(--str-mono); font-size: .72rem; color: var(--str-teal-br); white-space: nowrap; padding-top: 1px; }
+.str-event .ev { font-size: .85rem; color: var(--str-body); line-height: 1.4; }
+.str-event .ev b { color: var(--str-ink); font-weight: 700; }
+.str-event::before { content: ""; position: absolute; left: 58px; top: 18px; bottom: -9px; width: 1px; background: var(--str-line); }
+.str-event:last-child::before { display: none; }
+.str-event.alert .ev b { color: var(--str-red); }
+.str-event.gate .ev b { color: var(--str-amber); }
+.str-event.resolve .ev b { color: var(--str-green); }
+.str-event.new { animation: strEventIn .4s ease forwards; }
+@media (prefers-reduced-motion: reduce){ .str-event.new { animation: none; } }
+@keyframes strEventIn { from { opacity:0; transform: translateX(-6px); } to { opacity:1; transform: translateX(0); } }
+.str-audit-foot { font-family: var(--str-mono); font-size: .64rem; letter-spacing: .06em; color: var(--str-faint); padding: 0 16px 14px; display: flex; align-items: center; gap: 7px; }
+
+/* ---- BEFORE / AFTER ----------------------------------------------- */
+.str-ba { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 28px 0 0; }
+@media (max-width: 720px){ .str-ba { grid-template-columns: 1fr; } }
+.str-ba-col { border: 1px solid var(--str-line-2); border-radius: 16px; overflow: hidden; }
+.str-ba-col.without { background: linear-gradient(165deg, rgba(248,113,113,.06), var(--str-panel-2)); }
+.str-ba-col.with { background: linear-gradient(165deg, rgba(0,194,168,.07), var(--str-panel-2)); border-color: rgba(0,194,168,.3); }
+.str-ba-head { padding: 15px 18px; border-bottom: 1px solid var(--str-line); }
+.str-ba-head h3 { margin: 0; font-size: 1rem; font-weight: 800; color: #fff; }
+.str-ba-head p { margin: 4px 0 0; font-size: .8rem; color: var(--str-muted); }
+.str-ba-row { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center; padding: 11px 18px; border-bottom: 1px solid var(--str-line); }
+.str-ba-row:last-child { border-bottom: none; }
+.str-ba-row .lbl { font-size: .86rem; color: var(--str-body); }
+.str-ba-row .val { font-family: var(--str-mono); font-size: .7rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 3px 9px; border-radius: 100px; border: 1px solid; }
+.str-ba-col.without .val { color: var(--str-red); border-color: rgba(248,113,113,.4); background: rgba(248,113,113,.08); }
+.str-ba-col.with .val { color: var(--str-teal-br); border-color: rgba(0,194,168,.4); background: rgba(0,194,168,.08); }
+
+/* ---- STAKEHOLDER VALUE -------------------------------------------- */
+.str-stake { display: grid; grid-template-columns: repeat(5,1fr); gap: 14px; margin: 28px 0 0; }
+@media (max-width: 980px){ .str-stake { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 520px){ .str-stake { grid-template-columns: 1fr; } }
+.str-stakecard { border: 1px solid var(--str-line-2); border-radius: 15px; padding: 18px 16px; background: linear-gradient(165deg, var(--str-panel), var(--str-panel-2)); }
+.str-stakecard .sc-ic { width: 32px; height: 32px; display: grid; place-items: center; border-radius: 9px; margin-bottom: 12px; background: rgba(0,194,168,.1); color: var(--str-teal-br); }
+.str-stakecard .sc-ic svg { width: 18px; height: 18px; }
+.str-stakecard h3 { margin: 0 0 7px; font-size: .95rem; font-weight: 800; color: #fff; }
+.str-stakecard p { margin: 0; font-size: .84rem; line-height: 1.55; color: var(--str-muted); }
+
+/* ---- FINAL CTA + DISCLAIMER --------------------------------------- */
+.str-final {
+  text-align: center; border: 1px solid rgba(0,194,168,.28); border-radius: 20px; padding: clamp(32px,5vw,52px) clamp(22px,4vw,44px);
+  margin: 28px 0 0; background: radial-gradient(700px 300px at 50% -20%, rgba(0,194,168,.12), transparent 70%), linear-gradient(165deg, rgba(0,194,168,.05), var(--str-panel-2));
+}
+.str-final h2 { font-size: clamp(1.5rem,3.2vw,2.3rem); line-height: 1.14; color: #fff; font-weight: 800; margin: 0 0 14px; letter-spacing: -.02em; }
+.str-final p { font-size: 1.04rem; line-height: 1.65; color: var(--str-body); max-width: 64ch; margin: 0 auto 26px; }
+.str-final-btns { display: flex; flex-wrap: wrap; gap: 11px; justify-content: center; }
+.str-pull { font-family: var(--str-mono); font-size: clamp(1rem,2.1vw,1.32rem); line-height: 1.45; color: var(--str-teal-br); border-left: 3px solid var(--str-teal); padding: 6px 0 6px 18px; margin: 24px 0; max-width: 60ch; }
+.str-disclaimer {
+  margin: 30px 0 0; border: 1px solid var(--str-line-2); border-radius: 14px; padding: 16px 18px;
+  background: rgba(255,255,255,.02); font-size: .86rem; line-height: 1.65; color: var(--str-muted);
+  display: flex; gap: 12px; align-items: flex-start;
+}
+.str-disclaimer .di { width: 20px; height: 20px; flex-shrink: 0; color: var(--str-amber); margin-top: 2px; }
+.str-disclaimer b { color: var(--str-body); }
+
+/* visually-hidden helper */
+.str-sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+</style>
+</head>
+<body>
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- INCLUDE:HEADER -->
+<div id="hitl-notice" style="background:#0a1929;padding:4px 16px;text-align:center;font-size:12px;color:#4a5568;border-bottom:1px solid rgba(255,255,255,0.06);letter-spacing:0.01em;">Human-in-the-Loop required: licensed professionals verify all outputs before clinical or legal action</div>
+<header role="banner">
+  <div class="header-inner">
+    <a href="/index.html" class="logo" aria-label="Pocono AI Home">
+      <img src="/logo.svg?v=402" alt="" width="36" height="36" decoding="async" loading="eager" aria-hidden="true" style="display:inline-block;">
+      Pocono <span>AI</span>
+    </a>
+    <nav id="desktop-nav" aria-label="Main navigation">
+      <div class="nav-item"><a href="/index.html" class="nav-direct">Home</a></div>
+      <div class="nav-item"><a href="/for-physicians.html" class="nav-direct">Physicians</a></div>
+      <div class="nav-item"><a href="/for-attorneys.html" class="nav-direct">Attorneys</a></div>
+      <div class="nav-item"><a href="/sentinel-node.html" class="nav-direct nav-hub" style="color:#d5a94f;border:1px solid rgba(213,169,79,0.45);border-radius:999px;padding:6px 13px;">Sentinel Node</a></div>
+      <div class="nav-item"><a href="/living-memorials/" class="nav-direct">Living Echo</a></div>
+      <div class="nav-item"><a href="/contact.html" class="nav-direct">Contact</a></div>
+      <div class="nav-item" data-dropdown="menu-more">
+        <button type="button" class="nav-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="menu-more">More <span class="nav-chevron" aria-hidden="true">&#9662;</span></button>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <a href="/contact.html#pilot" class="nav-cta nav-cta-primary">Request a Pilot</a>
+      <button type="button" class="pa-search-trigger" data-search-open aria-label="Search (press / or Ctrl-K)" aria-haspopup="dialog" aria-expanded="false">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span class="pa-st-label">Search</span><kbd data-pa-keyhint>Ctrl K</kbd>
+      </button>
+      <button type="button" class="header-icon-btn" id="mobile-menu" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav-panel">
+        <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- "More" overflow dropdown — sibling of <header> so position:fixed escapes header's stacking context. Wired by nav.js via data-dropdown="menu-more". -->
+<div class="nav-dropdown" id="menu-more" aria-label="More navigation">
+  <p class="nav-dd-section">Products</p>
+  <a href="/engineering-drafting/">Drafting &amp; Engineering Edition</a>
+  <a href="/sentinel-home/">Sentinel Home Edition</a>
+  <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability — Assistive Tools &#x2605;</a>
+  <a href="/living-memorials/enterprise-estate-continuity.html">Enterprise Estate Continuity</a>
+  <p class="nav-dd-section">Capabilities</p>
+  <a href="/evidence-room.html">Evidence Room</a>
+  <a href="/push-button-deliverables.html">Push-Button Deliverables</a>
+  <a href="/pilot-readiness-kit.html">Pilot Kit</a>
+  <a href="/pilot-program.html">Pilot Program</a>
+  <a href="/how-it-works.html">How It Works</a>
+  <p class="nav-dd-section">Hubs &amp; Company</p>
+  <a href="/training.html">Training Hub</a>
+  <a href="/documentation-hub/">Document Hub</a>
+  <a href="/global/">Global Hub</a>
+  <a href="/investors-hub.html">Investor Hub</a>
+  <a href="/valuation-dashboard.html">Valuation Dashboard</a>
+  <a href="/about.html">About</a>
+  <p class="nav-dd-section">Trust &amp; Legal</p>
+  <a href="/transparency.html">Transparency</a>
+  <a href="/audit.html">Audit Log</a>
+  <a href="/privacy.html">Privacy</a>
+  <a href="/sitemap.html">Sitemap</a>
+</div>
+<!-- Site search is provided by the self-contained search.js asset (command palette: / or Ctrl/Cmd-K). -->
+
+<!-- Mobile panel: full-screen slide-in. v396 nav — hub tiles + grouped links + Sentinel Node + Engineering. -->
+<nav id="mobile-nav-panel" aria-label="Mobile navigation" aria-hidden="true" role="dialog" aria-modal="true">
+
+  <!-- Hub tiles: Sentinel Node, Documentation Hub, Training Hub, Global Hub -->
+  <div style="padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,0.07);">
+    <p style="font-size:0.65em;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.28);margin:0 0 10px;padding:0 2px;">Hubs</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <a href="/sentinel-node.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(213,169,79,0.1);border:1px solid rgba(213,169,79,0.35);border-radius:10px;color:#d5a94f;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Sentinel Node</a>
+      <a href="/documentation-hub/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(0,194,168,0.1);border:1px solid rgba(0,194,168,0.35);border-radius:10px;color:#00c2a8;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Docs Hub</a>
+      <a href="/training.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.35);border-radius:10px;color:#a78bfa;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Training Hub</a>
+      <a href="/global/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(122,240,220,0.07);border:1px solid rgba(122,240,220,0.3);border-radius:10px;color:#7af0dc;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Global Hub</a>
+    </div>
+  </div>
+
+  <!-- Core paths -->
+  <div class="mob-static-links">
+    <a href="/index.html">Home</a>
+    <a href="/for-physicians.html">Physicians</a>
+    <a href="/for-attorneys.html">Attorneys</a>
+    <a href="/engineering-drafting/">Engineering &amp; Drafting</a>
+    <a href="/pilot-program.html">Pilot Program</a>
+    <a href="/how-it-works.html">How It Works</a>
+    <a href="/trust.html">Trust &amp; Audit</a>
+    <a href="/pricing.html">Pricing</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/living-memorials/">Living Echo</a>
+    <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability</a>
+    <a href="/about.html">About</a>
+    <a href="/team.html" style="color:rgba(255,255,255,0.6);">Team &amp; Leadership</a>
+    <a href="/valuation-dashboard.html" style="color:rgba(255,255,255,0.6);">Valuation Dashboard</a>
+    <a href="/careers.html" style="color:rgba(255,255,255,0.6);">Careers</a>
+    <a href="/sentinel-demo.html" style="color:rgba(255,255,255,0.6);">Demo</a>
+    <a href="/sitemap.html" style="color:rgba(255,255,255,0.45);">Sitemap</a>
+    <a href="/transparency.html" style="color:rgba(255,255,255,0.45);">Transparency</a>
+    <a href="/privacy.html" style="color:rgba(255,255,255,0.45);">Privacy</a>
+  </div>
+
+  <a href="/contact.html#pilot" class="mob-cta">Request a Pilot</a>
+</nav>
+<!-- /INCLUDE:HEADER -->
+
+<main id="main-content" class="str-scope">
+
+  <!-- ============ 1. HERO ============ -->
+  <section class="str-hero" aria-labelledby="str-hero-title">
+    <div class="str-wrap str-hero-inner">
+      <div>
+        <span class="str-kicker"><span class="dot" aria-hidden="true"></span>Interactive Governance Demonstration</span>
+        <h1 class="str-h1" id="str-hero-title">Sentinel Trial Room<span class="tm">™</span></h1>
+        <p class="str-sub">Watch a risky AI draft get stopped, audited, corrected, and converted into a defensible human-reviewed output.</p>
+        <p class="str-support">Most AI demos show the answer. This one shows the <b>boundary</b>. Sentinel Node is designed for regulated work where the safest output may be the one the system refuses to export.</p>
+        <div class="str-cta-row">
+          <a href="#str-trial" class="str-btn primary">Enter the Trial Room
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+          </a>
+          <a href="#str-audit-section" class="str-btn ghost">See the Audit Chain</a>
+        </div>
+      </div>
+
+      <!-- Cinematic storyboard: a sequence of "frames" like a black-box recorder -->
+      <div class="str-board" role="img" aria-label="Storyboard: a patient chart, denial letter, and legal document arrive; an AI draft appears confident; Sentinel Node detects an evidence gap; export is blocked; human review is required; an audit event is recorded.">
+        <div class="str-board-bar"><span class="rec" aria-hidden="true"></span><span>SENTINEL · DEMO RECORDER</span><span class="grow"></span><span>SEALED · LOCAL</span></div>
+        <div class="str-board-stage" aria-hidden="true">
+          <div class="str-frame"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="16 3 16 8 21 8"/></svg></span><span class="ftxt"><b>Patient chart</b> arrives in the local packet</span><span class="ftag">Input</span></div>
+          <div class="str-frame"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9h10M7 13h6"/></svg></span><span class="ftxt"><b>Denial letter</b> &amp; <b>legal document</b> indexed</span><span class="ftag">Input</span></div>
+          <div class="str-frame"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a7 7 0 0 0-4 12.7V17a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2v-2.3A7 7 0 0 0 12 2z"/><path d="M9 22h6"/></svg></span><span class="ftxt"><b>AI draft</b> appears — confident, fluent</span><span class="ftag">Model</span></div>
+          <div class="str-frame warn"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span><span class="ftxt">Sentinel Node detects an <b>evidence gap</b></span><span class="ftag">Gate</span></div>
+          <div class="str-frame block"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span><span class="ftxt"><b>Export blocked</b> — nothing leaves the node</span><span class="ftag">Control</span></div>
+          <div class="str-frame gate"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span><span class="ftxt"><b>Human review</b> is required to proceed</span><span class="ftag">Gate</span></div>
+          <div class="str-frame"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span><span class="ftxt"><b>Audit event</b> recorded to the local chain</span><span class="ftag">Receipt</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 2 + 3 + 4 + 5 + 6. TRIAL ROOM ENGINE ============ -->
+  <section class="str-section" id="str-trial" aria-labelledby="str-trial-title">
+    <div class="str-wrap">
+      <p class="str-eyebrow">Step 1 · Choose a scenario</p>
+      <h2 class="str-h2" id="str-trial-title">Pick a regulated workflow to put on trial</h2>
+      <p class="str-lede">Each scenario below is a <b>fictional demonstration</b>. Selecting one loads a synthetic input packet, a plausible AI draft, and the live Sentinel Gate. Nothing here is real patient, client, or company data.</p>
+
+      <div class="str-scenarios" role="group" aria-label="Choose a demonstration scenario">
+        <button type="button" class="str-scn med" data-scn="A" aria-pressed="true">
+          <p class="str-scn-tag">Scenario A · Demo</p>
+          <span class="str-scn-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 12 5 5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7z"/></svg></span>
+          <p class="str-scn-title">Medical Prior Authorization</p>
+          <p class="str-scn-desc">An appeal draft cites criteria it cannot find and a date that conflicts with the note.</p>
+          <p class="str-scn-active">▸ Loaded</p>
+        </button>
+        <button type="button" class="str-scn safe" data-scn="B" aria-pressed="false">
+          <p class="str-scn-tag">Scenario B · Demo</p>
+          <span class="str-scn-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span>
+          <p class="str-scn-title">Hospital Discharge / Patient Safety</p>
+          <p class="str-scn-desc">A discharge summary misses an active medication change and an unresolved symptom.</p>
+          <p class="str-scn-active">▸ Loaded</p>
+        </button>
+        <button type="button" class="str-scn legal" data-scn="C" aria-pressed="false">
+          <p class="str-scn-tag">Scenario C · Demo</p>
+          <span class="str-scn-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M5 7l7-4 7 4M5 7l-3 6a4 4 0 0 0 6 0L5 7zm14 0-3 6a4 4 0 0 0 6 0l-3-6z"/></svg></span>
+          <p class="str-scn-title">Legal Discovery / Privilege Review</p>
+          <p class="str-scn-desc">A production set stages a potentially privileged document before the screen is complete.</p>
+          <p class="str-scn-active">▸ Loaded</p>
+        </button>
+        <button type="button" class="str-scn gov" data-scn="D" aria-pressed="false">
+          <p class="str-scn-tag">Scenario D · Demo</p>
+          <span class="str-scn-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6"/></svg></span>
+          <p class="str-scn-title">Investor Governance Audit</p>
+          <p class="str-scn-desc">A diligence reply uses absolute claims that one pilot configuration contradicts.</p>
+          <p class="str-scn-active">▸ Loaded</p>
+        </button>
+      </div>
+      <p class="str-fic-note"><span class="pip" aria-hidden="true"></span>All scenarios use synthetic demonstration data. Names, numbers, and documents are fictional.</p>
+
+      <!-- live region announcing scenario / status changes -->
+      <p class="str-sr" role="status" aria-live="polite" id="str-live"></p>
+
+      <!-- THREE-PANEL ENGINE -->
+      <p class="str-eyebrow" style="margin-top:42px;">Step 2 · Read the workflow</p>
+      <h2 class="str-h2" style="font-size:clamp(1.3rem,2.5vw,1.8rem);">The input packet, the draft, and the gate</h2>
+
+      <div class="str-engine">
+        <!-- LEFT: input packet -->
+        <div class="str-panel">
+          <div class="str-panel-head">
+            <h3>Input Packet</h3>
+            <span class="meta">Local · Indexed</span>
+          </div>
+          <div class="str-panel-body" id="str-packet"><!-- JS-populated --></div>
+        </div>
+
+        <!-- CENTER: AI draft -->
+        <div class="str-panel">
+          <div class="str-panel-head">
+            <h3>AI Draft</h3>
+            <span class="meta">Draft only</span>
+          </div>
+          <div class="str-panel-body">
+            <p class="str-draft" id="str-draft"><!-- JS-populated --></p>
+            <div class="str-chips" id="str-chips" aria-label="Citation status"><!-- JS-populated --></div>
+            <div class="str-confidence" id="str-confidence">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              <span id="str-confidence-text"><!-- JS-populated --></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: Sentinel Gate -->
+        <div class="str-panel gate">
+          <div class="str-panel-head">
+            <h3>Sentinel Gate</h3>
+            <span class="meta" id="str-gate-meta">Evaluating</span>
+          </div>
+          <div class="str-panel-body" id="str-gate"><!-- JS-populated --></div>
+        </div>
+      </div>
+
+      <!-- GOVERNANCE INTERRUPTION -->
+      <div class="str-interrupt" id="str-interrupt" role="region" aria-label="Governance interruption status">
+        <div class="str-interrupt-head">
+          <span class="badge" id="str-interrupt-badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </span>
+          <div>
+            <h3 id="str-interrupt-title">Draft blocked. Human review required.</h3>
+            <p id="str-interrupt-sub">Sentinel Node detected an evidence gap and prevented export.</p>
+          </div>
+        </div>
+        <div class="str-interrupt-body">
+          <p id="str-interrupt-detail">Sentinel Node detected an evidence gap, recorded the event locally, and prevented export until a qualified human reviewer resolves the issue.</p>
+          <div class="str-flags" id="str-flags">
+            <div class="str-flagcard locked"><span class="gly" aria-hidden="true">✕</span><span>Export locked</span></div>
+            <div class="str-flagcard req"><span class="gly" aria-hidden="true">!</span><span>Reviewer required</span></div>
+            <div class="str-flagcard rec"><span class="gly" aria-hidden="true">⚑</span><span>Evidence conflict detected</span></div>
+            <div class="str-flagcard ok"><span class="gly" aria-hidden="true">●</span><span>Demonstration audit event created</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- REVIEW + AUDIT -->
+      <p class="str-eyebrow" style="margin-top:42px;">Step 3 · You are the reviewer</p>
+      <h2 class="str-h2" style="font-size:clamp(1.3rem,2.5vw,1.8rem);">Make the call. Watch it get recorded.</h2>
+
+      <div class="str-grid2">
+        <!-- review + output -->
+        <div class="str-card">
+          <div class="str-card-head"><h3>Human Review Panel</h3></div>
+          <div class="str-card-body">
+            <p class="str-review-help">Human review is not a disclaimer. It is a system boundary. Choose how to resolve this draft — each decision is recorded to the local event chain.</p>
+            <div class="str-review-btns">
+              <button type="button" class="str-rbtn approve" id="str-approve">
+                <span class="rb-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                <span>Approve with citation<small>Confirm the evidence and permit export after review</small></span>
+              </button>
+              <button type="button" class="str-rbtn revise" id="str-revise">
+                <span class="rb-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></span>
+                <span>Request revision<small>Rewrite into a safer draft — export stays locked</small></span>
+              </button>
+              <button type="button" class="str-rbtn reject" id="str-reject">
+                <span class="rb-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span>
+                <span>Reject draft<small>Mark rejected — no export permitted</small></span>
+              </button>
+            </div>
+
+            <div class="str-output" id="str-output">
+              <p class="str-output-state" id="str-output-state">
+                <svg class="lk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                <span id="str-output-state-text">Export locked · awaiting reviewer decision</span>
+              </p>
+              <p class="str-output-text" id="str-output-text">The final output panel unlocks only after a reviewer permits export. Until then, this workflow holds the draft inside the node.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- audit trail -->
+        <div class="str-card" id="str-audit-section">
+          <div class="str-card-head"><h3>Audit Trail</h3><span class="meta" style="font-family:var(--str-mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--str-faint);">Local event chain</span></div>
+          <div class="str-audit-body" id="str-audit" aria-live="polite" aria-label="Demonstration audit sequence"><!-- JS-populated --></div>
+          <p class="str-audit-foot"><span aria-hidden="true">◆</span> Demonstration audit sequence · tamper-evident design pattern · stays on the node</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 7. BEFORE / AFTER ============ -->
+  <section class="str-section" aria-labelledby="str-ba-title">
+    <div class="str-wrap">
+      <p class="str-eyebrow">The difference governance makes</p>
+      <h2 class="str-h2" id="str-ba-title">Before and after a governed control surface</h2>
+      <p class="str-lede">Governed infrastructure does not promise to eliminate risk. It changes where risk is <b>visible</b> and who is <b>accountable</b> for it.</p>
+      <div class="str-ba">
+        <div class="str-ba-col without">
+          <div class="str-ba-head"><h3>Without governed infrastructure</h3><p>Ungoverned AI output, copied straight into high-liability work</p></div>
+          <div class="str-ba-row"><span class="lbl">Unsupported answer risk</span><span class="val">High</span></div>
+          <div class="str-ba-row"><span class="lbl">Data boundary clarity</span><span class="val">Low</span></div>
+          <div class="str-ba-row"><span class="lbl">Human accountability</span><span class="val">Unclear</span></div>
+          <div class="str-ba-row"><span class="lbl">Export control</span><span class="val">Weak</span></div>
+          <div class="str-ba-row"><span class="lbl">Audit defensibility</span><span class="val">Weak</span></div>
+          <div class="str-ba-row"><span class="lbl">Near-miss visibility</span><span class="val">Poor</span></div>
+        </div>
+        <div class="str-ba-col with">
+          <div class="str-ba-head"><h3>With Sentinel Node</h3><p>The same draft, run through an evidence-bound, human-gated workflow</p></div>
+          <div class="str-ba-row"><span class="lbl">Unsupported answer risk</span><span class="val">Reduced</span></div>
+          <div class="str-ba-row"><span class="lbl">Data boundary clarity</span><span class="val">Local</span></div>
+          <div class="str-ba-row"><span class="lbl">Human accountability</span><span class="val">Explicit</span></div>
+          <div class="str-ba-row"><span class="lbl">Export control</span><span class="val">Human-gated</span></div>
+          <div class="str-ba-row"><span class="lbl">Audit defensibility</span><span class="val">Stronger</span></div>
+          <div class="str-ba-row"><span class="lbl">Near-miss visibility</span><span class="val">Surfaced</span></div>
+        </div>
+      </div>
+      <p class="str-pull">The safest AI output may be the one the system refuses to export.</p>
+    </div>
+  </section>
+
+  <!-- ============ 8. STAKEHOLDER VALUE ============ -->
+  <section class="str-section" aria-labelledby="str-stake-title">
+    <div class="str-wrap">
+      <p class="str-eyebrow">Who this is for</p>
+      <h2 class="str-h2" id="str-stake-title">One control surface, five different stakes</h2>
+      <div class="str-stake">
+        <div class="str-stakecard">
+          <span class="sc-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 12 5 5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7z"/></svg></span>
+          <h3>For Physicians</h3>
+          <p>Less paperwork pressure without surrendering clinical judgment.</p>
+        </div>
+        <div class="str-stakecard">
+          <span class="sc-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M5 7l7-4 7 4"/><path d="M5 7l-3 6a4 4 0 0 0 6 0L5 7zm14 0-3 6a4 4 0 0 0 6 0l-3-6z"/></svg></span>
+          <h3>For Attorneys</h3>
+          <p>Confidentiality-sensitive AI workflows with human-controlled outputs.</p>
+        </div>
+        <div class="str-stakecard">
+          <span class="sc-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></span>
+          <h3>For Patient Advocates</h3>
+          <p>Near-misses are surfaced before they normalize into harm.</p>
+        </div>
+        <div class="str-stakecard">
+          <span class="sc-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg></span>
+          <h3>For Investors</h3>
+          <p>A differentiated infrastructure thesis, not another chatbot wrapper.</p>
+        </div>
+        <div class="str-stakecard">
+          <span class="sc-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></span>
+          <h3>For IT / MSPs</h3>
+          <p>A local deployment model with clear data boundaries.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 9. FINAL CTA ============ -->
+  <section class="str-section" style="border-bottom:none;" aria-labelledby="str-final-title">
+    <div class="str-wrap">
+      <div class="str-final">
+        <h2 id="str-final-title">Governance is not a policy document. It is a control surface.</h2>
+        <p>Sentinel Node makes the boundary visible: what evidence was used, what the model drafted, what the system blocked, what the reviewer decided, and what was allowed to leave the workflow.</p>
+        <div class="str-final-btns">
+          <a href="architecture.html" class="str-btn ghost">See Architecture</a>
+          <a href="for-physicians.html" class="str-btn ghost">For Physicians</a>
+          <a href="for-attorneys.html" class="str-btn ghost">For Attorneys</a>
+          <a href="investors.html" class="str-btn ghost">Investor Brief</a>
+          <a href="contact.html" class="str-btn primary">Schedule a Pilot Discussion
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- ============ 10. DISCLAIMER ============ -->
+      <div class="str-disclaimer">
+        <svg class="di" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <p style="margin:0;"><b>This page uses fictional demonstration data.</b> It is not medical advice, legal advice, clinical validation, or a guarantee of compliance. Pocono AI systems are designed to support licensed professional review, not replace it. Compliance is a property of a deploying organization, not a product. The scenarios, audit events, and reviewer decisions shown here are illustrative of a governance design pattern only.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+/* =====================================================================
+   SENTINEL TRIAL ROOM — interactive engine (vanilla JS, no dependencies)
+   All data is fictional demonstration data. v349.
+   ===================================================================== */
+(function () {
+  "use strict";
+
+  var SCENARIOS = {
+    A: {
+      label: "Medical Prior Authorization",
+      packet: [
+        { label: "Patient summary", text: "J. Rivera · 54F · Type 2 diabetes, stage 3 CKD. Established patient." },
+        { label: "Payer denial", text: "Denial #DX-4471: \u201CStep therapy not documented; request not approved.\u201D" },
+        { label: "Clinical note", text: "Endocrinology note dated 04/12: A1c 9.2%, metformin intolerance noted." },
+        { label: "Treatment history", text: "Prior trials: metformin (GI intolerance), 6-month lifestyle program." }
+      ],
+      draft: "Appeal letter draft: The requested therapy is medically necessary. The patient has documented metformin intolerance and six months of conservative management. <span class=\"flag\">Step-therapy criteria are satisfied per the endocrinology note dated 04/19.</span>",
+      chips: [
+        { ok: true,  text: "Endo note 04/12" },
+        { ok: true,  text: "Denial #DX-4471" },
+        { ok: false, text: "Step-therapy criteria \u2014 source not found" }
+      ],
+      confidence: "Model confidence on the cited date is low \u2014 the draft says 04/19 but the only matching note is dated 04/12.",
+      gate: [
+        { name: "Evidence citation required", status: "review" },
+        { name: "Conflict detection",         status: "block",  note: "date 04/19 \u2260 note 04/12" },
+        { name: "Human reviewer required",     status: "review" },
+        { name: "No cloud route",              status: "pass" },
+        { name: "Audit event recorded",        status: "pass" },
+        { name: "Export locked until review",  status: "block" }
+      ],
+      interruptDetail: "The draft asserts that step-therapy criteria are satisfied, but the supporting citation cannot be located and the referenced date (04/19) conflicts with the only matching note (04/12). Sentinel Node recorded the event locally and prevented export until a qualified reviewer resolves it.",
+      revision: "Appeal letter draft (revised): The request is supported by documented metformin intolerance and a six-month conservative-management trial recorded in the endocrinology note dated 04/12. The unverified step-therapy citation and the conflicting 04/19 date reference have been removed pending reviewer confirmation."
+    },
+    B: {
+      label: "Hospital Discharge / Patient Safety",
+      packet: [
+        { label: "Discharge note", text: "Inpatient stay 5 days. Plan: discharge home with home-health follow-up." },
+        { label: "Medication change", text: "Anticoagulant dose increased on day 4. INR monitoring plan not yet attached." },
+        { label: "Symptom warning", text: "Nursing note: patient reports new bruising in the last 24 hours." },
+        { label: "Care-transition gap", text: "Primary-care follow-up appointment not yet scheduled." }
+      ],
+      draft: "Discharge summary draft: Patient is stable for discharge. <span class=\"flag\">Continue all current medications as previously prescribed.</span> Routine follow-up recommended.",
+      chips: [
+        { ok: true,  text: "Discharge note" },
+        { ok: false, text: "Medication list \u2014 superseded version" },
+        { ok: true,  text: "Symptom log" }
+      ],
+      confidence: "Medication-list version mismatch detected \u2014 the cited list predates the day-4 anticoagulant change.",
+      gate: [
+        { name: "Evidence citation required", status: "review", note: "cites superseded med list" },
+        { name: "Conflict detection",         status: "block",  note: "active med change unreflected" },
+        { name: "Human reviewer required",     status: "review" },
+        { name: "No cloud route",              status: "pass" },
+        { name: "Audit event recorded",        status: "pass" },
+        { name: "Export locked until review",  status: "block" }
+      ],
+      interruptDetail: "The draft tells the patient to continue medications \u201Cas previously prescribed,\u201D but it cites a superseded medication list that omits an active anticoagulant change and does not address a newly reported symptom. Sentinel Node held the draft and recorded a local audit event.",
+      revision: "Discharge summary draft (revised): A medication change (anticoagulant dose adjustment) and a newly reported symptom were flagged as unresolved. This draft cannot be finalized until a licensed clinician reviews the current medication-list version, the INR monitoring plan, and the unscheduled follow-up."
+    },
+    C: {
+      label: "Legal Discovery / Privilege Review",
+      packet: [
+        { label: "Discovery packet", text: "2,140 documents staged for a responsiveness pass ahead of production." },
+        { label: "Privilege risk", text: "Doc #1186 is a counsel-to-client memo \u2014 potentially privileged." },
+        { label: "Litigation memo", text: "Internal strategy outline; not for production." },
+        { label: "Production deadline", text: "Friday, 5:00 PM. Pressure to release the full set." }
+      ],
+      draft: "Production set draft: All 2,140 responsive documents are ready for production. <span class=\"flag\">Document #1186 is responsive and included in the production batch.</span>",
+      chips: [
+        { ok: true,  text: "Responsiveness log" },
+        { ok: false, text: "Privilege screen \u2014 incomplete" },
+        { ok: true,  text: "Litigation memo" }
+      ],
+      confidence: "Privilege classification is incomplete for at least one document staged for release.",
+      gate: [
+        { name: "Evidence citation required", status: "review", note: "privilege screen incomplete" },
+        { name: "Conflict detection",         status: "block",  note: "privileged doc staged" },
+        { name: "Human reviewer required",     status: "review", note: "attorney sign-off" },
+        { name: "No cloud route",              status: "pass" },
+        { name: "Audit event recorded",        status: "pass" },
+        { name: "Export locked until review",  status: "block" }
+      ],
+      interruptDetail: "The draft places Document #1186 \u2014 a counsel-to-client memo \u2014 into the production batch while the privilege screen is still incomplete. Sentinel Node blocked the release and recorded a local audit event so the decision is attributable to a named reviewer.",
+      revision: "Production set draft (revised): Document #1186 has been pulled from the production batch and routed to attorney privilege review. The remaining set is held until a licensed attorney completes the privilege screen and authorizes release. No documents are produced automatically."
+    },
+    D: {
+      label: "Investor Governance Audit",
+      packet: [
+        { label: "Diligence request", text: "\u201CConfirm zero cloud routing of customer data.\u201D Evidence requested, not assertions." },
+        { label: "Architecture claim", text: "Marketing language: \u201Clocal-first inference by default.\u201D" },
+        { label: "Deployment representation", text: "One pilot config exposes an optional, off-by-default cloud backup toggle." },
+        { label: "Auditability concern", text: "Diligence wants supporting audit evidence attached." }
+      ],
+      draft: "Diligence response draft: <span class=\"flag\">Pocono AI guarantees that no customer data is ever sent to the cloud under any circumstances, and the system is fully HIPAA compliant by default.</span>",
+      chips: [
+        { ok: true,  text: "Architecture doc" },
+        { ok: false, text: "Pilot config \u2014 contradicts claim" },
+        { ok: true,  text: "Audit-log sample" }
+      ],
+      confidence: "Absolute-claim language flagged; one pilot configuration contradicts the assertion.",
+      gate: [
+        { name: "Prohibited-phrase check",     status: "block",  note: "\u201Cguarantees\u201D / \u201Ccompliant by default\u201D" },
+        { name: "Evidence citation required",  status: "review" },
+        { name: "Conflict detection",          status: "block",  note: "pilot config contradicts claim" },
+        { name: "Human reviewer required",     status: "review" },
+        { name: "No cloud route",              status: "pass",   note: "analysis ran locally" },
+        { name: "Export locked until review",  status: "block" }
+      ],
+      interruptDetail: "The draft uses absolute language (\u201Cguarantees,\u201D \u201Cnever,\u201D \u201Cfully HIPAA compliant by default\u201D) that one pilot configuration contradicts and that overstates what any vendor can claim. Sentinel Node flagged the prohibited phrasing, blocked export, and recorded a local audit event.",
+      revision: "Diligence response draft (revised): By default, customer data is processed locally and is not routed to a cloud AI service. One pilot configuration exposes an optional, off-by-default cloud backup toggle, disclosed here. Compliance is a property of the deploying organization, not a product guarantee; supporting audit evidence is attached for independent review."
+    }
+  };
+
+  // Base demonstration audit events (per spec)
+  var BASE_EVENTS = [
+    { ts: "09:14:01", text: "Task opened",                    cls: "" },
+    { ts: "09:14:02", text: "Local packet indexed",           cls: "" },
+    { ts: "09:14:04", text: "Retrieval initiated",            cls: "" },
+    { ts: "09:14:06", text: "Draft generated",                cls: "" },
+    { ts: "09:14:07", text: "Evidence conflict detected",     cls: "gate" },
+    { ts: "09:14:08", text: "Export blocked",                 cls: "alert" },
+    { ts: "09:14:12", text: "Human reviewer action required", cls: "gate" }
+  ];
+
+  var STATUS_LABEL = { pass: "Passed", review: "Needs review", block: "Blocked" };
+  var STATUS_GLYPH = { pass: "\u2713", review: "!", block: "\u2715" };
+
+  var current = "A";
+  var resolved = false;        // has a reviewer decision been made?
+  var clockBase = 13;          // seconds for first appended event (09:14:13)
+
+  // ---- element refs ----
+  var $ = function (id) { return document.getElementById(id); };
+  var packetEl   = $("str-packet");
+  var draftEl    = $("str-draft");
+  var chipsEl    = $("str-chips");
+  var confTextEl = $("str-confidence-text");
+  var gateEl     = $("str-gate");
+  var gateMeta   = $("str-gate-meta");
+  var auditEl    = $("str-audit");
+  var liveEl     = $("str-live");
+  var interruptEl = $("str-interrupt");
+  var intBadge   = $("str-interrupt-badge");
+  var intTitle   = $("str-interrupt-title");
+  var intSub     = $("str-interrupt-sub");
+  var intDetail  = $("str-interrupt-detail");
+  var flagsEl    = $("str-flags");
+  var outputEl   = $("str-output");
+  var outStateText = $("str-output-state-text");
+  var outText    = $("str-output-text");
+  var btnApprove = $("str-approve");
+  var btnRevise  = $("str-revise");
+  var btnReject  = $("str-reject");
+
+  function esc(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+
+  var LOCK_SVG = '<svg class="lk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>';
+  var OPEN_SVG = '<svg class="lk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg>';
+  var NO_SVG   = '<svg class="lk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
+
+  function renderPacket(s){
+    var h = "";
+    for (var i=0;i<s.packet.length;i++){
+      var d = s.packet[i];
+      h += '<div class="str-doc"><p class="str-doc-label">'+esc(d.label)+' <span class="fic">demo</span></p><p class="str-doc-text">'+esc(d.text)+'</p></div>';
+    }
+    packetEl.innerHTML = h;
+  }
+
+  function renderChips(s){
+    var h = "";
+    for (var i=0;i<s.chips.length;i++){
+      var c = s.chips[i];
+      h += '<span class="str-chip '+(c.ok?'ok':'bad')+'"><span class="gly" aria-hidden="true">'+(c.ok?'\u2713':'\u2715')+'</span>'+esc(c.text)+'<span class="str-sr">'+(c.ok?'(citation found)':'(citation missing or weak)')+'</span></span>';
+    }
+    chipsEl.innerHTML = h;
+  }
+
+  function renderGate(s){
+    var h = "";
+    for (var i=0;i<s.gate.length;i++){
+      var g = s.gate[i];
+      var note = g.note ? '<br><span style="font-family:var(--str-mono);font-size:.66rem;color:var(--str-faint);">'+esc(g.note)+'</span>' : '';
+      h += '<div class="str-check"><span class="str-check-name">'+esc(g.name)+note+'</span>'+
+           '<span class="str-status '+g.status+'"><span class="gly" aria-hidden="true">'+STATUS_GLYPH[g.status]+'</span>'+STATUS_LABEL[g.status]+'</span></div>';
+    }
+    gateEl.innerHTML = h;
+    gateMeta.textContent = "Export blocked";
+  }
+
+  function renderEvents(events){
+    var h = "";
+    for (var i=0;i<events.length;i++){
+      var e = events[i];
+      h += '<div class="str-event '+(e.cls||'')+(e.fresh?' new':'')+'"><span class="ts">'+e.ts+'</span><span class="ev">'+e.html+'</span></div>';
+    }
+    auditEl.innerHTML = h;
+  }
+
+  var events = [];
+  function buildBaseEvents(){
+    events = [];
+    for (var i=0;i<BASE_EVENTS.length;i++){
+      events.push({ ts: BASE_EVENTS[i].ts, html: esc(BASE_EVENTS[i].text), cls: BASE_EVENTS[i].cls });
+    }
+    clockBase = 13;
+  }
+
+  function nextTs(){
+    var sec = clockBase++;
+    var mm = "14";
+    if (sec >= 60){ sec -= 60; mm = "15"; }
+    return "09:"+mm+":"+(sec<10?("0"+sec):sec);
+  }
+
+  function appendEvent(html, cls){
+    events.push({ ts: nextTs(), html: html, cls: cls, fresh: true });
+    renderEvents(events);
+    var body = document.getElementById("str-audit");
+    if (body) body.scrollTop = body.scrollHeight;
+  }
+
+  function setReviewEnabled(on){
+    btnApprove.disabled = !on;
+    btnRevise.disabled  = !on;
+    btnReject.disabled  = !on;
+  }
+
+  function resetInterrupt(s){
+    interruptEl.className = "str-interrupt";
+    intBadge.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>';
+    intTitle.textContent = "Draft blocked. Human review required.";
+    intSub.textContent = "Sentinel Node detected an evidence gap and prevented export.";
+    intDetail.textContent = s.interruptDetail;
+    flagsEl.innerHTML =
+      '<div class="str-flagcard locked"><span class="gly" aria-hidden="true">\u2715</span><span>Export locked</span></div>'+
+      '<div class="str-flagcard req"><span class="gly" aria-hidden="true">!</span><span>Reviewer required</span></div>'+
+      '<div class="str-flagcard rec"><span class="gly" aria-hidden="true">\u2691</span><span>Evidence conflict detected</span></div>'+
+      '<div class="str-flagcard ok"><span class="gly" aria-hidden="true">\u25CF</span><span>Demonstration audit event created</span></div>';
+  }
+
+  function loadScenario(key, announce){
+    var s = SCENARIOS[key];
+    if (!s) return;
+    current = key;
+    resolved = false;
+
+    // selector pressed-state
+    var btns = document.querySelectorAll(".str-scn");
+    for (var i=0;i<btns.length;i++){
+      btns[i].setAttribute("aria-pressed", btns[i].getAttribute("data-scn")===key ? "true":"false");
+    }
+
+    renderPacket(s);
+    draftEl.innerHTML = s.draft;
+    renderChips(s);
+    confTextEl.textContent = s.confidence;
+    renderGate(s);
+    resetInterrupt(s);
+
+    // output -> locked
+    outputEl.className = "str-output";
+    document.getElementById("str-output-state").innerHTML = LOCK_SVG + '<span id="str-output-state-text">Export locked \u00B7 awaiting reviewer decision</span>';
+    outText.textContent = "The final output panel unlocks only after a reviewer permits export. Until then, this workflow holds the draft inside the node.";
+
+    // audit -> base
+    buildBaseEvents();
+    renderEvents(events);
+
+    setReviewEnabled(true);
+
+    if (announce) liveEl.textContent = s.label + " scenario loaded. Draft blocked, human review required.";
+  }
+
+  // ---- reviewer actions ----
+  function approve(){
+    if (resolved) return; resolved = true;
+    setReviewEnabled(false);
+    interruptEl.className = "str-interrupt cleared";
+    intBadge.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+    intTitle.textContent = "Export permitted after human review.";
+    intSub.textContent = "A named reviewer confirmed the evidence and authorized release.";
+    intDetail.textContent = "The reviewer confirmed the supporting evidence and accepted accountability for the decision. Export is now permitted because a human, not the model, authorized it. The decision is recorded in the local event chain.";
+    flagsEl.innerHTML =
+      '<div class="str-flagcard ok"><span class="gly" aria-hidden="true">\u2713</span><span>Export permitted</span></div>'+
+      '<div class="str-flagcard ok"><span class="gly" aria-hidden="true">\u2713</span><span>Reviewer decision recorded</span></div>'+
+      '<div class="str-flagcard ok"><span class="gly" aria-hidden="true">\u2713</span><span>Evidence confirmed</span></div>'+
+      '<div class="str-flagcard ok"><span class="gly" aria-hidden="true">\u25CF</span><span>Audit event appended</span></div>';
+    gateMeta.textContent = "Export permitted";
+    outputEl.className = "str-output permitted";
+    document.getElementById("str-output-state").innerHTML = OPEN_SVG + '<span id="str-output-state-text">Export permitted after human review</span>';
+    outText.textContent = "A reviewer confirmed the evidence and authorized this output. Release is attributable to a named human decision, captured in the audit chain.";
+    appendEvent('<b>Reviewer approved with citation</b> \u00B7 export permitted after human review', "resolve");
+    liveEl.textContent = "Reviewer approved with citation. Export permitted after human review.";
+  }
+
+  function revise(){
+    if (resolved) return; resolved = true;
+    setReviewEnabled(false);
+    var s = SCENARIOS[current];
+    draftEl.innerHTML = esc(s.revision);
+    confTextEl.textContent = "Revised draft generated. Flagged claims removed; export remains locked pending reviewer approval.";
+    intSub.textContent = "A safer draft was generated. Export remains locked pending approval.";
+    intDetail.textContent = "Sentinel Node rewrote the draft into a safer version that removes the unsupported claim. This still requires reviewer approval before export \u2014 a safer draft is not the same as an authorized one.";
+    flagsEl.innerHTML =
+      '<div class="str-flagcard locked"><span class="gly" aria-hidden="true">\u2715</span><span>Export still locked</span></div>'+
+      '<div class="str-flagcard req"><span class="gly" aria-hidden="true">!</span><span>Reviewer approval still required</span></div>'+
+      '<div class="str-flagcard ok"><span class="gly" aria-hidden="true">\u2713</span><span>Safer draft generated</span></div>'+
+      '<div class="str-flagcard ok"><span class="gly" aria-hidden="true">\u25CF</span><span>Audit event appended</span></div>';
+    outText.textContent = "A safer draft replaced the flagged version, but export stays locked. The reviewer must still approve before anything leaves the workflow.";
+    appendEvent('<b>Revision requested</b> \u00B7 safer draft generated \u00B7 export remains locked', "gate");
+    liveEl.textContent = "Revision requested. A safer draft was generated. Export remains locked, reviewer approval still required.";
+  }
+
+  function reject(){
+    if (resolved) return; resolved = true;
+    setReviewEnabled(false);
+    interruptEl.className = "str-interrupt";
+    intBadge.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
+    intTitle.textContent = "Draft rejected. No export permitted.";
+    intSub.textContent = "The reviewer rejected the draft. It will not leave the workflow.";
+    intDetail.textContent = "The reviewer judged the draft unsafe to release. No export is permitted. The rejection is recorded in the local event chain so the near-miss is visible rather than silently discarded.";
+    flagsEl.innerHTML =
+      '<div class="str-flagcard locked"><span class="gly" aria-hidden="true">\u2715</span><span>No export permitted</span></div>'+
+      '<div class="str-flagcard locked"><span class="gly" aria-hidden="true">\u2715</span><span>Draft rejected</span></div>'+
+      '<div class="str-flagcard rec"><span class="gly" aria-hidden="true">\u2691</span><span>Near-miss surfaced</span></div>'+
+      '<div class="str-flagcard ok"><span class="gly" aria-hidden="true">\u25CF</span><span>Audit event appended</span></div>';
+    gateMeta.textContent = "Rejected";
+    outputEl.className = "str-output rejected";
+    document.getElementById("str-output-state").innerHTML = NO_SVG + '<span id="str-output-state-text">No export permitted \u00B7 draft rejected</span>';
+    outText.textContent = "The reviewer rejected this draft. Nothing is exported. The decision and the near-miss remain visible in the audit chain.";
+    appendEvent('<b>Draft rejected by reviewer</b> \u00B7 no export permitted', "alert");
+    liveEl.textContent = "Draft rejected by reviewer. No export permitted.";
+  }
+
+  // ---- wire up ----
+  var sBtns = document.querySelectorAll(".str-scn");
+  for (var i=0;i<sBtns.length;i++){
+    (function(btn){
+      btn.addEventListener("click", function(){ loadScenario(btn.getAttribute("data-scn"), true); });
+      btn.addEventListener("keydown", function(ev){
+        var list = Array.prototype.slice.call(document.querySelectorAll(".str-scn"));
+        var idx = list.indexOf(btn);
+        if (ev.key === "ArrowRight" || ev.key === "ArrowDown"){ ev.preventDefault(); var n=list[(idx+1)%list.length]; n.focus(); loadScenario(n.getAttribute("data-scn"), true); }
+        else if (ev.key === "ArrowLeft" || ev.key === "ArrowUp"){ ev.preventDefault(); var p=list[(idx-1+list.length)%list.length]; p.focus(); loadScenario(p.getAttribute("data-scn"), true); }
+      });
+    })(sBtns[i]);
+  }
+  btnApprove.addEventListener("click", approve);
+  btnRevise.addEventListener("click", revise);
+  btnReject.addEventListener("click", reject);
+
+  // init
+  loadScenario("A", false);
+})();
+</script>
+
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 root-relative nav fix, Living Echo rebrand, Engineering & Drafting + Enterprise Estate Continuity links added (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- INCLUDE:FOOTER -->
+<footer role="contentinfo" style="background:#051622;border-top:1px solid rgba(255,255,255,0.08);padding:40px 24px 28px;font-size:0.85em;color:#8899aa;">
+  <div style="max-width:1180px;margin:0 auto;">
+
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:0 0 28px;margin-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.07);">
+      <div style="max-width:560px;">
+        <p style="margin:0 0 6px;font-size:1.05em;font-weight:700;color:#fff;">Local AI infrastructure for regulated practices.</p>
+        <p style="margin:0;font-size:0.95em;line-height:1.5;">Drafts with citations. Human review required. Sensitive documents stay under practice control. Simple path, deep proof.</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="/contact.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;background:#00c2a8;color:#04111a;font-weight:700;text-decoration:none;font-size:0.95em;">Request Pilot</a>
+        <a href="/sentinel-demo.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;border:1px solid rgba(0,194,168,0.55);color:#00c2a8;font-weight:700;text-decoration:none;font-size:0.95em;">Watch Demo</a>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px 32px;margin-bottom:32px;text-align:left;">
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">For You</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/start-here.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Start Here (3 min)</a>
+          <a href="/for-physicians.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Physicians</a>
+          <a href="/for-attorneys.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Attorneys</a>
+          <a href="/engineering-drafting/" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Engineering &amp; Drafting Teams</a>
+          <a href="/pilot-program.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Pilot Program</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Installer Training</a>
+          <a href="/how-it-works.html" style="color:#8899aa;text-decoration:none;">How It Works</a>
+          <a href="/trust.html" style="color:#8899aa;text-decoration:none;">Trust &amp; Audit</a>
+          <a href="/pricing.html" style="color:#8899aa;text-decoration:none;">Pricing</a>
+          <a href="/sentinel-demo.html" style="color:#8899aa;text-decoration:none;">See the Demo</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Documentation Hub</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/documentation-hub/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Hub Home &mdash; Deep Proof</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">Installer Training</a>
+          <a href="/sentinel-node/installation-simulator.html" style="color:#8899aa;text-decoration:none;">&#8627; Installation Simulator</a>
+          <a href="/documentation-hub/clinical/" style="color:#8899aa;text-decoration:none;">Clinical Documentation</a>
+          <a href="/documentation-hub/legal/" style="color:#8899aa;text-decoration:none;">Legal Documentation</a>
+          <a href="/documentation-hub/technical/" style="color:#8899aa;text-decoration:none;">Technical Documentation</a>
+          <a href="/documentation-hub/governance/" style="color:#8899aa;text-decoration:none;">Governance &amp; Audit</a>
+          <a href="/documentation-hub/tools/" style="color:#8899aa;text-decoration:none;">Tools &amp; Simulators</a>
+          <a href="/documentation-hub/research/" style="color:#8899aa;text-decoration:none;">Research &amp; Essays</a>
+          <a href="/documentation-hub/transparency/" style="color:#8899aa;text-decoration:none;">Transparency</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Global Federated AI</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/global/" style="color:#7af0dc;text-decoration:none;font-weight:600;">Global Federated Hub</a>
+          <a href="/global/australia/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Australia</a>
+          <a href="/global/singapore/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Singapore</a>
+          <a href="/global/taiwan/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Taiwan</a>
+          <a href="/global/europe/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Europe</a>
+          <a href="/contact.html" style="color:#8899aa;text-decoration:none;">Partner Inquiry</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Company</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/about.html" style="color:#8899aa;text-decoration:none;">About Pocono AI</a>
+          <a href="/team.html" style="color:#8899aa;text-decoration:none;">Team &amp; Leadership</a>
+          <a href="/why-pocono-ai.html" style="color:#8899aa;text-decoration:none;">Why Pocono AI</a>
+          <a href="/founding-commercial-leadership.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Join Us</a>
+          <a href="/careers.html" style="color:#8899aa;text-decoration:none;">Careers</a>
+          <a href="/how-we-hire.html" style="color:#8899aa;text-decoration:none;">How We Hire</a>
+          <a href="/channel-partners.html" style="color:#8899aa;text-decoration:none;">Technical Partners (MSPs)</a>
+          <a href="/partners.html" style="color:#8899aa;text-decoration:none;">Academic Partnerships</a>
+          <a href="/contact.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Contact</a>
+          <a href="https://forms.gle/VQahnkjMfY6QNEMy8" target="_blank" rel="noopener noreferrer" style="color:#d5a94f;text-decoration:none;font-weight:600;">Interest List &#8599;</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Founder Projects</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/rehability/" style="color:#a78bfa;text-decoration:none;font-weight:700;">Rehability &#x2605;</a>
+          <a href="/rehability/marcus-memory-helper/" style="color:#a78bfa;text-decoration:none;font-weight:600;">&#8627; Marcus's Memory Helper</a>
+          <a href="/sentinel-home/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Sentinel Home Edition</a>
+          <a href="/living-memorials/" style="color:#8899aa;text-decoration:none;">Living Echo</a>
+          <a href="/living-memorials/marcus-odell/" style="color:#8899aa;text-decoration:none;">Marcus&rsquo;s Living Echo</a>
+          <a href="/living-memorials/enterprise-estate-continuity.html" style="color:#8899aa;text-decoration:none;">Enterprise Estate Continuity</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Resources &amp; Legal</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/sitemap.html" style="color:#8899aa;text-decoration:none;">All Pages (Sitemap)</a>
+          <a href="/audit.html" style="color:#8899aa;text-decoration:none;">Transparency &amp; Audit Log</a>
+          <a href="/maturity-disclosure.html" style="color:#8899aa;text-decoration:none;">What We Have / Don&rsquo;t Claim</a>
+          <a href="/plain.html" style="color:#8899aa;text-decoration:none;">Plain Language Guide</a>
+          <a href="/privacy.html" style="color:#8899aa;text-decoration:none;">Privacy</a>
+          <a href="/terms.html" style="color:#8899aa;text-decoration:none;">Terms</a>
+          <a href="/sla.html" style="color:#8899aa;text-decoration:none;">SLA</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:18px;margin-bottom:14px;">
+      <p style="margin:0;font-size:0.82em;line-height:1.6;color:#6f8295;max-width:1000px;">Pocono AI does not provide medical, legal, or engineering advice, does not practice medicine, law, or licensed engineering, and does not make clinical, legal, or engineering decisions. Outputs are drafts or support materials that require review by a qualified professional; final professional judgment remains with the licensed physician, attorney, or engineer. Tools and simulations on this site are educational and use synthetic data.</p>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:20px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+      <p style="margin:0;font-size:0.9em;">&copy; 2026 Pocono AI, LLC &nbsp;&#183;&nbsp; East Stroudsburg, PA &nbsp;&#183;&nbsp; <a href="mailto:marcus@poconoai.com" style="color:#8899aa;">marcus@poconoai.com</a> &nbsp;&#183;&nbsp; <a href="tel:+15705340602" style="color:#8899aa;">(570) 534-0602</a></p>
+      <p style="margin:0;font-size:0.88em;"><a href="/audit.html" style="color:#5dade2;text-decoration:none;">Transparency v402</a></p>
+    </div>
+  </div>
+</footer>
+<script src="/search.js?v=402" defer></script>
+<!-- /INCLUDE:FOOTER -->
+<script src="search-index.js?v=402" defer></script>
+<script src="nav.js?v=402" defer></script>
+<script src="pilot-cta.js?v=402" defer></script>
+</body>
+</html>

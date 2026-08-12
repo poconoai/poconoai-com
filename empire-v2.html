@@ -1,0 +1,1638 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp -->
+<head>
+<meta charset="UTF-8">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Local AI Empire v2 — fully local, zero-cloud browser strategy sim. Claim territory, build AI nodes and data farms, outmanoeuvre a rule-based opponent. No ser...">
+<title>Local AI Empire v2 | Pocono AI Playground</title>
+<meta property="og:title" content="Local AI Empire v2 | Pocono AI">
+<meta property="og:description" content="Fully local browser strategy sim. Zero cloud. Zero tracking. Just code.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://poconoai.com/empire-v2.html">
+<meta property="og:image" content="https://poconoai.com/og-image.jpg">
+<meta name="theme-color" content="#0B0F13">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css?v=402">
+<link rel="stylesheet" href="nav-v2026.css?v=402">
+<link rel="stylesheet" href="brand-v292.css?v=402">
+<link rel="canonical" href="https://poconoai.com/empire-v2.html">
+
+<style>
+/* ══════════════════════════════════════════════════════
+   LOCAL AI EMPIRE v2 — GAME PAGE STYLES
+   Dark sovereign-tech aesthetic: deep navy, teal, amber
+   Syne (headers) · Fraunces (splash) · DM Mono (data)
+══════════════════════════════════════════════════════ */
+
+body { background: #03080f; }
+
+.empire-page-header {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 24px 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+.empire-eyebrow {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.68em;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #00d4a8;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 8px;
+}
+.empire-eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: #00d4a8;
+    animation: pulse-dot 2.4s ease-in-out infinite;
+    flex-shrink: 0;
+}
+@keyframes pulse-dot {
+    0%,100% { opacity:1; transform:scale(1); }
+    50%      { opacity:0.35; transform:scale(0.65); }
+}
+.empire-page-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.7rem, 3.8vw, 2.5rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: #ffffff;
+    margin: 0;
+    line-height: 1;
+    border: none;
+}
+.empire-page-title span { color: #00a3ff; }
+.empire-page-sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78em;
+    color: rgba(208,221,230,0.38);
+    margin: 8px 0 0;
+    letter-spacing: 0.04em;
+}
+.empire-back-link {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.74em;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(0,212,168,0.55);
+    text-decoration: none;
+    padding: 8px 0;
+    transition: color 0.15s;
+    white-space: nowrap;
+    margin-top: 4px;
+}
+.empire-back-link:hover { color: #00d4a8; }
+
+/* ── Game container ── */
+.empire-game-wrap {
+    max-width: 1100px;
+    margin: 20px auto 0;
+    padding: 0 24px 48px;
+    position: relative;
+}
+
+.empire-shell {
+    background: #04101c;
+    border: 1px solid rgba(0,163,255,0.16);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.65), 0 0 80px rgba(0,163,255,0.03);
+    position: relative;
+    /* Splash is position:absolute inset:0 — shell needs real height or it collapses to zero */
+    min-height: 640px;
+}
+
+/* Scan-line texture */
+.empire-shell::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.04) 3px, rgba(0,0,0,0.04) 4px);
+    pointer-events: none;
+    z-index: 1;
+    border-radius: 16px;
+}
+
+/* ── HUD ── */
+.empire-hud {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background: rgba(0,0,0,0.38);
+    border-bottom: 1px solid rgba(0,163,255,0.1);
+    flex-wrap: wrap;
+    gap: 10px;
+    position: relative;
+    z-index: 2;
+}
+.empire-hud-left { display: flex; align-items: center; gap: 6px; }
+.empire-brand-stamp {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.7em;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    padding-right: 14px;
+    border-right: 1px solid rgba(255,255,255,0.1);
+    margin-right: 8px;
+    white-space: nowrap;
+}
+.empire-resources { display: flex; gap: 14px; flex-wrap: wrap; }
+.empire-res { display: flex; align-items: center; gap: 4px; font-family: 'DM Mono', monospace; font-size: 0.82em; }
+.empire-res-icon { font-size: 0.9em; }
+.empire-res-val { font-weight: 700; color: #ffffff; min-width: 24px; }
+.empire-res-label { color: rgba(255,255,255,0.28); font-size: 0.85em; }
+.empire-hud-right { display: flex; align-items: center; gap: 12px; }
+.empire-turn-pill {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.7em;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #ffb74d;
+    background: rgba(255,183,77,0.08);
+    border: 1px solid rgba(255,183,77,0.22);
+    padding: 4px 12px;
+    border-radius: 20px;
+}
+.empire-phase-tag { font-family: 'DM Mono', monospace; font-size: 0.72em; color: rgba(208,221,230,0.45); }
+.empire-acts-left { font-family: 'DM Mono', monospace; font-size: 0.7em; color: rgba(0,212,168,0.65); }
+
+/* ── Game body ── */
+.empire-game-body {
+    display: grid;
+    grid-template-columns: 1fr 244px;
+    position: relative;
+    z-index: 2;
+}
+@media (max-width: 720px) {
+    .empire-game-body { grid-template-columns: 1fr; }
+    .empire-sidebar { border-left: none; border-top: 1px solid rgba(255,255,255,0.07); }
+}
+
+#empire-canvas {
+    display: block;
+    width: 100%;
+    cursor: crosshair;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none; -webkit-user-select: none;
+}
+
+/* ── Sidebar ── */
+.empire-sidebar {
+    border-left: 1px solid rgba(255,255,255,0.06);
+    background: rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+}
+.empire-panel {
+    padding: 13px 15px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.empire-panel:last-child { border-bottom: none; flex: 1; overflow: hidden; }
+.empire-panel-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.58em;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.28);
+    margin: 0 0 9px;
+}
+.empire-tile-info {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75em;
+    color: rgba(208,221,230,0.6);
+    line-height: 1.7;
+    min-height: 58px;
+}
+.empire-tile-info strong { color: #ffffff; display: block; margin-bottom: 2px; }
+.ti-p  { color: #00d4a8; display: block; }
+.ti-ai { color: #ff5f5f; display: block; }
+.ti-bonus { color: #ffb74d; display: block; font-size: 0.9em; }
+.ti-fog { color: rgba(255,255,255,0.28); }
+
+.empire-actions { display: flex; flex-direction: column; gap: 5px; }
+.empire-act {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.69em;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: background 0.12s;
+    width: 100%;
+}
+.empire-act:disabled { opacity: 0.22; cursor: not-allowed; }
+.empire-act-cost {
+    margin-left: auto;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.88em;
+    font-weight: 400;
+    opacity: 0.6;
+}
+.act-claim  { background:rgba(0,212,168,0.08); border-color:rgba(0,212,168,0.22); color:#00d4a8; }
+.act-claim:not(:disabled):hover  { background:rgba(0,212,168,0.16); }
+.act-node   { background:rgba(0,163,255,0.08); border-color:rgba(0,163,255,0.22); color:#00a3ff; }
+.act-node:not(:disabled):hover   { background:rgba(0,163,255,0.16); }
+.act-farm   { background:rgba(255,183,77,0.07); border-color:rgba(255,183,77,0.2); color:#ffb74d; }
+.act-farm:not(:disabled):hover   { background:rgba(255,183,77,0.14); }
+.act-scout  { background:rgba(160,100,255,0.07); border-color:rgba(160,100,255,0.18); color:#a06aff; }
+.act-scout:not(:disabled):hover  { background:rgba(160,100,255,0.14); }
+.act-end    { background:rgba(255,100,100,0.06); border-color:rgba(255,100,100,0.18); color:#ff7b7b; margin-top:3px; }
+.act-end:not(:disabled):hover    { background:rgba(255,100,100,0.13); }
+
+.empire-log {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.69em;
+    line-height: 1.65;
+    color: rgba(208,221,230,0.4);
+    overflow-y: auto;
+    max-height: 180px;
+    display: flex;
+    flex-direction: column-reverse;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,0.08) transparent;
+}
+.log-line { padding: 1px 0; }
+.log-good { color: #00d4a8; }
+.log-bad  { color: #ff6b6b; }
+.log-warn { color: #ffb74d; }
+.log-ai   { color: #a06aff; }
+.log-sys  { color: #00a3ff; }
+
+/* ── Toolbar ── */
+.empire-toolbar {
+    padding: 9px 18px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    background: rgba(0,0,0,0.28);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    position: relative;
+    z-index: 2;
+}
+.empire-kb {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65em;
+    color: rgba(255,255,255,0.22);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    align-items: center;
+}
+.empire-kb kbd {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: 3px;
+    padding: 1px 5px;
+    font-family: inherit;
+    font-size: 0.95em;
+    color: rgba(255,255,255,0.45);
+}
+.empire-toolbar-right { display: flex; gap: 7px; }
+.btn-toolbar {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.69em;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.11);
+    color: rgba(255,255,255,0.48);
+    padding: 5px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.12s, color 0.12s;
+}
+.btn-toolbar:hover { background: rgba(255,255,255,0.09); color: #ffffff; }
+
+/* ══════════════════════════════════════════════════════
+   SPLASH SCREEN
+══════════════════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════════
+   SCREEN SYSTEM — 3 screens, each normal flow (no absolute)
+   Shell is min-height:640px but each screen sizes to content.
+   JS toggles display:none to switch between them.
+══════════════════════════════════════════════════════ */
+
+/* ── Screen 1: Pure splash ── */
+.screen-splash {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 640px;
+    padding: 60px 32px;
+    text-align: center;
+    background: linear-gradient(160deg, #030e1c 0%, #03080f 70%);
+}
+
+.splash-logo-mark {
+    width: 80px; height: 80px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, rgba(0,212,168,0.15), rgba(0,163,255,0.08));
+    border: 1px solid rgba(0,212,168,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2.2em;
+    margin: 0 auto 24px;
+    box-shadow: 0 0 40px rgba(0,212,168,0.14);
+}
+.splash-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68em;
+    color: rgba(0,212,168,0.6);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+}
+.splash-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    color: #ffffff;
+    line-height: 1;
+    margin: 0 0 6px;
+    border: none;
+}
+.splash-title em { font-style: normal; color: #00a3ff; }
+.splash-version {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72em;
+    color: rgba(255,255,255,0.22);
+    letter-spacing: 0.1em;
+    margin: 0 0 28px;
+}
+.splash-tagline {
+    font-family: 'Fraunces', 'Georgia', serif;
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-style: italic;
+    color: rgba(208,221,230,0.5);
+    margin: 0 0 44px;
+    max-width: 420px;
+    line-height: 1.65;
+}
+.splash-cta-btn {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.92em;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, #00d4a8, #00a3ff);
+    border: none;
+    color: #03080f;
+    padding: 16px 52px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: opacity 0.15s, transform 0.12s;
+    box-shadow: 0 8px 40px rgba(0,212,168,0.28);
+    display: block;
+    margin: 0 auto 16px;
+}
+.splash-cta-btn:hover  { opacity: 0.88; transform: translateY(-2px); }
+.splash-cta-btn:active { transform: translateY(0); }
+.splash-fine {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62em;
+    color: rgba(255,255,255,0.16);
+    letter-spacing: 0.06em;
+}
+
+/* ── Screen 2: How to play ── */
+.screen-howto {
+    padding: 48px 32px 40px;
+    background: #04101c;
+}
+.howto-header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+.howto-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.66em;
+    color: rgba(0,212,168,0.55);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 10px;
+}
+.howto-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.4rem, 3vw, 1.9rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: #ffffff;
+    margin: 0 0 8px;
+    border: none;
+}
+.howto-sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.76em;
+    color: rgba(208,221,230,0.38);
+    margin: 0;
+}
+.howto-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    max-width: 860px;
+    margin: 0 auto 36px;
+}
+.howto-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 10px;
+    padding: 16px 16px 14px;
+}
+.howto-card-icon { font-size: 1.3em; display: block; margin-bottom: 8px; }
+.howto-card-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.76em;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 0.04em;
+    margin: 0 0 6px;
+}
+.howto-card-body {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68em;
+    color: rgba(208,221,230,0.45);
+    line-height: 1.65;
+    margin: 0;
+}
+.howto-card-body strong { color: #ffb74d; font-weight: 400; }
+.howto-footer {
+    text-align: center;
+}
+.howto-continue-btn {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.88em;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, #00d4a8, #00a3ff);
+    border: none;
+    color: #03080f;
+    padding: 14px 48px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: opacity 0.15s, transform 0.12s;
+    box-shadow: 0 6px 32px rgba(0,212,168,0.22);
+    margin-bottom: 12px;
+}
+.howto-continue-btn:hover  { opacity: 0.88; transform: translateY(-1px); }
+.howto-continue-btn:active { transform: translateY(0); }
+.howto-back-link {
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65em;
+    color: rgba(255,255,255,0.22);
+    cursor: pointer;
+    margin-top: 8px;
+    background: none;
+    border: none;
+    letter-spacing: 0.06em;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+.howto-back-link:hover { color: rgba(255,255,255,0.45); }
+
+/* ══════════════════════════════════════════════════════
+   END-GAME OVERLAY
+══════════════════════════════════════════════════════ */
+.empire-endgame {
+    position: absolute;
+    inset: 0;
+    background: rgba(3,8,15,0.88);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-radius: 16px;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 28px;
+    z-index: 15;
+}
+.empire-endgame.visible { display: flex; }
+.endgame-badge {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.68em;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 5px 16px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+}
+.badge-win  { background:rgba(0,212,168,0.1); border:1px solid rgba(0,212,168,0.28); color:#00d4a8; }
+.badge-lose { background:rgba(255,95,95,0.09); border:1px solid rgba(255,95,95,0.22); color:#ff7b7b; }
+.endgame-title {
+    font-family: 'Fraunces', 'Georgia', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-style: italic;
+    color: #ffffff;
+    margin: 0 0 12px;
+    line-height: 1.1;
+}
+.endgame-body {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.82em;
+    color: rgba(208,221,230,0.55);
+    max-width: 400px;
+    line-height: 1.7;
+    margin: 0 0 24px;
+}
+.endgame-stats {
+    display: flex;
+    gap: 32px;
+    margin-bottom: 26px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.endgame-stat-val {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.8em;
+    font-weight: 800;
+    color: #ffffff;
+    display: block;
+    line-height: 1;
+}
+.endgame-stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68em;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    display: block;
+    margin-top: 4px;
+}
+.endgame-play-again {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.8em;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, #00d4a8, #00a3ff);
+    border: none;
+    color: #03080f;
+    padding: 12px 38px;
+    border-radius: 7px;
+    cursor: pointer;
+    box-shadow: 0 6px 24px rgba(0,212,168,0.18);
+    transition: opacity 0.15s;
+}
+.endgame-play-again:hover { opacity: 0.88; }
+
+/* ── Info strip ── */
+.empire-info-strip {
+    max-width: 1100px;
+    margin: 20px auto 0;
+    padding: 0 24px 60px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 14px;
+}
+.empire-info-card {
+    background: rgba(255,255,255,0.018);
+    border: 1px solid rgba(255,255,255,0.055);
+    border-radius: 10px;
+    padding: 16px 18px;
+}
+.empire-info-card-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.61em;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(0,212,168,0.55);
+    margin: 0 0 9px;
+}
+.empire-info-card p {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.74em;
+    color: rgba(208,221,230,0.45);
+    line-height: 1.72;
+    margin: 0;
+}
+.empire-info-card p strong { color: rgba(255,255,255,0.7); font-weight: 400; }
+
+@media (max-width: 600px) {
+    .empire-game-wrap { padding: 0 10px 40px; }
+    .empire-page-header { padding: 20px 12px 0; }
+    .empire-info-strip { padding: 0 10px 40px; }
+    .splash-how { grid-template-columns: 1fr 1fr; }
+    .empire-hud { padding: 8px 12px; }
+    .empire-brand-stamp { display: none; }
+}
+</style>
+
+</head>
+<body>
+
+<div id="hitl-notice" style="background:#0a1929;padding:4px 16px;text-align:center;font-size:12px;color:#4a5568;border-bottom:1px solid rgba(255,255,255,0.06);letter-spacing:0.01em;">Human-in-the-Loop required: licensed professionals verify all outputs before clinical or legal action</div>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<!-- PARTIAL:header START -->
+<header role="banner">
+  <div class="header-inner">
+    <a href="index.html" class="logo" aria-label="Pocono AI Home">
+      <img src="logo.svg?v=402" alt="" width="36" height="36" decoding="async" loading="eager" aria-hidden="true" style="display:inline-block;">
+      Pocono <span>AI</span>
+    </a>
+    <nav id="desktop-nav" aria-label="Main navigation">
+      <a href="start-here.html" class="nav-direct">Start Here</a>
+      <a href="executive-brief.html" class="nav-direct">Executive Brief</a>
+      <a href="liability-simulator.html" class="nav-direct">See It Run</a>
+      <a href="architecture.html" class="nav-direct">Architecture</a>
+      <div class="nav-item" data-dropdown="menu-practice">
+        <button type="button" class="nav-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="menu-practice">For Your Practice
+          <svg class="nav-chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><polyline points="2,3 5,7 8,3"/></svg>
+        </button>
+      </div>
+      <a href="pricing.html" class="nav-direct">Pricing</a>
+      <div class="nav-item" data-dropdown="menu-company">
+        <button type="button" class="nav-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="menu-company">Company
+          <svg class="nav-chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><polyline points="2,3 5,7 8,3"/></svg>
+        </button>
+      </div>
+      <a href="contact.html" class="nav-direct nav-cta-link">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <button type="button" class="header-icon-btn" id="search-icon-btn" aria-label="Open search" aria-expanded="false" aria-controls="search-panel">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+      <button type="button" class="header-icon-btn" id="mobile-menu" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav-panel">
+        <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+<!-- PARTIAL:header END -->
+
+<!-- PARTIAL:nav-drop-root START -->
+<div id="nav-drop-root">
+<div id="menu-practice" class="nav-dropdown" role="menu" aria-label="For Your Practice">
+  <span class="nav-section-label">Medical Practices</span>
+  <a href="for-physicians.html" class="nav-featured" role="menuitem">For Physicians &amp; Practices</a>
+  <a href="physicians-hub.html" role="menuitem">Physician Knowledge Hub</a>
+  <a href="prior-auth-case-study.html" role="menuitem">Prior Auth Use Case</a>
+  <a href="physicians-denials-appeals.html" role="menuitem">Denials &amp; Appeals</a>
+  <a href="day-in-the-clinic.html" role="menuitem">A Day in the Clinic</a>
+  <a href="nurses-ai-briefing.html" role="menuitem">For Nursing Staff</a>
+  <a href="support-staff-clinic-workflows.html" role="menuitem">For Clinic Support Staff</a>
+  <a href="works-with-your-clinic.html" role="menuitem">Works With Your Clinic Systems</a>
+  <span class="nav-section-label">Law Firms</span>
+  <a href="for-attorneys.html" role="menuitem">For Attorneys</a>
+  <a href="law-firm-pilot.html" role="menuitem">Law Firm Pilot Program</a>
+  <a href="day-in-a-law-firm.html" role="menuitem">A Day Inside a Small Firm</a>
+  <a href="legal-workflows-by-practice.html" role="menuitem">Workflows by Practice</a>
+  <a href="how-pocono-ai-fails-safely.html" role="menuitem">How We Fail Safely</a>
+  <a href="before-after-small-firm.html" role="menuitem">Before vs. After</a>
+  <a href="support-staff-workflows.html" role="menuitem">For Paralegals &amp; Support Staff</a>
+  <a href="works-with-your-stack.html" role="menuitem">Works With Your Stack</a>
+  <span class="nav-section-label">See It On Screen</span>
+  <a href="governance-review.html" class="nav-featured" role="menuitem">Governance Review</a>
+  <a href="governance-dashboard.html" role="menuitem">Governance Dashboard</a>
+  <a href="local-vs-cloud.html" role="menuitem">Local vs. Cloud</a>
+  <a href="day-in-the-clinic.html" role="menuitem">Day in the Clinic</a>
+  <a href="workflow-demonstrations.html" role="menuitem">Workflow Demonstrations</a>
+  <a href="pilot-workflow.html" role="menuitem">Pilot Workflow</a>
+  <a href="deployment-topology.html" role="menuitem">Deployment Topology</a>
+  <span class="nav-section-label">IT &amp; Compliance</span>
+  <a href="sentinel-audit-system.html" role="menuitem">Audit System</a>
+  <a href="sentinel-specs.html" role="menuitem">Sentinel Node Specs</a>
+  <a href="deployment-topology.html" role="menuitem">Deployment Topology</a>
+  <a href="compliance.html" role="menuitem">Compliance Attestation</a>
+  <span class="nav-section-label">Solutions by Use Case</span>
+  <a href="regulated-ai-solutions.html" class="nav-featured" role="menuitem">Regulated AI Solutions</a>
+  <span class="nav-section-label">Engagement</span>
+  <a href="what-happens-after-contact.html" role="menuitem">What Happens After Contact</a>
+  <a href="clinical-collaboration-framework.html" role="menuitem">Clinical Collaboration</a>
+  <a href="pilot-evidence-framework.html" role="menuitem">Pilot Evidence Framework</a>
+  <a href="operational-impact-model.html" role="menuitem">Operational Impact Model</a>
+  <a href="continuity-and-resilience.html" role="menuitem">Continuity &amp; Resilience</a>
+  <a href="pilot-brief.html" role="menuitem">Pilot Brief</a>
+  <a href="pilot-readiness-kit.html" role="menuitem">Pilot Readiness Kit</a>
+  <a href="channel-partners.html" role="menuitem">MSP / Channel Partners</a>
+</div>
+<div id="menu-company" class="nav-dropdown" role="menu" aria-label="Company">
+  <span class="nav-section-label">Company</span>
+  <a href="about.html" class="nav-featured" role="menuitem">About Pocono AI</a>
+  <a href="team.html" role="menuitem">Team &amp; Leadership</a>
+  <a href="investors.html" role="menuitem">Investors</a>
+  <a href="research.html" role="menuitem">Research Hub</a>
+  <a href="ai-near-miss-doctrine.html" role="menuitem">AI Near-Miss Doctrine</a>
+  <span class="nav-section-label">Join &amp; Engage</span>
+  <a href="founding-commercial-leadership.html" role="menuitem">Join Us</a>
+  <a href="careers.html" role="menuitem">Careers</a>
+  <a href="partners.html" role="menuitem">Partners</a>
+  <a href="contact.html" class="nav-featured" role="menuitem">Contact</a>
+</div>
+</div>
+<!-- PARTIAL:nav-drop-root END -->
+
+<!-- PARTIAL:search-panel START -->
+<!-- Search panel: sticky top:70px, outside header flex context -->
+<div id="search-panel" role="search" aria-label="Site search" aria-hidden="true">
+  <div class="search-panel-inner">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="search" id="search-panel-input" placeholder="Search Pocono AI&hellip;" autocomplete="off" spellcheck="false" enterkeyhint="search" aria-label="Search site" aria-autocomplete="list" aria-controls="search-results-drop">
+    <button type="button" class="search-submit-btn" aria-label="Submit search">Search</button>
+    <button type="button" id="search-panel-close" aria-label="Close search">
+      <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="1" y1="1" x2="12" y2="12"/><line x1="12" y1="1" x2="1" y2="12"/></svg>
+    </button>
+    <div id="search-results-drop" role="listbox" aria-label="Search results"></div>
+  </div>
+</div>
+<!-- PARTIAL:search-panel END -->
+
+<!-- PARTIAL:mobile-nav START -->
+<!-- Mobile panel: full-screen slide-in -->
+<nav id="mobile-nav-panel" aria-label="Mobile navigation" aria-hidden="true">
+  <div class="mob-static-links"><a href="index.html">Home</a><a href="start-here.html" style="color:#00c2a8;font-weight:600;">Start Here</a><a href="executive-brief.html">Executive Brief</a><a href="liability-simulator.html">See It Run</a><a href="architecture.html">Architecture</a><a href="pricing.html">Pricing</a><a href="contact.html" style="color:#00c2a8;font-weight:600;">Contact</a></div>
+  <div class="mob-section">
+    <button type="button" class="mob-section-toggle" aria-expanded="false">Medical Practices
+      <svg class="mob-chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><polyline points="2,3 5,7 8,3"/></svg>
+    </button>
+    <div class="mob-section-links">
+      <a href="for-physicians.html" class="mob-featured">For Physicians &amp; Practices</a>
+      <a href="physicians-hub.html">Physician Knowledge Hub</a>
+      <a href="prior-auth-case-study.html">Prior Auth Use Case</a>
+      <a href="physicians-denials-appeals.html">Denials &amp; Appeals</a>
+      <a href="day-in-the-clinic.html">A Day in the Clinic</a>
+      <a href="nurses-ai-briefing.html">For Nursing Staff</a>
+      <a href="support-staff-clinic-workflows.html">For Clinic Support Staff</a>
+      <a href="works-with-your-clinic.html">Works With Your Clinic Systems</a>
+      <a href="patient-advocacy.html">Patient Safety</a>
+      <a href="ehr-burden-research.html">EHR Burden Research</a>
+    </div>
+  </div>
+  <div class="mob-section">
+    <button type="button" class="mob-section-toggle" aria-expanded="false">Law Firms
+      <svg class="mob-chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><polyline points="2,3 5,7 8,3"/></svg>
+    </button>
+    <div class="mob-section-links">
+      <a href="for-attorneys.html" class="mob-featured">For Attorneys</a>
+      <a href="law-firm-pilot.html">Law Firm Pilot Program</a>
+      <a href="day-in-a-law-firm.html">A Day Inside a Small Firm</a>
+      <a href="legal-workflows-by-practice.html">Workflows by Practice</a>
+      <a href="how-pocono-ai-fails-safely.html">How We Fail Safely</a>
+      <a href="before-after-small-firm.html">Before vs. After</a>
+      <a href="support-staff-workflows.html">For Paralegals &amp; Support Staff</a>
+      <a href="works-with-your-stack.html">Works With Your Stack</a>
+      <a href="legal-admin-burden.html">Legal Admin Burden</a>
+      <a href="paradox-automated-abandonment.html">Malpractice Analysis</a>
+    </div>
+  </div>
+  <div class="mob-section">
+    <button type="button" class="mob-section-toggle" aria-expanded="false">See It On Screen
+      <svg class="mob-chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><polyline points="2,3 5,7 8,3"/></svg>
+    </button>
+    <div class="mob-section-links">
+      <a href="governance-review.html" class="mob-featured">Governance Review</a>
+      <a href="governance-dashboard.html">Governance Dashboard</a>
+      <a href="local-vs-cloud.html">Local vs. Cloud</a>
+      <a href="day-in-the-clinic.html">Day in the Clinic</a>
+      <a href="workflow-demonstrations.html">Workflow Demonstrations</a>
+      <a href="pilot-workflow.html">Pilot Workflow</a>
+      <a href="operational-artifacts.html">Operational Artifacts</a>
+      <a href="deployment-topology.html">Deployment Topology</a>
+    </div>
+  </div>
+  <div class="mob-section">
+    <button type="button" class="mob-section-toggle" aria-expanded="false">IT &amp; Compliance
+      <svg class="mob-chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><polyline points="2,3 5,7 8,3"/></svg>
+    </button>
+    <div class="mob-section-links">
+      <a href="sentinel-audit-system.html" class="mob-featured">Audit System</a>
+      <a href="sentinel-specs.html">Sentinel Node Specs</a>
+      <a href="compliance.html">Compliance Attestation</a>
+      <a href="deployment.html">Deployment Timeline</a>
+      <a href="deployment-topology.html">Deployment Topology</a>
+      <a href="security.html">Security</a>
+    </div>
+  </div>
+  <div class="mob-section">
+    <button type="button" class="mob-section-toggle" aria-expanded="false">Engagement
+      <svg class="mob-chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><polyline points="2,3 5,7 8,3"/></svg>
+    </button>
+    <div class="mob-section-links">
+      <a href="what-happens-after-contact.html" class="mob-featured">What Happens After Contact</a>
+      <a href="clinical-collaboration-framework.html">Clinical Collaboration</a>
+      <a href="pilot-evidence-framework.html">Pilot Evidence Framework</a>
+      <a href="operational-impact-model.html">Operational Impact Model</a>
+      <a href="continuity-and-resilience.html">Continuity &amp; Resilience</a>
+      <a href="pilot-brief.html">Pilot Brief</a>
+      <a href="pilot-readiness-kit.html">Pilot Readiness Kit</a>
+      <a href="channel-partners.html">MSP / Channel Partners</a>
+      <a href="pricing.html">Pricing</a>
+    </div>
+  </div>
+  <div class="mob-section">
+    <button type="button" class="mob-section-toggle" aria-expanded="false">Company
+      <svg class="mob-chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><polyline points="2,3 5,7 8,3"/></svg>
+    </button>
+    <div class="mob-section-links">
+      <a href="about.html" class="mob-featured">About Pocono AI</a>
+      <a href="team.html">Team &amp; Leadership</a>
+      <a href="investors.html">Investors</a>
+      <a href="research.html">Research Hub</a>
+      <a href="ai-near-miss-doctrine.html">AI Near-Miss Doctrine</a>
+      <a href="founding-commercial-leadership.html">Join Us</a>
+      <a href="careers.html">Careers</a>
+      <a href="partners.html">Partners</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+  <div class="mob-section">
+    <button type="button" class="mob-section-toggle" aria-expanded="false">More
+      <svg class="mob-chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><polyline points="2,3 5,7 8,3"/></svg>
+    </button>
+    <div class="mob-section-links">
+      <a href="governance.html">AI Governance</a>
+      <a href="trust.html">Trust &amp; Claims</a>
+      <a href="regulated-ai-solutions.html">Regulated AI Solutions</a>
+      <a href="audit.html">Transparency Report</a>
+      <a href="sitemap.html">All Pages</a>
+    </div>
+  </div>
+  <a href="mailto:marcus@poconoai.com" class="mob-cta">Email Marcus: marcus@poconoai.com</a>
+</nav>
+<!-- PARTIAL:mobile-nav END -->
+
+
+<main id="main-content" tabindex="-1">
+<span id="main" aria-hidden="true"></span>
+
+<!-- Page header -->
+<div class="empire-page-header">
+    <div>
+        <p class="empire-eyebrow"><span class="empire-eyebrow-dot"></span>Pocono AI Playground &middot; Zero-Cloud Edition</p>
+        <h1 class="empire-page-title">Local AI Empire <span>v2</span></h1>
+        <p class="empire-page-sub">Turn-based territory strategy &mdash; 100% client-side &middot; no servers &middot; no tracking</p>
+    </div>
+    <a href="playground.html" class="empire-back-link">&larr; Playground</a>
+</div>
+
+<!-- Game -->
+<div class="empire-game-wrap">
+<div class="empire-shell" id="empire-shell">
+
+    <!-- ══ SCREEN 1: SPLASH ══ -->
+    <div class="screen-splash" id="screen-splash">
+        <div class="splash-logo-mark">⬡</div>
+        <p class="splash-eyebrow">Pocono AI &middot; Playground</p>
+        <h2 class="splash-title">Local AI Empire <em>v2</em></h2>
+        <p class="splash-version">Zero-cloud &middot; Zero-tracking &middot; All browser</p>
+        <p class="splash-tagline">"Build your network. Outmanoeuvre the machine. Every decision costs resources you may not have."</p>
+        <button class="splash-cta-btn" id="btn-splash-next">How to Play &rarr;</button>
+        <p class="splash-fine">No data leaves your browser &middot; State resets on page reload</p>
+    </div>
+
+    <!-- ══ SCREEN 2: HOW TO PLAY ══ -->
+    <div class="screen-howto" id="screen-howto" style="display:none;">
+        <div class="howto-header">
+            <p class="howto-eyebrow">Local AI Empire v2</p>
+            <h2 class="howto-title">How to Play</h2>
+            <p class="howto-sub">Read once, then click Begin Game. You'll figure out the rest.</p>
+        </div>
+        <div class="howto-grid">
+            <div class="howto-card">
+                <span class="howto-card-icon">🗺</span>
+                <p class="howto-card-title">Claim Territory</p>
+                <p class="howto-card-body">Click a tile to select it, then hit <strong>Claim</strong>. You can only expand to tiles adjacent to territory you already own. Cost: <strong>2⚡</strong>.</p>
+            </div>
+            <div class="howto-card">
+                <span class="howto-card-icon">⬡</span>
+                <p class="howto-card-title">Build AI Nodes</p>
+                <p class="howto-card-body">On owned tiles. Generates <strong>+1🖥 Compute and +1⚡</strong> per turn. Mountain terrain gives an extra +1 Compute. Cost: <strong>3⚡ + 2📡</strong>.</p>
+            </div>
+            <div class="howto-card">
+                <span class="howto-card-icon">◉</span>
+                <p class="howto-card-title">Build Data Farms</p>
+                <p class="howto-card-body">Generates <strong>+2📡 Data</strong> per turn. Ruins tiles give +1 Data, Forest tiles give +1 Energy. Cost: <strong>2⚡ + 1📡</strong>.</p>
+            </div>
+            <div class="howto-card">
+                <span class="howto-card-icon">◈</span>
+                <p class="howto-card-title">Scout the Fog</p>
+                <p class="howto-card-body">Unexplored tiles are dark. Select any tile and Scout to reveal a 2-tile radius. Cost: <strong>1⚡</strong>. Essential for reading enemy moves.</p>
+            </div>
+            <div class="howto-card">
+                <span class="howto-card-icon">★</span>
+                <p class="howto-card-title">Win Conditions</p>
+                <p class="howto-card-body">Control <strong>55% of the map</strong> — or capture the enemy <strong>★ HQ</strong> for an instant win. You have 3 actions per turn. The AI has 3 too.</p>
+            </div>
+            <div class="howto-card">
+                <span class="howto-card-icon">⌨</span>
+                <p class="howto-card-title">Controls</p>
+                <p class="howto-card-body">Click or tap tiles. Arrow keys move cursor. <strong>C</strong> claim &nbsp;<strong>N</strong> node &nbsp;<strong>F</strong> farm &nbsp;<strong>S</strong> scout &nbsp;<strong>↵</strong> end turn.</p>
+            </div>
+        </div>
+        <div class="howto-footer">
+            <button class="howto-continue-btn" id="btn-begin-game">Begin Game &rarr;</button>
+            <button class="howto-back-link" id="btn-back-splash">&larr; Back</button>
+        </div>
+    </div>
+
+    <!-- ── HUD (shown after start) ── -->
+    <div class="empire-hud" id="game-hud" style="display:none;">
+        <div class="empire-hud-left">
+            <span class="empire-brand-stamp">Local AI Empire v2</span>
+            <div class="empire-resources">
+                <div class="empire-res"><span class="empire-res-icon">⚡</span><span class="empire-res-val" id="res-e">10</span><span class="empire-res-label">Energy</span></div>
+                <div class="empire-res"><span class="empire-res-icon">📡</span><span class="empire-res-val" id="res-d">6</span><span class="empire-res-label">Data</span></div>
+                <div class="empire-res"><span class="empire-res-icon">🖥</span><span class="empire-res-val" id="res-c">4</span><span class="empire-res-label">Compute</span></div>
+                <div class="empire-res"><span class="empire-res-icon">🗺</span><span class="empire-res-val" id="res-t">1</span><span class="empire-res-label">Tiles</span></div>
+            </div>
+        </div>
+        <div class="empire-hud-right">
+            <span class="empire-acts-left" id="acts-left">3 actions left</span>
+            <span class="empire-phase-tag" id="phase-tag">Your turn</span>
+            <span class="empire-turn-pill">Turn <span id="turn-num">1</span></span>
+        </div>
+    </div>
+
+    <!-- ── Game body ── -->
+    <div class="empire-game-body" id="game-body" style="display:none;">
+        <canvas id="empire-canvas" aria-label="AI Empire strategy map — click tiles to interact"></canvas>
+
+        <aside class="empire-sidebar">
+            <div class="empire-panel">
+                <p class="empire-panel-label">Selected Tile</p>
+                <div class="empire-tile-info" id="tile-info">Click any tile on the map to select it.</div>
+            </div>
+            <div class="empire-panel">
+                <p class="empire-panel-label">Actions</p>
+                <div class="empire-actions">
+                    <button class="empire-act act-claim" id="btn-claim" disabled>⊕ Claim<span class="empire-act-cost">2⚡</span></button>
+                    <button class="empire-act act-node"  id="btn-node"  disabled>⬡ AI Node<span class="empire-act-cost">3⚡ 2📡</span></button>
+                    <button class="empire-act act-farm"  id="btn-farm"  disabled>◉ Data Farm<span class="empire-act-cost">2⚡ 1📡</span></button>
+                    <button class="empire-act act-scout" id="btn-scout" disabled>◈ Scout<span class="empire-act-cost">1⚡</span></button>
+                    <button class="empire-act act-end"   id="btn-end">↷ End Turn</button>
+                </div>
+            </div>
+            <div class="empire-panel" style="flex:1;overflow:hidden;">
+                <p class="empire-panel-label">Log</p>
+                <div class="empire-log" id="game-log" aria-live="polite"></div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- ── Toolbar ── -->
+    <div class="empire-toolbar" id="game-toolbar" style="display:none;">
+        <div class="empire-kb">
+            <kbd>↑↓←→</kbd>move &nbsp;<kbd>C</kbd>claim &nbsp;<kbd>N</kbd>node &nbsp;<kbd>F</kbd>farm &nbsp;<kbd>S</kbd>scout &nbsp;<kbd>↵</kbd>end turn
+        </div>
+        <div class="empire-toolbar-right">
+            <button class="btn-toolbar" id="btn-how">? How to Play</button>
+            <button class="btn-toolbar" id="btn-new">↺ New Game</button>
+        </div>
+    </div>
+
+    <!-- ── End-game overlay ── -->
+    <div class="empire-endgame" id="endgame">
+        <span class="endgame-badge" id="eg-badge">Victory</span>
+        <h2 class="endgame-title" id="eg-title">Empire Established</h2>
+        <p class="endgame-body" id="eg-body"></p>
+        <div class="endgame-stats">
+            <div class="endgame-stat"><span class="endgame-stat-val" id="eg-tiles">—</span><span class="endgame-stat-label">Your Tiles</span></div>
+            <div class="endgame-stat"><span class="endgame-stat-val" id="eg-turns">—</span><span class="endgame-stat-label">Turns</span></div>
+            <div class="endgame-stat"><span class="endgame-stat-val" id="eg-built">—</span><span class="endgame-stat-label">Structures</span></div>
+        </div>
+        <button class="endgame-play-again" id="btn-again">Play Again</button>
+    </div>
+
+</div><!-- empire-shell -->
+</div><!-- empire-game-wrap -->
+
+<!-- Info strip -->
+<div class="empire-info-strip">
+    <div class="empire-info-card">
+        <p class="empire-info-card-label">Terrain Bonuses</p>
+        <p><strong>▲ Mountain</strong> &mdash; AI Nodes +1 Compute/turn<br><strong>♣ Forest</strong> &mdash; Data Farms +1 Energy/turn<br><strong>◇ Ruins</strong> &mdash; Data Farms +1 Data/turn<br><strong>≋ Water</strong> &mdash; Cannot be claimed</p>
+    </div>
+    <div class="empire-info-card">
+        <p class="empire-info-card-label">Income per Turn</p>
+        <p>Base: <strong>+2⚡ Energy</strong> every turn<br>AI Node: <strong>+1🖥 Compute, +1⚡</strong><br>Data Farm: <strong>+2📡 Data</strong><br>Plus terrain bonuses listed left</p>
+    </div>
+    <div class="empire-info-card">
+        <p class="empire-info-card-label">Build Notes</p>
+        <p>v2 is a clean rewrite — zero CDN dependencies, zero cloud calls, one HTML file. The AI opponent expands and builds using a scoring heuristic. Future work: difficulty tiers, event cards.</p>
+    </div>
+</div>
+
+<div style="text-align:center;padding:0 20px 48px;">
+    <a href="playground.html" style="font-family:'Syne',sans-serif;font-size:0.78em;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(0,212,168,0.45);text-decoration:none;">&larr; Back to Playground</a>
+</div>
+
+</main>
+
+<footer role="contentinfo" style="background:#040c16;border-top:1px solid rgba(255,255,255,0.07);padding:22px 24px;text-align:center;font-size:0.82em;color:#5a6e7e;">
+    <p style="margin:0;">&copy; 2026 PoconoAI, LLC &middot; East Stroudsburg, PA &middot;
+    <a href="mailto:marcus@poconoai.com" style="color:#5a6e7e;">marcus@poconoai.com</a> &middot;
+    <a href="playground.html" style="color:#5a6e7e;">Playground</a> &middot;
+    <a href="how-we-hire.html" style="color:#5a6e7e;">How We Hire</a> &middot;
+    <a href="privacy.html" style="color:#4a8fa8;">Privacy</a> &middot;
+    <a href="terms.html" style="color:#4a8fa8;">Terms</a></p>
+</footer>
+
+<script src="search-index.js?v=402" defer></script>
+<script src="nav.js?v=402" defer></script>
+
+<!-- ══════════════════════════════════════════════════════════════
+     LOCAL AI EMPIRE v2 — COMPLETE GAME ENGINE
+     Pure vanilla JS + Canvas 2D. Zero external dependencies.
+     All state in-memory. Nothing sent anywhere.
+══════════════════════════════════════════════════════════════ -->
+<script>
+(function () {
+'use strict';
+
+/* ── Constants ── */
+var COLS = 18, ROWS = 11;
+var WIN_PCT   = 0.55;
+var WIN_TILES = Math.floor(COLS * ROWS * WIN_PCT);
+var MAX_ACTS  = 3;
+
+var T  = { EMPTY:0, P_CLAIM:1, AI_CLAIM:2, P_NODE:3, AI_NODE:4, P_FARM:5, AI_FARM:6 };
+var TR = { PLAIN:0, MOUNTAIN:1, FOREST:2, WATER:3, RUINS:4 };
+
+var COSTS = {
+    claim: { energy:2 },
+    node:  { energy:3, data:2 },
+    farm:  { energy:2, data:1 },
+    scout: { energy:1 }
+};
+
+/* ── DOM ── */
+function $id(id) { return document.getElementById(id); }
+var canvas   = $id('empire-canvas');
+var ctx      = canvas.getContext('2d');
+var hudEl    = $id('game-hud');
+var bodyEl   = $id('game-body');
+var tbEl     = $id('game-toolbar');
+var endEl    = $id('endgame');
+
+/* ── Canvas sizing (called each new game + resize) ── */
+var TW, TH;
+function resizeCanvas() {
+    var dpr  = Math.min(window.devicePixelRatio || 1, 2);
+    var cssW = canvas.parentElement.clientWidth;
+    // Target: tall enough to be substantial — floor at 520, cap at 680
+    var cssH = Math.max(520, Math.min(Math.round(cssW * ROWS / COLS), 680));
+    canvas.style.height = cssH + 'px';
+    canvas.width  = Math.round(cssW * dpr);
+    canvas.height = Math.round(cssH * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    TW = cssW / COLS;
+    TH = cssH / ROWS;
+}
+
+/* ── State ── */
+var G;
+
+function makeState() {
+    var map = [], fog = [], ter = [];
+    for (var r = 0; r < ROWS; r++) {
+        map.push(new Array(COLS).fill(T.EMPTY));
+        fog.push(new Array(COLS).fill(true));
+        var row = [];
+        for (var c = 0; c < COLS; c++) {
+            var n = Math.random();
+            row.push(n < 0.06 ? TR.WATER
+                   : n < 0.14 ? TR.MOUNTAIN
+                   : n < 0.24 ? TR.FOREST
+                   : n < 0.30 ? TR.RUINS
+                   : TR.PLAIN);
+        }
+        ter.push(row);
+    }
+    var pHQ = { r: Math.floor(ROWS / 2), c: 1 };
+    var aHQ = { r: Math.floor(ROWS / 2), c: COLS - 2 };
+    ter[pHQ.r][pHQ.c] = TR.PLAIN;
+    ter[aHQ.r][aHQ.c] = TR.PLAIN;
+    map[pHQ.r][pHQ.c] = T.P_CLAIM;
+    map[aHQ.r][aHQ.c] = T.AI_CLAIM;
+    revealZone(fog, pHQ.r, pHQ.c, 2);
+    return {
+        map: map, fog: fog, ter: ter,
+        pHQ: pHQ, aHQ: aHQ,
+        res:   { energy:10, data:6, compute:4 },
+        aiRes: { energy:10, data:6, compute:4 },
+        turn: 1, phase: 'player', selected: null,
+        actsDone: 0, winner: null, built: 0
+    };
+}
+
+function inBounds(r, c) { return r >= 0 && r < ROWS && c >= 0 && c < COLS; }
+
+function revealZone(fog, r, c, rad) {
+    for (var dr = -rad; dr <= rad; dr++)
+        for (var dc = -rad; dc <= rad; dc++)
+            if (inBounds(r + dr, c + dc)) fog[r + dr][c + dc] = false;
+}
+
+/* ── Render ── */
+var TBGS  = ['#091c2e','#141a28','#0b2018','#040f28','#1a1208'];
+var TICON = ['','▲','♣','≋','◇'];
+
+function render() {
+    var cssW = TW * COLS, cssH = TH * ROWS;
+    ctx.clearRect(0, 0, cssW, cssH);
+    ctx.fillStyle = '#03080f';
+    ctx.fillRect(0, 0, cssW, cssH);
+
+    // Grid lines
+    ctx.strokeStyle = 'rgba(255,255,255,0.032)';
+    ctx.lineWidth = 1;
+    for (var c = 0; c <= COLS; c++) {
+        ctx.beginPath(); ctx.moveTo(c * TW, 0); ctx.lineTo(c * TW, cssH); ctx.stroke();
+    }
+    for (var r = 0; r <= ROWS; r++) {
+        ctx.beginPath(); ctx.moveTo(0, r * TH); ctx.lineTo(cssW, r * TH); ctx.stroke();
+    }
+
+    for (r = 0; r < ROWS; r++)
+        for (c = 0; c < COLS; c++)
+            drawCell(r, c);
+}
+
+function drawCell(r, c) {
+    var x = c * TW, y = r * TH;
+    var fogged = G.fog[r][c];
+    var tile   = G.map[r][c];
+    var terr   = G.ter[r][c];
+    var isPHQ  = (r === G.pHQ.r && c === G.pHQ.c);
+    var isAHQ  = (r === G.aHQ.r && c === G.aHQ.c);
+    var isSel  = G.selected && G.selected.r === r && G.selected.c === c;
+
+    /* Fogged cell */
+    if (fogged) {
+        ctx.fillStyle = '#040d1a';
+        ctx.fillRect(x + 0.5, y + 0.5, TW - 1, TH - 1);
+        ctx.fillStyle = 'rgba(0,0,0,0.52)';
+        ctx.fillRect(x + 0.5, y + 0.5, TW - 1, TH - 1);
+        if ((r + c) % 4 === 0) {
+            ctx.fillStyle = 'rgba(255,255,255,0.035)';
+            ctx.fillRect(x + TW * 0.44, y + TH * 0.44, 2, 2);
+        }
+        if (isSel) renderSelection(x, y);
+        return;
+    }
+
+    /* Terrain base */
+    ctx.fillStyle = TBGS[terr];
+    ctx.fillRect(x + 0.5, y + 0.5, TW - 1, TH - 1);
+
+    /* Ownership tint */
+    var isP = (tile === T.P_CLAIM || tile === T.P_NODE || tile === T.P_FARM);
+    var isA = (tile === T.AI_CLAIM || tile === T.AI_NODE || tile === T.AI_FARM);
+    if (isP) { ctx.fillStyle = 'rgba(0,212,168,0.17)'; ctx.fillRect(x+0.5,y+0.5,TW-1,TH-1); }
+    if (isA) { ctx.fillStyle = 'rgba(255,95,95,0.17)';  ctx.fillRect(x+0.5,y+0.5,TW-1,TH-1); }
+
+    /* Terrain icon */
+    if (TICON[terr]) {
+        ctx.fillStyle = 'rgba(255,255,255,0.09)';
+        ctx.font = Math.max(8, Math.floor(TH * 0.3)) + 'px sans-serif';
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillText(TICON[terr], x + TW / 2, y + TH / 2);
+    }
+
+    /* Structure / HQ glyph */
+    var gl = '', gc = '#fff', gg = '';
+    if (isPHQ)                { gl='★'; gc='#00d4a8'; gg='#00d4a8'; }
+    else if (isAHQ)           { gl='★'; gc='#ff5f5f'; gg='#ff5f5f'; }
+    else if (tile===T.P_NODE) { gl='⬡'; gc='#00a3ff'; gg='#00a3ff'; }
+    else if (tile===T.AI_NODE){ gl='⬡'; gc='#ff5f5f'; gg='#ff5f5f'; }
+    else if (tile===T.P_FARM) { gl='◉'; gc='#ffb74d'; gg='#ffb74d'; }
+    else if (tile===T.AI_FARM){ gl='◉'; gc='#ff7040'; gg='#ff7040'; }
+
+    if (gl) {
+        var sz = Math.max(10, Math.floor(Math.min(TW, TH) * 0.50));
+        ctx.font = 'bold ' + sz + 'px sans-serif';
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.shadowColor = gg; ctx.shadowBlur = 10;
+        ctx.fillStyle = gc;
+        ctx.fillText(gl, x + TW / 2, y + TH / 2 + 1);
+        ctx.shadowBlur = 0;
+    }
+
+    /* Ownership border */
+    if (isP) { ctx.strokeStyle='rgba(0,212,168,0.48)'; ctx.lineWidth=1.5; ctx.strokeRect(x+1,y+1,TW-2,TH-2); }
+    if (isA) { ctx.strokeStyle='rgba(255,95,95,0.42)';  ctx.lineWidth=1.5; ctx.strokeRect(x+1,y+1,TW-2,TH-2); }
+
+    if (isSel) renderSelection(x, y);
+}
+
+function renderSelection(x, y) {
+    ctx.strokeStyle = '#ffb74d';
+    ctx.lineWidth   = 2;
+    ctx.strokeRect(x + 2, y + 2, TW - 4, TH - 4);
+    // Corner marks
+    var cs = Math.min(7, TW * 0.25);
+    ctx.strokeStyle = '#ffe082';
+    ctx.lineWidth   = 2;
+    ctx.beginPath();
+    ctx.moveTo(x+cs,y+2);      ctx.lineTo(x+2,y+2);      ctx.lineTo(x+2,y+cs);
+    ctx.moveTo(x+TW-cs,y+2);   ctx.lineTo(x+TW-2,y+2);   ctx.lineTo(x+TW-2,y+cs);
+    ctx.moveTo(x+2,y+TH-cs);   ctx.lineTo(x+2,y+TH-2);   ctx.lineTo(x+cs,y+TH-2);
+    ctx.moveTo(x+TW-2,y+TH-cs);ctx.lineTo(x+TW-2,y+TH-2);ctx.lineTo(x+TW-cs,y+TH-2);
+    ctx.stroke();
+}
+
+/* ── HUD & UI ── */
+function countTiles(who) {
+    var targets = who === 'player'
+        ? [T.P_CLAIM, T.P_NODE, T.P_FARM]
+        : [T.AI_CLAIM, T.AI_NODE, T.AI_FARM];
+    var n = 0;
+    for (var r = 0; r < ROWS; r++)
+        for (var c = 0; c < COLS; c++)
+            if (targets.indexOf(G.map[r][c]) !== -1) n++;
+    return n;
+}
+
+function updateHUD() {
+    $id('res-e').textContent = G.res.energy;
+    $id('res-d').textContent = G.res.data;
+    $id('res-c').textContent = G.res.compute;
+    $id('res-t').textContent = countTiles('player');
+    $id('turn-num').textContent = G.turn;
+    var left = Math.max(0, MAX_ACTS - G.actsDone);
+    $id('acts-left').textContent = left + ' action' + (left !== 1 ? 's' : '') + ' left';
+    $id('phase-tag').textContent = G.phase === 'player' ? 'Your turn'
+                                 : G.phase === 'ai'     ? 'AI thinking…'
+                                 : 'Game over';
+}
+
+function updateTileInfo() {
+    var el = $id('tile-info');
+    if (!G.selected) { el.innerHTML = 'Click any tile on the map to select it.'; return; }
+    var r = G.selected.r, c = G.selected.c;
+    if (G.fog[r][c]) { el.innerHTML = '<span class="ti-fog">(' + r + ',' + c + ') &mdash; Unexplored</span>'; return; }
+    var tile = G.map[r][c];
+    var terr = G.ter[r][c];
+    var tNames = ['Plains','Mountain','Forest','Water','Ruins'];
+    var sNames = ['Unclaimed','Your territory','Enemy territory','Your AI Node','Enemy AI Node','Your Data Farm','Enemy Data Farm'];
+    var bonuses = ['','Nodes +1 Compute','Farms +1 Energy','Cannot claim','Farms +1 Data'];
+    var isP = (tile===T.P_CLAIM||tile===T.P_NODE||tile===T.P_FARM);
+    var isA = (tile===T.AI_CLAIM||tile===T.AI_NODE||tile===T.AI_FARM);
+    var cls = isP ? 'ti-p' : isA ? 'ti-ai' : '';
+    el.innerHTML =
+        '<strong>(' + r + ',' + c + ') ' + tNames[terr] + '</strong>' +
+        '<span class="' + cls + '">' + sNames[tile] + '</span>' +
+        (bonuses[terr] ? '<span class="ti-bonus">' + bonuses[terr] + '</span>' : '');
+}
+
+function updateButtons() {
+    var canAct = G.phase === 'player' && G.actsDone < MAX_ACTS;
+    var sel    = G.selected;
+    var cClaim = false, cNode = false, cFarm = false, cScout = false;
+
+    if (canAct && sel && !G.fog[sel.r][sel.c]) {
+        var tile = G.map[sel.r][sel.c];
+        cClaim = tile === T.EMPTY && G.ter[sel.r][sel.c] !== TR.WATER
+              && adjTo(sel.r, sel.c, 'player') && G.res.energy >= COSTS.claim.energy;
+        cNode  = tile === T.P_CLAIM && !isHQ(sel.r,sel.c)
+              && G.res.energy >= COSTS.node.energy && G.res.data >= COSTS.node.data;
+        cFarm  = tile === T.P_CLAIM && !isHQ(sel.r,sel.c)
+              && G.res.energy >= COSTS.farm.energy && G.res.data >= COSTS.farm.data;
+        cScout = G.res.energy >= COSTS.scout.energy;
+    }
+
+    $id('btn-claim').disabled = !cClaim;
+    $id('btn-node').disabled  = !cNode;
+    $id('btn-farm').disabled  = !cFarm;
+    $id('btn-scout').disabled = !(canAct && sel && G.res.energy >= COSTS.scout.energy);
+    $id('btn-end').disabled   = G.phase !== 'player';
+}
+
+function isHQ(r,c) {
+    return (r===G.pHQ.r&&c===G.pHQ.c)||(r===G.aHQ.r&&c===G.aHQ.c);
+}
+function adjTo(r, c, who) {
+    var targets = who === 'player'
+        ? [T.P_CLAIM,T.P_NODE,T.P_FARM]
+        : [T.AI_CLAIM,T.AI_NODE,T.AI_FARM];
+    var dirs = [[-1,0],[1,0],[0,-1],[0,1]];
+    for (var i = 0; i < dirs.length; i++) {
+        var nr=r+dirs[i][0], nc=c+dirs[i][1];
+        if (inBounds(nr,nc) && targets.indexOf(G.map[nr][nc]) !== -1) return true;
+    }
+    return false;
+}
+
+/* ── Logging ── */
+function log(msg, cls) {
+    var el = $id('game-log');
+    var d  = document.createElement('div');
+    d.className = 'log-line' + (cls ? ' ' + cls : '');
+    d.textContent = msg;
+    el.insertBefore(d, el.firstChild);
+    while (el.children.length > 50) el.removeChild(el.lastChild);
+}
+
+/* ── Income ── */
+function applyIncome() {
+    var e = 2, d = 0, c = 0;
+    for (var r = 0; r < ROWS; r++) {
+        for (var cc = 0; cc < COLS; cc++) {
+            var t = G.map[r][cc], tr = G.ter[r][cc];
+            if (t === T.P_FARM) { d += 2; if (tr===TR.RUINS) d++; if (tr===TR.FOREST) e++; }
+            if (t === T.P_NODE) { c++; if (tr===TR.MOUNTAIN) c++; e++; }
+        }
+    }
+    G.res.energy  = Math.min(G.res.energy  + e, 99);
+    G.res.data    = Math.min(G.res.data    + d, 99);
+    G.res.compute = Math.min(G.res.compute + c, 99);
+    log('Income: +' + e + '⚡ +' + d + '📡 +' + c + '🖥', 'log-sys');
+}
+function applyAIIncome() {
+    var e = 2, d = 0;
+    for (var r = 0; r < ROWS; r++)
+        for (var c = 0; c < COLS; c++) {
+            var t = G.map[r][c], tr = G.ter[r][c];
+            if (t===T.AI_FARM) { d+=2; if(tr===TR.RUINS)d++; if(tr===TR.FOREST)e++; }
+            if (t===T.AI_NODE) { e++; }
+        }
+    G.aiRes.energy = Math.min(G.aiRes.energy + e, 99);
+    G.aiRes.data   = Math.min(G.aiRes.data   + d, 99);
+}
+
+/* ── Player actions ── */
+function spend(cost) {
+    G.res.energy  -= (cost.energy  || 0);
+    G.res.data    -= (cost.data    || 0);
+    G.res.compute -= (cost.compute || 0);
+    G.actsDone++;
+}
+
+function doAction(type) {
+    if (G.phase !== 'player' || G.actsDone >= MAX_ACTS || !G.selected) return;
+    var r = G.selected.r, c = G.selected.c;
+    var acted = false;
+
+    if (type === 'claim' && !$id('btn-claim').disabled) {
+        spend(COSTS.claim); G.map[r][c] = T.P_CLAIM;
+        revealZone(G.fog, r, c, 1);
+        log('Claimed (' + r + ',' + c + ')', 'log-good');
+        acted = true;
+    } else if (type === 'node' && !$id('btn-node').disabled) {
+        spend(COSTS.node); G.map[r][c] = T.P_NODE; G.built++;
+        log('AI Node built at (' + r + ',' + c + ')', 'log-good');
+        acted = true;
+    } else if (type === 'farm' && !$id('btn-farm').disabled) {
+        spend(COSTS.farm); G.map[r][c] = T.P_FARM; G.built++;
+        log('Data Farm built at (' + r + ',' + c + ')', 'log-good');
+        acted = true;
+    } else if (type === 'scout' && !$id('btn-scout').disabled) {
+        spend(COSTS.scout);
+        revealZone(G.fog, r, c, 2);
+        log('Scouted around (' + r + ',' + c + ')', 'log-good');
+        acted = true;
+    }
+
+    if (!acted) return;
+    checkWin();
+    refresh();
+    if (G.phase === 'player' && G.actsDone >= MAX_ACTS) {
+        log('Actions exhausted — ending turn…', 'log-sys');
+        setTimeout(endTurn, 480);
+    }
+}
+
+/* ── Turn management ── */
+function endTurn() {
+    if (G.phase !== 'player') return;
+    applyIncome();
+    G.phase = 'ai';
+    G.turn++;
+    refresh();
+    log('— Enemy turn —', 'log-ai');
+    setTimeout(runAI, 500);
+}
+
+/* ── AI turn ── */
+function runAI() {
+    if (G.phase !== 'ai') return;
+    applyAIIncome();
+    var acts = scoreAIActions();
+    execAI(acts, 0, function () {
+        checkWin();
+        if (G.phase !== 'over') {
+            G.phase    = 'player';
+            G.actsDone = 0;
+            refresh();
+            log('Your turn — ' + MAX_ACTS + ' actions', 'log-sys');
+        }
+    });
+}
+
+function scoreAIActions() {
+    var cands = [];
+    for (var r = 0; r < ROWS; r++) {
+        for (var c = 0; c < COLS; c++) {
+            var tile = G.map[r][c];
+            var terr = G.ter[r][c];
+            if (tile === T.EMPTY && terr !== TR.WATER && adjTo(r,c,'ai') && G.aiRes.energy >= 2) {
+                var distP = Math.abs(r-G.pHQ.r) + Math.abs(c-G.pHQ.c);
+                var score = 60 - distP * 1.5 + Math.random() * 14;
+                if (terr===TR.RUINS||terr===TR.MOUNTAIN||terr===TR.FOREST) score += 10;
+                cands.push({ type:'claim', r:r, c:c, score:score });
+            }
+            if (tile === T.AI_CLAIM && !isHQ(r,c)) {
+                if (G.aiRes.energy >= 3 && G.aiRes.data >= 2 && Math.random() < 0.42)
+                    cands.push({ type:'node', r:r, c:c, score:28 + Math.random()*12 });
+                if (G.aiRes.energy >= 2 && G.aiRes.data >= 1 && Math.random() < 0.52)
+                    cands.push({ type:'farm', r:r, c:c, score:22 + Math.random()*12 });
+            }
+        }
+    }
+    cands.sort(function(a,b){ return b.score - a.score; });
+    return cands.slice(0, MAX_ACTS);
+}
+
+function execAI(acts, idx, done) {
+    if (idx >= acts.length) { done(); return; }
+    var act  = acts[idx];
+    var tile = G.map[act.r][act.c];
+    var ok   = false;
+
+    if (act.type==='claim' && tile===T.EMPTY && G.ter[act.r][act.c]!==TR.WATER
+            && adjTo(act.r,act.c,'ai') && G.aiRes.energy>=2) {
+        G.map[act.r][act.c]=T.AI_CLAIM; G.aiRes.energy-=2;
+        log('Enemy claimed (' + act.r + ',' + act.c + ')', 'log-bad'); ok=true;
+    } else if (act.type==='node' && tile===T.AI_CLAIM && !isHQ(act.r,act.c)
+            && G.aiRes.energy>=3 && G.aiRes.data>=2) {
+        G.map[act.r][act.c]=T.AI_NODE; G.aiRes.energy-=3; G.aiRes.data-=2;
+        log('Enemy built AI Node at (' + act.r + ',' + act.c + ')', 'log-bad'); ok=true;
+    } else if (act.type==='farm' && tile===T.AI_CLAIM && !isHQ(act.r,act.c)
+            && G.aiRes.energy>=2 && G.aiRes.data>=1) {
+        G.map[act.r][act.c]=T.AI_FARM; G.aiRes.energy-=2; G.aiRes.data-=1;
+        log('Enemy built Data Farm at (' + act.r + ',' + act.c + ')', 'log-bad'); ok=true;
+    }
+
+    if (ok) render();
+    setTimeout(function(){ execAI(acts, idx+1, done); }, ok ? 300 : 0);
+}
+
+/* ── Win check ── */
+function checkWin() {
+    if (G.phase === 'over') return;
+    var pN  = countTiles('player');
+    var aiN = countTiles('ai');
+    if (pN >= WIN_TILES) { endGame('player','Dominance','Your network spans the territory. The rival empire has been outpaced.'); return; }
+    if (aiN >= WIN_TILES){ endGame('ai','Overrun','The enemy controls the network. Rebuild and reclaim your territory.'); return; }
+    // HQ capture
+    var phq = G.map[G.pHQ.r][G.pHQ.c];
+    if (phq===T.AI_CLAIM||phq===T.AI_NODE||phq===T.AI_FARM) { endGame('ai','HQ Fallen','Your headquarters has been captured.'); return; }
+    var ahq = G.map[G.aHQ.r][G.aHQ.c];
+    if (ahq===T.P_CLAIM||ahq===T.P_NODE||ahq===T.P_FARM)   { endGame('player','HQ Seized','Enemy headquarters captured. Rival network dismantled.'); return; }
+}
+
+function endGame(winner, title, body) {
+    G.phase  = 'over';
+    G.winner = winner;
+    var win  = winner === 'player';
+    var badge = $id('eg-badge');
+    badge.textContent = win ? 'Victory' : 'Defeat';
+    badge.className   = 'endgame-badge ' + (win ? 'badge-win' : 'badge-lose');
+    $id('eg-title').textContent = title;
+    $id('eg-body').textContent  = body;
+    $id('eg-tiles').textContent = countTiles('player');
+    $id('eg-turns').textContent = G.turn;
+    $id('eg-built').textContent = G.built;
+    endEl.classList.add('visible');
+    refresh();
+}
+
+/* ── Full refresh ── */
+function refresh() {
+    render(); updateHUD(); updateTileInfo(); updateButtons();
+}
+
+/* ── Canvas input ── */
+function pixelToTile(clientX, clientY) {
+    var rect = canvas.getBoundingClientRect();
+    var c = Math.floor((clientX - rect.left) / (rect.width  / COLS));
+    var r = Math.floor((clientY - rect.top)  / (rect.height / ROWS));
+    return inBounds(r, c) ? { r:r, c:c } : null;
+}
+
+canvas.addEventListener('click', function(e) {
+    if (!G || G.phase === 'over') return;
+    var t = pixelToTile(e.clientX, e.clientY);
+    if (t) { G.selected = t; refresh(); }
+}, false);
+
+canvas.addEventListener('touchend', function(e) {
+    if (!G || G.phase === 'over') return;
+    e.preventDefault();
+    var touch = e.changedTouches[0];
+    var t = pixelToTile(touch.clientX, touch.clientY);
+    if (t) { G.selected = t; refresh(); }
+}, { passive: false });
+
+/* ── Keyboard ── */
+document.addEventListener('keydown', function(e) {
+    if (!G || bodyEl.style.display === 'none') return;
+    var rect = canvas.getBoundingClientRect();
+    if (rect.bottom < -100 || rect.top > window.innerHeight + 100) return;
+
+    var key = e.key;
+    var moved = false;
+
+    if (key==='ArrowUp'||key==='ArrowDown'||key==='ArrowLeft'||key==='ArrowRight') {
+        e.preventDefault();
+        if (!G.selected) { G.selected = { r:G.pHQ.r, c:G.pHQ.c }; }
+        else {
+            var nr=G.selected.r, nc=G.selected.c;
+            if (key==='ArrowUp')    nr=Math.max(0,nr-1);
+            if (key==='ArrowDown')  nr=Math.min(ROWS-1,nr+1);
+            if (key==='ArrowLeft')  nc=Math.max(0,nc-1);
+            if (key==='ArrowRight') nc=Math.min(COLS-1,nc+1);
+            G.selected = { r:nr, c:nc };
+        }
+        moved = true;
+    } else if (key==='c'||key==='C') { doAction('claim'); }
+    else if  (key==='n'||key==='N') { doAction('node'); }
+    else if  (key==='f'||key==='F') { doAction('farm'); }
+    else if  (key==='s'||key==='S') { doAction('scout'); }
+    else if  (key==='Enter')        { endTurn(); }
+
+    if (moved) refresh();
+});
+
+/* ── Screen switching ── */
+function showScreen(name) {
+    $id('screen-splash').style.display = (name === 'splash')  ? '' : 'none';
+    $id('screen-howto').style.display  = (name === 'howto')   ? '' : 'none';
+    hudEl.style.display                = (name === 'game')    ? '' : 'none';
+    bodyEl.style.display               = (name === 'game')    ? '' : 'none';
+    tbEl.style.display                 = (name === 'game')    ? '' : 'none';
+}
+
+/* ── Button wiring ── */
+$id('btn-splash-next').addEventListener('click', function () { showScreen('howto'); });
+$id('btn-back-splash').addEventListener('click', function () { showScreen('splash'); });
+$id('btn-begin-game').addEventListener('click',  startGame);
+$id('btn-claim').addEventListener('click',  function () { doAction('claim'); });
+$id('btn-node').addEventListener('click',   function () { doAction('node'); });
+$id('btn-farm').addEventListener('click',   function () { doAction('farm'); });
+$id('btn-scout').addEventListener('click',  function () { doAction('scout'); });
+$id('btn-end').addEventListener('click',    endTurn);
+$id('btn-new').addEventListener('click',    function () { showScreen('splash'); });
+$id('btn-again').addEventListener('click',  function () { showScreen('splash'); });
+$id('btn-how').addEventListener('click',    function () { endEl.classList.remove('visible'); showScreen('howto'); });
+
+/* ── Start game ── */
+function startGame() {
+    endEl.classList.remove('visible');
+    $id('game-log').innerHTML = '';
+    G = makeState();
+    showScreen('game');
+    resizeCanvas();
+    refresh();
+    log('──── Local AI Empire v2 ────', 'log-sys');
+    log('Win by controlling ' + WIN_TILES + ' tiles (' + Math.round(WIN_PCT*100) + '%) or capturing ★', 'log-sys');
+    log('Your ★ is left-centre. Enemy ★ is right-centre.', 'log-sys');
+    log('You have ' + MAX_ACTS + ' actions per turn. Good luck.', 'log-sys');
+}
+
+/* ── Resize ── */
+var rsTimer;
+window.addEventListener('resize', function(){
+    clearTimeout(rsTimer);
+    rsTimer = setTimeout(function(){
+        if (G && bodyEl.style.display !== 'none') { resizeCanvas(); render(); }
+    }, 120);
+}, { passive: true });
+
+}()); // end IIFE
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1392 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pocono AI trust: data sovereignty guarantees, audit trail architecture, no telemetry, and the structural difference between a BAA and physical isolation.">
+    <meta name="keywords" content="HIPAA AI compliance, zero-trust AI, data sovereignty, no BAA required, air-gapped AI, HIPAA by architecture, on-premises AI, local AI, sovereign AI, zero cloud AI, HIPAA-governed AI environments, healthcare AI, legal AI, Sentinel Node, Pocono AI, data sovereignty, air-gapped AI, no cloud, EHR automation, RAG AI, independent medical practice AI, law firm AI">
+    <title>Trust & Security | Local Deployment Architecture | Pocono AI</title>
+
+    <meta property="og:title" content="Trust &amp; Security | Pocono AI — Local Deployment Architecture">
+    <meta property="og:description" content="Trust is a technical byproduct of Cloud Obviation and Transparent Auditability. See how the Sentinel Node enforces data sovereignty by architecture.">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Pocono AI">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://poconoai.com/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Pocono AI — Sovereign on-premises AI">
+    <meta property="og:url" content="https://poconoai.com/trust.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Trust &amp; Security | Pocono AI">
+    <meta name="twitter:description" content="Local Deployment Architecture. Physical isolation designed to support HIPAA-aligned workflows — no routine cloud transfer of sensitive data. Outputs require human review.">
+    <meta name="twitter:image" content="https://poconoai.com/og-image.jpg"><meta name="theme-color" content="#0B0F13">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="alternate icon" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon-180x180.png">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="alternate icon" href="favicon.ico">
+
+    <link rel="stylesheet" href="styles.css?v=402">
+    <link rel="canonical" href="https://poconoai.com/trust.html">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Trust & Security — Local Deployment Architecture | Pocono AI",
+      "description": "How the Sentinel Node is designed to make data exfiltration extremely difficult for medical and legal practices through local, hardware-isolated deployment.",
+      "url": "https://poconoai.com/trust.html",
+      "isPartOf": {
+        "@type": "WebSite",
+        "url": "https://poconoai.com",
+        "name": "Pocono AI, LLC"
+      },
+      "datePublished": "2026-06-01",
+      "dateModified": "2026-06-01"
+    }</script>
+<link rel="stylesheet" href="nav-v2026.css?v=402">
+<link rel="stylesheet" href="brand-v292.css?v=402">
+<script>
+// Pocono AI v169 — Zero-flash banner dismissal.
+// Strategy: inject <style> tag synchronously BEFORE banner HTML parses,
+// so dismissed banners never render at all (no flash). DOM removal still
+// happens for safety. ?showbanners=1 URL param re-shows everything.
+(function(){
+  var ids=[];
+
+  // Escape hatch: ?showbanners=1 clears all dismiss flags for testing
+  try {
+    if (location.search.indexOf('showbanners=1') !== -1) {
+      ids.forEach(function(id){ localStorage.removeItem('pai_dismissed_'+id); });
+      localStorage.removeItem('poconoPilot');
+      localStorage.removeItem('advisoryBarDismissed');
+    }
+  } catch(e) {}
+
+  // v246 Stage 1 — Legacy migration block removed.
+  // Was dead code containing a JS syntax error (adjacent string literals)
+  // that broke the entire banner-dismiss IIFE on ~46 pages.
+
+  // Build CSS rule list for dismissed banners and inject synchronously.
+  // This runs in <head> BEFORE banner HTML is parsed, so dismissed bars
+  // never paint — eliminating the flash entirely.
+  var hideRules = [];
+  ids.forEach(function(id){
+    try {
+      if (localStorage.getItem('pai_dismissed_'+id) === '1') {
+        hideRules.push('#'+id+'{display:none !important;}');
+      }
+    } catch(e) {}
+  });
+  if (hideRules.length) {
+    var style = document.createElement('style');
+    style.id = 'pai-banner-hide';
+    style.textContent = hideRules.join('');
+    (document.head || document.documentElement).appendChild(style);
+  }
+
+  function dismiss(id){
+    try { localStorage.setItem('pai_dismissed_'+id,'1'); } catch(e) {}
+    var el = document.getElementById(id);
+    if (el) {
+      el.style.setProperty('display','none','important');
+      el.setAttribute('aria-hidden','true');
+      if (el.parentNode) {
+        el.parentNode.removeChild(el);
+      }
+    }
+  }
+
+  // Cleanup pass — remove dismissed banners from DOM after parse,
+  // belt-and-suspenders alongside the CSS hide.
+  function cleanup(){
+    ids.forEach(function(id){
+      try {
+        if (localStorage.getItem('pai_dismissed_'+id) === '1') {
+          var el = document.getElementById(id);
+          if (el && el.parentNode) {
+            el.parentNode.removeChild(el);
+          }
+        }
+      } catch(e) {}
+    });
+  }
+
+  function bind(){
+    ids.forEach(function(id){
+      var btn = document.getElementById(id+'-close');
+      if (btn && !btn.dataset.boundDismiss) {
+        btn.dataset.boundDismiss = '1';
+        btn.addEventListener('click', function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          dismiss(id);
+        });
+        btn.addEventListener('touchend', function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          dismiss(id);
+        }, {passive:false});
+      }
+    });
+    cleanup();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bind);
+  } else {
+    bind();
+  }
+})();
+</script>
+
+<style>
+/* v209 — pressure-tested section responsive grid */
+@media (max-width: 720px) {
+    #pressure-tested > div:nth-child(2) {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* v219 — Security by Architectural Design section */
+
+/* ── Grid ── */
+.sbad-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;           /* was 16px — slightly more breathing room */
+    margin: 28px 0 0;    /* was 24px */
+    align-items: stretch; /* equal height across row */
+}
+
+/* ── Card ── */
+.sbad-card {
+    display: flex;
+    flex-direction: column;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(0,194,168,0.18);
+    border-top: 3px solid var(--teal);
+    border-radius: 10px;
+    padding: 24px 20px;  /* was 20px 18px */
+    transition: box-shadow 0.18s ease, transform 0.18s ease;
+}
+.sbad-card:hover {
+    box-shadow: 0 8px 28px rgba(0,0,0,0.35), 0 0 0 1px rgba(0,194,168,0.22);
+    transform: translateY(-2px);
+}
+
+/* ── Card icon ── */
+.sbad-card-icon {
+    display: block;
+    width: 44px;         /* was 40px — consistent with flow icons */
+    height: 44px;
+    margin-bottom: 14px; /* was 12px */
+    flex-shrink: 0;
+}
+
+/* ── Card title ── */
+.sbad-card h3 {
+    font-size: 0.97em;   /* was 0.95em */
+    font-weight: 700;
+    color: var(--white);
+    margin: 0 0 9px;     /* was 8px */
+    line-height: 1.3;
+    letter-spacing: 0.01em;
+}
+
+/* ── Card body ── */
+.sbad-card p {
+    font-size: 0.85em;   /* was 0.84em */
+    color: var(--light-text);
+    line-height: 1.72;   /* was 1.65 */
+    margin: 0;
+    max-width: 28ch;     /* soft line-length cap for readability */
+    opacity: 0.88;
+}
+
+/* ── Flow row ── */
+.sbad-flow {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    margin: 36px 0 0;    /* was 28px */
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+}
+.sbad-flow::-webkit-scrollbar { display: none; } /* Chrome/Safari */
+
+/* ── Flow node ── */
+.sbad-flow-node {
+    flex: 1;
+    min-width: 136px;    /* was 130px */
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(0,194,168,0.2);
+    border-radius: 10px;
+    padding: 18px 14px;  /* was 16px 14px */
+    text-align: center;
+    position: relative;
+}
+.sbad-flow-node:last-child {
+    border-color: rgba(0,194,168,0.45);
+    background: rgba(0,194,168,0.06);
+}
+
+/* ── Flow arrow ── */
+.sbad-flow-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 32px;         /* was 28px */
+    padding: 0 2px;
+}
+
+/* ── Flow node icon ── */
+.sbad-flow-node-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 38px;        /* was 36px */
+    margin-bottom: 10px; /* was 8px */
+    line-height: 1;
+}
+
+/* ── Flow node title ── */
+.sbad-flow-node-title {
+    font-size: 0.79em;   /* was 0.78em */
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 7px;  /* was 6px */
+    line-height: 1.3;
+    letter-spacing: 0.01em;
+}
+
+/* ── Flow node description ── */
+.sbad-flow-node-desc {
+    font-size: 0.73em;   /* was 0.72em */
+    color: var(--muted);
+    line-height: 1.62;   /* was 1.55 */
+    margin: 0;
+}
+
+/* ── Micro trust statement ── */
+.sbad-micro-trust {
+    margin: 18px 0 0;
+    font-size: 0.76em;
+    color: rgba(136,153,170,0.7);
+    text-align: center;
+    font-style: italic;
+    line-height: 1.6;
+    letter-spacing: 0.01em;
+}
+
+/* ── Compliance note ── */
+.sbad-compliance-note {
+    margin: 28px 0 0;    /* was 24px */
+    padding: 16px 20px;  /* was 14px 18px */
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 8px;
+    font-size: 0.8em;
+    color: var(--muted);
+    line-height: 1.75;   /* was 1.7 */
+}
+
+/* ── 2-col tablet ── */
+@media (max-width: 860px) {
+    .sbad-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+    .sbad-card p {
+        max-width: none; /* let full card width breathe at 2-col */
+    }
+}
+
+/* ── 1-col mobile ── */
+@media (max-width: 560px) {
+    .sbad-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+    .sbad-card {
+        padding: 20px 18px;
+    }
+    .sbad-card p {
+        max-width: none;
+        line-height: 1.78; /* slightly more open on small screens */
+    }
+    .sbad-flow {
+        flex-direction: column;
+        overflow-x: visible;
+        margin: 28px 0 0;
+        gap: 0;
+    }
+    .sbad-flow-arrow {
+        width: auto;
+        height: 28px;     /* was 22px — bigger tap-space */
+        justify-content: center;
+        /* rotate the SVG chevron to point down */
+        transform: rotate(90deg);
+    }
+    .sbad-flow-node {
+        min-width: unset;
+        padding: 18px 16px;
+    }
+    .sbad-flow-node-desc {
+        font-size: 0.76em; /* slightly larger on mobile for readability */
+        line-height: 1.68;
+    }
+    .sbad-micro-trust {
+        font-size: 0.78em;
+        text-align: left;
+    }
+}
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+<div id="reading-progress" aria-hidden="true"></div>
+
+<!-- v390 sitewide-deliverables-integration (2026-06-18) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- INCLUDE:HEADER -->
+<div id="hitl-notice" style="background:#0a1929;padding:4px 16px;text-align:center;font-size:12px;color:#4a5568;border-bottom:1px solid rgba(255,255,255,0.06);letter-spacing:0.01em;">Human-in-the-Loop required: licensed professionals verify all outputs before clinical or legal action</div>
+<header role="banner">
+  <div class="header-inner">
+    <a href="/index.html" class="logo" aria-label="Pocono AI Home">
+      <img src="/logo.svg?v=402" alt="" width="36" height="36" decoding="async" loading="eager" aria-hidden="true" style="display:inline-block;">
+      Pocono <span>AI</span>
+    </a>
+    <nav id="desktop-nav" aria-label="Main navigation">
+      <div class="nav-item"><a href="/index.html" class="nav-direct">Home</a></div>
+      <div class="nav-item"><a href="/for-physicians.html" class="nav-direct">Physicians</a></div>
+      <div class="nav-item"><a href="/for-attorneys.html" class="nav-direct">Attorneys</a></div>
+      <div class="nav-item"><a href="/sentinel-node.html" class="nav-direct nav-hub" style="color:#d5a94f;border:1px solid rgba(213,169,79,0.45);border-radius:999px;padding:6px 13px;">Sentinel Node</a></div>
+      <div class="nav-item"><a href="/living-memorials/" class="nav-direct">Living Echo</a></div>
+      <div class="nav-item"><a href="/contact.html" class="nav-direct">Contact</a></div>
+      <div class="nav-item" data-dropdown="menu-more">
+        <button type="button" class="nav-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="menu-more">More <span class="nav-chevron" aria-hidden="true">&#9662;</span></button>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <a href="/contact.html#pilot" class="nav-cta nav-cta-primary">Request a Pilot</a>
+      <button type="button" class="pa-search-trigger" data-search-open aria-label="Search (press / or Ctrl-K)" aria-haspopup="dialog" aria-expanded="false">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span class="pa-st-label">Search</span><kbd data-pa-keyhint>Ctrl K</kbd>
+      </button>
+      <button type="button" class="header-icon-btn" id="mobile-menu" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav-panel">
+        <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- "More" overflow dropdown — sibling of <header> so position:fixed escapes header's stacking context. Wired by nav.js via data-dropdown="menu-more". -->
+<div class="nav-dropdown" id="menu-more" aria-label="More navigation">
+  <p class="nav-dd-section">Products</p>
+  <a href="/engineering-drafting/">Drafting &amp; Engineering Edition</a>
+  <a href="/sentinel-home/">Sentinel Home Edition</a>
+  <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability — Assistive Tools &#x2605;</a>
+  <a href="/living-memorials/enterprise-estate-continuity.html">Enterprise Estate Continuity</a>
+  <p class="nav-dd-section">Capabilities</p>
+  <a href="/evidence-room.html">Evidence Room</a>
+  <a href="/push-button-deliverables.html">Push-Button Deliverables</a>
+  <a href="/pilot-readiness-kit.html">Pilot Kit</a>
+  <a href="/pilot-program.html">Pilot Program</a>
+  <a href="/how-it-works.html">How It Works</a>
+  <p class="nav-dd-section">Hubs &amp; Company</p>
+  <a href="/training.html">Training Hub</a>
+  <a href="/documentation-hub/">Document Hub</a>
+  <a href="/global/">Global Hub</a>
+  <a href="/investors-hub.html">Investor Hub</a>
+  <a href="/valuation-dashboard.html">Valuation Dashboard</a>
+  <a href="/about.html">About</a>
+  <p class="nav-dd-section">Trust &amp; Legal</p>
+  <a href="/transparency.html">Transparency</a>
+  <a href="/audit.html">Audit Log</a>
+  <a href="/privacy.html">Privacy</a>
+  <a href="/sitemap.html">Sitemap</a>
+</div>
+<!-- Site search is provided by the self-contained search.js asset (command palette: / or Ctrl/Cmd-K). -->
+
+<!-- Mobile panel: full-screen slide-in. v396 nav — hub tiles + grouped links + Sentinel Node + Engineering. -->
+<nav id="mobile-nav-panel" aria-label="Mobile navigation" aria-hidden="true" role="dialog" aria-modal="true">
+
+  <!-- Hub tiles: Sentinel Node, Documentation Hub, Training Hub, Global Hub -->
+  <div style="padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,0.07);">
+    <p style="font-size:0.65em;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.28);margin:0 0 10px;padding:0 2px;">Hubs</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <a href="/sentinel-node.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(213,169,79,0.1);border:1px solid rgba(213,169,79,0.35);border-radius:10px;color:#d5a94f;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Sentinel Node</a>
+      <a href="/documentation-hub/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(0,194,168,0.1);border:1px solid rgba(0,194,168,0.35);border-radius:10px;color:#00c2a8;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Docs Hub</a>
+      <a href="/training.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.35);border-radius:10px;color:#a78bfa;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Training Hub</a>
+      <a href="/global/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(122,240,220,0.07);border:1px solid rgba(122,240,220,0.3);border-radius:10px;color:#7af0dc;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Global Hub</a>
+    </div>
+  </div>
+
+  <!-- Core paths -->
+  <div class="mob-static-links">
+    <a href="/index.html">Home</a>
+    <a href="/for-physicians.html">Physicians</a>
+    <a href="/for-attorneys.html">Attorneys</a>
+    <a href="/engineering-drafting/">Engineering &amp; Drafting</a>
+    <a href="/pilot-program.html">Pilot Program</a>
+    <a href="/how-it-works.html">How It Works</a>
+    <a href="/trust.html">Trust &amp; Audit</a>
+    <a href="/pricing.html">Pricing</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/living-memorials/">Living Echo</a>
+    <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability</a>
+    <a href="/about.html">About</a>
+    <a href="/team.html" style="color:rgba(255,255,255,0.6);">Team &amp; Leadership</a>
+    <a href="/valuation-dashboard.html" style="color:rgba(255,255,255,0.6);">Valuation Dashboard</a>
+    <a href="/careers.html" style="color:rgba(255,255,255,0.6);">Careers</a>
+    <a href="/sentinel-demo.html" style="color:rgba(255,255,255,0.6);">Demo</a>
+    <a href="/sitemap.html" style="color:rgba(255,255,255,0.45);">Sitemap</a>
+    <a href="/transparency.html" style="color:rgba(255,255,255,0.45);">Transparency</a>
+    <a href="/privacy.html" style="color:rgba(255,255,255,0.45);">Privacy</a>
+  </div>
+
+  <a href="/contact.html#pilot" class="mob-cta">Request a Pilot</a>
+</nav>
+<!-- /INCLUDE:HEADER -->
+
+
+<main id="main-content" tabindex="-1">
+<span id="main" aria-hidden="true"></span>
+    <!-- HERO -->
+    <section class="hero-section">
+        <div class="sentinel-lockup" aria-label="Sentinel Node — Local Deployment Architecture">
+              <svg class="sentinel-lockup-mark" viewBox="0 0 64 64" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
+          <!-- v311b: rotated diamond + C-curve loop + summit dot. Inherits currentColor from CSS context. -->
+          <g transform="rotate(45 32 32)">
+            <rect x="12" y="12" width="40" height="40" rx="8" ry="8"/>
+            <path d="M43 22 L26 22 A6 6 0 0 0 20 28 L20 36 A6 6 0 0 0 26 42 L41 42"/>
+          </g>
+          <circle cx="32" cy="9" r="3" fill="currentColor" stroke="none"/>
+        </svg>
+              <div class="sentinel-lockup-rule"></div>
+              <div class="sentinel-lockup-text">
+                <span class="sentinel-lockup-name">Sentinel Node</span>
+                <span class="sentinel-lockup-tag">Local Deployment Architecture</span>
+              </div>
+            </div>
+        <h1>Trust is a technical byproduct of Cloud Obviation and Transparent Auditability.</h1>
+        <p class="hero-plain">We don't ask you to trust us with your data. We build systems in which we structurally cannot receive it.</p>
+        <div class="hero-ctas">
+            <a href="architecture.html" class="cta-button">See the Architecture</a>
+            <a href="#pillars" class="cta-button cta-button-light">The Pillars of Sovereignty</a>
+        </div>
+    </section>
+
+    <!-- PARTNER BADGES -->
+    <section class="trust-badges-section" aria-label="Built on enterprise infrastructure">
+        <p class="trust-badges-eyebrow">Built on enterprise infrastructure</p>
+        <div class="trust-badges-row">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 32" width="120" height="32" role="img" aria-label="Dell" class="badge-svg"><text x="60" y="24" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif" font-weight="800" font-size="22" letter-spacing="3" fill="currentColor">DELL</text></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 32" width="150" height="32" role="img" aria-label="NVIDIA" class="badge-svg"><text x="75" y="24" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif" font-weight="800" font-size="22" letter-spacing="3" fill="currentColor">NVIDIA</text></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 32" width="150" height="32" role="img" aria-label="Qdrant" class="badge-svg"><text x="75" y="24" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif" font-weight="800" font-size="22" letter-spacing="2" fill="currentColor">Qdrant</text></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 32" width="150" height="32" role="img" aria-label="Ollama" class="badge-svg"><text x="75" y="24" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif" font-weight="800" font-size="22" letter-spacing="2" fill="currentColor">Ollama</text></svg>
+        </div>
+    </section>
+
+    <!-- PILLARS -->
+    <section id="pillars">
+        <h2 style="color:var(--teal);">The Pillars of Sovereignty</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <span class="gov-icon is-lg" data-icon="sovereignty" aria-hidden="true" style="margin-bottom:14px;display:block;"></span>
+                <h3>The Privacy Paradox</h3>
+                <p>The operational bottleneck where organizations require AI efficiency but cannot risk the HIPAA violations or loss of privilege inherent in third-party cloud processing. The Sentinel Node resolves this paradox by removing the cloud entirely.</p>
+            </div>
+            <div class="feature-card">
+                <span class="gov-icon is-lg" data-icon="zero-egress" aria-hidden="true" style="margin-bottom:14px;display:block;"></span>
+                <h3>Cloud Obviation</h3>
+                <p>Not cloud avoidance — cloud <em>elimination</em>. The Sentinel Node processes all inference, retrieval, and storage locally. There is no API call to make. No transmission to intercept. No remote server to breach. Your compliance case is architectural.</p>
+            </div>
+            <div class="feature-card">
+                <span class="gov-icon is-lg" data-icon="audit" aria-hidden="true" style="margin-bottom:14px;display:block;"></span>
+                <h3>Transparent Auditability</h3>
+                <p>Every query, every retrieved chunk, every generated output is logged locally. Citations trace directly to page numbers in source documents. Your IT team or compliance officer can audit the full inference chain — no vendor access required.</p>
+            </div>
+            <div class="feature-card">
+                <span class="gov-icon is-lg" data-icon="on-premise" aria-hidden="true" style="margin-bottom:14px;display:block;"></span>
+                <h3>Air-Gapped Option</h3>
+                <p>The Sentinel Node can operate on a physically isolated VLAN with no outbound internet access whatsoever. Updates are delivered via cryptographically signed offline packets. This is not a setting — it is a physical architecture choice you make at deployment.</p>
+            </div>
+            <div class="feature-card">
+                <span class="gov-icon is-lg" data-icon="boundary" aria-hidden="true" style="margin-bottom:14px;display:block;"></span>
+                <h3>Jurisdictional Sovereignty</h3>
+                <p>Because every Sentinel Node operates as a self-contained deployment, regional compliance frameworks map directly onto the architecture. Data, inference, and audit logs are jurisdiction-resident: they remain within the legal boundary of the facility where the node is installed. No cross-border routing. No sub-processor chain.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CLOUD vs LOCAL COMPARISON — v212 visual -->
+    <section class="fade-in-section" style="margin:40px 0;" aria-label="Local AI vs Public Cloud comparison">
+        <span class="section-eyebrow">Why Local AI</span>
+        <h2 style="color:var(--white);margin:10px 0 8px;">Local AI vs. public cloud &mdash; a direct comparison.</h2>
+        <p style="color:var(--light-text);line-height:1.75;margin:0 0 20px;max-width:620px;">Cloud AI tools may be convenient, but they come with data residency, privacy, auditability, and compliance trade-offs that regulated workflows cannot accept. The Sentinel Node is designed to address each of these dimensions architecturally, not contractually.</p>
+        <div style="border:1px solid rgba(255,255,255,0.1);border-radius:12px;overflow:hidden;background:#fff;max-width:680px;">
+            <a href="arch-cloud-comparison.png" target="_blank" rel="noopener" style="display:block;cursor:zoom-in;" title="Click to view full size — Local AI vs Public Cloud comparison">
+                <picture>
+                    <source srcset="arch-cloud-comparison.webp" type="image/webp">
+                    <img src="arch-cloud-comparison.png" width="1024" height="1536"
+                         alt="Local AI that protects what matters: Public AI Cloud vs Pocono AI Local Deployment comparison across eight dimensions. Data Residency: cloud uploads to remote servers, local keeps data in your environment. Privacy: cloud may store and log data, local has no training or retention. Access Control: cloud is unclear, local is role-based. Reliability: cloud requires internet, local works offline. Cost: cloud is unpredictable, local is predictable. Control: cloud has external model dependency, local you stay in control. Audit: cloud is difficult to audit, local has full logs. Industry Fit: cloud is general purpose, local is built for medical and legal."
+                         loading="lazy" decoding="async"
+                         style="width:100%;height:auto;display:block;">
+                </picture>
+            </a>
+            <div style="padding:10px 18px 12px;border-top:1px solid rgba(0,0,0,0.08);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;background:#f8fafc;">
+                <p style="margin:0;font-size:0.74em;color:#64748b;font-style:italic;">Local by design. Managed by experts. Built for the work that matters.</p>
+                <div style="display:flex;gap:12px;">
+                    <a href="arch-cloud-comparison.png" target="_blank" rel="noopener" style="font-size:0.76em;color:#0a73d2;font-weight:700;text-decoration:none;">View full size &#8594;</a>
+                    <a href="arch-cloud-comparison.png" download style="font-size:0.76em;color:#0a73d2;font-weight:600;text-decoration:none;">&#8681; Download</a>
+                </div>
+            </div>
+        </div>
+        <div style="margin-top:14px;display:flex;gap:12px;flex-wrap:wrap;">
+            <a href="architecture.html" class="cta-button" style="font-size:0.88em;padding:10px 20px;">See the Technical Architecture</a>
+            <a href="competitive-analysis.html" class="cta-button cta-button-light" style="font-size:0.88em;padding:10px 20px;">Full Competitive Analysis</a>
+        </div>
+    </section>
+
+
+    
+<!-- v330 2026-06-01 schema-enrichment-meta-fix -->
+<section class="fade-in-section" style="margin:48px 0;" aria-labelledby="ig-270-architecture-at-a-gl">
+  <div style="margin:0 0 20px;">
+    <p style="margin:0 0 4px;font-size:0.7em;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--teal);">Architecture at a Glance</p>
+    <h2 id="ig-270-architecture-at-a-gl" style="font-size:clamp(1.1rem,2.2vw,1.4rem);color:var(--white);margin:0 0 8px;border:none;">Five layers. Every one load-bearing.</h2>
+    <p style="color:var(--light-text);font-size:0.87em;margin:0;line-height:1.6;">Sovereignty is not a feature. It is the consequence of building every layer — hardware, inference, governance, oversight, and audit — without shortcuts.</p>
+  </div>
+  <div style="border:1px solid rgba(0,194,168,0.2);border-radius:14px;overflow:hidden;background:#040f1a;box-shadow:0 12px 40px rgba(0,0,0,0.4);">
+    <a href="poconoai_trust_stack.svg" target="_blank" rel="noopener" style="display:block;cursor:zoom-in;" title="Click to view full size">
+      <img src="poconoai_trust_stack.svg" alt="Pocono AI Trust Stack: five tiers from hardware foundation up through local inference, governance policy enforcement, mandatory human oversight, and append-only audit — each one reinforcing the one above it." width="900" height="600" loading="lazy" decoding="async" style="width:100%;height:auto;display:block;">
+    </a>
+  </div>
+  <p style="margin:10px 0 0;font-size:0.75em;color:var(--muted);line-height:1.5;">Remove any layer and the trust guarantee fails. All five are present by design.</p>
+</section>
+
+<!-- ═══════════════════════════════════════════
+         SOVEREIGN AI DIAGRAM — v198
+         3-layer infographic: Local Operational Custody → Local Intelligence → Trust Receipts
+         Placement: trust.html — after why-local, before zero-telemetry
+    ═══════════════════════════════════════════ -->
+    <div class="fade-in-section" style="margin:48px auto;max-width:640px;" aria-label="Sovereign AI architecture infographic">
+        <p style="text-align:center;margin:0 0 6px;font-size:0.72em;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--teal);font-family:'DM Mono',monospace;">Architecture at a Glance</p>
+        <h2 style="text-align:center;font-size:clamp(1.2rem,2.5vw,1.55rem);color:var(--white);margin:0 0 20px;border:none;line-height:1.3;">Local deployment. Local processing. Trust and response layer.</h2>
+        <div style="border:1px solid rgba(0,194,168,0.25);border-radius:14px;overflow:hidden;background:#040f1a;">
+            <a href="arch-local-infrastructure-v271.png" target="_blank" rel="noopener"
+               title="View full-size — Local AI Infrastructure Deployed Within Your Environment"
+               style="display:block;cursor:zoom-in;" aria-label="Local AI Infrastructure diagram — click to view full size">
+                <picture>
+                    <source srcset="arch-local-infrastructure-v271.webp" type="image/webp">
+                    <img src="arch-local-infrastructure-v271.png"
+                         alt="Local AI Infrastructure Deployed Within Your Environment. Three stages: Local Deployment with Dell Precision workstation, SSD local storage, private network. Local AI Processing with Qdrant vector database, local LLM offline inference, reranker, response generation — no data leaves. Trust and Response Layer with verified sources, citations included, local by design, audit logging, access control. Sovereign AI. Operationally Simple."
+                         width="1024" height="1536"
+                         loading="lazy" decoding="async"
+                         style="width:100%;height:auto;display:block;">
+                </picture>
+            </a>
+            <div style="padding:10px 18px;border-top:1px solid rgba(0,194,168,0.15);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;background:rgba(4,15,26,0.9);">
+                <p style="margin:0;font-size:0.74em;color:var(--muted);font-style:italic;line-height:1.5;">Local Deployment &rarr; Local AI Processing &rarr; Trust &amp; Response Layer &mdash; no cloud at any layer</p>
+                <a href="arch-local-infrastructure-v271.png" target="_blank" rel="noopener"
+                   style="font-size:0.75em;color:var(--teal);font-weight:700;text-decoration:none;white-space:nowrap;">&#128269; Full size &rarr;</a>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- PRIMARY OVERVIEW — v214 (replaces managed infra v213) -->
+    <div class="fade-in-section" style="margin:40px 0;">
+    <div style="margin:32px 0;" aria-label="Managed Local AI Infrastructure">
+        <p style="margin:0 0 4px;font-size:0.7em;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--teal);">Managed Local AI Infrastructure</p>
+        <h2 style="font-size:clamp(1.1rem,2.2vw,1.4rem);color:var(--white);margin:0 0 6px;border:none;">Deployed in your environment. Managed by Pocono AI.</h2>
+        <p style="color:var(--light-text);font-size:0.87em;margin:0 0 12px;line-height:1.6;">You do not own the hardware. We deploy, manage, and support dedicated infrastructure that keeps your data local, private, and under your operational control. After the minimum 12-month term, SSD data repositories remain with your practice.</p>
+        <div style="border:1px solid rgba(10,46,100,0.15);border-radius:12px;overflow:hidden;background:#fff;max-width:680px;">
+            <a href="arch-primary-overview.png" target="_blank" rel="noopener" style="display:block;cursor:zoom-in;" title="Click to view full size">
+                <picture>
+                    <source srcset="arch-managed-infrastructure.webp" type="image/webp">
+                    <img src="arch-managed-infrastructure.png" alt="Diagram of the Sentinel Node managed local infrastructure: on-premises appliance, local inference and retrieval, audit layer, and signed offline update custody." width="1024" height="1536" loading="lazy" decoding="async" style="width:100%;height:auto;display:block;">
+                </picture>
+            </a>
+            <div style="padding:10px 16px 12px;border-top:1px solid rgba(0,0,0,0.08);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;background:#f8fafc;">
+                <p style="margin:0;font-size:0.74em;color:#64748b;font-style:italic;line-height:1.4;">Dedicated. Managed. Local. Your data. Your environment. Our responsibility.</p>
+                <div style="display:flex;gap:12px;">
+                    <a href="arch-primary-overview.png" target="_blank" rel="noopener" style="font-size:0.76em;color:var(--teal);font-weight:700;text-decoration:none;white-space:nowrap;">View full size &#8594;</a>
+                    <a href="arch-primary-overview.png" download style="font-size:0.76em;color:#0a73d2;font-weight:600;text-decoration:none;white-space:nowrap;">&#8681; Download</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- ZERO TELEMETRY PROOF -->
+    <div class="highlight-section" id="analytics" data-alias="zero-telemetry" >
+        <span id="zero-telemetry"></span><h2 style="color:white;margin-top:0;">Zero Telemetry — Proven, Not Promised</h2>
+        <p>The Sentinel Node has zero outbound telemetry. We offer a 30-minute technical walkthrough for your IT and security teams, including a live <strong>network packet capture (tcpdump) diagnostic</strong> to demonstrate zero network exfiltration during model inference. You can watch the network traffic yourself. Request the recording: <a href="mailto:marcus@poconoai.com">marcus@poconoai.com</a></p>
+        <div class="stat-row">
+            <div class="stat-box">
+                <span class="stat-value">0</span>
+                <span class="stat-label">Outbound API Calls During Inference</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-value">0</span>
+                <span class="stat-label">PHI Exfiltration Events</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-value">100%</span>
+                <span class="stat-label">Local Processing</span>
+            </div>
+        </div>
+        <p style="font-size:0.88em;color:var(--light-text);margin-top:16px;">This marketing site uses zero telemetry: no analytics scripts, no tracking pixels, no advertising cookies, no behavioral monitoring, no embedded schedulers, no third-party chat widgets. Some pages contain disclosed YouTube video embeds; those embeds may contact YouTube's servers and are not Pocono AI telemetry. The Sentinel Node hardware itself has zero analytics instrumentation and no cloud AI data transfer from protected customer documents.</p>
+<p><a href="/audit.html">View current transparency report &rarr;</a></p>
+    </div>
+
+    <!-- BAA + COMPLIANCE SECTION -->
+    <section>
+        <h2>Compliance Architecture</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h3>BAA Draft Available</h3>
+                <p>A Business Associate Agreement draft (v3.0) is available for review; the final version is under review by healthcare counsel. Pocono AI is structured to operate as a Business Associate for healthcare deployments, treating the appliance as a secured, localized endpoint under your existing compliance framework. Client SSD data repositories are retained by the practice after the minimum service term. <a href="BAA_v3_0.pdf" style="color:var(--teal);">Review the BAA Template v3.0 draft (PDF)</a></p>
+            </div>
+            <div class="feature-card">
+                <h3>HIPAA by Architecture</h3>
+                <p>Compliance-conscious AI begins with architecture, not just policy. The Sentinel Node is designed to prevent outbound data transmission during inference — architecturally categorically different from a signed agreement.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Attorney-Client Privilege</h3>
+                <p>For legal practices, cloud AI introduces a genuine privilege waiver risk when confidential client communications and case documents are transmitted to third-party servers. The Sentinel Node eliminates the transmission entirely.</p>
+            </div>
+            <div class="feature-card">
+                <h3>No FHIR/EHR Integration Required</h3>
+                <p>The zero-integration workflow operates entirely adjacent to your existing EHR. No HL7/FHIR API approvals, no IT queue, no 12-18 month wait. PHI stays local as a PDF export — processed on the Node, never transmitted.</p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ═══ SECURITY BY ARCHITECTURAL DESIGN — v218 ═══ -->
+    <section id="security-by-design" style="margin-bottom:48px;" aria-labelledby="sbad-heading">
+
+        <p style="margin:0 0 6px;font-size:0.72em;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--teal);font-family:var(--font-mono);">How It's Built</p>
+        <h2 id="sbad-heading" style="font-size:clamp(1.25rem,2.8vw,1.7rem);color:var(--white);margin:0 0 10px;border:none;line-height:1.2;">Security by Architectural Design</h2>
+        <p style="color:var(--light-text);font-size:0.93em;line-height:1.75;max-width:700px;margin:0 0 4px;">Pocono AI is built from the ground up to protect privacy, preserve operational control, and support compliance-conscious workflows in healthcare and legal environments.</p>
+
+        <!-- 6-card principles grid -->
+        <div class="sbad-grid" role="list">
+
+            <div class="sbad-card" role="listitem">
+                <!-- Local-Only Inference: server rack with shield+check -->
+                <svg class="sbad-card-icon" viewBox="0 0 36 36" fill="none" stroke="#00c2a8" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <!-- Server body -->
+                  <rect x="3" y="6" width="22" height="7" rx="2" fill="rgba(0,194,168,0.08)" stroke="#00c2a8"/>
+                  <rect x="3" y="16" width="22" height="7" rx="2" fill="rgba(0,194,168,0.08)" stroke="#00c2a8"/>
+                  <!-- Server detail dots -->
+                  <circle cx="19" cy="9.5" r="1.1" fill="#00c2a8" stroke="none"/>
+                  <circle cx="22.5" cy="9.5" r="1.1" fill="#00c2a8" stroke="none"/>
+                  <circle cx="19" cy="19.5" r="1.1" fill="#00c2a8" stroke="none"/>
+                  <circle cx="22.5" cy="19.5" r="1.1" fill="#00c2a8" stroke="none"/>
+                  <!-- Vent lines -->
+                  <line x1="6" y1="9.5" x2="15" y2="9.5" stroke="rgba(0,194,168,0.4)" stroke-width="1.2"/>
+                  <line x1="6" y1="19.5" x2="15" y2="19.5" stroke="rgba(0,194,168,0.4)" stroke-width="1.2"/>
+                  <!-- Shield badge (bottom-right) -->
+                  <path d="M22 25 l5-2.5 5 2.5 v4.5 a5 5 0 0 1-5 3.8 5 5 0 0 1-5-3.8z" fill="rgba(0,194,168,0.15)" stroke="#00c2a8" stroke-width="1.5"/>
+                  <!-- Checkmark inside shield -->
+                  <polyline points="24.5,29 26.5,31 30,27" stroke="#00c2a8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <h3>Local-Only Inference</h3>
+                <p>AI inference occurs on hardware physically located within the client environment.</p>
+            </div>
+
+            <div class="sbad-card" role="listitem">
+                <!-- Zero External Telemetry: cloud with prohibition slash -->
+                <svg class="sbad-card-icon" viewBox="0 0 36 36" fill="none" stroke="#00c2a8" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <!-- Cloud shape -->
+                  <path d="M26 23H11a6 6 0 0 1-.8-11.95A8 8 0 0 1 26.5 14a5 5 0 0 1-.5 9z" fill="rgba(0,194,168,0.08)" stroke="#00c2a8" stroke-width="1.7"/>
+                  <!-- Prohibition circle -->
+                  <circle cx="26.5" cy="25.5" r="6" fill="#051622" stroke="#e05555" stroke-width="1.8"/>
+                  <!-- Prohibition slash -->
+                  <line x1="22.3" y1="21.3" x2="30.7" y2="29.7" stroke="#e05555" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+                <h3>Zero External Telemetry</h3>
+                <p>No patient or client data is transmitted to third-party AI providers during normal operation.</p>
+            </div>
+
+            <div class="sbad-card" role="listitem">
+                <!-- Human-in-the-Loop: person silhouette with shield+check -->
+                <svg class="sbad-card-icon" viewBox="0 0 36 36" fill="none" stroke="#00c2a8" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <!-- Person head -->
+                  <circle cx="14" cy="9" r="4.5" fill="rgba(0,194,168,0.1)" stroke="#00c2a8"/>
+                  <!-- Person shoulders/body -->
+                  <path d="M5 28v-2a9 9 0 0 1 18 0v2" fill="rgba(0,194,168,0.06)" stroke="#00c2a8"/>
+                  <!-- Shield badge (right side) -->
+                  <path d="M24 17 l5.5-2.5 5.5 2.5 v5 a5.5 5.5 0 0 1-5.5 4.2 5.5 5.5 0 0 1-5.5-4.2z" fill="rgba(0,194,168,0.15)" stroke="#00c2a8" stroke-width="1.5"/>
+                  <!-- Checkmark -->
+                  <polyline points="26.2,22.2 28.5,24.5 32.5,19.5" stroke="#00c2a8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <h3>Human-in-the-Loop Oversight</h3>
+                <p>AI-generated outputs are reviewed by authorized professionals before operational use.</p>
+            </div>
+
+            <div class="sbad-card" role="listitem">
+                <!-- Controlled Document Indexing: database cylinder + document -->
+                <svg class="sbad-card-icon" viewBox="0 0 36 36" fill="none" stroke="#00c2a8" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <!-- Database cylinder body -->
+                  <ellipse cx="12" cy="8" rx="8" ry="3" fill="rgba(0,194,168,0.12)" stroke="#00c2a8"/>
+                  <line x1="4" y1="8" x2="4" y2="22" stroke="#00c2a8"/>
+                  <line x1="20" y1="8" x2="20" y2="22" stroke="#00c2a8"/>
+                  <ellipse cx="12" cy="22" rx="8" ry="3" fill="rgba(0,194,168,0.06)" stroke="#00c2a8"/>
+                  <!-- Middle shelf line -->
+                  <path d="M4 15 a8 3 0 0 0 16 0" stroke="rgba(0,194,168,0.4)" stroke-width="1.1"/>
+                  <!-- Document page (overlapping right) -->
+                  <rect x="18" y="14" width="14" height="17" rx="2" fill="#051e2e" stroke="#5dade2" stroke-width="1.6"/>
+                  <!-- Dog-ear fold -->
+                  <polyline points="28,14 32,14 32,18" stroke="#5dade2" stroke-width="1.4"/>
+                  <line x1="28" y1="14" x2="28" y2="18" x2="32" y2="18" stroke="#5dade2" stroke-width="1.4"/>
+                  <!-- Doc lines -->
+                  <line x1="21" y1="21" x2="29" y2="21" stroke="rgba(93,173,226,0.6)" stroke-width="1.1"/>
+                  <line x1="21" y1="24" x2="29" y2="24" stroke="rgba(93,173,226,0.6)" stroke-width="1.1"/>
+                  <line x1="21" y1="27" x2="26" y2="27" stroke="rgba(93,173,226,0.6)" stroke-width="1.1"/>
+                </svg>
+                <h3>Controlled Document Indexing</h3>
+                <p>Only approved internal documents are indexed into the local retrieval system.</p>
+            </div>
+
+            <div class="sbad-card" role="listitem">
+                <!-- Audit Visibility: clipboard with checklist -->
+                <svg class="sbad-card-icon" viewBox="0 0 36 36" fill="none" stroke="#00c2a8" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <!-- Clipboard board -->
+                  <rect x="5" y="7" width="22" height="26" rx="2.5" fill="rgba(0,194,168,0.07)" stroke="#00c2a8"/>
+                  <!-- Clip at top -->
+                  <rect x="11" y="4" width="10" height="5" rx="2" fill="#051e2e" stroke="#00c2a8" stroke-width="1.5"/>
+                  <!-- Check item 1 -->
+                  <polyline points="10,16 12.5,18.5 16,14" stroke="#00c2a8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <line x1="18" y1="16" x2="23" y2="16" stroke="rgba(0,194,168,0.55)" stroke-width="1.2"/>
+                  <!-- Check item 2 -->
+                  <polyline points="10,22 12.5,24.5 16,20" stroke="#00c2a8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <line x1="18" y1="22" x2="23" y2="22" stroke="rgba(0,194,168,0.55)" stroke-width="1.2"/>
+                  <!-- Pending item 3 -->
+                  <rect x="9.5" y="27" width="5" height="5" rx="1.2" fill="none" stroke="rgba(0,194,168,0.35)" stroke-width="1.3"/>
+                  <line x1="18" y1="29.5" x2="23" y2="29.5" stroke="rgba(0,194,168,0.3)" stroke-width="1.2"/>
+                </svg>
+                <h3>Audit Visibility</h3>
+                <p>Retrieval and response workflows are designed to support source attribution and audit review.</p>
+            </div>
+
+            <div class="sbad-card" role="listitem">
+                <!-- Role-Based Operational Access: padlock with key -->
+                <svg class="sbad-card-icon" viewBox="0 0 36 36" fill="none" stroke="#00c2a8" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <!-- Padlock shackle -->
+                  <path d="M10 16 V11 a8 8 0 0 1 16 0 v5" fill="none" stroke="#00c2a8"/>
+                  <!-- Padlock body -->
+                  <rect x="6" y="16" width="24" height="16" rx="3" fill="rgba(0,194,168,0.1)" stroke="#00c2a8"/>
+                  <!-- Keyhole circle -->
+                  <circle cx="18" cy="23" r="3" fill="rgba(0,194,168,0.2)" stroke="#00c2a8" stroke-width="1.5"/>
+                  <!-- Keyhole stem -->
+                  <line x1="18" y1="26" x2="18" y2="30" stroke="#00c2a8" stroke-width="1.8"/>
+                  <!-- Key badge (top right) -->
+                  <circle cx="29" cy="10" r="5" fill="#051e2e" stroke="#5dade2" stroke-width="1.5"/>
+                  <circle cx="29" cy="10" r="2" fill="none" stroke="#5dade2" stroke-width="1.3"/>
+                  <line x1="31" y1="12" x2="34" y2="15" stroke="#5dade2" stroke-width="1.4" stroke-linecap="round"/>
+                  <line x1="33" y1="14" x2="33" y2="16.5" stroke="#5dade2" stroke-width="1.3" stroke-linecap="round"/>
+                </svg>
+                <h3>Role-Based Operational Access</h3>
+                <p>Administrative access is restricted to authorized personnel and deployment partners.</p>
+            </div>
+
+        </div>
+
+        <!-- Data flow: Your Data → ... → No External Cloud -->
+        <p style="margin:36px 0 10px;font-size:0.72em;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--teal);font-family:var(--font-mono);">Data Never Leaves Your Office</p>
+        <div class="sbad-flow" role="list" aria-label="Data flow: from your data through local processing to authorized users, with no external cloud">
+
+            <div class="sbad-flow-node" role="listitem">
+                <div class="sbad-flow-node-icon" aria-hidden="true">
+                  <svg viewBox="0 0 32 32" width="34" height="34" fill="none" stroke="#00c2a8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <!-- Back document -->
+                    <rect x="8" y="5" width="16" height="20" rx="2" fill="rgba(0,194,168,0.05)" stroke="rgba(0,194,168,0.4)" stroke-width="1.2"/>
+                    <!-- Front document -->
+                    <rect x="5" y="8" width="16" height="20" rx="2" fill="#051e2e" stroke="#00c2a8"/>
+                    <!-- Dog-ear -->
+                    <polyline points="17,8 21,8 21,12" stroke="#00c2a8" stroke-width="1.4"/>
+                    <line x1="17" y1="8" x2="17" y2="12" stroke="#00c2a8" stroke-width="1.3"/>
+                    <!-- Lines -->
+                    <line x1="8" y1="16" x2="18" y2="16" stroke="rgba(0,194,168,0.5)" stroke-width="1.1"/>
+                    <line x1="8" y1="19" x2="18" y2="19" stroke="rgba(0,194,168,0.5)" stroke-width="1.1"/>
+                    <line x1="8" y1="22" x2="14" y2="22" stroke="rgba(0,194,168,0.5)" stroke-width="1.1"/>
+                  </svg>
+                </div>
+                <div class="sbad-flow-node-title">Your Data</div>
+                <p class="sbad-flow-node-desc">Clinical notes, cases, policies, contracts, and internal documents.</p>
+            </div>
+
+            <div class="sbad-flow-arrow" aria-hidden="true">
+              <svg viewBox="0 0 16 24" width="16" height="24" fill="none" stroke="rgba(0,194,168,0.55)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4,4 12,12 4,20"/></svg>
+            </div>
+
+            <div class="sbad-flow-node" role="listitem">
+                <div class="sbad-flow-node-icon" aria-hidden="true">
+                  <svg viewBox="0 0 32 32" width="34" height="34" fill="none" stroke="#00c2a8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <!-- Server rack unit 1 -->
+                    <rect x="5" y="4" width="22" height="7" rx="1.5" fill="rgba(0,194,168,0.1)" stroke="#00c2a8"/>
+                    <!-- Server rack unit 2 -->
+                    <rect x="5" y="13" width="22" height="7" rx="1.5" fill="rgba(0,194,168,0.07)" stroke="#00c2a8"/>
+                    <!-- Server rack unit 3 -->
+                    <rect x="5" y="22" width="22" height="7" rx="1.5" fill="rgba(0,194,168,0.04)" stroke="#00c2a8"/>
+                    <!-- Status dots -->
+                    <circle cx="23" cy="7.5" r="1.2" fill="#00c2a8" stroke="none"/>
+                    <circle cx="26" cy="7.5" r="1.2" fill="rgba(0,194,168,0.4)" stroke="none"/>
+                    <circle cx="23" cy="16.5" r="1.2" fill="#00c2a8" stroke="none"/>
+                    <circle cx="26" cy="16.5" r="1.2" fill="rgba(0,194,168,0.4)" stroke="none"/>
+                    <!-- Vent lines -->
+                    <line x1="8" y1="7.5" x2="18" y2="7.5" stroke="rgba(0,194,168,0.35)" stroke-width="1.1"/>
+                    <line x1="8" y1="16.5" x2="18" y2="16.5" stroke="rgba(0,194,168,0.35)" stroke-width="1.1"/>
+                    <line x1="8" y1="25.5" x2="18" y2="25.5" stroke="rgba(0,194,168,0.35)" stroke-width="1.1"/>
+                  </svg>
+                </div>
+                <div class="sbad-flow-node-title">Local AI Workstation</div>
+                <p class="sbad-flow-node-desc">Pocono AI runs locally on your hardware. Data is processed and stored on-site only.</p>
+            </div>
+
+            <div class="sbad-flow-arrow" aria-hidden="true">
+              <svg viewBox="0 0 16 24" width="16" height="24" fill="none" stroke="rgba(0,194,168,0.55)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4,4 12,12 4,20"/></svg>
+            </div>
+
+            <div class="sbad-flow-node" role="listitem">
+                <div class="sbad-flow-node-icon" aria-hidden="true">
+                  <svg viewBox="0 0 32 32" width="34" height="34" fill="none" stroke="#00c2a8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <!-- Card/interface panel -->
+                    <rect x="3" y="5" width="26" height="22" rx="3" fill="rgba(0,194,168,0.08)" stroke="#00c2a8"/>
+                    <!-- Top bar -->
+                    <line x1="3" y1="11" x2="29" y2="11" stroke="rgba(0,194,168,0.3)" stroke-width="1.1"/>
+                    <!-- Traffic dots -->
+                    <circle cx="7" cy="8" r="1.2" fill="rgba(0,194,168,0.5)" stroke="none"/>
+                    <circle cx="11" cy="8" r="1.2" fill="rgba(0,194,168,0.3)" stroke="none"/>
+                    <circle cx="15" cy="8" r="1.2" fill="rgba(0,194,168,0.2)" stroke="none"/>
+                    <!-- Search bar -->
+                    <rect x="6" y="14" width="14" height="3.5" rx="1.5" fill="none" stroke="rgba(0,194,168,0.45)" stroke-width="1.1"/>
+                    <circle cx="21.5" cy="15.75" r="1.8" fill="none" stroke="#5dade2" stroke-width="1.3"/>
+                    <line x1="22.8" y1="17.05" x2="25" y2="19.25" stroke="#5dade2" stroke-width="1.4"/>
+                    <!-- Result lines -->
+                    <line x1="6" y1="21" x2="22" y2="21" stroke="rgba(0,194,168,0.4)" stroke-width="1.1"/>
+                    <line x1="6" y1="24" x2="18" y2="24" stroke="rgba(0,194,168,0.25)" stroke-width="1.1"/>
+                  </svg>
+                </div>
+                <div class="sbad-flow-node-title">Private AI Processing</div>
+                <p class="sbad-flow-node-desc">Natural language search, AI-augmented workflows, source-cited responses, and secure knowledge base.</p>
+            </div>
+
+            <div class="sbad-flow-arrow" aria-hidden="true">
+              <svg viewBox="0 0 16 24" width="16" height="24" fill="none" stroke="rgba(0,194,168,0.55)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4,4 12,12 4,20"/></svg>
+            </div>
+
+            <div class="sbad-flow-node" role="listitem">
+                <div class="sbad-flow-node-icon" aria-hidden="true">
+                  <svg viewBox="0 0 32 32" width="34" height="34" fill="none" stroke="#00c2a8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <!-- Back person (right) -->
+                    <circle cx="21" cy="11" r="3.5" fill="rgba(0,194,168,0.06)" stroke="rgba(0,194,168,0.5)" stroke-width="1.2"/>
+                    <path d="M14.5 27v-1.5a7 7 0 0 1 14 0V27" fill="none" stroke="rgba(0,194,168,0.4)" stroke-width="1.2"/>
+                    <!-- Front person (left, main) -->
+                    <circle cx="12" cy="10" r="4.5" fill="rgba(0,194,168,0.1)" stroke="#00c2a8"/>
+                    <path d="M3 27v-2a9 9 0 0 1 18 0v2" fill="rgba(0,194,168,0.06)" stroke="#00c2a8"/>
+                    <!-- Check badge -->
+                    <circle cx="25" cy="22" r="5" fill="#051e2e" stroke="#00c2a8" stroke-width="1.4"/>
+                    <polyline points="22.5,22.2 24.3,24 28,19.5" stroke="#00c2a8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <div class="sbad-flow-node-title">Authorized Users</div>
+                <p class="sbad-flow-node-desc">Staff and professionals interact through secure, role-based access.</p>
+            </div>
+
+            <div class="sbad-flow-arrow" aria-hidden="true">
+              <svg viewBox="0 0 16 24" width="16" height="24" fill="none" stroke="rgba(0,194,168,0.55)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4,4 12,12 4,20"/></svg>
+            </div>
+
+            <div class="sbad-flow-node" role="listitem">
+                <div class="sbad-flow-node-icon" aria-hidden="true">
+                  <svg viewBox="0 0 32 32" width="34" height="34" fill="none" stroke="#00c2a8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <!-- Cloud shape -->
+                    <path d="M23 21H10a5.5 5.5 0 0 1-.7-10.95A7.3 7.3 0 0 1 24.2 13a4.5 4.5 0 0 1-.2 8z" fill="rgba(0,194,168,0.07)" stroke="rgba(0,194,168,0.55)" stroke-width="1.4"/>
+                    <!-- Prohibition circle -->
+                    <circle cx="23.5" cy="22.5" r="6.5" fill="#0a1929" stroke="#e05555" stroke-width="1.8"/>
+                    <!-- Prohibition diagonal slash -->
+                    <line x1="19.1" y1="18.1" x2="27.9" y2="26.9" stroke="#e05555" stroke-width="1.8" stroke-linecap="round"/>
+                  </svg>
+                </div>
+                <div class="sbad-flow-node-title">No External Cloud</div>
+                <p class="sbad-flow-node-desc">No client operational data is transmitted to external AI inference providers during standard deployment operation.</p>
+            </div>
+
+        </div>
+
+        <p class="sbad-micro-trust">Designed to minimize unnecessary external data exposure while preserving operational control within the client environment.</p>
+
+        <p class="sbad-compliance-note"><strong style="color:rgba(255,255,255,0.4);font-weight:600;">Compliance note.</strong> Pocono AI deployments are designed to support privacy-conscious operational workflows. Final compliance responsibility remains with the deploying organization and its governing policies.</p>
+
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         PRESSURE TESTED SECTION — v209
+         Structured stakeholder simulation overview.
+         Inserted between Legal Precedent and Founder Bio.
+         Tone: analytical, restrained, enterprise-grade.
+    ═══════════════════════════════════════════════════════ -->
+    <!-- v358: Evidence Room cross-link — pressure-test the audit chain yourself -->
+    <section style="margin-bottom:48px;" aria-labelledby="evr-tease-h">
+        <div style="border:1px solid rgba(0,194,168,0.35);border-left:4px solid #00c2a8;border-radius:12px;background:#06131f;padding:22px 24px;display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between;">
+            <div style="max-width:640px;">
+                <p style="margin:0 0 6px;font-size:0.72em;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#00c2a8;font-family:var(--font-mono);">Live Artifact</p>
+                <h2 id="evr-tease-h" style="font-size:clamp(1.15rem,2.4vw,1.45rem);color:var(--white);margin:0 0 8px;border:none;line-height:1.25;">Don&rsquo;t take our word for &ldquo;tamper-evident.&rdquo; Attack it.</h2>
+                <p style="color:var(--light-text);font-size:0.93em;line-height:1.7;margin:0;">The Evidence Room keeps a working, reviewable audit record of your visit &mdash; sealed locally in your browser with SHA-256. Rewrite a record, cover your tracks, forge the chain, and watch each layer of custody catch you. Synthetic data; nothing leaves your device.</p>
+            </div>
+            <a href="evidence-room.html" style="display:inline-flex;align-items:center;padding:12px 24px;border-radius:999px;background:#00c2a8;color:#04111a;font-weight:700;text-decoration:none;white-space:nowrap;">Enter the Evidence Room</a>
+        </div>
+    </section>
+
+    <section id="pressure-tested" style="margin-bottom:48px;" aria-labelledby="pt-heading">
+
+        <!-- Section header -->
+        <div style="margin-bottom:28px;">
+            <p style="margin:0 0 6px;font-size:0.72em;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--teal);font-family:var(--font-mono);">Internal Diligence</p>
+            <h2 id="pt-heading" style="font-size:clamp(1.25rem,2.8vw,1.7rem);color:var(--white);margin:0 0 12px;border:none;line-height:1.2;">Pressure Tested Across Simulated Stakeholders</h2>
+            <p style="color:var(--light-text);font-size:0.93em;line-height:1.75;max-width:680px;margin:0;">The Pocono AI deployment model, trust architecture, workflow assumptions, and buyer experience were evaluated through a structured multi-perspective stakeholder simulation — 24 simulated stakeholders, 4 adversarial teams, 4 evaluation rounds. The purpose was to identify weaknesses before they reach real clients.</p>
+        </div>
+
+        <!-- Infographic + findings: two-column on desktop, stacked on mobile -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start;margin-bottom:32px;">
+
+            <!-- Infographic -->
+            <div style="border:1px solid rgba(255,255,255,0.08);border-radius:12px;overflow:hidden;background:#040f1a;">
+                <a href="sentinel-pressure-test.png" target="_blank" rel="noopener"
+                   style="display:block;cursor:zoom-in;"
+                   title="View full size — Sentinel Node Pressure Test overview"
+                   aria-label="Infographic: 24 Experts, 4 Rounds, 1 Verdict — Sentinel Node pressure test. Click to view full size.">
+                    <picture>
+                        <source srcset="sentinel-pressure-test.webp" type="image/webp">
+                        <img src="sentinel-pressure-test.png"
+                             alt="Infographic: 24 Experts. 4 Rounds. 1 Verdict. The Sentinel Defense: Trust. Privacy. Local AI. Four teams: Red Team — Attack, Challenge, Stress Test. Blue Team — Technical, Security, Validate. Green Team — Users, Workflows, Real World. Gold Team — Strategy, Growth, Invest. Verdict: Defended. Trust: Strong. Privacy: Protected. Architecture: Solid. Market Fit: Valid. The Sentinel on Trial checklist: Local AI, No Patient Data Leaves, HIPAA-Aligned, Zero Telemetry, Private by Design, Built for Medical and Legal — all checked. Bottom quote: This no longer looks like a hobby project or AI experiment. It looks like an unusually serious early-stage infrastructure company."
+                             width="1024" height="1536"
+                             loading="lazy" decoding="async"
+                             style="width:100%;height:auto;display:block;">
+                    </picture>
+                </a>
+                <div style="padding:10px 16px 12px;border-top:1px solid rgba(255,255,255,0.06);background:rgba(4,15,26,0.97);">
+                    <p style="margin:0;font-size:0.73em;color:var(--muted);font-style:italic;line-height:1.5;">Structured simulation — not a substitute for formal certification or independent auditing.</p>
+                    <a href="sentinel-pressure-test.png" target="_blank" rel="noopener" style="font-size:0.76em;color:var(--teal);font-weight:600;text-decoration:none;display:inline-block;margin-top:4px;">View full size &#8594;</a>
+                </div>
+            </div>
+
+            <!-- Summary findings -->
+            <div>
+                <p style="margin:0 0 14px;font-size:0.72em;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.35);">Key Findings</p>
+                <div style="display:flex;flex-direction:column;gap:12px;">
+
+                    <div style="padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-left:3px solid var(--teal);border-radius:0 8px 8px 0;">
+                        <p style="margin:0;font-size:0.86em;color:var(--light-text);line-height:1.65;">The local AI appliance model was consistently understood by non-technical stakeholders across clinical, legal, and administrative roles.</p>
+                    </div>
+
+                    <div style="padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-left:3px solid var(--teal);border-radius:0 8px 8px 0;">
+                        <p style="margin:0;font-size:0.86em;color:var(--light-text);line-height:1.65;">The architecture and trust model were assessed as unusually mature relative to stage of company development.</p>
+                    </div>
+
+                    <div style="padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-left:3px solid var(--teal);border-radius:0 8px 8px 0;">
+                        <p style="margin:0;font-size:0.86em;color:var(--light-text);line-height:1.65;">Simplified navigation and audience-specific entry points significantly improved buyer comprehension and perceived operational readiness.</p>
+                    </div>
+
+                    <div style="padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-left:3px solid rgba(255,165,0,0.6);border-radius:0 8px 8px 0;">
+                        <p style="margin:0;font-size:0.86em;color:var(--light-text);line-height:1.65;">The strongest remaining requirement identified was real-world demonstration and deployment proof. Operational execution is now the primary challenge, not website credibility.</p>
+                    </div>
+
+                    <div style="padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-left:3px solid rgba(255,165,0,0.6);border-radius:0 8px 8px 0;">
+                        <p style="margin:0;font-size:0.86em;color:var(--light-text);line-height:1.65;">Pricing, deployment model, and timeline were well understood. Early termination terms and infrastructure refresh mechanics require clearer front-of-site positioning.</p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Four team cards -->
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin-bottom:28px;">
+
+            <!-- Red Team -->
+            <div style="padding:18px 20px;background:rgba(255,255,255,0.03);border:1px solid rgba(220,50,50,0.2);border-radius:10px;border-top:2px solid rgba(220,50,50,0.7);">
+                <p style="margin:0 0 4px;font-size:0.68em;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:#ef4444;">Red Team</p>
+                <p style="margin:0 0 10px;font-size:0.78em;color:rgba(255,255,255,0.4);font-style:italic;">Attack. Challenge. Stress Test.</p>
+                <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:5px;">
+                    <li style="font-size:0.82em;color:var(--light-text);display:flex;gap:8px;line-height:1.5;"><span style="color:#ef4444;flex-shrink:0;margin-top:2px;">&#8250;</span>Cybersecurity and attack surface analysis</li>
+                    <li style="font-size:0.82em;color:var(--light-text);display:flex;gap:8px;line-height:1.5;"><span style="color:#ef4444;flex-shrink:0;margin-top:2px;">&#8250;</span>Regulatory compliance scrutiny</li>
+                    <li style="font-size:0.82em;color:var(--light-text);display:flex;gap:8px;line-height:1.5;"><span style="color:#ef4444;flex-shrink:0;margin-top:2px;">&#8250;</span>Legal and liability challenges</li>
+                    <li style="font-size:0.82em;color:var(--light-text);display:flex;gap:8px;line-height:1.5;"><span style="color:#ef4444;flex-shrink:0;margin-top:2px;">&#8250;</span>Investor and competitive skepticism</li>
+                </ul>
+            </div>
+
+            <!-- Blue Team -->
+            <div style="padding:18px 20px;background:rgba(255,255,255,0.03);border:1px solid rgba(10,115,210,0.2);border-radius:10px;border-top:2px solid rgba(10,115,210,0.7);">
+                <p style="margin:0 0 4px;font-size:0.68em;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:var(--ai-blue);">Blue Team</p>
+                <p style="margin:0 0 10px;font-size:0.78em;color:rgba(255,255,255,0.4);font-style:italic;">Technical. Security. Validate.</p>
+                <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:5px;">
+                    <li style="font-size:0.82em;color:var(--light-text);display:flex;gap:8px;line-height:1.5;"><span style="color:var(--ai-blue);flex-shrink:0;margin-top:2px;">&#8250;</span>Architecture and infrastructure logic</li>
+                    <li style="font-size:0.82em;color:var(--light-text);display:flex;gap:8px;line-height:1.5;"><span style="color:var(--ai-blue);flex-shrink:0;margin-top:2px;">&#8250;</span>Deployment and network segmentation</li>
+                    <li style="font-size:0.82em;color:var(--light-text);display:flex;gap:8px;line-height:1.5;"><span style="color:var(--ai-blue);flex-shrink:0;margin-top:2px;">&#8250;</span>RAG pipeline and retrieval workflow</li>
+                    <li style="font-size:0.82em;color:var(--light-text);display:flex;gap:8px;line-height:1.5;"><span style="color:var(--ai-blue);flex-shrink:0;margin-top:2px;">&#8250;</span>MSP scalability and operational logic</li>
+                </ul>
+            </div>
+
+            <!-- Green Team -->
+            <div style="padding:18px 20px;background:rgba(255,255,255,0.03);border:1px solid rgba(0,160,80,0.2);border-radius:10px;border-top:2px solid rgba(0,160,80,0.7);">
+                <p style="margin:0 0 4px;font-size:0.68em;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:#4ade80;">Green Team</p>
+                <p style="margin:0 0 10px;font-size:0.78em;color:rgba(255,255,255,0.4);font-style:italic;">Users. Workflows. Real World.</p>
+                <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:5px;">
+                    <li style="font-size:0.82em;color:var(--light-text);display:flex;gap:8px;line-height:1.5;"><span style="color:#4ade80;flex-shrink:0;margin-top:2px;">&#8250;</span>Physician and nursing workflows</li>
+                    <li style="font-size:0.82em;color:var(--light-text);display:flex;gap:8px;line-height:1.5;"><span style="color:#4ade80;flex-shrink:0;margin-top:2px;">&#8250;</span>Front office and billing operations</li>
+                    <li style="font-size:0.82em;color:var(--light-text);display:flex;gap:8px;line-height:1.5;"><span style="color:#4ade80;flex-shrink:0;margin-top:2px;">&#8250;</span>Legal office staff and case workflows</li>
+                    <li style="font-size:0.82em;color:var(--light-text);display:flex;gap:8px;line-height:1.5;"><span style="color:#4ade80;flex-shrink:0;margin-top:2px;">&#8250;</span>Patient and client trust concerns</li>
+                </ul>
+            </div>
+
+            <!-- Gold Team -->
+            <div style="padding:18px 20px;background:rgba(255,255,255,0.03);border:1px solid rgba(180,140,0,0.2);border-radius:10px;border-top:2px solid rgba(200,165,0,0.7);">
+                <p style="margin:0 0 4px;font-size:0.68em;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:#f0c040;">Gold Team</p>
+                <p style="margin:0 0 10px;font-size:0.78em;color:rgba(255,255,255,0.4);font-style:italic;">Strategy. Growth. Invest.</p>
+                <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:5px;">
+                    <li style="font-size:0.82em;color:var(--light-text);display:flex;gap:8px;line-height:1.5;"><span style="color:#f0c040;flex-shrink:0;margin-top:2px;">&#8250;</span>Investor and funding perspective</li>
+                    <li style="font-size:0.82em;color:var(--light-text);display:flex;gap:8px;line-height:1.5;"><span style="color:#f0c040;flex-shrink:0;margin-top:2px;">&#8250;</span>Product strategy and differentiation</li>
+                    <li style="font-size:0.82em;color:var(--light-text);display:flex;gap:8px;line-height:1.5;"><span style="color:#f0c040;flex-shrink:0;margin-top:2px;">&#8250;</span>Operational scaling and MSP channel</li>
+                    <li style="font-size:0.82em;color:var(--light-text);display:flex;gap:8px;line-height:1.5;"><span style="color:#f0c040;flex-shrink:0;margin-top:2px;">&#8250;</span>Market positioning and implementation feasibility</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- Simulated verdict callout -->
+        <div style="padding:20px 24px;background:rgba(0,194,168,0.05);border:1px solid rgba(0,194,168,0.15);border-radius:10px;margin-bottom:24px;display:flex;flex-wrap:wrap;gap:20px;align-items:center;">
+            <div style="flex:1;min-width:200px;">
+                <p style="margin:0 0 4px;font-size:0.7em;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--teal);">Simulated Verdict</p>
+                <p style="margin:0;font-size:1em;font-weight:700;color:var(--white);line-height:1.3;">Defended across all four evaluation dimensions.</p>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:10px;">
+                <span style="padding:5px 12px;background:rgba(0,194,168,0.1);border:1px solid rgba(0,194,168,0.25);border-radius:20px;font-size:0.78em;font-weight:600;color:var(--teal);">Trust: Strong</span>
+                <span style="padding:5px 12px;background:rgba(0,194,168,0.1);border:1px solid rgba(0,194,168,0.25);border-radius:20px;font-size:0.78em;font-weight:600;color:var(--teal);">Privacy: Protected</span>
+                <span style="padding:5px 12px;background:rgba(0,194,168,0.1);border:1px solid rgba(0,194,168,0.25);border-radius:20px;font-size:0.78em;font-weight:600;color:var(--teal);">Architecture: Solid</span>
+                <span style="padding:5px 12px;background:rgba(0,194,168,0.1);border:1px solid rgba(0,194,168,0.25);border-radius:20px;font-size:0.78em;font-weight:600;color:var(--teal);">Market Fit: Valid</span>
+            </div>
+        </div>
+
+        <!-- Quote from simulation output -->
+        <div style="margin-bottom:24px;padding:20px 24px;background:rgba(255,255,255,0.03);border-left:3px solid rgba(255,255,255,0.12);border-radius:0 8px 8px 0;">
+            <blockquote style="margin:0;font-size:0.9em;color:var(--light-text);line-height:1.75;font-style:italic;">&ldquo;This no longer looks like a hobby project or AI experiment. It looks like an unusually serious early-stage infrastructure company.&rdquo;</blockquote>
+            <p style="margin:8px 0 0;font-size:0.76em;color:var(--muted);">&#8212; Composite finding from Gold Team evaluation round</p>
+        </div>
+
+        <!-- Transparency disclosure -->
+        <div style="padding:16px 20px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:8px;">
+            <p style="margin:0;font-size:0.8em;color:var(--muted);line-height:1.7;"><strong style="color:rgba(255,255,255,0.45);font-weight:600;">Methodology note.</strong> Stakeholder simulations are used internally to challenge assumptions, identify weaknesses, improve buyer clarity, and refine deployment strategy. Simulated stakeholders draw on published domain knowledge across healthcare, law, cybersecurity, and infrastructure investment. These simulations are not a substitute for formal security certification, independent auditing, clinical validation, or legal review. Real-world pilot data will be published with partner permission once available.</p>
+        </div>
+
+    </section>
+
+    <!-- LEGAL PRECEDENT CALLOUT -->
+    <section style="background:var(--card-dark);border:1px solid rgba(255,80,80,0.2);border-radius:12px;padding:32px;margin-bottom:40px;">
+        <span class="section-eyebrow" style="color:#ff5050;">Legal Precedent</span>
+        <h2 style="color:var(--white);margin:12px 0;">Cloud AI Hallucinations Are an Uninsurable Liability</h2>
+        <p style="color:var(--light-text);line-height:1.8;">In <em>Mata v. Avianca</em> (S.D.N.Y. 2023), attorneys were sanctioned $5,000 for AI-fabricated citations submitted to a federal court — and by April 2026, an Oregon federal judge had imposed roughly $110,000 in fines and fees for the same conduct (<em>Couvrette v. Wisnovsky</em>). Cloud AI models generate from parametric memory — they can confidently cite sources that do not exist.</p>
+        <p style="color:var(--light-text);line-height:1.8;">The Sentinel Node's local RAG forces every output to cite a retrieved document chunk from your actual files, traceable to a specific page number. The physician or attorney verifies the citation before acting. This is the Human-in-the-Loop (HITL) architecture — not a disclaimer, but a cognitive handoff point.</p>
+        <a href="trust.html" class="cta-button" style="margin-top:16px;display:inline-block;">Read: Malpractice Trap Analysis</a>
+    </section>
+
+    <!-- FOUNDER BIO ANCHOR — v245 enhanced with brand infographic -->
+    <section id="founder-bio" style="margin-bottom:40px;">
+        <div style="background:linear-gradient(150deg,rgba(0,163,255,0.06),rgba(5,22,34,0.97));border:1px solid rgba(0,163,255,0.18);border-radius:16px;overflow:hidden;">
+
+            <!-- two-column: text left, image right on wide screens -->
+            <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:0;">
+
+                <!-- text column -->
+                <div style="flex:1;min-width:280px;padding:36px 36px 32px;">
+                    <span class="section-eyebrow">The Human Behind the Architecture</span>
+                    <h2 style="color:var(--white);margin:12px 0 16px;font-size:clamp(1.2rem,2.5vw,1.55rem);line-height:1.25;">Technical trust starts with human trust.</h2>
+
+                    <p style="color:var(--light-text);line-height:1.85;margin-bottom:14px;">Marcus O'Dell spent over two decades building and hardening large-scale local data environments — MySQL, PostgreSQL, Linux systems architecture, enterprise data custody. He holds a Master's degree in Psychology, which shapes how the Human-in-the-Loop workflow is designed: not as a legal disclaimer, but as a cognitive handoff point that matches how licensed professionals actually think under time pressure.</p>
+
+                    <p style="color:var(--light-text);line-height:1.85;margin-bottom:14px;">Pocono AI was built from lived experience: the experience of navigating complex systems, seeing how fragmented information creates real human burden, and recognizing that privacy is not an abstract feature — it is part of dignity, trust, and care.</p>
+
+                    <blockquote style="border-left:3px solid var(--teal);padding:12px 18px;margin:20px 0;background:rgba(0,194,168,0.05);border-radius:0 8px 8px 0;">
+                        <p style="color:var(--white);font-style:italic;line-height:1.75;margin:0 0 8px;">"I built this out of necessity. Physicians and attorneys are drowning in administrative burden that has nothing to do with why they went to school for a decade. The Sentinel Node gives them their time back — without asking them to trust a vendor they've never met with the most sensitive data they hold."</p>
+                        <cite style="color:var(--muted);font-size:0.82em;font-style:normal;">— Marcus O'Dell, Founder &amp; CEO</cite>
+                    </blockquote>
+
+                    <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:24px;">
+                        <a href="about.html" class="cta-button cta-button-light" style="font-size:0.88em;padding:10px 20px;">Full Founder Background &rarr;</a>
+                        <a href="why-pocono-ai.html" style="color:var(--teal);font-weight:700;font-size:0.88em;text-decoration:none;display:flex;align-items:center;">Why Local AI Matters &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- image column -->
+                <div style="flex:0 0 auto;width:min(320px,100%);background:rgba(0,0,0,0.2);">
+                    <picture>
+                        <source srcset="founder-brand-infographic.webp" type="image/webp">
+                        <img src="founder-brand-infographic.png"
+                             alt="Marcus Odell, founder of Pocono AI, with Sentinel Node privacy shield imagery and the phrase Carpe diem — and your data."
+                             width="1024" height="1536"
+                             loading="lazy" decoding="async"
+                             style="width:100%;height:auto;display:block;">
+                    </picture>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="contact" class="cta-container">
+        <h2 style="color:white;border-bottom:none;margin-top:0;">Request a Technical Security Briefing</h2>
+        <p style="color:var(--light-text);max-width:520px;margin:0 auto 28px;line-height:1.8;">We offer a 30-minute live walkthrough for IT and compliance teams — including a network test confirming zero data leaves during use.</p>
+        <a href="mailto:marcus@poconoai.com?subject=Trust%20%26%20Security%20Briefing%20Request%20%E2%80%94%20PoconoAI.com" class="cta-button">&#9993; Request Security Briefing</a>
+        <a href="/push-button-deliverables.html" class="cta-button cta-button-light" style="margin-top:10px;display:inline-block;">See governed sample outputs &rarr;</a>
+        <p style="color:var(--muted);font-size:0.8em;margin-top:16px;">No third-party form processors. Your inquiry goes directly to Marcus — consistent with the product we sell.</p>
+    </section>
+
+
+  <section class="section-tight">
+    <div class="container">
+
+      <aside class="related-rail" aria-label="Related authority">
+        <p class="related-rail-eyebrow">Continue investigating</p>
+        <h2 class="related-rail-title">Related authority</h2>
+        <ul class="related-rail-list">
+          <li class="related-rail-item">
+            <a href="governance.html">
+              <span class="related-rail-tag">Governance</span>
+              <span class="related-rail-link-title">AI Governance Framework</span>
+              <span class="related-rail-blurb">The four pillars: verification, provenance, traceability, local control.</span>
+            </a>
+          </li>
+          <li class="related-rail-item">
+            <a href="audit-lifecycle.html">
+              <span class="related-rail-tag">Architecture</span>
+              <span class="related-rail-link-title">The Audit Lifecycle</span>
+              <span class="related-rail-blurb">Seven stages from prompt to retention. How the trust claim is mechanized.</span>
+            </a>
+  &nbsp;&middot;&nbsp; <a href="training.html" style="color:#00c2a8;font-weight:700;">Training &amp; Deployment &rarr;</a>
+          </li>
+          <li class="related-rail-item">
+            <a href="operational-artifacts.html">
+              <span class="related-rail-tag">Operations</span>
+              <span class="related-rail-link-title">Operational Artifacts</span>
+              <span class="related-rail-blurb">The six worked-example artifacts a deployment produces as evidence of trust.</span>
+            </a>
+          </li>
+          <li class="related-rail-item">
+            <a href="compliance-hub.html">
+              <span class="related-rail-tag">Compliance</span>
+              <span class="related-rail-link-title">Compliance Officer Hub</span>
+              <span class="related-rail-blurb">The navigator for compliance officers — evidence you can produce, mapped to audit response.</span>
+            </a>
+          </li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ═══ v320 Chunk 3: UPDATE CUSTODY & OS BOUNDARY — Sentinel Node v1.46 ═══ -->
+  <section style="max-width:980px;margin:48px auto;padding:0 24px;" aria-labelledby="trust-custody-title">
+    <div style="border:1px solid rgba(0,194,168,0.22);border-radius:14px;overflow:hidden;background:linear-gradient(155deg,rgba(8,15,28,0.9),rgba(5,22,34,0.7));">
+      <div style="background:rgba(0,194,168,0.05);border-bottom:1px solid rgba(0,194,168,0.18);padding:12px 26px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+        <span style="display:inline-flex;align-items:center;gap:7px;color:#00c2a8;font-size:0.68em;font-weight:700;text-transform:uppercase;letter-spacing:0.16em;"><span style="width:6px;height:6px;border-radius:50%;background:#00c2a8;box-shadow:0 0 8px rgba(0,194,168,0.6);"></span>Update Custody &amp; Boundary</span>
+        <span style="color:#8fa9bb;font-size:0.72em;">Sentinel Node v1.46 &middot; release-candidate scaffold</span>
+      </div>
+      <div style="padding:26px 30px;">
+        <h2 id="trust-custody-title" style="font-size:clamp(1.15rem,2.4vw,1.5rem);color:#f0f4f8;margin:0 0 12px;border:none;line-height:1.2;">Signed update custody, and an honest boundary about what the app enforces.</h2>
+        <p style="color:#c6d4e3;font-size:0.93em;line-height:1.7;margin:0 0 16px;max-width:760px;">Sentinel Node accepts update and model-refresh packages only through a staged local workflow. The application verifies manifest shape, package SHA-256, trusted release-key status, Ed25519 signatures, and rollback sequence. Packages that are unsigned, hash-mismatched, signed by an unknown or revoked key, expired, or out of rollback sequence are rejected. Every verification attempt writes an audit event &mdash; without prompts, drafts, source text, PHI, privileged content, credentials, tokens, or private keys. Private signing keys are never stored on the appliance.</p>
+        <div style="border-left:3px solid #00c2a8;padding:14px 18px;background:rgba(0,194,168,0.04);border-radius:0 8px 8px 0;margin:0 0 16px;">
+          <p style="margin:0;color:#c6d4e3;font-size:0.91em;line-height:1.7;"><strong style="color:#e8f0f8;">The boundary, stated plainly:</strong> the application verifies what the application can see; the installer and MSP enforce operating-system controls such as firewall rules, USB device policy, disk encryption, read-only mounts, and physical custody. No package is auto-executed from removable media. There is no remote management interface and no automatic cloud pull.</p>
+        </div>
+        <p style="color:#a8cce8;font-size:0.85em;line-height:1.6;margin:0 0 16px;font-style:italic;max-width:760px;">This is a pilot-candidate scaffold, not a production certification. It is not a HIPAA, legal, NIST, or ISO certification. Professional review remains mandatory.</p>
+        <a href="sentinel-pilot-scaffold.html" style="display:inline-flex;align-items:center;gap:8px;color:#00c2a8;text-decoration:none;font-weight:700;font-size:0.92em;padding:9px 18px;border:1px solid rgba(0,194,168,0.4);border-radius:100px;">See the Pilot-Scaffold Update &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+
+    <!-- v321: Related research callout — AI Near-Miss Doctrine -->
+    <section aria-label="Related research">
+      <div style="background:linear-gradient(160deg,rgba(10,115,210,0.08),rgba(5,22,34,0.85));border:1px solid rgba(10,115,210,0.22);border-left:3px solid #0A73D2;border-radius:0 10px 10px 0;padding:22px 24px;margin:24px 0;display:flex;flex-wrap:wrap;align-items:center;gap:16px;justify-content:space-between;">
+        <div style="flex:1 1 320px;min-width:260px;">
+          <p style="font-size:0.66em;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#5dade2;margin:0 0 6px;">Related Research &middot; Governance</p>
+          <p style="color:#fff;font-weight:700;font-size:0.98em;margin:0 0 4px;">AI Near-Miss Governance</p>
+          <p style="color:#D0DDE6;font-size:0.85em;line-height:1.6;margin:0;">How regulated AI should preserve evidence — making mistakes detectable, reviewable, correctable, and defensible before they become harm.</p>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;flex-shrink:0;">
+          <a href="ai-near-miss-doctrine.html" style="display:inline-flex;align-items:center;gap:6px;padding:9px 16px;background:#0A73D2;color:#fff;font-size:0.82em;font-weight:700;border-radius:6px;text-decoration:none;">Read the Doctrine &rarr;</a>
+          <a href="Pocono_AI_The_AI_Near_Miss_Doctrine.pdf" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border:1px solid rgba(255,255,255,0.18);color:#D0DDE6;font-size:0.82em;font-weight:600;border-radius:6px;text-decoration:none;">Download PDF</a>
+        </div>
+      </div>
+    </section>
+
+
+<!-- Concept cluster v336 -->
+<section style="max-width:1100px;margin:40px auto 0;padding:28px 24px 32px;border-top:1px solid rgba(255,255,255,0.07);">
+  <p style="margin:0 0 14px;font-size:0.72em;font-weight:800;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.3);">Why Local AI — Core Concepts</p>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;">
+    <a href="sentinel-node.html" style="display:inline-block;padding:8px 14px;background:rgba(0,194,168,0.08);border:1px solid rgba(0,194,168,0.28);border-radius:8px;color:#2dd4bf;text-decoration:none;font-size:0.86rem;font-weight:600;">Sentinel Node</a>
+    <a href="local-ai-inference.html" style="display:inline-block;padding:8px 14px;background:rgba(0,194,168,0.06);border:1px solid rgba(0,194,168,0.2);border-radius:8px;color:#9eb9cc;text-decoration:none;font-size:0.86rem;">Local AI Inference</a>
+    <a href="data-sovereignty-ai.html" style="display:inline-block;padding:8px 14px;background:rgba(0,194,168,0.06);border:1px solid rgba(0,194,168,0.2);border-radius:8px;color:#9eb9cc;text-decoration:none;font-size:0.86rem;">Data Sovereignty</a>
+    <a href="zero-telemetry-ai.html" style="display:inline-block;padding:8px 14px;background:rgba(0,194,168,0.06);border:1px solid rgba(0,194,168,0.2);border-radius:8px;color:#9eb9cc;text-decoration:none;font-size:0.86rem;">Zero Telemetry</a>
+    <a href="zero-exfiltration-ai.html" style="display:inline-block;padding:8px 14px;background:rgba(0,194,168,0.06);border:1px solid rgba(0,194,168,0.2);border-radius:8px;color:#9eb9cc;text-decoration:none;font-size:0.86rem;">Zero Exfiltration</a>
+    <a href="ai-governance-layer.html" style="display:inline-block;padding:8px 14px;background:rgba(0,194,168,0.06);border:1px solid rgba(0,194,168,0.2);border-radius:8px;color:#9eb9cc;text-decoration:none;font-size:0.86rem;">AI Governance Layer</a>
+    <a href="regulated-ai-infrastructure.html" style="display:inline-block;padding:8px 14px;background:rgba(0,194,168,0.06);border:1px solid rgba(0,194,168,0.2);border-radius:8px;color:#9eb9cc;text-decoration:none;font-size:0.86rem;">Regulated AI Infrastructure</a>
+    <a href="regulated-ai-solutions.html" style="display:inline-block;padding:8px 14px;background:rgba(0,194,168,0.08);border:1px solid rgba(0,194,168,0.28);border-radius:8px;color:#2dd4bf;text-decoration:none;font-size:0.86rem;font-weight:600;">Solutions by Use Case &rarr;</a>
+  </div>
+</section>
+</main>
+
+<!-- v390 sitewide-deliverables-integration (2026-06-18) -->
+<!-- v396 root-relative nav fix, Living Echo rebrand, Engineering & Drafting + Enterprise Estate Continuity links added (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- INCLUDE:FOOTER -->
+<footer role="contentinfo" style="background:#051622;border-top:1px solid rgba(255,255,255,0.08);padding:40px 24px 28px;font-size:0.85em;color:#8899aa;">
+  <div style="max-width:1180px;margin:0 auto;">
+
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:0 0 28px;margin-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.07);">
+      <div style="max-width:560px;">
+        <p style="margin:0 0 6px;font-size:1.05em;font-weight:700;color:#fff;">Local AI infrastructure for regulated practices.</p>
+        <p style="margin:0;font-size:0.95em;line-height:1.5;">Drafts with citations. Human review required. Sensitive documents stay under practice control. Simple path, deep proof.</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="/contact.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;background:#00c2a8;color:#04111a;font-weight:700;text-decoration:none;font-size:0.95em;">Request Pilot</a>
+        <a href="/sentinel-demo.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;border:1px solid rgba(0,194,168,0.55);color:#00c2a8;font-weight:700;text-decoration:none;font-size:0.95em;">Watch Demo</a>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px 32px;margin-bottom:32px;text-align:left;">
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">For You</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/start-here.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Start Here (3 min)</a>
+          <a href="/for-physicians.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Physicians</a>
+          <a href="/for-attorneys.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Attorneys</a>
+          <a href="/engineering-drafting/" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Engineering &amp; Drafting Teams</a>
+          <a href="/pilot-program.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Pilot Program</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Installer Training</a>
+          <a href="/how-it-works.html" style="color:#8899aa;text-decoration:none;">How It Works</a>
+          <a href="/trust.html" style="color:#8899aa;text-decoration:none;">Trust &amp; Audit</a>
+          <a href="/pricing.html" style="color:#8899aa;text-decoration:none;">Pricing</a>
+          <a href="/sentinel-demo.html" style="color:#8899aa;text-decoration:none;">See the Demo</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Documentation Hub</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/documentation-hub/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Hub Home &mdash; Deep Proof</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">Installer Training</a>
+          <a href="/sentinel-node/installation-simulator.html" style="color:#8899aa;text-decoration:none;">&#8627; Installation Simulator</a>
+          <a href="/documentation-hub/clinical/" style="color:#8899aa;text-decoration:none;">Clinical Documentation</a>
+          <a href="/documentation-hub/legal/" style="color:#8899aa;text-decoration:none;">Legal Documentation</a>
+          <a href="/documentation-hub/technical/" style="color:#8899aa;text-decoration:none;">Technical Documentation</a>
+          <a href="/documentation-hub/governance/" style="color:#8899aa;text-decoration:none;">Governance &amp; Audit</a>
+          <a href="/documentation-hub/tools/" style="color:#8899aa;text-decoration:none;">Tools &amp; Simulators</a>
+          <a href="/documentation-hub/research/" style="color:#8899aa;text-decoration:none;">Research &amp; Essays</a>
+          <a href="/documentation-hub/transparency/" style="color:#8899aa;text-decoration:none;">Transparency</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Global Federated AI</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/global/" style="color:#7af0dc;text-decoration:none;font-weight:600;">Global Federated Hub</a>
+          <a href="/global/australia/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Australia</a>
+          <a href="/global/singapore/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Singapore</a>
+          <a href="/global/taiwan/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Taiwan</a>
+          <a href="/global/europe/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Europe</a>
+          <a href="/contact.html" style="color:#8899aa;text-decoration:none;">Partner Inquiry</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Company</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/about.html" style="color:#8899aa;text-decoration:none;">About Pocono AI</a>
+          <a href="/team.html" style="color:#8899aa;text-decoration:none;">Team &amp; Leadership</a>
+          <a href="/why-pocono-ai.html" style="color:#8899aa;text-decoration:none;">Why Pocono AI</a>
+          <a href="/founding-commercial-leadership.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Join Us</a>
+          <a href="/careers.html" style="color:#8899aa;text-decoration:none;">Careers</a>
+          <a href="/how-we-hire.html" style="color:#8899aa;text-decoration:none;">How We Hire</a>
+          <a href="/channel-partners.html" style="color:#8899aa;text-decoration:none;">Technical Partners (MSPs)</a>
+          <a href="/partners.html" style="color:#8899aa;text-decoration:none;">Academic Partnerships</a>
+          <a href="/contact.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Contact</a>
+          <a href="https://forms.gle/VQahnkjMfY6QNEMy8" target="_blank" rel="noopener noreferrer" style="color:#d5a94f;text-decoration:none;font-weight:600;">Interest List &#8599;</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Founder Projects</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/rehability/" style="color:#a78bfa;text-decoration:none;font-weight:700;">Rehability &#x2605;</a>
+          <a href="/rehability/marcus-memory-helper/" style="color:#a78bfa;text-decoration:none;font-weight:600;">&#8627; Marcus's Memory Helper</a>
+          <a href="/sentinel-home/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Sentinel Home Edition</a>
+          <a href="/living-memorials/" style="color:#8899aa;text-decoration:none;">Living Echo</a>
+          <a href="/living-memorials/marcus-odell/" style="color:#8899aa;text-decoration:none;">Marcus&rsquo;s Living Echo</a>
+          <a href="/living-memorials/enterprise-estate-continuity.html" style="color:#8899aa;text-decoration:none;">Enterprise Estate Continuity</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Resources &amp; Legal</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/sitemap.html" style="color:#8899aa;text-decoration:none;">All Pages (Sitemap)</a>
+          <a href="/audit.html" style="color:#8899aa;text-decoration:none;">Transparency &amp; Audit Log</a>
+          <a href="/maturity-disclosure.html" style="color:#8899aa;text-decoration:none;">What We Have / Don&rsquo;t Claim</a>
+          <a href="/plain.html" style="color:#8899aa;text-decoration:none;">Plain Language Guide</a>
+          <a href="/privacy.html" style="color:#8899aa;text-decoration:none;">Privacy</a>
+          <a href="/terms.html" style="color:#8899aa;text-decoration:none;">Terms</a>
+          <a href="/sla.html" style="color:#8899aa;text-decoration:none;">SLA</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:18px;margin-bottom:14px;">
+      <p style="margin:0;font-size:0.82em;line-height:1.6;color:#6f8295;max-width:1000px;">Pocono AI does not provide medical, legal, or engineering advice, does not practice medicine, law, or licensed engineering, and does not make clinical, legal, or engineering decisions. Outputs are drafts or support materials that require review by a qualified professional; final professional judgment remains with the licensed physician, attorney, or engineer. Tools and simulations on this site are educational and use synthetic data.</p>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:20px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+      <p style="margin:0;font-size:0.9em;">&copy; 2026 Pocono AI, LLC &nbsp;&#183;&nbsp; East Stroudsburg, PA &nbsp;&#183;&nbsp; <a href="mailto:marcus@poconoai.com" style="color:#8899aa;">marcus@poconoai.com</a> &nbsp;&#183;&nbsp; <a href="tel:+15705340602" style="color:#8899aa;">(570) 534-0602</a></p>
+      <p style="margin:0;font-size:0.88em;"><a href="/audit.html" style="color:#5dade2;text-decoration:none;">Transparency v402</a></p>
+    </div>
+  </div>
+</footer>
+<script src="/search.js?v=402" defer></script>
+<!-- /INCLUDE:FOOTER -->
+
+<script src="search-index.js?v=402" defer></script>
+<script src="nav.js?v=402" defer></script>
+<script src="pilot-cta.js?v=402" defer></script>
+</body>
+</html>

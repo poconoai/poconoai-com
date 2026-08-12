@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <!-- Outer hexagon — the air-gap perimeter (teal) -->
+  <polygon
+    points="256,28 456,141 456,371 256,484 56,371 56,141"
+    fill="none"
+    stroke="#188B96"
+    stroke-width="22"
+    stroke-linejoin="round"
+  />
+  <!-- Mid shield ring — unbroken containment boundary (ai-blue, thinner) -->
+  <polygon
+    points="256,80 412,167 412,345 256,432 100,345 100,167"
+    fill="none"
+    stroke="#00A3FF"
+    stroke-width="10"
+    stroke-linejoin="round"
+    opacity="0.55"
+  />
+  <!-- Inner core glow fill — local AI inference engine -->
+  <polygon
+    points="256,148 336,193 336,285 256,330 176,285 176,193"
+    fill="#051622"
+    stroke="#00A3FF"
+    stroke-width="14"
+    stroke-linejoin="round"
+  />
+  <!-- Inner core active glow — pulsing compute node -->
+  <polygon
+    points="256,148 336,193 336,285 256,330 176,285 176,193"
+    fill="url(#coreGlow)"
+    opacity="0.7"
+  />
+  <!-- Central node dot -->
+  <circle cx="256" cy="239" r="28" fill="#00A3FF" opacity="0.9"/>
+  <circle cx="256" cy="239" r="14" fill="#051622"/>
+  <circle cx="256" cy="239" r="6" fill="#188B96"/>
+  <!-- Defs -->
+  <defs>
+    <radialGradient id="coreGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00A3FF" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#188B96" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+</svg>

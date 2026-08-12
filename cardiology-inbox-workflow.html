@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>A Day Inside the Cardiology Inbox | Pocono AI</title>
+<meta name="description" content="How a small cardiology practice uses Sentinel Node to manage abnormal labs, echo reports, and Holter data — local AI with human review gating.">
+<meta name="keywords" content="cardiology inbox, cardiology workflow, Holter Zio review, echocardiogram follow-up, incidental finding ownership, abnormal lab follow-up, portal AFib message, surgical clearance anticoagulation, results to closure, local AI cardiology, Sentinel Node cardiology pilot">
+<meta name="theme-color" content="#0B0F13">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="favicon-180x180.png">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+<link rel="canonical" href="https://poconoai.com/cardiology-inbox-workflow.html">
+<link rel="stylesheet" href="styles.css?v=402">
+<link rel="stylesheet" href="nav-v2026.css?v=402">
+<link rel="stylesheet" href="brand-v292.css?v=402">
+<meta property="og:title" content="A Day Inside the Cardiology Inbox | Pocono AI">
+<meta property="og:type" content="article">
+<meta property="og:description" content="How a small cardiology practice uses Sentinel Node to manage abnormal labs, echo reports, and Holter data — local AI with physician review and a local audit trail.">
+<meta property="og:url" content="https://poconoai.com/cardiology-inbox-workflow.html">
+<meta property="og:image" content="https://poconoai.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:description" content="How a small cardiology practice uses Sentinel Node to manage abnormal labs, echo reports, and Holter data — local AI with human review gating.">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"A Day Inside the Cardiology Inbox","description":"A workflow proof page for small cardiology practices. Walks a single cardiology day from abnormal labs through Holter/Zio review, incidental findings, portal symptom messages, and surgical clearance requests — comparing without Sentinel Node and with Sentinel Node. Derived from the Pocono AI Cardiology Inbox Safety Gap white paper.","publisher":{"@type":"Organization","name":"Pocono AI, LLC"},"datePublished":"2026-05-26","dateModified":"2026-05-26"}</script>
+
+<style>
+/* page-local styles — no externals */
+.card-wrap { max-width: 1100px; margin: 0 auto; padding: 36px 22px 96px; }
+
+/* Hero */
+.card-hero { padding: 24px 0 26px; border-bottom: 1px solid rgba(255,255,255,0.06); margin-bottom: 28px; }
+.card-eyebrow { color: #5dade2; font-size: 0.78em; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; margin: 0 0 14px; }
+.card-h1 { font-size: clamp(1.55rem, 3.4vw, 2.35rem); line-height: 1.18; margin: 0 0 14px; color: var(--white,#fff); font-weight: 700; }
+.card-lede { font-size: clamp(0.98rem, 1.4vw, 1.08rem); line-height: 1.65; color: var(--light-text,#d0dde6); margin: 0 0 22px; max-width: 760px; }
+.card-cta-row { display: flex; flex-wrap: wrap; gap: 12px; }
+.card-cta-primary { display: inline-block; padding: 12px 22px; background: #00c2a8; color: #051622; font-weight: 700; font-size: 0.93rem; text-decoration: none; border-radius: 7px; }
+.card-cta-secondary { display: inline-block; padding: 12px 22px; background: transparent; color: #00c2a8; font-weight: 600; font-size: 0.9rem; text-decoration: none; border: 1px solid rgba(0,194,168,0.42); border-radius: 7px; }
+.card-cta-primary:hover { background: #00d8b8; }
+.card-cta-secondary:hover { background: rgba(0,194,168,0.08); }
+
+/* Disclaimer strip */
+.card-disclaimer { background: rgba(255,193,7,0.05); border: 1px solid rgba(255,193,7,0.22); border-radius: 8px; padding: 14px 18px; margin: 0 0 32px; font-size: 0.88em; line-height: 1.6; color: #d4c89a; }
+.card-disclaimer strong { color: #ffd454; }
+
+/* Section headings */
+.card-section { margin: 48px 0; }
+.card-h2 { font-size: clamp(1.2rem, 2.2vw, 1.55rem); line-height: 1.28; margin: 0 0 8px; color: var(--white,#fff); font-weight: 700; }
+.card-section-eyebrow { color: #5dade2; font-size: 0.72em; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; margin: 0 0 10px; }
+.card-section-lede { color: var(--light-text,#d0dde6); line-height: 1.65; margin: 0 0 22px; max-width: 760px; }
+
+/* Simulator */
+.sim-wrap { background: linear-gradient(135deg, rgba(0,194,168,0.045), rgba(5,22,34,0.92)); border: 1px solid rgba(0,194,168,0.2); border-radius: 12px; padding: 24px; }
+.sim-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+.sim-controls { display: flex; flex-direction: column; gap: 16px; }
+.sim-control-group { background: rgba(0,0,0,0.25); border-radius: 7px; padding: 12px 14px; }
+.sim-control-label { display: block; font-size: 0.72em; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #8fa6b8; margin: 0 0 8px; }
+.sim-seg { display: flex; gap: 6px; flex-wrap: wrap; }
+.sim-seg button { background: rgba(255,255,255,0.04); color: #c5d3dc; border: 1px solid rgba(255,255,255,0.08); padding: 7px 13px; font-size: 0.82em; border-radius: 5px; cursor: pointer; font-family: inherit; }
+.sim-seg button:focus-visible { outline: 2px solid #00c2a8; outline-offset: 2px; }
+.sim-seg button[aria-pressed="true"] { background: #00c2a8; color: #051622; border-color: #00c2a8; font-weight: 700; }
+.sim-toggle-list { display: flex; flex-direction: column; gap: 8px; }
+.sim-toggle { display: flex; align-items: center; gap: 10px; font-size: 0.88em; color: #c5d3dc; cursor: pointer; padding: 4px 0; }
+.sim-toggle input { width: 18px; height: 18px; cursor: pointer; accent-color: #00c2a8; }
+.sim-toggle:hover { color: #fff; }
+.sim-output { background: rgba(0,0,0,0.32); border-radius: 8px; padding: 18px 20px; }
+.sim-output h3 { color: #00c2a8; font-size: 0.78em; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; margin: 0 0 14px; }
+.sim-metric { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.9em; }
+.sim-metric:last-of-type { border-bottom: none; }
+.sim-metric-label { color: #8fa6b8; flex: 1; }
+.sim-metric-value { color: #fff; font-weight: 700; font-variant-numeric: tabular-nums; font-size: 1.05em; }
+.sim-illustrative-note { margin-top: 14px; font-size: 0.78em; color: #8fa6b8; line-height: 1.55; font-style: italic; }
+@media (max-width: 760px) { .sim-grid { grid-template-columns: 1fr; } }
+
+/* Workflow comparison */
+.wf-event { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.07); border-radius: 10px; padding: 22px 24px; margin: 0 0 18px; }
+.wf-event-time { color: #5dade2; font-size: 0.74em; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; margin: 0 0 6px; }
+.wf-event-title { color: #fff; font-size: 1.05em; font-weight: 700; margin: 0 0 16px; line-height: 1.35; }
+.wf-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.wf-col { background: rgba(0,0,0,0.22); border-radius: 7px; padding: 14px 16px; }
+.wf-col-label { display: block; font-size: 0.68em; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; margin: 0 0 10px; }
+.wf-col-without .wf-col-label { color: #d4736a; }
+.wf-col-with    .wf-col-label { color: #00c2a8; }
+.wf-col ul { margin: 0; padding-left: 18px; }
+.wf-col li { color: #c5d3dc; line-height: 1.55; font-size: 0.88em; margin-bottom: 6px; }
+@media (max-width: 760px) { .wf-cols { grid-template-columns: 1fr; } }
+
+/* Time savings table */
+.ts-table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 0.9em; background: rgba(0,0,0,0.18); border-radius: 8px; overflow: hidden; }
+.ts-table th { background: rgba(0,194,168,0.08); color: #00c2a8; font-weight: 600; text-align: left; padding: 11px 14px; font-size: 0.78em; letter-spacing: 0.06em; text-transform: uppercase; border-bottom: 1px solid rgba(0,194,168,0.18); }
+.ts-table td { padding: 11px 14px; color: #d0dde6; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.ts-table tbody tr:last-child td { border-bottom: none; }
+.ts-table td:first-child { color: #fff; font-weight: 600; }
+
+/* Closure status list */
+.closure-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; margin: 18px 0; }
+.closure-status { background: rgba(0,0,0,0.24); border-left: 3px solid #5dade2; padding: 10px 14px; font-size: 0.88em; color: #d0dde6; border-radius: 0 5px 5px 0; }
+.closure-status.s-overdue { border-left-color: #d4736a; color: #ffd9d4; }
+.closure-status.s-closed  { border-left-color: #00c2a8; color: #c2f0e6; }
+.closure-status.s-new     { border-left-color: #8b9ba8; }
+
+/* White paper callout */
+.wp-callout { background: linear-gradient(135deg, rgba(93,173,226,0.08), rgba(5,22,34,0.96)); border: 1px solid rgba(93,173,226,0.32); border-radius: 12px; padding: 32px 34px; margin: 36px 0; }
+.wp-callout h3 { color: #fff; font-size: 1.18em; margin: 0 0 8px; }
+.wp-callout-eyebrow { color: #5dade2; font-size: 0.72em; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; margin: 0 0 12px; }
+.wp-callout p { color: #d0dde6; line-height: 1.65; margin: 0 0 16px; }
+.wp-callout-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+.wp-btn-primary { display: inline-block; padding: 11px 22px; background: #5dade2; color: #051622; font-weight: 700; font-size: 0.9rem; text-decoration: none; border-radius: 6px; }
+.wp-btn-primary:hover { background: #7bc1ec; }
+
+/* Local architecture proof points */
+.proof-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px; margin: 18px 0; }
+.proof-item { background: rgba(0,194,168,0.05); border: 1px solid rgba(0,194,168,0.16); border-radius: 6px; padding: 11px 14px; font-size: 0.88em; color: #c2f0e6; }
+.proof-item::before { content: "▪ "; color: #00c2a8; font-weight: 700; }
+
+/* Final CTA */
+.final-cta { background: linear-gradient(135deg, rgba(0,194,168,0.1), rgba(5,22,34,0.97)); border: 1px solid rgba(0,194,168,0.32); border-radius: 12px; padding: 36px 38px; margin: 36px 0 0; }
+.final-cta h2 { color: #fff; font-size: 1.3em; margin: 0 0 10px; }
+.final-cta p { color: #d0dde6; line-height: 1.65; margin: 0 0 20px; max-width: 720px; }
+.final-cta-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+</style>
+
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+<div id="reading-progress" aria-hidden="true"></div>
+
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- INCLUDE:HEADER -->
+<div id="hitl-notice" style="background:#0a1929;padding:4px 16px;text-align:center;font-size:12px;color:#4a5568;border-bottom:1px solid rgba(255,255,255,0.06);letter-spacing:0.01em;">Human-in-the-Loop required: licensed professionals verify all outputs before clinical or legal action</div>
+<header role="banner">
+  <div class="header-inner">
+    <a href="/index.html" class="logo" aria-label="Pocono AI Home">
+      <img src="/logo.svg?v=402" alt="" width="36" height="36" decoding="async" loading="eager" aria-hidden="true" style="display:inline-block;">
+      Pocono <span>AI</span>
+    </a>
+    <nav id="desktop-nav" aria-label="Main navigation">
+      <div class="nav-item"><a href="/index.html" class="nav-direct">Home</a></div>
+      <div class="nav-item"><a href="/for-physicians.html" class="nav-direct">Physicians</a></div>
+      <div class="nav-item"><a href="/for-attorneys.html" class="nav-direct">Attorneys</a></div>
+      <div class="nav-item"><a href="/sentinel-node.html" class="nav-direct nav-hub" style="color:#d5a94f;border:1px solid rgba(213,169,79,0.45);border-radius:999px;padding:6px 13px;">Sentinel Node</a></div>
+      <div class="nav-item"><a href="/living-memorials/" class="nav-direct">Living Echo</a></div>
+      <div class="nav-item"><a href="/contact.html" class="nav-direct">Contact</a></div>
+      <div class="nav-item" data-dropdown="menu-more">
+        <button type="button" class="nav-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="menu-more">More <span class="nav-chevron" aria-hidden="true">&#9662;</span></button>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <a href="/contact.html#pilot" class="nav-cta nav-cta-primary">Request a Pilot</a>
+      <button type="button" class="pa-search-trigger" data-search-open aria-label="Search (press / or Ctrl-K)" aria-haspopup="dialog" aria-expanded="false">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span class="pa-st-label">Search</span><kbd data-pa-keyhint>Ctrl K</kbd>
+      </button>
+      <button type="button" class="header-icon-btn" id="mobile-menu" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav-panel">
+        <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- "More" overflow dropdown — sibling of <header> so position:fixed escapes header's stacking context. Wired by nav.js via data-dropdown="menu-more". -->
+<div class="nav-dropdown" id="menu-more" aria-label="More navigation">
+  <p class="nav-dd-section">Products</p>
+  <a href="/engineering-drafting/">Drafting &amp; Engineering Edition</a>
+  <a href="/sentinel-home/">Sentinel Home Edition</a>
+  <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability — Assistive Tools &#x2605;</a>
+  <a href="/living-memorials/enterprise-estate-continuity.html">Enterprise Estate Continuity</a>
+  <p class="nav-dd-section">Capabilities</p>
+  <a href="/evidence-room.html">Evidence Room</a>
+  <a href="/push-button-deliverables.html">Push-Button Deliverables</a>
+  <a href="/pilot-readiness-kit.html">Pilot Kit</a>
+  <a href="/pilot-program.html">Pilot Program</a>
+  <a href="/how-it-works.html">How It Works</a>
+  <p class="nav-dd-section">Hubs &amp; Company</p>
+  <a href="/training.html">Training Hub</a>
+  <a href="/documentation-hub/">Document Hub</a>
+  <a href="/global/">Global Hub</a>
+  <a href="/investors-hub.html">Investor Hub</a>
+  <a href="/valuation-dashboard.html">Valuation Dashboard</a>
+  <a href="/about.html">About</a>
+  <p class="nav-dd-section">Trust &amp; Legal</p>
+  <a href="/transparency.html">Transparency</a>
+  <a href="/audit.html">Audit Log</a>
+  <a href="/privacy.html">Privacy</a>
+  <a href="/sitemap.html">Sitemap</a>
+</div>
+<!-- Site search is provided by the self-contained search.js asset (command palette: / or Ctrl/Cmd-K). -->
+
+<!-- Mobile panel: full-screen slide-in. v396 nav — hub tiles + grouped links + Sentinel Node + Engineering. -->
+<nav id="mobile-nav-panel" aria-label="Mobile navigation" aria-hidden="true" role="dialog" aria-modal="true">
+
+  <!-- Hub tiles: Sentinel Node, Documentation Hub, Training Hub, Global Hub -->
+  <div style="padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,0.07);">
+    <p style="font-size:0.65em;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.28);margin:0 0 10px;padding:0 2px;">Hubs</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <a href="/sentinel-node.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(213,169,79,0.1);border:1px solid rgba(213,169,79,0.35);border-radius:10px;color:#d5a94f;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Sentinel Node</a>
+      <a href="/documentation-hub/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(0,194,168,0.1);border:1px solid rgba(0,194,168,0.35);border-radius:10px;color:#00c2a8;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Docs Hub</a>
+      <a href="/training.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.35);border-radius:10px;color:#a78bfa;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Training Hub</a>
+      <a href="/global/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(122,240,220,0.07);border:1px solid rgba(122,240,220,0.3);border-radius:10px;color:#7af0dc;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Global Hub</a>
+    </div>
+  </div>
+
+  <!-- Core paths -->
+  <div class="mob-static-links">
+    <a href="/index.html">Home</a>
+    <a href="/for-physicians.html">Physicians</a>
+    <a href="/for-attorneys.html">Attorneys</a>
+    <a href="/engineering-drafting/">Engineering &amp; Drafting</a>
+    <a href="/pilot-program.html">Pilot Program</a>
+    <a href="/how-it-works.html">How It Works</a>
+    <a href="/trust.html">Trust &amp; Audit</a>
+    <a href="/pricing.html">Pricing</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/living-memorials/">Living Echo</a>
+    <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability</a>
+    <a href="/about.html">About</a>
+    <a href="/team.html" style="color:rgba(255,255,255,0.6);">Team &amp; Leadership</a>
+    <a href="/valuation-dashboard.html" style="color:rgba(255,255,255,0.6);">Valuation Dashboard</a>
+    <a href="/careers.html" style="color:rgba(255,255,255,0.6);">Careers</a>
+    <a href="/sentinel-demo.html" style="color:rgba(255,255,255,0.6);">Demo</a>
+    <a href="/sitemap.html" style="color:rgba(255,255,255,0.45);">Sitemap</a>
+    <a href="/transparency.html" style="color:rgba(255,255,255,0.45);">Transparency</a>
+    <a href="/privacy.html" style="color:rgba(255,255,255,0.45);">Privacy</a>
+  </div>
+
+  <a href="/contact.html#pilot" class="mob-cta">Request a Pilot</a>
+</nav>
+<!-- /INCLUDE:HEADER -->
+
+
+<main id="main-content" tabindex="-1">
+<span id="main" aria-hidden="true"></span>
+
+<div class="card-wrap">
+
+  <!-- ── 1. HERO ──────────────────────────────────────────── -->
+  <section class="card-hero">
+    <p class="card-eyebrow">Workflow Proof &nbsp;·&nbsp; Cardiology</p>
+    <h1 class="card-h1">Cardiology risk does not only live in the diagnosis. It lives in the inbox.</h1>
+    <p class="card-lede">A single cardiology day can generate abnormal labs, echo reports, Holter/Zio findings, portal messages, clearance requests, incidental findings, and follow-up obligations. Sentinel Node helps practices retrieve context, route work, document decisions, and close the loop &mdash; locally.</p>
+    <div class="card-cta-row">
+      <a class="card-cta-primary" href="contact.html">Apply for the Cardiology Results Closure Pilot</a>
+      <a class="card-cta-secondary" href="assets/pdfs/Pocono_AI_Cardiology_Inbox_Safety_Gap_White_Paper.pdf" download>&darr; Download the White Paper</a>
+    </div>
+  </section>
+
+  <!-- ── 2. DISCLAIMER STRIP ──────────────────────────────── -->
+  <div class="card-disclaimer">
+    <strong>Disclaimer.</strong> This page is an illustrative workflow model based on common cardiology inbox patterns. It is not a clinical study, not medical advice, and not a claim of guaranteed savings. Sentinel Node does not diagnose, triage, prescribe, or replace clinician judgment.
+  </div>
+
+  <!-- ── 3. INTERACTIVE WORKDAY SIMULATOR ─────────────────── -->
+  <section class="card-section">
+    <p class="card-section-eyebrow">Interactive</p>
+    <h2 class="card-h2">Simulate a Day Inside the Cardiology Inbox</h2>
+    <p class="card-section-lede">Adjust the controls below to model a representative day for a small cardiology practice (one cardiologist, one APP, RN triage, MA support). The output panel updates to show illustrative workflow estimates, not measured results.</p>
+
+    <div class="sim-wrap">
+      <div class="sim-grid">
+
+        <div class="sim-controls">
+
+          <div class="sim-control-group">
+            <span class="sim-control-label">Inbox load</span>
+            <div class="sim-seg" role="group" aria-label="Inbox load">
+              <button type="button" data-control="load" data-value="normal"    aria-pressed="false">Normal</button>
+              <button type="button" data-control="load" data-value="heavy"     aria-pressed="true">Heavy</button>
+              <button type="button" data-control="load" data-value="overload"  aria-pressed="false">Overloaded</button>
+            </div>
+          </div>
+
+          <div class="sim-control-group">
+            <span class="sim-control-label">Practice model</span>
+            <div class="sim-seg" role="group" aria-label="Practice model">
+              <button type="button" data-control="practice" data-value="cardapprmma" aria-pressed="true">Cardiologist + APP + RN + MA</button>
+            </div>
+          </div>
+
+          <div class="sim-control-group">
+            <span class="sim-control-label">Risk mode</span>
+            <div class="sim-seg" role="group" aria-label="Risk mode">
+              <button type="button" data-control="risk" data-value="routine"  aria-pressed="false">Routine</button>
+              <button type="button" data-control="risk" data-value="mixed"    aria-pressed="true">Mixed</button>
+              <button type="button" data-control="risk" data-value="highrisk" aria-pressed="false">High-risk</button>
+            </div>
+          </div>
+
+          <div class="sim-control-group">
+            <span class="sim-control-label">Day&rsquo;s events</span>
+            <div class="sim-toggle-list">
+              <label class="sim-toggle"><input type="checkbox" data-toggle="rhythm"        checked> Rhythm report needs review</label>
+              <label class="sim-toggle"><input type="checkbox" data-toggle="echo"          checked> Echo shows EF drop</label>
+              <label class="sim-toggle"><input type="checkbox" data-toggle="incidental"    checked> Incidental finding appears</label>
+              <label class="sim-toggle"><input type="checkbox" data-toggle="portal"        checked> Portal message includes symptoms</label>
+              <label class="sim-toggle"><input type="checkbox" data-toggle="clearance"     checked> Clearance request involves anticoagulation</label>
+              <label class="sim-toggle"><input type="checkbox" data-toggle="notify-missing" checked> Patient notification missing</label>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="sim-output" aria-live="polite">
+          <h3>Illustrative Workflow Estimates</h3>
+          <div class="sim-metric"><span class="sim-metric-label">Estimated total inbox items</span><span class="sim-metric-value" id="sim-total">&mdash;</span></div>
+          <div class="sim-metric"><span class="sim-metric-label">Estimated open loops identified</span><span class="sim-metric-value" id="sim-loops">&mdash;</span></div>
+          <div class="sim-metric"><span class="sim-metric-label">Estimated physician/staff friction reduced</span><span class="sim-metric-value" id="sim-friction">&mdash;</span></div>
+          <div class="sim-metric"><span class="sim-metric-label">Estimated after-hours burden reduced</span><span class="sim-metric-value" id="sim-afterhours">&mdash;</span></div>
+          <div class="sim-metric"><span class="sim-metric-label">Items routed to staff after clinician review</span><span class="sim-metric-value" id="sim-routed">&mdash;</span></div>
+          <p class="sim-illustrative-note">Numbers above are illustrative workflow estimates for pilot scoping conversations only. They are not guaranteed savings, not clinical results, and not validated outcomes. Actual measurement requires a real pilot in a real practice.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 4. WORKFLOW COMPARISON ──────────────────────────── -->
+  <section class="card-section">
+    <p class="card-section-eyebrow">Workflow Comparison</p>
+    <h2 class="card-h2">The same day, without and with Sentinel Node</h2>
+    <p class="card-section-lede">Each event below is a real category of cardiology inbox obligation. The columns show the operational difference between a practice that runs the workflow manually and a practice that uses a local, human-reviewed Sentinel review layer.</p>
+
+    <article class="wf-event">
+      <p class="wf-event-time">7:38 AM</p>
+      <h3 class="wf-event-title">Inbox starts overloaded</h3>
+      <div class="wf-cols">
+        <div class="wf-col wf-col-without"><span class="wf-col-label">Without Sentinel Node</span><ul>
+          <li>Cardiologist opens EHR before first patient and sees a pile of unsorted items</li>
+          <li>Routine, abnormal, and urgent items are intermixed with no triage layer</li>
+          <li>Mental triage required just to decide where to start</li>
+          <li>Items deferred to lunch or after hours by default</li>
+          <li>Documentation scattered across notes, calls, messages, and EHR clicks</li>
+        </ul></div>
+        <div class="wf-col wf-col-with"><span class="wf-col-label">With Sentinel Node</span><ul>
+          <li>Items pre-classified into workflow categories (routine, abnormal, monitor, imaging, message, clearance)</li>
+          <li>Open-loop conditions flagged before clinician opens the chart</li>
+          <li>Items already assigned to suggested owners pending clinician confirmation</li>
+          <li>Closure status visible on each item</li>
+          <li>Audit trail preserved from intake onward</li>
+        </ul></div>
+      </div>
+    </article>
+
+    <article class="wf-event">
+      <p class="wf-event-time">8:12 AM</p>
+      <h3 class="wf-event-title">High-risk lab needs context</h3>
+      <div class="wf-cols">
+        <div class="wf-col wf-col-without"><span class="wf-col-label">Without Sentinel Node</span><ul>
+          <li>Potassium and creatinine return; heart failure patient on potassium-affecting therapy</li>
+          <li>Clinician hunts through chart for trend, prior labs, medication changes, symptoms</li>
+          <li>Owner of the patient call is unclear &mdash; cardiologist, APP, or nurse?</li>
+          <li>Repeat-lab need decided in isolation, often without staff task generated</li>
+          <li>Follow-up may remain open after the result is &ldquo;reviewed&rdquo;</li>
+        </ul></div>
+        <div class="wf-col wf-col-with"><span class="wf-col-label">With Sentinel Node</span><ul>
+          <li>Lab classified as medication-safety item; trend retrieved automatically</li>
+          <li>Prior potassium, creatinine, EGFR, and recent medication changes assembled in a packet</li>
+          <li>Open loops flagged: no repeat lab, no medication review note, no patient contact</li>
+          <li>Suggested owner: cardiologist review &rarr; staff call task drafted</li>
+          <li>Patient call script drafted for clinician sign-off; closure status tracked</li>
+        </ul></div>
+      </div>
+    </article>
+
+    <article class="wf-event">
+      <p class="wf-event-time">9:26 AM</p>
+      <h3 class="wf-event-title">Echo result creates follow-up obligation</h3>
+      <div class="wf-cols">
+        <div class="wf-col wf-col-without"><span class="wf-col-label">Without Sentinel Node</span><ul>
+          <li>EF drop from ~50% to ~35% &mdash; clinically meaningful, but the report alone does not close the loop</li>
+          <li>Clinician must check prior echo, current meds, last visit, and follow-up status manually</li>
+          <li>Patient notification may not get documented even if the call is made</li>
+          <li>Medication-optimization plan may sit in a note without a scheduled visit</li>
+          <li>Follow-up appointment status is invisible from inside the report itself</li>
+        </ul></div>
+        <div class="wf-col wf-col-with"><span class="wf-col-label">With Sentinel Node</span><ul>
+          <li>Echo classified as abnormal result requiring follow-up</li>
+          <li>EF trend, last cardiology note, current medications, and appointment status retrieved</li>
+          <li>Open loops flagged: no follow-up visit scheduled, no documented patient notification</li>
+          <li>Patient call and medication-review staff tasks drafted for clinician sign-off</li>
+          <li>Closure stays &ldquo;open&rdquo; until appointment scheduled and notification documented</li>
+        </ul></div>
+      </div>
+    </article>
+
+    <article class="wf-event">
+      <p class="wf-event-time">10:41 AM</p>
+      <h3 class="wf-event-title">Incidental finding creates ownership ambiguity</h3>
+      <div class="wf-cols">
+        <div class="wf-col wf-col-without"><span class="wf-col-label">Without Sentinel Node</span><ul>
+          <li>Cardiac CT includes an incidental pulmonary nodule with a follow-up recommendation</li>
+          <li>Cardiology received the study; the finding is non-cardiac</li>
+          <li>PCP may or may not have been copied; nobody is sure who owns follow-up</li>
+          <li>Patient may not understand or remember the recommendation</li>
+          <li>The finding can disappear into the chart with no documented owner</li>
+        </ul></div>
+        <div class="wf-col wf-col-with"><span class="wf-col-label">With Sentinel Node</span><ul>
+          <li>Classified as incidental non-cardiac finding &mdash; one of the highest-risk inbox categories</li>
+          <li>Ordering clinician, PCP copy status, and patient notification status retrieved</li>
+          <li>Owner-assignment queue flags the item until ownership is explicitly transferred or accepted</li>
+          <li>PCP notification packet and patient communication drafted for clinician review</li>
+          <li>Tracking date set; closure requires documented ownership transfer</li>
+        </ul></div>
+      </div>
+    </article>
+
+    <article class="wf-event">
+      <p class="wf-event-time">12:18 PM</p>
+      <h3 class="wf-event-title">Holter/Zio report requires context-dependent review</h3>
+      <div class="wf-cols">
+        <div class="wf-col wf-col-without"><span class="wf-col-label">Without Sentinel Node</span><ul>
+          <li>Monitor report returns showing runs of nonsustained VT</li>
+          <li>Clinician must reconstruct symptoms, prior rhythm history, last EF, structural heart disease, beta blocker use</li>
+          <li>Anticoagulation context may need to be retrieved manually</li>
+          <li>Patient notification status not visible from the report view</li>
+          <li>Final disposition may be reviewed but not fully closed</li>
+        </ul></div>
+        <div class="wf-col wf-col-with"><span class="wf-col-label">With Sentinel Node</span><ul>
+          <li>Classified as a rhythm report requiring clinician review &mdash; the pilot&rsquo;s anchor case</li>
+          <li>Reason ordered, prior EKG, last echo and EF, beta blocker / antiarrhythmic use, anticoagulation status, and upcoming appointment retrieved</li>
+          <li>Open loops flagged: no clinician review yet, no patient notification, no follow-up visit, no documented plan</li>
+          <li>Routing packet, staff task, and closure checklist drafted for review &mdash; nothing acted on autonomously</li>
+          <li>Closure remains open until patient notification and follow-up plan are documented or explicitly closed</li>
+        </ul></div>
+      </div>
+    </article>
+
+    <article class="wf-event">
+      <p class="wf-event-time">2:07 PM</p>
+      <h3 class="wf-event-title">Portal message mentions AFib symptoms</h3>
+      <div class="wf-cols">
+        <div class="wf-col wf-col-without"><span class="wf-col-label">Without Sentinel Node</span><ul>
+          <li>Patient sends a portal message: &ldquo;My watch says I&rsquo;m in afib again, I feel weird and a little short of breath&rdquo;</li>
+          <li>Message may be routed like a routine portal item</li>
+          <li>Symptom context, anticoagulation status, recent test results not surfaced automatically</li>
+          <li>Triage owner unclear; escalation depends on who happens to see it</li>
+          <li>Message may age without a documented response</li>
+        </ul></div>
+        <div class="wf-col wf-col-with"><span class="wf-col-label">With Sentinel Node</span><ul>
+          <li>Classified as a symptom-bearing portal message &mdash; not routine</li>
+          <li>Relevant diagnoses, anticoagulation status, recent test results, and prior calls retrieved</li>
+          <li>Routed to RN triage queue under practice-defined escalation rules; cardiologist notified if criteria met</li>
+          <li>Sentinel does not message the patient directly &mdash; it prepares context for human triage</li>
+          <li>Closure remains open until documented response and disposition</li>
+        </ul></div>
+      </div>
+    </article>
+
+    <article class="wf-event">
+      <p class="wf-event-time">4:36 PM</p>
+      <h3 class="wf-event-title">Clearance request involves anticoagulation</h3>
+      <div class="wf-cols">
+        <div class="wf-col wf-col-without"><span class="wf-col-label">Without Sentinel Node</span><ul>
+          <li>Dental or surgical office asks whether a patient can stop Eliquis before a procedure</li>
+          <li>Appears administrative but is not purely administrative</li>
+          <li>Clinician must reconstruct indication, stroke risk, procedure bleeding risk, timing, recent symptoms</li>
+          <li>Response may be completed without documenting the clinical basis</li>
+          <li>External-office follow-up status may not be tracked</li>
+        </ul></div>
+        <div class="wf-col wf-col-with"><span class="wf-col-label">With Sentinel Node</span><ul>
+          <li>Classified as a clearance request requiring clinician review &mdash; not auto-answered</li>
+          <li>Indication for anticoagulation, stroke and bleeding risk context, recent symptoms, and procedure timing retrieved</li>
+          <li>Clearance response packet drafted for clinician review with documented clinical basis</li>
+          <li>External-office reply tracked through closure</li>
+          <li>Audit trail preserved: source request, retrieved evidence, clinician decision, sent response, timestamps</li>
+        </ul></div>
+      </div>
+    </article>
+
+    <article class="wf-event">
+      <p class="wf-event-time">6:18 PM</p>
+      <h3 class="wf-event-title">The second shift begins</h3>
+      <div class="wf-cols">
+        <div class="wf-col wf-col-without"><span class="wf-col-label">Without Sentinel Node</span><ul>
+          <li>Clinic ends; inbox remains</li>
+          <li>Cardiologist reviews reports, signs refills, looks up prior studies, routes tasks after hours</li>
+          <li>EHR records clicks but does not necessarily prove closure</li>
+          <li>Burnout, risk, and liability compound in fragmented work</li>
+          <li>Family time absorbs the cost</li>
+        </ul></div>
+        <div class="wf-col wf-col-with"><span class="wf-col-label">With Sentinel Node</span><ul>
+          <li>Day-end review queue is shorter because context retrieval and routing happened earlier</li>
+          <li>Open-loop list is visible: still-open obligations are explicit, not implicit</li>
+          <li>Items remaining are clinician-action items, not chart-hunting tasks</li>
+          <li>Audit trail captures what was reviewed, when, by whom, with what evidence, with what disposition</li>
+          <li>After-hours work shifts from reconstruction to review</li>
+        </ul></div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ── 5. TIME SAVINGS TABLE ──────────────────────────── -->
+  <section class="card-section">
+    <p class="card-section-eyebrow">Illustrative Estimates</p>
+    <h2 class="card-h2">Where minutes hide in the day</h2>
+    <p class="card-section-lede">Conservative illustrative ranges for the most common high-friction items. These are planning estimates, not measured results.</p>
+    <table class="ts-table">
+      <thead>
+        <tr><th>Workflow item</th><th>Without Sentinel</th><th>With Sentinel</th><th>Friction reduced</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>High-risk lab context review</td>   <td>8&ndash;12 min</td><td>3&ndash;5 min</td><td>5&ndash;7 min</td></tr>
+        <tr><td>Echo follow-up check</td>            <td>10&ndash;15 min</td><td>4&ndash;6 min</td><td>6&ndash;9 min</td></tr>
+        <tr><td>Holter/Zio context packet</td>       <td>12&ndash;20 min</td><td>5&ndash;8 min</td><td>7&ndash;12 min</td></tr>
+        <tr><td>Incidental finding ownership</td>    <td>8&ndash;15 min</td><td>3&ndash;6 min</td><td>5&ndash;9 min</td></tr>
+        <tr><td>Portal symptom routing</td>          <td>6&ndash;12 min</td><td>2&ndash;5 min</td><td>4&ndash;7 min</td></tr>
+        <tr><td>Clearance packet prep</td>           <td>10&ndash;18 min</td><td>4&ndash;8 min</td><td>6&ndash;10 min</td></tr>
+      </tbody>
+    </table>
+    <p class="sim-illustrative-note">These estimates are illustrative workflow assumptions for pilot planning. Actual results must be measured in practice.</p>
+  </section>
+
+  <!-- ── 6. CLOSURE SECTION ─────────────────────────────── -->
+  <section class="card-section">
+    <p class="card-section-eyebrow">Closure Is The Standard</p>
+    <h2 class="card-h2">The difference between reviewed and closed is where risk lives.</h2>
+    <p class="card-section-lede">The EHR may show that a result was opened. The safer question is whether the clinically meaningful obligation was assigned, reviewed, communicated, followed up, documented, and closed.</p>
+
+    <div class="closure-grid">
+      <div class="closure-status s-new">New</div>
+      <div class="closure-status">Classified</div>
+      <div class="closure-status">Context retrieved</div>
+      <div class="closure-status">Needs clinician review</div>
+      <div class="closure-status">Reviewed</div>
+      <div class="closure-status">Needs patient notification</div>
+      <div class="closure-status">Patient notified</div>
+      <div class="closure-status">Follow-up scheduled</div>
+      <div class="closure-status">PCP notified</div>
+      <div class="closure-status">Ownership transferred</div>
+      <div class="closure-status s-closed">Closed</div>
+      <div class="closure-status s-overdue">Overdue</div>
+    </div>
+
+    <p style="color:#8fa6b8;font-size:0.86em;line-height:1.6;margin:14px 0 0;">The practice should be able to answer one question at any time: <em>what clinically meaningful obligations are still open?</em></p>
+  </section>
+
+  <!-- ── 7. WHITE PAPER CALLOUT ─────────────────────────── -->
+  <aside class="wp-callout">
+    <p class="wp-callout-eyebrow">White Paper</p>
+    <h3>Read the full white paper: The Cardiology Inbox Safety Gap</h3>
+    <p>This page is derived from Pocono AI&rsquo;s workflow white paper on cardiology results-to-closure, abnormal findings, rhythm reports, incidental imaging findings, and follow-up obligations in small cardiology practices.</p>
+    <div class="wp-callout-buttons">
+      <a class="wp-btn-primary" href="assets/pdfs/Pocono_AI_Cardiology_Inbox_Safety_Gap_White_Paper.pdf" download>&darr; Download the White Paper</a>
+      <a class="card-cta-secondary" href="assets/pdfs/Pocono_AI_Cardiology_Inbox_Safety_Gap_White_Paper.pdf" target="_blank" rel="noopener">Open in browser</a>
+    </div>
+  </aside>
+
+  <!-- ── 8. LOCAL ARCHITECTURE PROOF POINTS ─────────────── -->
+  <section class="card-section">
+    <p class="card-section-eyebrow">Why Local Matters</p>
+    <h2 class="card-h2">Sentinel Node is local workflow infrastructure, not autonomous medicine</h2>
+    <p class="card-section-lede">Cardiology inbox data is among the most sensitive in a practice &mdash; diagnoses, medications, symptoms, anticoagulation decisions, imaging findings, patient messages. The most sensitive workflow in the practice should not require sending patient context to an external AI service by default.</p>
+
+    <div class="proof-grid">
+      <div class="proof-item">Local inference</div>
+      <div class="proof-item">Local retrieval</div>
+      <div class="proof-item">Local audit trail</div>
+      <div class="proof-item">No telemetry</div>
+      <div class="proof-item">No third-party model calls</div>
+      <div class="proof-item">No cloud exfiltration</div>
+      <div class="proof-item">Human-reviewed outputs</div>
+      <div class="proof-item">Evidence-linked summaries</div>
+      <div class="proof-item">Role-based queues</div>
+    </div>
+
+    <p style="color:#8fa6b8;font-size:0.84em;line-height:1.6;margin:16px 0 0;">Sentinel Node does not diagnose, does not autonomously message patients, does not autonomously clear patients for surgery, does not autonomously change medications, and does not determine emergency urgency on its own. It supports human-reviewed workflow closure.</p>
+  </section>
+
+  <!-- ── 9. FINAL CTA ──────────────────────────────────── -->
+  <section class="final-cta">
+    <h2>Apply for the Cardiology Results Closure Pilot</h2>
+    <p>In 30 to 60 days, Pocono AI helps a small cardiology practice map one high-risk results-to-closure workflow, deploy a local human-reviewed Sentinel review layer, and measure whether high-risk inbox obligations become easier to classify, route, document, and close.</p>
+    <div class="final-cta-buttons">
+      <a class="card-cta-primary" href="contact.html">Apply for Pilot</a>
+      <a class="card-cta-secondary" href="assets/pdfs/Pocono_AI_Cardiology_Inbox_Safety_Gap_White_Paper.pdf" download>&darr; Download White Paper</a>
+      <a class="card-cta-secondary" href="contact.html">Contact Pocono AI</a>
+    </div>
+  </section>
+
+</div>
+
+</main>
+
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 root-relative nav fix, Living Echo rebrand, Engineering & Drafting + Enterprise Estate Continuity links added (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- INCLUDE:FOOTER -->
+<footer role="contentinfo" style="background:#051622;border-top:1px solid rgba(255,255,255,0.08);padding:40px 24px 28px;font-size:0.85em;color:#8899aa;">
+  <div style="max-width:1180px;margin:0 auto;">
+
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:0 0 28px;margin-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.07);">
+      <div style="max-width:560px;">
+        <p style="margin:0 0 6px;font-size:1.05em;font-weight:700;color:#fff;">Local AI infrastructure for regulated practices.</p>
+        <p style="margin:0;font-size:0.95em;line-height:1.5;">Drafts with citations. Human review required. Sensitive documents stay under practice control. Simple path, deep proof.</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="/contact.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;background:#00c2a8;color:#04111a;font-weight:700;text-decoration:none;font-size:0.95em;">Request Pilot</a>
+        <a href="/sentinel-demo.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;border:1px solid rgba(0,194,168,0.55);color:#00c2a8;font-weight:700;text-decoration:none;font-size:0.95em;">Watch Demo</a>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px 32px;margin-bottom:32px;text-align:left;">
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">For You</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/start-here.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Start Here (3 min)</a>
+          <a href="/for-physicians.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Physicians</a>
+          <a href="/for-attorneys.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Attorneys</a>
+          <a href="/engineering-drafting/" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Engineering &amp; Drafting Teams</a>
+          <a href="/pilot-program.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Pilot Program</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Installer Training</a>
+          <a href="/how-it-works.html" style="color:#8899aa;text-decoration:none;">How It Works</a>
+          <a href="/trust.html" style="color:#8899aa;text-decoration:none;">Trust &amp; Audit</a>
+          <a href="/pricing.html" style="color:#8899aa;text-decoration:none;">Pricing</a>
+          <a href="/sentinel-demo.html" style="color:#8899aa;text-decoration:none;">See the Demo</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Documentation Hub</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/documentation-hub/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Hub Home &mdash; Deep Proof</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">Installer Training</a>
+          <a href="/sentinel-node/installation-simulator.html" style="color:#8899aa;text-decoration:none;">&#8627; Installation Simulator</a>
+          <a href="/documentation-hub/clinical/" style="color:#8899aa;text-decoration:none;">Clinical Documentation</a>
+          <a href="/documentation-hub/legal/" style="color:#8899aa;text-decoration:none;">Legal Documentation</a>
+          <a href="/documentation-hub/technical/" style="color:#8899aa;text-decoration:none;">Technical Documentation</a>
+          <a href="/documentation-hub/governance/" style="color:#8899aa;text-decoration:none;">Governance &amp; Audit</a>
+          <a href="/documentation-hub/tools/" style="color:#8899aa;text-decoration:none;">Tools &amp; Simulators</a>
+          <a href="/documentation-hub/research/" style="color:#8899aa;text-decoration:none;">Research &amp; Essays</a>
+          <a href="/documentation-hub/transparency/" style="color:#8899aa;text-decoration:none;">Transparency</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Global Federated AI</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/global/" style="color:#7af0dc;text-decoration:none;font-weight:600;">Global Federated Hub</a>
+          <a href="/global/australia/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Australia</a>
+          <a href="/global/singapore/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Singapore</a>
+          <a href="/global/taiwan/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Taiwan</a>
+          <a href="/global/europe/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Europe</a>
+          <a href="/contact.html" style="color:#8899aa;text-decoration:none;">Partner Inquiry</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Company</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/about.html" style="color:#8899aa;text-decoration:none;">About Pocono AI</a>
+          <a href="/team.html" style="color:#8899aa;text-decoration:none;">Team &amp; Leadership</a>
+          <a href="/why-pocono-ai.html" style="color:#8899aa;text-decoration:none;">Why Pocono AI</a>
+          <a href="/founding-commercial-leadership.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Join Us</a>
+          <a href="/careers.html" style="color:#8899aa;text-decoration:none;">Careers</a>
+          <a href="/how-we-hire.html" style="color:#8899aa;text-decoration:none;">How We Hire</a>
+          <a href="/channel-partners.html" style="color:#8899aa;text-decoration:none;">Technical Partners (MSPs)</a>
+          <a href="/partners.html" style="color:#8899aa;text-decoration:none;">Academic Partnerships</a>
+          <a href="/contact.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Contact</a>
+          <a href="https://forms.gle/VQahnkjMfY6QNEMy8" target="_blank" rel="noopener noreferrer" style="color:#d5a94f;text-decoration:none;font-weight:600;">Interest List &#8599;</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Founder Projects</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/rehability/" style="color:#a78bfa;text-decoration:none;font-weight:700;">Rehability &#x2605;</a>
+          <a href="/rehability/marcus-memory-helper/" style="color:#a78bfa;text-decoration:none;font-weight:600;">&#8627; Marcus's Memory Helper</a>
+          <a href="/sentinel-home/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Sentinel Home Edition</a>
+          <a href="/living-memorials/" style="color:#8899aa;text-decoration:none;">Living Echo</a>
+          <a href="/living-memorials/marcus-odell/" style="color:#8899aa;text-decoration:none;">Marcus&rsquo;s Living Echo</a>
+          <a href="/living-memorials/enterprise-estate-continuity.html" style="color:#8899aa;text-decoration:none;">Enterprise Estate Continuity</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Resources &amp; Legal</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/sitemap.html" style="color:#8899aa;text-decoration:none;">All Pages (Sitemap)</a>
+          <a href="/audit.html" style="color:#8899aa;text-decoration:none;">Transparency &amp; Audit Log</a>
+          <a href="/maturity-disclosure.html" style="color:#8899aa;text-decoration:none;">What We Have / Don&rsquo;t Claim</a>
+          <a href="/plain.html" style="color:#8899aa;text-decoration:none;">Plain Language Guide</a>
+          <a href="/privacy.html" style="color:#8899aa;text-decoration:none;">Privacy</a>
+          <a href="/terms.html" style="color:#8899aa;text-decoration:none;">Terms</a>
+          <a href="/sla.html" style="color:#8899aa;text-decoration:none;">SLA</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:18px;margin-bottom:14px;">
+      <p style="margin:0;font-size:0.82em;line-height:1.6;color:#6f8295;max-width:1000px;">Pocono AI does not provide medical, legal, or engineering advice, does not practice medicine, law, or licensed engineering, and does not make clinical, legal, or engineering decisions. Outputs are drafts or support materials that require review by a qualified professional; final professional judgment remains with the licensed physician, attorney, or engineer. Tools and simulations on this site are educational and use synthetic data.</p>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:20px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+      <p style="margin:0;font-size:0.9em;">&copy; 2026 Pocono AI, LLC &nbsp;&#183;&nbsp; East Stroudsburg, PA &nbsp;&#183;&nbsp; <a href="mailto:marcus@poconoai.com" style="color:#8899aa;">marcus@poconoai.com</a> &nbsp;&#183;&nbsp; <a href="tel:+15705340602" style="color:#8899aa;">(570) 534-0602</a></p>
+      <p style="margin:0;font-size:0.88em;"><a href="/audit.html" style="color:#5dade2;text-decoration:none;">Transparency v402</a></p>
+    </div>
+  </div>
+</footer>
+<script src="/search.js?v=402" defer></script>
+<!-- /INCLUDE:FOOTER -->
+
+<script>
+/* ─────────────────────────────────────────────────────────
+   Cardiology inbox simulator — vanilla JS, no externals.
+   Updates illustrative workflow estimates as controls change.
+   Numbers are intentionally rough and labeled illustrative.
+   ───────────────────────────────────────────────────────── */
+(function () {
+  var state = {
+    load:     'heavy',
+    practice: 'cardapprmma',
+    risk:     'mixed',
+    toggles:  { rhythm: true, echo: true, incidental: true, portal: true, clearance: true, 'notify-missing': true }
+  };
+
+  var LOAD_MULT = { normal: 0.7, heavy: 1.0, overload: 1.45 };
+  var RISK_MULT = { routine: 0.65, mixed: 1.0, highrisk: 1.35 };
+
+  function recompute() {
+    var lm = LOAD_MULT[state.load];
+    var rm = RISK_MULT[state.risk];
+    var ev = state.toggles;
+    var eventCount = ['rhythm','echo','incidental','portal','clearance','notify-missing']
+      .filter(function (k) { return ev[k]; }).length;
+
+    // Base item counts derived from white-paper morning inbox model: ~64 items in heavy mixed day.
+    var totalItems   = Math.round(64 * lm * (0.85 + 0.05 * eventCount));
+    var openLoops    = Math.round((9 + eventCount * 2.5) * lm * rm);
+    var frictionMin  = Math.round((22 + eventCount * 6) * lm * rm);
+    var afterHoursMin = Math.round((35 + eventCount * 5) * lm * rm);
+    var routedToStaff = Math.round((5 + eventCount * 1.8) * lm * rm);
+
+    document.getElementById('sim-total').textContent      = totalItems + ' items';
+    document.getElementById('sim-loops').textContent      = openLoops + ' open loops';
+    document.getElementById('sim-friction').textContent   = '~' + frictionMin + ' min';
+    document.getElementById('sim-afterhours').textContent = '~' + afterHoursMin + ' min';
+    document.getElementById('sim-routed').textContent     = routedToStaff + ' items';
+  }
+
+  // Segmented controls
+  var segButtons = document.querySelectorAll('.sim-seg button[data-control]');
+  segButtons.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var control = btn.dataset.control;
+      var value   = btn.dataset.value;
+      state[control] = value;
+      // toggle aria-pressed within same group
+      document.querySelectorAll('.sim-seg button[data-control="' + control + '"]')
+        .forEach(function (b) { b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'); });
+      recompute();
+    });
+  });
+
+  // Checkboxes
+  document.querySelectorAll('.sim-toggle input[data-toggle]').forEach(function (cb) {
+    cb.addEventListener('change', function () {
+      state.toggles[cb.dataset.toggle] = cb.checked;
+      recompute();
+    });
+  });
+
+  recompute();
+})();
+</script>
+
+<script src="search-index.js?v=402" defer></script>
+<script src="nav.js?v=402" defer></script>
+<script src="pilot-cta.js?v=402" defer></script>
+
+</body>
+</html>

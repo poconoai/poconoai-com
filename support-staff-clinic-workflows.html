@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp -->
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Clinic Support Staff — Nurses, MAs, Front Desk, Prior Auth | Pocono AI</title>
+<meta name="description" content="How Sentinel Node helps clinic nurses, MAs, and front-desk staff handle prior auth, referrals, and documentation without cloud AI data exposure.">
+<meta name="keywords" content="clinic staff AI, medical assistant AI, prior authorization AI, referral coordinator AI, front desk AI, billing staff AI, practice manager AI, nurse workflow AI, clinic workflow automation, EHR burden reduction">
+<meta name="theme-color" content="#0B0F13">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="favicon-180x180.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+<link rel="canonical" href="https://poconoai.com/support-staff-clinic-workflows.html">
+<link rel="stylesheet" href="styles.css?v=402">
+<link rel="stylesheet" href="nav-v2026.css?v=402">
+<link rel="stylesheet" href="brand-v292.css?v=402">
+<meta property="og:title" content="For Clinic Support Staff | Pocono AI">
+<meta property="og:type" content="article">
+<meta property="og:description" content="How Sentinel Node reduces administrative chaos for nurses, MAs, front desk, prior auth coordinators, and billing staff — without replacing clinical judgment.">
+<meta property="og:url" content="https://poconoai.com/support-staff-clinic-workflows.html">
+<meta property="og:image" content="https://poconoai.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="For Clinic Support Staff | Pocono AI">
+<meta name="twitter:description" content="How Sentinel Node helps clinic nurses, MAs, and front-desk staff handle prior auth, referrals, and documentation without cloud AI data exposure.">
+
+<style>
+.page-wrap { max-width: 1080px; margin: 0 auto; padding: clamp(28px,4vw,60px) 24px; color: #cfdfeb; }
+
+/* Hero */
+.cs-hero { padding: 32px 0 24px; }
+.cs-kicker { display: inline-flex; align-items: center; gap: 10px; color: #2dd4bf; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; font-size: .76rem; margin-bottom: 14px; padding: 6px 14px; border: 1px solid rgba(45,212,191,.34); border-radius: 100px; background: rgba(0,194,168,.06); }
+.cs-title { font-size: clamp(2rem,5.2vw,3.6rem); line-height: 1.05; letter-spacing: -.025em; color: #fff; margin: 0 0 18px; font-weight: 800; }
+.cs-title em { font-style: normal; color: #2dd4bf; }
+.cs-lede { font-size: clamp(1.04rem,1.7vw,1.22rem); line-height: 1.65; color: #b9d9ee; max-width: 880px; margin: 0 0 22px; }
+
+/* Promise box */
+.cs-promise { border-left: 3px solid #2dd4bf; padding: 16px 22px; background: linear-gradient(90deg, rgba(0,194,168,.06), transparent); margin: 28px 0 38px; font-size: 1.02rem; line-height: 1.7; color: #e0eef9; border-radius: 0 12px 12px 0; }
+.cs-promise b { color: #fff; }
+
+/* Section heading */
+.cs-section-head { margin: 48px 0 22px; padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,.08); }
+.cs-section-head h2 { color: #fff; font-size: clamp(1.5rem,3vw,2rem); margin: 0 0 6px; font-weight: 800; letter-spacing: -.01em; }
+.cs-section-head .sub { color: #8fb1c7; font-size: .92rem; margin: 0; }
+
+/* Role card */
+.role { border: 1px solid rgba(255,255,255,.1); border-radius: 18px; background: linear-gradient(155deg, rgba(15,23,42,.5), rgba(5,12,22,.35)); padding: 26px 28px; margin: 18px 0; scroll-margin-top: 90px; }
+.role-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 12px; padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,.08); margin-bottom: 18px; }
+.role-number { color: #2dd4bf; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .76rem; font-weight: 700; letter-spacing: .12em; }
+.role-name { color: #fff; font-size: clamp(1.35rem,2.4vw,1.75rem); font-weight: 800; margin: 0; letter-spacing: -.015em; }
+.role-tag { color: #8fb1c7; font-size: .9rem; font-style: italic; margin-left: auto; }
+
+.role-section { margin-bottom: 20px; }
+.role-section:last-child { margin-bottom: 0; }
+.role-label { display: flex; align-items: center; gap: 8px; margin: 0 0 10px; color: #fff; font-size: .72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .12em; }
+.role-label .marker { width: 4px; height: 14px; background: #2dd4bf; border-radius: 2px; }
+
+.role ul.pain { padding: 0; margin: 0; list-style: none; }
+.role ul.pain li { padding: 8px 0 8px 24px; position: relative; color: #cfdfeb; line-height: 1.65; font-size: .93rem; border-bottom: 1px dashed rgba(255,255,255,.05); }
+.role ul.pain li:last-child { border-bottom: 0; }
+.role ul.pain li::before { content: "—"; position: absolute; left: 0; top: 8px; color: #fca5a5; font-weight: 700; }
+
+.role ul.relief { padding: 0; margin: 0; list-style: none; }
+.role ul.relief li { padding: 8px 0 8px 26px; position: relative; color: #d8e8f4; line-height: 1.65; font-size: .93rem; border-bottom: 1px dashed rgba(255,255,255,.05); }
+.role ul.relief li:last-child { border-bottom: 0; }
+.role ul.relief li::before { content: "→"; position: absolute; left: 0; top: 8px; color: #86efac; font-weight: 700; }
+.role ul.relief li b { color: #fff; font-weight: 600; }
+
+.role p { color: #b9d9ee; line-height: 1.7; margin: 0 0 10px; font-size: .94rem; }
+
+/* Boundaries panel — what the system will NOT do */
+.boundaries { border: 1px solid rgba(248,113,113,.22); background: rgba(248,113,113,.04); border-radius: 14px; padding: 14px 18px; margin: 14px 0; }
+.boundaries .head { color: #fca5a5; font-size: .68rem; font-weight: 800; text-transform: uppercase; letter-spacing: .12em; margin-bottom: 8px; }
+.boundaries p { color: #fed7d7; margin: 0; font-size: .9rem; line-height: 1.6; }
+.boundaries p b { color: #fff; }
+
+/* Clinician reality callout */
+.clinician-callout { border: 1px solid rgba(45,212,191,.28); background: linear-gradient(135deg, rgba(0,194,168,.05), rgba(2,8,18,.4)); border-radius: 18px; padding: 26px 28px; margin: 48px 0; }
+.clinician-callout h3 { color: #fff; font-size: 1.25rem; margin: 0 0 12px; font-weight: 800; }
+.clinician-callout p { color: #cfdfeb; line-height: 1.75; font-size: .96rem; margin: 0 0 12px; }
+.clinician-callout p:last-child { margin-bottom: 0; }
+.clinician-callout em { font-style: normal; color: #fff; font-weight: 600; }
+
+/* CTA */
+.cs-cta { margin: 56px 0 24px; padding: 32px 28px; border: 1px solid rgba(45,212,191,.28); border-radius: 22px; background: linear-gradient(145deg, rgba(5,22,34,.7), rgba(2,8,18,.4)); text-align: center; }
+.cs-cta h3 { margin: 0 0 10px; color: #fff; font-size: clamp(1.3rem,2.4vw,1.7rem); font-weight: 800; }
+.cs-cta p { margin: 0 auto 22px; color: #b9d9ee; max-width: 600px; line-height: 1.65; font-size: .96rem; }
+.cs-btn-row { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+.cs-btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 22px; border-radius: 100px; text-decoration: none; font-weight: 700; font-size: .94rem; }
+.cs-btn.primary { background: linear-gradient(135deg, rgba(45,212,191,.22), rgba(59,130,246,.14)); color: #eaffff; border: 1px solid rgba(45,212,191,.5); }
+.cs-btn.secondary { background: rgba(15,23,42,.55); color: #9bdcff; border: 1px solid rgba(148,163,184,.28); }
+
+/* Microcopy line */
+.micro { color: #8fb1c7; font-size: .82rem; font-style: italic; margin: 16px 0 0; padding-top: 14px; border-top: 1px solid rgba(255,255,255,.06); text-align: center; }
+
+@media (max-width: 720px) {
+  .role-head { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .role-tag { margin-left: 0; }
+  .role { padding: 22px 20px; }
+}
+</style>
+
+<!-- JSON-LD: v329 final structured-data pass -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://poconoai.com/support-staff-clinic-workflows.html",
+      "url": "https://poconoai.com/support-staff-clinic-workflows.html",
+      "datePublished": "2026-06-01",
+      "dateModified": "2026-06-01"
+      ,
+      "name": "AI Workflows for Clinic Support Staff | Pocono AI",
+      "description": "Sentinel Node workflow guides for medical receptionists, medical assistants, and clinic coordinators \u2014 prior authorization preparation, appointment documentation, patient intake, and referral processing with local AI assistance.",
+      "isPartOf": {
+        "@id": "https://poconoai.com/#website"
+      },
+      "publisher": {
+        "@id": "https://poconoai.com/#organization"
+      },
+      "audience": {
+        "@type": "Audience",
+        "audienceType": "Clinic support staff and medical assistants"
+      },
+      "inLanguage": "en-US"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to content</a>
+
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- INCLUDE:HEADER -->
+<div id="hitl-notice" style="background:#0a1929;padding:4px 16px;text-align:center;font-size:12px;color:#4a5568;border-bottom:1px solid rgba(255,255,255,0.06);letter-spacing:0.01em;">Human-in-the-Loop required: licensed professionals verify all outputs before clinical or legal action</div>
+<header role="banner">
+  <div class="header-inner">
+    <a href="/index.html" class="logo" aria-label="Pocono AI Home">
+      <img src="/logo.svg?v=402" alt="" width="36" height="36" decoding="async" loading="eager" aria-hidden="true" style="display:inline-block;">
+      Pocono <span>AI</span>
+    </a>
+    <nav id="desktop-nav" aria-label="Main navigation">
+      <div class="nav-item"><a href="/index.html" class="nav-direct">Home</a></div>
+      <div class="nav-item"><a href="/for-physicians.html" class="nav-direct">Physicians</a></div>
+      <div class="nav-item"><a href="/for-attorneys.html" class="nav-direct">Attorneys</a></div>
+      <div class="nav-item"><a href="/sentinel-node.html" class="nav-direct nav-hub" style="color:#d5a94f;border:1px solid rgba(213,169,79,0.45);border-radius:999px;padding:6px 13px;">Sentinel Node</a></div>
+      <div class="nav-item"><a href="/living-memorials/" class="nav-direct">Living Echo</a></div>
+      <div class="nav-item"><a href="/contact.html" class="nav-direct">Contact</a></div>
+      <div class="nav-item" data-dropdown="menu-more">
+        <button type="button" class="nav-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="menu-more">More <span class="nav-chevron" aria-hidden="true">&#9662;</span></button>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <a href="/contact.html#pilot" class="nav-cta nav-cta-primary">Request a Pilot</a>
+      <button type="button" class="pa-search-trigger" data-search-open aria-label="Search (press / or Ctrl-K)" aria-haspopup="dialog" aria-expanded="false">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span class="pa-st-label">Search</span><kbd data-pa-keyhint>Ctrl K</kbd>
+      </button>
+      <button type="button" class="header-icon-btn" id="mobile-menu" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav-panel">
+        <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- "More" overflow dropdown — sibling of <header> so position:fixed escapes header's stacking context. Wired by nav.js via data-dropdown="menu-more". -->
+<div class="nav-dropdown" id="menu-more" aria-label="More navigation">
+  <p class="nav-dd-section">Products</p>
+  <a href="/engineering-drafting/">Drafting &amp; Engineering Edition</a>
+  <a href="/sentinel-home/">Sentinel Home Edition</a>
+  <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability — Assistive Tools &#x2605;</a>
+  <a href="/living-memorials/enterprise-estate-continuity.html">Enterprise Estate Continuity</a>
+  <p class="nav-dd-section">Capabilities</p>
+  <a href="/evidence-room.html">Evidence Room</a>
+  <a href="/push-button-deliverables.html">Push-Button Deliverables</a>
+  <a href="/pilot-readiness-kit.html">Pilot Kit</a>
+  <a href="/pilot-program.html">Pilot Program</a>
+  <a href="/how-it-works.html">How It Works</a>
+  <p class="nav-dd-section">Hubs &amp; Company</p>
+  <a href="/training.html">Training Hub</a>
+  <a href="/documentation-hub/">Document Hub</a>
+  <a href="/global/">Global Hub</a>
+  <a href="/investors-hub.html">Investor Hub</a>
+  <a href="/valuation-dashboard.html">Valuation Dashboard</a>
+  <a href="/about.html">About</a>
+  <p class="nav-dd-section">Trust &amp; Legal</p>
+  <a href="/transparency.html">Transparency</a>
+  <a href="/audit.html">Audit Log</a>
+  <a href="/privacy.html">Privacy</a>
+  <a href="/sitemap.html">Sitemap</a>
+</div>
+<!-- Site search is provided by the self-contained search.js asset (command palette: / or Ctrl/Cmd-K). -->
+
+<!-- Mobile panel: full-screen slide-in. v396 nav — hub tiles + grouped links + Sentinel Node + Engineering. -->
+<nav id="mobile-nav-panel" aria-label="Mobile navigation" aria-hidden="true" role="dialog" aria-modal="true">
+
+  <!-- Hub tiles: Sentinel Node, Documentation Hub, Training Hub, Global Hub -->
+  <div style="padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,0.07);">
+    <p style="font-size:0.65em;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.28);margin:0 0 10px;padding:0 2px;">Hubs</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <a href="/sentinel-node.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(213,169,79,0.1);border:1px solid rgba(213,169,79,0.35);border-radius:10px;color:#d5a94f;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Sentinel Node</a>
+      <a href="/documentation-hub/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(0,194,168,0.1);border:1px solid rgba(0,194,168,0.35);border-radius:10px;color:#00c2a8;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Docs Hub</a>
+      <a href="/training.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.35);border-radius:10px;color:#a78bfa;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Training Hub</a>
+      <a href="/global/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(122,240,220,0.07);border:1px solid rgba(122,240,220,0.3);border-radius:10px;color:#7af0dc;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Global Hub</a>
+    </div>
+  </div>
+
+  <!-- Core paths -->
+  <div class="mob-static-links">
+    <a href="/index.html">Home</a>
+    <a href="/for-physicians.html">Physicians</a>
+    <a href="/for-attorneys.html">Attorneys</a>
+    <a href="/engineering-drafting/">Engineering &amp; Drafting</a>
+    <a href="/pilot-program.html">Pilot Program</a>
+    <a href="/how-it-works.html">How It Works</a>
+    <a href="/trust.html">Trust &amp; Audit</a>
+    <a href="/pricing.html">Pricing</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/living-memorials/">Living Echo</a>
+    <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability</a>
+    <a href="/about.html">About</a>
+    <a href="/team.html" style="color:rgba(255,255,255,0.6);">Team &amp; Leadership</a>
+    <a href="/valuation-dashboard.html" style="color:rgba(255,255,255,0.6);">Valuation Dashboard</a>
+    <a href="/careers.html" style="color:rgba(255,255,255,0.6);">Careers</a>
+    <a href="/sentinel-demo.html" style="color:rgba(255,255,255,0.6);">Demo</a>
+    <a href="/sitemap.html" style="color:rgba(255,255,255,0.45);">Sitemap</a>
+    <a href="/transparency.html" style="color:rgba(255,255,255,0.45);">Transparency</a>
+    <a href="/privacy.html" style="color:rgba(255,255,255,0.45);">Privacy</a>
+  </div>
+
+  <a href="/contact.html#pilot" class="mob-cta">Request a Pilot</a>
+</nav>
+<!-- /INCLUDE:HEADER -->
+
+
+<main id="main">
+<div class="page-wrap">
+
+  <div class="cs-hero">
+    <span class="cs-kicker">For Nurses · MAs · Front Desk · Prior Auth · Billing · Practice Managers</span>
+    <h1 class="cs-title">Less paperwork. <em>More patient care.</em></h1>
+    <p class="cs-lede">The people who keep a clinic running carry a different kind of exhaustion than the physicians they support. Inbox overload, fax backlogs, prior auth chaos, referral fragmentation — these aren't workflow inefficiencies. They're the daily environment. Sentinel Node is not built to replace the people who know this work. It's built to reduce the operational weight that makes it unsustainable.</p>
+  </div>
+
+  <div class="cs-promise">
+    <b>The promise to clinic staff:</b> Your role requires judgment, clinical knowledge, and relationships that no system can replicate. What it shouldn't require is three hours of documentation cleanup after hours, or forty fax pages that need to be sorted before anyone sees a patient. <b>Sentinel Node handles the retrieval and organization. The judgment stays with you.</b>
+  </div>
+
+  <!-- ─── ROLE 1: NURSES ──────────────────────── -->
+  <section class="role" aria-labelledby="nurse-h">
+    <div class="role-head">
+      <span class="role-number">01 · NURSING STAFF</span>
+      <h2 class="role-name" id="nurse-h">Nurses</h2>
+      <span class="role-tag">Clinical judgment at the center of everything.</span>
+    </div>
+
+    <div class="role-section">
+      <p class="role-label"><span class="marker"></span>The work that overwhelms you</p>
+      <ul class="pain">
+        <li>Charting during or after patient encounters when the encounter itself deserved your full attention.</li>
+        <li>Retrieving prior visit notes, lab results, and specialist letters from a chart that spans three systems.</li>
+        <li>Tracking down patient education materials specific to a diagnosis while the patient is still in the room.</li>
+        <li>After-hours documentation cleanup — the charting that couldn't happen during the day because the day didn't stop.</li>
+        <li>Sorting inbound faxes for patients on your panel: labs, consult notes, hospital discharge summaries, insurance responses — all arriving unannounced.</li>
+      </ul>
+    </div>
+
+    <div class="role-section">
+      <p class="role-label"><span class="marker"></span>What Sentinel Node helps organize</p>
+      <ul class="relief">
+        <li><b>Bounded chart retrieval across local records.</b> One query surfaces the prior visit note, the specialist letter, and the recent lab together — with citations to where each came from in the record. You verify the clinical relevance; the system handles the retrieval.</li>
+        <li><b>Inbound document sorting proposals.</b> The system reads scanned faxes and proposes a category and patient match. You confirm or correct before anything touches a chart. Every routing decision is logged in your name.</li>
+        <li><b>After-visit note structure assistance.</b> The system can produce a structured draft from the data already in the local record — diagnoses present, medications listed, follow-up documented. The physician reviews and signs before it becomes part of the chart. <b>Nothing enters the chart unsigned.</b></li>
+        <li><b>Patient education material retrieval.</b> Ask the system for materials on a specific condition or medication. It retrieves from your practice's own approved library — not the open internet.</li>
+      </ul>
+    </div>
+
+    <div class="boundaries">
+      <div class="head">⊘ The system will not</div>
+      <p>Diagnose independently. Interpret lab values without a licensed clinician. Modify a chart without explicit review and sign-off. Prescribe or recommend medication changes autonomously. Generate clinical assessments that bypass physician oversight. <b>Every output that affects patient care requires a clinician's eyes before it acts.</b></p>
+    </div>
+  </section>
+
+  <!-- ─── ROLE 2: MEDICAL ASSISTANTS ──────────────────────── -->
+  <section class="role" aria-labelledby="ma-h">
+    <div class="role-head">
+      <span class="role-number">02 · MEDICAL ASSISTANTS</span>
+      <h2 class="role-name" id="ma-h">Medical Assistants</h2>
+      <span class="role-tag">The operational core of patient flow.</span>
+    </div>
+
+    <div class="role-section">
+      <p class="role-label"><span class="marker"></span>The work that overwhelms you</p>
+      <ul class="pain">
+        <li>Pre-visit chart prep for twelve appointments: pulling records, checking for outstanding labs, confirming medication lists, flagging anything the physician needs to know before the patient walks in.</li>
+        <li>Rooming patients while simultaneously noting vitals, updating the reason for visit, and flagging chart discrepancies you noticed during prep.</li>
+        <li>Coordinating follow-up orders — labs, imaging, referrals — and confirming they were placed correctly after the physician leaves the room.</li>
+        <li>Tracking down missing records from outside providers when the patient says "my last doctor sent everything."</li>
+        <li>Duplicate documentation: entering the same information into the EHR that was already in the intake form, the registration system, and the paper the patient brought in.</li>
+      </ul>
+    </div>
+
+    <div class="role-section">
+      <p class="role-label"><span class="marker"></span>What Sentinel Node helps organize</p>
+      <ul class="relief">
+        <li><b>Pre-visit chart summary drafts.</b> Before each appointment, the system can assemble a structured summary of relevant prior notes, outstanding items, and last-recorded medications — flagged as DRAFT for your review. You confirm what's accurate; the physician sees what you approved.</li>
+        <li><b>Outstanding-item tracking.</b> The system surfaces labs ordered but not yet resulted, referrals sent but not yet confirmed, and follow-up appointments scheduled but not yet attended — organized by patient, visible on your review queue.</li>
+        <li><b>Duplicate field detection.</b> When the same patient data appears inconsistently across intake, registration, and the EHR, the system flags the conflict and shows the discrepancy. You decide which version is correct before it propagates.</li>
+        <li><b>Outside record intake logging.</b> When records arrive from external providers, the system logs receipt, proposes a patient match, and flags whether the document type is expected for that patient. Nothing is filed until you confirm.</li>
+      </ul>
+    </div>
+
+    <div class="boundaries">
+      <div class="head">⊘ The system will not</div>
+      <p>Place orders autonomously. Update the official medication list without clinician review. Make clinical judgments about abnormal vitals. Send any communication to a patient on its own. <b>Everything that affects a patient record goes through a human confirmation step before it lands.</b></p>
+    </div>
+  </section>
+
+  <!-- ─── ROLE 3: FRONT DESK ──────────────────────── -->
+  <section class="role" aria-labelledby="fd-h">
+    <div class="role-head">
+      <span class="role-number">03 · FRONT DESK</span>
+      <h2 class="role-name" id="fd-h">Front Desk Staff</h2>
+      <span class="role-tag">The first and last impression of the practice.</span>
+    </div>
+
+    <div class="role-section">
+      <p class="role-label"><span class="marker"></span>The work that overwhelms you</p>
+      <ul class="pain">
+        <li>Answering phones while simultaneously checking in patients, verifying insurance, and responding to messages in the portal — all at once, all urgent.</li>
+        <li>Insurance verification before each visit: confirming coverage, checking for authorization requirements, catching plan changes the patient didn't know about.</li>
+        <li>Coordinating documents arriving by fax, portal message, phone call, and walk-in patient simultaneously, with no single place they all land.</li>
+        <li>Scheduling patients across multiple providers while tracking which provider requires which authorization type for which procedure.</li>
+        <li>Fielding patient questions that require you to pull chart information you don't have ready access to during a phone call.</li>
+      </ul>
+    </div>
+
+    <div class="role-section">
+      <p class="role-label"><span class="marker"></span>What Sentinel Node helps organize</p>
+      <ul class="relief">
+        <li><b>Insurance verification status tracking.</b> The system maintains a structured log of verification outcomes by patient and appointment date — what was confirmed, when, by whom. You see the status before the patient arrives, not after.</li>
+        <li><b>Inbound document routing proposals.</b> Faxes, portal attachments, and scanned documents are categorized and matched to a patient record for your confirmation. Nothing is routed automatically — you approve each match before it moves.</li>
+        <li><b>Visit preparation flag queue.</b> The system surfaces patients scheduled in the next 48 hours who have outstanding items — missing insurance info, unconfirmed authorizations, incomplete intake forms. You see the list before it becomes a problem at check-in.</li>
+        <li><b>Practice-specific FAQ drafts for phone calls.</b> When a patient asks a common question you've answered before, the system can surface a draft response from your practice's own approved content. You decide what to say; the system helps you find the answer faster.</li>
+      </ul>
+    </div>
+
+    <div class="boundaries">
+      <div class="head">⊘ The system will not</div>
+      <p>Speak to patients directly. Schedule appointments without staff confirmation. Override insurance verification decisions. Make commitments on behalf of the practice. <b>Every external communication — to patients, to payers, to anyone — originates with a person.</b></p>
+    </div>
+  </section>
+
+  <!-- ─── ROLE 4: PRIOR AUTHORIZATION COORDINATORS ──────────────────────── -->
+  <section class="role" aria-labelledby="pa-h">
+    <div class="role-head">
+      <span class="role-number">04 · PRIOR AUTHORIZATION</span>
+      <h2 class="role-name" id="pa-h">Prior Authorization Coordinators</h2>
+      <span class="role-tag">The role that stands between patients and the care they need.</span>
+    </div>
+
+    <div class="role-section">
+      <p class="role-label"><span class="marker"></span>The work that overwhelms you</p>
+      <ul class="pain">
+        <li>Managing simultaneous open authorizations across a dozen payers, each with different portal interfaces, different documentation requirements, and different timelines.</li>
+        <li>Assembling clinical justification letters under time pressure — pulling the right diagnosis codes, the right clinical notes, the right supporting literature — for a denial that came in this morning for a patient who needs the medication this week.</li>
+        <li>Tracking authorization expirations so that a patient who finally got approved last month doesn't fall off a cliff when that approval quietly lapses.</li>
+        <li>Resubmitting denied authorizations with updated documentation while simultaneously working the active queue for new requests.</li>
+        <li>Translating physician clinical rationale into the payer's preferred language — a skill that isn't medical training and isn't administrative work and somehow has to be both.</li>
+      </ul>
+    </div>
+
+    <div class="role-section">
+      <p class="role-label"><span class="marker"></span>What Sentinel Node helps organize</p>
+      <ul class="relief">
+        <li><b>Clinical documentation assembly for PA submissions.</b> The system retrieves the relevant diagnosis codes, prior note excerpts, and lab results from your local records — structured as a draft package for the authorization letter. The physician reviews the clinical content and signs the justification. <b>The physician remains the clinical author.</b></li>
+        <li><b>Expiration tracking by authorization.</b> The system maintains a structured log of active authorizations with expiration dates, surfacing upcoming expirations as a daily flag queue. You see what's expiring before the patient does.</li>
+        <li><b>Denial pattern logging.</b> When the same payer denies the same drug for the same diagnosis type repeatedly, the system logs the pattern across your patient population. You can use that pattern to refine your initial submission for similar cases.</li>
+        <li><b>Resubmission draft assistance.</b> For denied authorizations, the system can pull what was in the original submission and what changed in the clinical record since — structured for your review before you build the appeal. The clinical argument is yours; the retrieval burden is the system's.</li>
+      </ul>
+    </div>
+
+    <div class="boundaries">
+      <div class="head">⊘ The system will not</div>
+      <p>Submit authorizations autonomously. Fabricate clinical justifications. Determine what level of clinical detail satisfies a payer's requirements. Make medical necessity determinations. <b>The physician certifies clinical necessity. The system organizes the evidence.</b></p>
+    </div>
+  </section>
+
+  <!-- ─── ROLE 5: REFERRAL COORDINATORS ──────────────────────── -->
+  <section class="role" aria-labelledby="ref-h">
+    <div class="role-head">
+      <span class="role-number">05 · REFERRAL COORDINATION</span>
+      <h2 class="role-name" id="ref-h">Referral Coordinators</h2>
+      <span class="role-tag">Keeping patients connected across a fragmented system.</span>
+    </div>
+
+    <div class="role-section">
+      <p class="role-label"><span class="marker"></span>The work that overwhelms you</p>
+      <ul class="pain">
+        <li>Managing open referrals across specialists who don't share your EHR, don't consistently respond to fax, and don't always confirm receipt.</li>
+        <li>Chasing consult notes that were supposed to come back within 30 days and are now at 60, while the patient calls asking what the specialist said.</li>
+        <li>Assembling the clinical information packet the specialist requires — specific labs, specific imaging, specific visit notes — for a referral that goes out today.</li>
+        <li>Tracking which referrals require prior authorization before the specialist can see the patient, and which authorizations are still open.</li>
+        <li>Coordinating with patients who need help navigating the referral — who the specialist is, where they're located, what to bring, what the visit is for — in a practice that doesn't have a patient navigator.</li>
+      </ul>
+    </div>
+
+    <div class="role-section">
+      <p class="role-label"><span class="marker"></span>What Sentinel Node helps organize</p>
+      <ul class="relief">
+        <li><b>Referral status tracking queue.</b> The system maintains a structured view of open referrals by patient — sent date, specialist, expected return window, and whether a consult note has arrived. You see the gaps without having to reconstruct them from memory each morning.</li>
+        <li><b>Clinical packet assembly for referrals.</b> When a specialist requires specific labs, imaging reports, and visit notes, the system retrieves those documents from your local records and organizes them into a structured packet for your review. You confirm completeness before anything goes out.</li>
+        <li><b>Overdue consult note flagging.</b> The system flags referrals where a consult note has not arrived within the expected window. You see the list; you decide which to follow up on and how.</li>
+        <li><b>Authorization linkage tracking.</b> When a referral requires prior authorization before the specialist visit, the system links the authorization status to the referral record — so you can see at a glance whether the patient is cleared to go.</li>
+      </ul>
+    </div>
+
+    <div class="boundaries">
+      <div class="head">⊘ The system will not</div>
+      <p>Select specialists on behalf of patients. Make clinical referral decisions. Contact specialists independently. Advise patients on which specialist to choose. <b>Clinical referral decisions remain with the physician. Patient guidance remains with staff who know the patient.</b></p>
+    </div>
+  </section>
+
+  <!-- ─── ROLE 6: BILLING / CODING STAFF ──────────────────────── -->
+  <section class="role" aria-labelledby="bill-h">
+    <div class="role-head">
+      <span class="role-number">06 · BILLING &amp; CODING</span>
+      <h2 class="role-name" id="bill-h">Billing &amp; Coding Staff</h2>
+      <span class="role-tag">The financial viability of the practice, quietly carried.</span>
+    </div>
+
+    <div class="role-section">
+      <p class="role-label"><span class="marker"></span>The work that overwhelms you</p>
+      <ul class="pain">
+        <li>Resolving claim denials that require you to pull the clinical note, interpret what was documented, and determine whether the denial is a coding issue or a documentation issue — before you know which team to involve.</li>
+        <li>Tracking the difference between what was billed, what was adjudicated, what's pending, and what's been written off, across dozens of payers with different remittance schedules.</li>
+        <li>Insurance requirements that change without notice — a payer that stopped covering a modifier, a code that suddenly requires additional documentation, a formulary change that wasn't communicated until the claim came back.</li>
+        <li>Coordinating with clinical staff to get the documentation that supports a challenged claim — without disrupting the day or the physician who is in with patients.</li>
+        <li>Recurring denials for the same reason, from the same payer, for the same provider, that nobody has had time to systematically address.</li>
+      </ul>
+    </div>
+
+    <div class="role-section">
+      <p class="role-label"><span class="marker"></span>What Sentinel Node helps organize</p>
+      <ul class="relief">
+        <li><b>Clinical note retrieval for denial review.</b> When a denial requires documentation review, the system retrieves the relevant visit note, the orders placed, and the diagnoses coded — in one query, with citations. You can see what was documented before you decide whether the issue is coding or documentation.</li>
+        <li><b>Denial pattern log by payer and reason code.</b> The system logs denial reasons across your patient population, organized by payer and code type. Recurring patterns become visible as data, not just as individual frustrations.</li>
+        <li><b>Documentation gap flagging for pre-submission review.</b> Before a claim goes out, the system can check whether the documented visit note contains the elements typically required for the procedure code being billed — surfacing gaps for clinical review before submission, not after denial.</li>
+        <li><b>Structured audit trail for payer appeals.</b> For disputed claims, the system produces a structured record of what documentation existed at the time of service, what was retrieved for the appeal, and when each step occurred. The paper trail is complete before you need it.</li>
+      </ul>
+    </div>
+
+    <div class="boundaries">
+      <div class="head">⊘ The system will not</div>
+      <p>Determine the correct diagnosis or procedure code independently. Make medical necessity determinations. Submit claims without staff review. Alter clinical documentation to support a code. <b>Coding integrity rests with licensed coders and physician attestation. The system retrieves; it does not decide.</b></p>
+    </div>
+  </section>
+
+  <!-- ─── ROLE 7: PRACTICE MANAGERS ──────────────────────── -->
+  <section class="role" aria-labelledby="pm-h">
+    <div class="role-head">
+      <span class="role-number">07 · PRACTICE MANAGEMENT</span>
+      <h2 class="role-name" id="pm-h">Practice Managers</h2>
+      <span class="role-tag">Responsible for everything. Resourced for very little of it.</span>
+    </div>
+
+    <div class="role-section">
+      <p class="role-label"><span class="marker"></span>The work that overwhelms you</p>
+      <ul class="pain">
+        <li>Fielding operational questions from six staff roles simultaneously while also being the person who handles payer escalations, vendor contracts, and HR issues.</li>
+        <li>Auditing staff compliance with documentation and workflow protocols without a structured way to see what's happening across the practice.</li>
+        <li>Building the case for an operational change — new workflow, new vendor, staffing adjustment — without clean data to support it.</li>
+        <li>Managing staff burnout that you can see but can't quantify, in a practice where there's no buffer capacity to absorb it if someone leaves.</li>
+        <li>Onboarding new staff to workflows that live in institutional memory rather than documented procedures — meaning you're the documentation.</li>
+      </ul>
+    </div>
+
+    <div class="role-section">
+      <p class="role-label"><span class="marker"></span>What Sentinel Node helps organize</p>
+      <ul class="relief">
+        <li><b>Operational audit trail visibility.</b> The system logs every query, retrieval, and review decision with staff attribution and timestamps. You can see what the system was asked to do, who asked, and what was confirmed or overridden — without surveilling individuals.</li>
+        <li><b>Workflow pattern reporting.</b> The system can surface aggregate data on where the retrieval burden is concentrated — which document types are queried most, which payer-related tasks take longest, which roles are carrying the most operational volume. <b>This is operational data, not performance evaluation.</b></li>
+        <li><b>Governance documentation for audits and accreditation.</b> The system produces structured logs of its own operation — what it was used for, who reviewed outputs, what was approved — that can support your operational compliance documentation.</li>
+        <li><b>New staff orientation support.</b> The system can retrieve practice-specific protocols, documentation standards, and workflow guides from your local repository. New staff can query them directly rather than interrupting experienced staff for institutional knowledge they haven't acquired yet.</li>
+      </ul>
+    </div>
+
+    <div class="boundaries">
+      <div class="head">⊘ The system will not</div>
+      <p>Make staffing decisions. Evaluate individual employee performance. Generate HR documentation autonomously. Override practice policy. Make financial decisions about billing or payer contracts. <b>Operational judgment — who to hire, what to change, how to lead — remains with the practice manager.</b></p>
+    </div>
+  </section>
+
+  <!-- ─── CLINICIAN CALLOUT ──────────────────────── -->
+  <div class="clinician-callout">
+    <h3>What the people on these pages carry that no system should touch.</h3>
+    <p>A prior authorization coordinator who has worked the same payer relationship for four years knows things about that payer's informal approval patterns that no documentation captures. A front desk staff member who recognizes a patient's voice knows when that patient is in distress before they say why they're calling. A practice manager who can read the room knows which staff member is one bad week away from leaving.</p>
+    <p>None of this is in a database. <em>All of it is in the people.</em> Sentinel Node is designed for a practice that understands that. The institutional knowledge stays where it lives. The retrieval burden — the paper, the faxes, the documentation assembly, the prior auth evidence packages — moves to the system, where it belongs.</p>
+    <p>The goal is not to make this work more efficient. The goal is to make it <em>survivable</em>.</p>
+  </div>
+
+  <!-- ─── CTA ──────────────────────── -->
+  <div class="cs-cta">
+    <h3>Your physician wants to forward this page.</h3>
+    <p>This page is designed for the physician owner to share with the people who actually do this work. If you're a practice manager or clinic administrator evaluating Sentinel Node for your practice, the operational impact model and pilot brief are the right next steps.</p>
+    <div class="cs-btn-row">
+      <a href="for-physicians.html" class="cs-btn primary">For Physicians &amp; Owners</a>
+      <a href="works-with-your-clinic.html" class="cs-btn secondary">Works With Your Clinic Systems</a>
+      <a href="operational-impact-model.html" class="cs-btn secondary">Operational Impact Model</a>
+    </div>
+    <p class="micro">AI drafts. Clinicians decide. Every retrieval has a traceable origin.</p>
+  </div>
+
+</div><!-- /page-wrap -->
+</main>
+
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 root-relative nav fix, Living Echo rebrand, Engineering & Drafting + Enterprise Estate Continuity links added (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- INCLUDE:FOOTER -->
+<footer role="contentinfo" style="background:#051622;border-top:1px solid rgba(255,255,255,0.08);padding:40px 24px 28px;font-size:0.85em;color:#8899aa;">
+  <div style="max-width:1180px;margin:0 auto;">
+
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:0 0 28px;margin-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.07);">
+      <div style="max-width:560px;">
+        <p style="margin:0 0 6px;font-size:1.05em;font-weight:700;color:#fff;">Local AI infrastructure for regulated practices.</p>
+        <p style="margin:0;font-size:0.95em;line-height:1.5;">Drafts with citations. Human review required. Sensitive documents stay under practice control. Simple path, deep proof.</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="/contact.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;background:#00c2a8;color:#04111a;font-weight:700;text-decoration:none;font-size:0.95em;">Request Pilot</a>
+        <a href="/sentinel-demo.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;border:1px solid rgba(0,194,168,0.55);color:#00c2a8;font-weight:700;text-decoration:none;font-size:0.95em;">Watch Demo</a>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px 32px;margin-bottom:32px;text-align:left;">
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">For You</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/start-here.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Start Here (3 min)</a>
+          <a href="/for-physicians.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Physicians</a>
+          <a href="/for-attorneys.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Attorneys</a>
+          <a href="/engineering-drafting/" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Engineering &amp; Drafting Teams</a>
+          <a href="/pilot-program.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Pilot Program</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Installer Training</a>
+          <a href="/how-it-works.html" style="color:#8899aa;text-decoration:none;">How It Works</a>
+          <a href="/trust.html" style="color:#8899aa;text-decoration:none;">Trust &amp; Audit</a>
+          <a href="/pricing.html" style="color:#8899aa;text-decoration:none;">Pricing</a>
+          <a href="/sentinel-demo.html" style="color:#8899aa;text-decoration:none;">See the Demo</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Documentation Hub</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/documentation-hub/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Hub Home &mdash; Deep Proof</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">Installer Training</a>
+          <a href="/sentinel-node/installation-simulator.html" style="color:#8899aa;text-decoration:none;">&#8627; Installation Simulator</a>
+          <a href="/documentation-hub/clinical/" style="color:#8899aa;text-decoration:none;">Clinical Documentation</a>
+          <a href="/documentation-hub/legal/" style="color:#8899aa;text-decoration:none;">Legal Documentation</a>
+          <a href="/documentation-hub/technical/" style="color:#8899aa;text-decoration:none;">Technical Documentation</a>
+          <a href="/documentation-hub/governance/" style="color:#8899aa;text-decoration:none;">Governance &amp; Audit</a>
+          <a href="/documentation-hub/tools/" style="color:#8899aa;text-decoration:none;">Tools &amp; Simulators</a>
+          <a href="/documentation-hub/research/" style="color:#8899aa;text-decoration:none;">Research &amp; Essays</a>
+          <a href="/documentation-hub/transparency/" style="color:#8899aa;text-decoration:none;">Transparency</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Global Federated AI</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/global/" style="color:#7af0dc;text-decoration:none;font-weight:600;">Global Federated Hub</a>
+          <a href="/global/australia/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Australia</a>
+          <a href="/global/singapore/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Singapore</a>
+          <a href="/global/taiwan/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Taiwan</a>
+          <a href="/global/europe/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Europe</a>
+          <a href="/contact.html" style="color:#8899aa;text-decoration:none;">Partner Inquiry</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Company</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/about.html" style="color:#8899aa;text-decoration:none;">About Pocono AI</a>
+          <a href="/team.html" style="color:#8899aa;text-decoration:none;">Team &amp; Leadership</a>
+          <a href="/why-pocono-ai.html" style="color:#8899aa;text-decoration:none;">Why Pocono AI</a>
+          <a href="/founding-commercial-leadership.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Join Us</a>
+          <a href="/careers.html" style="color:#8899aa;text-decoration:none;">Careers</a>
+          <a href="/how-we-hire.html" style="color:#8899aa;text-decoration:none;">How We Hire</a>
+          <a href="/channel-partners.html" style="color:#8899aa;text-decoration:none;">Technical Partners (MSPs)</a>
+          <a href="/partners.html" style="color:#8899aa;text-decoration:none;">Academic Partnerships</a>
+          <a href="/contact.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Contact</a>
+          <a href="https://forms.gle/VQahnkjMfY6QNEMy8" target="_blank" rel="noopener noreferrer" style="color:#d5a94f;text-decoration:none;font-weight:600;">Interest List &#8599;</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Founder Projects</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/rehability/" style="color:#a78bfa;text-decoration:none;font-weight:700;">Rehability &#x2605;</a>
+          <a href="/rehability/marcus-memory-helper/" style="color:#a78bfa;text-decoration:none;font-weight:600;">&#8627; Marcus's Memory Helper</a>
+          <a href="/sentinel-home/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Sentinel Home Edition</a>
+          <a href="/living-memorials/" style="color:#8899aa;text-decoration:none;">Living Echo</a>
+          <a href="/living-memorials/marcus-odell/" style="color:#8899aa;text-decoration:none;">Marcus&rsquo;s Living Echo</a>
+          <a href="/living-memorials/enterprise-estate-continuity.html" style="color:#8899aa;text-decoration:none;">Enterprise Estate Continuity</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Resources &amp; Legal</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/sitemap.html" style="color:#8899aa;text-decoration:none;">All Pages (Sitemap)</a>
+          <a href="/audit.html" style="color:#8899aa;text-decoration:none;">Transparency &amp; Audit Log</a>
+          <a href="/maturity-disclosure.html" style="color:#8899aa;text-decoration:none;">What We Have / Don&rsquo;t Claim</a>
+          <a href="/plain.html" style="color:#8899aa;text-decoration:none;">Plain Language Guide</a>
+          <a href="/privacy.html" style="color:#8899aa;text-decoration:none;">Privacy</a>
+          <a href="/terms.html" style="color:#8899aa;text-decoration:none;">Terms</a>
+          <a href="/sla.html" style="color:#8899aa;text-decoration:none;">SLA</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:18px;margin-bottom:14px;">
+      <p style="margin:0;font-size:0.82em;line-height:1.6;color:#6f8295;max-width:1000px;">Pocono AI does not provide medical, legal, or engineering advice, does not practice medicine, law, or licensed engineering, and does not make clinical, legal, or engineering decisions. Outputs are drafts or support materials that require review by a qualified professional; final professional judgment remains with the licensed physician, attorney, or engineer. Tools and simulations on this site are educational and use synthetic data.</p>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:20px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+      <p style="margin:0;font-size:0.9em;">&copy; 2026 Pocono AI, LLC &nbsp;&#183;&nbsp; East Stroudsburg, PA &nbsp;&#183;&nbsp; <a href="mailto:marcus@poconoai.com" style="color:#8899aa;">marcus@poconoai.com</a> &nbsp;&#183;&nbsp; <a href="tel:+15705340602" style="color:#8899aa;">(570) 534-0602</a></p>
+      <p style="margin:0;font-size:0.88em;"><a href="/audit.html" style="color:#5dade2;text-decoration:none;">Transparency v402</a></p>
+    </div>
+  </div>
+</footer>
+<script src="/search.js?v=402" defer></script>
+<!-- /INCLUDE:FOOTER -->
+<script src="nav.js?v=402" defer></script>
+<script src="pilot-cta.js?v=402" defer></script>
+
+
+<script src="search-index.js?v=402" defer></script>
+<script src="nav-v2026.js?v=402" defer></script>
+</body>
+</html>

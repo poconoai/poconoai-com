@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp -->
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Before vs. After: A Small Law Firm With Governed Local AI | Pocono AI</title>
+<meta property="og:title" content="Before & After: Small Law Firm AI Deployment | Pocono AI">
+<meta property="og:description" content="Side-by-side workflow comparison for a small law firm before and after Sentinel Node deployment — document review time, privilege risk, billable hour recovery.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Pocono AI">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://poconoai.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Pocono AI — Sovereign on-premises AI">
+<meta property="og:url" content="https://poconoai.com/before-after-small-firm.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Before & After: Small Firm | Pocono AI">
+<meta name="twitter:description" content="See what changes in a small law firm when local AI replaces cloud tools for document review.">
+<meta name="description" content="Nine operational dimensions of a small law firm before and after Sentinel Node — time savings, privilege protection, and governance receipts.">
+<meta name="keywords" content="small law firm workflow comparison, AI before after, legal automation comparison, attorney workflow improvement, paralegal AI, Sentinel Node ROI, conflict check AI, discovery review AI">
+<meta name="theme-color" content="#0B0F13">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="favicon-180x180.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+<link rel="canonical" href="https://poconoai.com/before-after-small-firm.html">
+<link rel="stylesheet" href="styles.css?v=402">
+<link rel="stylesheet" href="nav-v2026.css?v=402">
+<link rel="stylesheet" href="brand-v292.css?v=402">
+
+<style>
+.page-wrap { max-width: 1100px; margin: 0 auto; padding: clamp(28px,4vw,60px) 24px; color: #cfdfeb; }
+
+.ba-hero { padding: 32px 0 24px; }
+.ba-kicker { display: inline-flex; align-items: center; gap: 10px; color: #2dd4bf; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; font-size: .76rem; margin-bottom: 14px; padding: 6px 14px; border: 1px solid rgba(45,212,191,.34); border-radius: 100px; background: rgba(0,194,168,.06); }
+.ba-title { font-size: clamp(2rem,5.2vw,3.6rem); line-height: 1.05; letter-spacing: -.025em; color: #fff; margin: 0 0 18px; font-weight: 800; }
+.ba-title em { font-style: normal; color: #2dd4bf; }
+.ba-lede { font-size: clamp(1.04rem,1.7vw,1.22rem); line-height: 1.65; color: #b9d9ee; max-width: 880px; margin: 0 0 22px; }
+
+/* Honesty note */
+.ba-honesty { border-left: 3px solid rgba(148,163,184,.4); padding: 14px 22px; background: linear-gradient(90deg, rgba(148,163,184,.06), transparent); margin: 28px 0 38px; font-size: .94rem; line-height: 1.7; color: #b9d9ee; }
+.ba-honesty b { color: #fff; }
+
+/* Comparison row */
+.ba-row { border: 1px solid rgba(255,255,255,.1); border-radius: 18px; background: linear-gradient(155deg, rgba(15,23,42,.45), rgba(5,12,22,.3)); padding: 24px 24px 20px; margin: 18px 0; }
+.ba-dim { display: flex; align-items: baseline; gap: 14px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,.08); margin-bottom: 18px; }
+.ba-dim-num { color: #2dd4bf; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .76rem; font-weight: 700; letter-spacing: .12em; }
+.ba-dim-name { color: #fff; font-size: 1.18rem; font-weight: 800; margin: 0; letter-spacing: -.01em; }
+
+.ba-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.ba-col { border-radius: 14px; padding: 18px 20px; }
+.ba-col.before { border: 1px solid rgba(248,113,113,.22); background: rgba(248,113,113,.04); }
+.ba-col.after { border: 1px solid rgba(74,222,128,.22); background: rgba(74,222,128,.04); }
+.ba-col h4 { margin: 0 0 12px; font-size: .68rem; text-transform: uppercase; letter-spacing: .14em; font-weight: 800; display: flex; align-items: center; gap: 8px; }
+.ba-col.before h4 { color: #fca5a5; }
+.ba-col.after h4 { color: #86efac; }
+.ba-col h4 .dot { width: 8px; height: 8px; border-radius: 50%; }
+.ba-col.before h4 .dot { background: #fca5a5; }
+.ba-col.after h4 .dot { background: #86efac; }
+.ba-col p { margin: 0 0 8px; line-height: 1.65; font-size: .92rem; }
+.ba-col p:last-child { margin-bottom: 0; }
+.ba-col.before p { color: #fed7d7; }
+.ba-col.after p { color: #bbf7d0; }
+.ba-col em { font-style: normal; color: #fff; font-weight: 600; }
+
+/* Summary block */
+.ba-summary { margin: 56px 0 24px; padding: 32px 28px; border: 1px solid rgba(45,212,191,.28); border-radius: 22px; background: linear-gradient(145deg, rgba(0,194,168,.05), rgba(2,8,18,.4)); }
+.ba-summary h2 { color: #fff; font-size: clamp(1.4rem,2.6vw,1.9rem); margin: 0 0 16px; font-weight: 800; }
+.ba-summary p { color: #cfdfeb; line-height: 1.75; font-size: 1rem; margin: 0 0 14px; }
+.ba-summary p:last-child { margin-bottom: 0; }
+.ba-summary b { color: #fff; }
+
+/* CTA */
+.ba-cta-wrap { margin: 48px 0 24px; padding: 32px 28px; border: 1px solid rgba(45,212,191,.28); border-radius: 22px; background: linear-gradient(145deg, rgba(5,22,34,.7), rgba(2,8,18,.4)); text-align: center; }
+.ba-cta-wrap h3 { margin: 0 0 10px; color: #fff; font-size: clamp(1.3rem,2.4vw,1.8rem); font-weight: 800; }
+.ba-cta-wrap p { margin: 0 auto 22px; color: #b9d9ee; max-width: 620px; line-height: 1.65; }
+.ba-btn-row { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+.ba-btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 22px; border-radius: 100px; text-decoration: none; font-weight: 700; font-size: .94rem; }
+.ba-btn.primary { background: linear-gradient(135deg, rgba(45,212,191,.22), rgba(59,130,246,.14)); color: #eaffff; border: 1px solid rgba(45,212,191,.5); }
+.ba-btn.secondary { background: rgba(15,23,42,.55); color: #9bdcff; border: 1px solid rgba(148,163,184,.28); }
+
+@media (max-width: 720px) {
+  .ba-cols { grid-template-columns: 1fr; }
+}
+</style>
+
+<!-- JSON-LD: v329 final structured-data pass -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://poconoai.com/before-after-small-firm.html",
+      "url": "https://poconoai.com/before-after-small-firm.html",
+      "datePublished": "2026-06-01",
+      "dateModified": "2026-06-01"
+      ,
+      "name": "Before & After: Small Law Firm AI Deployment | Pocono AI",
+      "description": "Side-by-side workflow comparison for a small law firm before and after Sentinel Node deployment \u2014 document review time, privilege risk, billable hour recovery, and audit trail completeness.",
+      "isPartOf": {
+        "@id": "https://poconoai.com/#website"
+      },
+      "publisher": {
+        "@id": "https://poconoai.com/#organization"
+      },
+      "audience": {
+        "@type": "Audience",
+        "audienceType": "Attorneys and independent law firms"
+      },
+      "inLanguage": "en-US"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to content</a>
+
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- INCLUDE:HEADER -->
+<div id="hitl-notice" style="background:#0a1929;padding:4px 16px;text-align:center;font-size:12px;color:#4a5568;border-bottom:1px solid rgba(255,255,255,0.06);letter-spacing:0.01em;">Human-in-the-Loop required: licensed professionals verify all outputs before clinical or legal action</div>
+<header role="banner">
+  <div class="header-inner">
+    <a href="/index.html" class="logo" aria-label="Pocono AI Home">
+      <img src="/logo.svg?v=402" alt="" width="36" height="36" decoding="async" loading="eager" aria-hidden="true" style="display:inline-block;">
+      Pocono <span>AI</span>
+    </a>
+    <nav id="desktop-nav" aria-label="Main navigation">
+      <div class="nav-item"><a href="/index.html" class="nav-direct">Home</a></div>
+      <div class="nav-item"><a href="/for-physicians.html" class="nav-direct">Physicians</a></div>
+      <div class="nav-item"><a href="/for-attorneys.html" class="nav-direct">Attorneys</a></div>
+      <div class="nav-item"><a href="/sentinel-node.html" class="nav-direct nav-hub" style="color:#d5a94f;border:1px solid rgba(213,169,79,0.45);border-radius:999px;padding:6px 13px;">Sentinel Node</a></div>
+      <div class="nav-item"><a href="/living-memorials/" class="nav-direct">Living Echo</a></div>
+      <div class="nav-item"><a href="/contact.html" class="nav-direct">Contact</a></div>
+      <div class="nav-item" data-dropdown="menu-more">
+        <button type="button" class="nav-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="menu-more">More <span class="nav-chevron" aria-hidden="true">&#9662;</span></button>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <a href="/contact.html#pilot" class="nav-cta nav-cta-primary">Request a Pilot</a>
+      <button type="button" class="pa-search-trigger" data-search-open aria-label="Search (press / or Ctrl-K)" aria-haspopup="dialog" aria-expanded="false">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span class="pa-st-label">Search</span><kbd data-pa-keyhint>Ctrl K</kbd>
+      </button>
+      <button type="button" class="header-icon-btn" id="mobile-menu" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav-panel">
+        <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- "More" overflow dropdown — sibling of <header> so position:fixed escapes header's stacking context. Wired by nav.js via data-dropdown="menu-more". -->
+<div class="nav-dropdown" id="menu-more" aria-label="More navigation">
+  <p class="nav-dd-section">Products</p>
+  <a href="/engineering-drafting/">Drafting &amp; Engineering Edition</a>
+  <a href="/sentinel-home/">Sentinel Home Edition</a>
+  <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability — Assistive Tools &#x2605;</a>
+  <a href="/living-memorials/enterprise-estate-continuity.html">Enterprise Estate Continuity</a>
+  <p class="nav-dd-section">Capabilities</p>
+  <a href="/evidence-room.html">Evidence Room</a>
+  <a href="/push-button-deliverables.html">Push-Button Deliverables</a>
+  <a href="/pilot-readiness-kit.html">Pilot Kit</a>
+  <a href="/pilot-program.html">Pilot Program</a>
+  <a href="/how-it-works.html">How It Works</a>
+  <p class="nav-dd-section">Hubs &amp; Company</p>
+  <a href="/training.html">Training Hub</a>
+  <a href="/documentation-hub/">Document Hub</a>
+  <a href="/global/">Global Hub</a>
+  <a href="/investors-hub.html">Investor Hub</a>
+  <a href="/valuation-dashboard.html">Valuation Dashboard</a>
+  <a href="/about.html">About</a>
+  <p class="nav-dd-section">Trust &amp; Legal</p>
+  <a href="/transparency.html">Transparency</a>
+  <a href="/audit.html">Audit Log</a>
+  <a href="/privacy.html">Privacy</a>
+  <a href="/sitemap.html">Sitemap</a>
+</div>
+<!-- Site search is provided by the self-contained search.js asset (command palette: / or Ctrl/Cmd-K). -->
+
+<!-- Mobile panel: full-screen slide-in. v396 nav — hub tiles + grouped links + Sentinel Node + Engineering. -->
+<nav id="mobile-nav-panel" aria-label="Mobile navigation" aria-hidden="true" role="dialog" aria-modal="true">
+
+  <!-- Hub tiles: Sentinel Node, Documentation Hub, Training Hub, Global Hub -->
+  <div style="padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,0.07);">
+    <p style="font-size:0.65em;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.28);margin:0 0 10px;padding:0 2px;">Hubs</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <a href="/sentinel-node.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(213,169,79,0.1);border:1px solid rgba(213,169,79,0.35);border-radius:10px;color:#d5a94f;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Sentinel Node</a>
+      <a href="/documentation-hub/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(0,194,168,0.1);border:1px solid rgba(0,194,168,0.35);border-radius:10px;color:#00c2a8;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Docs Hub</a>
+      <a href="/training.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.35);border-radius:10px;color:#a78bfa;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Training Hub</a>
+      <a href="/global/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(122,240,220,0.07);border:1px solid rgba(122,240,220,0.3);border-radius:10px;color:#7af0dc;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Global Hub</a>
+    </div>
+  </div>
+
+  <!-- Core paths -->
+  <div class="mob-static-links">
+    <a href="/index.html">Home</a>
+    <a href="/for-physicians.html">Physicians</a>
+    <a href="/for-attorneys.html">Attorneys</a>
+    <a href="/engineering-drafting/">Engineering &amp; Drafting</a>
+    <a href="/pilot-program.html">Pilot Program</a>
+    <a href="/how-it-works.html">How It Works</a>
+    <a href="/trust.html">Trust &amp; Audit</a>
+    <a href="/pricing.html">Pricing</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/living-memorials/">Living Echo</a>
+    <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability</a>
+    <a href="/about.html">About</a>
+    <a href="/team.html" style="color:rgba(255,255,255,0.6);">Team &amp; Leadership</a>
+    <a href="/valuation-dashboard.html" style="color:rgba(255,255,255,0.6);">Valuation Dashboard</a>
+    <a href="/careers.html" style="color:rgba(255,255,255,0.6);">Careers</a>
+    <a href="/sentinel-demo.html" style="color:rgba(255,255,255,0.6);">Demo</a>
+    <a href="/sitemap.html" style="color:rgba(255,255,255,0.45);">Sitemap</a>
+    <a href="/transparency.html" style="color:rgba(255,255,255,0.45);">Transparency</a>
+    <a href="/privacy.html" style="color:rgba(255,255,255,0.45);">Privacy</a>
+  </div>
+
+  <a href="/contact.html#pilot" class="mob-cta">Request a Pilot</a>
+</nav>
+<!-- /INCLUDE:HEADER -->
+
+
+<main id="main">
+<div class="page-wrap">
+
+  <div class="ba-hero">
+    <span class="ba-kicker">Operational Comparison · Small Firm</span>
+    <h1 class="ba-title">Before vs. after — <em>nine dimensions</em> of a small firm's day.</h1>
+    <p class="ba-lede">A clean look at what changes when a small general-practice firm moves from email-and-file-share workflows to governed local AI. No exaggeration. No vague promises about "transformation." Just the specific things that look different on a Tuesday afternoon.</p>
+  </div>
+
+  <div class="ba-honesty">
+    <b>A note on the "before" column.</b> The "before" column is not a critique of staff or attorneys. The pain described is structural — it is what happens when smart, capable people are asked to coordinate complex matters across email, file shares, scanned PDFs, and institutional memory. The systems make the work harder than it needs to be. Better tooling doesn't replace expertise; it lets expertise spend its time on the right things.
+  </div>
+
+  <!-- 01: Conflict checks -->
+  <div class="ba-row">
+    <div class="ba-dim">
+      <span class="ba-dim-num">01</span>
+      <h3 class="ba-dim-name">Conflict checks</h3>
+    </div>
+    <div class="ba-cols">
+      <div class="ba-col before">
+        <h4><span class="dot"></span>Before</h4>
+        <p>The paralegal searches three systems — closed-files index, active-matter spreadsheet, partner email archives. Each takes a different query syntax. The partner double-checks against memory. <em>The conflict you missed is the one nobody searched the right system for.</em></p>
+      </div>
+      <div class="ba-col after">
+        <h4><span class="dot"></span>After</h4>
+        <p>One bounded retrieval across eleven years of matter records. Eleven seconds. Each match cited back to the original file. The conflict check itself is sealed into the audit chain — when the disciplinary board asks <em>"did you run a check?"</em> the answer has a timestamp.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 02: Document version control -->
+  <div class="ba-row">
+    <div class="ba-dim">
+      <span class="ba-dim-num">02</span>
+      <h3 class="ba-dim-name">Document version control</h3>
+    </div>
+    <div class="ba-cols">
+      <div class="ba-col before">
+        <h4><span class="dot"></span>Before</h4>
+        <p>Email subject lines that read <em>"FINAL_v2_REVIEWED_v3_USE_THIS_ONE.docx"</em>. Six versions of a trust amendment in five folders. The partner asks: "Which one is current?" Nobody is sure.</p>
+      </div>
+      <div class="ba-col after">
+        <h4><span class="dot"></span>After</h4>
+        <p>One canonical version per matter. Every previous version preserved with its diff visible inline. When an attorney opens the matter, the current operative version is unambiguous — and the chain of who edited what, when, is queryable.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 03: Citation verification -->
+  <div class="ba-row">
+    <div class="ba-dim">
+      <span class="ba-dim-num">03</span>
+      <h3 class="ba-dim-name">Citation verification</h3>
+    </div>
+    <div class="ba-cols">
+      <div class="ba-col before">
+        <h4><span class="dot"></span>Before</h4>
+        <p>A junior associate manually verifies every citation in a brief. Hours of work. Or — if the deadline is tight enough — they skip the verification and hope. Or they used ChatGPT and inherited a hallucinated case from <em>Mata v. Avianca</em> style.</p>
+      </div>
+      <div class="ba-col after">
+        <h4><span class="dot"></span>After</h4>
+        <p>Citations come from a sealed local retrieval index — not from parametric model memory. Every quoted excerpt is verified against the underlying document before display. Paraphrases are flagged as paraphrases. Because citations are drawn from the sealed local retrieval index rather than model memory, fabricated case law is caught at the citation gate &mdash; every cited source is traceable to a retrieved document, and the attorney verifies before use.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04: Prior order retrieval -->
+  <div class="ba-row">
+    <div class="ba-dim">
+      <span class="ba-dim-num">04</span>
+      <h3 class="ba-dim-name">Prior order retrieval</h3>
+    </div>
+    <div class="ba-cols">
+      <div class="ba-col before">
+        <h4><span class="dot"></span>Before</h4>
+        <p>The paralegal pulls PDFs from three folders covering four years of custody modifications. One order is handwritten. One is scanned and barely legible. The attorney hopes she has the operative version. <em>She finds out at the bench.</em></p>
+      </div>
+      <div class="ba-col after">
+        <h4><span class="dot"></span>After</h4>
+        <p>One query surfaces every prior order with operative provisions extracted. Handwritten orders show as inline images with low-confidence flags — the system doesn't pretend to know what the judge wrote. The attorney reads the original. <em>She walks into court informed.</em></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 05: Mail routing -->
+  <div class="ba-row">
+    <div class="ba-dim">
+      <span class="ba-dim-num">05</span>
+      <h3 class="ba-dim-name">Inbound mail routing</h3>
+    </div>
+    <div class="ba-cols">
+      <div class="ba-col before">
+        <h4><span class="dot"></span>Before</h4>
+        <p>Beth, the senior paralegal, sorts forty-one pieces of mail by intuition and sticky notes. She's right almost every time. When she's wrong, nobody knows until weeks later. When she's out sick, the firm guesses.</p>
+      </div>
+      <div class="ba-col after">
+        <h4><span class="dot"></span>After</h4>
+        <p>The system proposes a routing for each piece — matter, attorney, category. Beth confirms each one. She is right 38 out of 41 times. The system catches what slips past her. The three the system got wrong, she catches in seconds. Every routing decision is logged.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 06: Intake completeness -->
+  <div class="ba-row">
+    <div class="ba-dim">
+      <span class="ba-dim-num">06</span>
+      <h3 class="ba-dim-name">Intake completeness</h3>
+    </div>
+    <div class="ba-cols">
+      <div class="ba-col before">
+        <h4><span class="dot"></span>Before</h4>
+        <p>The legal assistant takes notes on a legal pad during a wrongful-death intake call. Twelve fields needed. Seven get filled. The other five live in his memory until Wednesday. By Wednesday, some details have softened.</p>
+      </div>
+      <div class="ba-col after">
+        <h4><span class="dot"></span>After</h4>
+        <p>The intake worksheet exists, the missing fields are visible as <em>PENDING</em>, and the inquiry is in the partner's queue with a timestamp. Nothing moves to active without explicit partner signoff. The legal pad is a backup, not a system of record.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 07: Discovery review -->
+  <div class="ba-row">
+    <div class="ba-dim">
+      <span class="ba-dim-num">07</span>
+      <h3 class="ba-dim-name">Discovery review</h3>
+    </div>
+    <div class="ba-cols">
+      <div class="ba-col before">
+        <h4><span class="dot"></span>Before</h4>
+        <p>Saturdays. So many Saturdays. The partner and the associate reading 1,400 pages of document production, looking for the 23 pages that matter. The brief is due Monday. Everyone is at the office.</p>
+      </div>
+      <div class="ba-col after">
+        <h4><span class="dot"></span>After</h4>
+        <p>Bounded retrieval against the sealed evidence index returns the 23 relevant documents in seconds. Each excerpt is clickable to its Bates-stamped page. The attorney still reads the originals — but starts from <em>relevant</em>, not from page one.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 08: Hallucination risk -->
+  <div class="ba-row">
+    <div class="ba-dim">
+      <span class="ba-dim-num">08</span>
+      <h3 class="ba-dim-name">AI hallucination risk</h3>
+    </div>
+    <div class="ba-cols">
+      <div class="ba-col before">
+        <h4><span class="dot"></span>Before</h4>
+        <p>Whatever the junior associate used ChatGPT for this week, in private, after hours, against the firm's "we don't really have a policy yet" policy. The firm finds out about it when the court does.</p>
+      </div>
+      <div class="ba-col after">
+        <h4><span class="dot"></span>After</h4>
+        <p>The firm's actual governance policy is enforced at the system level. Out-of-scope requests are refused with the refusal logged. Citations come from sealed retrieval — not parametric guessing. <em>Architecturally, there is no surface for a hallucinated citation to enter the firm's work product.</em></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 09: Audit trail -->
+  <div class="ba-row">
+    <div class="ba-dim">
+      <span class="ba-dim-num">09</span>
+      <h3 class="ba-dim-name">Audit trail</h3>
+    </div>
+    <div class="ba-cols">
+      <div class="ba-col before">
+        <h4><span class="dot"></span>Before</h4>
+        <p>Email search and prayer. <em>"I think I sent that to David in October. Or maybe November. Let me check my Sent folder."</em> Reconstructing what was done, by whom, on which version, after the fact.</p>
+      </div>
+      <div class="ba-col after">
+        <h4><span class="dot"></span>After</h4>
+        <p>A reviewable envelope record. Every AI-assisted output stamped with prompt, sources, draft, reviewer, decision, version, timestamp. The record is local and the firm's property. The next audit-layer release (Stage 2) cryptographically links each envelope into a tamper-evident chain with single-hash lookup.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Summary -->
+  <div class="ba-summary">
+    <h2>What's actually different.</h2>
+    <p>Nothing on this list claims AI replacement. Sarah, David, Priya, Beth, and Marcus are still doing the lawyering, the intake, the review, the judgment calls, the human work. <b>What's different is the operational floor underneath them.</b></p>
+    <p>The work that used to bleed into Saturdays — discovery review, citation verification, prior-order reconstruction, conflict checking, intake reconstruction — moves to seconds. The work that used to live in institutional memory and sticky notes becomes auditable. The risk that used to come from a junior associate quietly using ChatGPT at 10 PM becomes architecturally contained.</p>
+    <p>The firm doesn't suddenly become a different firm. It becomes the firm it was already trying to be — without the operational drag that small firms accept as the cost of being small.</p>
+  </div>
+
+  <!-- CTA -->
+  <div class="ba-cta-wrap">
+    <h3>If a side-by-side like this makes intuitive sense, the next step is operational.</h3>
+    <p>The 60-day paid Proof-of-Value runs your firm's actual matters against Sentinel Node so you see this comparison with your own files, your own staff, your own week.</p>
+    <div class="ba-btn-row">
+      <a href="day-in-a-law-firm.html" class="ba-btn primary">Read the Day Inside a Small Firm</a>
+      <a href="legal-workflows-by-practice.html" class="ba-btn secondary">Workflows by Practice Area</a>
+      <a href="law-firm-pilot.html" class="ba-btn secondary">Law Firm Pilot Program</a>
+      <a href="contact.html#pilot" class="ba-btn secondary">Talk to Us</a>
+    </div>
+    <p style="margin:18px 0 0;font-size:.82rem;color:#8fb1c7;font-style:italic;padding-top:14px;border-top:1px solid rgba(255,255,255,.06);">The judgment stays with the attorney. The chain stays with the firm.</p>
+  </div>
+
+</div>
+</main>
+
+<div id="search-panel" role="search" aria-label="Site search" aria-hidden="true">
+  <div class="search-panel-inner">
+    <svg class="search-panel-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="search" id="search-panel-input" placeholder="Search Pocono AI&hellip;" autocomplete="off" spellcheck="false" enterkeyhint="search" aria-label="Search site" aria-autocomplete="list" aria-controls="search-results-drop">
+    <button type="button" id="search-panel-close" aria-label="Close search">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 root-relative nav fix, Living Echo rebrand, Engineering & Drafting + Enterprise Estate Continuity links added (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- INCLUDE:FOOTER -->
+<footer role="contentinfo" style="background:#051622;border-top:1px solid rgba(255,255,255,0.08);padding:40px 24px 28px;font-size:0.85em;color:#8899aa;">
+  <div style="max-width:1180px;margin:0 auto;">
+
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:0 0 28px;margin-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.07);">
+      <div style="max-width:560px;">
+        <p style="margin:0 0 6px;font-size:1.05em;font-weight:700;color:#fff;">Local AI infrastructure for regulated practices.</p>
+        <p style="margin:0;font-size:0.95em;line-height:1.5;">Drafts with citations. Human review required. Sensitive documents stay under practice control. Simple path, deep proof.</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="/contact.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;background:#00c2a8;color:#04111a;font-weight:700;text-decoration:none;font-size:0.95em;">Request Pilot</a>
+        <a href="/sentinel-demo.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;border:1px solid rgba(0,194,168,0.55);color:#00c2a8;font-weight:700;text-decoration:none;font-size:0.95em;">Watch Demo</a>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px 32px;margin-bottom:32px;text-align:left;">
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">For You</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/start-here.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Start Here (3 min)</a>
+          <a href="/for-physicians.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Physicians</a>
+          <a href="/for-attorneys.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Attorneys</a>
+          <a href="/engineering-drafting/" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Engineering &amp; Drafting Teams</a>
+          <a href="/pilot-program.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Pilot Program</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Installer Training</a>
+          <a href="/how-it-works.html" style="color:#8899aa;text-decoration:none;">How It Works</a>
+          <a href="/trust.html" style="color:#8899aa;text-decoration:none;">Trust &amp; Audit</a>
+          <a href="/pricing.html" style="color:#8899aa;text-decoration:none;">Pricing</a>
+          <a href="/sentinel-demo.html" style="color:#8899aa;text-decoration:none;">See the Demo</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Documentation Hub</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/documentation-hub/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Hub Home &mdash; Deep Proof</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">Installer Training</a>
+          <a href="/sentinel-node/installation-simulator.html" style="color:#8899aa;text-decoration:none;">&#8627; Installation Simulator</a>
+          <a href="/documentation-hub/clinical/" style="color:#8899aa;text-decoration:none;">Clinical Documentation</a>
+          <a href="/documentation-hub/legal/" style="color:#8899aa;text-decoration:none;">Legal Documentation</a>
+          <a href="/documentation-hub/technical/" style="color:#8899aa;text-decoration:none;">Technical Documentation</a>
+          <a href="/documentation-hub/governance/" style="color:#8899aa;text-decoration:none;">Governance &amp; Audit</a>
+          <a href="/documentation-hub/tools/" style="color:#8899aa;text-decoration:none;">Tools &amp; Simulators</a>
+          <a href="/documentation-hub/research/" style="color:#8899aa;text-decoration:none;">Research &amp; Essays</a>
+          <a href="/documentation-hub/transparency/" style="color:#8899aa;text-decoration:none;">Transparency</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Global Federated AI</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/global/" style="color:#7af0dc;text-decoration:none;font-weight:600;">Global Federated Hub</a>
+          <a href="/global/australia/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Australia</a>
+          <a href="/global/singapore/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Singapore</a>
+          <a href="/global/taiwan/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Taiwan</a>
+          <a href="/global/europe/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Europe</a>
+          <a href="/contact.html" style="color:#8899aa;text-decoration:none;">Partner Inquiry</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Company</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/about.html" style="color:#8899aa;text-decoration:none;">About Pocono AI</a>
+          <a href="/team.html" style="color:#8899aa;text-decoration:none;">Team &amp; Leadership</a>
+          <a href="/why-pocono-ai.html" style="color:#8899aa;text-decoration:none;">Why Pocono AI</a>
+          <a href="/founding-commercial-leadership.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Join Us</a>
+          <a href="/careers.html" style="color:#8899aa;text-decoration:none;">Careers</a>
+          <a href="/how-we-hire.html" style="color:#8899aa;text-decoration:none;">How We Hire</a>
+          <a href="/channel-partners.html" style="color:#8899aa;text-decoration:none;">Technical Partners (MSPs)</a>
+          <a href="/partners.html" style="color:#8899aa;text-decoration:none;">Academic Partnerships</a>
+          <a href="/contact.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Contact</a>
+          <a href="https://forms.gle/VQahnkjMfY6QNEMy8" target="_blank" rel="noopener noreferrer" style="color:#d5a94f;text-decoration:none;font-weight:600;">Interest List &#8599;</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Founder Projects</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/rehability/" style="color:#a78bfa;text-decoration:none;font-weight:700;">Rehability &#x2605;</a>
+          <a href="/rehability/marcus-memory-helper/" style="color:#a78bfa;text-decoration:none;font-weight:600;">&#8627; Marcus's Memory Helper</a>
+          <a href="/sentinel-home/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Sentinel Home Edition</a>
+          <a href="/living-memorials/" style="color:#8899aa;text-decoration:none;">Living Echo</a>
+          <a href="/living-memorials/marcus-odell/" style="color:#8899aa;text-decoration:none;">Marcus&rsquo;s Living Echo</a>
+          <a href="/living-memorials/enterprise-estate-continuity.html" style="color:#8899aa;text-decoration:none;">Enterprise Estate Continuity</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Resources &amp; Legal</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/sitemap.html" style="color:#8899aa;text-decoration:none;">All Pages (Sitemap)</a>
+          <a href="/audit.html" style="color:#8899aa;text-decoration:none;">Transparency &amp; Audit Log</a>
+          <a href="/maturity-disclosure.html" style="color:#8899aa;text-decoration:none;">What We Have / Don&rsquo;t Claim</a>
+          <a href="/plain.html" style="color:#8899aa;text-decoration:none;">Plain Language Guide</a>
+          <a href="/privacy.html" style="color:#8899aa;text-decoration:none;">Privacy</a>
+          <a href="/terms.html" style="color:#8899aa;text-decoration:none;">Terms</a>
+          <a href="/sla.html" style="color:#8899aa;text-decoration:none;">SLA</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:18px;margin-bottom:14px;">
+      <p style="margin:0;font-size:0.82em;line-height:1.6;color:#6f8295;max-width:1000px;">Pocono AI does not provide medical, legal, or engineering advice, does not practice medicine, law, or licensed engineering, and does not make clinical, legal, or engineering decisions. Outputs are drafts or support materials that require review by a qualified professional; final professional judgment remains with the licensed physician, attorney, or engineer. Tools and simulations on this site are educational and use synthetic data.</p>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:20px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+      <p style="margin:0;font-size:0.9em;">&copy; 2026 Pocono AI, LLC &nbsp;&#183;&nbsp; East Stroudsburg, PA &nbsp;&#183;&nbsp; <a href="mailto:marcus@poconoai.com" style="color:#8899aa;">marcus@poconoai.com</a> &nbsp;&#183;&nbsp; <a href="tel:+15705340602" style="color:#8899aa;">(570) 534-0602</a></p>
+      <p style="margin:0;font-size:0.88em;"><a href="/audit.html" style="color:#5dade2;text-decoration:none;">Transparency v402</a></p>
+    </div>
+  </div>
+</footer>
+<script src="/search.js?v=402" defer></script>
+<!-- /INCLUDE:FOOTER -->
+
+
+<script src="search-index.js?v=402" defer></script>
+<script src="nav.js?v=402" defer></script>
+<script src="pilot-cta.js?v=402" defer></script>
+</body>
+</html>

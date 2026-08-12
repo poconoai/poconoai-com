@@ -1,0 +1,25 @@
+Pocono AI v401 Release Manifest
+Date: 2026-06-26
+Release: Travis Vought Founding Strategic Advisor + full-site version stamp
+
+Purpose
+- Add Travis Vought as Founding Strategic Advisor on About and Team pages.
+- Clarify his strategic advisory scope: strategy, positioning, investor materials, partnerships, fundraising, and organizational development.
+- Preserve distinction that he advises Pocono AI strategically and is not part of the day-to-day executive team.
+- Stamp the public website to v401 across full HTML pages.
+- Refresh audit.html, transparency.html, sitemap files, search-index header, public asset cache-busting references, and footer transparency labels.
+
+Primary content updates
+- about.html
+- team.html
+- assets/images/team/travis-vought.jpg
+
+Governance/audit updates
+- audit.html current release entry added.
+- transparency.html current release summary added.
+- sitemap.xml lastmod values refreshed to 2026-06-26.
+- sitemap.html current release wording refreshed.
+- search-index.js header advanced to v401.
+
+Deployment validation
+- See v401_validation_report.txt in this zip.

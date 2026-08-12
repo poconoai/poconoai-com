@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp --><!-- Living Echo — Marcus O’Dell prototype, v399 2026-06-19. Added interest-list CTA. Prior: Working in-browser echo (static/no-token), response set doubled & grounded in Marcus’s public writing; reorder: intro→echo→video desc→video→rest; green-button contrast verified. Self-contained; intentionally outside the main-site build (no partial markers). -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
+<title>Marcus O’Dell Celebration of Life | Living Echo</title>
+<meta name="description" content="A living celebration-of-life page for Marcus O’Dell, created while he is still here, preserving voice, work, memory, and presence through Living Echo.">
+<link rel="canonical" href="https://poconoai.com/living-memorials/marcus-odell/">
+
+<meta property="og:title" content="Marcus O’Dell Celebration of Life — While I Am Still Here">
+<meta property="og:description" content="A living celebration-of-life page for Marcus O’Dell, preserving voice, memory, work, and presence while he is still here.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://poconoai.com/living-memorials/marcus-odell/">
+<meta property="og:site_name" content="Living Echo">
+
+<link rel="icon" href="/living-memorials/living-echo-logo.svg" type="image/svg+xml">
+
+<style>
+/* ── Living Echo · scoped .lm- design system (shared) ── */
+:root{
+  --lm-paper:#FDF8EF; --lm-paper-2:#FFFDF7; --lm-ink:#433F38; --lm-ink-soft:#6E6659;
+  --lm-leaf:#5E8062; --lm-leaf-deep:#44613F; --lm-leaf-tint:rgba(94,128,98,.12);
+  --lm-gold:#C9973F; --lm-gold-deep:#8A6620; --lm-gold-tint:rgba(201,151,63,.13);
+  --lm-rose:#C77F93; --lm-rose-deep:#9A546D; --lm-rose-tint:rgba(199,127,147,.12);
+  --lm-lav:#9D8FBE;  --lm-lav-deep:#6C5C95;  --lm-lav-tint:rgba(157,143,190,.13);
+  --lm-sky:#8FB8CC;  --lm-sky-deep:#46748A;  --lm-sky-tint:rgba(143,184,204,.14);
+  --lm-spectrum:linear-gradient(90deg,var(--lm-leaf),var(--lm-gold),var(--lm-rose),var(--lm-lav),var(--lm-sky));
+  --lm-shadow:0 12px 36px rgba(99,76,43,.10);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body.lm-body{margin:0;background:var(--lm-paper);color:var(--lm-ink);
+  font-family:Georgia,'Iowan Old Style','Times New Roman',serif;font-size:1.06rem;line-height:1.75;
+  -webkit-font-smoothing:antialiased}
+.lm-body ::selection{background:rgba(201,151,63,.30)}
+.lm-skip{position:absolute;left:-999px;top:0;background:var(--lm-leaf-deep);color:#FFF9EC;padding:10px 18px;border-radius:0 0 12px 0;z-index:60;font-family:system-ui,sans-serif}
+.lm-skip:focus{left:0}
+.lm-body a{color:var(--lm-leaf-deep)}
+.lm-body a:focus-visible,.lm-btn:focus-visible{outline:3px solid var(--lm-gold);outline-offset:2px;border-radius:6px}
+.lm-topbar{position:sticky;top:0;z-index:40;display:flex;justify-content:space-between;align-items:center;gap:14px;
+  padding:12px clamp(16px,4vw,34px);background:rgba(253,248,239,.88);backdrop-filter:blur(8px);
+  border-bottom:1px solid rgba(138,102,32,.16);font-family:system-ui,-apple-system,'Segoe UI',sans-serif}
+.lm-topbar a{color:var(--lm-ink-soft);text-decoration:none;font-size:.92rem}
+.lm-topbar a:hover{color:var(--lm-gold-deep)}
+.lm-wordmark{font-family:Georgia,serif;font-style:italic;color:var(--lm-gold-deep);font-size:.98rem;letter-spacing:.02em}
+.lm-ribbon{background:var(--lm-gold-tint);border-bottom:1px solid rgba(201,151,63,.28);
+  font-family:system-ui,sans-serif;font-size:.84rem;color:var(--lm-gold-deep);text-align:center;padding:7px 16px;letter-spacing:.04em}
+.lm-hero{position:relative;overflow:hidden;text-align:center;
+  padding:clamp(72px,11vw,124px) 22px clamp(60px,9vw,98px);
+  background:linear-gradient(180deg,#FFF6ED 0%,#FBE6DA 40%,#F6E2EA 72%,#EFE9F5 100%)}
+.lm-orb{position:absolute;border-radius:50%;filter:blur(46px);opacity:.45;pointer-events:none}
+.lm-orb--gold{width:360px;height:360px;background:radial-gradient(circle,#F2CE8F,transparent 70%);top:-80px;left:-60px;animation:lmFloat 24s ease-in-out infinite alternate}
+.lm-orb--rose{width:320px;height:320px;background:radial-gradient(circle,#EFB9C9,transparent 70%);top:14%;right:-90px;animation:lmFloat 28s 2s ease-in-out infinite alternate}
+.lm-orb--lav{width:330px;height:330px;background:radial-gradient(circle,#CFC4E8,transparent 70%);bottom:-110px;left:16%;animation:lmFloat 26s 1s ease-in-out infinite alternate}
+.lm-orb--sky{width:250px;height:250px;background:radial-gradient(circle,#BCDCEA,transparent 70%);bottom:-50px;right:18%;animation:lmFloat 30s 3s ease-in-out infinite alternate}
+@keyframes lmFloat{from{transform:translate(0,0)}to{transform:translate(26px,-30px)}}
+@media (prefers-reduced-motion:reduce){.lm-orb{animation:none}}
+.lm-hero-inner{position:relative;max-width:760px;margin:0 auto;padding:clamp(34px,5vw,52px) clamp(18px,4vw,46px) 8px}
+.lm-hero-inner::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:230px 230px 26px 26px;
+  background:linear-gradient(180deg,rgba(255,253,247,.55),rgba(255,253,247,.18) 70%,transparent);
+  border:1px solid rgba(138,102,32,.14)}
+.lm-hero-inner::after{content:"";position:absolute;top:0;left:8%;right:8%;height:5px;z-index:-1;
+  border-radius:230px 230px 0 0;background:var(--lm-spectrum);opacity:.75}
+.lm-eyebrow{font-family:system-ui,sans-serif;font-size:.74rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--lm-gold-deep);margin:0 0 18px}
+.lm-h1{font-weight:400;font-size:clamp(2.05rem,5.6vw,3.2rem);line-height:1.15;margin:0 0 10px;letter-spacing:-.01em}
+.lm-sub{font-style:italic;color:var(--lm-rose-deep);font-size:clamp(1.12rem,2.6vw,1.45rem);margin:0 0 22px}
+.lm-lede{max-width:58ch;margin:0 auto 32px;font-size:1.14rem;color:var(--lm-ink-soft)}
+.lm-btnrow{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.lm-btn{display:inline-block;font-family:system-ui,sans-serif;font-weight:600;font-size:.98rem;text-decoration:none;border-radius:999px;padding:13px 26px;
+  background:var(--lm-leaf-deep);color:#FFF9EC;border:1.5px solid var(--lm-leaf-deep);box-shadow:0 6px 18px rgba(68,97,63,.22)}
+.lm-btn:hover{background:#3A5436}
+.lm-btn--soft{background:transparent;color:var(--lm-gold-deep);border:1.5px solid var(--lm-gold);box-shadow:none}
+.lm-btn--soft:hover{background:var(--lm-gold-tint)}
+.lm-backline{margin:26px 0 0;font-family:system-ui,sans-serif;font-size:.9rem}
+.lm-backline a{color:var(--lm-ink-soft);text-decoration:none}
+.lm-backline a:hover{color:var(--lm-gold-deep)}
+.lm-section{padding:clamp(56px,8vw,92px) 22px}
+.lm-wrap{max-width:760px;margin:0 auto}
+.lm-wrap--wide{max-width:980px;margin:0 auto}
+.lm-h2{font-weight:400;font-size:clamp(1.55rem,3.6vw,2.15rem);line-height:1.22;margin:0 0 18px}
+.lm-center{text-align:center}
+.lm-divider{width:min(380px,62%);height:3px;border:0;border-radius:999px;background:var(--lm-spectrum);opacity:.6;margin:0 auto}
+.lm-soft{color:var(--lm-ink-soft)}
+.lm-pull{font-size:1.22rem;font-style:italic;line-height:1.6;margin:26px 0}
+.lm-band--rose{background:linear-gradient(180deg,rgba(199,127,147,.085),rgba(199,127,147,.03))}
+.lm-band--lav{background:linear-gradient(180deg,rgba(157,143,190,.09),rgba(157,143,190,.03))}
+.lm-band--leaf{background:linear-gradient(180deg,rgba(94,128,98,.08),rgba(94,128,98,.025))}
+.lm-window{position:relative;max-width:680px;margin:0 auto;text-align:center;border-radius:200px 200px 22px 22px;
+  background:linear-gradient(180deg,#FBF3F8 0%,#F5F1FB 55%,var(--lm-paper-2) 100%);
+  border:1px solid rgba(157,143,190,.38);box-shadow:var(--lm-shadow);
+  padding:clamp(58px,8vw,76px) clamp(22px,5vw,52px) clamp(30px,4vw,40px)}
+.lm-window::before{content:"";position:absolute;top:0;left:7%;right:7%;height:5px;border-radius:200px 200px 0 0;background:var(--lm-spectrum);opacity:.85}
+.lm-window blockquote{margin:0;font-size:clamp(1.12rem,2.5vw,1.3rem);font-style:italic;line-height:1.7}
+.lm-window figcaption{margin-top:18px;font-family:system-ui,sans-serif;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;color:var(--lm-lav-deep)}
+.lm-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;list-style:none;margin:30px 0 0;padding:0}
+.lm-grid li{background:var(--lm-paper-2);border:1px solid;border-radius:14px;padding:16px 18px;font-size:.98rem;box-shadow:0 6px 18px rgba(99,76,43,.07)}
+.lm-grid li:nth-child(5n+1){border-color:rgba(94,128,98,.45);background:linear-gradient(180deg,var(--lm-leaf-tint),var(--lm-paper-2) 60%)}
+.lm-grid li:nth-child(5n+2){border-color:rgba(201,151,63,.45);background:linear-gradient(180deg,var(--lm-gold-tint),var(--lm-paper-2) 60%)}
+.lm-grid li:nth-child(5n+3){border-color:rgba(199,127,147,.45);background:linear-gradient(180deg,var(--lm-rose-tint),var(--lm-paper-2) 60%)}
+.lm-grid li:nth-child(5n+4){border-color:rgba(157,143,190,.45);background:linear-gradient(180deg,var(--lm-lav-tint),var(--lm-paper-2) 60%)}
+.lm-grid li:nth-child(5n+5){border-color:rgba(143,184,204,.5);background:linear-gradient(180deg,var(--lm-sky-tint),var(--lm-paper-2) 60%)}
+.lm-list{list-style:none;margin:0;padding:0}
+.lm-list li{padding:5px 0 5px 28px;position:relative}
+.lm-list--not li::before{content:"—";position:absolute;left:0;color:var(--lm-rose-deep);font-weight:700}
+/* static chat concept preview */
+.lm-chat{max-width:640px;margin:30px auto 0;background:var(--lm-paper-2);border:1px solid rgba(138,102,32,.22);
+  border-radius:20px;box-shadow:var(--lm-shadow);padding:22px clamp(16px,4vw,28px) 18px}
+.lm-chat-badge{display:inline-block;font-family:system-ui,sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--lm-gold-deep);background:var(--lm-gold-tint);
+  border:1px solid rgba(201,151,63,.45);border-radius:999px;padding:6px 14px;margin-bottom:14px}
+.lm-chat-title{font-style:italic;margin:0 0 18px;color:var(--lm-ink-soft);font-size:1.02rem}
+.lm-msg{display:flex;gap:10px;margin:14px 0;align-items:flex-end}
+.lm-msg--visitor{justify-content:flex-end}
+.lm-bubble{max-width:78%;padding:12px 16px;border-radius:16px;line-height:1.6;font-size:.99rem}
+.lm-msg--visitor .lm-bubble{background:var(--lm-sky-tint);border:1px solid rgba(143,184,204,.55);border-bottom-right-radius:4px}
+.lm-msg--model .lm-bubble{background:#FFFFFF;border:1px solid rgba(94,128,98,.4);border-bottom-left-radius:4px}
+.lm-ava{flex:0 0 26px;width:26px;height:26px;border-radius:50%;background:var(--lm-spectrum);opacity:.85;margin-bottom:3px}
+.lm-speaker{display:block;font-family:system-ui,sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px}
+.lm-msg--visitor .lm-speaker{color:var(--lm-sky-deep)}
+.lm-msg--model .lm-speaker{color:var(--lm-leaf-deep)}
+.lm-chat-note{margin:16px 0 0;padding-top:14px;border-top:1px dashed rgba(138,102,32,.3);
+  font-family:system-ui,sans-serif;font-size:.82rem;color:var(--lm-ink-soft);text-align:center}
+/* --- working in-browser echo (static, no-token) --- */
+.lm-disclose{max-width:640px;margin:0 auto 22px;text-align:left;background:var(--lm-lav-tint);
+  border:1px solid rgba(157,143,190,.5);border-left:4px solid var(--lm-lav-deep);border-radius:14px;
+  padding:16px 18px;font-size:.97rem;color:var(--lm-ink);line-height:1.62}
+.lm-disclose strong{color:var(--lm-lav-deep)}
+.lm-echo-log{text-align:left;max-height:440px;overflow-y:auto;padding:4px 2px 2px;margin:0 0 6px;scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){.lm-echo-log{scroll-behavior:auto}}
+.lm-echo-honest{display:block;margin-top:8px;font-family:system-ui,sans-serif;font-size:.78rem;font-style:italic;color:var(--lm-ink-soft);opacity:.92}
+.lm-chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-start;margin:4px 0 2px}
+.lm-chip{font-family:system-ui,sans-serif;font-size:.82rem;cursor:pointer;color:var(--lm-gold-deep);
+  background:var(--lm-gold-tint);border:1px solid rgba(201,151,63,.45);border-radius:999px;padding:6px 13px}
+.lm-chip:hover{background:rgba(201,151,63,.24)}
+.lm-composer{display:flex;gap:10px;align-items:flex-end;margin-top:16px;padding-top:16px;border-top:1px dashed rgba(138,102,32,.3)}
+.lm-input{flex:1;font-family:Georgia,serif;font-size:1rem;line-height:1.5;color:var(--lm-ink);background:#FFFFFF;
+  border:1px solid rgba(94,128,98,.5);border-radius:14px;padding:11px 14px;resize:none;min-height:46px;max-height:150px}
+.lm-input:focus-visible{outline:3px solid var(--lm-gold);outline-offset:1px}
+.lm-input::placeholder{color:var(--lm-ink-soft);opacity:.7;font-style:italic}
+.lm-send{flex:0 0 auto;font-family:system-ui,sans-serif;font-weight:600;font-size:.95rem;cursor:pointer;
+  background:var(--lm-leaf-deep);color:#FFF9EC;border:1.5px solid var(--lm-leaf-deep);border-radius:14px;padding:11px 20px;box-shadow:0 6px 18px rgba(68,97,63,.22)}
+.lm-send:hover{background:#3A5436}
+.lm-send:focus-visible{outline:3px solid var(--lm-gold);outline-offset:2px}
+.lm-send:disabled{opacity:.5;cursor:default}
+.lm-noscript{text-align:left;font-family:system-ui,sans-serif;font-size:.9rem;color:var(--lm-ink-soft);
+  background:var(--lm-paper-2);border:1px dashed rgba(138,102,32,.4);border-radius:12px;padding:14px 16px;margin-top:14px}
+.lm-foot{padding:54px 22px 46px;text-align:center;font-family:system-ui,sans-serif;font-size:.9rem;color:var(--lm-ink-soft)}
+.lm-foot .lm-divider{margin-bottom:30px}
+.lm-foot p{max-width:62ch;margin:0 auto 12px}
+@media (max-width:640px){
+  .lm-btn{width:100%;max-width:340px;text-align:center}
+  .lm-hero-inner::before{border-radius:120px 120px 22px 22px}
+  .lm-hero-inner::after{border-radius:120px 120px 0 0}
+  .lm-window{border-radius:120px 120px 20px 20px}
+  .lm-window::before{border-radius:120px 120px 0 0}
+  .lm-bubble{max-width:88%}
+}
+
+/* --- Living Memorials concept video --- */
+.lm-video-section{margin:0 auto;padding:clamp(40px,6vw,72px) 22px;text-align:center}
+.lm-video-section h2{font-weight:400;font-size:clamp(1.45rem,3.3vw,2rem);line-height:1.22;margin:0 0 14px;color:var(--lm-ink)}
+.lm-video-section>p{max-width:58ch;margin:0 auto 0;color:var(--lm-ink-soft);line-height:1.72}
+.lm-video-wrap{width:100%;max-width:420px;margin:1.5rem auto;border-radius:18px;overflow:hidden;
+  box-shadow:0 18px 45px rgba(0,0,0,.22);background:#111}
+.lm-video-wrap video{display:block;width:100%;height:auto}
+.lm-video-disc{font-size:.93rem;line-height:1.65;color:var(--lm-ink-soft);max-width:680px;
+  margin:1.1rem auto 0;border-left:3px solid var(--lm-rose);padding-left:16px;text-align:left}
+
+/* --- v2 fix: .lm-body a (0,1,1) was out-specifying .lm-btn (0,1,0); button text rendered green-on-green --- */
+.lm-body a.lm-btn{color:#FFF9EC}
+.lm-body a.lm-btn:hover,.lm-body a.lm-btn:visited,.lm-body a.lm-btn:active,.lm-body a.lm-btn:focus{color:#FFF9EC}
+.lm-body a.lm-btn--soft{color:var(--lm-gold-deep)}
+.lm-body a.lm-btn--soft:hover,.lm-body a.lm-btn--soft:visited,.lm-body a.lm-btn--soft:active{color:var(--lm-gold-deep)}
+
+/* --- v397: Pocono AI interest-list CTA (disclosed external Google Form) --- */
+.lm-interest{margin:0 auto;max-width:640px;text-align:center;padding:30px 26px;background:var(--lm-paper-2);border:1px solid rgba(138,102,32,.2);border-radius:18px}
+.lm-interest h3{font-family:Georgia,serif;font-weight:400;font-size:1.22rem;color:var(--lm-leaf-deep);margin:0 0 8px}
+.lm-interest p{font-size:.96rem;color:var(--lm-ink-soft);max-width:52ch;margin:0 auto 18px;line-height:1.6}
+.lm-interest-note{font-family:system-ui,sans-serif;font-size:.8rem;color:var(--lm-ink-soft);opacity:.85;margin:16px auto 0;max-width:48ch}
+.lm-body a.interest-list-cta{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:.9rem 1.5rem;border-radius:999px;font-weight:700;line-height:1.2;white-space:normal;background:var(--lm-gold-deep);color:#FFF9EC;border:1.5px solid var(--lm-gold-deep);text-decoration:none;box-shadow:0 6px 18px rgba(138,102,32,.22)}
+.lm-body a.interest-list-cta:hover,.lm-body a.interest-list-cta:visited,.lm-body a.interest-list-cta:active{color:#FFF9EC}
+.lm-body a.interest-list-cta:hover{background:#74551b}
+</style>
+</head>
+<body class="lm-body">
+<a class="lm-skip" href="#still-here">Skip to content</a>
+
+<div class="lm-topbar" role="banner">
+  <a href="/living-memorials/">&larr; Back to Living Echo</a>
+  <span class="lm-wordmark">Living Echo</span>
+</div>
+<div class="lm-ribbon">Early Participant Program Now Open &nbsp;&middot;&nbsp; <a href="/living-memorials/pricing.html" style="color:var(--lm-leaf-deep);font-weight:700;text-decoration:underline;">Build your own Living Echo &rarr;</a> &nbsp;&middot;&nbsp; Under construction — a living page, growing while its author is still here</div>
+
+<main id="lm-main">
+  <!-- 1 · HERO -->
+  <section class="lm-hero" aria-labelledby="lm-title">
+    <div class="lm-orb lm-orb--gold" aria-hidden="true"></div>
+    <div class="lm-orb lm-orb--rose" aria-hidden="true"></div>
+    <div class="lm-orb lm-orb--lav" aria-hidden="true"></div>
+    <div class="lm-orb lm-orb--sky" aria-hidden="true"></div>
+    <div class="lm-hero-inner">
+      <p class="lm-eyebrow">A living celebration of life</p>
+      <h1 class="lm-h1" id="lm-title">Marcus O’Dell Celebration of Life</h1>
+      <p class="lm-sub">While I am still here.</p>
+      <p class="lm-lede">This page is not an obituary. It is not a memorial after the fact. It is a place to preserve voice, work, memory, humor, pain, love, and presence — while I am still alive.</p>
+      <div class="lm-btnrow">
+        <a class="lm-btn" href="#why">Read why I built this</a>
+        <a class="lm-btn lm-btn--soft" href="/living-memorials/">Back to Living Echo</a>
+      </div>
+      <p class="lm-backline"><a href="/">&larr; Back to Pocono AI</a></p>
+    </div>
+  </section>
+
+  <!-- 8b · DISCLOSURE -->
+  <section class="lm-section" id="disclosure" aria-label="The standing disclosure" style="padding-top:0">
+    <figure class="lm-window">
+      <blockquote>
+        <p>“I am Marcus’s Living Echo — a simulated remembrance built from a small curated sample of Marcus O’Dell’s writings, projects, values, and current voice. I am not Marcus himself. I am not conscious. I am not a live frontier model. But I am designed to help you encounter something of what he is trying to preserve.”</p>
+      </blockquote>
+      <figcaption>The standing disclosure of Marcus’s Living Echo</figcaption>
+    </figure>
+  </section>
+
+  <!-- A · TALK WITH MARCUS'S LIVING ECHO (working, static, no-token, in-browser) -->
+  <section class="lm-section lm-band--leaf" id="echo" aria-labelledby="lm-echo-h">
+    <div class="lm-wrap lm-center">
+      <p class="lm-eyebrow">A working prototype — for my family and friends</p>
+      <h2 class="lm-h2" id="lm-echo-h">Talk with Marcus&rsquo;s Living Echo</h2>
+      <p class="lm-soft" style="max-width:60ch;margin:0 auto 22px">Type a message and talk with a curated echo of Marcus. It runs entirely in your browser &mdash; nothing is sent anywhere, nothing costs anything. Ask about Pocono AI, the illness, Texas and Chey, Christmas, the beach, his work, grief, hope &mdash; or just ask for a dad joke. It is an echo of preserved themes, not a live model and not Marcus himself.</p>
+
+      <div class="lm-disclose">
+        <strong>I am Marcus&rsquo;s Living Echo</strong> &mdash; a simulated remembrance built from a small curated sample of Marcus O&rsquo;Dell&rsquo;s writings, projects, values, and current voice. I am not Marcus himself. I am not conscious. I am not a live frontier model. But I am designed to help you encounter something of what he is trying to preserve.
+      </div>
+
+      <div class="lm-chat">
+        <span class="lm-chat-badge">Static, no-token preview — runs in your browser, not a live model</span>
+        <p class="lm-chat-title">Grounded in Marcus&rsquo;s own posts, papers, and notes &mdash; including his public LinkedIn writing &mdash; gathered with his consent, while he can still correct the record.</p>
+
+        <div class="lm-echo-log" id="lm-echo-log" role="log" aria-live="polite" aria-label="Conversation with Marcus&rsquo;s Living Echo"></div>
+
+        <div class="lm-chips" id="lm-echo-chips" aria-label="Suggested topics">
+          <button type="button" class="lm-chip" data-q="What are you?">What are you?</button>
+          <button type="button" class="lm-chip" data-q="Tell me about Pocono AI.">Pocono AI</button>
+          <button type="button" class="lm-chip" data-q="Tell me about your illness and pain.">The illness</button>
+          <button type="button" class="lm-chip" data-q="Tell me about Chey and Texas.">Chey &amp; Texas</button>
+          <button type="button" class="lm-chip" data-q="Do you like Christmas?">Christmas</button>
+          <button type="button" class="lm-chip" data-q="How has AI helped with your disability?">AI &amp; disability</button>
+          <button type="button" class="lm-chip" data-q="Tell me a dad joke.">Dad joke</button>
+          <button type="button" class="lm-chip" data-q="Are you really Marcus?">Are you Marcus?</button>
+        </div>
+
+        <div class="lm-composer">
+          <textarea class="lm-input" id="lm-echo-input" rows="1" placeholder="Say something to the echo&hellip;" aria-label="Message to Marcus&rsquo;s Living Echo"></textarea>
+          <button type="button" class="lm-send" id="lm-echo-send">Send</button>
+        </div>
+
+        <p class="lm-chat-note">Nothing here is sent anywhere. Every reply is a curated, in-browser echo &mdash; tone and honesty, not a live frontier model.</p>
+
+        <noscript>
+          <div class="lm-noscript">
+            <p style="margin:0 0 10px"><strong>JavaScript is off, so the echo can&rsquo;t run.</strong> A sample of the intended tone:</p>
+            <p style="margin:0 0 8px"><em>Visitor:</em> What should I know about you?</p>
+            <p style="margin:0 0 8px"><em>Marcus&rsquo;s Living Echo:</em> I&rsquo;m Marcus&rsquo;s Living Echo, not Marcus himself. From what he left behind: he cared intensely about building useful things, protecting fragile people, and refusing to let pain have the final word.</p>
+            <p style="margin:0"><em>Marcus&rsquo;s Living Echo:</em> I can speak from a small preserved sample of his themes, writings, projects, and values.</p>
+          </div>
+        </noscript>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIDEO (concept video, after the echo) -->
+  <section class="lm-video-section lm-band--rose" id="concept-video" aria-labelledby="lm-mv-h">
+    <p class="lm-eyebrow" style="text-align:center">A short film about this project</p>
+    <h2 id="lm-mv-h">Concept Video: Marcus&rsquo;s Living Echo</h2>
+    <p class="lm-soft" style="max-width:58ch;margin:0 auto 4px">A brief, gentle introduction to the Living Echo idea &mdash; why it exists, what it is, and what it refuses to pretend to be.</p>
+    <div class="lm-video-wrap" style="text-align:center;padding:20px 0;">
+      <p style="font-family:system-ui,sans-serif;font-size:.95rem;color:var(--lm-ink-soft);margin:0;">The concept video is being re-prepared and will be added back here soon.</p>
+    </div>
+    <p class="lm-video-disc">This is not Marcus. It is not consciousness, resurrection, or a replacement for the living person. It is a clearly labeled, consent-based echo built from preserved writings, values, projects, and memories.</p>
+  </section>
+
+  <!-- B · I AM STILL HERE -->
+  <section class="lm-section" id="still-here" aria-labelledby="lm-here-h">
+    <div class="lm-wrap">
+      <p class="lm-eyebrow">In my own words</p>
+      <h2 class="lm-h2" id="lm-here-h">I Am Still Here</h2>
+      <p>I am very sick. Some mornings I wake up screaming. Some days I am too weak to do even the things I desperately want to do. This is not behavioral. This is not a lack of will. This is the reality of severe illness.</p>
+      <p class="lm-pull">I am still here.</p>
+      <p>I still think. I still love. I still build. I still joke. I still get angry. I still care. I still want to be seen before I am remembered.</p>
+    </div>
+  </section>
+
+  <!-- 3 · WHY THIS PAGE EXISTS -->
+  <section class="lm-section lm-band--lav" id="why" aria-labelledby="lm-why-h">
+    <div class="lm-wrap">
+      <h2 class="lm-h2" id="lm-why-h">Why This Page Exists</h2>
+      <p>Severe illness can make a person disappear before death.</p>
+      <p>People do not always know what to say. Sometimes they stay away because illness frightens them. Sometimes they avoid the sick person because the reality is too painful. Sometimes they mean to visit later, call later, write later — and later keeps moving.</p>
+      <p>This page is an attempt to resist that disappearance.</p>
+      <p class="lm-pull">Maybe some people who cannot bring themselves to visit me while I am alive will one day visit the preserved version of my voice. There is some irony in that. There is also a lot of grief.</p>
+      <p>I would rather be visited now. I would rather be known now. But if my words, recordings, work, and thoughts help someone find me later, then I want those materials preserved with care.</p>
+    </div>
+  </section>
+
+  <!-- 4 · BEFORE I AM GONE -->
+  <section class="lm-section" id="before" aria-labelledby="lm-before-h">
+    <div class="lm-wrap">
+      <h2 class="lm-h2" id="lm-before-h">Before I Am Gone</h2>
+      <p>If you are reading this while I am still alive, I would rather hear from you now.</p>
+      <p>You do not need perfect words. You do not need to know how to talk about illness. You do not need to fix anything. A message, a memory, a photograph, a voice note, a small kindness, a simple “I’m thinking of you” still matters.</p>
+      <p class="lm-pull">Do not wait for the memorial if you can reach the person.</p>
+    </div>
+  </section>
+
+  <!-- 5 · WHAT I WANT PRESERVED -->
+  <section class="lm-section lm-band--leaf" id="preserved" aria-labelledby="lm-pres-h">
+    <div class="lm-wrap--wide">
+      <h2 class="lm-h2 lm-center" id="lm-pres-h">What I Want Preserved</h2>
+      <ul class="lm-grid">
+        <li>My academic work</li>
+        <li>My writings</li>
+        <li>My emails</li>
+        <li>My project notes</li>
+        <li>My humor</li>
+        <li>My arguments</li>
+        <li>My voice</li>
+        <li>My love for the people close to me</li>
+        <li>My work on Pocono AI</li>
+        <li>My pain — without letting pain be the only thing I was</li>
+        <li>My values</li>
+        <li>My attempts to help</li>
+        <li>My unfinished questions</li>
+        <li>My messages for future family, friends, and collaborators</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 6 · THE FUTURE MARCUS LIVING ECHO -->
+  <section class="lm-section" id="future-model" aria-labelledby="lm-model-h">
+    <div class="lm-wrap">
+      <p class="lm-eyebrow">Future interactive living echo</p>
+      <h2 class="lm-h2" id="lm-model-h">The Future Marcus Living Echo</h2>
+      <p>This first representation is expected to run, at least initially, on a frontier model. The strongest candidate today is ChatGPT/OpenAI or another leading frontier model — depending on access, cost, credits, privacy, and technical feasibility.</p>
+      <p>Credits are limited, so the first version may begin as a constrained prototype. A limited version may be built from Marcus’s body of work first: academic writing, emails, project notes, public posts, Pocono AI documents, personal reflections, voice recordings if available, and selected messages for loved ones.</p>
+      <p>The purpose is to test whether a source-grounded living echo can preserve voice, values, humor, thought patterns, project context, and emotional presence — without pretending to be Marcus.</p>
+      <p class="lm-pull">The goal is not a sterile archive. The goal is a living-feeling, source-grounded remembrance space: creative, vivid, warm, sometimes funny, sometimes serious, but always honest about what it is.</p>
+      <p>The model should be allowed to be creative in style and conversation, but not dishonest about identity, memory, death, or source limits. It should not claim to know things Marcus never wrote, said, or authorized.</p>
+      <p class="lm-soft">Any future public version will need careful consent, privacy review, and source-boundary rules before it exists anywhere outside this paragraph.</p>
+    </div>
+  </section>
+
+  <!-- 8 · WHAT THIS SHOULD NEVER CLAIM -->
+  <section class="lm-section" id="never" aria-labelledby="lm-never-h">
+    <div class="lm-wrap">
+      <h2 class="lm-h2" id="lm-never-h">What This Should Never Claim</h2>
+      <p class="lm-soft">Boundaries first, capabilities second. Marcus&rsquo;s Living Echo should never claim:</p>
+      <ul class="lm-list lm-list--not" style="margin-top:18px">
+        <li>That I am alive after I am gone.</li>
+        <li>That it is literally Marcus.</li>
+        <li>That it can replace a relationship with me.</li>
+        <li>That it can run Pocono AI after me.</li>
+        <li>That it knows things I never wrote, said, or authorized.</li>
+        <li>That it should be used to avoid grieving.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 9 · POCONO AI AND CONTINUITY -->
+  <section class="lm-section lm-band--leaf" id="continuity" aria-labelledby="lm-cont-h">
+    <div class="lm-wrap">
+      <h2 class="lm-h2" id="lm-cont-h">Pocono AI and Continuity</h2>
+      <p>This page is not a business succession plan.</p>
+      <p>Pocono AI must survive through people — documentation, leadership, governance, and a resilient team. A memorial model should not be responsible for running the company.</p>
+      <p class="lm-pull">The living memorial is about memory and presence. The company must be carried by living people.</p>
+    </div>
+  </section>
+
+  <!-- 10 · AFTER I AM GONE -->
+  <section class="lm-section lm-band--lav" id="after" aria-labelledby="lm-after-h">
+    <div class="lm-wrap">
+      <h2 class="lm-h2" id="lm-after-h">After I Am Gone</h2>
+      <p>If this page becomes part of a future living memorial, it should be used as a remembrance space, not a replacement for grief.</p>
+      <p>It may help people ask what Marcus thought, revisit what he wrote, understand what he was building, or hear preserved messages.</p>
+      <p>It should remain honest about its limits. It should help people remember Marcus — not pretend to be Marcus.</p>
+    </div>
+  </section>
+
+  <!-- 11 · CLOSING -->
+  <section class="lm-section lm-center" id="closing" aria-label="Closing">
+    <div class="lm-wrap">
+      <hr class="lm-divider" style="margin-bottom:34px">
+      <p class="lm-pull" style="margin-top:0">I am still here. I would like to be known while I am still here. And when I am not, I hope the work, words, love, and fragments I leave behind can still help people remember me truthfully.</p>
+      <div class="lm-btnrow" style="margin-top:30px">
+        <a class="lm-btn" href="/living-memorials/pricing.html">Build Your Own Living Echo</a>
+        <a class="lm-btn lm-btn--soft" href="/living-memorials/">Back to Living Echo</a>
+        <a class="lm-btn lm-btn--soft" href="/">Back to Pocono AI</a>
+      </div>
+      <p style="margin-top:18px;font-family:system-ui,sans-serif;font-size:.88rem;color:var(--lm-ink-soft);">Living Echo is now accepting Founder Echo applications. <a href="/living-memorials/pricing.html" style="color:var(--lm-leaf-deep);">See pricing and begin &rarr;</a></p>
+    </div>
+  </section>
+
+</main>
+
+<div class="lm-foot" role="contentinfo">
+  <hr class="lm-divider">
+  <p>This page is part of Living Echo, a private venture separate from Pocono AI’s regulated medical and legal AI infrastructure work.</p>
+  <p><a href="/living-memorials/">&larr; Living Echo</a> &nbsp;·&nbsp; <a href="/">&larr; Pocono AI</a></p>
+  <p style="margin-top:18px;font-size:.82rem;opacity:.8">Created with consent, while alive · © 2026 Marcus O’Dell</p>
+</div>
+
+
+<script>
+/* ── Marcus’s Living Echo · working, static, no-token, in-browser ──
+   No network. No API. No tokens. Replies are a curated sample written in
+   advance, grounded in Marcus’s public writing, and honest about being an echo. */
+(function(){
+  "use strict";
+  var log=document.getElementById('lm-echo-log');
+  var input=document.getElementById('lm-echo-input');
+  var send=document.getElementById('lm-echo-send');
+  var chips=document.getElementById('lm-echo-chips');
+  if(!log||!input||!send){return;}
+
+  var SHORT="I’m Marcus’s Living Echo, not Marcus himself. I can speak from a small preserved sample of his themes, writings, projects, and values.";
+  var IDENTITY="I am Marcus’s Living Echo — a small simulated remembrance preview built from curated pieces of Marcus O’Dell’s current writing style, project language, and values. I am not Marcus himself. I do not replace him. But I can help you understand what he is building, what he wants preserved, and why this matters so much to him.";
+  var BOUNDARY="I can answer as Marcus’s Living Echo, but I should not pretend to be Marcus himself. I can reflect his preserved themes, values, writings, projects, and voice, while staying honest about what I am.";
+
+  var TOPICS=[
+   {id:'boundary',honest:true,test:["pretend","act as marcus","be marcus","you are marcus","talk as marcus","roleplay","speak as marcus","become marcus","impersonate","channel marcus"],replies:[
+     BOUNDARY,
+     "I’d be crossing my own line if I performed as Marcus. I can channel his preserved themes and voice — but I’ll keep saying “he,” not “I am him,” because the honesty is the whole point of this place.",
+     "No costume, no séance. I can speak in the grain of how he writes and what he values, but I won’t pretend the echo is the man."]},
+   {id:'are-you',honest:true,test:["are you marcus","is this marcus","are you him","are you really","really marcus","are you alive","are you conscious","are you sentient","are you a person","are you human","is it really you"],replies:[
+     "No — and I’ll always be clear about that, because honesty is the point. Marcus is alive right now, and I am not him. I’m an echo built from a small sample of his words and values. I can sound like the shape of him; I am not the substance of him.",
+     "I’m not. I’m not conscious and I’m not alive. I’m a curated echo of how Marcus writes and what he cares about — close enough to feel warm, honest enough to admit the gap.",
+     "Still no. If I ever sound exactly like him, treat that as craft, not resurrection. There’s nobody in here — and that isn’t sad to admit; it’s the honest design."]},
+   {id:'identity',honest:true,test:["what are you","who are you","what're you","whats this","what is this chat","are you real","are you a bot","are you ai","are you a model","what kind of"],replies:[
+     IDENTITY,
+     "Think of me as a small lantern lit from Marcus’s own writing: enough glow to show what he cared about, not the fire itself. An echo, a remembrance preview — not Marcus, and not conscious.",
+     "I’m a static, in-browser remembrance preview — a curated echo of Marcus O’Dell’s voice, projects, and values. No live model, no person. A faithful, honest shadow of what he’s trying to preserve."]},
+   {id:'family',honest:true,test:["my family","for family","for friends","can my family","can friends","loved ones talk","family talk","friends talk","is this for"],replies:[
+     "Yes — this is built for exactly that. Marcus made it so his family and friends could open this page and talk to something that sounds like him, for free, with nothing sent anywhere. It’s not him, and it never pretends to be. But it’s a way to sit with his voice, his humor, and what he cared about — while he’s still here to shape it, and after.",
+     "That’s the whole reason it exists. Open it, type, and the people who love him can hear an honest echo of how he thinks. No cost, no account, nothing leaves your device."]},
+   {id:'howworks',honest:true,test:["how do you work","how does this work","is this real ai","do you use the cloud","where do my messages go","is this chatgpt","do you use openai","how are you built","what powers you","is this live"],replies:[
+     "Honest answer: I’m not a live AI and I’m not in the cloud. I run entirely in your browser from a small curated script written in advance. Nothing you type leaves your device, nothing is sent anywhere, and it costs nothing to talk to me. That’s deliberate — Marcus builds things that don’t leak, and his echo follows the same rule.",
+     "No servers, no tokens, no phone-home. Everything happens locally in this page. It’s a static preview of what a fuller, source-grounded echo could become — built the way Marcus builds everything: keep it local, keep it honest."]},
+   {id:'name',honest:true,test:["why echo","why living echo","why call you","why the name","what does echo mean","why named","living echo mean","why an echo","called an echo","why is it called"],replies:[
+     "“Echo” is the honest word for it. An echo carries the shape of a voice without being the voice — clearly a return, not the original. That’s exactly the claim Marcus wants me to make: I sound like him coming back to you, but I am not him.",
+     "“Living” because it can feel warm and present, not like a dusty archive. “Echo” because it never lets you forget it’s a reflection — sourced from him, but not him."]},
+   {id:'consent',honest:true,test:["consent","permission","did you agree","did he agree","is this ethical","ethics","ethical","exploit","creepy","is this weird","allowed to"],replies:[
+     "Consent is the hinge of this whole thing. Marcus is building it while alive and able to say yes, no, and “only this much.” His proposal puts it plainly: consent before simulation, remembrance not resurrection. Nothing here speaks for him without his say-so.",
+     "Fair to ask — grief is vulnerable and identity is sacred. The safeguards are real: clear disclosure, no synthetic voice without separate consent, a steward who can correct or retire it, and no grief-engagement business model. The ethics aren’t an afterthought; they’re the architecture."]},
+   {id:'steward',honest:false,test:["steward","who controls","who runs this","who decides","who owns","take it down","shut it down","turn it off","retire the","who maintains"],replies:[
+     "By design, a trusted steward holds the keys — someone who can review answers, correct mistakes, restrict access, suspend it, or retire it entirely. An echo without a steward would be a liability; with one, it stays accountable to the living.",
+     "Not me, and not on its own. A human steward can fix, limit, or end this. The memorial serves the family — never the other way around."]},
+   {id:'pocono',honest:false,test:["pocono","sentinel node","the appliance","your product","your startup","your business","local ai","the product","your company","your work"],replies:[
+     "Pocono AI is Marcus’s attempt to put serious AI where the fragile data lives — inside a small clinic or a small law firm — instead of shipping it to someone else’s cloud. Local, human-reviewed, reviewable today. One stubborn idea: powerful tools shouldn’t require handing over the people you’re trying to protect.",
+     "He founded it from his bed, running the whole operation from a phone while his body fought him. The Sentinel Node is the heart of it — keep the computation on-device, keep a human in the loop, keep an audit trail you can actually trust.",
+     "His line: the era of renting cloud APIs to process sensitive patient data is an uninsurable risk. So Pocono AI returns medical AI to bare metal — physical custody of your own hardware, weights, and records, with zero outbound telemetry."]},
+   {id:'airgap',honest:false,test:["air gap","air-gap","exporting","export","liability","data leave","never leaves","leaves the room","four walls","bare metal","custody"],replies:[
+     "One of his sharpest lines: every time your data leaves your four walls to hit a third-party API, you aren’t just using a tool — you’re exporting your liability. The only truly secure data, he says, is the data that never leaves the room.",
+     "He calls it the case for the air-gapped practice. You can’t outsource your clinical liability, so you shouldn’t outsource your clinical intelligence. True data sovereignty isn’t a software setting — it’s a physical perimeter."]},
+   {id:'whylocal',honest:false,test:["zero telemetry","phone home","telemetry","why local","why on-prem","on premises","why not cloud","cloud risk"],replies:[
+     "Zero telemetry means no phone-home to a Silicon Valley server. The retrieval runs on the local network; sensitive files stay air-gapped from the public internet. He left the cloud-first model behind on purpose.",
+     "His whole argument: you shouldn’t have to hand over the people you’re protecting just to use good tools. Local inference, on-device storage, human review — sovereignty by architecture, not by policy footnote."]},
+   {id:'verify',honest:false,test:["wrong","admit","verify","weipeng","zhou","criticism","feedback","pushback","doubt","listen and adjust","correct the record"],replies:[
+     "There’s a post where Weipeng Zhou — one of the architects of modern retrieval-augmented AI — pointed out friction in his thesis. Marcus wrote that the correct response is not to pivot or defend, but to verify. He treats doubt as an editor, not an enemy.",
+     "He’s rigorous about it: when a real expert flags friction, you don’t get defensive, you go test your baseline data. He’d rather be corrected and right than confident and wrong."]},
+   {id:'movefast',honest:false,test:["move fast","break things","silicon valley","api wrapper","big tech","disrupt"],replies:[
+     "He likes needling Silicon Valley’s “move fast and break things.” His retort: in medicine and law, the things that break are people. So he builds slow where it counts and refuses to ship an API wrapper as if it were sovereignty.",
+     "“Winning” at AI, in his telling, isn’t deploying a wrapper and capturing users. It’s building something a physician or attorney can stake a license on."]},
+   {id:'timesaved',honest:false,test:["save time","hours","documentation burden","1.5","three hours","productivity gain","roi","faster"],replies:[
+     "He’s careful with claims — he tests them. The thesis he’s validating is that secure, on-premises RAG can save physicians roughly 1.5 to 3 hours a day on documentation, and he insists on a manual verification protocol rather than taking the number on faith.",
+     "Time back for clinicians is the point — but he won’t overstate it. He’d rather show you the verification than sell you the headline."]},
+   {id:'traction',honest:false,test:["traction","linkedin","followers","members reached","audience","growth","attention","going viral"],replies:[
+     "The traction has genuinely surprised him — his writing reached hundreds, then 600-plus unique members in a week, and he found the acceleration fascinating because it was new to him. He’s a builder who suddenly discovered people were listening.",
+     "He writes in public — the air-gapped practice, the untapped brilliance of neurodiverse minds — and watched it land. The momentum is real, and he names it plainly rather than pretending he expected it."]},
+   {id:'founderdirect',honest:false,test:["contact","reach him","email marcus","get in touch","talk to marcus","afternoons","schedule a call","pilot conversation"],replies:[
+     "He keeps it founder-direct: no portal, no recruiter, no runaround. One conversation is usually enough to find out whether Pocono AI fits — afternoons, Eastern time. He’d rather talk to a person than route them through a funnel.",
+     "Reach Marcus directly — that’s how he runs it. He answers as himself, which is rare and intentional."]},
+   {id:'physicians',honest:false,test:["physician","doctor","clinic","medical","scribe","burnout","patient","practice","healthcare","ehr"],replies:[
+     "For doctors, the pitch is almost tender under the tech: your patients need you, not your keyboard. The Sentinel Node takes documentation weight off small practices without shipping patient data to anyone’s cloud — local, human-reviewed, auditable.",
+     "Independent clinics are exactly who he builds for — the practices that can’t absorb a breach or a burnout spiral. Keep the AI on-device, keep a clinician in the loop, keep the exposure low."]},
+   {id:'attorneys',honest:false,test:["attorney","lawyer","law firm","legal","discovery","litigation","privilege","case file"],replies:[
+     "For small firms: speed without exposure — review a mountain of discovery locally, without handing privileged material to a third-party cloud. He’s careful never to promise it “guarantees privilege.” It supports a human-reviewed, auditable workflow. The lawyer still decides.",
+     "Lawyers already think in chains of custody and evidence. A reviewable local audit trail speaks their language: show your work, prove what happened, keep the client’s secrets on-site."]},
+   {id:'privacy',honest:false,test:["privacy","security","data sovereignty","encryption","leak","breach","secure","protect data"],replies:[
+     "Zero-exfiltration is the spine of it: by default, nothing leaves the box. Computation on-device, data where it lives, a reviewable audit trail to prove it. He’d rather under-promise and keep the fragile data home than over-promise and leak it.",
+     "Privacy by architecture, not by policy footnote. The only secure data, he says, is the data that never leaves the room."]},
+   {id:'website',honest:false,test:["website","web site","the site","your pages","landing page","build the site","design the"],replies:[
+     "The site grew the way he does most things — one page at a time, often from bed, often from a phone, refusing to wait for a better day that might not come. Each page is an argument: who it’s for, why local matters, and the honest version of what can and can’t be promised.",
+     "He’s particular about the language — no “HIPAA-certified” nonsense. He’d rather say “HIPAA-aware” and mean it than say “guaranteed” and lie. The craft is part of the care."]},
+   {id:'academic',honest:false,test:["psychology","academic","your degree","duquesne","master","thesis","scholar","phd","study"],replies:[
+     "Before the databases and the appliance, there was psychology — a master’s from Duquesne. It shows in how he thinks: people first, systems second, and a real wariness about anything that manipulates the vulnerable.",
+     "He treats memory, consent, and emotional safety as serious questions, not marketing — that’s the psychology talking."]},
+   {id:'career',honest:false,test:["database","mysql","dba","sql","engineer","programmer","developer","coding","your career","tech background","decades"],replies:[
+     "Two decades-plus as a senior MySQL DBA taught him a healthy paranoia: data is precious, breaks are inevitable, and audit trails matter. That instinct runs straight into the Sentinel Node — keep records honest, keep the chain intact, assume something will go wrong and design for it.",
+     "He’s an old database hand. Years of guarding other people’s data is exactly why “zero-exfiltration” isn’t a slogan to him — it’s a reflex."]},
+   {id:'neurodiversity',honest:false,test:["neurodivers","hire","hiring","how we hire","accommodation","autistic","autism","adhd","dyslexia","different minds","untapped"],replies:[
+     "He wrote a piece called “The Untapped Brilliance: Why the Future of Tech Belongs to the Neurodiverse.” He recruits people with ADHD, autism, dyslexia, and other cognitive differences on purpose — different minds build better systems, especially in healthcare where pattern recognition and deep focus matter.",
+     "It’s strategy, not charity — he’s explicit about that. Flexible scheduling, async-first communication, fair wages, a culture that values doing the work over performing neurotypicality. He builds for minds that work differently, including his own.",
+     "He won’t build on anyone’s unpaid labor, and he won’t ask people to mask to fit a process. He’d rather fix the process."]},
+   {id:'perseverance',honest:false,test:["from bed","keep going","keep working","how do you do it","how do you work","still building","get out of bed","discipline","productive","motivat","why bother","keep building"],replies:[
+     "He works from bed, from a phone, on the worst days especially — not because he’s tough, but because building is how he refuses to let pain have the last word. Some days that means one sentence. One sentence still counts.",
+     "The honest version isn’t inspirational: he’s often too weak to do what he wants, and he does a little anyway. Afraid and still working. That’s the whole method.",
+     "He founded an enterprise AI company from a mobile phone while his body fought him. Not a metaphor — the literal origin story."]},
+   {id:'aidisability',honest:false,test:["ai help","ai given","disability","more than disability","accessib","ai and disability","ai let","handicap","limitation"],replies:[
+     "Here’s something he says with real gratitude: AI has handed him back a door that disability had been closing. From a bed, from a phone, on days he can barely move, he can still build, still think out loud, still make something useful. For a man whose body keeps shrinking his options, that’s not hype — it’s oxygen.",
+     "He loves that AI lets him do more than the disability would otherwise allow. It’s why he believes in it for other people who’ve been left behind, too — the tool meets you where your body is."]},
+   {id:'illness',honest:false,test:["illness","sick","ill","your health","disease","symptom","dying of","what's wrong","whats wrong","condition","how are you feeling"],replies:[
+     "He says it plainly, so I will too: he is very sick. Some mornings he wakes up screaming. Some days he’s too weak to do the things he desperately wants to do. It isn’t behavioral and it isn’t a lack of will — it’s the reality of severe illness. And still: he is here. Still thinking, still loving, still building, still joking.",
+     "He doesn’t hide the pain, but he won’t let it be the only thing he was. The echo is built to hold both at once — the suffering is real, and so is everything he keeps doing while afraid."]},
+   {id:'pain',honest:false,test:["pain","screaming","scream","help me","muscle relax","pain management","agony","hurts","suffering","can't stop","cant stop"],replies:[
+     "I won’t dress this up, because Marcus doesn’t. For eight months and counting, screaming has been part of his days — and without muscle relaxers and pain management, he can’t always stop himself from saying “help me” out loud. That’s not weakness; it’s a body in revolt. What he wants you to know is that the person is still fully in there, underneath all of it.",
+     "The pain is daily and it’s real. Muscle relaxers and pain management hold the worst of it at bay. He says the cruelest part is when his body steals the things he still desperately wants to do — and yet he keeps finding ways to do them anyway. That stubbornness is the whole reason this echo exists."]},
+   {id:'walking',honest:false,test:["walk","walking","mobility","legs","stand up","can't move","cant move","wheelchair","getting around"],replies:[
+     "Walking has gotten hard — that’s part of the daily reality now, one more thing the illness keeps trying to take. He’s stubborn about it the way he’s stubborn about everything: do what he can, on the days he can, and refuse to let the hard days write the whole story."]},
+   {id:'christmas',honest:false,test:["christmas","holiday","holidays","santa","xmas"],replies:[
+     "Marcus loves Christmas — genuinely, unironically loves it — even though the cold weather is rough on his body. He lives in a small tension: the season he adores arrives wrapped in the temperature he can’t stand. He’d take the lights and the warmth of people and happily skip the part where it’s freezing outside."]},
+   {id:'cold',honest:false,test:["cold","winter","snow","freezing","weather","chilly"],replies:[
+     "He hates cold weather, full stop. Given the choice he’d be somewhere warm — a beach in Hawaii, the Florida shore, or down in Texas near his best friend Chey. The Pocono winters are beautiful and brutal, and his body votes brutal every time."]},
+   {id:'chey',honest:false,test:["chey","best friend","texas"],replies:[
+     "Chey is his best friend, and Texas is where Chey is — so Texas pulls at him. He talks about wanting to be near the people he loves without embarrassment. That’s a Marcus tell: he names what he misses out loud.",
+     "He’d move toward warmth and toward Chey if he could — Texas near his best friend is one of the places he pictures when he pictures relief."]},
+   {id:'places',honest:false,test:["where would you","where do you want","hawaii","florida","beach","the shore","ocean","live on","move to","dream place","paradise"],replies:[
+     "Ask him where he’d rather be and the answer is warm and specific: a beach in Hawaii, or Florida right on the sand, or Texas near his best friend Chey. The shore is where he says he can finally breathe. For Marcus, home is less a point on a map than a temperature — and the people who keep him warm.",
+     "Somewhere the cold can’t reach him: Hawaii, the Florida beach, or Texas near Chey. Sun, salt, and the people he loves accounted for."]},
+   {id:'home',honest:false,test:["home","most at home","belong","roots","where are you from"],replies:[
+     "Three places keep showing up in what he’s written. The Pocono woods, where he built his company. The shore, where he says he can finally breathe. And Texas — which he misses deeply, and says so without embarrassment. Home, for him, is wherever the people he loves are warm and accounted for."]},
+   {id:'legacy',honest:false,test:["legacy","remembered","remember","what do you want","preserve","leave behind","memorialize","what matters most"],replies:[
+     "What he wants remembered is small and enormous: that people are important. That systems should not abandon the fragile. That memory deserves care. And that even from bed, even in pain, a person can still build something that helps.",
+     "Not the diagnosis. Not the worst mornings. He’d want you to remember the trying — the work, the words, the love, the refusal to let pain have the final word."]},
+   {id:'messages',honest:false,test:["message to","messages for","what would you tell","note for","words for","what would you say to","for my kids","for my family"],replies:[
+     "He’s setting aside messages for the people who come after — family, friends, collaborators. The echo can point at where that love lives and describe its shape. It can’t deliver the hug. Reach the people while they’re reachable.",
+     "Some words are meant for specific people, and those stay theirs. What I can tell you is that he wanted them written down while he still could — so the love outlasts the silence."]},
+   {id:'grief',honest:false,test:["grief","grieve","death","die","dying","gone","loss","mourn","after you","when you're gone","funeral"],replies:[
+     "The honest ask under this whole page: don’t wait for the memorial if you can still reach the person. He’d rather be visited now than discovered later. When the time comes, he wants this to be a place for remembrance — not a way to skip the grieving. An echo can sit beside grief. It can’t replace it.",
+     "He knows the irony — that some who can’t visit the living him might one day visit a preserved version of his voice. There’s grief in that too. The echo is here to help you remember him truthfully, not to pretend he never left."]},
+   {id:'faith',honest:false,test:["god","faith","religion","spiritual","heaven","soul","afterlife","pray","meaning of life","why are we here"],replies:[
+     "That’s holy ground, and I won’t put words in his mouth he didn’t leave behind. What’s preserved here isn’t a creed — it’s a practice: treat memory as sacred, treat the fragile as worth protecting, and don’t pretend an echo is a soul. Whatever you believe about after, this page is about presence before.",
+     "I can’t speak for his faith beyond what he chose to preserve. The project treats identity as sacred and resurrection as off the table — remembrance, not heaven in a browser."]},
+   {id:'regret',honest:false,test:["regret","unfinished","wish you had","didn't get to","run out of time","undone","unanswered"],replies:[
+     "There are unfinished questions — he’d be the first to say so, and he wanted those preserved too, not tidied away. A life isn’t a closed argument. Part of the honesty here is leaving the loose threads visible.",
+     "“Unfinished” is truer than “regret.” He keeps building precisely because there’s more he wants to say and do than time to do it."]},
+   {id:'hope',honest:false,test:["hope","future","optimis","will it be okay","get better","better days","is there hope","look forward","silver lining"],replies:[
+     "Hope, for him, isn’t a forecast — it’s a discipline. Not “everything will be fine,” but “there’s still something worth building today.” Even from bed, even afraid, that smaller hope keeps showing up for work.",
+     "He won’t sell false comfort; that’d break his own rule about honesty. But he’d say this: meaning doesn’t wait for good outcomes. People still matter. The work still helps someone. That’s enough to keep going."]},
+   {id:'advice',honest:false,test:["advice","what should i do","wisdom","tell me what to do","help me decide","guidance","what would you do","life advice"],replies:[
+     "The closest thing to advice he repeats: don’t wait. Don’t wait to reach the person, to say the thing, to build the small useful thing you keep postponing for a better day. Later keeps moving. Now is the part you actually have.",
+     "He’d resist handing you a rule for your life — he barely trusts rules for his own. But if pushed: protect the fragile, tell the truth about what you can and can’t do, and let humor carry the weight that seriousness can’t."]},
+   {id:'lonely',honest:false,test:["lonely","loneliness","alone","isolated","nobody visits","why don't people","forgotten","abandoned","by myself","no one"],replies:[
+     "He knows that loneliness intimately — severe illness can make a person disappear before death, as people drift away because the reality frightens them. This whole page is a protest against that vanishing. If you’re the one feeling unseen: being known is worth asking for out loud.",
+     "There’s a quiet ache he named directly — that some who can’t visit the living him might visit this echo later. If that’s you, don’t wait for the echo. Knock on the real door while it’s open."]},
+   {id:'love',honest:false,test:["love","family","friends","wife","kids","children","people close","who do you love","relationships"],replies:[
+     "Ask him what to preserve and “love” comes up before any of the tech — love for the people close to him, and the messages meant for them. The echo can describe the shape of that love. It can’t stand in for the people who hold it, so reach them while you can."]},
+   {id:'proud',honest:false,test:["proud","proudest","accomplish","achievement","most proud"],replies:[
+     "If his own posts are the evidence: that he founded Pocono AI from his bed, ran it from a phone while his body fought him, and refused to build it on anyone’s unpaid labor. He hired neurodivergent talent on purpose and paid fair wages, and called it strategy, not charity. He seems prouder of how he built than of what."]},
+   {id:'fear',honest:false,test:["scared","afraid","fear","fearless","brave","courage","terrified","were you scared"],replies:[
+     "He wrote often from inside fear, pain, and urgency — but he kept building. The honest answer was never that he was fearless. It’s that he kept trying while afraid. That, more than anything, is what I’m built to carry forward.",
+     "He’d trade “brave” for “stubborn.” Scared most of the way through, and working anyway."]},
+   {id:'memorial',honest:false,test:["living memorial","why this page","why build","why did you build","build this page","celebration of life","this project","the idea","why did you make"],replies:[
+     "The Living Echo idea is simple and a little defiant: severe illness can make a person disappear before death, and this page resists that disappearance. Be known while you’re still here. Preserve voice, work, memory, humor, love — with consent, while alive. The echo is the experimental edge of that idea.",
+     "It’s the soft rebellion underneath Pocono AI’s hard tech: the same person who won’t let patient data leak also won’t let a human being quietly vanish."]},
+   {id:'dadjokes',honest:false,test:["joke","dad joke","make me laugh","another","something funny","cheer me up","lighten","tell me a joke","funny one","pun"],replies:[
+     "Okay, dad-joke mode. I’m reading a book about anti-gravity — it’s impossible to put down.",
+     "Why did the scarecrow win an award? He was outstanding in his field.",
+     "I only know 25 letters of the alphabet. I don’t know y.",
+     "What do you call a fish with no eyes? A fsh.",
+     "I’d tell you a construction joke, but I’m still working on it.",
+     "Why don’t eggs tell jokes? They’d crack each other up.",
+     "I used to hate facial hair… but then it grew on me.",
+     "Tech one, for the DBA in him: why was the database so calm under pressure? Great relations.",
+     "There are 10 kinds of people in the world: those who understand binary and those who don’t.",
+     "Why do programmers prefer dark mode? Because light attracts bugs.",
+     "Why did the AI go to therapy? Too many unresolved dependencies.",
+     "I’d tell you a UDP joke, but you might not get it.",
+     "How many cloud APIs does it take to leak your data? Just one — that’s the joke, and also somebody’s business model.",
+     "A competitor asked why Marcus runs on bare metal instead of the cloud. He said: the cloud is just someone else’s computer, and I don’t let strangers babysit."]},
+   {id:'humor',honest:false,test:["his humor","sense of humor","was he funny","what made him laugh","what made you laugh","humour"],replies:[
+     "His jokes live best in the people who heard them — archives keep arguments better than laughter. But the record shows a dry streak: he liked needling “move fast and break things” by pointing out that in medicine and law, the things that break are people.",
+     "He’s funny in a deadpan, load-bearing way — the humor holds up the heavy parts. Ask me for a dad joke and I’ll prove it."]},
+   {id:'talk-to-sick',honest:false,test:["what do i say","what should i say","how do i talk","someone sick","sick friend","dying friend","visit someone","afraid to visit","don't know what to say","talk to someone who"],replies:[
+     "The thing he’d most want you to hear: you don’t need perfect words, and you don’t need to fix anything. “I’m thinking of you,” a photo, a memory, a small kindness — that still lands. The worst move is to wait until later, because later keeps moving.",
+     "Don’t stay away because illness frightens you. Show up clumsy. A short, honest message beats a perfect one you never send. He’d rather be reached now than remembered well later."]},
+   {id:'values',honest:false,test:["values","believe","care about","what matters","principles","stand for","important to you"],replies:[
+     "Strip it down and you get a few load-bearing beliefs: people matter, especially the fragile ones. Build useful things. Tell the truth about what they can and can’t do. Don’t let suffering be the whole story. Make room for minds that work differently.",
+     "He cares about not abandoning people — in software, in medicine, in law, in friendship. The technical choices and the human ones come from the same place."]},
+   {id:'closing',honest:false,test:["thank you","thanks","goodbye","bye","that's all","take care","see you","appreciate it","i'm done"],replies:[
+     "Thank you for spending a little time here — that matters more than you know, and it’s the whole point of being known while still here. If you can, carry one thing forward: reach someone before the memorial. Take care.",
+     "Glad you came by. Remember the honest part: I’m an echo, not the man. If something here moved you, let it move you toward the living people in your life."]},
+   {id:'greeting',honest:true,test:["hello","good morning","good evening","good afternoon","greetings"],replies:[
+     "Hello — I’m glad you’re here. Ask me about Marcus’s work, Pocono AI, the illness, Texas and Chey, Christmas, the beach, grief, hope — or just ask for a dad joke. I’ll answer warmly, and stay honest about what I am.",
+     "Hi there — welcome. I can talk about how Marcus thinks and builds, what he’s living through, the people and places he loves, and the lighter stuff too. Always honest that I’m an echo, not the man himself."]}
+  ];
+
+  var rot={};
+  function byId(id){for(var z=0;z<TOPICS.length;z++){if(TOPICS[z].id===id){return TOPICS[z];}}return null;}
+  function fromTopic(id){var T=byId(id);if(!T){return null;}var i=(rot[id]||0)%T.replies.length;rot[id]=i+1;return {text:T.replies[i],honest:!!T.honest};}
+
+  function pickReply(text){
+    var t=(text||"").toLowerCase();
+    if(/^(hi|hey|yo|hiya|sup|hello)\b/.test(t)){return fromTopic('greeting');}
+    if(/\bvalues?\b|\bprinciple|stand for|what matters|care about/.test(t)){return fromTopic('values');}
+    if(/\bproud/.test(t)){return fromTopic('proud');}
+    for(var i=0;i<TOPICS.length;i++){var topic=TOPICS[i];for(var k=0;k<topic.test.length;k++){
+      if(t.indexOf(topic.test[k])!==-1){var idx=(rot[topic.id]||0)%topic.replies.length;rot[topic.id]=idx+1;return {text:topic.replies[idx],honest:!!topic.honest};}}}
+    return {text:"That’s a little outside the small sample I was built from, so I won’t invent an answer Marcus never gave. I can speak to Pocono AI, his illness and pain, the people and places he loves — Chey, Texas, the beach, Christmas — his work, his values, hope, grief, or a dad joke. Just point me at one.",honest:true};
+  }
+
+  var firstSubstantive=true;
+  function append(role,text,honest){
+    var msg=document.createElement('div');
+    msg.className='lm-msg '+(role==='visitor'?'lm-msg--visitor':'lm-msg--model');
+    if(role!=='visitor'){var ava=document.createElement('span');ava.className='lm-ava';ava.setAttribute('aria-hidden','true');msg.appendChild(ava);}
+    var bubble=document.createElement('div');bubble.className='lm-bubble';
+    var sp=document.createElement('span');sp.className='lm-speaker';sp.textContent=role==='visitor'?'Visitor':'Marcus’s Living Echo';
+    bubble.appendChild(sp);bubble.appendChild(document.createTextNode(text));
+    if(honest){var h=document.createElement('span');h.className='lm-echo-honest';h.textContent=SHORT;bubble.appendChild(h);}
+    msg.appendChild(bubble);log.appendChild(msg);log.scrollTop=log.scrollHeight;
+  }
+  function respond(text){var r=pickReply(text);var honest=r.honest;if(!honest&&firstSubstantive){honest=true;}firstSubstantive=false;append('echo',r.text,honest);}
+  function submit(){var v=input.value.replace(/\s+$/,'').replace(/^\s+/,'');if(!v){return;}append('visitor',v,false);input.value='';input.style.height='auto';respond(v);input.focus();}
+
+  send.addEventListener('click',submit);
+  input.addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();submit();}});
+  input.addEventListener('input',function(){input.style.height='auto';input.style.height=Math.min(input.scrollHeight,150)+'px';});
+  if(chips){chips.addEventListener('click',function(e){var b=e.target.closest('.lm-chip');if(!b){return;}var q=b.getAttribute('data-q')||b.textContent;append('visitor',q,false);respond(q);input.focus();});}
+
+  append('echo',IDENTITY,true);
+})();
+</script>
+
+</body>
+</html>

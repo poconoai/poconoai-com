@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Generate a custom AI sovereignty attestation letter for your practice. Free, browser-based, no data transmitted. Covers on-premises AI and HIPAA controls.">
+    <meta name="keywords" content="AI compliance attestation, HIPAA attestation letter, AI sovereignty attestation, PHI compliance AI, regulator AI report, on-premises AI, local AI, sovereign AI, zero cloud AI, HIPAA-governed AI environments, healthcare AI, legal AI, Sentinel Node, Pocono AI, data sovereignty, air-gapped AI, no cloud, EHR automation, RAG AI, independent medical practice AI, law firm AI">
+    <title>AI Sovereignty Attestation Generator | Pocono AI</title>
+    <meta property="og:title" content="Generate Your AI Compliance Attestation Letter — Free">
+    <meta property="og:description" content="Answer 8 questions. Get a plain-language Sovereignty Attestation Letter you can hand to a regulator, insurer, or attorney. Runs locally — zero data sent anywhere.">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Pocono AI">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://poconoai.com/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Pocono AI — Sovereign on-premises AI">
+    <meta property="og:url" content="https://poconoai.com/compliance.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI Sovereignty Attestation Generator | Free | Pocono AI">
+    <meta name="twitter:description" content="Answer 8 questions. Get a plain-language Sovereignty Attestation Letter for regulators, insurers, or attorneys. Free.">
+    <meta name="twitter:image" content="https://poconoai.com/og-image.jpg">
+    <meta name="theme-color" content="#0B0F13">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="alternate icon" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon-180x180.png">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="alternate icon" href="favicon.ico"><link rel="stylesheet" href="styles.css?v=402">
+    <link rel="canonical" href="https://poconoai.com/compliance.html">
+
+    <style>
+        .attestation-wrapper {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 4%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            align-items: start;
+        }
+
+        @media (max-width: 720px) { .attestation-wrapper { grid-template-columns: 1fr; } }
+
+        .att-form {
+            background: var(--card-dark);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 14px;
+            padding: 28px 24px;
+        }
+
+        .att-group { margin-bottom: 20px; }
+
+        .att-label {
+            display: block;
+            font-size: 0.78em;
+            font-weight: 700;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: 6px;
+        }
+
+        .att-input, .att-select, .att-textarea {
+            width: 100%;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            color: var(--white);
+            font-size: 0.9em;
+            font-family: inherit;
+            padding: 10px 14px;
+            outline: none;
+            transition: border-color 0.2s;
+            box-sizing: border-box;
+        }
+
+        .att-input:focus, .att-select:focus, .att-textarea:focus {
+            border-color: var(--teal);
+        }
+
+        .att-select option { background: #0B1F3A; }
+
+        .att-textarea { resize: vertical; min-height: 80px; }
+
+        /* Document preview */
+        .att-preview {
+            position: sticky;
+            top: 80px;
+        }
+
+        .att-doc {
+            background: #FAFAFA;
+            border-radius: 12px;
+            padding: 32px 28px;
+            color: #222;
+            font-family: 'Fraunces', 'Georgia', serif;
+            font-size: 0.88em;
+            line-height: 1.8;
+            border: 1px solid #DDD;
+            min-height: 600px;
+            position: relative;
+        }
+
+        .att-doc-header {
+            text-align: center;
+            border-bottom: 2px solid #0B1F3A;
+            padding-bottom: 16px;
+            margin-bottom: 20px;
+        }
+
+        .att-doc-title {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: #0B1F3A;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin: 0 0 4px;
+        }
+
+        .att-doc-subtitle {
+            font-size: 0.82em;
+            color: #555;
+            margin: 0;
+        }
+
+        .att-doc-section {
+            margin-bottom: 16px;
+        }
+
+        .att-doc-section-title {
+            font-weight: 700;
+            color: #0B1F3A;
+            font-size: 0.9em;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        .att-doc p {
+            margin: 0 0 12px;
+            color: #333;
+        }
+
+        .att-placeholder {
+            color: #188B96;
+            font-style: italic;
+        }
+
+        .att-doc-sig {
+            margin-top: 32px;
+            padding-top: 16px;
+            border-top: 1px solid #CCC;
+        }
+
+        .att-sig-line {
+            border-bottom: 1px solid #333;
+            margin: 20px 0 4px;
+            height: 1px;
+        }
+
+        .att-sig-label {
+            font-size: 0.75em;
+            color: #777;
+        }
+
+        .att-watermark {
+            position: absolute;
+            bottom: 16px;
+            right: 16px;
+            font-size: 0.65em;
+            color: #BBB;
+            font-family: 'Syne', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .att-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+        }
+
+        .att-risk-score {
+            background: var(--card-dark);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 10px;
+            padding: 16px 20px;
+            margin-bottom: 16px;
+        }
+
+        .att-risk-label {
+            font-size: 0.75em;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--muted);
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .att-risk-bar-track {
+            height: 8px;
+            background: rgba(255,255,255,0.06);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 6px;
+        }
+
+        .att-risk-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.5s ease, background 0.3s;
+        }
+
+        .att-risk-verdict {
+            font-size: 0.82em;
+            font-weight: 700;
+            margin-top: 4px;
+        }
+    </style>
+<link rel="stylesheet" href="nav-v2026.css?v=402">
+<link rel="stylesheet" href="brand-v292.css?v=402">
+<script>
+// Pocono AI v169 — Zero-flash banner dismissal.
+// Strategy: inject <style> tag synchronously BEFORE banner HTML parses,
+// so dismissed banners never render at all (no flash). DOM removal still
+// happens for safety. ?showbanners=1 URL param re-shows everything.
+(function(){
+  var ids=[];
+
+  // Escape hatch: ?showbanners=1 clears all dismiss flags for testing
+  try {
+    if (location.search.indexOf('showbanners=1') !== -1) {
+      ids.forEach(function(id){ localStorage.removeItem('pai_dismissed_'+id); });
+      localStorage.removeItem('poconoPilot');
+      localStorage.removeItem('advisoryBarDismissed');
+    }
+  } catch(e) {}
+
+  // v246 Stage 1 — Legacy migration block removed.
+  // Was dead code containing a JS syntax error (adjacent string literals)
+  // that broke the entire banner-dismiss IIFE on ~46 pages.
+
+  // Build CSS rule list for dismissed banners and inject synchronously.
+  // This runs in <head> BEFORE banner HTML is parsed, so dismissed bars
+  // never paint — eliminating the flash entirely.
+  var hideRules = [];
+  ids.forEach(function(id){
+    try {
+      if (localStorage.getItem('pai_dismissed_'+id) === '1') {
+        hideRules.push('#'+id+'{display:none !important;}');
+      }
+    } catch(e) {}
+  });
+  if (hideRules.length) {
+    var style = document.createElement('style');
+    style.id = 'pai-banner-hide';
+    style.textContent = hideRules.join('');
+    (document.head || document.documentElement).appendChild(style);
+  }
+
+  function dismiss(id){
+    try { localStorage.setItem('pai_dismissed_'+id,'1'); } catch(e) {}
+    var el = document.getElementById(id);
+    if (el) {
+      el.style.setProperty('display','none','important');
+      el.setAttribute('aria-hidden','true');
+      if (el.parentNode) {
+        el.parentNode.removeChild(el);
+      }
+    }
+  }
+
+  // Cleanup pass — remove dismissed banners from DOM after parse,
+  // belt-and-suspenders alongside the CSS hide.
+  function cleanup(){
+    ids.forEach(function(id){
+      try {
+        if (localStorage.getItem('pai_dismissed_'+id) === '1') {
+          var el = document.getElementById(id);
+          if (el && el.parentNode) {
+            el.parentNode.removeChild(el);
+          }
+        }
+      } catch(e) {}
+    });
+  }
+
+  function bind(){
+    ids.forEach(function(id){
+      var btn = document.getElementById(id+'-close');
+      if (btn && !btn.dataset.boundDismiss) {
+        btn.dataset.boundDismiss = '1';
+        btn.addEventListener('click', function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          dismiss(id);
+        });
+        btn.addEventListener('touchend', function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          dismiss(id);
+        }, {passive:false});
+      }
+    });
+    cleanup();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bind);
+  } else {
+    bind();
+  }
+})();
+</script>
+
+<!-- JSON-LD: v328 structured-data pass -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://poconoai.com/compliance.html",
+      "url": "https://poconoai.com/compliance.html",
+      "datePublished": "2026-06-01",
+      "dateModified": "2026-06-01"
+      ,
+      "name": "AI Sovereignty Attestation Generator | Pocono AI",
+      "description": "Free browser-based tool that generates a customized AI governance attestation letter for healthcare or legal practices. Describes your on-premises AI architecture, data handling posture, and HIPAA-aligned controls. All generation runs locally \u2014 no data transmitted.",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Any (browser-based)",
+      "isPartOf": {
+        "@id": "https://poconoai.com/#website"
+      },
+      "publisher": {
+        "@id": "https://poconoai.com/#organization"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "audience": [
+        {
+          "@type": "Audience",
+          "audienceType": "Physicians and independent medical practices"
+        },
+        {
+          "@type": "Audience",
+          "audienceType": "Attorneys and independent law firms"
+        }
+      ],
+      "inLanguage": "en-US"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+<div id="reading-progress" aria-hidden="true"></div>
+
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- INCLUDE:HEADER -->
+<div id="hitl-notice" style="background:#0a1929;padding:4px 16px;text-align:center;font-size:12px;color:#4a5568;border-bottom:1px solid rgba(255,255,255,0.06);letter-spacing:0.01em;">Human-in-the-Loop required: licensed professionals verify all outputs before clinical or legal action</div>
+<header role="banner">
+  <div class="header-inner">
+    <a href="/index.html" class="logo" aria-label="Pocono AI Home">
+      <img src="/logo.svg?v=402" alt="" width="36" height="36" decoding="async" loading="eager" aria-hidden="true" style="display:inline-block;">
+      Pocono <span>AI</span>
+    </a>
+    <nav id="desktop-nav" aria-label="Main navigation">
+      <div class="nav-item"><a href="/index.html" class="nav-direct">Home</a></div>
+      <div class="nav-item"><a href="/for-physicians.html" class="nav-direct">Physicians</a></div>
+      <div class="nav-item"><a href="/for-attorneys.html" class="nav-direct">Attorneys</a></div>
+      <div class="nav-item"><a href="/sentinel-node.html" class="nav-direct nav-hub" style="color:#d5a94f;border:1px solid rgba(213,169,79,0.45);border-radius:999px;padding:6px 13px;">Sentinel Node</a></div>
+      <div class="nav-item"><a href="/living-memorials/" class="nav-direct">Living Echo</a></div>
+      <div class="nav-item"><a href="/contact.html" class="nav-direct">Contact</a></div>
+      <div class="nav-item" data-dropdown="menu-more">
+        <button type="button" class="nav-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="menu-more">More <span class="nav-chevron" aria-hidden="true">&#9662;</span></button>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <a href="/contact.html#pilot" class="nav-cta nav-cta-primary">Request a Pilot</a>
+      <button type="button" class="pa-search-trigger" data-search-open aria-label="Search (press / or Ctrl-K)" aria-haspopup="dialog" aria-expanded="false">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span class="pa-st-label">Search</span><kbd data-pa-keyhint>Ctrl K</kbd>
+      </button>
+      <button type="button" class="header-icon-btn" id="mobile-menu" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav-panel">
+        <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- "More" overflow dropdown — sibling of <header> so position:fixed escapes header's stacking context. Wired by nav.js via data-dropdown="menu-more". -->
+<div class="nav-dropdown" id="menu-more" aria-label="More navigation">
+  <p class="nav-dd-section">Products</p>
+  <a href="/engineering-drafting/">Drafting &amp; Engineering Edition</a>
+  <a href="/sentinel-home/">Sentinel Home Edition</a>
+  <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability — Assistive Tools &#x2605;</a>
+  <a href="/living-memorials/enterprise-estate-continuity.html">Enterprise Estate Continuity</a>
+  <p class="nav-dd-section">Capabilities</p>
+  <a href="/evidence-room.html">Evidence Room</a>
+  <a href="/push-button-deliverables.html">Push-Button Deliverables</a>
+  <a href="/pilot-readiness-kit.html">Pilot Kit</a>
+  <a href="/pilot-program.html">Pilot Program</a>
+  <a href="/how-it-works.html">How It Works</a>
+  <p class="nav-dd-section">Hubs &amp; Company</p>
+  <a href="/training.html">Training Hub</a>
+  <a href="/documentation-hub/">Document Hub</a>
+  <a href="/global/">Global Hub</a>
+  <a href="/investors-hub.html">Investor Hub</a>
+  <a href="/valuation-dashboard.html">Valuation Dashboard</a>
+  <a href="/about.html">About</a>
+  <p class="nav-dd-section">Trust &amp; Legal</p>
+  <a href="/transparency.html">Transparency</a>
+  <a href="/audit.html">Audit Log</a>
+  <a href="/privacy.html">Privacy</a>
+  <a href="/sitemap.html">Sitemap</a>
+</div>
+<!-- Site search is provided by the self-contained search.js asset (command palette: / or Ctrl/Cmd-K). -->
+
+<!-- Mobile panel: full-screen slide-in. v396 nav — hub tiles + grouped links + Sentinel Node + Engineering. -->
+<nav id="mobile-nav-panel" aria-label="Mobile navigation" aria-hidden="true" role="dialog" aria-modal="true">
+
+  <!-- Hub tiles: Sentinel Node, Documentation Hub, Training Hub, Global Hub -->
+  <div style="padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,0.07);">
+    <p style="font-size:0.65em;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.28);margin:0 0 10px;padding:0 2px;">Hubs</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <a href="/sentinel-node.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(213,169,79,0.1);border:1px solid rgba(213,169,79,0.35);border-radius:10px;color:#d5a94f;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Sentinel Node</a>
+      <a href="/documentation-hub/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(0,194,168,0.1);border:1px solid rgba(0,194,168,0.35);border-radius:10px;color:#00c2a8;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Docs Hub</a>
+      <a href="/training.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.35);border-radius:10px;color:#a78bfa;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Training Hub</a>
+      <a href="/global/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(122,240,220,0.07);border:1px solid rgba(122,240,220,0.3);border-radius:10px;color:#7af0dc;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Global Hub</a>
+    </div>
+  </div>
+
+  <!-- Core paths -->
+  <div class="mob-static-links">
+    <a href="/index.html">Home</a>
+    <a href="/for-physicians.html">Physicians</a>
+    <a href="/for-attorneys.html">Attorneys</a>
+    <a href="/engineering-drafting/">Engineering &amp; Drafting</a>
+    <a href="/pilot-program.html">Pilot Program</a>
+    <a href="/how-it-works.html">How It Works</a>
+    <a href="/trust.html">Trust &amp; Audit</a>
+    <a href="/pricing.html">Pricing</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/living-memorials/">Living Echo</a>
+    <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability</a>
+    <a href="/about.html">About</a>
+    <a href="/team.html" style="color:rgba(255,255,255,0.6);">Team &amp; Leadership</a>
+    <a href="/valuation-dashboard.html" style="color:rgba(255,255,255,0.6);">Valuation Dashboard</a>
+    <a href="/careers.html" style="color:rgba(255,255,255,0.6);">Careers</a>
+    <a href="/sentinel-demo.html" style="color:rgba(255,255,255,0.6);">Demo</a>
+    <a href="/sitemap.html" style="color:rgba(255,255,255,0.45);">Sitemap</a>
+    <a href="/transparency.html" style="color:rgba(255,255,255,0.45);">Transparency</a>
+    <a href="/privacy.html" style="color:rgba(255,255,255,0.45);">Privacy</a>
+  </div>
+
+  <a href="/contact.html#pilot" class="mob-cta">Request a Pilot</a>
+</nav>
+<!-- /INCLUDE:HEADER -->
+
+
+<main id="main-content" tabindex="-1">
+<span id="main" aria-hidden="true"></span>
+<div class="page-back-link"><a href="index.html" class="back-link-anchor">&#8592; Home</a></div>
+
+
+    <section class="hero-section">
+        <div class="sentinel-lockup" aria-label="Sentinel Node — AI Sovereignty Attestation">
+              <svg class="sentinel-lockup-mark" viewBox="0 0 64 64" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
+          <!-- v311b: rotated diamond + C-curve loop + summit dot. Inherits currentColor from CSS context. -->
+          <g transform="rotate(45 32 32)">
+            <rect x="12" y="12" width="40" height="40" rx="8" ry="8"/>
+            <path d="M43 22 L26 22 A6 6 0 0 0 20 28 L20 36 A6 6 0 0 0 26 42 L41 42"/>
+          </g>
+          <circle cx="32" cy="9" r="3" fill="currentColor" stroke="none"/>
+        </svg>
+              <div class="sentinel-lockup-rule"></div>
+              <div class="sentinel-lockup-text">
+                <span class="sentinel-lockup-name">Sentinel Node</span>
+                <span class="sentinel-lockup-tag">AI Compliance Tool</span>
+              </div>
+            </div>
+        <h1>Generate Your AI Sovereignty Attestation Letter</h1>
+        <p class="hero-plain">Answer 8 questions about your current AI setup. Get a formatted letter you can hand to a regulator, insurer, or attorney showing exactly how your practice handles patient data in AI systems. Free. Instant. Runs in your browser — nothing sent anywhere.</p>
+        <p style="font-size:0.8em;color:var(--muted);margin-top:8px;">&#128274; Zero data transmitted. This tool generates your document entirely in your browser.</p>
+    </section>
+
+    <section class="trust-badges-section" aria-label="Built on enterprise infrastructure">
+        <p class="trust-badges-eyebrow">Built on enterprise infrastructure</p>
+        <div class="trust-badges-row">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 32" width="120" height="32" role="img" aria-label="Dell" class="badge-svg"><text x="60" y="24" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif" font-weight="800" font-size="22" letter-spacing="3" fill="currentColor">DELL</text></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 32" width="150" height="32" role="img" aria-label="NVIDIA" class="badge-svg"><text x="75" y="24" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif" font-weight="800" font-size="22" letter-spacing="3" fill="currentColor">NVIDIA</text></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 32" width="150" height="32" role="img" aria-label="Qdrant" class="badge-svg"><text x="75" y="24" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif" font-weight="800" font-size="22" letter-spacing="2" fill="currentColor">Qdrant</text></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 32" width="150" height="32" role="img" aria-label="Ollama" class="badge-svg"><text x="75" y="24" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif" font-weight="800" font-size="22" letter-spacing="2" fill="currentColor">Ollama</text></svg>
+        </div>
+    </section>
+
+    <div class="attestation-wrapper">
+
+        <!-- FORM -->
+        <div class="att-form">
+            <h2 style="color:var(--white);margin:0 0 20px;font-size:1.05em;">Practice Information</h2>
+
+            <div class="att-group">
+                <label class="att-label" for="prac-name">Practice / Firm Name</label>
+                <input class="att-input" id="prac-name" type="text" autocomplete="organization" placeholder="e.g. Pocono Family Medicine" oninput="generate()">
+            </div>
+
+            <div class="att-group">
+                <label class="att-label" for="prac-type">Practice Type</label>
+                <select class="att-select" id="prac-type" onchange="generate()">
+                    <option value="medical">Independent Medical Practice</option>
+                    <option value="legal">Independent Law Firm</option>
+                    <option value="dental">Dental Practice</option>
+                    <option value="mental">Behavioral / Mental Health Practice</option>
+                </select>
+            </div>
+
+            <div class="att-group">
+                <label class="att-label" for="signatory">Authorized Signatory Name &amp; Title</label>
+                <input class="att-input" id="signatory" type="text" autocomplete="name" placeholder="e.g. Dr. Jane Smith, MD — Practice Owner" oninput="generate()">
+            </div>
+
+            <div class="att-group">
+                <label class="att-label" for="prac-address">Practice Address</label>
+                <input class="att-input" id="prac-address" type="text" autocomplete="street-address" placeholder="e.g. 123 Main St, East Stroudsburg, PA 18301" oninput="generate()">
+            </div>
+
+            <h2 style="color:var(--white);margin:24px 0 16px;font-size:1.05em;">AI System Configuration</h2>
+
+            <div class="att-group">
+                <label class="att-label" for="ai-system">AI System in Use</label>
+                <select class="att-select" id="ai-system" onchange="generate()">
+                    <option value="sentinel">Pocono AI Sentinel Node™ (on-premises)</option>
+                    <option value="cloud_baa">Cloud AI with BAA (e.g. Nuance DAX, Microsoft Copilot)</option>
+                    <option value="cloud_no_baa">Cloud AI without BAA (e.g. ChatGPT, Claude.ai)</option>
+                    <option value="none">No AI system currently in use</option>
+                    <option value="evaluating">Evaluating options — not yet deployed</option>
+                </select>
+            </div>
+
+            <div class="att-group">
+                <label class="att-label" for="data-types">PHI / Confidential Data Types Involved</label>
+                <select class="att-select" id="data-types" onchange="generate()">
+                    <option value="full_phi">Full EHR / Patient records (PHI)</option>
+                    <option value="clinical_notes">Clinical notes and documentation only</option>
+                    <option value="admin_only">Administrative only — no clinical data</option>
+                    <option value="legal_priv">Attorney-client privileged documents</option>
+                    <option value="mixed">Mixed — clinical + administrative</option>
+                </select>
+            </div>
+
+            <div class="att-group">
+                <label class="att-label" for="baa-status">BAA Executed?</label>
+                <select class="att-select" id="baa-status" onchange="generate()">
+                    <option value="yes">Yes — BAA on file with AI vendor</option>
+                    <option value="no">No — no BAA executed</option>
+                    <option value="na_local">N/A — system is fully on-premises, no vendor data access</option>
+                    <option value="unknown">Unknown / Under review</option>
+                </select>
+            </div>
+
+            <div class="att-group">
+                <label class="att-label" for="intended-recipient">This Letter Is Addressed To</label>
+                <input class="att-input" id="intended-recipient" type="text" autocomplete="off" placeholder="e.g. HHS Office for Civil Rights, Insurance Carrier, Opposing Counsel" oninput="generate()">
+            </div>
+
+            <div class="att-group">
+                <label class="att-label" for="add-context">Additional Context (optional)</label>
+                <textarea class="att-textarea" id="add-context" placeholder="e.g. This attestation is being provided in response to a compliance inquiry dated..." oninput="generate()"></textarea>
+            </div>
+
+            <button class="cta-button" style="width:100%;margin-top:4px;" onclick="generate()">&#8635; Regenerate Letter</button>
+        </div>
+
+        <!-- PREVIEW + RISK SCORE -->
+        <div class="att-preview">
+
+            <!-- Risk score -->
+            <div class="att-risk-score">
+                <div class="att-risk-label">Current AI Compliance Posture</div>
+                <div class="att-risk-bar-track">
+                    <div class="att-risk-fill" id="risk-fill" style="width:0%"></div>
+                </div>
+                <div class="att-risk-verdict" id="risk-verdict">Configure your system above</div>
+            </div>
+
+            <!-- Document -->
+            <div class="att-doc" id="att-document">
+                <div class="att-doc-header">
+                    <div class="att-doc-title">AI Data Sovereignty Attestation</div>
+                    <div class="att-doc-subtitle">Confidential — <span id="doc-prac-name" class="att-placeholder">[Practice Name]</span></div>
+                </div>
+
+                <div class="att-doc-section">
+                    <div class="att-doc-section-title">Practice Identification</div>
+                    <p id="doc-practice-block"><span class="att-placeholder">[Complete the form to generate your attestation letter]</span></p>
+                </div>
+
+                <div class="att-doc-section">
+                    <div class="att-doc-section-title">AI System Description</div>
+                    <p id="doc-system-block"><span class="att-placeholder">[AI system information will appear here]</span></p>
+                </div>
+
+                <div class="att-doc-section">
+                    <div class="att-doc-section-title">Data Handling &amp; PHI Transmission</div>
+                    <p id="doc-phi-block"><span class="att-placeholder">[PHI handling description will appear here]</span></p>
+                </div>
+
+                <div class="att-doc-section">
+                    <div class="att-doc-section-title">Compliance Framework</div>
+                    <p id="doc-compliance-block"><span class="att-placeholder">[Compliance posture will appear here]</span></p>
+                </div>
+
+                <div class="att-doc-section">
+                    <div class="att-doc-section-title">Attestation</div>
+                    <p id="doc-attestation-block"><span class="att-placeholder">[Attestation statement will appear here]</span></p>
+                </div>
+
+                <div class="att-doc-sig">
+                    <div class="att-sig-line"></div>
+                    <div class="att-sig-label" id="doc-sig-label">Authorized Signatory</div>
+                    <div style="margin-top:16px;">
+                        <div class="att-sig-line" style="width:40%;display:inline-block;"></div>
+                    </div>
+                    <div class="att-sig-label">Date</div>
+                </div>
+
+                <div class="att-watermark">Generated by poconoai.com &mdash; For reference only &mdash; Consult legal counsel</div>
+            </div>
+
+            <div class="att-actions">
+                <button class="cta-button" onclick="printDoc()" style="flex:1;">&#128438; Print / Save as PDF</button>
+                <button class="cta-button cta-button-light" onclick="copyText()" style="flex:1;" id="copy-btn">&#128203; Copy Text</button>
+            </div>
+
+            <p style="color:var(--muted);font-size:0.72em;margin-top:10px;line-height:1.6;">This attestation letter is a starting point — not legal advice. Have your attorney review before submitting to any regulatory body or opposing counsel.</p>
+        </div>
+
+    </div><!-- /wrapper -->
+
+    <!-- WHY THIS MATTERS -->
+    <section style="max-width:960px;margin:48px auto 0;padding:0 4%;">
+        <h2>Why Regulators Ask About AI Systems</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h3>OCR Investigations</h3>
+                <p style="color:var(--light-text);font-size:0.88em;line-height:1.7;">The HHS Office for Civil Rights has begun asking about AI tool usage in breach investigations. A practice that cannot articulate how their AI system handles PHI — or that discovers it has been transmitting PHI to cloud vendors without a BAA — faces significantly elevated penalty risk.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Malpractice Defense</h3>
+                <p style="color:var(--light-text);font-size:0.88em;line-height:1.7;">When AI-generated clinical documentation is involved in a malpractice claim, attorneys will ask how the AI was configured, what data it accessed, and whether it could have introduced errors. A sovereignty attestation establishes your system's architecture as part of your defense record.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Insurance Renewals</h3>
+                <p style="color:var(--light-text);font-size:0.88em;line-height:1.7;">Malpractice and cyber liability insurers are beginning to ask about AI tool usage during renewals. Practices using cloud AI without BAAs may face coverage exclusions or premium increases. Documentation of your compliance posture is increasingly expected.</p>
+            </div>
+            <div class="feature-card">
+                <h3>State Attorney General</h3>
+                <p style="color:var(--light-text);font-size:0.88em;line-height:1.7;">Several states (CA, NY, TX) have passed or are passing state-level healthcare AI disclosure requirements. Being able to immediately produce a clear, accurate description of your AI system's data handling is not optional — it is a compliance baseline.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="cta-container">
+        <h2 style="color:white;border-bottom:none;margin-top:0;">The Cleanest Attestation Is No Transmission</h2>
+        <p style="color:var(--light-text);max-width:520px;margin:0 auto 24px;line-height:1.8;">A Sentinel Node attestation is one paragraph: the system runs locally, processes no external API calls, and PHI does not leave the building. No BAA drama. No cloud vendor to investigate. Just locally deployed infrastructure under your operational control — and under the governance framework of your jurisdiction, not a vendor's.</p>
+        <a href="mailto:marcus@poconoai.com?subject=Compliance%20Attestation%20%E2%80%94%20PoconoAI.com" class="cta-button">&#9993; Talk to Marcus</a>
+        <a href="trust.html" class="cta-button cta-button-light" style="margin-left:12px;">Local Deployment Architecture</a>
+    </section>
+
+
+<!-- Concept cluster v336 -->
+<section style="max-width:1100px;margin:40px auto 0;padding:28px 24px 32px;border-top:1px solid rgba(255,255,255,0.07);">
+  <p style="margin:0 0 14px;font-size:0.72em;font-weight:800;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.3);">Why Local AI — Core Concepts</p>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;">
+    <a href="sentinel-node.html" style="display:inline-block;padding:8px 14px;background:rgba(0,194,168,0.08);border:1px solid rgba(0,194,168,0.28);border-radius:8px;color:#2dd4bf;text-decoration:none;font-size:0.86rem;font-weight:600;">Sentinel Node</a>
+    <a href="local-ai-inference.html" style="display:inline-block;padding:8px 14px;background:rgba(0,194,168,0.06);border:1px solid rgba(0,194,168,0.2);border-radius:8px;color:#9eb9cc;text-decoration:none;font-size:0.86rem;">Local AI Inference</a>
+    <a href="data-sovereignty-ai.html" style="display:inline-block;padding:8px 14px;background:rgba(0,194,168,0.06);border:1px solid rgba(0,194,168,0.2);border-radius:8px;color:#9eb9cc;text-decoration:none;font-size:0.86rem;">Data Sovereignty</a>
+    <a href="zero-telemetry-ai.html" style="display:inline-block;padding:8px 14px;background:rgba(0,194,168,0.06);border:1px solid rgba(0,194,168,0.2);border-radius:8px;color:#9eb9cc;text-decoration:none;font-size:0.86rem;">Zero Telemetry</a>
+    <a href="zero-exfiltration-ai.html" style="display:inline-block;padding:8px 14px;background:rgba(0,194,168,0.06);border:1px solid rgba(0,194,168,0.2);border-radius:8px;color:#9eb9cc;text-decoration:none;font-size:0.86rem;">Zero Exfiltration</a>
+    <a href="ai-governance-layer.html" style="display:inline-block;padding:8px 14px;background:rgba(0,194,168,0.06);border:1px solid rgba(0,194,168,0.2);border-radius:8px;color:#9eb9cc;text-decoration:none;font-size:0.86rem;">AI Governance Layer</a>
+    <a href="regulated-ai-infrastructure.html" style="display:inline-block;padding:8px 14px;background:rgba(0,194,168,0.06);border:1px solid rgba(0,194,168,0.2);border-radius:8px;color:#9eb9cc;text-decoration:none;font-size:0.86rem;">Regulated AI Infrastructure</a>
+    <a href="ai-governance-audit-trail.html" style="display:inline-block;padding:8px 14px;background:rgba(0,194,168,0.06);border:1px solid rgba(0,194,168,0.2);border-radius:8px;color:#9eb9cc;text-decoration:none;font-size:0.86rem;">AI Governance Audit Trail</a>
+    <a href="regulated-ai-solutions.html" style="display:inline-block;padding:8px 14px;background:rgba(0,194,168,0.08);border:1px solid rgba(0,194,168,0.28);border-radius:8px;color:#2dd4bf;text-decoration:none;font-size:0.86rem;font-weight:600;">Solutions by Use Case &rarr;</a>
+  </div>
+</section>
+</main>
+
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 root-relative nav fix, Living Echo rebrand, Engineering & Drafting + Enterprise Estate Continuity links added (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- INCLUDE:FOOTER -->
+<footer role="contentinfo" style="background:#051622;border-top:1px solid rgba(255,255,255,0.08);padding:40px 24px 28px;font-size:0.85em;color:#8899aa;">
+  <div style="max-width:1180px;margin:0 auto;">
+
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:0 0 28px;margin-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.07);">
+      <div style="max-width:560px;">
+        <p style="margin:0 0 6px;font-size:1.05em;font-weight:700;color:#fff;">Local AI infrastructure for regulated practices.</p>
+        <p style="margin:0;font-size:0.95em;line-height:1.5;">Drafts with citations. Human review required. Sensitive documents stay under practice control. Simple path, deep proof.</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="/contact.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;background:#00c2a8;color:#04111a;font-weight:700;text-decoration:none;font-size:0.95em;">Request Pilot</a>
+        <a href="/sentinel-demo.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;border:1px solid rgba(0,194,168,0.55);color:#00c2a8;font-weight:700;text-decoration:none;font-size:0.95em;">Watch Demo</a>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px 32px;margin-bottom:32px;text-align:left;">
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">For You</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/start-here.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Start Here (3 min)</a>
+          <a href="/for-physicians.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Physicians</a>
+          <a href="/for-attorneys.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Attorneys</a>
+          <a href="/engineering-drafting/" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Engineering &amp; Drafting Teams</a>
+          <a href="/pilot-program.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Pilot Program</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Installer Training</a>
+          <a href="/how-it-works.html" style="color:#8899aa;text-decoration:none;">How It Works</a>
+          <a href="/trust.html" style="color:#8899aa;text-decoration:none;">Trust &amp; Audit</a>
+          <a href="/pricing.html" style="color:#8899aa;text-decoration:none;">Pricing</a>
+          <a href="/sentinel-demo.html" style="color:#8899aa;text-decoration:none;">See the Demo</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Documentation Hub</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/documentation-hub/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Hub Home &mdash; Deep Proof</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">Installer Training</a>
+          <a href="/sentinel-node/installation-simulator.html" style="color:#8899aa;text-decoration:none;">&#8627; Installation Simulator</a>
+          <a href="/documentation-hub/clinical/" style="color:#8899aa;text-decoration:none;">Clinical Documentation</a>
+          <a href="/documentation-hub/legal/" style="color:#8899aa;text-decoration:none;">Legal Documentation</a>
+          <a href="/documentation-hub/technical/" style="color:#8899aa;text-decoration:none;">Technical Documentation</a>
+          <a href="/documentation-hub/governance/" style="color:#8899aa;text-decoration:none;">Governance &amp; Audit</a>
+          <a href="/documentation-hub/tools/" style="color:#8899aa;text-decoration:none;">Tools &amp; Simulators</a>
+          <a href="/documentation-hub/research/" style="color:#8899aa;text-decoration:none;">Research &amp; Essays</a>
+          <a href="/documentation-hub/transparency/" style="color:#8899aa;text-decoration:none;">Transparency</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Global Federated AI</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/global/" style="color:#7af0dc;text-decoration:none;font-weight:600;">Global Federated Hub</a>
+          <a href="/global/australia/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Australia</a>
+          <a href="/global/singapore/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Singapore</a>
+          <a href="/global/taiwan/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Taiwan</a>
+          <a href="/global/europe/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Europe</a>
+          <a href="/contact.html" style="color:#8899aa;text-decoration:none;">Partner Inquiry</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Company</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/about.html" style="color:#8899aa;text-decoration:none;">About Pocono AI</a>
+          <a href="/team.html" style="color:#8899aa;text-decoration:none;">Team &amp; Leadership</a>
+          <a href="/why-pocono-ai.html" style="color:#8899aa;text-decoration:none;">Why Pocono AI</a>
+          <a href="/founding-commercial-leadership.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Join Us</a>
+          <a href="/careers.html" style="color:#8899aa;text-decoration:none;">Careers</a>
+          <a href="/how-we-hire.html" style="color:#8899aa;text-decoration:none;">How We Hire</a>
+          <a href="/channel-partners.html" style="color:#8899aa;text-decoration:none;">Technical Partners (MSPs)</a>
+          <a href="/partners.html" style="color:#8899aa;text-decoration:none;">Academic Partnerships</a>
+          <a href="/contact.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Contact</a>
+          <a href="https://forms.gle/VQahnkjMfY6QNEMy8" target="_blank" rel="noopener noreferrer" style="color:#d5a94f;text-decoration:none;font-weight:600;">Interest List &#8599;</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Founder Projects</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/rehability/" style="color:#a78bfa;text-decoration:none;font-weight:700;">Rehability &#x2605;</a>
+          <a href="/rehability/marcus-memory-helper/" style="color:#a78bfa;text-decoration:none;font-weight:600;">&#8627; Marcus's Memory Helper</a>
+          <a href="/sentinel-home/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Sentinel Home Edition</a>
+          <a href="/living-memorials/" style="color:#8899aa;text-decoration:none;">Living Echo</a>
+          <a href="/living-memorials/marcus-odell/" style="color:#8899aa;text-decoration:none;">Marcus&rsquo;s Living Echo</a>
+          <a href="/living-memorials/enterprise-estate-continuity.html" style="color:#8899aa;text-decoration:none;">Enterprise Estate Continuity</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Resources &amp; Legal</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/sitemap.html" style="color:#8899aa;text-decoration:none;">All Pages (Sitemap)</a>
+          <a href="/audit.html" style="color:#8899aa;text-decoration:none;">Transparency &amp; Audit Log</a>
+          <a href="/maturity-disclosure.html" style="color:#8899aa;text-decoration:none;">What We Have / Don&rsquo;t Claim</a>
+          <a href="/plain.html" style="color:#8899aa;text-decoration:none;">Plain Language Guide</a>
+          <a href="/privacy.html" style="color:#8899aa;text-decoration:none;">Privacy</a>
+          <a href="/terms.html" style="color:#8899aa;text-decoration:none;">Terms</a>
+          <a href="/sla.html" style="color:#8899aa;text-decoration:none;">SLA</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:18px;margin-bottom:14px;">
+      <p style="margin:0;font-size:0.82em;line-height:1.6;color:#6f8295;max-width:1000px;">Pocono AI does not provide medical, legal, or engineering advice, does not practice medicine, law, or licensed engineering, and does not make clinical, legal, or engineering decisions. Outputs are drafts or support materials that require review by a qualified professional; final professional judgment remains with the licensed physician, attorney, or engineer. Tools and simulations on this site are educational and use synthetic data.</p>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:20px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+      <p style="margin:0;font-size:0.9em;">&copy; 2026 Pocono AI, LLC &nbsp;&#183;&nbsp; East Stroudsburg, PA &nbsp;&#183;&nbsp; <a href="mailto:marcus@poconoai.com" style="color:#8899aa;">marcus@poconoai.com</a> &nbsp;&#183;&nbsp; <a href="tel:+15705340602" style="color:#8899aa;">(570) 534-0602</a></p>
+      <p style="margin:0;font-size:0.88em;"><a href="/audit.html" style="color:#5dade2;text-decoration:none;">Transparency v402</a></p>
+    </div>
+  </div>
+</footer>
+<script src="/search.js?v=402" defer></script>
+<!-- /INCLUDE:FOOTER -->
+
+<script>
+function v(id) { return document.getElementById(id).value.trim(); }
+function set(id, html) { document.getElementById(id).innerHTML = html; }
+
+const today = new Date().toLocaleDateString('en-US', {year:'numeric',month:'long',day:'numeric'});
+
+function generate() {
+    const prac     = v('prac-name')     || '[Practice Name]';
+    const type     = v('prac-type');
+    const sig      = v('signatory')     || '[Authorized Signatory]';
+    const addr     = v('prac-address')  || '[Practice Address]';
+    const aiSys    = v('ai-system');
+    const data     = v('data-types');
+    const baa      = v('baa-status');
+    const recip    = v('intended-recipient') || '[Recipient]';
+    const ctx      = v('add-context');
+
+    const isLegal  = type === 'legal';
+    const dataWord = isLegal ? 'attorney-client privileged documents and confidential client files' : 'protected health information (PHI) and patient records';
+    const regWord  = isLegal ? 'attorney-client privilege and state bar confidentiality rules' : 'HIPAA Privacy and Security Rules (45 CFR Parts 160 and 164)';
+
+    // ── System description
+    const systemDescriptions = {
+        sentinel: `The practice has deployed the Pocono AI Sentinel Node™, a sovereign, on-premises AI appliance manufactured by Pocono AI, LLC (East Stroudsburg, Pennsylvania). The Sentinel Node operates entirely on hardware physically located within the practice's facility. All artificial intelligence inference, document retrieval, and vector database operations are performed locally. The system makes zero outbound API calls during inference. No patient records, clinical documentation, or ${dataWord} are transmitted to any third-party server, cloud provider, or external network during AI processing.`,
+        cloud_baa: `The practice utilizes a cloud-based AI service from a third-party vendor. A Business Associate Agreement (BAA) has been executed with the vendor in accordance with HIPAA requirements. ${dataWord.charAt(0).toUpperCase() + dataWord.slice(1)} may be transmitted to the vendor's cloud infrastructure for AI processing. The BAA governs the vendor's handling, safeguarding, and permitted uses of such information.`,
+        cloud_no_baa: `The practice has identified use of a cloud-based AI service. At the time of this writing, no Business Associate Agreement has been executed with the AI vendor. The practice is in the process of reviewing its AI tool usage and compliance obligations. This attestation reflects the practice's current understanding of its system configuration.`,
+        none: `The practice does not currently utilize any artificial intelligence systems for clinical documentation, administrative processing, or data analysis. No AI-related data transmission occurs.`,
+        evaluating: `The practice is currently evaluating artificial intelligence solutions. No AI system has been deployed, and no patient or client data has been processed through any AI tool at this time.`
+    };
+
+    // ── PHI handling
+    const phiDescriptions = {
+        sentinel: `Because the Sentinel Node operates entirely on-premises with zero outbound network calls during inference, ${dataWord} does not leave the practice's physical facility during AI processing. The compliance posture is architectural — not contractual. The absence of data transmission is enforced by the system design, not dependent on a vendor's security practices.`,
+        cloud_baa: `${dataWord.charAt(0).toUpperCase() + dataWord.slice(1)} is transmitted to the vendor's cloud infrastructure for AI processing. Transmission occurs over encrypted channels in accordance with the executed BAA. The practice relies on the vendor's security controls and BAA commitments for data protection during cloud processing.`,
+        cloud_no_baa: `The practice acknowledges that use of cloud AI services without an executed BAA may constitute a HIPAA violation if PHI is involved. The practice is reviewing its current AI tool configurations and taking corrective action as appropriate.`,
+        none: `No AI processing of ${dataWord} occurs.`,
+        evaluating: `No AI processing of ${dataWord} has occurred during the evaluation period.`
+    };
+
+    // ── Compliance
+    const complianceDescriptions = {
+        sentinel: `The Sentinel Node deployment is designed to support ${regWord}-aligned workflows through physical isolation rather than routine cloud data transfer. No PHI leaves the practice's facility during AI processing; the primary HIPAA-alignment mechanism is physical isolation rather than contractual obligation alone. A Business Associate Agreement template is available from Pocono AI, LLC; final execution requires attorney review and practice-specific customization. The system may be made available for inspection by authorized compliance officers or IT security assessors, and a network packet capture demonstration can be provided to verify zero outbound data transmission during inference. Note: this attestation is a documentation template. Final compliance posture requires review by qualified healthcare counsel.`,
+        cloud_baa: `A Business Associate Agreement has been executed with the AI vendor. The practice maintains a copy of the executed BAA on file. Compliance relies on the vendor's implementation of appropriate administrative, physical, and technical safeguards as required by 45 CFR § 164.308–164.318.`,
+        cloud_no_baa: `The practice acknowledges a potential gap in its current compliance framework. Corrective actions are underway including vendor assessment, BAA review, and evaluation of alternative AI solutions.`,
+        none: `No AI systems are in use; no AI-specific compliance measures are required at this time.`,
+        evaluating: `No AI systems have been deployed. Compliance review of candidate systems will be completed prior to deployment.`
+    };
+
+    // ── Risk score
+    const riskMap = { sentinel: 5, cloud_baa: 55, cloud_no_baa: 92, none: 8, evaluating: 10 };
+    const riskScore = riskMap[aiSys] || 50;
+    const riskFill = document.getElementById('risk-fill');
+    const riskVerdict = document.getElementById('risk-verdict');
+    riskFill.style.width = riskScore + '%';
+    riskFill.style.background = riskScore < 20 ? '#059669' : riskScore < 60 ? '#F59E0B' : '#EF4444';
+    riskVerdict.textContent = riskScore < 20 ? '✓ Strong — architecturally defensible posture'
+        : riskScore < 60 ? '⚠ Moderate — contractual compliance, verify BAA currency'
+        : '✗ High — immediate review required';
+    riskVerdict.style.color = riskScore < 20 ? '#34D399' : riskScore < 60 ? '#FFC850' : '#FF6B5B';
+
+    // ── Update document
+    document.getElementById('doc-prac-name').textContent = prac;
+    document.getElementById('doc-prac-name').className = '';
+
+    set('doc-practice-block', `<strong>${prac}</strong> is a ${type === 'legal' ? 'law firm' : type === 'dental' ? 'dental practice' : type === 'mental' ? 'behavioral health practice' : 'medical practice'} located at ${addr}. This attestation is issued as of ${today}, and is directed to: ${recip}.${ctx ? '<br><br>' + ctx : ''}`);
+
+    set('doc-system-block', systemDescriptions[aiSys] || '');
+    set('doc-phi-block', phiDescriptions[aiSys] || '');
+    set('doc-compliance-block', complianceDescriptions[aiSys] || '');
+
+    set('doc-attestation-block', `I, ${sig}, hereby attest that the foregoing is true and accurate to the best of my knowledge as of ${today}. This attestation is provided for compliance documentation purposes. The undersigned practice retains all records related to AI system configuration and is prepared to make such records available for authorized review upon request.`);
+
+    document.getElementById('doc-sig-label').textContent = sig;
+}
+
+function printDoc() {
+    window.print();
+}
+
+function copyText() {
+    const doc = document.getElementById('att-document');
+    const text = doc.innerText;
+    navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById('copy-btn');
+        btn.textContent = '✓ Copied!';
+        setTimeout(() => btn.textContent = '📋 Copy Text', 2000);
+    });
+}
+
+// Init
+document.addEventListener('DOMContentLoaded', generate);
+</script>
+
+<script src="search-index.js?v=402" defer></script>
+<script src="nav.js?v=402" defer></script>
+<script src="pilot-cta.js?v=402" defer></script>
+</body>
+</html>

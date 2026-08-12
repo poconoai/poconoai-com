@@ -1,0 +1,165 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 640" width="900" height="640" role="img" aria-label="Sentinel Node™ Enterprise Autonomy Architecture — data sovereignty pipeline diagram">
+  <title>Sentinel Node™ Enterprise Autonomy Architecture — Data Sovereignty Pipeline</title>
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#051622;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0A2635;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="nodeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0A2635;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#051622;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00A3FF;stop-opacity:0.15" />
+      <stop offset="100%" style="stop-color:#00A3FF;stop-opacity:0.05" />
+    </linearGradient>
+    <linearGradient id="tealGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#188B96;stop-opacity:0.15" />
+      <stop offset="100%" style="stop-color:#188B96;stop-opacity:0.05" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#00A3FF" flood-opacity="0.15"/>
+    </filter>
+    <marker id="arrowBlue" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#00A3FF" opacity="0.8"/>
+    </marker>
+    <marker id="arrowTeal" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#188B96" opacity="0.8"/>
+    </marker>
+    <marker id="arrowRed" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#E05A5A" opacity="0.8"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="640" fill="url(#bgGrad)" rx="12"/>
+
+  <!-- Outer air-gap boundary -->
+  <rect x="16" y="16" width="868" height="608" rx="10" fill="none" stroke="#188B96" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.5"/>
+  <text x="30" y="34" font-family="'DM Mono', monospace" font-size="10" fill="#188B96" opacity="0.7" letter-spacing="2">AIR-GAP BOUNDARY — ZERO OUTBOUND NETWORK PATH</text>
+
+  <!-- Title block -->
+  <text x="450" y="68" font-family="'Syne', sans-serif" font-size="20" font-weight="700" fill="#FFFFFF" text-anchor="middle" filter="url(#glow)">Sentinel Node™ · Enterprise Autonomy Architecture</text>
+  <text x="450" y="88" font-family="'DM Mono', monospace" font-size="11" fill="#D0DDE6" text-anchor="middle" opacity="0.7">EAA™ Data Sovereignty Pipeline · Pocono AI, LLC</text>
+
+  <!-- ─── ROW 1: INPUT SOURCES ─── -->
+  <!-- EHR / PDF Source -->
+  <rect x="60" y="118" width="160" height="80" rx="8" fill="url(#nodeGrad)" stroke="#00A3FF" stroke-width="1" opacity="0.9" filter="url(#shadow)"/>
+  <rect x="60" y="118" width="160" height="80" rx="8" fill="url(#blueGrad)"/>
+  <text x="140" y="145" font-family="'Syne', sans-serif" font-size="11" font-weight="700" fill="#00A3FF" text-anchor="middle">INPUT SOURCES</text>
+  <text x="140" y="163" font-family="'DM Mono', monospace" font-size="10" fill="#D0DDE6" text-anchor="middle">EHR Exports · PDFs</text>
+  <text x="140" y="178" font-family="'DM Mono', monospace" font-size="10" fill="#D0DDE6" text-anchor="middle">Faxes · Legal Docs</text>
+  <text x="140" y="193" font-family="'DM Mono', monospace" font-size="9" fill="#188B96" text-anchor="middle">No FHIR required</text>
+
+  <!-- Arrow: Input → OCR -->
+  <line x1="220" y1="158" x2="268" y2="158" stroke="#00A3FF" stroke-width="1.5" marker-end="url(#arrowBlue)" opacity="0.7"/>
+
+  <!-- Phase 00: OCR Sanitization -->
+  <rect x="270" y="118" width="160" height="80" rx="8" fill="url(#nodeGrad)" stroke="#00A3FF" stroke-width="1" filter="url(#shadow)"/>
+  <rect x="270" y="118" width="160" height="80" rx="8" fill="url(#blueGrad)"/>
+  <text x="280" y="139" font-family="'DM Mono', monospace" font-size="9" fill="#00A3FF" letter-spacing="1">PHASE 00 · OCR</text>
+  <text x="350" y="152" font-family="'Syne', sans-serif" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">OCR Microservice</text>
+  <text x="350" y="167" font-family="'DM Mono', monospace" font-size="10" fill="#D0DDE6" text-anchor="middle">Tesseract / NVIDIA</text>
+  <text x="350" y="180" font-family="'DM Mono', monospace" font-size="10" fill="#D0DDE6" text-anchor="middle">Ada Vision Pipeline</text>
+  <text x="350" y="193" font-family="'DM Mono', monospace" font-size="9" fill="#188B96" text-anchor="middle">95% confidence threshold</text>
+
+  <!-- Arrow: OCR → Confidence -->
+  <line x1="430" y1="158" x2="478" y2="158" stroke="#00A3FF" stroke-width="1.5" marker-end="url(#arrowBlue)" opacity="0.7"/>
+
+  <!-- Confidence Gate -->
+  <rect x="480" y="118" width="140" height="80" rx="8" fill="url(#nodeGrad)" stroke="#188B96" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="480" y="118" width="140" height="80" rx="8" fill="url(#tealGrad)"/>
+  <text x="550" y="140" font-family="'Syne', sans-serif" font-size="11" font-weight="700" fill="#188B96" text-anchor="middle">Confidence Gate</text>
+  <text x="550" y="156" font-family="'DM Mono', monospace" font-size="10" fill="#D0DDE6" text-anchor="middle">≥ 95% → Proceed</text>
+  <text x="550" y="171" font-family="'DM Mono', monospace" font-size="10" fill="#E05A5A" text-anchor="middle">&lt; 95% → Quarantine</text>
+  <text x="550" y="186" font-family="'DM Mono', monospace" font-size="9" fill="#D0DDE6" text-anchor="middle">Human-in-the-Loop</text>
+
+  <!-- Quarantine branch (down from gate) -->
+  <line x1="550" y1="198" x2="550" y2="228" stroke="#E05A5A" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrowRed)" opacity="0.7"/>
+  <rect x="490" y="230" width="120" height="36" rx="6" fill="#1A0808" stroke="#E05A5A" stroke-width="1" opacity="0.9"/>
+  <text x="550" y="245" font-family="'DM Mono', monospace" font-size="9" fill="#E05A5A" text-anchor="middle">QUARANTINE DASH</text>
+  <text x="550" y="258" font-family="'DM Mono', monospace" font-size="9" fill="#E05A5A" text-anchor="middle">Staff Review Required</text>
+
+  <!-- Arrow: Gate (pass) → Vectorization -->
+  <line x1="620" y1="158" x2="668" y2="158" stroke="#188B96" stroke-width="1.5" marker-end="url(#arrowTeal)" opacity="0.8"/>
+
+  <!-- Phase 01: Vectorization -->
+  <rect x="670" y="118" width="160" height="80" rx="8" fill="url(#nodeGrad)" stroke="#188B96" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="670" y="118" width="160" height="80" rx="8" fill="url(#tealGrad)"/>
+  <text x="680" y="139" font-family="'DM Mono', monospace" font-size="9" fill="#188B96" letter-spacing="1">PHASE 01</text>
+  <text x="750" y="152" font-family="'Syne', sans-serif" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">Local Vectorization</text>
+  <text x="750" y="167" font-family="'DM Mono', monospace" font-size="10" fill="#D0DDE6" text-anchor="middle">Qdrant Vector DB</text>
+  <text x="750" y="180" font-family="'DM Mono', monospace" font-size="10" fill="#D0DDE6" text-anchor="middle">Encrypted · Local NVMe</text>
+  <text x="750" y="193" font-family="'DM Mono', monospace" font-size="9" fill="#188B96" text-anchor="middle">Zero cloud sync</text>
+
+  <!-- ─── ROW 2: CORE ENGINE ─── -->
+  <!-- Arrow down from Vectorization to Inference -->
+  <line x1="750" y1="198" x2="750" y2="268" stroke="#188B96" stroke-width="1.5" marker-end="url(#arrowTeal)" opacity="0.8"/>
+
+  <!-- Phase 02: Private Inference (center) -->
+  <rect x="310" y="270" width="480" height="100" rx="10" fill="url(#nodeGrad)" stroke="#00A3FF" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="310" y="270" width="480" height="100" rx="10" fill="url(#blueGrad)"/>
+  <text x="320" y="292" font-family="'DM Mono', monospace" font-size="9" fill="#00A3FF" letter-spacing="1">PHASE 02 · CORE ENGINE</text>
+  <text x="550" y="308" font-family="'Syne', sans-serif" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle" filter="url(#glow)">Private Inference Engine</text>
+  <text x="550" y="326" font-family="'DM Mono', monospace" font-size="10" fill="#D0DDE6" text-anchor="middle">Ollama Runtime · Llama 4 / Gemma · NVIDIA RTX Ada Generation</text>
+  <text x="550" y="344" font-family="'DM Mono', monospace" font-size="10" fill="#D0DDE6" text-anchor="middle">64–128 GB DDR5 RAM · 4 TB NVMe RAID · Zero outbound telemetry</text>
+  <text x="550" y="362" font-family="'DM Mono', monospace" font-size="10" fill="#00A3FF" text-anchor="middle" filter="url(#glow)">NEVER EXITS LAN · ALL INFERENCE ON-DEVICE</text>
+
+  <!-- RAG Context Injection path (Qdrant → Inference) -->
+  <line x1="550" y1="270" x2="550" y2="268" stroke="#188B96" stroke-width="0.5"/>
+  <line x1="700" y1="270" x2="700" y2="198" stroke="#188B96" stroke-width="1" stroke-dasharray="3,3" opacity="0.6" marker-end="url(#arrowTeal)"/>
+  <text x="715" y="240" font-family="'DM Mono', monospace" font-size="8" fill="#188B96" opacity="0.7" transform="rotate(-90, 715, 240)">RAG Context Injection</text>
+
+  <!-- ─── ROW 3: OUTPUTS ─── -->
+  <!-- Arrow: Inference → Audit Log -->
+  <line x1="400" y1="370" x2="280" y2="420" stroke="#00A3FF" stroke-width="1.5" marker-end="url(#arrowBlue)" opacity="0.7"/>
+
+  <!-- Immutable Audit Log -->
+  <rect x="60" y="422" width="200" height="72" rx="8" fill="url(#nodeGrad)" stroke="#188B96" stroke-width="1" filter="url(#shadow)"/>
+  <rect x="60" y="422" width="200" height="72" rx="8" fill="url(#tealGrad)"/>
+  <text x="160" y="443" font-family="'Syne', sans-serif" font-size="11" font-weight="700" fill="#188B96" text-anchor="middle">Immutable Audit Log</text>
+  <text x="160" y="459" font-family="'DM Mono', monospace" font-size="10" fill="#D0DDE6" text-anchor="middle">Every query · Every chunk</text>
+  <text x="160" y="474" font-family="'DM Mono', monospace" font-size="10" fill="#D0DDE6" text-anchor="middle">retrieved · Timestamped</text>
+  <text x="160" y="488" font-family="'DM Mono', monospace" font-size="9" fill="#188B96" text-anchor="middle">HIPAA defensible trail</text>
+
+  <!-- Arrow: Inference → Cited Response -->
+  <line x1="550" y1="370" x2="550" y2="418" stroke="#00A3FF" stroke-width="1.5" marker-end="url(#arrowBlue)" opacity="0.7"/>
+
+  <!-- Source-Cited Response -->
+  <rect x="400" y="420" width="200" height="72" rx="8" fill="url(#nodeGrad)" stroke="#00A3FF" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="400" y="420" width="200" height="72" rx="8" fill="url(#blueGrad)"/>
+  <text x="500" y="441" font-family="'Syne', sans-serif" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">Source-Cited Response</text>
+  <text x="500" y="457" font-family="'DM Mono', monospace" font-size="10" fill="#D0DDE6" text-anchor="middle">Grounded in your docs</text>
+  <text x="500" y="472" font-family="'DM Mono', monospace" font-size="10" fill="#D0DDE6" text-anchor="middle">Citations mandatory</text>
+  <text x="500" y="487" font-family="'DM Mono', monospace" font-size="9" fill="#00A3FF" text-anchor="middle">Human-in-the-Loop verify</text>
+
+  <!-- Arrow: Inference → Twin Node HA -->
+  <line x1="700" y1="370" x2="730" y2="418" stroke="#188B96" stroke-width="1.5" marker-end="url(#arrowTeal)" opacity="0.7"/>
+
+  <!-- Twin Node HA -->
+  <rect x="640" y="420" width="200" height="72" rx="8" fill="url(#nodeGrad)" stroke="#188B96" stroke-width="1" filter="url(#shadow)"/>
+  <rect x="640" y="420" width="200" height="72" rx="8" fill="url(#tealGrad)"/>
+  <text x="740" y="441" font-family="'Syne', sans-serif" font-size="11" font-weight="700" fill="#188B96" text-anchor="middle">Twin Node HA</text>
+  <text x="740" y="457" font-family="'DM Mono', monospace" font-size="10" fill="#D0DDE6" text-anchor="middle">Active-Passive Cluster</text>
+  <text x="740" y="472" font-family="'DM Mono', monospace" font-size="10" fill="#D0DDE6" text-anchor="middle">Dell ProSupport + KYHD</text>
+  <text x="740" y="487" font-family="'DM Mono', monospace" font-size="9" fill="#188B96" text-anchor="middle">Zero workflow interruption</text>
+
+  <!-- ─── WALL: THE INTERNET BOUNDARY ─── -->
+  <rect x="60" y="530" width="780" height="46" rx="8" fill="#1A0808" stroke="#E05A5A" stroke-width="1.5"/>
+  <line x1="60" y1="553" x2="840" y2="553" stroke="#E05A5A" stroke-width="0.5" opacity="0.3"/>
+  <text x="450" y="548" font-family="'Syne', sans-serif" font-size="12" font-weight="700" fill="#E05A5A" text-anchor="middle" letter-spacing="3">⛔  THE INTERNET  ·  PHI NEVER CROSSES THIS LINE  ·  ARCHITECTURAL GUARANTEE  ⛔</text>
+  <text x="450" y="566" font-family="'DM Mono', monospace" font-size="9" fill="#E05A5A" text-anchor="middle" opacity="0.8">No cloud. No API calls. No telemetry. No exfiltration. Zero outbound network path during inference.</text>
+
+  <!-- KYHD note -->
+  <text x="450" y="620" font-family="'DM Mono', monospace" font-size="9" fill="#D0DDE6" text-anchor="middle" opacity="0.5">KYHD — Keep Your Hard Drive · Dell ProSupport · Sentinel Node™ · Pocono AI, LLC · Enterprise Autonomy Architecture™ (EAA™)</text>
+
+  <!-- Decorative corner elements -->
+  <circle cx="44" cy="44" r="2" fill="#188B96" opacity="0.5"/>
+  <circle cx="856" cy="44" r="2" fill="#188B96" opacity="0.5"/>
+  <circle cx="44" cy="596" r="2" fill="#188B96" opacity="0.5"/>
+  <circle cx="856" cy="596" r="2" fill="#188B96" opacity="0.5"/>
+</svg>

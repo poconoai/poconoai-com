@@ -1,0 +1,1723 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp -->
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Evidence Room — Attack a Live Audit Chain | Pocono AI</title>
+<meta name="description" content="This page keeps a tamper-evident, hash-chained record of your visit — sealed locally in your browser with SHA-256. Alter the record, cover your tracks, forge the chain, and watch each attack get caught. Nothing leaves your device.">
+<meta name="keywords" content="Evidence Room, tamper-evident audit trail, hash chain demonstration, append-only ledger, chain of custody, SHA-256, local AI governance, evidence packet, human-in-the-loop attestation, Pocono AI">
+<meta name="theme-color" content="#0B0F13">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="favicon-180x180.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+<link rel="canonical" href="https://poconoai.com/evidence-room.html">
+<link rel="stylesheet" href="styles.css?v=402">
+<link rel="stylesheet" href="nav-v2026.css?v=402">
+<link rel="stylesheet" href="brand-v292.css?v=402">
+<meta property="og:title" content="The Evidence Room — Attack a Live Audit Chain | Pocono AI">
+<meta property="og:type" content="website">
+<meta property="og:description" content="A working chain of custody records your visit to this page, sealed with SHA-256 in your own browser. You are invited to attack it: edit a record, cover your tracks, forge the chain — and watch each layer of the attack get caught.">
+<meta property="og:url" content="https://poconoai.com/evidence-room.html">
+<meta property="og:image" content="https://poconoai.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="Pocono AI">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="The Evidence Room | Pocono AI">
+<meta name="twitter:description" content="A live, local, tamper-evident hash chain of your own visit. Attack it three ways. Get caught three ways. Nothing leaves your device.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "The Evidence Room — Live Tamper-Evidence Demonstration",
+  "description": "An interactive demonstration in which the page keeps a working, hash-chained, append-only record of the visitor's session, sealed locally with SHA-256. Visitors are invited to alter, re-seal, and forge the record, and to observe how content seals, link integrity, and external witness anchors each catch a different class of attack. Uses synthetic demonstration data only; nothing is transmitted or stored.",
+  "url": "https://poconoai.com/evidence-room.html",
+  "publisher": { "@type": "Organization", "name": "Pocono AI, LLC", "url": "https://poconoai.com" },
+  "isAccessibleForFree": true,
+  "datePublished": "2026-06-10",
+  "dateModified": "2026-06-10"
+}
+</script>
+<style>
+/* =====================================================================
+   THE EVIDENCE ROOM — page-scoped styles (self-contained, v358)
+   No external dependencies. Plain CSS. GitHub-Pages safe.
+   Aesthetic: evidence locker / forensic bench. Everything that can be
+   verified is set in the mono "system voice"; everything human is not.
+   All selectors are scoped under .evr-scope or the evr- prefix.
+   ===================================================================== */
+.evr-scope {
+  --evr-bg:      #050b13;
+  --evr-panel:   #0a1825;
+  --evr-panel-2: #07111d;
+  --evr-well:    #040d16;
+  --evr-line:    rgba(126,156,184,.16);
+  --evr-line-2:  rgba(126,156,184,.32);
+  --evr-ink:     #e9f2f8;
+  --evr-faint:   #7e93a6;
+  --evr-dim:     #5a6f82;
+  --evr-teal:    #00c2a8;
+  --evr-teal-br: #2fe3c9;
+  --evr-green:   #39d98a;
+  --evr-amber:   #f2b441;
+  --evr-red:     #ff5d6c;
+  --evr-mono: ui-monospace,'DM Mono','Cascadia Code','SF Mono',Menlo,Consolas,'Liberation Mono',monospace;
+  --evr-sans: 'Syne','Segoe UI',system-ui,-apple-system,sans-serif;
+  background:
+    radial-gradient(1100px 520px at 85% -120px, rgba(0,194,168,.07), transparent 62%),
+    radial-gradient(900px 460px at -140px 360px, rgba(47,227,201,.04), transparent 60%),
+    var(--evr-bg);
+  color: var(--evr-ink);
+  font-family: var(--evr-sans);
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+.evr-scope *, .evr-scope *::before, .evr-scope *::after { box-sizing: border-box; }
+.evr-wrap { max-width: 1180px; margin: 0 auto; padding: 0 22px; }
+
+/* ---- type ---- */
+.evr-scope h1, .evr-scope h2, .evr-scope h3 { line-height: 1.16; margin: 0; color: var(--evr-ink); border: none; }
+.evr-eyebrow {
+  font-family: var(--evr-mono); font-size: .72rem; font-weight: 700;
+  letter-spacing: .22em; text-transform: uppercase; color: var(--evr-teal-br);
+  margin: 0 0 14px; display: flex; align-items: center; gap: 10px;
+}
+.evr-eyebrow .evr-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--evr-red); box-shadow: 0 0 0 0 rgba(255,93,108,.5); flex: none; }
+.evr-lede { color: var(--evr-faint); font-size: 1.04rem; max-width: 62ch; }
+.evr-mono-t { font-family: var(--evr-mono); }
+.evr-k { color: var(--evr-teal); }
+
+/* ---- hero ---- */
+.evr-hero { padding: 66px 0 30px; border-bottom: 1px solid var(--evr-line); position: relative; }
+.evr-hero h1 { font-size: clamp(2.1rem, 5.4vw, 3.4rem); font-weight: 800; letter-spacing: -.01em; margin: 0 0 16px; }
+.evr-hero h1 .thin { color: var(--evr-faint); font-weight: 600; }
+.evr-claim {
+  margin: 22px 0 0; padding: 14px 16px; border: 1px solid var(--evr-line);
+  border-left: 3px solid var(--evr-teal); border-radius: 8px; background: var(--evr-panel-2);
+  font-size: .95rem; color: var(--evr-faint); max-width: 760px;
+}
+.evr-claim strong { color: var(--evr-ink); }
+.evr-claim a { color: var(--evr-teal); }
+.evr-hero-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+
+/* ---- buttons ---- */
+.evr-btn {
+  -webkit-appearance: none; appearance: none; cursor: pointer; text-decoration: none;
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 44px; padding: 10px 20px; border-radius: 999px;
+  font-family: var(--evr-sans); font-weight: 700; font-size: .92rem;
+  border: 1px solid var(--evr-line-2); background: var(--evr-panel); color: var(--evr-ink);
+  transition: border-color .15s, background .15s, transform .15s;
+}
+.evr-btn:hover { border-color: rgba(0,194,168,.55); }
+.evr-btn:focus-visible, .evr-scope a:focus-visible, .evr-scope button:focus-visible, .evr-scope textarea:focus-visible, .evr-scope summary:focus-visible {
+  outline: 2px solid var(--evr-teal-br); outline-offset: 2px;
+}
+.evr-btn-pri { background: var(--evr-teal); border-color: var(--evr-teal); color: #04111a; }
+.evr-btn-pri:hover { background: var(--evr-teal-br); border-color: var(--evr-teal-br); }
+.evr-btn-warn { border-color: rgba(242,180,65,.55); color: var(--evr-amber); }
+.evr-btn-warn:hover { border-color: var(--evr-amber); background: rgba(242,180,65,.08); }
+.evr-btn-danger { border-color: rgba(255,93,108,.55); color: var(--evr-red); }
+.evr-btn-danger:hover { border-color: var(--evr-red); background: rgba(255,93,108,.08); }
+.evr-btn-ghost { background: transparent; border-color: var(--evr-line); color: var(--evr-faint); font-weight: 600; }
+.evr-btn-ghost:hover { color: var(--evr-ink); }
+.evr-btn[disabled] { opacity: .45; cursor: not-allowed; }
+.evr-btn-sm { min-height: 34px; padding: 5px 13px; font-size: .8rem; }
+
+/* ---- layout grid ---- */
+.evr-grid { display: grid; grid-template-columns: 1fr; gap: 34px; padding: 38px 0 64px; align-items: start; }
+@media (min-width: 1000px) {
+  .evr-grid { grid-template-columns: minmax(0,1fr) 396px; }
+  .evr-aside { order: 2; position: sticky; top: 86px; max-height: calc(100vh - 102px); display: flex; flex-direction: column; }
+  .evr-maincol { order: 1; min-width: 0; }
+}
+
+/* ---- exhibits ---- */
+.evr-exhibit { padding: 34px 0 8px; border-top: 1px solid var(--evr-line); margin-top: 26px; scroll-margin-top: 90px; }
+.evr-exhibit:first-child { border-top: none; margin-top: 0; padding-top: 6px; }
+.evr-ex-tag {
+  font-family: var(--evr-mono); font-size: .7rem; font-weight: 700; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--evr-dim); display: inline-flex; align-items: center; gap: 10px; margin: 0 0 10px;
+}
+.evr-ex-tag b { color: var(--evr-teal); }
+.evr-exhibit h2 { font-size: clamp(1.35rem, 3vw, 1.8rem); font-weight: 800; margin: 0 0 14px; }
+.evr-exhibit p { color: var(--evr-faint); max-width: 64ch; margin: 0 0 14px; }
+.evr-exhibit p strong { color: var(--evr-ink); }
+
+/* ---- act buttons (Exhibit A) ---- */
+.evr-acts { display: grid; grid-template-columns: repeat(auto-fit, minmax(215px, 1fr)); gap: 12px; margin: 18px 0 8px; }
+.evr-act {
+  text-align: left; cursor: pointer; border: 1px solid var(--evr-line); border-radius: 12px;
+  background: var(--evr-panel); color: var(--evr-ink); padding: 14px 16px; min-height: 44px;
+  font-family: var(--evr-sans); transition: border-color .15s, transform .15s;
+}
+.evr-act:hover { border-color: rgba(0,194,168,.55); }
+.evr-act .t { display: block; font-weight: 700; font-size: .95rem; margin-bottom: 3px; }
+.evr-act .d { display: block; font-size: .8rem; color: var(--evr-dim); font-family: var(--evr-mono); }
+.evr-note { font-size: .82rem; color: var(--evr-dim); font-family: var(--evr-mono); margin-top: 10px; }
+
+/* ---- panels / console ---- */
+.evr-panel { border: 1px solid var(--evr-line); border-radius: 14px; background: var(--evr-panel); padding: 18px; margin: 16px 0; }
+.evr-panel-head { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; justify-content: space-between; margin-bottom: 12px; }
+.evr-panel-title { font-family: var(--evr-mono); font-size: .74rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--evr-faint); }
+.evr-console {
+  font-family: var(--evr-mono); font-size: .82rem; line-height: 1.7; color: var(--evr-faint);
+  background: var(--evr-well); border: 1px solid var(--evr-line); border-radius: 10px;
+  padding: 12px 14px; max-height: 240px; overflow-y: auto;
+}
+.evr-console p { margin: 0 0 6px; max-width: none; color: inherit; }
+.evr-console .ok   { color: var(--evr-green); }
+.evr-console .bad  { color: var(--evr-red); }
+.evr-console .warn { color: var(--evr-amber); }
+.evr-console .sys  { color: var(--evr-dim); }
+
+/* ---- THE LEDGER ---- */
+.evr-ledger-panel {
+  border: 1px solid var(--evr-line-2); border-radius: 16px; background: var(--evr-panel-2);
+  display: flex; flex-direction: column; overflow: hidden; min-height: 320px;
+}
+.evr-ledger-head { padding: 14px 16px 12px; border-bottom: 1px solid var(--evr-line); background: var(--evr-panel); }
+.evr-ledger-head .row1 { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.evr-ledger-title { font-family: var(--evr-mono); font-size: .74rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--evr-faint); }
+.evr-state {
+  font-family: var(--evr-mono); font-size: .7rem; font-weight: 700; letter-spacing: .12em;
+  padding: 4px 10px; border-radius: 999px; border: 1px solid; white-space: nowrap;
+}
+.evr-state[data-s="ok"]      { color: var(--evr-green); border-color: rgba(57,217,138,.5);  background: rgba(57,217,138,.08); }
+.evr-state[data-s="bad"]     { color: var(--evr-red);   border-color: rgba(255,93,108,.5);  background: rgba(255,93,108,.08); }
+.evr-state[data-s="dispute"] { color: var(--evr-amber); border-color: rgba(242,180,65,.5);  background: rgba(242,180,65,.08); }
+.evr-head-hash { margin-top: 9px; font-family: var(--evr-mono); font-size: .73rem; color: var(--evr-dim); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.evr-head-hash code { color: var(--evr-teal); letter-spacing: .04em; word-break: break-all; }
+.evr-chip-btn {
+  -webkit-appearance: none; appearance: none; cursor: pointer; font-family: var(--evr-mono); font-size: .68rem; font-weight: 700;
+  color: var(--evr-faint); background: transparent; border: 1px solid var(--evr-line); border-radius: 999px; padding: 6px 11px; min-height: 30px;
+}
+.evr-chip-btn:hover { color: var(--evr-ink); border-color: var(--evr-line-2); }
+.evr-chip-btn[aria-pressed="true"] { color: var(--evr-teal); border-color: rgba(0,194,168,.55); }
+
+.evr-records { list-style: none; margin: 0; padding: 14px 16px 10px; overflow-y: auto; flex: 1; min-height: 140px; }
+.evr-rec { position: relative; padding: 0 0 0 26px; margin: 0 0 14px; }
+.evr-rec::before { /* chain rail */
+  content: ""; position: absolute; left: 8px; top: 22px; bottom: -16px; width: 2px;
+  background: var(--evr-line-2); border-radius: 2px;
+}
+.evr-rec:last-child::before { display: none; }
+.evr-rec .node {
+  position: absolute; left: 0; top: 6px; width: 18px; height: 18px; border-radius: 50%;
+  border: 2px solid var(--evr-teal); background: var(--evr-well);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; line-height: 1; color: var(--evr-green); font-family: var(--evr-mono); font-weight: 700;
+}
+.evr-rec[data-s="content"] .node { border-color: var(--evr-red); color: var(--evr-red); }
+.evr-rec[data-s="content"]::before { background: var(--evr-red); }
+.evr-rec[data-s="link"] .node { border-color: var(--evr-red); color: var(--evr-red); }
+.evr-rec[data-s="link"]::before { background: repeating-linear-gradient(180deg, var(--evr-red) 0 5px, transparent 5px 10px); }
+.evr-rec[data-s="forged"] .node { border-color: var(--evr-amber); color: var(--evr-amber); }
+.evr-card { border: 1px solid var(--evr-line); border-radius: 10px; background: var(--evr-panel); padding: 9px 11px 8px; }
+.evr-rec[data-s="content"] .evr-card { border-color: rgba(255,93,108,.55); }
+.evr-rec[data-s="link"]    .evr-card { border-color: rgba(255,93,108,.35); }
+.evr-rec .meta { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; font-family: var(--evr-mono); font-size: .68rem; color: var(--evr-dim); }
+.evr-rec .meta .seq { color: var(--evr-teal); font-weight: 700; }
+.evr-actor { padding: 1px 7px; border-radius: 999px; border: 1px solid var(--evr-line); letter-spacing: .08em; }
+.evr-actor[data-a="system"]     { color: var(--evr-dim); }
+.evr-actor[data-a="visitor"]    { color: var(--evr-teal); border-color: rgba(0,194,168,.4); }
+.evr-actor[data-a="reviewer-1"] { color: var(--evr-amber); border-color: rgba(242,180,65,.4); }
+.evr-rec .evr-detail { font-size: .85rem; color: var(--evr-ink); margin: 5px 0 6px; line-height: 1.45; overflow-wrap: break-word; }
+.evr-rec .evr-detail .altered-tag { font-family: var(--evr-mono); font-size: .64rem; color: var(--evr-red); border: 1px solid rgba(255,93,108,.5); border-radius: 4px; padding: 0 5px; margin-left: 6px; letter-spacing: .08em; vertical-align: 1px; white-space: nowrap; }
+.evr-hashes { font-family: var(--evr-mono); font-size: .67rem; color: var(--evr-dim); display: flex; flex-direction: column; gap: 2px; }
+.evr-hashes .h { color: var(--evr-teal); }
+.evr-rec[data-s="content"] .evr-hashes .h { color: var(--evr-red); text-decoration: line-through; }
+.evr-rec .statusline { font-family: var(--evr-mono); font-size: .66rem; margin-top: 5px; font-weight: 700; letter-spacing: .08em; }
+.evr-rec .statusline.ok { color: var(--evr-green); }
+.evr-rec .statusline.bad { color: var(--evr-red); }
+.evr-rec .statusline.warn { color: var(--evr-amber); }
+.evr-rec .tools { margin-top: 7px; }
+.evr-rec textarea {
+  width: 100%; min-height: 64px; resize: vertical; border-radius: 8px; border: 1px solid var(--evr-line-2);
+  background: var(--evr-well); color: var(--evr-ink); font-family: var(--evr-sans); font-size: .85rem; padding: 8px 10px;
+}
+.evr-ledger-foot { border-top: 1px solid var(--evr-line); background: var(--evr-panel); padding: 11px 14px 12px; }
+.evr-ledger-controls { display: flex; flex-wrap: wrap; gap: 8px; }
+.evr-live { font-family: var(--evr-mono); font-size: .72rem; color: var(--evr-faint); margin: 9px 0 0; min-height: 1.2em; }
+
+/* ---- witness panel ---- */
+.evr-anchors { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-direction: column; gap: 7px; }
+.evr-anchors li {
+  display: flex; align-items: center; gap: 9px; flex-wrap: wrap;
+  font-family: var(--evr-mono); font-size: .72rem; color: var(--evr-faint);
+  border: 1px solid var(--evr-line); border-radius: 8px; padding: 7px 10px; background: var(--evr-well);
+}
+.evr-anchors li code { color: var(--evr-teal); }
+.evr-anchors li .w-ok  { color: var(--evr-green); font-weight: 700; margin-left: auto; }
+.evr-anchors li .w-bad { color: var(--evr-red);   font-weight: 700; margin-left: auto; }
+.evr-anchors li.bad { border-color: rgba(255,93,108,.55); }
+
+/* ---- Exhibit D review card ---- */
+.evr-review { border: 1px solid var(--evr-line-2); border-radius: 14px; overflow: hidden; margin: 18px 0 8px; max-width: 700px; }
+.evr-review .draft { padding: 16px 18px; background: var(--evr-panel); }
+.evr-review .src   { padding: 14px 18px; background: var(--evr-well); border-top: 1px dashed var(--evr-line-2); }
+.evr-review .lbl { font-family: var(--evr-mono); font-size: .66rem; letter-spacing: .16em; text-transform: uppercase; color: var(--evr-dim); margin: 0 0 7px; }
+.evr-review blockquote { margin: 0; font-size: .96rem; color: var(--evr-ink); line-height: 1.6; }
+.evr-review .src blockquote { color: var(--evr-faint); font-size: .9rem; }
+.evr-review .cite { font-family: var(--evr-mono); font-size: .7rem; color: var(--evr-teal); }
+.evr-review mark, .evr-scope .evr-panel mark { background: rgba(242,180,65,.22); color: var(--evr-amber); border-radius: 3px; padding: 0 3px; font-weight: 700; }
+.evr-review .verdict-row { display: flex; gap: 10px; flex-wrap: wrap; padding: 14px 18px; border-top: 1px solid var(--evr-line); background: var(--evr-panel-2); }
+
+/* ---- seal + packet (Exhibit E) ---- */
+.evr-packet { display: grid; grid-template-columns: 132px 1fr; gap: 22px; align-items: center; border: 1px solid var(--evr-line-2); border-radius: 16px; background: var(--evr-panel); padding: 20px; margin: 18px 0 10px; max-width: 760px; }
+.evr-seal { width: 132px; height: 132px; display: block; }
+.evr-packet .body p { margin: 0 0 12px; }
+.evr-packet .body .fp { font-family: var(--evr-mono); font-size: .72rem; color: var(--evr-dim); }
+.evr-packet .body .fp code { color: var(--evr-teal); word-break: break-all; }
+.evr-packet .btnrow { display: flex; gap: 10px; flex-wrap: wrap; }
+@media (max-width: 560px) { .evr-packet { grid-template-columns: 1fr; justify-items: center; text-align: center; } .evr-packet .btnrow { justify-content: center; } }
+
+/* ---- method / fine print ---- */
+.evr-method summary { cursor: pointer; font-family: var(--evr-mono); font-size: .8rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--evr-faint); padding: 6px 0; }
+.evr-method[open] summary { color: var(--evr-teal); }
+.evr-method li { color: var(--evr-faint); font-size: .9rem; margin-bottom: 8px; }
+.evr-fine { border-top: 1px solid var(--evr-line); margin-top: 36px; padding: 18px 0 4px; font-size: .8rem; color: var(--evr-dim); line-height: 1.7; max-width: 880px; }
+
+/* ---- mobile status chip ---- */
+.evr-chip {
+  position: fixed; right: 14px; bottom: 14px; z-index: 60;
+  display: inline-flex; align-items: center; gap: 8px; min-height: 44px;
+  font-family: var(--evr-mono); font-size: .72rem; font-weight: 700; letter-spacing: .06em;
+  color: var(--evr-ink); background: var(--evr-panel); border: 1px solid var(--evr-line-2);
+  border-radius: 999px; padding: 9px 15px; text-decoration: none;
+  box-shadow: 0 8px 24px rgba(0,0,0,.45);
+}
+.evr-chip .led { width: 9px; height: 9px; border-radius: 50%; background: var(--evr-green); }
+.evr-chip[data-s="bad"] .led { background: var(--evr-red); }
+.evr-chip[data-s="dispute"] .led { background: var(--evr-amber); }
+@media (min-width: 1000px) { .evr-chip { display: none; } }
+
+/* ---- motion (opt-in only) ---- */
+@media (prefers-reduced-motion: no-preference) {
+  .evr-eyebrow .evr-dot { animation: evr-pulse 2.2s ease-out infinite; }
+  @keyframes evr-pulse { 0% { box-shadow: 0 0 0 0 rgba(255,93,108,.45); } 70% { box-shadow: 0 0 0 9px rgba(255,93,108,0); } 100% { box-shadow: 0 0 0 0 rgba(255,93,108,0); } }
+  .evr-rec.fresh .evr-card { animation: evr-in .35s ease-out; }
+  @keyframes evr-in { from { transform: translateY(4px); opacity: 0; } to { transform: none; opacity: 1; } }
+  .evr-act:hover, .evr-btn:hover { transform: translateY(-1px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .evr-scope *, .evr-scope *::before, .evr-scope *::after { animation: none !important; transition: none !important; }
+}
+.evr-rec.playing .evr-card { box-shadow: inset 0 0 0 1px var(--evr-teal-br); }
+
+@media (max-width: 999px) {
+  .evr-aside { position: static; max-height: none; }
+  .evr-records { max-height: 50vh; }
+}
+@media (max-width: 640px) {
+  .evr-hero { padding-top: 44px; }
+  .evr-grid { padding-top: 26px; gap: 26px; }
+}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to content</a>
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- INCLUDE:HEADER -->
+<div id="hitl-notice" style="background:#0a1929;padding:4px 16px;text-align:center;font-size:12px;color:#4a5568;border-bottom:1px solid rgba(255,255,255,0.06);letter-spacing:0.01em;">Human-in-the-Loop required: licensed professionals verify all outputs before clinical or legal action</div>
+<header role="banner">
+  <div class="header-inner">
+    <a href="/index.html" class="logo" aria-label="Pocono AI Home">
+      <img src="/logo.svg?v=402" alt="" width="36" height="36" decoding="async" loading="eager" aria-hidden="true" style="display:inline-block;">
+      Pocono <span>AI</span>
+    </a>
+    <nav id="desktop-nav" aria-label="Main navigation">
+      <div class="nav-item"><a href="/index.html" class="nav-direct">Home</a></div>
+      <div class="nav-item"><a href="/for-physicians.html" class="nav-direct">Physicians</a></div>
+      <div class="nav-item"><a href="/for-attorneys.html" class="nav-direct">Attorneys</a></div>
+      <div class="nav-item"><a href="/sentinel-node.html" class="nav-direct nav-hub" style="color:#d5a94f;border:1px solid rgba(213,169,79,0.45);border-radius:999px;padding:6px 13px;">Sentinel Node</a></div>
+      <div class="nav-item"><a href="/living-memorials/" class="nav-direct">Living Echo</a></div>
+      <div class="nav-item"><a href="/contact.html" class="nav-direct">Contact</a></div>
+      <div class="nav-item" data-dropdown="menu-more">
+        <button type="button" class="nav-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="menu-more">More <span class="nav-chevron" aria-hidden="true">&#9662;</span></button>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <a href="/contact.html#pilot" class="nav-cta nav-cta-primary">Request a Pilot</a>
+      <button type="button" class="pa-search-trigger" data-search-open aria-label="Search (press / or Ctrl-K)" aria-haspopup="dialog" aria-expanded="false">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span class="pa-st-label">Search</span><kbd data-pa-keyhint>Ctrl K</kbd>
+      </button>
+      <button type="button" class="header-icon-btn" id="mobile-menu" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav-panel">
+        <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- "More" overflow dropdown — sibling of <header> so position:fixed escapes header's stacking context. Wired by nav.js via data-dropdown="menu-more". -->
+<div class="nav-dropdown" id="menu-more" aria-label="More navigation">
+  <p class="nav-dd-section">Products</p>
+  <a href="/engineering-drafting/">Drafting &amp; Engineering Edition</a>
+  <a href="/sentinel-home/">Sentinel Home Edition</a>
+  <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability — Assistive Tools &#x2605;</a>
+  <a href="/living-memorials/enterprise-estate-continuity.html">Enterprise Estate Continuity</a>
+  <p class="nav-dd-section">Capabilities</p>
+  <a href="/evidence-room.html">Evidence Room</a>
+  <a href="/push-button-deliverables.html">Push-Button Deliverables</a>
+  <a href="/pilot-readiness-kit.html">Pilot Kit</a>
+  <a href="/pilot-program.html">Pilot Program</a>
+  <a href="/how-it-works.html">How It Works</a>
+  <p class="nav-dd-section">Hubs &amp; Company</p>
+  <a href="/training.html">Training Hub</a>
+  <a href="/documentation-hub/">Document Hub</a>
+  <a href="/global/">Global Hub</a>
+  <a href="/investors-hub.html">Investor Hub</a>
+  <a href="/valuation-dashboard.html">Valuation Dashboard</a>
+  <a href="/about.html">About</a>
+  <p class="nav-dd-section">Trust &amp; Legal</p>
+  <a href="/transparency.html">Transparency</a>
+  <a href="/audit.html">Audit Log</a>
+  <a href="/privacy.html">Privacy</a>
+  <a href="/sitemap.html">Sitemap</a>
+</div>
+<!-- Site search is provided by the self-contained search.js asset (command palette: / or Ctrl/Cmd-K). -->
+
+<!-- Mobile panel: full-screen slide-in. v396 nav — hub tiles + grouped links + Sentinel Node + Engineering. -->
+<nav id="mobile-nav-panel" aria-label="Mobile navigation" aria-hidden="true" role="dialog" aria-modal="true">
+
+  <!-- Hub tiles: Sentinel Node, Documentation Hub, Training Hub, Global Hub -->
+  <div style="padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,0.07);">
+    <p style="font-size:0.65em;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.28);margin:0 0 10px;padding:0 2px;">Hubs</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <a href="/sentinel-node.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(213,169,79,0.1);border:1px solid rgba(213,169,79,0.35);border-radius:10px;color:#d5a94f;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Sentinel Node</a>
+      <a href="/documentation-hub/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(0,194,168,0.1);border:1px solid rgba(0,194,168,0.35);border-radius:10px;color:#00c2a8;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Docs Hub</a>
+      <a href="/training.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.35);border-radius:10px;color:#a78bfa;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Training Hub</a>
+      <a href="/global/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(122,240,220,0.07);border:1px solid rgba(122,240,220,0.3);border-radius:10px;color:#7af0dc;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Global Hub</a>
+    </div>
+  </div>
+
+  <!-- Core paths -->
+  <div class="mob-static-links">
+    <a href="/index.html">Home</a>
+    <a href="/for-physicians.html">Physicians</a>
+    <a href="/for-attorneys.html">Attorneys</a>
+    <a href="/engineering-drafting/">Engineering &amp; Drafting</a>
+    <a href="/pilot-program.html">Pilot Program</a>
+    <a href="/how-it-works.html">How It Works</a>
+    <a href="/trust.html">Trust &amp; Audit</a>
+    <a href="/pricing.html">Pricing</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/living-memorials/">Living Echo</a>
+    <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability</a>
+    <a href="/about.html">About</a>
+    <a href="/team.html" style="color:rgba(255,255,255,0.6);">Team &amp; Leadership</a>
+    <a href="/valuation-dashboard.html" style="color:rgba(255,255,255,0.6);">Valuation Dashboard</a>
+    <a href="/careers.html" style="color:rgba(255,255,255,0.6);">Careers</a>
+    <a href="/sentinel-demo.html" style="color:rgba(255,255,255,0.6);">Demo</a>
+    <a href="/sitemap.html" style="color:rgba(255,255,255,0.45);">Sitemap</a>
+    <a href="/transparency.html" style="color:rgba(255,255,255,0.45);">Transparency</a>
+    <a href="/privacy.html" style="color:rgba(255,255,255,0.45);">Privacy</a>
+  </div>
+
+  <a href="/contact.html#pilot" class="mob-cta">Request a Pilot</a>
+</nav>
+<!-- /INCLUDE:HEADER -->
+
+<main id="main-content" class="evr-scope">
+
+  <!-- ============ HERO ============ -->
+  <section class="evr-hero" aria-labelledby="evr-title">
+    <div class="evr-wrap">
+      <p class="evr-eyebrow"><span class="evr-dot" aria-hidden="true"></span>Live artifact &middot; this page is recording</p>
+      <h1 id="evr-title">The Evidence Room<br><span class="thin">Attack a working audit chain.</span></h1>
+      <p class="evr-lede">Since the moment this page opened, it has been keeping a record of your visit &mdash; each act sealed with SHA-256 and chained to the act before it, entirely inside your own browser. Our whole company rests on the claim that a record like this can be trusted. So we will not ask you to believe it.</p>
+      <div class="evr-claim" role="note">
+        <strong>We invite you to attack it.</strong> Rewrite history. Cover your tracks. Forge the entire chain. Each attack works a little &mdash; and each one is caught by a different layer of custody. <span class="evr-mono-t" style="font-size:.82em;color:var(--evr-dim);">Synthetic data only. No cookies, no storage, no transmission. The record below lives in this tab&rsquo;s memory and dies when you close it.</span>
+      </div>
+      <div class="evr-hero-cta">
+        <a class="evr-btn evr-btn-pri" href="#exhibit-a">Begin the demonstration</a>
+        <a class="evr-btn evr-btn-ghost" href="#evr-method">How this page is built</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="evr-wrap">
+    <div class="evr-grid">
+
+      <!-- ============ THE LEDGER (aside) ============ -->
+      <aside class="evr-aside" aria-label="Chain of custody for this visit">
+        <div class="evr-ledger-panel" id="evr-ledger-panel">
+          <div class="evr-ledger-head">
+            <div class="row1">
+              <span class="evr-ledger-title">Chain of custody &mdash; this visit</span>
+              <span class="evr-state" id="evr-state" data-s="ok">VERIFIED</span>
+            </div>
+            <div class="evr-head-hash">
+              <span>HEAD</span><code id="evr-head">&mdash;</code>
+              <button type="button" class="evr-chip-btn" id="evr-copyhead">copy</button>
+              <span id="evr-count" style="margin-left:auto;">0 records</span>
+            </div>
+          </div>
+          <ol class="evr-records" id="evr-records"></ol>
+          <div class="evr-ledger-foot">
+            <div class="evr-ledger-controls">
+              <button type="button" class="evr-btn evr-btn-sm" id="evr-verify">Verify chain</button>
+              <button type="button" class="evr-btn evr-btn-sm evr-btn-ghost" id="evr-anchor">Anchor head</button>
+              <button type="button" class="evr-btn evr-btn-sm evr-btn-ghost" id="evr-listen" aria-pressed="false">Listen to the chain</button>
+            </div>
+            <p class="evr-live" id="evr-live" role="status" aria-live="polite"></p>
+          </div>
+        </div>
+      </aside>
+
+      <!-- ============ EXHIBITS (main column) ============ -->
+      <div class="evr-maincol">
+
+        <!-- EXHIBIT A -->
+        <section class="evr-exhibit" id="exhibit-a" aria-labelledby="evr-a-h">
+          <p class="evr-ex-tag"><b>Exhibit A</b> &mdash; append-only</p>
+          <h2 id="evr-a-h">Acts become records.</h2>
+          <p>On a Sentinel Node, no consequential act completes until its record is sealed &mdash; <strong>the audit write comes first</strong>, then the action. Try it. Each button below performs one synthetic workflow act. Watch the ledger: the record appears, gets hashed, and is chained to everything that came before it.</p>
+          <div class="evr-acts" role="group" aria-label="Synthetic workflow acts">
+            <button type="button" class="evr-act" data-act="open">
+              <span class="t">Open a case file</span>
+              <span class="d">intake &middot; synthetic matter</span>
+            </button>
+            <button type="button" class="evr-act" data-act="retrieve">
+              <span class="t">Run a retrieval</span>
+              <span class="d">local index &middot; cited passages</span>
+            </button>
+            <button type="button" class="evr-act" data-act="draft">
+              <span class="t">Generate a draft</span>
+              <span class="d">3 citations attached</span>
+            </button>
+            <button type="button" class="evr-act" data-act="queue">
+              <span class="t">Send to review queue</span>
+              <span class="d">human gate &middot; hard stop</span>
+            </button>
+          </div>
+          <p class="evr-note">Reading is an event too: as each exhibit enters your viewport, the room records it. You have been on the record since the title loaded.</p>
+        </section>
+
+        <!-- EXHIBIT B -->
+        <section class="evr-exhibit" id="exhibit-b" aria-labelledby="evr-b-h">
+          <p class="evr-ex-tag"><b>Exhibit B</b> &mdash; the attack</p>
+          <h2 id="evr-b-h">Now rewrite history.</h2>
+          <p>Assume the worst case: you are an insider with direct access to storage. The system&rsquo;s own interfaces would refuse this, so you go around them. Choose any record in the ledger and press <strong>alter</strong> &mdash; or let the room pick a target for you. Change what it says. Make the past more convenient.</p>
+          <div class="evr-hero-cta" style="margin-top:6px;">
+            <button type="button" class="evr-btn evr-btn-warn" id="evr-pick">Pick a target for me</button>
+            <button type="button" class="evr-btn evr-btn-ghost" id="evr-verify-b">Verify the chain</button>
+          </div>
+          <div class="evr-panel" id="evr-attack-panel" hidden>
+            <div class="evr-panel-head">
+              <span class="evr-panel-title">Forensics console</span>
+              <button type="button" class="evr-btn evr-btn-sm evr-btn-ghost" id="evr-restore" hidden>Reset the demonstration</button>
+            </div>
+            <div class="evr-console" id="evr-console"></div>
+            <div class="evr-hero-cta" style="margin-top:14px;">
+              <button type="button" class="evr-btn evr-btn-warn" id="evr-reseal" hidden>Cover your tracks &mdash; re-seal the record</button>
+              <button type="button" class="evr-btn evr-btn-danger" id="evr-forge" hidden>Forge the entire chain downstream</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- EXHIBIT C -->
+        <section class="evr-exhibit" id="exhibit-c" aria-labelledby="evr-c-h">
+          <p class="evr-ex-tag"><b>Exhibit C</b> &mdash; the witness</p>
+          <h2 id="evr-c-h">The chain has friends outside the building.</h2>
+          <p>While you read, the room has been quietly <strong>anchoring</strong> its head hash into a separate witness ledger &mdash; the way a production node&rsquo;s chain head leaves the system inside exported evidence packets, supervisor copies, and printed receipts. A forger can rewrite what is inside one system. The copies outside it do not cooperate.</p>
+          <div class="evr-panel" style="max-width:700px;">
+            <div class="evr-panel-head">
+              <span class="evr-panel-title">Witness ledger &mdash; anchored heads</span>
+              <span class="evr-mono-t" id="evr-witness-state" style="font-size:.7rem;color:var(--evr-dim);"></span>
+            </div>
+            <ul class="evr-anchors" id="evr-anchors"></ul>
+          </div>
+          <p><strong>Tamper-evident does not mean unbreakable.</strong> It means a lie has to outrun every witness &mdash; every packet, every printout, every copy that already left the room. That is the difference between hiding something and answering for it.</p>
+        </section>
+
+        <!-- EXHIBIT D -->
+        <section class="evr-exhibit" id="exhibit-d" aria-labelledby="evr-d-h">
+          <p class="evr-ex-tag"><b>Exhibit D</b> &mdash; human judgment</p>
+          <h2 id="evr-d-h">The chain proves what happened. A person answers for what is true.</h2>
+          <p>Hashes cannot tell you whether a sentence is supported by its source. That is a professional&rsquo;s job &mdash; which is why, on a Sentinel Node, the human gate is a hard stop and the reviewer&rsquo;s verdict is sealed into the same chain as everything else. Here is a synthetic draft and the passage it cites. For the next thirty seconds, you are <span class="evr-mono-t evr-k">reviewer-1</span>.</p>
+          <div class="evr-review" id="evr-review">
+            <div class="draft">
+              <p class="lbl">AI draft &mdash; awaiting attestation</p>
+              <blockquote id="evr-draft-text">&ldquo;Across the retrieved cohort study, anticoagulation was associated with reduced readmission in <span id="evr-claim-num">1,200 patients</span>.&rdquo; <span class="cite">[source: synthetic-cohort-study.pdf, p.4]</span></blockquote>
+            </div>
+            <div class="src">
+              <p class="lbl">Cited passage &mdash; synthetic-cohort-study.pdf, p.4</p>
+              <blockquote>&ldquo;&hellip;in this single-center retrospective cohort of <span id="evr-src-num">120 patients</span>, anticoagulation was associated with reduced 30-day readmission&hellip;&rdquo;</blockquote>
+            </div>
+            <div class="verdict-row" id="evr-verdict-row">
+              <button type="button" class="evr-btn" id="evr-att-sup">Attest: supported</button>
+              <button type="button" class="evr-btn evr-btn-warn" id="evr-att-unsup">Attest: unsupported</button>
+            </div>
+          </div>
+          <div class="evr-panel" id="evr-review-result" hidden style="max-width:700px;"></div>
+        </section>
+
+        <!-- EXHIBIT E -->
+        <section class="evr-exhibit" id="exhibit-e" aria-labelledby="evr-e-h">
+          <p class="evr-ex-tag"><b>Exhibit E</b> &mdash; the packet</p>
+          <h2 id="evr-e-h">Your visit has a fingerprint. Take it with you.</h2>
+          <p>The seal below is drawn from your chain&rsquo;s head hash. No other visit &mdash; by you or anyone else, ever &mdash; will produce this exact mark, because no other visit will produce this exact sequence of acts. Export the evidence packet and you hold the only copy in existence.</p>
+          <div class="evr-packet">
+            <svg class="evr-seal" id="evr-seal" viewBox="0 0 120 120" role="img" aria-labelledby="evr-seal-title evr-seal-desc">
+              <title id="evr-seal-title">Evidence seal for this visit</title>
+              <desc id="evr-seal-desc">A circular generative stamp derived from the chain&rsquo;s current head hash. It changes whenever the chain changes.</desc>
+            </svg>
+            <div class="body">
+              <p class="fp">HEAD <code id="evr-fp">&mdash;</code></p>
+              <div class="btnrow">
+                <button type="button" class="evr-btn evr-btn-pri" id="evr-export-json">Download evidence packet (.json)</button>
+                <button type="button" class="evr-btn" id="evr-export-txt">Download receipt (.txt)</button>
+              </div>
+            </div>
+          </div>
+          <p>When you close this tab, this chain ceases to exist. It was computed in your browser&rsquo;s memory and written nowhere else &mdash; no server saw it, no analytics counted it, no cookie survived it. <strong>That is local-first: the proof stays where the responsibility lives.</strong> On this page, the record dies with the tab. On a Sentinel Node, it is designed to outlive the doubt.</p>
+          <div class="evr-hero-cta">
+            <a class="evr-btn evr-btn-pri" href="ai-governance-audit-trail.html">How the production chain works</a>
+            <a class="evr-btn" href="contact.html#pilot">Request a pilot</a>
+            <a class="evr-btn evr-btn-ghost" href="sentinel-trial-room.html">Prefer to watch governance stop a harm? The Trial Room is next door</a>
+          </div>
+        </section>
+
+        <!-- METHOD -->
+        <section class="evr-exhibit" id="evr-method" aria-labelledby="evr-m-h">
+          <details class="evr-method">
+            <summary id="evr-m-h">How this page is built &mdash; the fine print</summary>
+            <ul>
+              <li><strong>Hashing.</strong> SHA-256 via the browser&rsquo;s Web Crypto API, with a self-contained pure-JavaScript fallback (verified against published test vectors) for non-secure contexts. Each record&rsquo;s seal covers its sequence number, timestamp, actor, event, detail, and the previous record&rsquo;s hash.</li>
+              <li><strong>Storage.</strong> An append-only array in page memory. No cookies, no localStorage, no sessionStorage, no IndexedDB, no network requests, no analytics. Reload the page and the chain is gone &mdash; deliberately.</li>
+              <li><strong>The three detection layers</strong> you just used: content seals catch edits; link integrity catches re-sealed records; witness anchors catch full forgeries. Production custody adds reviewer identity, policy gates, and packet export &mdash; this room demonstrates the geometry, not the whole machine.</li>
+              <li><strong>Accessibility.</strong> Keyboard operable throughout, visible focus, 44px touch targets, status changes announced politely, color never the only signal, <span class="evr-mono-t">prefers-reduced-motion</span> honored. Audio is optional, user-initiated, and duplicated in text.</li>
+              <li><strong>See for yourself.</strong> View source &mdash; the entire room is one static page.</li>
+            </ul>
+          </details>
+          <p class="evr-fine">The Evidence Room is an educational demonstration using synthetic data only. It is not the Sentinel Node product, not a security audit, and not a representation that any system is immune to compromise &mdash; tamper-<em>evidence</em> is about detection and accountability, not invulnerability. Pocono AI does not provide medical or legal advice; outputs in regulated settings require review by a qualified professional. Nothing on this page is collected, transmitted, or retained.</p>
+        </section>
+
+
+<!-- INCLUDE:AUDIT-ROADMAP v384 — self-contained, inline-styled, zero external CSS deps.
+     Source of truth for the sitewide "Reviewable Today, Tamper-Evident Next" card.
+     If you change this, re-inject into evidence-room.html and architecture.html. -->
+<section class="audit-roadmap-card" aria-labelledby="audit-roadmap-h" style="max-width:1040px;margin:42px auto;padding:26px 26px 22px;background:linear-gradient(180deg,#101620,#0b0f13);border:1px solid rgba(0,194,168,0.28);border-radius:14px;box-shadow:0 1px 0 rgba(255,255,255,0.03) inset,0 18px 50px rgba(0,0,0,0.35);">
+  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px;">
+    <span style="font:600 0.66rem/1 system-ui,sans-serif;letter-spacing:0.18em;text-transform:uppercase;color:#00C2A8;">Audit &amp; Security Roadmap</span>
+    <span style="font:600 0.6rem/1 system-ui,sans-serif;letter-spacing:0.08em;text-transform:uppercase;color:#0B0F13;background:#00C2A8;padding:3px 8px;border-radius:999px;">Reviewable today</span>
+    <span style="font:600 0.6rem/1 system-ui,sans-serif;letter-spacing:0.08em;text-transform:uppercase;color:#cfe9ee;background:rgba(10,165,255,0.16);border:1px solid rgba(10,165,255,0.4);padding:3px 8px;border-radius:999px;">Tamper-evident next</span>
+  </div>
+  <h2 id="audit-roadmap-h" style="font:700 1.5rem/1.2 system-ui,sans-serif;color:#E6E9ED;margin:0 0 10px;">Reviewable Today. Tamper-Evident Next.</h2>
+  <p style="font:400 0.98rem/1.6 system-ui,sans-serif;color:#A6ADB7;margin:0 0 6px;max-width:78ch;">
+    Sentinel Node&rsquo;s pilot architecture preserves a <strong style="color:#E6E9ED;">reviewable audit trail</strong> for
+    approved-source retrieval, draft generation, human review, and go-live reporting. We do not claim that citations prove
+    correctness, or that a local log is tamper-proof. Our next audit-layer release adds hash-chained audit events, signed
+    verification bundles, admin-action logging, and optional off-box/WORM retention for stronger tamper-evidence.
+  </p>
+  <p style="font:400 0.82rem/1.5 system-ui,sans-serif;color:#8899aa;margin:0 0 18px;max-width:78ch;">
+    Citations support human review &mdash; they do not prove the AI&rsquo;s interpretation is correct. Sentinel Node produces
+    cited <em>draft</em> output from approved sources; a qualified person reviews before any clinical, legal, or operational use.
+    &ldquo;Tamper-evident&rdquo; here means alteration is detectable, not impossible.
+  </p>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;">
+
+    <div style="background:rgba(0,194,168,0.06);border:1px solid rgba(0,194,168,0.32);border-radius:11px;padding:16px;">
+      <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:8px;">
+        <span style="font:700 0.7rem/1 system-ui;letter-spacing:0.06em;color:#0B0F13;background:#00C2A8;padding:3px 7px;border-radius:6px;">STAGE 1</span>
+        <span style="font:600 0.7rem/1 system-ui;letter-spacing:0.04em;text-transform:uppercase;color:#00d9bb;">Shipping in pilot</span>
+      </div>
+      <h3 style="font:700 1.02rem/1.3 system-ui;color:#E6E9ED;margin:0 0 8px;">Pilot Audit Layer</h3>
+      <ul style="margin:0;padding-left:18px;font:400 0.86rem/1.55 system-ui;color:#A6ADB7;">
+        <li>Local operational audit trail</li>
+        <li>Approved-source manifest &amp; version</li>
+        <li>Draft metadata</li>
+        <li>Reviewer identity captured</li>
+        <li>Human approval record (hard gate)</li>
+        <li>Install / go-live report</li>
+        <li>Exportable review packet</li>
+      </ul>
+    </div>
+
+    <div style="background:rgba(10,165,255,0.05);border:1px solid rgba(10,165,255,0.34);border-radius:11px;padding:16px;">
+      <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:8px;">
+        <span style="font:700 0.7rem/1 system-ui;letter-spacing:0.06em;color:#0B0F13;background:#0AA5FF;padding:3px 7px;border-radius:6px;">STAGE 2</span>
+        <span style="font:600 0.7rem/1 system-ui;letter-spacing:0.04em;text-transform:uppercase;color:#5dade2;">Next audit-layer release</span>
+      </div>
+      <h3 style="font:700 1.02rem/1.3 system-ui;color:#E6E9ED;margin:0 0 8px;">Tamper-Evident Audit Layer</h3>
+      <ul style="margin:0;padding-left:18px;font:400 0.86rem/1.55 system-ui;color:#A6ADB7;">
+        <li>Hash-chained audit events</li>
+        <li>Signed audit entries</li>
+        <li>Admin-action logging</li>
+        <li>Exportable verification bundle</li>
+        <li>Audit integrity checker</li>
+      </ul>
+    </div>
+
+    <div style="background:rgba(166,173,183,0.05);border:1px solid rgba(166,173,183,0.26);border-radius:11px;padding:16px;">
+      <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:8px;">
+        <span style="font:700 0.7rem/1 system-ui;letter-spacing:0.06em;color:#E6E9ED;background:#2A313B;padding:3px 7px;border-radius:6px;">STAGE 3</span>
+        <span style="font:600 0.7rem/1 system-ui;letter-spacing:0.04em;text-transform:uppercase;color:#A6ADB7;">Production roadmap</span>
+      </div>
+      <h3 style="font:700 1.02rem/1.3 system-ui;color:#E6E9ED;margin:0 0 8px;">External Retention Layer</h3>
+      <ul style="margin:0;padding-left:18px;font:400 0.86rem/1.55 system-ui;color:#A6ADB7;">
+        <li>Optional off-box replication</li>
+        <li>Optional WORM archive</li>
+        <li>Customer-controlled retention</li>
+        <li>External timestamping</li>
+        <li>Role-separated audit review</li>
+      </ul>
+    </div>
+
+  </div>
+  <p style="font:400 0.74rem/1.5 system-ui;color:#6b8fa8;margin:16px 0 0;">
+    Roadmap items are planned capabilities, not commitments to a delivery date, and do not change what the current pilot claims.
+    The current pilot does not implement hash-chained or signed audit records as a production control; that work is Stage 2.
+  </p>
+</section>
+<!-- /INCLUDE:AUDIT-ROADMAP -->
+        <!-- Installation Simulator CTA — v378 -->
+        <section style="margin-top:32px;padding:22px 24px;background:rgba(0,194,168,0.07);border:1px solid rgba(0,194,168,0.25);border-radius:12px;">
+          <div style="font-size:0.62rem;font-weight:700;letter-spacing:0.14em;color:#6b8fa8;text-transform:uppercase;margin-bottom:8px">Deployment Controls Walkthrough</div>
+          <h2 style="font-size:1.1rem;color:#fff;margin:0 0 8px">Sentinel Node Installation Simulator</h2>
+          <p style="font-size:0.85rem;color:#9eb9cc;margin:0 0 14px;line-height:1.6">See how Sentinel Node connects network boundaries, approved-source retrieval, human review, and audit evidence into one governed deployment process — 26 interactive phases.</p>
+          <a href="sentinel-node/installation-simulator.html" style="display:inline-block;background:#00c2a8;color:#04111a;font-weight:800;font-size:0.88rem;padding:10px 20px;border-radius:8px;text-decoration:none;">Review the Simulator ↗</a>
+        </section>
+
+      </div><!-- /maincol -->
+    </div><!-- /grid -->
+  </div><!-- /wrap -->
+
+  <a class="evr-chip" id="evr-chip" href="#evr-ledger-panel" data-s="ok" aria-label="Jump to the chain of custody ledger">
+    <span class="led" aria-hidden="true"></span><span id="evr-chip-text">0 &middot; VERIFIED</span>
+  </a>
+
+  <noscript>
+    <div class="evr-wrap" style="padding:30px 22px 60px;">
+      <div class="evr-claim"><strong>The Evidence Room needs JavaScript</strong> &mdash; the chain is computed live in your browser, which is the entire point: nothing is sent anywhere to be hashed. With scripts off, the room stays dark. The written record of how our production audit chain works is at <a href="ai-governance-audit-trail.html">ai-governance-audit-trail.html</a> and <a href="trust.html">trust.html</a>.</div>
+    </div>
+  </noscript>
+
+</main>
+
+<script>
+(function () {
+'use strict';
+
+/*EVR-CORE-START*/
+/* ===================== sha-256 (FIPS 180-4) fallback ===================== */
+/* Used only when crypto.subtle is unavailable (non-secure contexts).       */
+var EVR_K = [
+0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,
+0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,
+0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,
+0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,
+0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,
+0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,
+0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,
+0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2];
+
+function evrUtf8Bytes(str) {
+  if (typeof TextEncoder !== 'undefined') return new TextEncoder().encode(str);
+  var s = unescape(encodeURIComponent(str)), out = new Uint8Array(s.length);
+  for (var i = 0; i < s.length; i++) out[i] = s.charCodeAt(i) & 0xff;
+  return out;
+}
+
+function evrSha256Sync(str) {
+  var bytes = evrUtf8Bytes(str);
+  var l = bytes.length;
+  var bitLenHi = Math.floor(l / 0x20000000);
+  var bitLenLo = (l << 3) >>> 0;
+  var padded = (((l + 9 + 63) >> 6) << 6);
+  var m = new Uint8Array(padded);
+  m.set(bytes); m[l] = 0x80;
+  m[padded - 8] = (bitLenHi >>> 24) & 0xff; m[padded - 7] = (bitLenHi >>> 16) & 0xff;
+  m[padded - 6] = (bitLenHi >>> 8)  & 0xff; m[padded - 5] =  bitLenHi         & 0xff;
+  m[padded - 4] = (bitLenLo >>> 24) & 0xff; m[padded - 3] = (bitLenLo >>> 16) & 0xff;
+  m[padded - 2] = (bitLenLo >>> 8)  & 0xff; m[padded - 1] =  bitLenLo         & 0xff;
+
+  var h0=0x6a09e667,h1=0xbb67ae85,h2=0x3c6ef372,h3=0xa54ff53a,
+      h4=0x510e527f,h5=0x9b05688c,h6=0x1f83d9ab,h7=0x5be0cd19;
+  var w = new Array(64), i, j, t1, t2;
+
+  for (i = 0; i < padded; i += 64) {
+    for (j = 0; j < 16; j++) {
+      w[j] = (m[i+4*j] << 24) | (m[i+4*j+1] << 16) | (m[i+4*j+2] << 8) | m[i+4*j+3];
+    }
+    for (j = 16; j < 64; j++) {
+      var x = w[j-15], y = w[j-2];
+      var s0 = ((x>>>7)|(x<<25)) ^ ((x>>>18)|(x<<14)) ^ (x>>>3);
+      var s1 = ((y>>>17)|(y<<15)) ^ ((y>>>19)|(y<<13)) ^ (y>>>10);
+      w[j] = (w[j-16] + s0 + w[j-7] + s1) | 0;
+    }
+    var a=h0,b=h1,c=h2,d=h3,e=h4,f=h5,g=h6,h=h7;
+    for (j = 0; j < 64; j++) {
+      var S1 = ((e>>>6)|(e<<26)) ^ ((e>>>11)|(e<<21)) ^ ((e>>>25)|(e<<7));
+      var ch = (e & f) ^ (~e & g);
+      t1 = (h + S1 + ch + EVR_K[j] + w[j]) | 0;
+      var S0 = ((a>>>2)|(a<<30)) ^ ((a>>>13)|(a<<19)) ^ ((a>>>22)|(a<<10));
+      var maj = (a & b) ^ (a & c) ^ (b & c);
+      t2 = (S0 + maj) | 0;
+      h=g; g=f; f=e; e=(d+t1)|0; d=c; c=b; b=a; a=(t1+t2)|0;
+    }
+    h0=(h0+a)|0; h1=(h1+b)|0; h2=(h2+c)|0; h3=(h3+d)|0;
+    h4=(h4+e)|0; h5=(h5+f)|0; h6=(h6+g)|0; h7=(h7+h)|0;
+  }
+  function hx(n){ return ('00000000' + (n >>> 0).toString(16)).slice(-8); }
+  return hx(h0)+hx(h1)+hx(h2)+hx(h3)+hx(h4)+hx(h5)+hx(h6)+hx(h7);
+}
+
+var EVR_SUBTLE = (typeof crypto !== 'undefined' && crypto.subtle && typeof crypto.subtle.digest === 'function');
+
+function evrSha256(str) {
+  if (EVR_SUBTLE) {
+    try {
+      return crypto.subtle.digest('SHA-256', evrUtf8Bytes(str)).then(function (buf) {
+        var v = new Uint8Array(buf), s = '';
+        for (var i = 0; i < v.length; i++) s += ('0' + v[i].toString(16)).slice(-2);
+        return s;
+      }).catch(function () { return evrSha256Sync(str); });
+    } catch (e) { return Promise.resolve(evrSha256Sync(str)); }
+  }
+  return Promise.resolve(evrSha256Sync(str));
+}
+
+/* ===================== the chain ===================== */
+var EVR_GENESIS = '0000000000000000000000000000000000000000000000000000000000000000';
+
+function evrCanonical(rec) {
+  return JSON.stringify([rec.seq, rec.t, rec.actor, rec.event, rec.detail, rec.prev]);
+}
+
+function EvrChain() {
+  this.records = [];   /* {seq,t,actor,event,detail,prev,hash,altered?,original?} */
+  this.anchors = [];   /* {n,seq,hash,t}  — copies that "left the room"          */
+}
+EvrChain.prototype.head = function () { return this.records.length ? this.records[this.records.length - 1] : null; };
+EvrChain.prototype.append = function (actor, event, detail, tISO) {
+  var self = this;
+  var rec = {
+    seq: this.records.length + 1,
+    t: tISO,
+    actor: actor,
+    event: event,
+    detail: detail,
+    prev: this.head() ? this.head().hash : EVR_GENESIS,
+    hash: ''
+  };
+  return evrSha256(evrCanonical(rec)).then(function (h) {
+    rec.hash = h;
+    self.records.push(rec);
+    return rec;
+  });
+};
+EvrChain.prototype.anchor = function (tISO) {
+  var h = this.head(); if (!h) return null;
+  var a = { n: this.anchors.length + 1, seq: h.seq, hash: h.hash, t: tISO };
+  this.anchors.push(a);
+  return a;
+};
+/* verify(): per-record flags + witness comparison. Pure, async. */
+EvrChain.prototype.verify = function () {
+  var self = this;
+  var checks = this.records.map(function (rec) { return evrSha256(evrCanonical(rec)); });
+  return Promise.all(checks).then(function (computed) {
+    var statuses = [], internalOK = true, firstBad = 0;
+    for (var i = 0; i < self.records.length; i++) {
+      var rec = self.records[i];
+      var content = (computed[i] !== rec.hash);
+      var expectedPrev = (i === 0) ? EVR_GENESIS : self.records[i - 1].hash;
+      var link = (rec.prev !== expectedPrev);
+      statuses.push({ seq: rec.seq, content: content, link: link });
+      if ((content || link) && internalOK) { internalOK = false; firstBad = rec.seq; }
+    }
+    var witnessBad = [];
+    for (var k = 0; k < self.anchors.length; k++) {
+      var a = self.anchors[k];
+      var current = (a.seq >= 1 && a.seq <= self.records.length) ? self.records[a.seq - 1].hash : null;
+      if (current !== a.hash) witnessBad.push({ n: a.n, seq: a.seq, anchored: a.hash, current: current });
+    }
+    return { internalOK: internalOK, firstBad: firstBad, statuses: statuses,
+             witnessOK: witnessBad.length === 0, witnessBad: witnessBad };
+  });
+};
+/* attacker toolkit — these operate directly on storage, as an insider would */
+EvrChain.prototype.tamper = function (seq, newDetail) {
+  var rec = this.records[seq - 1]; if (!rec) return false;
+  if (!rec.altered) rec.original = { detail: rec.detail, hash: rec.hash, prev: rec.prev };
+  rec.detail = newDetail; rec.altered = true;
+  return true;
+};
+EvrChain.prototype.reseal = function (seq) {           /* recompute one record's hash */
+  var rec = this.records[seq - 1]; if (!rec) return Promise.resolve(false);
+  return evrSha256(evrCanonical(rec)).then(function (h) { rec.hash = h; return true; });
+};
+EvrChain.prototype.forge = function (fromSeq) {        /* recompute prev+hash to the head */
+  var self = this, p = Promise.resolve();
+  var start = Math.max(1, fromSeq);
+  for (var i = start; i <= this.records.length; i++) {
+    (function (idx) {
+      p = p.then(function () {
+        var rec = self.records[idx - 1];
+        rec.prev = (idx === 1) ? EVR_GENESIS : self.records[idx - 2].hash;
+        return evrSha256(evrCanonical(rec)).then(function (h) { rec.hash = h; });
+      });
+    })(i);
+  }
+  return p;
+};
+/*EVR-CORE-END*/
+
+/* ===================== DOM layer ===================== */
+var $id = function (id) { return document.getElementById(id); };
+var els = {
+  records: $id('evr-records'), state: $id('evr-state'), head: $id('evr-head'), count: $id('evr-count'),
+  live: $id('evr-live'), copyhead: $id('evr-copyhead'), verify: $id('evr-verify'), verifyB: $id('evr-verify-b'),
+  anchorBtn: $id('evr-anchor'), listen: $id('evr-listen'), anchors: $id('evr-anchors'),
+  witnessState: $id('evr-witness-state'), pick: $id('evr-pick'), attackPanel: $id('evr-attack-panel'),
+  consoleEl: $id('evr-console'), reseal: $id('evr-reseal'), forge: $id('evr-forge'), restore: $id('evr-restore'),
+  chip: $id('evr-chip'), chipText: $id('evr-chip-text'),
+  attSup: $id('evr-att-sup'), attUnsup: $id('evr-att-unsup'),
+  reviewResult: $id('evr-review-result'), claimNum: $id('evr-claim-num'), srcNum: $id('evr-src-num'),
+  exportJson: $id('evr-export-json'), exportTxt: $id('evr-export-txt'),
+  seal: $id('evr-seal'), fp: $id('evr-fp')
+};
+if (!els.records || !els.state) { return; }
+
+var chain = new EvrChain();
+var prefersReduced = false;
+try { prefersReduced = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches); } catch (e) {}
+
+var ui = {
+  opQueue: Promise.resolve(),
+  appendsSinceAnchor: 0,
+  tamperTarget: 0,
+  attackStage: 0,          /* 0 none · 1 altered · 2 resealed · 3 forged */
+  alertedInternal: false,
+  alertedWitness: false,
+  reviewed: false,
+  amended: false,
+  lastVerify: null,
+  audio: null, playing: false, playTimer: null
+};
+
+function nowISO() {
+  try { return new Date().toISOString().replace('T', ' ').slice(0, 19) + 'Z'; }
+  catch (e) { return '' + Date.now(); }
+}
+function short(h) { return h ? h.slice(0, 12) + '\u2026' : '\u2014'; }
+function announce(msg) { if (els.live) els.live.textContent = msg; }
+function esc(s) {
+  return String(s).replace(/[&<>"']/g, function (c) {
+    return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c];
+  });
+}
+
+/* ---- append: appendNow runs inside the op queue; append() enqueues ---- */
+function appendNow(actor, event, detail, opts) {
+  opts = opts || {};
+  return chain.append(actor, event, detail, nowISO()).then(function (rec) {
+    renderRecord(rec, !opts.quiet);
+    ui.appendsSinceAnchor++;
+    if (opts.autoAnchorEligible !== false && ui.appendsSinceAnchor >= 4 && ui.attackStage === 0) {
+      doAnchor(true);
+    }
+    refreshHead();
+    announce('Record ' + rec.seq + ' sealed \u2014 ' + String(rec.event).replace(/_/g, ' ') + '.');
+    return rec;
+  });
+}
+function append(actor, event, detail, opts) {
+  ui.opQueue = ui.opQueue.then(function () { return appendNow(actor, event, detail, opts); });
+  return ui.opQueue;
+}
+
+/* ---- render one record ---- */
+var recEls = {}; /* seq -> li */
+function renderRecord(rec, animate) {
+  var li = document.createElement('li');
+  li.className = 'evr-rec' + (animate && !prefersReduced ? ' fresh' : '');
+  li.setAttribute('data-seq', rec.seq);
+  li.innerHTML =
+    '<span class="node" aria-hidden="true">\u2713</span>' +
+    '<div class="evr-card">' +
+      '<div class="meta"><span class="seq">#' + rec.seq + '</span>' +
+        '<span class="evr-actor" data-a="' + esc(rec.actor) + '">' + esc(rec.actor) + '</span>' +
+        '<span>' + esc(rec.event) + '</span><span style="margin-left:auto;">' + esc(String(rec.t).slice(11, 19)) + '</span></div>' +
+      '<p class="evr-detail">' + esc(rec.detail) + '</p>' +
+      '<div class="evr-hashes"><span>prev ' + short(rec.prev) + '</span><span>hash <span class="h">' + short(rec.hash) + '</span></span></div>' +
+      '<p class="statusline ok">SEALED \u2713</p>' +
+      '<div class="tools"><button type="button" class="evr-chip-btn evr-alter" data-seq="' + rec.seq + '">alter</button></div>' +
+    '</div>';
+  els.records.appendChild(li);
+  recEls[rec.seq] = li;
+  if (!prefersReduced) { hashScramble(li.querySelector('.evr-hashes .h'), short(rec.hash)); }
+  try { els.records.scrollTo({ top: els.records.scrollHeight, behavior: prefersReduced ? 'auto' : 'smooth' }); }
+  catch (e) { els.records.scrollTop = els.records.scrollHeight; }
+}
+
+function hashScramble(el, finalText) {
+  if (!el) return;
+  var glyphs = '0123456789abcdef', frame = 0, max = 6;
+  var iv = setInterval(function () {
+    if (++frame >= max) { clearInterval(iv); el.textContent = finalText; return; }
+    var s = '';
+    for (var i = 0; i < 12; i++) { s += glyphs[(Math.random() * 16) | 0]; }
+    el.textContent = s + '\u2026';
+  }, 55);
+}
+
+function refreshHead() {
+  var h = chain.head();
+  els.head.textContent = h ? short(h.hash) : '\u2014';
+  els.count.textContent = chain.records.length + ' record' + (chain.records.length === 1 ? '' : 's');
+  els.fp.textContent = h ? h.hash : '\u2014';
+  drawSeal(h ? h.hash : EVR_GENESIS);
+  els.chipText.textContent = chain.records.length + ' \u00b7 ' + els.state.textContent;
+}
+
+/* ---- state badge ---- */
+function setState(s, label) {
+  els.state.setAttribute('data-s', s); els.state.textContent = label;
+  els.chip.setAttribute('data-s', s);
+  els.chipText.textContent = chain.records.length + ' \u00b7 ' + label;
+}
+
+/* ---- verify: verifyNow runs inside the queue; runVerify enqueues ---- */
+function verifyNow() {
+  return chain.verify().then(function (rep) {
+    ui.lastVerify = rep;
+    var p = Promise.resolve();
+    if (!rep.internalOK && !ui.alertedInternal) {
+      ui.alertedInternal = true;
+      p = appendNow('system', 'integrity_alert',
+        'Verification failed at record #' + rep.firstBad + ' \u2014 seal does not match content. Incident recorded.',
+        { autoAnchorEligible: false });
+    } else if (rep.internalOK && !rep.witnessOK && !ui.alertedWitness) {
+      ui.alertedWitness = true;
+      p = appendNow('system', 'witness_dispute',
+        'Internal chain verifies, but ' + rep.witnessBad.length + ' external witness anchor(s) hold a different past. Forgery suspected.',
+        { autoAnchorEligible: false });
+    }
+    return p.then(function () { paintVerify(rep); return rep; });
+  });
+}
+function runVerify(announceIt) {
+  ui.opQueue = ui.opQueue.then(function () {
+    return verifyNow().then(function (rep) {
+      if (announceIt) {
+        announce(rep.internalOK && rep.witnessOK
+          ? 'Chain verified. All ' + chain.records.length + ' records intact.'
+          : rep.internalOK
+            ? 'Witness dispute: external anchors disagree with the chain.'
+            : 'Tamper detected at record ' + rep.firstBad + '.');
+      }
+      return rep;
+    });
+  });
+  return ui.opQueue;
+}
+
+function paintVerify(rep) {
+  for (var i = 0; i < rep.statuses.length; i++) {
+    var st = rep.statuses[i], li = recEls[st.seq];
+    if (!li) continue;
+    var line = li.querySelector('.statusline'), node = li.querySelector('.node');
+    if (st.content) {
+      li.setAttribute('data-s', 'content'); node.textContent = '\u2715';
+      line.className = 'statusline bad'; line.textContent = 'SEAL MISMATCH \u2715 \u2014 content was altered';
+    } else if (st.link) {
+      li.setAttribute('data-s', 'link'); node.textContent = '!';
+      line.className = 'statusline bad'; line.textContent = 'LINK BROKEN \u2715 \u2014 does not recognize previous record';
+    } else if (ui.attackStage === 3 && !rep.witnessOK && ui.tamperTarget > 0 && st.seq >= ui.tamperTarget) {
+      li.setAttribute('data-s', 'forged'); node.textContent = '?';
+      line.className = 'statusline warn'; line.textContent = 'SELF-CONSISTENT \u2014 disputed by external witness';
+    } else {
+      li.removeAttribute('data-s'); node.textContent = '\u2713';
+      line.className = 'statusline ok'; line.textContent = 'SEALED \u2713';
+    }
+  }
+  renderAnchors(rep);
+  if (!rep.internalOK) { setState('bad', 'TAMPER DETECTED'); }
+  else if (!rep.witnessOK) { setState('dispute', 'WITNESS DISPUTE'); }
+  else { setState('ok', 'VERIFIED'); }
+}
+
+/* ---- witness anchors ---- */
+function doAnchor(auto) {
+  var a = chain.anchor(nowISO());
+  if (!a) return;
+  ui.appendsSinceAnchor = 0;
+  renderAnchors(ui.lastVerify);
+  if (!auto) announce('Head anchored to witness ledger: record ' + a.seq + '.');
+}
+function renderAnchors(rep) {
+  var badMap = {};
+  if (rep && rep.witnessBad) { rep.witnessBad.forEach(function (b) { badMap[b.n] = true; }); }
+  var html = '';
+  for (var i = 0; i < chain.anchors.length; i++) {
+    var a = chain.anchors[i], bad = !!badMap[a.n];
+    html += '<li class="' + (bad ? 'bad' : '') + '">\u2693 #' + a.n +
+      ' <span>head@' + a.seq + '</span> <code>' + short(a.hash) + '</code>' +
+      '<span style="color:var(--evr-dim);">' + esc(String(a.t).slice(11, 19)) + '</span>' +
+      (bad ? '<span class="w-bad">DISPUTES CHAIN \u2715</span>' : '<span class="w-ok">MATCHES \u2713</span>') +
+      '</li>';
+  }
+  els.anchors.innerHTML = html || '<li>No anchors yet \u2014 the room anchors automatically as records accrue.</li>';
+  if (els.witnessState) {
+    els.witnessState.textContent = chain.anchors.length
+      ? (rep && !rep.witnessOK
+          ? rep.witnessBad.length + ' of ' + chain.anchors.length + ' anchors dispute the chain'
+          : chain.anchors.length + ' anchor' + (chain.anchors.length === 1 ? '' : 's') + ' \u00b7 all match')
+      : '';
+  }
+}
+
+/* ---- forensics console ---- */
+function clog(cls, msg) {
+  els.attackPanel.hidden = false;
+  var p = document.createElement('p');
+  p.className = cls; p.textContent = msg;
+  els.consoleEl.appendChild(p);
+  els.consoleEl.scrollTop = els.consoleEl.scrollHeight;
+}
+
+/* ---- tamper UI ---- */
+function openEditor(seq) {
+  var li = recEls[seq]; if (!li || li.querySelector('textarea')) return;
+  if (ui.attackStage === 0) {
+    /* the room quietly anchors the present before you touch the past */
+    doAnchor(true);
+    clog('sys', '[room] Before you touch anything, the room anchors the present: head@' +
+      (chain.head() ? chain.head().seq : 0) + ' \u2192 witness ledger.');
+  }
+  var rec = chain.records[seq - 1]; if (!rec) return;
+  var tools = li.querySelector('.tools');
+  tools.innerHTML = '';
+  var ta = document.createElement('textarea');
+  ta.value = rec.detail;
+  ta.setAttribute('aria-label', 'Rewrite the detail of record ' + seq);
+  var save = document.createElement('button');
+  save.type = 'button'; save.className = 'evr-btn evr-btn-sm evr-btn-danger'; save.textContent = 'Save alteration';
+  var cancel = document.createElement('button');
+  cancel.type = 'button'; cancel.className = 'evr-btn evr-btn-sm evr-btn-ghost'; cancel.textContent = 'Cancel';
+  var row = document.createElement('div');
+  row.style.cssText = 'display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;';
+  row.appendChild(save); row.appendChild(cancel);
+  tools.appendChild(ta); tools.appendChild(row);
+  try { ta.focus(); } catch (e) {}
+  save.addEventListener('click', function () {
+    var val = ta.value.replace(/\s+$/, '') || rec.detail;
+    chain.tamper(seq, val);
+    ui.tamperTarget = (ui.tamperTarget && ui.tamperTarget < seq) ? ui.tamperTarget : seq;
+    ui.attackStage = Math.max(ui.attackStage, 1);
+    li.querySelector('.evr-detail').innerHTML = esc(val) + '<span class="altered-tag">ALTERED IN STORAGE</span>';
+    restoreAlterBtn(tools, seq);
+    clog('warn', '[you] Record #' + seq + ' rewritten directly in storage. The stored seal was not touched.');
+    clog('sys', '[room] Storage and seal now disagree. Verifying\u2026');
+    els.reseal.hidden = true; els.forge.hidden = true; els.restore.hidden = false;
+    runVerify(false).then(function () {
+      clog('bad', '[verify] SEAL MISMATCH at #' + seq + ' \u2014 content no longer matches its hash. Tamper detected in one pass.');
+      clog('sys', '[room] A clumsy edit. A real insider would re-seal the record. Try it.');
+      els.reseal.hidden = false;
+      try { els.reseal.focus(); } catch (e) {}
+    });
+  });
+  cancel.addEventListener('click', function () { restoreAlterBtn(tools, seq); });
+}
+function restoreAlterBtn(tools, seq) {
+  tools.innerHTML = '<button type="button" class="evr-chip-btn evr-alter" data-seq="' + seq + '">alter</button>';
+}
+
+/* escalation 2: re-seal the altered record */
+function doReseal() {
+  if (!ui.tamperTarget) return;
+  var seq = ui.tamperTarget;
+  els.reseal.disabled = true;
+  ui.opQueue = ui.opQueue.then(function () {
+    return chain.reseal(seq).then(function () {
+      ui.attackStage = Math.max(ui.attackStage, 2);
+      els.reseal.hidden = true; els.reseal.disabled = false;
+      var li = recEls[seq];
+      if (li) {
+        var hEl = li.querySelector('.evr-hashes .h');
+        if (hEl) hEl.textContent = short(chain.records[seq - 1].hash);
+      }
+      if (seq === chain.records.length) refreshHead();
+      clog('warn', '[you] Record #' + seq + ' re-sealed. Its content and hash agree again. Clean, you think.');
+      return verifyNow();
+    }).then(function () {
+      if (seq < chain.records.length) {
+        clog('bad', '[verify] LINK BROKEN at #' + (seq + 1) + ' \u2014 it still points at the hash #' + seq + ' used to have. The chain remembers.');
+        clog('sys', '[room] One record can be re-sealed. Its neighbor testifies against it. To silence everyone downstream, you must re-seal them all.');
+      } else {
+        clog('warn', '[verify] You altered the head \u2014 no later record exists to contradict it internally.');
+        clog('sys', '[room] Which is exactly why heads are anchored outside the room. Finish the job anyway.');
+      }
+      els.forge.hidden = false;
+      try { els.forge.focus(); } catch (e) {}
+    });
+  });
+}
+
+/* escalation 3: forge everything downstream */
+function doForge() {
+  if (!ui.tamperTarget) return;
+  var from = ui.tamperTarget;
+  els.forge.disabled = true;
+  ui.opQueue = ui.opQueue.then(function () {
+    return chain.forge(from).then(function () {
+      ui.attackStage = 3;
+      els.forge.hidden = true; els.forge.disabled = false;
+      for (var i = from; i <= chain.records.length; i++) {
+        var li = recEls[i]; if (!li) continue;
+        var rec = chain.records[i - 1];
+        var spans = li.querySelectorAll('.evr-hashes > span');
+        if (spans[0]) spans[0].textContent = 'prev ' + short(rec.prev);
+        var hEl = li.querySelector('.evr-hashes .h');
+        if (hEl) hEl.textContent = short(rec.hash);
+      }
+      refreshHead();
+      clog('warn', '[you] Records #' + from + '\u2013#' + chain.records.length + ' recomputed and re-linked. Every seal agrees. Every link holds.');
+      return verifyNow();
+    }).then(function (rep) {
+      if (rep && rep.internalOK) {
+        clog('ok',  '[verify] Internal verification: PASS. The chain itself now swears to your version of events.');
+      }
+      if (rep && !rep.witnessOK) {
+        clog('bad', '[witness] ' + rep.witnessBad.length + ' anchored head(s) disagree with the chain they came from. The copies outside the room never got the memo.');
+        clog('sys', '[room] To finish the forgery you would now need every exported packet, every printout, every supervisor\u2019s copy \u2014 custody that already left the building. This is where the attack ends.');
+      }
+      els.restore.hidden = false;
+      try { els.restore.focus(); } catch (e) {}
+    });
+  });
+}
+
+/* demonstration reset */
+function doReset() {
+  ui.opQueue = ui.opQueue.then(function () {
+    chain.records = []; chain.anchors = [];
+    recEls = {}; els.records.innerHTML = '';
+    ui.tamperTarget = 0; ui.attackStage = 0;
+    ui.alertedInternal = false; ui.alertedWitness = false; ui.appendsSinceAnchor = 0;
+    ui.lastVerify = null;
+    els.reseal.hidden = true; els.forge.hidden = true; els.restore.hidden = true;
+    setState('ok', 'VERIFIED');
+    clog('sys', '[room] Demonstration reset. A new chain begins at a new genesis. Production systems do not have this button \u2014 that is the point.');
+    return appendNow('system', 'demonstration_reset',
+      'Visitor reset the Evidence Room. Fresh genesis; the prior demonstration chain is discarded (it lived only in memory).',
+      { autoAnchorEligible: false }
+    ).then(function () {
+      doAnchor(true);
+      announce('Demonstration reset. New chain started.');
+    });
+  });
+}
+
+/* ---- Exhibit A acts ---- */
+var ACTS = {
+  open:     { actor: 'visitor', event: 'case_file_opened', detail: 'Opened synthetic matter MAT-2026-0413 \u2014 access scope: this demonstration only.' },
+  retrieve: { actor: 'system',  event: 'retrieval_run',    detail: 'Local index queried; 4 passages returned from 2 synthetic sources. Nothing left the device.' },
+  draft:    { actor: 'system',  event: 'draft_generated',  detail: 'Draft produced with 3 inline citations. Status: UNREVIEWED \u2014 export blocked pending human attestation.' },
+  queue:    { actor: 'visitor', event: 'sent_to_review',   detail: 'Draft routed to the human review queue. The gate ahead is a hard stop, not a checkbox.' }
+};
+
+/* ---- Exhibit D review ---- */
+function attest(verdict) {
+  if (ui.reviewed) return;
+  ui.reviewed = true;
+  els.attSup.disabled = true; els.attUnsup.disabled = true;
+  var supported = (verdict === 'supported');
+  var detail = supported
+    ? 'reviewer-1 attested the draft claim as SUPPORTED by synthetic-cohort-study.pdf p.4.'
+    : 'reviewer-1 attested the draft claim as UNSUPPORTED: cited passage reports 120 patients; draft asserts 1,200.';
+  append('reviewer-1', 'attestation', detail).then(function () {
+    els.claimNum.innerHTML = '<mark>1,200 patients</mark>';
+    els.srcNum.innerHTML = '<mark>120 patients</mark>';
+    els.reviewResult.hidden = false;
+    if (supported) {
+      els.reviewResult.innerHTML =
+        '<p style="margin:0 0 10px;"><strong>Look again.</strong> The draft says <span class="evr-mono-t evr-k">1,200</span>; the source says <span class="evr-mono-t evr-k">120</span>. The model inflated the cohort tenfold \u2014 and your attestation is already sealed into the chain.</p>' +
+        '<p style="margin:0 0 12px;">An append-only record never erases a mistake. It <strong>amends</strong> it \u2014 the correction is chained to the error, and both remain. That is how regulated records have always worked, and how accountability survives being human.</p>' +
+        '<button type="button" class="evr-btn evr-btn-warn" id="evr-amend">Append a correction</button>';
+      var amendBtn = $id('evr-amend');
+      if (amendBtn) {
+        amendBtn.addEventListener('click', function () {
+          if (ui.amended) return;
+          ui.amended = true; amendBtn.disabled = true;
+          append('reviewer-1', 'attestation_amended',
+            'Correction to prior attestation: claim is UNSUPPORTED \u2014 source reports 120 patients, not 1,200. The original attestation is retained above; nothing erased.')
+            .then(function () { amendBtn.textContent = 'Correction sealed \u2014 the error and the amendment now coexist'; });
+        });
+      }
+    } else {
+      els.reviewResult.innerHTML =
+        '<p style="margin:0 0 10px;"><strong>Correct.</strong> The cited passage reports <span class="evr-mono-t evr-k">120</span> patients; the draft claimed <span class="evr-mono-t evr-k">1,200</span>. A tenfold inflation, caught in one read.</p>' +
+        '<p style="margin:0;">Your refusal is now part of the permanent record \u2014 sealed under <span class="evr-mono-t evr-k">reviewer-1</span>, chained to the draft it stopped. On a production node it would carry a real reviewer\u2019s identity and credentials. The chain proves the catch happened; you made the catch.</p>';
+    }
+  });
+}
+
+/* ---- seal (deterministic generative stamp from head hash) ---- */
+function drawSeal(hash) {
+  if (!els.seal) return;
+  var b = [];
+  for (var i = 0; i < 32; i++) { b.push(parseInt(hash.substr(i * 2, 2), 16) || 0); }
+  var cx = 60, cy = 60, spokes = 24, svg = '';
+  svg += '<circle cx="60" cy="60" r="56" fill="none" stroke="rgba(126,156,184,.3)" stroke-width="1"/>';
+  svg += '<circle cx="60" cy="60" r="46" fill="none" stroke="rgba(0,194,168,.45)" stroke-width="1" stroke-dasharray="' +
+         (2 + b[0] % 7) + ' ' + (2 + b[1] % 9) + '"/>';
+  for (var s = 0; s < spokes; s++) {
+    var byte = b[s % 32];
+    var r1 = 18 + (byte % 12);
+    var r2 = 30 + (b[(s + 7) % 32] % 16);
+    var ang = (s / spokes) * Math.PI * 2 - Math.PI / 2;
+    var x1 = cx + r1 * Math.cos(ang), y1 = cy + r1 * Math.sin(ang);
+    var x2 = cx + r2 * Math.cos(ang), y2 = cy + r2 * Math.sin(ang);
+    var hot = (byte % 3 === 0);
+    svg += '<line x1="' + x1.toFixed(1) + '" y1="' + y1.toFixed(1) + '" x2="' + x2.toFixed(1) + '" y2="' + y2.toFixed(1) +
+           '" stroke="' + (hot ? '#00c2a8' : 'rgba(126,156,184,.55)') + '" stroke-width="' + (hot ? 1.8 : 1) + '" stroke-linecap="round"/>';
+    if (b[(s + 13) % 32] % 4 === 0) {
+      svg += '<circle cx="' + x2.toFixed(1) + '" cy="' + y2.toFixed(1) + '" r="1.7" fill="#2fe3c9"/>';
+    }
+  }
+  svg += '<circle cx="60" cy="60" r="11.5" fill="none" stroke="#00c2a8" stroke-width="1.4"/>';
+  svg += '<text x="60" y="64" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="8.5" fill="#e9f2f8" letter-spacing="1">' +
+         esc(hash.slice(0, 4)) + '</text>';
+  els.seal.innerHTML =
+    '<title id="evr-seal-title">Evidence seal for this visit</title>' +
+    '<desc id="evr-seal-desc">A circular generative stamp derived from the chain\u2019s current head hash. It changes whenever the chain changes.</desc>' +
+    svg;
+}
+
+/* ---- sonification (optional, user-initiated, quiet) ---- */
+var SCALE = [0, 2, 4, 7, 9, 12, 14, 16]; /* major pentatonic across two octaves */
+function playChain() {
+  if (ui.playing) { stopChain(); return; }
+  var AC = window.AudioContext || window.webkitAudioContext;
+  if (!AC) { announce('Audio is not available in this browser. Every state is shown in text.'); return; }
+  try { if (!ui.audio) ui.audio = new AC(); } catch (e) { announce('Audio is not available in this browser. Every state is shown in text.'); return; }
+  if (ui.audio.state === 'suspended') { try { ui.audio.resume(); } catch (e) {} }
+  ui.playing = true;
+  els.listen.setAttribute('aria-pressed', 'true');
+  els.listen.textContent = 'Stop listening';
+  announce('Playing the chain: one tone per record. Broken records sound flat and low.');
+  var statuses = (ui.lastVerify && ui.lastVerify.statuses.length === chain.records.length)
+    ? ui.lastVerify.statuses : null;
+  var i = 0;
+  function step() {
+    if (!ui.playing || i >= chain.records.length) { stopChain(); return; }
+    var rec = chain.records[i];
+    var bad = statuses ? !!(statuses[i].content || statuses[i].link) : false;
+    var li = recEls[rec.seq];
+    if (li) {
+      li.classList.add('playing');
+      (function (l) { setTimeout(function () { l.classList.remove('playing'); }, 200); })(li);
+    }
+    try {
+      var t = ui.audio.currentTime;
+      var osc = ui.audio.createOscillator(), gain = ui.audio.createGain();
+      if (bad) { osc.type = 'sawtooth'; osc.frequency.value = 92; }
+      else {
+        var byte = parseInt(rec.hash.slice(0, 2), 16) || 0;
+        var semis = SCALE[byte % SCALE.length];
+        osc.type = 'sine'; osc.frequency.value = 220 * Math.pow(2, semis / 12);
+      }
+      gain.gain.setValueAtTime(0.0001, t);
+      gain.gain.exponentialRampToValueAtTime(bad ? 0.05 : 0.06, t + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.0001, t + (bad ? 0.22 : 0.16));
+      osc.connect(gain); gain.connect(ui.audio.destination);
+      osc.start(t); osc.stop(t + 0.26);
+    } catch (e) {}
+    i++;
+    ui.playTimer = setTimeout(step, 165);
+  }
+  step();
+}
+function stopChain() {
+  ui.playing = false;
+  if (ui.playTimer) { clearTimeout(ui.playTimer); ui.playTimer = null; }
+  els.listen.setAttribute('aria-pressed', 'false');
+  els.listen.textContent = 'Listen to the chain';
+}
+
+/* ---- export ---- */
+function buildReportNow() {
+  return chain.verify().then(function (rep) {
+    return {
+      artifact: 'Pocono AI \u2014 The Evidence Room (educational demonstration)',
+      page: 'https://poconoai.com/evidence-room.html',
+      siteVersion: 'v358',
+      generated: nowISO(),
+      provenance: 'Generated entirely on the visitor\u2019s device. Never transmitted, never stored server-side. This file is the only copy in existence unless its holder makes another.',
+      data: 'Synthetic demonstration data only. No personal information is recorded.',
+      verification: {
+        internal: rep.internalOK ? 'PASS' : 'FAIL (first failure at record #' + rep.firstBad + ')',
+        witness: rep.witnessOK ? 'PASS \u2014 all anchors match the chain' : 'DISPUTED \u2014 ' + rep.witnessBad.length + ' anchor(s) disagree with the chain',
+        perRecord: rep.statuses
+      },
+      headHash: chain.head() ? chain.head().hash : null,
+      witnessAnchors: chain.anchors.slice(),
+      chain: chain.records.map(function (r) {
+        return { seq: r.seq, time: r.t, actor: r.actor, event: r.event, detail: r.detail,
+                 prev: r.prev, hash: r.hash, alteredInDemonstration: !!r.altered };
+      })
+    };
+  });
+}
+function receiptText(rep) {
+  var L = [];
+  L.push('POCONO AI \u2014 THE EVIDENCE ROOM');
+  L.push('Evidence receipt \u00b7 educational demonstration \u00b7 synthetic data only');
+  L.push('');
+  L.push('Generated locally : ' + rep.generated);
+  L.push('Page              : ' + rep.page + '   (site v358)');
+  L.push('');
+  L.push('VERIFICATION');
+  L.push('  internal seals & links : ' + rep.verification.internal);
+  L.push('  external witnesses     : ' + rep.verification.witness);
+  L.push('');
+  L.push('HEAD ' + (rep.headHash || '\u2014'));
+  L.push('');
+  L.push('CHAIN \u2014 ' + rep.chain.length + ' record' + (rep.chain.length === 1 ? '' : 's'));
+  for (var i = 0; i < rep.chain.length; i++) {
+    var r = rep.chain[i];
+    L.push('  #' + ('000' + r.seq).slice(-3) + '  ' + String(r.time).slice(11) + '  [' + r.actor + '] ' + r.event +
+           (r.alteredInDemonstration ? '  (ALTERED IN DEMONSTRATION)' : ''));
+    L.push('        ' + r.detail);
+    L.push('        prev ' + String(r.prev).slice(0, 16) + '\u2026   hash ' + String(r.hash).slice(0, 16) + '\u2026');
+  }
+  L.push('');
+  L.push('WITNESS ANCHORS \u2014 ' + rep.witnessAnchors.length);
+  for (var k = 0; k < rep.witnessAnchors.length; k++) {
+    var a = rep.witnessAnchors[k];
+    L.push('  \u2693 #' + a.n + '  head@' + a.seq + '  ' + String(a.hash).slice(0, 16) + '\u2026  ' + String(a.t).slice(11));
+  }
+  L.push('');
+  L.push(rep.provenance);
+  L.push('Reload the page and the chain is gone. On a Sentinel Node, the record is designed to outlive the doubt.');
+  L.push('');
+  return L.join('\n');
+}
+function download(name, text, mime) {
+  try {
+    var blob = new Blob([text], { type: mime });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url; a.download = name;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function () {
+      try { document.body.removeChild(a); URL.revokeObjectURL(url); } catch (e) {}
+    }, 0);
+    return true;
+  } catch (e) { announce('Download is not available in this browser.'); return false; }
+}
+function exportPacket(kind) {
+  ui.opQueue = ui.opQueue.then(function () {
+    return appendNow('visitor', 'packet_export',
+      (kind === 'json' ? 'Evidence packet (.json)' : 'Plain-text receipt (.txt)') +
+      ' export initiated. Audit-first: this record seals before the file is written.',
+      { autoAnchorEligible: false }
+    ).then(function () {
+      doAnchor(true);
+      return buildReportNow();
+    }).then(function (rep) {
+      var h8 = rep.headHash ? rep.headHash.slice(0, 8) : 'genesis';
+      if (kind === 'json') {
+        download('pocono-evidence-packet-' + rep.chain.length + '-' + h8 + '.json',
+                 JSON.stringify(rep, null, 2), 'application/json');
+      } else {
+        download('pocono-evidence-receipt-' + rep.chain.length + '-' + h8 + '.txt',
+                 receiptText(rep), 'text/plain');
+      }
+      announce('Exported. The only copy in existence is the one you hold.');
+    });
+  });
+}
+
+/* ---- copy head hash ---- */
+function copyHead() {
+  var h = chain.head();
+  var txt = h ? h.hash : '';
+  if (!txt) { announce('No head yet.'); return; }
+  function done() {
+    announce('Head hash copied: ' + short(txt));
+    els.copyhead.textContent = 'copied';
+    setTimeout(function () { els.copyhead.textContent = 'copy'; }, 1400);
+  }
+  function fallback() {
+    try {
+      var ta = document.createElement('textarea');
+      ta.value = txt; ta.setAttribute('readonly', '');
+      ta.style.cssText = 'position:fixed;left:-9999px;top:0;';
+      document.body.appendChild(ta); ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      done();
+    } catch (e) { announce('Copy is unavailable \u2014 head: ' + txt); }
+  }
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(txt).then(done, fallback);
+  } else { fallback(); }
+}
+
+/* ---- wiring ---- */
+els.copyhead.addEventListener('click', copyHead);
+els.verify.addEventListener('click', function () { runVerify(true); });
+if (els.verifyB) {
+  els.verifyB.addEventListener('click', function () {
+    runVerify(true);
+    var panel = $id('evr-ledger-panel');
+    if (panel) { try { panel.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth', block: 'nearest' }); } catch (e) {} }
+  });
+}
+els.anchorBtn.addEventListener('click', function () {
+  ui.opQueue = ui.opQueue.then(function () { doAnchor(false); });
+});
+els.listen.addEventListener('click', playChain);
+els.reseal.addEventListener('click', doReseal);
+els.forge.addEventListener('click', doForge);
+els.restore.addEventListener('click', doReset);
+els.exportJson.addEventListener('click', function () { exportPacket('json'); });
+els.exportTxt.addEventListener('click', function () { exportPacket('txt'); });
+els.attSup.addEventListener('click', function () { attest('supported'); });
+els.attUnsup.addEventListener('click', function () { attest('unsupported'); });
+
+Array.prototype.forEach.call(document.querySelectorAll('.evr-act'), function (btn) {
+  btn.addEventListener('click', function () {
+    var a = ACTS[btn.getAttribute('data-act')];
+    if (a) append(a.actor, a.event, a.detail);
+  });
+});
+
+els.records.addEventListener('click', function (ev) {
+  var t = ev.target;
+  while (t && t !== els.records && !(t.classList && t.classList.contains('evr-alter'))) { t = t.parentNode; }
+  if (!t || t === els.records) return;
+  var seq = parseInt(t.getAttribute('data-seq'), 10);
+  if (seq) openEditor(seq);
+});
+
+els.pick.addEventListener('click', function () {
+  ui.opQueue = ui.opQueue.then(function () {
+    var n = chain.records.length;
+    if (n < 3) {
+      return appendNow('system', 'target_note',
+        'Too few records to attack meaningfully \u2014 perform a few acts in Exhibit A first.',
+        { autoAnchorEligible: false });
+    }
+    var seq = Math.max(2, Math.ceil(n / 2));
+    var li = recEls[seq];
+    if (li) { try { li.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth', block: 'center' }); } catch (e) {} }
+    openEditor(seq);
+    announce('Target selected: record ' + seq + '. Rewrite its detail, then save the alteration.');
+  });
+});
+
+/* exhibits enter the record as they enter the viewport */
+(function () {
+  var map = {
+    'exhibit-a': 'Exhibit A \u2014 Acts Become Records',
+    'exhibit-b': 'Exhibit B \u2014 The Attack',
+    'exhibit-c': 'Exhibit C \u2014 The Witness',
+    'exhibit-d': 'Exhibit D \u2014 Human Judgment',
+    'exhibit-e': 'Exhibit E \u2014 The Packet'
+  };
+  if (!('IntersectionObserver' in window)) return;
+  var seen = {};
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (!en.isIntersecting) return;
+      var id = en.target.id;
+      if (seen[id]) return;
+      seen[id] = true;
+      io.unobserve(en.target);
+      append('visitor', 'exhibit_viewed', map[id] + ' entered the viewport. Reading is an event.', { quiet: true });
+    });
+  }, { threshold: 0.35 });
+  for (var id in map) {
+    if (Object.prototype.hasOwnProperty.call(map, id)) {
+      var el = document.getElementById(id);
+      if (el) io.observe(el);
+    }
+  }
+})();
+
+window.addEventListener('pagehide', stopChain);
+
+/* ---- genesis ---- */
+append('system', 'page_opened',
+  'Genesis. The Evidence Room opened in this browser tab and a new chain of custody began \u2014 computed locally via ' +
+  (EVR_SUBTLE ? 'Web Crypto SHA-256' : 'a verified pure-JS SHA-256 fallback') +
+  '. Nothing leaves this device.',
+  { autoAnchorEligible: false }
+).then(function () {
+  ui.opQueue = ui.opQueue.then(function () {
+    doAnchor(true);          /* witness #1: the genesis head leaves the room immediately */
+    renderAnchors(null);
+    refreshHead();
+  });
+});
+
+})();
+</script>
+
+<section aria-label="Applied workflow example" style="max-width:980px;margin:0 auto;padding:8px 24px 40px;">
+  <div style="background:linear-gradient(160deg,rgba(0,194,168,0.08),rgba(5,22,34,0.85));border:1px solid rgba(0,194,168,0.25);border-left:3px solid #00c2a8;border-radius:0 12px 12px 0;padding:24px 26px;display:flex;flex-wrap:wrap;align-items:center;gap:18px;justify-content:space-between;">
+    <div style="flex:1 1 340px;min-width:280px;">
+      <p style="font-size:0.66em;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#00c2a8;margin:0 0 6px;">Applied Workflow Example</p>
+      <p style="color:#fff;font-weight:700;font-size:1.02em;margin:0 0 5px;">Applied AI for Prior Authorization</p>
+      <p style="color:#c2ccd6;font-size:0.88em;line-height:1.6;margin:0;">A practical applied-workflow reference: how the same evidence-grounding, citation verification, human review, and tamper-evident logging you just explored apply to a real prior authorization workflow.</p>
+    </div>
+    <a href="applied-ai-prior-authorization.html" style="display:inline-flex;align-items:center;gap:7px;padding:11px 22px;background:#00c2a8;color:#04221d;font-size:0.86em;font-weight:700;border-radius:8px;text-decoration:none;flex-shrink:0;">Read the White Paper &rarr;</a>
+          <a href="global/" style="display:inline-flex;align-items:center;gap:7px;padding:11px 22px;background:transparent;border:1px solid rgba(122,240,220,0.4);color:#7af0dc;font-size:0.86em;font-weight:700;border-radius:8px;text-decoration:none;flex-shrink:0;">Global Federated AI &rarr;</a>
+  </div>
+</section>
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 root-relative nav fix, Living Echo rebrand, Engineering & Drafting + Enterprise Estate Continuity links added (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- INCLUDE:FOOTER -->
+<footer role="contentinfo" style="background:#051622;border-top:1px solid rgba(255,255,255,0.08);padding:40px 24px 28px;font-size:0.85em;color:#8899aa;">
+  <div style="max-width:1180px;margin:0 auto;">
+
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:0 0 28px;margin-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.07);">
+      <div style="max-width:560px;">
+        <p style="margin:0 0 6px;font-size:1.05em;font-weight:700;color:#fff;">Local AI infrastructure for regulated practices.</p>
+        <p style="margin:0;font-size:0.95em;line-height:1.5;">Drafts with citations. Human review required. Sensitive documents stay under practice control. Simple path, deep proof.</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="/contact.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;background:#00c2a8;color:#04111a;font-weight:700;text-decoration:none;font-size:0.95em;">Request Pilot</a>
+        <a href="/sentinel-demo.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;border:1px solid rgba(0,194,168,0.55);color:#00c2a8;font-weight:700;text-decoration:none;font-size:0.95em;">Watch Demo</a>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px 32px;margin-bottom:32px;text-align:left;">
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">For You</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/start-here.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Start Here (3 min)</a>
+          <a href="/for-physicians.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Physicians</a>
+          <a href="/for-attorneys.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Attorneys</a>
+          <a href="/engineering-drafting/" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Engineering &amp; Drafting Teams</a>
+          <a href="/pilot-program.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Pilot Program</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Installer Training</a>
+          <a href="/how-it-works.html" style="color:#8899aa;text-decoration:none;">How It Works</a>
+          <a href="/trust.html" style="color:#8899aa;text-decoration:none;">Trust &amp; Audit</a>
+          <a href="/pricing.html" style="color:#8899aa;text-decoration:none;">Pricing</a>
+          <a href="/sentinel-demo.html" style="color:#8899aa;text-decoration:none;">See the Demo</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Documentation Hub</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/documentation-hub/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Hub Home &mdash; Deep Proof</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">Installer Training</a>
+          <a href="/sentinel-node/installation-simulator.html" style="color:#8899aa;text-decoration:none;">&#8627; Installation Simulator</a>
+          <a href="/documentation-hub/clinical/" style="color:#8899aa;text-decoration:none;">Clinical Documentation</a>
+          <a href="/documentation-hub/legal/" style="color:#8899aa;text-decoration:none;">Legal Documentation</a>
+          <a href="/documentation-hub/technical/" style="color:#8899aa;text-decoration:none;">Technical Documentation</a>
+          <a href="/documentation-hub/governance/" style="color:#8899aa;text-decoration:none;">Governance &amp; Audit</a>
+          <a href="/documentation-hub/tools/" style="color:#8899aa;text-decoration:none;">Tools &amp; Simulators</a>
+          <a href="/documentation-hub/research/" style="color:#8899aa;text-decoration:none;">Research &amp; Essays</a>
+          <a href="/documentation-hub/transparency/" style="color:#8899aa;text-decoration:none;">Transparency</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Global Federated AI</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/global/" style="color:#7af0dc;text-decoration:none;font-weight:600;">Global Federated Hub</a>
+          <a href="/global/australia/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Australia</a>
+          <a href="/global/singapore/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Singapore</a>
+          <a href="/global/taiwan/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Taiwan</a>
+          <a href="/global/europe/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Europe</a>
+          <a href="/contact.html" style="color:#8899aa;text-decoration:none;">Partner Inquiry</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Company</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/about.html" style="color:#8899aa;text-decoration:none;">About Pocono AI</a>
+          <a href="/team.html" style="color:#8899aa;text-decoration:none;">Team &amp; Leadership</a>
+          <a href="/why-pocono-ai.html" style="color:#8899aa;text-decoration:none;">Why Pocono AI</a>
+          <a href="/founding-commercial-leadership.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Join Us</a>
+          <a href="/careers.html" style="color:#8899aa;text-decoration:none;">Careers</a>
+          <a href="/how-we-hire.html" style="color:#8899aa;text-decoration:none;">How We Hire</a>
+          <a href="/channel-partners.html" style="color:#8899aa;text-decoration:none;">Technical Partners (MSPs)</a>
+          <a href="/partners.html" style="color:#8899aa;text-decoration:none;">Academic Partnerships</a>
+          <a href="/contact.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Contact</a>
+          <a href="https://forms.gle/VQahnkjMfY6QNEMy8" target="_blank" rel="noopener noreferrer" style="color:#d5a94f;text-decoration:none;font-weight:600;">Interest List &#8599;</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Founder Projects</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/rehability/" style="color:#a78bfa;text-decoration:none;font-weight:700;">Rehability &#x2605;</a>
+          <a href="/rehability/marcus-memory-helper/" style="color:#a78bfa;text-decoration:none;font-weight:600;">&#8627; Marcus's Memory Helper</a>
+          <a href="/sentinel-home/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Sentinel Home Edition</a>
+          <a href="/living-memorials/" style="color:#8899aa;text-decoration:none;">Living Echo</a>
+          <a href="/living-memorials/marcus-odell/" style="color:#8899aa;text-decoration:none;">Marcus&rsquo;s Living Echo</a>
+          <a href="/living-memorials/enterprise-estate-continuity.html" style="color:#8899aa;text-decoration:none;">Enterprise Estate Continuity</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Resources &amp; Legal</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/sitemap.html" style="color:#8899aa;text-decoration:none;">All Pages (Sitemap)</a>
+          <a href="/audit.html" style="color:#8899aa;text-decoration:none;">Transparency &amp; Audit Log</a>
+          <a href="/maturity-disclosure.html" style="color:#8899aa;text-decoration:none;">What We Have / Don&rsquo;t Claim</a>
+          <a href="/plain.html" style="color:#8899aa;text-decoration:none;">Plain Language Guide</a>
+          <a href="/privacy.html" style="color:#8899aa;text-decoration:none;">Privacy</a>
+          <a href="/terms.html" style="color:#8899aa;text-decoration:none;">Terms</a>
+          <a href="/sla.html" style="color:#8899aa;text-decoration:none;">SLA</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:18px;margin-bottom:14px;">
+      <p style="margin:0;font-size:0.82em;line-height:1.6;color:#6f8295;max-width:1000px;">Pocono AI does not provide medical, legal, or engineering advice, does not practice medicine, law, or licensed engineering, and does not make clinical, legal, or engineering decisions. Outputs are drafts or support materials that require review by a qualified professional; final professional judgment remains with the licensed physician, attorney, or engineer. Tools and simulations on this site are educational and use synthetic data.</p>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:20px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+      <p style="margin:0;font-size:0.9em;">&copy; 2026 Pocono AI, LLC &nbsp;&#183;&nbsp; East Stroudsburg, PA &nbsp;&#183;&nbsp; <a href="mailto:marcus@poconoai.com" style="color:#8899aa;">marcus@poconoai.com</a> &nbsp;&#183;&nbsp; <a href="tel:+15705340602" style="color:#8899aa;">(570) 534-0602</a></p>
+      <p style="margin:0;font-size:0.88em;"><a href="/audit.html" style="color:#5dade2;text-decoration:none;">Transparency v402</a></p>
+    </div>
+  </div>
+</footer>
+<script src="/search.js?v=402" defer></script>
+<!-- /INCLUDE:FOOTER -->
+<script src="search-index.js?v=402" defer></script>
+<script src="nav.js?v=402" defer></script>
+<script src="pilot-cta.js?v=402" defer></script>
+</body>
+</html>

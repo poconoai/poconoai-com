@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp -->
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Works With Your Clinic Systems — Epic, Athenahealth, eClinicalWorks | Pocono AI</title>
+<meta name="description" content="How Sentinel Node coexists with Epic, Athenahealth, Cerner, and eClinicalWorks — local AI that fits the clinic systems you already run.">
+<meta name="keywords" content="Sentinel Node Epic integration, Pocono AI Athenahealth, Pocono AI eClinicalWorks, Cerner AI, EHR AI, clinic AI integration, no rip-and-replace, fax records AI, scanned referrals AI, medical practice AI coexistence">
+<meta name="theme-color" content="#0B0F13">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="favicon-180x180.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+<link rel="canonical" href="https://poconoai.com/works-with-your-clinic.html">
+<link rel="stylesheet" href="styles.css?v=402">
+<link rel="stylesheet" href="nav-v2026.css?v=402">
+<link rel="stylesheet" href="brand-v292.css?v=402">
+<meta property="og:title" content="Works With Your Clinic Systems | Pocono AI">
+<meta property="og:type" content="article">
+<meta property="og:description" content="How Sentinel Node coexists with Epic, Athenahealth, Cerner, eClinicalWorks, fax records, and existing clinic workflows — without requiring system replacement.">
+<meta property="og:url" content="https://poconoai.com/works-with-your-clinic.html">
+<meta property="og:image" content="https://poconoai.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Works With Your Clinic Systems | Pocono AI">
+<meta name="twitter:description" content="How Sentinel Node coexists with Epic, Athenahealth, Cerner, and eClinicalWorks — local AI that fits the clinic systems you already run.">
+
+<style>
+.page-wrap { max-width: 1080px; margin: 0 auto; padding: clamp(28px,4vw,60px) 24px; color: #cfdfeb; }
+
+.wc-hero { padding: 32px 0 24px; }
+.wc-kicker { display: inline-flex; align-items: center; gap: 10px; color: #2dd4bf; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; font-size: .76rem; margin-bottom: 14px; padding: 6px 14px; border: 1px solid rgba(45,212,191,.34); border-radius: 100px; background: rgba(0,194,168,.06); }
+.wc-title { font-size: clamp(2rem,5.2vw,3.6rem); line-height: 1.05; letter-spacing: -.025em; color: #fff; margin: 0 0 18px; font-weight: 800; }
+.wc-title em { font-style: normal; color: #2dd4bf; }
+.wc-lede { font-size: clamp(1.04rem,1.7vw,1.22rem); line-height: 1.65; color: #b9d9ee; max-width: 880px; margin: 0 0 22px; }
+
+.wc-premise { border-left: 3px solid #2dd4bf; padding: 16px 22px; background: linear-gradient(90deg, rgba(0,194,168,.06), transparent); margin: 28px 0 38px; font-size: 1.02rem; line-height: 1.7; color: #e0eef9; border-radius: 0 12px 12px 0; }
+.wc-premise b { color: #fff; }
+
+.wc-section-head { margin: 56px 0 24px; padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,.08); }
+.wc-section-head h2 { color: #fff; font-size: clamp(1.5rem,3vw,2rem); margin: 0 0 6px; font-weight: 800; letter-spacing: -.01em; }
+.wc-section-head .sub { color: #8fb1c7; font-size: .92rem; margin: 0; }
+
+/* Compatibility cards */
+.compat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 24px 0; }
+.compat-card { border: 1px solid rgba(255,255,255,.1); border-radius: 14px; background: linear-gradient(155deg, rgba(15,23,42,.5), rgba(5,12,22,.35)); padding: 20px 22px; }
+.compat-head { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,.08); }
+.compat-icon { flex: 0 0 auto; width: 38px; height: 38px; border-radius: 8px; background: rgba(45,212,191,.12); border: 1px solid rgba(45,212,191,.3); display: flex; align-items: center; justify-content: center; color: #2dd4bf; font-weight: 800; font-size: .8rem; }
+.compat-name { color: #fff; font-weight: 800; font-size: 1.08rem; margin: 0; letter-spacing: -.01em; }
+.compat-card p { color: #b9d9ee; line-height: 1.6; font-size: .9rem; margin: 0 0 10px; }
+.compat-card p:last-child { margin-bottom: 0; }
+.compat-card .stance { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 100px; font-size: .68rem; font-weight: 800; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 12px; }
+.compat-card .stance.coexists { background: rgba(74,222,128,.08); color: #86efac; border: 1px solid rgba(74,222,128,.25); }
+.compat-card .stance.reads { background: rgba(45,212,191,.08); color: #8ff7e4; border: 1px solid rgba(45,212,191,.25); }
+.compat-card .stance.imports { background: rgba(139,92,246,.08); color: #c4b5fd; border: 1px solid rgba(139,92,246,.25); }
+
+/* Honest block */
+.honest-block { border: 1px solid rgba(251,191,36,.22); background: rgba(251,191,36,.03); border-radius: 16px; padding: 24px 26px; margin: 36px 0; }
+.honest-block h3 { color: #fde68a; margin: 0 0 12px; font-size: 1.1rem; font-weight: 800; }
+.honest-block p { color: #f4e4b3; line-height: 1.7; font-size: .94rem; margin: 0 0 10px; }
+.honest-block p:last-child { margin-bottom: 0; }
+.honest-block b { color: #fff; }
+
+/* Phase rollout */
+.phases { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 24px 0; }
+.phase { border: 1px solid rgba(255,255,255,.1); background: rgba(15,23,42,.4); border-radius: 14px; padding: 20px; }
+.phase-num { color: #2dd4bf; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .72rem; font-weight: 800; letter-spacing: .14em; margin-bottom: 8px; }
+.phase h4 { color: #fff; margin: 0 0 8px; font-size: 1.02rem; font-weight: 800; line-height: 1.3; }
+.phase p { color: #b9d9ee; font-size: .87rem; line-height: 1.6; margin: 0; }
+.phase-time { color: #6b8499; font-size: .76rem; font-style: italic; margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,.06); }
+
+/* Promise list */
+.promise-list { list-style: none; padding: 0; margin: 20px 0; }
+.promise-list li { padding: 14px 0 14px 36px; position: relative; color: #cfdfeb; line-height: 1.65; font-size: .96rem; border-bottom: 1px solid rgba(255,255,255,.05); }
+.promise-list li:last-child { border-bottom: 0; }
+.promise-list li::before { content: "✓"; position: absolute; left: 8px; top: 14px; color: #86efac; font-weight: 800; font-size: 1.05rem; }
+.promise-list li b { color: #fff; }
+
+/* CTA */
+.wc-cta { margin: 56px 0 24px; padding: 32px 28px; border: 1px solid rgba(45,212,191,.28); border-radius: 22px; background: linear-gradient(145deg, rgba(5,22,34,.7), rgba(2,8,18,.4)); text-align: center; }
+.wc-cta h3 { margin: 0 0 10px; color: #fff; font-size: clamp(1.3rem,2.4vw,1.7rem); font-weight: 800; }
+.wc-cta p { margin: 0 auto 22px; color: #b9d9ee; max-width: 600px; line-height: 1.65; }
+.wc-btn-row { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+.wc-btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 22px; border-radius: 100px; text-decoration: none; font-weight: 700; font-size: .94rem; }
+.wc-btn.primary { background: linear-gradient(135deg, rgba(45,212,191,.22), rgba(59,130,246,.14)); color: #eaffff; border: 1px solid rgba(45,212,191,.5); }
+.wc-btn.secondary { background: rgba(15,23,42,.55); color: #9bdcff; border: 1px solid rgba(148,163,184,.28); }
+
+.micro { color: #8fb1c7; font-size: .82rem; font-style: italic; margin: 16px 0 0; padding-top: 14px; border-top: 1px solid rgba(255,255,255,.06); text-align: center; }
+
+@media (max-width: 720px) {
+  .phases { grid-template-columns: 1fr; }
+}
+</style>
+
+<!-- JSON-LD: v328 structured-data pass -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://poconoai.com/works-with-your-clinic.html",
+      "url": "https://poconoai.com/works-with-your-clinic.html",
+      "datePublished": "2026-06-01",
+      "dateModified": "2026-06-01"
+      ,
+      "name": "Works With Your Clinic Systems | Pocono AI",
+      "description": "Sentinel Node compatibility with existing clinic technology \u2014 Epic, Athenahealth, Cerner, Nuance DAX, and other EHR systems. On-premises RAG that works alongside your existing stack without cloud exposure.",
+      "isPartOf": {
+        "@id": "https://poconoai.com/#website"
+      },
+      "publisher": {
+        "@id": "https://poconoai.com/#organization"
+      },
+      "audience": {
+        "@type": "Audience",
+        "audienceType": "Physicians and independent medical practices"
+      },
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://poconoai.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "For Physicians",
+          "item": "https://poconoai.com/for-physicians.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Works With Your Clinic",
+          "item": "https://poconoai.com/works-with-your-clinic.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to content</a>
+
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- INCLUDE:HEADER -->
+<div id="hitl-notice" style="background:#0a1929;padding:4px 16px;text-align:center;font-size:12px;color:#4a5568;border-bottom:1px solid rgba(255,255,255,0.06);letter-spacing:0.01em;">Human-in-the-Loop required: licensed professionals verify all outputs before clinical or legal action</div>
+<header role="banner">
+  <div class="header-inner">
+    <a href="/index.html" class="logo" aria-label="Pocono AI Home">
+      <img src="/logo.svg?v=402" alt="" width="36" height="36" decoding="async" loading="eager" aria-hidden="true" style="display:inline-block;">
+      Pocono <span>AI</span>
+    </a>
+    <nav id="desktop-nav" aria-label="Main navigation">
+      <div class="nav-item"><a href="/index.html" class="nav-direct">Home</a></div>
+      <div class="nav-item"><a href="/for-physicians.html" class="nav-direct">Physicians</a></div>
+      <div class="nav-item"><a href="/for-attorneys.html" class="nav-direct">Attorneys</a></div>
+      <div class="nav-item"><a href="/sentinel-node.html" class="nav-direct nav-hub" style="color:#d5a94f;border:1px solid rgba(213,169,79,0.45);border-radius:999px;padding:6px 13px;">Sentinel Node</a></div>
+      <div class="nav-item"><a href="/living-memorials/" class="nav-direct">Living Echo</a></div>
+      <div class="nav-item"><a href="/contact.html" class="nav-direct">Contact</a></div>
+      <div class="nav-item" data-dropdown="menu-more">
+        <button type="button" class="nav-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="menu-more">More <span class="nav-chevron" aria-hidden="true">&#9662;</span></button>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <a href="/contact.html#pilot" class="nav-cta nav-cta-primary">Request a Pilot</a>
+      <button type="button" class="pa-search-trigger" data-search-open aria-label="Search (press / or Ctrl-K)" aria-haspopup="dialog" aria-expanded="false">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span class="pa-st-label">Search</span><kbd data-pa-keyhint>Ctrl K</kbd>
+      </button>
+      <button type="button" class="header-icon-btn" id="mobile-menu" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav-panel">
+        <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- "More" overflow dropdown — sibling of <header> so position:fixed escapes header's stacking context. Wired by nav.js via data-dropdown="menu-more". -->
+<div class="nav-dropdown" id="menu-more" aria-label="More navigation">
+  <p class="nav-dd-section">Products</p>
+  <a href="/engineering-drafting/">Drafting &amp; Engineering Edition</a>
+  <a href="/sentinel-home/">Sentinel Home Edition</a>
+  <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability — Assistive Tools &#x2605;</a>
+  <a href="/living-memorials/enterprise-estate-continuity.html">Enterprise Estate Continuity</a>
+  <p class="nav-dd-section">Capabilities</p>
+  <a href="/evidence-room.html">Evidence Room</a>
+  <a href="/push-button-deliverables.html">Push-Button Deliverables</a>
+  <a href="/pilot-readiness-kit.html">Pilot Kit</a>
+  <a href="/pilot-program.html">Pilot Program</a>
+  <a href="/how-it-works.html">How It Works</a>
+  <p class="nav-dd-section">Hubs &amp; Company</p>
+  <a href="/training.html">Training Hub</a>
+  <a href="/documentation-hub/">Document Hub</a>
+  <a href="/global/">Global Hub</a>
+  <a href="/investors-hub.html">Investor Hub</a>
+  <a href="/valuation-dashboard.html">Valuation Dashboard</a>
+  <a href="/about.html">About</a>
+  <p class="nav-dd-section">Trust &amp; Legal</p>
+  <a href="/transparency.html">Transparency</a>
+  <a href="/audit.html">Audit Log</a>
+  <a href="/privacy.html">Privacy</a>
+  <a href="/sitemap.html">Sitemap</a>
+</div>
+<!-- Site search is provided by the self-contained search.js asset (command palette: / or Ctrl/Cmd-K). -->
+
+<!-- Mobile panel: full-screen slide-in. v396 nav — hub tiles + grouped links + Sentinel Node + Engineering. -->
+<nav id="mobile-nav-panel" aria-label="Mobile navigation" aria-hidden="true" role="dialog" aria-modal="true">
+
+  <!-- Hub tiles: Sentinel Node, Documentation Hub, Training Hub, Global Hub -->
+  <div style="padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,0.07);">
+    <p style="font-size:0.65em;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.28);margin:0 0 10px;padding:0 2px;">Hubs</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <a href="/sentinel-node.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(213,169,79,0.1);border:1px solid rgba(213,169,79,0.35);border-radius:10px;color:#d5a94f;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Sentinel Node</a>
+      <a href="/documentation-hub/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(0,194,168,0.1);border:1px solid rgba(0,194,168,0.35);border-radius:10px;color:#00c2a8;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Docs Hub</a>
+      <a href="/training.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.35);border-radius:10px;color:#a78bfa;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Training Hub</a>
+      <a href="/global/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(122,240,220,0.07);border:1px solid rgba(122,240,220,0.3);border-radius:10px;color:#7af0dc;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Global Hub</a>
+    </div>
+  </div>
+
+  <!-- Core paths -->
+  <div class="mob-static-links">
+    <a href="/index.html">Home</a>
+    <a href="/for-physicians.html">Physicians</a>
+    <a href="/for-attorneys.html">Attorneys</a>
+    <a href="/engineering-drafting/">Engineering &amp; Drafting</a>
+    <a href="/pilot-program.html">Pilot Program</a>
+    <a href="/how-it-works.html">How It Works</a>
+    <a href="/trust.html">Trust &amp; Audit</a>
+    <a href="/pricing.html">Pricing</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/living-memorials/">Living Echo</a>
+    <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability</a>
+    <a href="/about.html">About</a>
+    <a href="/team.html" style="color:rgba(255,255,255,0.6);">Team &amp; Leadership</a>
+    <a href="/valuation-dashboard.html" style="color:rgba(255,255,255,0.6);">Valuation Dashboard</a>
+    <a href="/careers.html" style="color:rgba(255,255,255,0.6);">Careers</a>
+    <a href="/sentinel-demo.html" style="color:rgba(255,255,255,0.6);">Demo</a>
+    <a href="/sitemap.html" style="color:rgba(255,255,255,0.45);">Sitemap</a>
+    <a href="/transparency.html" style="color:rgba(255,255,255,0.45);">Transparency</a>
+    <a href="/privacy.html" style="color:rgba(255,255,255,0.45);">Privacy</a>
+  </div>
+
+  <a href="/contact.html#pilot" class="mob-cta">Request a Pilot</a>
+</nav>
+<!-- /INCLUDE:HEADER -->
+
+
+<main id="main">
+<div class="page-wrap">
+
+  <div class="wc-hero">
+    <span class="wc-kicker">Coexistence · Not Replacement</span>
+    <h1 class="wc-title">Works with <em>your clinic's systems.</em></h1>
+    <p class="wc-lede">Independent practices don't worry about efficiency. They worry about disruption. The EHR that took eighteen months to configure for your billing workflows, the fax line your referring physicians use, the shared drive where your staff stores scanned records going back to 2012 — these are the things a practice cannot afford to break. Sentinel Node is designed to coexist with them, not replace them.</p>
+  </div>
+
+  <div class="wc-premise">
+    <b>The premise:</b> Sentinel Node reads from the documents your clinic already keeps, in the places your clinic already keeps them. It does not require you to switch EHRs, migrate patient records to a new platform, reconfigure your fax workflow, or renegotiate vendor contracts. <b>Your systems stay. The retrieval and organization layer is added alongside them.</b>
+  </div>
+
+  <!-- COMPATIBILITY CARDS -->
+  <div class="wc-section-head">
+    <h2>The systems Sentinel Node coexists with.</h2>
+    <p class="sub">What this looks like for the platforms most independent practices actually run.</p>
+  </div>
+
+  <div class="compat-grid">
+
+    <div class="compat-card">
+      <div class="compat-head">
+        <div class="compat-icon">EPC</div>
+        <h3 class="compat-name">Epic</h3>
+      </div>
+      <span class="stance coexists">Coexists · No Integration Required</span>
+      <p>Epic is the institutional EHR. Sentinel Node does not attempt to integrate with Epic's API, does not sync to Epic's database, and does not require FHIR approval. Instead, Sentinel Node reads from exported documents, printed PDFs, and scanned records your staff has already filed locally — the information that lives outside of Epic's UI but represents the real clinical picture.</p>
+      <p><b>What you keep doing:</b> chart in Epic exactly as you do today.</p>
+    </div>
+
+    <div class="compat-card">
+      <div class="compat-head">
+        <div class="compat-icon">ATH</div>
+        <h3 class="compat-name">Athenahealth</h3>
+      </div>
+      <span class="stance coexists">Coexists · No Integration Required</span>
+      <p>Athenahealth manages billing, scheduling, and clinical documentation for many independent practices. Sentinel Node sits alongside it — reading from locally stored exports, scanned records, and documents your staff downloads from Athenahealth to local drives during their normal workflow. No Athenahealth configuration changes required.</p>
+      <p><b>What you keep doing:</b> use Athenahealth for everything it does today.</p>
+    </div>
+
+    <div class="compat-card">
+      <div class="compat-head">
+        <div class="compat-icon">CRN</div>
+        <h3 class="compat-name">Cerner / Oracle Health</h3>
+      </div>
+      <span class="stance coexists">Coexists · No Integration Required</span>
+      <p>Cerner deployments in community and independent practice settings typically involve locally accessible document stores and shared network locations alongside the EHR. Sentinel Node indexes those locally accessible documents — visit notes exported to PDF, scanned consult letters, local policy documents — without connecting to Cerner's core system.</p>
+      <p><b>What you keep doing:</b> chart and document in Cerner as you always have.</p>
+    </div>
+
+    <div class="compat-card">
+      <div class="compat-head">
+        <div class="compat-icon">eCW</div>
+        <h3 class="compat-name">eClinicalWorks</h3>
+      </div>
+      <span class="stance coexists">Coexists · No Integration Required</span>
+      <p>eClinicalWorks is the EHR of choice for many independent primary care and specialty practices. Sentinel Node coexists with it by reading the documents your staff has saved locally — referral letters, prior auth correspondence, exported summaries, and scanned records — which often contain the clinical context that matters most when answering a retrieval question.</p>
+      <p><b>What you keep doing:</b> use eClinicalWorks for scheduling, documentation, and billing.</p>
+    </div>
+
+    <div class="compat-card">
+      <div class="compat-head">
+        <div class="compat-icon">FAX</div>
+        <h3 class="compat-name">Faxed Records &amp; Scanned Referrals</h3>
+      </div>
+      <span class="stance reads">Reads · Indexes</span>
+      <p>Fax remains the primary document exchange format for most independent practices. Scanned faxes — consult notes from specialists, hospital discharge summaries, prior auth responses, lab results from outside labs — are ingested locally by Sentinel Node through OCR and structure detection. Staff confirm routing before anything is filed; the documents stay in your local scan folder.</p>
+      <p><b>What you keep doing:</b> receive and scan faxes as you do today. The retrieval layer is added underneath.</p>
+    </div>
+
+    <div class="compat-card">
+      <div class="compat-head">
+        <div class="compat-icon">PDF</div>
+        <h3 class="compat-name">Local Drives &amp; Document Repositories</h3>
+      </div>
+      <span class="stance reads">Reads · Indexes</span>
+      <p>Most independent practices have years of clinical documents stored on shared network drives — patient records, clinical protocols, payer correspondence, policy documents, training materials. Sentinel Node indexes these in place without requiring you to move, rename, or restructure them. The folder structure your staff knows stays exactly as it is.</p>
+      <p><b>What you keep doing:</b> save documents where you save them today.</p>
+    </div>
+
+    <div class="compat-card">
+      <div class="compat-head">
+        <div class="compat-icon">OL</div>
+        <h3 class="compat-name">Outlook &amp; Email Correspondence</h3>
+      </div>
+      <span class="stance reads">Reads · Selectively</span>
+      <p>Payer correspondence, referral confirmations, and prior auth responses increasingly arrive by email. With appropriate configuration and staff confirmation, Sentinel Node can index locally archived email exports — surfacing a prior auth approval or a payer policy change that's buried in an inbox from six months ago. <b>This is opt-in and staff-confirmed, not passive email surveillance.</b></p>
+      <p><b>What you keep doing:</b> use Outlook as you do today. Indexing only applies to what you explicitly configure.</p>
+    </div>
+
+    <div class="compat-card">
+      <div class="compat-head">
+        <div class="compat-icon">BIL</div>
+        <h3 class="compat-name">Billing Systems &amp; PM Software</h3>
+      </div>
+      <span class="stance coexists">Coexists · Untouched</span>
+      <p>Practice management and billing systems — whether integrated with your EHR or standalone — are not touched by Sentinel Node. Billing workflows, claim submission, payment posting, and payer portal access remain entirely in your existing systems. Sentinel Node's value to billing staff comes from faster document retrieval for denial review, not from integrating with the billing system itself.</p>
+      <p><b>What you keep doing:</b> bill and manage claims in your existing PM system.</p>
+    </div>
+
+  </div>
+
+  <!-- WHAT WE'RE HONEST ABOUT -->
+  <div class="honest-block">
+    <h3>What we're honest about.</h3>
+    <p>Sentinel Node is not an EHR integration. It does not connect to Epic's or Athenahealth's API. It does not sync bi-directionally with your clinical database. It does not pull real-time patient data from your EHR as appointments are added or orders are placed.</p>
+    <p><b>What it does:</b> read the documents your staff has already exported, printed, scanned, or filed locally — and make those documents retrievable in seconds rather than minutes. The integration ceiling is the local document layer. That layer is where most of the retrieval burden actually lives.</p>
+    <p>If your operational question is "why can't I find that consult note from six months ago" or "where is that prior auth denial letter" or "what did we document last time for this type of appeal" — Sentinel Node is designed for exactly that problem. If your question is "can Sentinel Node write directly into Epic" — the honest answer is no, and any system that claims to do that for an independent practice without FHIR approval is telling you something worth investigating.</p>
+  </div>
+
+  <!-- GRADUAL ADOPTION -->
+  <div class="wc-section-head">
+    <h2>Adoption that starts where you are.</h2>
+    <p class="sub">Three phases — each independent of what you do in your EHR.</p>
+  </div>
+
+  <div class="phases">
+    <div class="phase">
+      <div class="phase-num">PHASE 01</div>
+      <h4>Read-Only Retrieval</h4>
+      <p>Sentinel Node indexes your existing local document store — scanned records, fax files, exported PDFs — and makes them searchable. Staff query; staff confirm. Nothing enters or modifies any existing record.</p>
+      <p class="phase-time">Weeks 1–3 of pilot deployment.</p>
+    </div>
+    <div class="phase">
+      <div class="phase-num">PHASE 02</div>
+      <h4>Workflow Augmentation</h4>
+      <p>Staff begin using retrieval to accelerate specific high-burden tasks: prior auth evidence packages, referral clinical packets, denial review document assembly. Each output is reviewed before it's used.</p>
+      <p class="phase-time">Weeks 4–8 of pilot deployment.</p>
+    </div>
+    <div class="phase">
+      <div class="phase-num">PHASE 03</div>
+      <h4>Governed Steady State</h4>
+      <p>Audit chain active, governance logs reviewed monthly, workflows calibrated to the specific retrieval patterns that matter most for your practice. Physician oversight built in from the first day forward.</p>
+      <p class="phase-time">Post-pilot steady state operation.</p>
+    </div>
+  </div>
+
+  <!-- PROMISES -->
+  <div class="wc-section-head">
+    <h2>What stays exactly as it is.</h2>
+    <p class="sub">Six operational commitments about your existing environment.</p>
+  </div>
+
+  <ul class="promise-list">
+    <li><b>Your EHR workflow stays intact.</b> Physicians chart in the same system, the same way. Nothing about Sentinel Node changes the clinical documentation workflow inside your EHR.</li>
+    <li><b>Your fax line stays operational.</b> Sentinel Node reads scanned faxes; it does not replace the fax workflow or require any fax system changes.</li>
+    <li><b>Your billing system is not touched.</b> Claim submission, payment posting, and payer portal access remain in your existing system. Sentinel Node does not connect to it.</li>
+    <li><b>Your staff's folder structure stays as it is.</b> Documents are indexed in place. Files do not need to be moved, renamed, or reorganized for the system to read them.</li>
+    <li><b>Vendor contracts are not disrupted.</b> No EHR renegotiation, no FHIR approval process, no new vendor relationships required to deploy Sentinel Node.</li>
+    <li><b>Patient records do not leave the building.</b> Sentinel Node processes documents on the appliance located in your office. PHI does not traverse a public network for retrieval, inference, or audit logging.</li>
+  </ul>
+
+  <!-- CTA -->
+  <div class="wc-cta">
+    <h3>Ready to see what this looks like in your clinic?</h3>
+    <p>The pilot starts with a workflow assessment — what documents your staff retrieves most often, where the retrieval burden is highest, and how Sentinel Node can reduce it without changing anything you depend on.</p>
+    <div class="wc-btn-row">
+      <a href="for-physicians.html" class="wc-btn primary">For Physicians &amp; Practice Owners</a>
+      <a href="support-staff-clinic-workflows.html" class="wc-btn secondary">For Clinic Support Staff</a>
+      <a href="pilot-brief.html" class="wc-btn secondary">60-Day Pilot Brief</a>
+    </div>
+    <p class="micro">Patient data protected by architecture. Governance before automation.</p>
+  </div>
+
+</div><!-- /page-wrap -->
+</main>
+
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 root-relative nav fix, Living Echo rebrand, Engineering & Drafting + Enterprise Estate Continuity links added (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- INCLUDE:FOOTER -->
+<footer role="contentinfo" style="background:#051622;border-top:1px solid rgba(255,255,255,0.08);padding:40px 24px 28px;font-size:0.85em;color:#8899aa;">
+  <div style="max-width:1180px;margin:0 auto;">
+
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:0 0 28px;margin-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.07);">
+      <div style="max-width:560px;">
+        <p style="margin:0 0 6px;font-size:1.05em;font-weight:700;color:#fff;">Local AI infrastructure for regulated practices.</p>
+        <p style="margin:0;font-size:0.95em;line-height:1.5;">Drafts with citations. Human review required. Sensitive documents stay under practice control. Simple path, deep proof.</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="/contact.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;background:#00c2a8;color:#04111a;font-weight:700;text-decoration:none;font-size:0.95em;">Request Pilot</a>
+        <a href="/sentinel-demo.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;border:1px solid rgba(0,194,168,0.55);color:#00c2a8;font-weight:700;text-decoration:none;font-size:0.95em;">Watch Demo</a>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px 32px;margin-bottom:32px;text-align:left;">
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">For You</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/start-here.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Start Here (3 min)</a>
+          <a href="/for-physicians.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Physicians</a>
+          <a href="/for-attorneys.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Attorneys</a>
+          <a href="/engineering-drafting/" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Engineering &amp; Drafting Teams</a>
+          <a href="/pilot-program.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Pilot Program</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Installer Training</a>
+          <a href="/how-it-works.html" style="color:#8899aa;text-decoration:none;">How It Works</a>
+          <a href="/trust.html" style="color:#8899aa;text-decoration:none;">Trust &amp; Audit</a>
+          <a href="/pricing.html" style="color:#8899aa;text-decoration:none;">Pricing</a>
+          <a href="/sentinel-demo.html" style="color:#8899aa;text-decoration:none;">See the Demo</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Documentation Hub</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/documentation-hub/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Hub Home &mdash; Deep Proof</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">Installer Training</a>
+          <a href="/sentinel-node/installation-simulator.html" style="color:#8899aa;text-decoration:none;">&#8627; Installation Simulator</a>
+          <a href="/documentation-hub/clinical/" style="color:#8899aa;text-decoration:none;">Clinical Documentation</a>
+          <a href="/documentation-hub/legal/" style="color:#8899aa;text-decoration:none;">Legal Documentation</a>
+          <a href="/documentation-hub/technical/" style="color:#8899aa;text-decoration:none;">Technical Documentation</a>
+          <a href="/documentation-hub/governance/" style="color:#8899aa;text-decoration:none;">Governance &amp; Audit</a>
+          <a href="/documentation-hub/tools/" style="color:#8899aa;text-decoration:none;">Tools &amp; Simulators</a>
+          <a href="/documentation-hub/research/" style="color:#8899aa;text-decoration:none;">Research &amp; Essays</a>
+          <a href="/documentation-hub/transparency/" style="color:#8899aa;text-decoration:none;">Transparency</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Global Federated AI</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/global/" style="color:#7af0dc;text-decoration:none;font-weight:600;">Global Federated Hub</a>
+          <a href="/global/australia/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Australia</a>
+          <a href="/global/singapore/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Singapore</a>
+          <a href="/global/taiwan/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Taiwan</a>
+          <a href="/global/europe/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Europe</a>
+          <a href="/contact.html" style="color:#8899aa;text-decoration:none;">Partner Inquiry</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Company</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/about.html" style="color:#8899aa;text-decoration:none;">About Pocono AI</a>
+          <a href="/team.html" style="color:#8899aa;text-decoration:none;">Team &amp; Leadership</a>
+          <a href="/why-pocono-ai.html" style="color:#8899aa;text-decoration:none;">Why Pocono AI</a>
+          <a href="/founding-commercial-leadership.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Join Us</a>
+          <a href="/careers.html" style="color:#8899aa;text-decoration:none;">Careers</a>
+          <a href="/how-we-hire.html" style="color:#8899aa;text-decoration:none;">How We Hire</a>
+          <a href="/channel-partners.html" style="color:#8899aa;text-decoration:none;">Technical Partners (MSPs)</a>
+          <a href="/partners.html" style="color:#8899aa;text-decoration:none;">Academic Partnerships</a>
+          <a href="/contact.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Contact</a>
+          <a href="https://forms.gle/VQahnkjMfY6QNEMy8" target="_blank" rel="noopener noreferrer" style="color:#d5a94f;text-decoration:none;font-weight:600;">Interest List &#8599;</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Founder Projects</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/rehability/" style="color:#a78bfa;text-decoration:none;font-weight:700;">Rehability &#x2605;</a>
+          <a href="/rehability/marcus-memory-helper/" style="color:#a78bfa;text-decoration:none;font-weight:600;">&#8627; Marcus's Memory Helper</a>
+          <a href="/sentinel-home/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Sentinel Home Edition</a>
+          <a href="/living-memorials/" style="color:#8899aa;text-decoration:none;">Living Echo</a>
+          <a href="/living-memorials/marcus-odell/" style="color:#8899aa;text-decoration:none;">Marcus&rsquo;s Living Echo</a>
+          <a href="/living-memorials/enterprise-estate-continuity.html" style="color:#8899aa;text-decoration:none;">Enterprise Estate Continuity</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Resources &amp; Legal</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/sitemap.html" style="color:#8899aa;text-decoration:none;">All Pages (Sitemap)</a>
+          <a href="/audit.html" style="color:#8899aa;text-decoration:none;">Transparency &amp; Audit Log</a>
+          <a href="/maturity-disclosure.html" style="color:#8899aa;text-decoration:none;">What We Have / Don&rsquo;t Claim</a>
+          <a href="/plain.html" style="color:#8899aa;text-decoration:none;">Plain Language Guide</a>
+          <a href="/privacy.html" style="color:#8899aa;text-decoration:none;">Privacy</a>
+          <a href="/terms.html" style="color:#8899aa;text-decoration:none;">Terms</a>
+          <a href="/sla.html" style="color:#8899aa;text-decoration:none;">SLA</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:18px;margin-bottom:14px;">
+      <p style="margin:0;font-size:0.82em;line-height:1.6;color:#6f8295;max-width:1000px;">Pocono AI does not provide medical, legal, or engineering advice, does not practice medicine, law, or licensed engineering, and does not make clinical, legal, or engineering decisions. Outputs are drafts or support materials that require review by a qualified professional; final professional judgment remains with the licensed physician, attorney, or engineer. Tools and simulations on this site are educational and use synthetic data.</p>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:20px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+      <p style="margin:0;font-size:0.9em;">&copy; 2026 Pocono AI, LLC &nbsp;&#183;&nbsp; East Stroudsburg, PA &nbsp;&#183;&nbsp; <a href="mailto:marcus@poconoai.com" style="color:#8899aa;">marcus@poconoai.com</a> &nbsp;&#183;&nbsp; <a href="tel:+15705340602" style="color:#8899aa;">(570) 534-0602</a></p>
+      <p style="margin:0;font-size:0.88em;"><a href="/audit.html" style="color:#5dade2;text-decoration:none;">Transparency v402</a></p>
+    </div>
+  </div>
+</footer>
+<script src="/search.js?v=402" defer></script>
+<!-- /INCLUDE:FOOTER -->
+<script src="nav.js?v=402" defer></script>
+<script src="pilot-cta.js?v=402" defer></script>
+
+
+<script src="search-index.js?v=402" defer></script>
+<script src="nav-v2026.js?v=402" defer></script>
+</body>
+</html>

@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp -->
+<head>
+<meta charset="UTF-8">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Sentinel Node governance: human-in-the-loop enforcement, append-only audit receipts, source-cited outputs, and role-based access for regulated practice.">
+<meta name="keywords" content="AI governance, AI verification, AI compliance, human in the loop, local AI governance, healthcare AI governance, legal AI governance, HIPAA AI governance, data provenance, AI traceability, responsible AI, regulated AI, Pocono AI governance">
+<title>AI Verification &amp; Governance for Regulated Workflows | Pocono AI</title>
+<meta property="og:title" content="AI Verification &amp; Governance for Regulated Workflows | Pocono AI">
+<meta property="og:description" content="Why provenance, traceability, human oversight, and local control are the foundation of responsible AI for healthcare and legal organizations.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Pocono AI">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://poconoai.com/governance.html">
+<meta property="og:image" content="https://poconoai.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI Governance for Regulated Workflows | Pocono AI">
+<meta name="twitter:description" content="Provenance. Traceability. Human oversight. Local control. Why these aren't optional in healthcare and legal AI.">
+<meta name="theme-color" content="#0B0F13">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="favicon-180x180.png">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="alternate icon" href="favicon.ico">
+<link rel="stylesheet" href="styles.css?v=402">
+<link rel="stylesheet" href="nav-v2026.css?v=402">
+<link rel="stylesheet" href="brand-v292.css?v=402">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+<link rel="canonical" href="https://poconoai.com/governance.html">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "AI Verification & Governance for Regulated Workflows | Pocono AI",
+  "description": "Plain-language explanation of AI governance for healthcare and legal organizations: why human review, provenance, traceability, and local control are essential — not optional.",
+  "url": "https://poconoai.com/governance.html",
+  "isPartOf": { "@type": "WebSite", "url": "https://poconoai.com", "name": "Pocono AI, LLC" },
+  "publisher": { "@type": "Organization", "name": "Pocono AI, LLC", "url": "https://poconoai.com" },
+  "datePublished": "2026-06-01",
+  "dateModified": "2026-06-01"
+}
+</script>
+
+<style>
+/* === governance.html page styles === */
+.gov-hero {
+  background: linear-gradient(160deg, #071e2e 0%, #051a28 55%, #081f30 100%);
+  border-bottom: 1px solid rgba(0,194,168,0.15);
+  padding: 72px 24px 56px;
+  text-align: center;
+}
+.gov-eyebrow {
+  display: inline-block;
+  font-size: 0.78em;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--teal, #00c2a8);
+  margin-bottom: 16px;
+}
+.gov-hero h1 {
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  line-height: 1.15;
+  max-width: 800px;
+  margin: 0 auto 20px;
+  font-weight: 800;
+}
+.gov-hero-sub {
+  font-size: 1.08em;
+  color: var(--light-text, #8899aa);
+  max-width: 640px;
+  margin: 0 auto 0;
+  line-height: 1.65;
+}
+.gov-wrap {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 24px 96px;
+}
+.gov-section {
+  padding: 52px 0 0;
+}
+.gov-section-label {
+  font-size: 0.72em;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--teal, #00c2a8);
+  margin-bottom: 8px;
+}
+.gov-section h2 {
+  font-size: clamp(1.25rem, 2.5vw, 1.7rem);
+  line-height: 1.2;
+  margin: 0 0 18px;
+  font-weight: 700;
+}
+.gov-section p {
+  line-height: 1.72;
+  color: var(--light-text, #8899aa);
+  margin: 0 0 16px;
+}
+.gov-section p strong {
+  color: #d0dde8;
+}
+.gov-callout {
+  background: rgba(0,194,168,0.06);
+  border-left: 4px solid var(--teal, #00c2a8);
+  border-radius: 0 8px 8px 0;
+  padding: 18px 22px;
+  margin: 24px 0;
+}
+.gov-callout p {
+  margin: 0;
+  font-size: 0.97em;
+  color: #c5d4e0;
+  line-height: 1.65;
+}
+.gov-callout strong { color: var(--teal, #00c2a8); }
+.gov-pillar-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+  margin: 28px 0;
+}
+.gov-pillar {
+  background: rgba(255,255,255,0.025);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-top: 3px solid var(--teal, #00c2a8);
+  border-radius: 0 0 10px 10px;
+  padding: 22px 20px;
+}
+.gov-pillar h3 {
+  font-size: 1.05em;
+  font-weight: 700;
+  color: #d0dde8;
+  margin: 0 0 10px;
+}
+.gov-pillar p {
+  font-size: 0.88em;
+  margin: 0;
+}
+.gov-scenario-block {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 10px;
+  padding: 24px 22px;
+  margin: 16px 0;
+}
+.gov-scenario-block .scenario-label {
+  font-size: 0.72em;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(0,194,168,0.7);
+  margin-bottom: 8px;
+}
+.gov-scenario-block h3 {
+  font-size: 1.05em;
+  font-weight: 700;
+  color: #d0dde8;
+  margin: 0 0 10px;
+}
+.gov-scenario-block p {
+  font-size: 0.91em;
+  margin: 0;
+}
+.gov-compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 24px 0;
+  font-size: 0.91em;
+}
+.gov-compare-table th {
+  text-align: left;
+  padding: 10px 14px;
+  font-size: 0.82em;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-bottom: 2px solid rgba(0,194,168,0.2);
+}
+.gov-compare-table th:first-child { color: var(--light-text, #8899aa); }
+.gov-compare-table th:nth-child(2) { color: #e05c5c; }
+.gov-compare-table th:nth-child(3) { color: var(--teal, #00c2a8); }
+.gov-compare-table td {
+  padding: 11px 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  color: var(--light-text, #8899aa);
+  line-height: 1.5;
+}
+.gov-compare-table td:first-child { color: #d0dde8; font-weight: 600; }
+.gov-compare-table td.bad { color: #c97a7a; }
+.gov-compare-table td.good { color: #6abfab; }
+.gov-related-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+  margin: 24px 0;
+}
+.gov-related-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 8px;
+  padding: 18px 18px;
+  text-decoration: none;
+  transition: border-color 0.15s, background 0.15s;
+}
+.gov-related-card:hover {
+  border-color: rgba(0,194,168,0.3);
+  background: rgba(0,194,168,0.04);
+}
+.gov-related-card .rc-label {
+  font-size: 0.72em;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--teal, #00c2a8);
+  margin-bottom: 6px;
+}
+.gov-related-card h3 {
+  font-size: 0.97em;
+  font-weight: 700;
+  color: #d0dde8;
+  margin: 0 0 6px;
+}
+.gov-related-card p {
+  font-size: 0.85em;
+  color: var(--light-text, #8899aa);
+  margin: 0;
+}
+.gov-cta-block {
+  background: linear-gradient(135deg, rgba(0,163,255,0.07), rgba(5,22,34,0.9));
+  border: 1px solid rgba(0,163,255,0.2);
+  border-radius: 14px;
+  padding: 40px 32px;
+  text-align: center;
+  margin: 52px 0 0;
+}
+.gov-cta-block h2 {
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+  margin: 0 0 14px;
+}
+.gov-divider {
+  border: none;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  margin: 48px 0 0;
+}
+.btn-teal {
+  display: inline-block;
+  background: var(--teal, #00c2a8);
+  color: #051622;
+  font-weight: 700;
+  font-size: 0.95em;
+  padding: 14px 28px;
+  border-radius: 7px;
+  text-decoration: none;
+  margin: 0 8px 8px;
+  transition: opacity 0.15s;
+}
+.btn-teal:hover { opacity: 0.88; }
+.btn-ghost {
+  display: inline-block;
+  border: 1px solid rgba(0,194,168,0.4);
+  color: var(--teal, #00c2a8);
+  font-weight: 600;
+  font-size: 0.95em;
+  padding: 13px 26px;
+  border-radius: 7px;
+  text-decoration: none;
+  margin: 0 8px 8px;
+  transition: background 0.15s;
+}
+.btn-ghost:hover { background: rgba(0,194,168,0.08); }
+
+/* === AI Governance 2026 — Whitepaper Section === */
+.gov-2026-section {
+  padding: 52px 0 0;
+}
+.gov-2026-section .gov-section-label {
+  font-size: 0.72em;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--teal, #00c2a8);
+  margin-bottom: 8px;
+}
+.gov-2026-section h2 {
+  font-size: clamp(1.25rem, 2.5vw, 1.7rem);
+  line-height: 1.2;
+  margin: 0 0 14px;
+  font-weight: 700;
+}
+.gov-2026-section .gov-2026-intro {
+  line-height: 1.72;
+  color: var(--light-text, #8899aa);
+  margin: 0 0 28px;
+  max-width: 740px;
+}
+.gov-2026-infographic {
+  width: 100%;
+  border-radius: 10px;
+  display: block;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.35);
+}
+.gov-pdf-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 10px;
+  padding: 22px 24px;
+  margin-top: 20px;
+  text-decoration: none;
+  transition: border-color 0.15s, background 0.15s;
+}
+.gov-pdf-card:hover {
+  border-color: rgba(0,194,168,0.28);
+  background: rgba(0,194,168,0.03);
+}
+.gov-pdf-icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  background: rgba(0,194,168,0.10);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.gov-pdf-icon svg {
+  display: block;
+}
+.gov-pdf-meta {
+  flex: 1;
+  min-width: 0;
+}
+.gov-pdf-eyebrow {
+  font-size: 0.70em;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--teal, #00c2a8);
+  margin: 0 0 4px;
+}
+.gov-pdf-title {
+  font-size: 0.97em;
+  font-weight: 700;
+  color: #d0dde8;
+  margin: 0 0 5px;
+  line-height: 1.35;
+}
+.gov-pdf-desc {
+  font-size: 0.85em;
+  color: var(--light-text, #8899aa);
+  margin: 0 0 12px;
+  line-height: 1.6;
+}
+.gov-pdf-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(0,194,168,0.10);
+  border: 1px solid rgba(0,194,168,0.30);
+  color: var(--teal, #00c2a8);
+  font-size: 0.83em;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background 0.15s, border-color 0.15s;
+}
+.gov-pdf-btn:hover {
+  background: rgba(0,194,168,0.18);
+  border-color: rgba(0,194,168,0.50);
+}
+.gov-pdf-meta a { text-decoration: none; }
+@media (max-width: 520px) {
+  .gov-pdf-card { flex-direction: column; gap: 14px; }
+  .gov-pdf-icon { display: none; }
+}
+</style>
+
+<script>
+(function(){
+  var ids=[];
+  try {
+    if (location.search.indexOf('showbanners=1') !== -1) {
+      ids.forEach(function(id){ localStorage.removeItem('pai_dismissed_'+id); });
+    }
+  } catch(e) {}
+  var hideRules = [];
+  ids.forEach(function(id){
+    try {
+      if (localStorage.getItem('pai_dismissed_'+id) === '1') {
+        hideRules.push('#'+id+'{display:none !important;}');
+      }
+    } catch(e) {}
+  });
+  if (hideRules.length) {
+    var style = document.createElement('style');
+    style.textContent = hideRules.join('');
+    (document.head || document.documentElement).appendChild(style);
+  }
+})();
+</script>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to content</a>
+<div id="reading-progress" aria-hidden="true"></div>
+
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- INCLUDE:HEADER -->
+<div id="hitl-notice" style="background:#0a1929;padding:4px 16px;text-align:center;font-size:12px;color:#4a5568;border-bottom:1px solid rgba(255,255,255,0.06);letter-spacing:0.01em;">Human-in-the-Loop required: licensed professionals verify all outputs before clinical or legal action</div>
+<header role="banner">
+  <div class="header-inner">
+    <a href="/index.html" class="logo" aria-label="Pocono AI Home">
+      <img src="/logo.svg?v=402" alt="" width="36" height="36" decoding="async" loading="eager" aria-hidden="true" style="display:inline-block;">
+      Pocono <span>AI</span>
+    </a>
+    <nav id="desktop-nav" aria-label="Main navigation">
+      <div class="nav-item"><a href="/index.html" class="nav-direct">Home</a></div>
+      <div class="nav-item"><a href="/for-physicians.html" class="nav-direct">Physicians</a></div>
+      <div class="nav-item"><a href="/for-attorneys.html" class="nav-direct">Attorneys</a></div>
+      <div class="nav-item"><a href="/sentinel-node.html" class="nav-direct nav-hub" style="color:#d5a94f;border:1px solid rgba(213,169,79,0.45);border-radius:999px;padding:6px 13px;">Sentinel Node</a></div>
+      <div class="nav-item"><a href="/living-memorials/" class="nav-direct">Living Echo</a></div>
+      <div class="nav-item"><a href="/contact.html" class="nav-direct">Contact</a></div>
+      <div class="nav-item" data-dropdown="menu-more">
+        <button type="button" class="nav-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="menu-more">More <span class="nav-chevron" aria-hidden="true">&#9662;</span></button>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <a href="/contact.html#pilot" class="nav-cta nav-cta-primary">Request a Pilot</a>
+      <button type="button" class="pa-search-trigger" data-search-open aria-label="Search (press / or Ctrl-K)" aria-haspopup="dialog" aria-expanded="false">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span class="pa-st-label">Search</span><kbd data-pa-keyhint>Ctrl K</kbd>
+      </button>
+      <button type="button" class="header-icon-btn" id="mobile-menu" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav-panel">
+        <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- "More" overflow dropdown — sibling of <header> so position:fixed escapes header's stacking context. Wired by nav.js via data-dropdown="menu-more". -->
+<div class="nav-dropdown" id="menu-more" aria-label="More navigation">
+  <p class="nav-dd-section">Products</p>
+  <a href="/engineering-drafting/">Drafting &amp; Engineering Edition</a>
+  <a href="/sentinel-home/">Sentinel Home Edition</a>
+  <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability — Assistive Tools &#x2605;</a>
+  <a href="/living-memorials/enterprise-estate-continuity.html">Enterprise Estate Continuity</a>
+  <p class="nav-dd-section">Capabilities</p>
+  <a href="/evidence-room.html">Evidence Room</a>
+  <a href="/push-button-deliverables.html">Push-Button Deliverables</a>
+  <a href="/pilot-readiness-kit.html">Pilot Kit</a>
+  <a href="/pilot-program.html">Pilot Program</a>
+  <a href="/how-it-works.html">How It Works</a>
+  <p class="nav-dd-section">Hubs &amp; Company</p>
+  <a href="/training.html">Training Hub</a>
+  <a href="/documentation-hub/">Document Hub</a>
+  <a href="/global/">Global Hub</a>
+  <a href="/investors-hub.html">Investor Hub</a>
+  <a href="/valuation-dashboard.html">Valuation Dashboard</a>
+  <a href="/about.html">About</a>
+  <p class="nav-dd-section">Trust &amp; Legal</p>
+  <a href="/transparency.html">Transparency</a>
+  <a href="/audit.html">Audit Log</a>
+  <a href="/privacy.html">Privacy</a>
+  <a href="/sitemap.html">Sitemap</a>
+</div>
+<!-- Site search is provided by the self-contained search.js asset (command palette: / or Ctrl/Cmd-K). -->
+
+<!-- Mobile panel: full-screen slide-in. v396 nav — hub tiles + grouped links + Sentinel Node + Engineering. -->
+<nav id="mobile-nav-panel" aria-label="Mobile navigation" aria-hidden="true" role="dialog" aria-modal="true">
+
+  <!-- Hub tiles: Sentinel Node, Documentation Hub, Training Hub, Global Hub -->
+  <div style="padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,0.07);">
+    <p style="font-size:0.65em;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.28);margin:0 0 10px;padding:0 2px;">Hubs</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <a href="/sentinel-node.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(213,169,79,0.1);border:1px solid rgba(213,169,79,0.35);border-radius:10px;color:#d5a94f;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Sentinel Node</a>
+      <a href="/documentation-hub/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(0,194,168,0.1);border:1px solid rgba(0,194,168,0.35);border-radius:10px;color:#00c2a8;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Docs Hub</a>
+      <a href="/training.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.35);border-radius:10px;color:#a78bfa;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Training Hub</a>
+      <a href="/global/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(122,240,220,0.07);border:1px solid rgba(122,240,220,0.3);border-radius:10px;color:#7af0dc;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Global Hub</a>
+    </div>
+  </div>
+
+  <!-- Core paths -->
+  <div class="mob-static-links">
+    <a href="/index.html">Home</a>
+    <a href="/for-physicians.html">Physicians</a>
+    <a href="/for-attorneys.html">Attorneys</a>
+    <a href="/engineering-drafting/">Engineering &amp; Drafting</a>
+    <a href="/pilot-program.html">Pilot Program</a>
+    <a href="/how-it-works.html">How It Works</a>
+    <a href="/trust.html">Trust &amp; Audit</a>
+    <a href="/pricing.html">Pricing</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/living-memorials/">Living Echo</a>
+    <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability</a>
+    <a href="/about.html">About</a>
+    <a href="/team.html" style="color:rgba(255,255,255,0.6);">Team &amp; Leadership</a>
+    <a href="/valuation-dashboard.html" style="color:rgba(255,255,255,0.6);">Valuation Dashboard</a>
+    <a href="/careers.html" style="color:rgba(255,255,255,0.6);">Careers</a>
+    <a href="/sentinel-demo.html" style="color:rgba(255,255,255,0.6);">Demo</a>
+    <a href="/sitemap.html" style="color:rgba(255,255,255,0.45);">Sitemap</a>
+    <a href="/transparency.html" style="color:rgba(255,255,255,0.45);">Transparency</a>
+    <a href="/privacy.html" style="color:rgba(255,255,255,0.45);">Privacy</a>
+  </div>
+
+  <a href="/contact.html#pilot" class="mob-cta">Request a Pilot</a>
+</nav>
+<!-- /INCLUDE:HEADER -->
+
+
+<main id="main-content" tabindex="-1">
+<span id="main" aria-hidden="true"></span>
+
+<!-- HERO -->
+<section class="gov-hero">
+  <div class="sentinel-lockup" aria-label="Sentinel Node — Governance Framework">
+              <svg class="sentinel-lockup-mark" viewBox="0 0 64 64" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
+          <!-- v311b: rotated diamond + C-curve loop + summit dot. Inherits currentColor from CSS context. -->
+          <g transform="rotate(45 32 32)">
+            <rect x="12" y="12" width="40" height="40" rx="8" ry="8"/>
+            <path d="M43 22 L26 22 A6 6 0 0 0 20 28 L20 36 A6 6 0 0 0 26 42 L41 42"/>
+          </g>
+          <circle cx="32" cy="9" r="3" fill="currentColor" stroke="none"/>
+        </svg>
+              <div class="sentinel-lockup-rule"></div>
+              <div class="sentinel-lockup-text">
+                <span class="sentinel-lockup-name">Sentinel Node</span>
+                <span class="sentinel-lockup-tag">AI Governance</span>
+              </div>
+            </div>
+  <h1>AI Verification &amp; Governance<br>for Regulated Workflows</h1>
+  <p class="gov-hero-sub">Why human review, provenance, traceability, and local control are not optional features for medical practices, law firms, and compliance-sensitive organizations — and how the Sentinel Node™ operationalizes each of them.</p>
+</section>
+
+<div class="gov-wrap">
+
+  <!-- SECTION 1: WHY GOVERNANCE MATTERS -->
+  <section class="gov-section">
+    <p class="gov-section-label">The Problem</p>
+    <h2>Most AI Tools Aren't Designed for Regulated Environments</h2>
+    <p>General-purpose AI tools — the kind pitched to every industry — are optimized for speed and ease of use. They were not designed with the accountability requirements of a medical practice or a law office in mind.</p>
+    <p>In regulated environments, the question is not just <em>does the AI give a good answer</em> — it's:</p>
+    <ul style="padding-left:20px;line-height:1.9;color:var(--light-text,#8899aa);">
+      <li><strong style="color:#d0dde8;">Where did that answer come from?</strong> Which documents, which sources, which version?</li>
+      <li><strong style="color:#d0dde8;">Who reviewed it before it was acted on?</strong> Was a qualified professional in the loop?</li>
+      <li><strong style="color:#d0dde8;">Is there a record of the interaction?</strong> Can it be reconstructed later if challenged?</li>
+      <li><strong style="color:#d0dde8;">Where did my patient or client data go?</strong> Which vendor's servers? Which country?</li>
+      <li><strong style="color:#d0dde8;">Can the vendor see my data?</strong> Is it used for training? Shared with third parties?</li>
+    </ul>
+    <p>Cloud-based AI tools typically cannot answer these questions satisfactorily. The Sentinel Node™ is built specifically to answer them — by design, not by add-on.</p>
+    <div class="gov-callout">
+      <p><strong>The governance gap in AI adoption:</strong> Most AI tools that reach healthcare and legal workflows were not built for those workflows. The risks they introduce — provenance gaps, unreviewed outputs, data exfiltration, audit holes — are not theoretical. They are the natural result of applying general-purpose tools to regulated contexts.</p>
+    </div>
+  </section>
+
+  <!-- SECTION 2: FOUR PILLARS -->
+  <section class="gov-section">
+    <p class="gov-section-label">The Four Pillars</p>
+    <h2>What Responsible AI Governance Requires</h2>
+    <p>Across healthcare, law, and other regulated industries, four properties define whether an AI system can be responsibly deployed:</p>
+    <div class="gov-pillar-grid">
+      <div class="gov-pillar">
+        <span class="gov-icon is-lg" data-icon="human-review" aria-hidden="true" style="margin-bottom:14px;display:block;"></span>
+        <h3>1. Human Review</h3>
+        <p>No AI output should enter a clinical record, legal document, or operational workflow without review by a qualified professional. The AI is a draft tool. The human is the decision-maker.</p>
+      </div>
+      <div class="gov-pillar">
+        <span class="gov-icon is-lg" data-icon="audit" aria-hidden="true" style="margin-bottom:14px;display:block;"></span>
+        <h3>2. Provenance</h3>
+        <p>Every AI-assisted output must be traceable to its source documents. Which file? Which page? Which section? Without provenance, an AI answer cannot be verified or challenged.</p>
+      </div>
+      <div class="gov-pillar">
+        <span class="gov-icon is-lg" data-icon="sealed-loop" aria-hidden="true" style="margin-bottom:14px;display:block;"></span>
+        <h3>3. Traceability</h3>
+        <p>There must be a durable record of every AI interaction: who asked, what was retrieved, what the model produced, and who reviewed it. This record must be reviewable and retained.</p>
+      </div>
+      <div class="gov-pillar">
+        <span class="gov-icon is-lg" data-icon="boundary" aria-hidden="true" style="margin-bottom:14px;display:block;"></span>
+        <h3>4. Local Control</h3>
+        <p>Sensitive data — patient records, case files, privileged communications — must not leave your facility. The organization using the tool must control the data, not the vendor. In a regionally governed deployment, local control is also <em>jurisdictional</em> control: the node operates under the compliance framework of the region where it is installed, not the region where the vendor is headquartered.</p>
+      </div>
+    </div>
+    <p>The Sentinel Node™ operationalizes all four. Each is a structural property of the system, not a configuration option or an add-on module.</p>
+  </section>
+
+  <!-- SECTION 3: HUMAN REVIEW -->
+  <section class="gov-section">
+    <p class="gov-section-label">Human Review</p>
+    <h2>Why AI Must Never Act Without a Human in the Loop</h2>
+    <p>The most consequential decision in any AI governance framework is this one: <strong>does the AI output go directly into a workflow, or does a qualified human review it first?</strong></p>
+    <p>In medicine, an unreviewed AI output that enters a clinical note or influences a prescribing decision can harm a patient. In law, an unreviewed AI-generated research summary that shapes legal strategy can harm a client. These are not edge cases. They are the expected failure mode of systems that remove human judgment from the loop.</p>
+    <p>The Sentinel Node™ enforces human-in-the-loop review structurally. The user interface presents every AI response as a draft. The audit log records the review step. Staff cannot route an AI output into a workflow without it passing through a human decision point.</p>
+    <p>This is not a restriction on usefulness. It is a recognition of where AI is and is not reliable today — and a commitment to protecting the people your organization serves.</p>
+  </section>
+
+  <!-- SECTION 4: PROVENANCE -->
+  <section class="gov-section">
+    <p class="gov-section-label">Provenance</p>
+    <h2>Every Answer Has a Source — and You Can See It</h2>
+    <p>Provenance is the ability to trace an AI answer back to the exact documents, pages, and passages that informed it. Most AI systems do not provide this. They return an answer — but not a citation trail.</p>
+    <p>In a regulated environment, this is not good enough. If a physician asks an AI about a drug interaction and the AI returns an answer, the physician needs to know: is this from my current formulary? My protocol manual? A document that was current last year but has since been updated?</p>
+    <p>The Sentinel Node™ uses a Retrieval-Augmented Generation (RAG) architecture powered by Qdrant. When a query is processed, the system retrieves the most relevant document chunks from your local knowledge base and logs the source of every chunk: document ID, filename, page number, and section heading. The retrieved chunks become part of the prompt context — and part of the permanent audit record.</p>
+    <p>The result: every answer is grounded in identifiable source documents that were in your system at a specific point in time. This is traceable. This is auditable. This is provenance.</p>
+    <div class="gov-callout">
+      <p><strong>Why this matters for attorneys:</strong> Work product privilege and professional responsibility rules require attorneys to exercise independent judgment. AI-assisted research that cannot be traced to verifiable sources creates a professional responsibility risk that provenance-based systems directly mitigate.</p>
+    </div>
+  </section>
+
+  <!-- SECTION 5: TRACEABILITY -->
+  <section class="gov-section">
+    <p class="gov-section-label">Traceability</p>
+    <h2>A Durable, Reviewable Record of Every AI Interaction</h2>
+    <p>Traceability means that months or years after an AI-assisted interaction, you can reconstruct exactly what happened: what was asked, what was retrieved, what the model produced, and who reviewed it.</p>
+    <p>This is what regulators, malpractice investigators, and bar disciplinary boards may eventually ask for. "We use AI" is not a sufficient answer. "Here is the complete, reviewable log of every AI interaction, with source provenance and human review records" is.</p>
+    <p>The Sentinel Node™ audit log provides this. Today, in the pilot, every event is written to a local SQLite database as an append-only, reviewable record — nothing is modified or deleted in place during the retention window. The next audit-layer release (Stage 2) adds SHA-256 hash chaining and signed records so that altering a past entry breaks the chain and is detectable on verification. The log is retained for a minimum of 90 days, with configurable extension for organizational compliance requirements.</p>
+    <p>For investors and diligence reviewers, this also matters: an organization that can demonstrate structured AI governance — with audit trails — is meaningfully differentiated from one that cannot.</p>
+  </section>
+
+  <!-- SECTION 6: LOCAL CONTROL -->
+  <section class="gov-section">
+    <p class="gov-section-label">Local Control</p>
+    <h2>Your Data Doesn't Leave. Not Even the Audit Log.</h2>
+    <p>Cloud-based AI tools create a structural problem for regulated organizations: the vendor has access to your data. Sometimes contractually constrained, sometimes not. Sometimes used for model training. Sometimes shared with sub-processors in ways that a BAA or DPA does not fully address.</p>
+    <p>The Sentinel Node™ eliminates this problem at the architectural level. The inference model, the vector database, the retrieval pipeline, and the audit log all run on hardware inside your facility. There is no cloud hop. No vendor server. No third-party sub-processor receiving your queries or your patient data.</p>
+    <p>The audit log itself — the record of every AI interaction — is also local. You own it. You control access to it. If you are asked to produce it for a regulatory audit or a legal proceeding, you produce it directly, without coordinating with a vendor.</p>
+    <div class="gov-callout">
+      <p><strong>Air-gapped operation:</strong> The Sentinel Node™ is designed to operate without an internet connection once deployed. For organizations in high-sensitivity environments — correctional health, substance use treatment, psychiatric care, privilege-sensitive legal matters — this matters.</p>
+    </div>
+  </section>
+
+  <!-- SECTION 7: COMPARISON -->
+  <section class="gov-section">
+    <p class="gov-section-label">How We Compare</p>
+    <h2>Cloud AI vs. Local AI Governance</h2>
+    <p>This comparison reflects architectural realities, not vendor marketing. The properties below are structural — they follow from where the model runs and where data flows, not from policy commitments.</p>
+    <table class="gov-compare-table">
+      <thead>
+        <tr>
+          <th>Governance Property</th>
+          <th>Cloud AI Tools</th>
+          <th>Sentinel Node™ (Local)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Patient/client data location</td>
+          <td class="bad">Vendor servers; may be multi-tenant</td>
+          <td class="good">Your building, your hardware</td>
+        </tr>
+        <tr>
+          <td>Audit log location</td>
+          <td class="bad">Vendor-controlled; access varies</td>
+          <td class="good">Local, under your direct control</td>
+        </tr>
+        <tr>
+          <td>Audit log integrity</td>
+          <td class="bad">Rarely; log integrity not guaranteed</td>
+          <td class="good">Append-only, reviewable today; hash-chained Stage 2</td>
+        </tr>
+        <tr>
+          <td>Source provenance per query</td>
+          <td class="bad">Typically not provided</td>
+          <td class="good">Doc ID, filename, page, section — logged</td>
+        </tr>
+        <tr>
+          <td>Human-in-the-loop enforcement</td>
+          <td class="bad">Optional; often bypassed for speed</td>
+          <td class="good">Structural; all outputs are drafts</td>
+        </tr>
+        <tr>
+          <td>Vendor access to queries</td>
+          <td class="bad">Yes, by definition</td>
+          <td class="good">No vendor access to operational data</td>
+        </tr>
+        <tr>
+          <td>Air-gapped operation</td>
+          <td class="bad">Not possible</td>
+          <td class="good">Supported by design</td>
+        </tr>
+        <tr>
+          <td>Audit log retention control</td>
+          <td class="bad">Vendor-defined; may not be configurable</td>
+          <td class="good">Organization-controlled; 90-day default</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size:0.85em;color:var(--light-text,#8899aa);">Note: "Cloud AI Tools" reflects general architectural properties common to cloud-deployed AI services. Individual vendor terms and configurations vary. This comparison is not a legal or compliance assessment for any specific product.</p>
+  </section>
+
+  <!-- SECTION 8: REAL-WORLD SCENARIOS -->
+  <section class="gov-section">
+    <p class="gov-section-label">Practical Scenarios</p>
+    <h2>What Governance Looks Like in Practice</h2>
+
+    <div class="gov-scenario-block">
+      <p class="scenario-label">Medical Practice</p>
+      <h3>Prior Authorization Documentation</h3>
+      <p>A nurse practitioner uses the Sentinel Node™ to draft prior authorization language for a specialty medication. The system retrieves relevant passages from the practice's clinical protocol manual and the current payer criteria document. The retrieved chunks and the generated draft are logged in the audit record. The supervising physician reviews the draft, confirms clinical accuracy against the cited sources, and approves it for submission. The entire interaction — query, sources, draft, reviewer, timestamp — is preserved in the reviewable log.</p>
+    </div>
+
+    <div class="gov-scenario-block">
+      <p class="scenario-label">Law Firm</p>
+      <h3>Case Research Under Privilege</h3>
+      <p>An associate uses the Sentinel Node™ to research relevant case law from the firm's internal matter files. The system retrieves relevant case summaries and deposition excerpts from the local Qdrant database. The associate reviews the AI-synthesized summary, verifies the cited source documents, and confirms the analysis before integrating it into a brief. No query or document content ever left the firm's network. The full retrieval and review chain is logged locally.</p>
+    </div>
+
+    <div class="gov-scenario-block">
+      <p class="scenario-label">Compliance &amp; Investor Diligence</p>
+      <h3>Demonstrating AI Governance to a Reviewer</h3>
+      <p>A healthcare organization using the Sentinel Node™ is asked by a compliance officer or external auditor to demonstrate how AI is governed in their clinical workflows. They produce the local audit log — a complete, reviewable audit record of every AI interaction over the review period — along with documentation of the human review policy. The log shows source provenance for every retrieved document, every prompt, every response, and every reviewer. This is governance that can be demonstrated, not just asserted.</p>
+    </div>
+  </section>
+
+  <!-- SENTINEL TRIAL ROOM REFERENCE — v349 -->
+  <section class="gov-section" aria-label="Sentinel Trial Room demonstration">
+    <div style="border:1px solid rgba(10,115,210,0.28);border-radius:12px;background:linear-gradient(155deg,rgba(8,15,28,0.9),rgba(6,18,30,0.7));padding:22px 26px;">
+      <p style="margin:0 0 8px;font-size:0.66em;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#5dade2;">See it as a workflow</p>
+      <h2 style="margin:0 0 10px;border:0;">The Sentinel Trial Room</h2>
+      <p style="margin:0 0 14px;color:var(--light-text,#c8d4de);line-height:1.7;">The <strong>Sentinel Trial Room&trade;</strong> demonstrates how an audit-aware workflow can surface an evidence gap, block export, require human review, and record the reviewer decision as part of a local demonstration event chain. It illustrates the same governance design pattern described above &mdash; expressed as a fictional, interactive workflow you can step through. It uses synthetic demonstration data only; it is not clinical validation, legal advice, or a compliance guarantee, and it follows a reviewable, security-conscious design approach rather than a certified process.</p>
+      <a href="sentinel-trial-room.html" style="display:inline-flex;align-items:center;gap:8px;color:#5dade2;text-decoration:none;font-weight:700;font-size:0.92em;">Step inside the Sentinel Trial Room &rarr;</a>
+    </div>
+  </section>
+
+  <!-- ═══ v320: GOVERNANCE AS RUNTIME GATES — Sentinel Node v1.46 (Z1–Z21) ═══ -->
+  <section class="gov-section" id="runtime-gates" aria-labelledby="gov-runtime-title">
+    <p class="gov-section-label">Runtime Governance · Sentinel Node v1.46</p>
+    <h2 id="gov-runtime-title">Governance Is Expressed as Runtime Gates</h2>
+    <p>Governance is not a PDF afterthought. In the Sentinel Node, governance is expressed as <strong style="color:#d0dde8;">runtime gates</strong>: OCR confidence, evidence admissibility, scope filtering, draft quality review, professional approval, export blocking, signed update custody, and local audit envelopes. An internal release-candidate build sequence turned these gates from policy language into observable controls. Each gate produces an auditable signal a reviewer can inspect. <strong style="color:#d0dde8;">This is a pilot-candidate scaffold, not a production certification</strong> — professional review remains mandatory.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:14px;margin:22px 0 4px;">
+      <div style="background:rgba(0,194,168,0.04);border:1px solid rgba(0,194,168,0.16);border-radius:10px;padding:18px 20px;">
+        <p style="margin:0 0 6px;font-size:0.66em;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--teal,#00c2a8);">Evidence Train</p>
+        <p style="margin:0;color:var(--light-text,#8899aa);font-size:0.88em;line-height:1.65;">Citation IDs, source hashes, and page or chunk metadata travel with every drafted claim, so a reviewer can trace each statement back to an approved source. Source data must still be selected correctly.</p>
+      </div>
+      <div style="background:rgba(0,194,168,0.04);border:1px solid rgba(0,194,168,0.16);border-radius:10px;padding:18px 20px;">
+        <p style="margin:0 0 6px;font-size:0.66em;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--teal,#00c2a8);">Audit Envelope</p>
+        <p style="margin:0;color:var(--light-text,#8899aa);font-size:0.88em;line-height:1.65;">Login, ingestion, OCR gate, retrieval, generation, approval, export, and signed-update events are recorded with actor and scope. Document text, prompts, drafts, and tokens are excluded from audit metadata.</p>
+      </div>
+      <div style="background:rgba(0,194,168,0.04);border:1px solid rgba(0,194,168,0.16);border-radius:10px;padding:18px 20px;">
+        <p style="margin:0 0 6px;font-size:0.66em;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--teal,#00c2a8);">Named Reviewer</p>
+        <p style="margin:0;color:var(--light-text,#8899aa);font-size:0.88em;line-height:1.65;">A draft-only workflow requires a named professional approval before any regulated output moves forward. The export gate blocks unapproved artifacts. No autopilot mode exists.</p>
+      </div>
+      <div style="background:rgba(0,194,168,0.04);border:1px solid rgba(0,194,168,0.16);border-radius:10px;padding:18px 20px;">
+        <p style="margin:0 0 6px;font-size:0.66em;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--teal,#00c2a8);">Draft-Quality Monitoring</p>
+        <p style="margin:0;color:var(--light-text,#8899aa);font-size:0.88em;line-height:1.65;">Unsupported-claim warnings flag draft statements that lack admissible evidence. A reviewer interprets the warnings; the monitor does not prove correctness and does not replace professional judgment.</p>
+      </div>
+      <div style="background:rgba(0,194,168,0.04);border:1px solid rgba(0,194,168,0.16);border-radius:10px;padding:18px 20px;">
+        <p style="margin:0 0 6px;font-size:0.66em;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--teal,#00c2a8);">Drift Watch &amp; Model Refresh</p>
+        <p style="margin:0;color:var(--light-text,#8899aa);font-size:0.88em;line-height:1.65;">Drift Watch surfaces unsupported-claim rate, OCR rejection rate, image-fallback rate, zero-evidence task rate, and average retrieval score, with model-refresh readiness thresholds. These indicate risk and trend; they do not prove correctness.</p>
+      </div>
+      <div style="background:rgba(0,194,168,0.04);border:1px solid rgba(0,194,168,0.16);border-radius:10px;padding:18px 20px;">
+        <p style="margin:0 0 6px;font-size:0.66em;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--teal,#00c2a8);">Golden-Case Regression</p>
+        <p style="margin:0;color:var(--light-text,#8899aa);font-size:0.88em;line-height:1.65;">Synthetic golden cases verify expected sources, blocked wrong-scope retrieval, rejected bad OCR, and flagged unsupported claims, with local run records. Golden cases are regression checks, not certification.</p>
+      </div>
+      <div style="background:rgba(0,194,168,0.04);border:1px solid rgba(0,194,168,0.16);border-radius:10px;padding:18px 20px;">
+        <p style="margin:0 0 6px;font-size:0.66em;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--teal,#00c2a8);">Local Metrics Dashboard</p>
+        <p style="margin:0;color:var(--light-text,#8899aa);font-size:0.88em;line-height:1.65;">A local-only dashboard aggregates posture signals for a pilot lead, MSP, or compliance reviewer. It is not telemetry by default, does not upload metrics, and contains no PHI, privileged content, prompts, drafts, or identifiers.</p>
+      </div>
+      <div style="background:rgba(0,194,168,0.04);border:1px solid rgba(0,194,168,0.16);border-radius:10px;padding:18px 20px;">
+        <p style="margin:0 0 6px;font-size:0.66em;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--teal,#00c2a8);">Compliance Evidence Binder</p>
+        <p style="margin:0;color:var(--light-text,#8899aa);font-size:0.88em;line-height:1.65;">An internal readiness and evidence map links each control to the questions reviewers ask, with status and limitations. It is not a HIPAA, legal, NIST, ISO, or production-deployment certification.</p>
+      </div>
+    </div>
+
+    <p style="margin:18px 0 0;font-size:0.85em;color:var(--muted,#5a6b7a);line-height:1.6;font-style:italic;">The OCR confidence gate defaults to 95%. Low-confidence material is refused or routed to image fallback or manual review rather than fabricated as text. Cloud AI is off unless explicitly approved by the customer; the default posture is local-only.</p>
+
+    <p style="margin:16px 0 0;"><a href="sentinel-pilot-scaffold.html" style="display:inline-flex;align-items:center;gap:8px;color:var(--teal,#00c2a8);text-decoration:none;font-weight:700;font-size:0.92em;">See the full Pilot-Scaffold Update &rarr;</a></p>
+  </section>
+
+  <!-- SECTION 9 (inserted v230): AI GOVERNANCE IN 2026 — WHITEPAPER -->
+  <section class="gov-2026-section" id="governance-2026">
+    <p class="gov-section-label">Governance Perspective · 2026</p>
+    <h2>AI Governance in 2026</h2>
+    <p class="gov-2026-intro">In regulated environments, governance increasingly requires enforceable architecture rather than policy statements alone. This paper outlines Pocono AI's perspective on operational governance, auditability, human oversight, and localized AI infrastructure. The emerging standard is not centralized cloud compliance — it is <strong>federated, regionally governed inference</strong>: each deployment subject to the regulatory framework of its operating jurisdiction.</p>
+
+    <img
+      src="governance-infographic-2026.png"
+      alt="AI Governance. Data Sovereignty. Global Trust. An infographic outlining shared governance principles across North America, the European Union, Asia, Africa, South America, and Australia — covering data sovereignty, transparency, human oversight, security, and compliance."
+      class="gov-2026-infographic"
+      width="1080"
+      height="1080"
+      loading="lazy"
+      decoding="async"
+    >
+
+    <div class="gov-pdf-card">
+      <div class="gov-pdf-icon" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--teal,#00c2a8)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+          <line x1="16" y1="13" x2="8" y2="13"/>
+          <line x1="16" y1="17" x2="8" y2="17"/>
+          <polyline points="10 9 9 9 8 9"/>
+        </svg>
+      </div>
+      <div class="gov-pdf-meta">
+        <p class="gov-pdf-eyebrow">Whitepaper · PDF</p>
+        <p class="gov-pdf-title">AI Governance in 2026: From Policy Documents to Enforceable Architecture</p>
+        <p class="gov-pdf-desc">A governance and operational architecture perspective from Pocono AI focused on auditability, human review workflows, and sovereign AI infrastructure for regulated industries.</p>
+        <a
+          href="assets/pdfs/Pocono_AI_Governance_2026_Whitepaper.pdf"
+          class="gov-pdf-btn"
+          download
+          aria-label="Download AI Governance in 2026 whitepaper PDF"
+        >
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download Whitepaper (PDF)
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 10: WHAT THIS IS NOT -->
+  <section class="gov-section">
+    <p class="gov-section-label">Honest Scope</p>
+    <h2>What the Sentinel Node™ Governance Layer Does Not Do</h2>
+    <p>We want to be specific about what this system provides and what falls outside its scope.</p>
+    <ul style="padding-left:20px;line-height:1.85;color:var(--light-text,#8899aa);">
+      <li><strong style="color:#d0dde8;">It does not certify HIPAA compliance for your organization.</strong> HIPAA compliance is an organizational program, not a product feature. The Sentinel Node™ supports HIPAA-aligned architecture for the AI interaction layer. Full compliance requires administrative safeguards, physical security, workforce training, and legal review by qualified counsel.</li>
+      <li><strong style="color:#d0dde8;">It does not substitute for professional judgment.</strong> The system is designed to support licensed professionals — not to replace them. Clinical and legal outputs require expert review before use.</li>
+      <li><strong style="color:#d0dde8;">It does not guarantee correctness of AI outputs.</strong> Large language models can produce plausible but incorrect responses. Human review is required precisely because AI is not infallible.</li>
+      <li><strong style="color:#d0dde8;">It does not provide legal advice.</strong> This page and the Pocono AI platform are not sources of legal or regulatory guidance. Consult qualified legal counsel for your organization's specific compliance obligations.</li>
+    </ul>
+  </section>
+
+  <!-- SECTION 10: RELATED PAGES -->
+  <section class="gov-section">
+    <p class="gov-section-label">Go Deeper</p>
+    <h2>Related Resources</h2>
+    <div class="gov-related-grid">
+      <a href="sentinel-audit-system.html" class="gov-related-card">
+        <p class="rc-label">Technical Detail</p>
+        <h3>How Sentinel Node™ Audits AI Workflows</h3>
+        <p>Step-by-step walkthrough of the audit proxy, hash chain, and what each log record captures.</p>
+      </a>
+      <a href="architecture.html" class="gov-related-card">
+        <p class="rc-label">Architecture</p>
+        <h3>Sovereign by Design</h3>
+        <p>The full technical architecture of the Sentinel Node™ — hardware, software, and data flow.</p>
+      </a>
+      <a href="compliance.html" class="gov-related-card">
+        <p class="rc-label">Compliance</p>
+        <h3>AI Sovereignty Attestation Generator</h3>
+        <p>Generate a structured attestation of your Sentinel Node™ deployment's privacy properties.</p>
+      </a>
+      <a href="trust.html" class="gov-related-card">
+        <p class="rc-label">Trust &amp; Transparency</p>
+        <h3>Trust Center</h3>
+        <p>Security posture, zero-telemetry architecture, and what we disclose about how the system works.</p>
+      </a>
+      <a href="for-physicians.html" class="gov-related-card">
+        <p class="rc-label">For Physicians</p>
+        <h3>AI Governance for Medical Practices</h3>
+        <p>How the Sentinel Node™ addresses the specific workflow and documentation needs of independent practices.</p>
+      </a>
+      <a href="for-attorneys.html" class="gov-related-card">
+        <p class="rc-label">For Attorneys</p>
+        <h3>AI Governance for Law Offices</h3>
+        <p>Privilege, provenance, and professional responsibility — addressed by local AI architecture.</p>
+      </a>
+    </div>
+  </section>
+
+  <hr class="gov-divider">
+
+  <!-- BRAND VIDEO — "Verification IS the architecture" -->
+  <div class="ev-wrap">
+    <hr class="ev-divider">
+    <div class="ev-row">
+      <div class="ev-callout">
+        <span class="ev-label">Pocono AI · Brand</span>
+        <p class="ev-quote">Verification IS the architecture.</p>
+        <p class="ev-sub">Every output the Sentinel Node produces is citation-gated, human-reviewed, and sealed into an append-only audit envelope. Governance enforced by design — not by policy.</p>
+      </div>
+      <div class="ev-player">
+                <div class="yt-embed-wrap">
+          <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.12);border-left:3px solid rgba(250,200,80,0.6);border-radius:0 8px 8px 0;padding:9px 14px;margin-bottom:8px;font-size:0.82em;color:#a0a8b0;line-height:1.5;"><strong style="color:#f0d47d;">&#9658; Third-party content.</strong> The video below is hosted on YouTube (Google). Loading this area requests content from YouTube&rsquo;s servers. YouTube is the <em>only</em> third-party dependency on this site &mdash; no analytics, trackers, or scripts. <a href="/audit.html" style="color:#5dade2;">See transparency disclosure.</a></div>
+          <iframe
+          src="https://www.youtube.com/embed/ItMzPUsbLFw"
+          title="Pocono AI — Verification IS the architecture"
+          allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+          loading="lazy"
+          referrerpolicy="strict-origin-when-cross-origin">
+        </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <section class="gov-cta-block" id="contact">
+    <h2>Want to Discuss AI Governance for Your Organization?</h2>
+    <p class="gov-hero-sub" style="margin:0 auto 24px;">Marcus is available for direct technical and governance conversations — no sales team, no pitch deck required.</p>
+    <a href="mailto:marcus@poconoai.com?subject=AI%20Governance%20Discussion" class="btn-teal">Email Marcus Directly</a>
+    <a href="sentinel-audit-system.html" class="btn-ghost">See the Audit System</a>
+    <a href="investors.html" class="btn-ghost">Investor Overview</a>
+  </section>
+
+</div><!-- /gov-wrap -->
+
+  <section class="section-tight">
+    <div class="container">
+
+      <aside class="related-rail" aria-label="Related authority">
+        <p class="related-rail-eyebrow">Continue investigating</p>
+        <h2 class="related-rail-title">Related authority</h2>
+        <ul class="related-rail-list">
+          <li class="related-rail-item">
+            <a href="liability-simulator.html">
+              <span class="related-rail-tag">Interactive</span>
+              <span class="related-rail-link-title">Liability Exposure Simulator</span>
+              <span class="related-rail-blurb">See the argument on this page run live. Industry × architecture, side-by-side, with governance telemetry.</span>
+            </a>
+          </li>
+          <li class="related-rail-item">
+            <a href="audit-lifecycle.html">
+              <span class="related-rail-tag">Architecture</span>
+              <span class="related-rail-link-title">The Audit Lifecycle</span>
+              <span class="related-rail-blurb">Seven stages from prompt to retention. The mechanism behind the governance claim.</span>
+            </a>
+          </li>
+          <li class="related-rail-item">
+            <a href="trust-receipts.html">
+              <span class="related-rail-tag">Trust</span>
+              <span class="related-rail-link-title">Trust Receipts</span>
+              <span class="related-rail-blurb">Per-output trust receipts. The provenance mechanism that travels with every response.</span>
+            </a>
+          </li>
+          <li class="related-rail-item">
+            <a href="attorneys-privilege.html">
+              <span class="related-rail-tag">Legal</span>
+              <span class="related-rail-link-title">Privilege Handling</span>
+              <span class="related-rail-blurb">Four mechanisms that keep privileged material privileged when AI is in the workflow.</span>
+            </a>
+          </li>
+          <li class="related-rail-item">
+            <a href="hybrid-ai-orchestration.html">
+              <span class="related-rail-tag">Architecture</span>
+              <span class="related-rail-link-title">Hybrid Orchestration</span>
+              <span class="related-rail-blurb">Local-first inference with explicit policy-governed handoff. The durability argument.</span>
+            </a>
+          </li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ── FROM POLICY TO PROOF — v311 ── -->
+  <section style="max-width:980px;margin:48px auto;padding:0 24px;" aria-labelledby="p2p-title">
+    <div style="background:linear-gradient(135deg,rgba(0,194,168,.07),rgba(8,15,28,.6));border:1px solid rgba(0,194,168,.28);border-left:4px solid #00c2a8;border-radius:0 14px 14px 0;padding:28px 32px;">
+      <span style="display:inline-block;font-size:.7em;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#00c2a8;margin-bottom:10px;">Governance Receipt White Paper</span>
+      <h2 id="p2p-title" style="margin:0 0 12px;color:#f0f4f8;font-size:clamp(1.3rem,2.4vw,1.7rem);font-weight:800;letter-spacing:-.015em;border:0;">From Policy to Proof</h2>
+      <p style="color:var(--light-text);font-size:1rem;line-height:1.75;margin:0 0 18px;">Policies say what should happen. A governance receipt shows what did happen. Sentinel Node is designed around this principle: every consequential AI-assisted workflow should preserve the prompt, retrieved evidence, generated draft, human review, final output, and local audit trail.</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="governance-receipt-whitepaper.html" style="display:inline-block;padding:11px 22px;background:#00c2a8;color:#051622;font-weight:800;font-size:.88rem;text-decoration:none;border-radius:7px;">Download the Governance Receipt White Paper &rarr;</a>
+        <a href="architecture.html" style="display:inline-block;padding:11px 22px;background:transparent;color:#00c2a8;font-weight:600;font-size:.85rem;text-decoration:none;border:1px solid rgba(0,194,168,.4);border-radius:7px;">See Sentinel Node Governance</a>
+      </div>
+    </div>
+  </section>
+
+
+    <!-- v321: Related research callout — AI Near-Miss Doctrine -->
+    <section aria-label="Related research">
+      <div style="background:linear-gradient(160deg,rgba(10,115,210,0.08),rgba(5,22,34,0.85));border:1px solid rgba(10,115,210,0.22);border-left:3px solid #0A73D2;border-radius:0 10px 10px 0;padding:22px 24px;margin:24px 0;display:flex;flex-wrap:wrap;align-items:center;gap:16px;justify-content:space-between;">
+        <div style="flex:1 1 320px;min-width:260px;">
+          <p style="font-size:0.66em;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#5dade2;margin:0 0 6px;">Related Research &middot; Governance</p>
+          <p style="color:#fff;font-weight:700;font-size:0.98em;margin:0 0 4px;">AI Near-Miss Governance</p>
+          <p style="color:#D0DDE6;font-size:0.85em;line-height:1.6;margin:0;">Incident response, near-miss classification, root-cause review, and corrective action for regulated AI workflows in healthcare and law.</p>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;flex-shrink:0;">
+          <a href="ai-near-miss-doctrine.html" style="display:inline-flex;align-items:center;gap:6px;padding:9px 16px;background:#0A73D2;color:#fff;font-size:0.82em;font-weight:700;border-radius:6px;text-decoration:none;">Read the Doctrine &rarr;</a>
+          <a href="Pocono_AI_The_AI_Near_Miss_Doctrine.pdf" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border:1px solid rgba(255,255,255,0.18);color:#D0DDE6;font-size:0.82em;font-weight:600;border-radius:6px;text-decoration:none;">Download PDF</a>
+        </div>
+      </div>
+    </section>
+
+
+<!-- Concept cluster v336 -->
+<section style="max-width:1100px;margin:40px auto 0;padding:28px 24px 32px;border-top:1px solid rgba(255,255,255,0.07);">
+  <p style="margin:0 0 14px;font-size:0.72em;font-weight:800;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.3);">Why Local AI — Core Concepts</p>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;">
+    <a href="sentinel-node.html" style="display:inline-block;padding:8px 14px;background:rgba(0,194,168,0.08);border:1px solid rgba(0,194,168,0.28);border-radius:8px;color:#2dd4bf;text-decoration:none;font-size:0.86rem;font-weight:600;">Sentinel Node</a>
+    <a href="local-ai-inference.html" style="display:inline-block;padding:8px 14px;background:rgba(0,194,168,0.06);border:1px solid rgba(0,194,168,0.2);border-radius:8px;color:#9eb9cc;text-decoration:none;font-size:0.86rem;">Local AI Inference</a>
+    <a href="data-sovereignty-ai.html" style="display:inline-block;padding:8px 14px;background:rgba(0,194,168,0.06);border:1px solid rgba(0,194,168,0.2);border-radius:8px;color:#9eb9cc;text-decoration:none;font-size:0.86rem;">Data Sovereignty</a>
+    <a href="zero-telemetry-ai.html" style="display:inline-block;padding:8px 14px;background:rgba(0,194,168,0.06);border:1px solid rgba(0,194,168,0.2);border-radius:8px;color:#9eb9cc;text-decoration:none;font-size:0.86rem;">Zero Telemetry</a>
+    <a href="zero-exfiltration-ai.html" style="display:inline-block;padding:8px 14px;background:rgba(0,194,168,0.06);border:1px solid rgba(0,194,168,0.2);border-radius:8px;color:#9eb9cc;text-decoration:none;font-size:0.86rem;">Zero Exfiltration</a>
+    <a href="ai-governance-layer.html" style="display:inline-block;padding:8px 14px;background:rgba(0,194,168,0.06);border:1px solid rgba(0,194,168,0.2);border-radius:8px;color:#9eb9cc;text-decoration:none;font-size:0.86rem;">AI Governance Layer</a>
+    <a href="regulated-ai-infrastructure.html" style="display:inline-block;padding:8px 14px;background:rgba(0,194,168,0.06);border:1px solid rgba(0,194,168,0.2);border-radius:8px;color:#9eb9cc;text-decoration:none;font-size:0.86rem;">Regulated AI Infrastructure</a>
+  </div>
+</section>
+</main>
+
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 root-relative nav fix, Living Echo rebrand, Engineering & Drafting + Enterprise Estate Continuity links added (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- INCLUDE:FOOTER -->
+<footer role="contentinfo" style="background:#051622;border-top:1px solid rgba(255,255,255,0.08);padding:40px 24px 28px;font-size:0.85em;color:#8899aa;">
+  <div style="max-width:1180px;margin:0 auto;">
+
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:0 0 28px;margin-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.07);">
+      <div style="max-width:560px;">
+        <p style="margin:0 0 6px;font-size:1.05em;font-weight:700;color:#fff;">Local AI infrastructure for regulated practices.</p>
+        <p style="margin:0;font-size:0.95em;line-height:1.5;">Drafts with citations. Human review required. Sensitive documents stay under practice control. Simple path, deep proof.</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="/contact.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;background:#00c2a8;color:#04111a;font-weight:700;text-decoration:none;font-size:0.95em;">Request Pilot</a>
+        <a href="/sentinel-demo.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;border:1px solid rgba(0,194,168,0.55);color:#00c2a8;font-weight:700;text-decoration:none;font-size:0.95em;">Watch Demo</a>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px 32px;margin-bottom:32px;text-align:left;">
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">For You</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/start-here.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Start Here (3 min)</a>
+          <a href="/for-physicians.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Physicians</a>
+          <a href="/for-attorneys.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Attorneys</a>
+          <a href="/engineering-drafting/" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Engineering &amp; Drafting Teams</a>
+          <a href="/pilot-program.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Pilot Program</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Installer Training</a>
+          <a href="/how-it-works.html" style="color:#8899aa;text-decoration:none;">How It Works</a>
+          <a href="/trust.html" style="color:#8899aa;text-decoration:none;">Trust &amp; Audit</a>
+          <a href="/pricing.html" style="color:#8899aa;text-decoration:none;">Pricing</a>
+          <a href="/sentinel-demo.html" style="color:#8899aa;text-decoration:none;">See the Demo</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Documentation Hub</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/documentation-hub/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Hub Home &mdash; Deep Proof</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">Installer Training</a>
+          <a href="/sentinel-node/installation-simulator.html" style="color:#8899aa;text-decoration:none;">&#8627; Installation Simulator</a>
+          <a href="/documentation-hub/clinical/" style="color:#8899aa;text-decoration:none;">Clinical Documentation</a>
+          <a href="/documentation-hub/legal/" style="color:#8899aa;text-decoration:none;">Legal Documentation</a>
+          <a href="/documentation-hub/technical/" style="color:#8899aa;text-decoration:none;">Technical Documentation</a>
+          <a href="/documentation-hub/governance/" style="color:#8899aa;text-decoration:none;">Governance &amp; Audit</a>
+          <a href="/documentation-hub/tools/" style="color:#8899aa;text-decoration:none;">Tools &amp; Simulators</a>
+          <a href="/documentation-hub/research/" style="color:#8899aa;text-decoration:none;">Research &amp; Essays</a>
+          <a href="/documentation-hub/transparency/" style="color:#8899aa;text-decoration:none;">Transparency</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Global Federated AI</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/global/" style="color:#7af0dc;text-decoration:none;font-weight:600;">Global Federated Hub</a>
+          <a href="/global/australia/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Australia</a>
+          <a href="/global/singapore/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Singapore</a>
+          <a href="/global/taiwan/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Taiwan</a>
+          <a href="/global/europe/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Europe</a>
+          <a href="/contact.html" style="color:#8899aa;text-decoration:none;">Partner Inquiry</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Company</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/about.html" style="color:#8899aa;text-decoration:none;">About Pocono AI</a>
+          <a href="/team.html" style="color:#8899aa;text-decoration:none;">Team &amp; Leadership</a>
+          <a href="/why-pocono-ai.html" style="color:#8899aa;text-decoration:none;">Why Pocono AI</a>
+          <a href="/founding-commercial-leadership.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Join Us</a>
+          <a href="/careers.html" style="color:#8899aa;text-decoration:none;">Careers</a>
+          <a href="/how-we-hire.html" style="color:#8899aa;text-decoration:none;">How We Hire</a>
+          <a href="/channel-partners.html" style="color:#8899aa;text-decoration:none;">Technical Partners (MSPs)</a>
+          <a href="/partners.html" style="color:#8899aa;text-decoration:none;">Academic Partnerships</a>
+          <a href="/contact.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Contact</a>
+          <a href="https://forms.gle/VQahnkjMfY6QNEMy8" target="_blank" rel="noopener noreferrer" style="color:#d5a94f;text-decoration:none;font-weight:600;">Interest List &#8599;</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Founder Projects</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/rehability/" style="color:#a78bfa;text-decoration:none;font-weight:700;">Rehability &#x2605;</a>
+          <a href="/rehability/marcus-memory-helper/" style="color:#a78bfa;text-decoration:none;font-weight:600;">&#8627; Marcus's Memory Helper</a>
+          <a href="/sentinel-home/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Sentinel Home Edition</a>
+          <a href="/living-memorials/" style="color:#8899aa;text-decoration:none;">Living Echo</a>
+          <a href="/living-memorials/marcus-odell/" style="color:#8899aa;text-decoration:none;">Marcus&rsquo;s Living Echo</a>
+          <a href="/living-memorials/enterprise-estate-continuity.html" style="color:#8899aa;text-decoration:none;">Enterprise Estate Continuity</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Resources &amp; Legal</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/sitemap.html" style="color:#8899aa;text-decoration:none;">All Pages (Sitemap)</a>
+          <a href="/audit.html" style="color:#8899aa;text-decoration:none;">Transparency &amp; Audit Log</a>
+          <a href="/maturity-disclosure.html" style="color:#8899aa;text-decoration:none;">What We Have / Don&rsquo;t Claim</a>
+          <a href="/plain.html" style="color:#8899aa;text-decoration:none;">Plain Language Guide</a>
+          <a href="/privacy.html" style="color:#8899aa;text-decoration:none;">Privacy</a>
+          <a href="/terms.html" style="color:#8899aa;text-decoration:none;">Terms</a>
+          <a href="/sla.html" style="color:#8899aa;text-decoration:none;">SLA</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:18px;margin-bottom:14px;">
+      <p style="margin:0;font-size:0.82em;line-height:1.6;color:#6f8295;max-width:1000px;">Pocono AI does not provide medical, legal, or engineering advice, does not practice medicine, law, or licensed engineering, and does not make clinical, legal, or engineering decisions. Outputs are drafts or support materials that require review by a qualified professional; final professional judgment remains with the licensed physician, attorney, or engineer. Tools and simulations on this site are educational and use synthetic data.</p>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:20px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+      <p style="margin:0;font-size:0.9em;">&copy; 2026 Pocono AI, LLC &nbsp;&#183;&nbsp; East Stroudsburg, PA &nbsp;&#183;&nbsp; <a href="mailto:marcus@poconoai.com" style="color:#8899aa;">marcus@poconoai.com</a> &nbsp;&#183;&nbsp; <a href="tel:+15705340602" style="color:#8899aa;">(570) 534-0602</a></p>
+      <p style="margin:0;font-size:0.88em;"><a href="/audit.html" style="color:#5dade2;text-decoration:none;">Transparency v402</a></p>
+    </div>
+  </div>
+</footer>
+<script src="/search.js?v=402" defer></script>
+<!-- /INCLUDE:FOOTER -->
+
+<script src="search-index.js?v=402" defer></script>
+<script src="nav.js?v=402" defer></script>
+<script src="pilot-cta.js?v=402" defer></script>
+
+</body>
+</html>

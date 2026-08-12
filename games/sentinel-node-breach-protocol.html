@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="robots" content="index, follow">
+<meta name="description" content="Sentinel Node: Breach Protocol — an original retro raycaster FPS. Defend the Sentinel Node from intrusion processes with the Audit Chain Blaster. Built for fun by Pocono AI.">
+<title>Sentinel Node: Breach Protocol</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&display=swap');
+
+:root{
+  --teal:#188B96; --blue:#0A73D2; --mint:#7df0c4; --amber:#f0d47d;
+  --danger:#f0584a; --navy:#051622; --ink:#020a10; --text:#cfe6ee;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;overflow:hidden;background:#000;font-family:'Share Tech Mono',ui-monospace,monospace;color:var(--text);}
+body{display:flex;align-items:center;justify-content:center;touch-action:none;}
+
+#stage{position:relative;width:100vw;height:100vh;max-width:100vw;max-height:100vh;background:#000;overflow:hidden;}
+canvas{display:block;width:100%;height:100%;image-rendering:pixelated;image-rendering:crisp-edges;}
+
+/* ---------- HUD ---------- */
+#hud{position:absolute;inset:0;pointer-events:none;z-index:5;}
+.hud-bar{position:absolute;left:0;right:0;bottom:0;height:74px;
+  background:linear-gradient(0deg,rgba(5,22,34,0.96),rgba(5,22,34,0.62));
+  border-top:2px solid rgba(24,139,150,0.5);display:flex;align-items:center;
+  justify-content:space-between;padding:8px 16px;gap:12px;font-family:'Orbitron',sans-serif;}
+.hud-cell{display:flex;flex-direction:column;gap:2px;min-width:64px;}
+.hud-cell .lbl{font-size:9px;letter-spacing:0.18em;color:var(--teal);text-transform:uppercase;}
+.hud-cell .val{font-size:22px;font-weight:900;line-height:1;color:#fff;text-shadow:0 0 10px rgba(125,240,196,0.4);}
+.hud-cell.health .val{color:var(--mint);}
+.hud-cell.armor .val{color:var(--blue);}
+.hud-cell.ammo .val{color:var(--amber);}
+.hud-cell.cores .val{color:#fff;}
+.hud-cell.danger .val{color:var(--danger);animation:flash 0.6s steps(2) infinite;}
+@keyframes flash{50%{opacity:0.35;}}
+
+#crosshair{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:22px;height:22px;z-index:6;pointer-events:none;opacity:0.8;}
+#crosshair::before,#crosshair::after{content:"";position:absolute;background:var(--mint);box-shadow:0 0 6px rgba(125,240,196,0.6);}
+#crosshair::before{left:50%;top:0;width:2px;height:22px;transform:translateX(-50%);}
+#crosshair::after{top:50%;left:0;height:2px;width:22px;transform:translateY(-50%);}
+
+#dmgflash{position:absolute;inset:0;background:radial-gradient(circle,transparent 40%,rgba(240,88,74,0.55));opacity:0;z-index:7;pointer-events:none;transition:opacity 0.08s;}
+#msg{position:absolute;top:14%;left:50%;transform:translateX(-50%);z-index:8;font-family:'Orbitron',sans-serif;
+  font-size:15px;font-weight:700;letter-spacing:0.08em;color:var(--mint);text-shadow:0 0 12px rgba(0,0,0,0.9);
+  background:rgba(5,22,34,0.7);padding:8px 18px;border:1px solid rgba(24,139,150,0.5);border-radius:6px;
+  opacity:0;transition:opacity 0.3s;text-align:center;white-space:nowrap;pointer-events:none;}
+
+/* weapon viewmodel */
+#weapon{position:absolute;bottom:74px;left:50%;transform:translateX(-50%);z-index:5;width:200px;height:150px;pointer-events:none;}
+
+/* ---------- Mobile controls ---------- */
+#touch{position:absolute;inset:0;z-index:9;display:none;}
+.tc{position:absolute;pointer-events:auto;}
+#tc-move{left:14px;bottom:88px;width:130px;height:130px;border-radius:50%;
+  background:radial-gradient(circle,rgba(24,139,150,0.18),rgba(5,22,34,0.35));border:2px solid rgba(24,139,150,0.4);}
+#tc-stick{position:absolute;left:42px;top:42px;width:46px;height:46px;border-radius:50%;
+  background:rgba(125,240,196,0.5);border:2px solid var(--mint);}
+#tc-fire{right:18px;bottom:96px;width:96px;height:96px;border-radius:50%;
+  background:radial-gradient(circle,rgba(240,212,125,0.25),rgba(5,22,34,0.4));border:2px solid var(--amber);
+  display:flex;align-items:center;justify-content:center;font-family:'Orbitron',sans-serif;font-weight:900;font-size:12px;color:var(--amber);}
+#tc-turnL,#tc-turnR{bottom:96px;width:64px;height:64px;border-radius:14px;
+  background:rgba(10,115,210,0.18);border:2px solid rgba(10,115,210,0.4);
+  display:flex;align-items:center;justify-content:center;font-size:26px;color:var(--blue);}
+#tc-turnL{right:128px;} #tc-turnR{right:122px;bottom:170px;}
+
+/* ---------- Overlays ---------- */
+.overlay{position:absolute;inset:0;z-index:20;background:linear-gradient(160deg,rgba(5,22,34,0.97),rgba(2,10,16,0.99));
+  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;gap:14px;}
+.overlay h1{font-family:'Orbitron',sans-serif;font-weight:900;font-size:clamp(1.6rem,7vw,3rem);
+  background:linear-gradient(100deg,var(--mint),var(--blue));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  letter-spacing:0.04em;line-height:1.05;}
+.overlay .tag{color:var(--amber);font-size:0.8rem;letter-spacing:0.22em;text-transform:uppercase;}
+.overlay p{max-width:440px;color:var(--text);font-size:0.86rem;line-height:1.6;}
+.overlay .ctl{max-width:430px;text-align:left;font-size:0.78rem;color:#9fc0cc;line-height:1.85;background:rgba(0,0,0,0.3);
+  border:1px solid rgba(24,139,150,0.3);border-radius:10px;padding:14px 18px;}
+.overlay .ctl b{color:var(--mint);}
+.btn{font-family:'Orbitron',sans-serif;font-weight:700;font-size:1rem;letter-spacing:0.06em;cursor:pointer;pointer-events:auto;
+  background:linear-gradient(100deg,var(--mint),var(--blue));color:#02101a;border:none;padding:14px 34px;border-radius:999px;
+  box-shadow:0 6px 24px rgba(10,115,210,0.4);transition:transform 0.15s,filter 0.15s;}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.08);}
+.btn.secondary{background:transparent;border:1px solid rgba(24,139,150,0.5);color:var(--text);box-shadow:none;}
+.disclaimer{position:absolute;bottom:14px;left:0;right:0;text-align:center;font-size:0.66rem;color:#5f7682;padding:0 20px;line-height:1.5;}
+.hidden{display:none !important;}
+.brand{display:inline-flex;align-items:center;gap:8px;font-family:'Orbitron',sans-serif;font-size:0.7rem;color:#7d97a4;letter-spacing:0.1em;}
+.brand .dot{width:20px;height:20px;border-radius:6px;background:linear-gradient(135deg,var(--teal),var(--blue));display:grid;place-items:center;color:#fff;font-weight:900;font-size:0.7rem;}
+.win-stats{font-family:'Orbitron',sans-serif;color:var(--mint);font-size:0.9rem;letter-spacing:0.06em;line-height:1.9;}
+#muteBtn{position:absolute;top:12px;right:12px;z-index:10;pointer-events:auto;background:rgba(5,22,34,0.7);
+  border:1px solid rgba(24,139,150,0.4);color:var(--mint);width:42px;height:42px;border-radius:10px;cursor:pointer;font-size:18px;}
+#backBtn{position:absolute;top:12px;left:12px;z-index:10;pointer-events:auto;background:rgba(5,22,34,0.7);
+  border:1px solid rgba(24,139,150,0.4);color:var(--text);padding:9px 14px;border-radius:10px;cursor:pointer;font-size:12px;text-decoration:none;font-family:'Share Tech Mono',monospace;}
+</style>
+</head>
+<body>
+<div id="stage">
+  <canvas id="screen"></canvas>
+
+  <div id="hud" class="hidden">
+    <div id="dmgflash"></div>
+    <div id="crosshair"></div>
+    <canvas id="weapon" width="200" height="150"></canvas>
+    <div id="msg"></div>
+    <div class="hud-bar">
+      <div class="hud-cell health"><span class="lbl">Integrity</span><span class="val" id="hHealth">100</span></div>
+      <div class="hud-cell armor"><span class="lbl">Shield</span><span class="val" id="hArmor">0</span></div>
+      <div class="hud-cell ammo"><span class="lbl">Audit Charge</span><span class="val" id="hAmmo">50</span></div>
+      <div class="hud-cell cores"><span class="lbl">Objective</span><span class="val" id="hCores" style="font-size:13px;">REACH NODE</span></div>
+      <div class="hud-cell danger hidden" id="dangerCell"><span class="lbl">Breach</span><span class="val">!!</span></div>
+    </div>
+  </div>
+
+  <div id="touch">
+    <div id="tc-move" class="tc"><div id="tc-stick"></div></div>
+    <div id="tc-turnL" class="tc">&#8634;</div>
+    <div id="tc-turnR" class="tc">&#8635;</div>
+    <div id="tc-fire" class="tc">FIRE</div>
+  </div>
+
+  <button id="muteBtn" class="hidden" aria-label="Toggle sound">&#128266;</button>
+  <a id="backBtn" class="hidden" href="index.html">&larr; Games</a>
+
+  <!-- START -->
+  <div id="startScreen" class="overlay">
+    <div class="brand"><span class="dot">P</span> POCONO AI &mdash; THE WORKSHOP</div>
+    <div class="tag">Breach Protocol</div>
+    <h1>SENTINEL NODE</h1>
+    <p>An intrusion swarm has breached the facility floor. Fight through the rogue processes with your <b style="color:var(--amber)">Audit Chain Blaster</b> and reach the <b style="color:var(--mint)">protected Sentinel Node</b> at the heart of the clinic &mdash; where the doctors, nurses, and patients are shielded by local AI governance.</p>
+    <div class="ctl">
+      <b>Desktop:</b> WASD / Arrows move &middot; Mouse or &larr;&rarr; turn &middot; Click / Space / Ctrl fire &middot; click canvas to lock mouse<br>
+      <b>Mobile:</b> left pad moves &middot; turn buttons rotate &middot; FIRE shoots<br>
+      <b>Goal:</b> reach the protected Sentinel Node safe zone at the center. Survive the journey.
+    </div>
+    <button class="btn" id="startBtn">INITIATE BREACH PROTOCOL</button>
+    <div class="disclaimer">
+      An original retro FPS built for fun by the Pocono&nbsp;AI workshop. <b>Not a Pocono&nbsp;AI product</b>, not affiliated with any commercial game.
+      No data collected, no tracking, no accounts. All art &amp; audio generated procedurally.
+    </div>
+  </div>
+
+  <!-- WIN -->
+  <div id="winScreen" class="overlay hidden">
+    <div class="tag" style="color:var(--mint)">Clinic Protected</div>
+    <h1>SENTINEL NODE SECURED</h1>
+    <div class="win-stats" id="winStats"></div>
+    <p>You reached the governance shield. Human review restored. Local AI governance online &mdash; zero telemetry, zero exfiltration. The clinic continues operating, safe.</p>
+    <button class="btn" id="winRetry">PLAY AGAIN</button>
+    <a class="btn secondary" href="index.html">BACK TO GAMES</a>
+  </div>
+
+  <!-- LOSE -->
+  <div id="loseScreen" class="overlay hidden">
+    <div class="tag" style="color:var(--danger)">Integrity Lost</div>
+    <h1 style="background:linear-gradient(100deg,#f0584a,#f0d47d);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">NODE COMPROMISED</h1>
+    <div class="win-stats" id="loseStats" style="color:var(--danger)"></div>
+    <p>The intrusion swarm overwhelmed the node. Reboot and try again.</p>
+    <button class="btn" id="loseRetry">REBOOT &amp; RETRY</button>
+    <a class="btn secondary" href="index.html">BACK TO GAMES</a>
+  </div>
+</div>
+
+<!-- ====================== AUDIO ENGINE (embedded, self-contained) ====================== -->
+<script>
+/* Sentinel procedural audio — embedded copy. No files, no network, no telemetry. */
+window.SentinelAudio=(function(){'use strict';var AC=window.AudioContext||window.webkitAudioContext;var ctx=null,master=null,muted=false,masterVol=0.5,supported=!!AC;
+function ensure(){if(!supported)return false;if(!ctx){try{ctx=new AC();master=ctx.createGain();master.gain.value=masterVol;master.connect(ctx.destination);}catch(e){supported=false;return false;}}return true;}
+function unlock(){if(!ensure())return;if(ctx.state==='suspended')ctx.resume();}
+function setMuted(m){muted=!!m;if(master)master.gain.setTargetAtTime(muted?0:masterVol,ctx.currentTime,0.01);}
+function setVolume(v){masterVol=Math.max(0,Math.min(1,v));if(master&&!muted)master.gain.setTargetAtTime(masterVol,ctx.currentTime,0.01);}
+function now(){return ctx.currentTime;}
+function env(node,t0,peak,a,d,s,sl,r){var g=node.gain;g.cancelScheduledValues(t0);g.setValueAtTime(0.0001,t0);g.exponentialRampToValueAtTime(Math.max(0.0001,peak),t0+a);g.exponentialRampToValueAtTime(Math.max(0.0001,peak*sl),t0+a+d);g.setValueAtTime(Math.max(0.0001,peak*sl),t0+a+d+s);g.exponentialRampToValueAtTime(0.0001,t0+a+d+s+r);}
+function osc(type,freq,t0){var o=ctx.createOscillator();o.type=type;o.frequency.setValueAtTime(freq,t0);return o;}
+var noiseBuf=null;function noiseBuffer(){if(noiseBuf)return noiseBuf;var len=ctx.sampleRate*1.0;noiseBuf=ctx.createBuffer(1,len,ctx.sampleRate);var d=noiseBuf.getChannelData(0);for(var i=0;i<len;i++)d[i]=Math.random()*2-1;return noiseBuf;}
+function noiseSrc(){var s=ctx.createBufferSource();s.buffer=noiseBuffer();return s;}
+function shaper(amount){var ws=ctx.createWaveShaper();var n=256,curve=new Float32Array(n),k=amount||40;for(var i=0;i<n;i++){var x=(i*2)/n-1;curve[i]=((3+k)*x*20*Math.PI/180)/(Math.PI+k*Math.abs(x));}ws.curve=curve;ws.oversample='4x';return ws;}
+function sBlaster(t){var o=osc('square',880,t);o.frequency.exponentialRampToValueAtTime(120,t+0.12);var dist=shaper(25);var g=ctx.createGain();env(g,t,0.34,0.002,0.05,0,0.3,0.07);var bp=ctx.createBiquadFilter();bp.type='bandpass';bp.frequency.value=1200;bp.Q.value=1.2;o.connect(dist);dist.connect(bp);bp.connect(g);g.connect(master);o.start(t);o.stop(t+0.2);var n=noiseSrc();var ng=ctx.createGain();env(ng,t,0.22,0.001,0.03,0,0.2,0.02);var hp=ctx.createBiquadFilter();hp.type='highpass';hp.frequency.value=1800;n.connect(hp);hp.connect(ng);ng.connect(master);n.start(t);n.stop(t+0.08);var sub=osc('sine',160,t);sub.frequency.exponentialRampToValueAtTime(60,t+0.1);var sg=ctx.createGain();env(sg,t,0.3,0.002,0.06,0,0.2,0.06);sub.connect(sg);sg.connect(master);sub.start(t);sub.stop(t+0.18);}
+function sEnemyHit(t){var n=noiseSrc();var bp=ctx.createBiquadFilter();bp.type='bandpass';bp.frequency.setValueAtTime(2600,t);bp.frequency.exponentialRampToValueAtTime(900,t+0.08);bp.Q.value=3;var g=ctx.createGain();env(g,t,0.28,0.001,0.04,0,0.2,0.04);var dist=shaper(50);n.connect(bp);bp.connect(dist);dist.connect(g);g.connect(master);n.start(t);n.stop(t+0.12);var o=osc('square',1400,t);o.frequency.setValueAtTime(1400,t);o.frequency.setValueAtTime(2100,t+0.02);o.frequency.setValueAtTime(980,t+0.045);var og=ctx.createGain();env(og,t,0.12,0.001,0.02,0,0.1,0.03);o.connect(og);og.connect(master);o.start(t);o.stop(t+0.09);}
+function sEnemyDefeated(t){[220,223].forEach(function(f){var o=osc('sawtooth',f,t);o.frequency.exponentialRampToValueAtTime(45,t+0.4);var g=ctx.createGain();env(g,t,0.2,0.003,0.08,0.05,0.4,0.18);var lp=ctx.createBiquadFilter();lp.type='lowpass';lp.frequency.setValueAtTime(3000,t);lp.frequency.exponentialRampToValueAtTime(300,t+0.4);var dist=shaper(30);o.connect(dist);dist.connect(lp);lp.connect(g);g.connect(master);o.start(t);o.stop(t+0.55);});var n=noiseSrc();var ng=ctx.createGain();ng.gain.setValueAtTime(0.0001,t);for(var i=0;i<6;i++){var tt=t+0.05+i*0.05;ng.gain.setValueAtTime(0.12*(1-i/6),tt);ng.gain.setValueAtTime(0.0001,tt+0.02);}var nf=ctx.createBiquadFilter();nf.type='bandpass';nf.frequency.value=1500;nf.Q.value=5;n.connect(nf);nf.connect(ng);ng.connect(master);n.start(t);n.stop(t+0.45);}
+function sPlayerDamage(t){var o=osc('sine',120,t);o.frequency.exponentialRampToValueAtTime(40,t+0.22);var g=ctx.createGain();env(g,t,0.5,0.002,0.08,0.02,0.3,0.14);o.connect(g);g.connect(master);o.start(t);o.stop(t+0.3);var n=noiseSrc();var hp=ctx.createBiquadFilter();hp.type='highpass';hp.frequency.value=2500;var dist=shaper(60);var ng=ctx.createGain();env(ng,t,0.25,0.001,0.05,0,0.2,0.05);n.connect(hp);hp.connect(dist);dist.connect(ng);ng.connect(master);n.start(t);n.stop(t+0.12);var o2=osc('triangle',330,t);var o2g=ctx.createGain();env(o2g,t,0.12,0.005,0.1,0.02,0.3,0.1);o2.connect(o2g);o2g.connect(master);o2.start(t);o2.stop(t+0.25);}
+function sGate(t){var n=noiseSrc();var bp=ctx.createBiquadFilter();bp.type='bandpass';bp.frequency.setValueAtTime(300,t);bp.frequency.exponentialRampToValueAtTime(2400,t+0.35);bp.Q.value=1.5;var g=ctx.createGain();env(g,t,0.22,0.04,0.1,0.12,0.6,0.18);n.connect(bp);bp.connect(g);g.connect(master);n.start(t);n.stop(t+0.6);var o=osc('square',90,t+0.4);o.frequency.exponentialRampToValueAtTime(50,t+0.5);var og=ctx.createGain();env(og,t+0.4,0.35,0.002,0.05,0,0.3,0.08);var dist=shaper(20);o.connect(dist);dist.connect(og);og.connect(master);o.start(t+0.4);o.stop(t+0.6);var sv=osc('sawtooth',600,t);sv.frequency.exponentialRampToValueAtTime(180,t+0.4);var svg=ctx.createGain();env(svg,t,0.06,0.02,0.1,0.1,0.5,0.15);var lp=ctx.createBiquadFilter();lp.type='lowpass';lp.frequency.value=2000;sv.connect(lp);lp.connect(svg);svg.connect(master);sv.start(t);sv.stop(t+0.5);}
+function sCoreActivate(t){var base=110;[1,2,3,4.01].forEach(function(mult,i){var o=osc(i===0?'sawtooth':'sine',base*mult,t);o.frequency.exponentialRampToValueAtTime(base*mult*4,t+0.9);var g=ctx.createGain();var peak=0.16/(i+1);env(g,t,peak,0.25,0.2,0.25,0.7,0.25);o.connect(g);g.connect(master);o.start(t);o.stop(t+1.0);});var n=noiseSrc();var bp=ctx.createBiquadFilter();bp.type='bandpass';bp.frequency.setValueAtTime(800,t);bp.frequency.exponentialRampToValueAtTime(6000,t+0.9);bp.Q.value=4;var ng=ctx.createGain();env(ng,t,0.1,0.3,0.2,0.2,0.6,0.25);n.connect(bp);bp.connect(ng);ng.connect(master);n.start(t);n.stop(t+1.0);var bell=osc('sine',880,t+0.85);var bg=ctx.createGain();env(bg,t+0.85,0.2,0.004,0.15,0.05,0.4,0.2);bell.connect(bg);bg.connect(master);bell.start(t+0.85);bell.stop(t+1.3);}
+function sWin(t){var notes=[523.25,659.25,783.99,1046.5];notes.forEach(function(f,i){var tt=t+i*0.1;var o=osc('triangle',f,tt);var o2=osc('sine',f*2,tt);var g=ctx.createGain();env(g,tt,0.22,0.01,0.12,0.06,0.5,0.25);o.connect(g);o2.connect(g);g.connect(master);o.start(tt);o.stop(tt+0.5);o2.start(tt);o2.stop(tt+0.5);});var pad=osc('sine',261.63,t);var pg=ctx.createGain();env(pg,t,0.12,0.05,0.2,0.3,0.6,0.4);pad.connect(pg);pg.connect(master);pad.start(t);pad.stop(t+1.0);}
+function sLose(t){[0,0.28].forEach(function(off){var o=osc('sawtooth',440,t+off);o.frequency.exponentialRampToValueAtTime(110,t+off+0.26);var g=ctx.createGain();env(g,t+off,0.28,0.005,0.05,0.08,0.6,0.12);var lp=ctx.createBiquadFilter();lp.type='lowpass';lp.frequency.value=1800;var dist=shaper(35);o.connect(dist);dist.connect(lp);lp.connect(g);g.connect(master);o.start(t+off);o.stop(t+off+0.28);});[98,104].forEach(function(f){var o=osc('square',f,t+0.5);var g=ctx.createGain();env(g,t+0.5,0.16,0.01,0.15,0.2,0.6,0.4);var lp=ctx.createBiquadFilter();lp.type='lowpass';lp.frequency.value=700;o.connect(lp);lp.connect(g);g.connect(master);o.start(t+0.5);o.stop(t+1.2);});}
+function sLowHealth(t){var o=osc('sine',660,t);var g=ctx.createGain();env(g,t,0.16,0.01,0.06,0.02,0.4,0.1);var o2=osc('sine',990,t);var g2=ctx.createGain();env(g2,t,0.06,0.01,0.05,0.01,0.3,0.08);o.connect(g);g.connect(master);o2.connect(g2);g2.connect(master);o.start(t);o.stop(t+0.22);o2.start(t);o2.stop(t+0.18);}
+function sUiClick(t){var o=osc('square',1200,t);o.frequency.setValueAtTime(1800,t);o.frequency.exponentialRampToValueAtTime(900,t+0.03);var g=ctx.createGain();env(g,t,0.14,0.001,0.015,0,0.2,0.02);var bp=ctx.createBiquadFilter();bp.type='bandpass';bp.frequency.value=1400;bp.Q.value=0.8;o.connect(bp);bp.connect(g);g.connect(master);o.start(t);o.stop(t+0.05);}
+/* footstep — soft industrial floor thud */
+function sStep(t){var n=noiseSrc();var lp=ctx.createBiquadFilter();lp.type='lowpass';lp.frequency.value=320;var g=ctx.createGain();env(g,t,0.10,0.001,0.03,0,0.1,0.03);n.connect(lp);lp.connect(g);g.connect(master);n.start(t);n.stop(t+0.07);var o=osc('sine',70,t);var og=ctx.createGain();env(og,t,0.08,0.002,0.04,0,0.1,0.03);o.connect(og);og.connect(master);o.start(t);o.stop(t+0.08);}
+/* pickup — clean ascending confirm */
+function sPickup(t){[660,880,1320].forEach(function(f,i){var tt=t+i*0.05;var o=osc('triangle',f,tt);var g=ctx.createGain();env(g,tt,0.16,0.004,0.05,0.01,0.4,0.08);o.connect(g);g.connect(master);o.start(tt);o.stop(tt+0.16);});}
+/* security beep — subtle warning tone */
+function sBeep(t){var o=osc('sine',1040,t);var g=ctx.createGain();env(g,t,0.07,0.005,0.04,0.02,0.4,0.06);var bp=ctx.createBiquadFilter();bp.type='bandpass';bp.frequency.value=1040;bp.Q.value=2;o.connect(bp);bp.connect(g);g.connect(master);o.start(t);o.stop(t+0.16);}
+var registry={blaster:sBlaster,enemyHit:sEnemyHit,enemyDefeated:sEnemyDefeated,playerDamage:sPlayerDamage,gate:sGate,coreActivate:sCoreActivate,win:sWin,lose:sLose,lowHealth:sLowHealth,uiClick:sUiClick,step:sStep,pickup:sPickup,beep:sBeep};
+/* ---- Ambient data-center hum: continuous layered drone, very low gain ---- */
+var ambient=null;
+function startAmbient(){if(!ensure()||ambient)return;ambient={nodes:[]};
+  // deep electrical hum (50/60Hz-ish stack)
+  [55,110,165].forEach(function(f,i){var o=osc('sawtooth',f,now());var g=ctx.createGain();g.gain.value=0.0001;var lp=ctx.createBiquadFilter();lp.type='lowpass';lp.frequency.value=260;o.connect(lp);lp.connect(g);g.connect(master);o.start();g.gain.setTargetAtTime(0.018/(i+1),now(),1.5);ambient.nodes.push(o);ambient.nodes.push(g);});
+  // airy server-fan noise bed
+  var n=noiseSrc();n.loop=true;var bp=ctx.createBiquadFilter();bp.type='bandpass';bp.frequency.value=2200;bp.Q.value=0.6;var ng=ctx.createGain();ng.gain.value=0.0001;n.connect(bp);bp.connect(ng);ng.connect(master);n.start();ng.gain.setTargetAtTime(0.012,now(),2);ambient.nodes.push(n);ambient.nodes.push(ng);
+}
+function stopAmbient(){if(!ambient)return;ambient.nodes.forEach(function(x){try{if(x.stop)x.stop();else if(x.gain)x.gain.setTargetAtTime(0.0001,now(),0.3);}catch(e){}});ambient=null;}
+function play(name){if(!ensure())return;if(ctx.state==='suspended')ctx.resume();var fn=registry[name];if(!fn)return;try{fn(now());}catch(e){}}
+return{unlock:unlock,play:play,setMuted:setMuted,setVolume:setVolume,startAmbient:startAmbient,stopAmbient:stopAmbient,isSupported:function(){return supported;},names:Object.keys(registry)};
+})();
+</script>
+
+<!-- ====================== GAME ENGINE ====================== -->
+<script>
+(function(){
+'use strict';
+
+/* ---------- Canvas ---------- */
+var screen=document.getElementById('screen');
+var ctx=screen.getContext('2d');
+var weaponCv=document.getElementById('weapon');
+var wctx=weaponCv.getContext('2d');
+
+/* Render resolution (low for retro + speed); scaled by CSS */
+var RW=320, RH=200;
+screen.width=RW; screen.height=RH;
+
+/* ---------- Map (open facility floor — original layout) ----------
+   Legend:
+   1 = steel hardware panel wall   2 = blue server rack wall
+   3 = teal audit-chain panel      4 = amber conduit wall
+   8 = governance shield perimeter (glowing safe-zone border, solid)
+   S = protected Sentinel Node safe-zone floor (walkable; entering = WIN)
+   0 = open floor.
+   Design: wide corridors, large rooms, clear sightlines, central
+   protected zone. Player starts bottom-left, advances to center. */
+var MAP=[
+ "1111111111111111111111111",
+ "1000000000000000000000001",
+ "1000000000000000000000001",
+ "1004400000022220000004401",
+ "1004400000022220000004401",
+ "1000000000000000000000001",
+ "1000000008888888880000001",
+ "1000000008SSSSSSS80000001",
+ "1003300008SSSSSSS80033001",
+ "1003300008SSSSSSS88033001",
+ "1000000000SSSSSSS80000001",
+ "1000000008SSSSSSS80000001",
+ "1000000008SSSSSSS80000001",
+ "1000000008888888880000001",
+ "1000000000000000000000001",
+ "1002200000000000000022001",
+ "1002200000000000000022001",
+ "1000000000044440000000001",
+ "1000000000044440000000001",
+ "1000000000000000000000001",
+ "1000000000000000000000001",
+ "1111111111111111111111111"
+];
+var MH=MAP.length, MW=MAP[0].length;
+function cell(x,y){if(x<0||y<0||x>=MW||y>=MH)return '1';return MAP[y|0][x|0];}
+function solid(x,y){var c=cell(x,y);return c!=='0'&&c!=='S';}
+function inSafeZone(x,y){return cell(x,y)==='S';}
+
+/* ---------- Spawn safety ----------
+   Verify a position has full clearance for the player radius on all sides,
+   so we never start (or respawn) inside or hugging a wall. */
+var PLAYER_RADIUS=0.28;
+function clearAt(x,y,pad){
+  pad=pad||PLAYER_RADIUS;
+  if(solid(x,y))return false;
+  // sample a ring around the point at the player radius + padding
+  for(var a=0;a<8;a++){
+    var ang=a*Math.PI/4;
+    if(solid(x+Math.cos(ang)*pad, y+Math.sin(ang)*pad))return false;
+  }
+  return true;
+}
+/* Known-good fixed fallback: row 1 is the top corridor, fully open floor. */
+var SAFE_SPAWN={x:2.5,y:20.5};
+function findSafeSpawn(){
+  // 1) try the guaranteed fallback first (cheap + deterministic)
+  if(clearAt(SAFE_SPAWN.x,SAFE_SPAWN.y,0.34))return {x:SAFE_SPAWN.x,y:SAFE_SPAWN.y};
+  // 2) randomized search over validated floor cells with clearance
+  for(var tries=0;tries<200;tries++){
+    var cx=1+Math.floor(Math.random()*(MW-2));
+    var cy=1+Math.floor(Math.random()*(MH-2));
+    var x=cx+0.5,y=cy+0.5;
+    if(clearAt(x,y,0.34)) return {x:x,y:y};
+  }
+  // 3) deterministic scan as last resort
+  for(var yy=1;yy<MH-1;yy++)for(var xx=1;xx<MW-1;xx++){
+    if(clearAt(xx+0.5,yy+0.5,0.30))return {x:xx+0.5,y:yy+0.5};
+  }
+  // 4) absolute fallback (should never reach here on a valid map)
+  return {x:1.5,y:1.5};
+}
+
+/* ---------- Player ---------- */
+var P={x:2.5,y:20.5,a:-1.2,fov:Math.PI/3,
+  health:100,armor:0,ammo:60,maxAmmo:200,cores:0,
+  speed:3.2,turn:2.6,bob:0,kick:0,alive:true};
+
+/* ---------- Protected Sentinel Node safe zone ----------
+   Center of the 5x5+ 'S' region. Reaching any 'S' cell wins. */
+var SAFE_CENTER={x:13.5,y:10.0};
+var NODE={x:13.5,y:10.0};  // the humming Sentinel Node core, center of safe zone
+
+/* Clinic occupants inside the safe zone — doctors & nurses at work.
+   Rendered as simple billboard figures; purely visual, protected. */
+var OCCUPANTS=[
+  {x:11.0,y:8.5,kind:'doctor'},
+  {x:16.0,y:8.5,kind:'nurse'},
+  {x:11.0,y:12.0,kind:'nurse'},
+  {x:16.0,y:12.0,kind:'doctor'},
+  {x:13.5,y:7.5,kind:'patient'}
+];
+
+/* ---------- Wall signage (Pocono AI / Sentinel Node branding) ----------
+   Positioned along the open facility walls facing the player paths. */
+var SIGNS=[
+  {x:12.5,y:1.2,text:'POCONO AI',color:'#7df0c4',sub:'SENTINEL NODE FACILITY'},
+  {x:2.0,y:14.5,text:'LOCAL-FIRST. AUDIT-FIRST.',color:'#188B96'},
+  {x:23.0,y:14.5,text:'ZERO TELEMETRY',color:'#7dc4f0'},
+  {x:23.0,y:5.5,text:'ZERO EXFILTRATION',color:'#7df0c4'},
+  {x:2.0,y:5.5,text:'HUMAN REVIEW REQUIRED',color:'#f0d47d'},
+  {x:6.5,y:10.0,text:'GOVERNANCE SHIELD ACTIVE',color:'#7df0c4',sub:'CLINIC PROTECTED'},
+  {x:12.5,y:20.5,text:'SECURE LOCAL INFERENCE',color:'#7dc4f0'},
+  {x:2.0,y:2.2,text:'ON-PREM AI FOR REGULATED PRACTICES',color:'#f0d47d'},
+  {x:21.0,y:20.5,text:'LIABILITY REDUCTION, NOT AI HYPE',color:'#188B96'}
+];
+
+/* ---------- Enemies: rogue processes ----------
+   types: 'crawler' (melee), 'daemon' (ranged) */
+var enemies=[];
+function spawnEnemies(){
+  var spots=[
+    [5.5,4.5,'crawler'],[20.5,4.5,'crawler'],
+    [5.5,16.5,'crawler'],[19.5,16.5,'crawler'],
+    [12.5,2.5,'daemon'],[12.5,19.5,'daemon'],
+    [3.5,10.5,'daemon'],[21.5,10.5,'daemon'],
+    [7.5,5.5,'crawler'],[17.5,5.5,'crawler'],
+    [7.5,16.5,'crawler'],[17.5,16.5,'crawler'],
+    [12.5,15.5,'crawler'],[5.5,12.5,'crawler']
+  ];
+  // validate each spot; nudge any embedded spawn to nearest clear floor
+  spots=spots.map(function(s){
+    if(!clearAt(s[0],s[1],0.30)){
+      var fix=findSafeSpawn(); s[0]=fix.x; s[1]=fix.y;
+    }
+    return s;
+  });
+  enemies=spots.map(function(s){
+    return {x:s[0],y:s[1],type:s[2],
+      hp:s[2]==='daemon'?40:25, alive:true, hit:0,
+      cooldown:Math.random()*2, dist:0, anim:Math.random()*6.28};
+  });
+}
+
+/* ---------- Projectiles (daemon shots) ---------- */
+var shots=[];
+
+/* ---------- Input ---------- */
+var keys={};
+var mouseLock=false;
+window.addEventListener('keydown',function(e){keys[e.key.toLowerCase()]=true;
+  if([' ','arrowup','arrowdown','arrowleft','arrowright'].indexOf(e.key.toLowerCase())>=0)e.preventDefault();
+  if(e.key===' '||e.key==='Control')fire();
+});
+window.addEventListener('keyup',function(e){keys[e.key.toLowerCase()]=false;});
+
+screen.addEventListener('click',function(){
+  if(running && !isTouch){ if(!mouseLock) screen.requestPointerLock&&screen.requestPointerLock(); fire(); }
+});
+document.addEventListener('pointerlockchange',function(){mouseLock=(document.pointerLockElement===screen);});
+document.addEventListener('mousemove',function(e){if(mouseLock&&running){P.a+=e.movementX*0.0025;}});
+
+/* ---------- Touch controls ---------- */
+var isTouch=('ontouchstart' in window)||navigator.maxTouchPoints>0;
+var moveVec={x:0,y:0}, turnDir=0, firing=false;
+function setupTouch(){
+  if(!isTouch)return;
+  document.getElementById('touch').style.display='block';
+  var pad=document.getElementById('tc-move'), stick=document.getElementById('tc-stick');
+  var padRect, activeId=null;
+  function startMove(t){padRect=pad.getBoundingClientRect();activeId=t.identifier;moveMove(t);}
+  function moveMove(t){
+    var cx=padRect.left+padRect.width/2, cy=padRect.top+padRect.height/2;
+    var dx=t.clientX-cx, dy=t.clientY-cy, d=Math.hypot(dx,dy), max=52;
+    if(d>max){dx=dx/d*max;dy=dy/d*max;}
+    stick.style.transform='translate('+dx+'px,'+dy+'px)';
+    moveVec.x=dx/max; moveVec.y=dy/max;
+  }
+  function endMove(){activeId=null;moveVec.x=0;moveVec.y=0;stick.style.transform='translate(0,0)';}
+  pad.addEventListener('touchstart',function(e){e.preventDefault();startMove(e.changedTouches[0]);},{passive:false});
+  pad.addEventListener('touchmove',function(e){e.preventDefault();for(var i=0;i<e.touches.length;i++)if(e.touches[i].identifier===activeId)moveMove(e.touches[i]);},{passive:false});
+  pad.addEventListener('touchend',function(e){e.preventDefault();endMove();},{passive:false});
+
+  var tl=document.getElementById('tc-turnL'), tr=document.getElementById('tc-turnR'), tf=document.getElementById('tc-fire');
+  tl.addEventListener('touchstart',function(e){e.preventDefault();turnDir=-1;},{passive:false});
+  tl.addEventListener('touchend',function(e){e.preventDefault();turnDir=0;},{passive:false});
+  tr.addEventListener('touchstart',function(e){e.preventDefault();turnDir=1;},{passive:false});
+  tr.addEventListener('touchend',function(e){e.preventDefault();turnDir=0;},{passive:false});
+  tf.addEventListener('touchstart',function(e){e.preventDefault();fire();firing=true;},{passive:false});
+  tf.addEventListener('touchend',function(e){e.preventDefault();firing=false;},{passive:false});
+}
+
+/* ---------- Firing ---------- */
+var fireCooldown=0;
+function fire(){
+  if(!running||!P.alive)return;
+  if(fireCooldown>0)return;
+  if(P.ammo<=0){ SentinelAudio.play('uiClick'); return; }
+  P.ammo--; fireCooldown=0.18; P.kick=1; P.bob+=0.3;
+  SentinelAudio.play('blaster');
+  updateHUD();
+  // hitscan: find nearest enemy within a small angular cone along center ray
+  var best=null,bestDist=1e9;
+  for(var i=0;i<enemies.length;i++){
+    var e=enemies[i]; if(!e.alive)continue;
+    var dx=e.x-P.x, dy=e.y-P.y, dist=Math.hypot(dx,dy);
+    var ang=Math.atan2(dy,dx)-P.a;
+    while(ang<-Math.PI)ang+=2*Math.PI; while(ang>Math.PI)ang-=2*Math.PI;
+    var cone=Math.atan2(0.5,dist); // wider when closer
+    if(Math.abs(ang)<Math.max(0.08,cone) && dist<bestDist){
+      // line of sight check
+      if(losClear(P.x,P.y,e.x,e.y)){best=e;bestDist=dist;}
+    }
+  }
+  if(best){
+    var dmg=best.type==='daemon'?16:20;
+    best.hp-=dmg; best.hit=0.18;
+    if(best.hp<=0){best.alive=false;SentinelAudio.play('enemyDefeated');flash('PROCESS PURGED');}
+    else SentinelAudio.play('enemyHit');
+  }
+}
+function losClear(x0,y0,x1,y1){
+  var steps=Math.ceil(Math.hypot(x1-x0,y1-y0)*4);
+  for(var i=1;i<steps;i++){var t=i/steps;if(solid(x0+(x1-x0)*t,y0+(y1-y0)*t))return false;}
+  return true;
+}
+
+/* ---------- HUD ---------- */
+var elH=document.getElementById('hHealth'),elA=document.getElementById('hArmor'),
+    elAm=document.getElementById('hAmmo'),elC=document.getElementById('hCores'),
+    dangerCell=document.getElementById('dangerCell'),msgEl=document.getElementById('msg'),
+    dmgflash=document.getElementById('dmgflash');
+function updateHUD(){
+  elH.textContent=Math.max(0,P.health|0);
+  elA.textContent=P.armor|0;
+  elAm.textContent=P.ammo|0;
+  /* objective label is static now */
+  dangerCell.classList.toggle('hidden',P.health>30);
+}
+var msgTimer=0;
+function flash(t){msgEl.textContent=t;msgEl.style.opacity='1';msgTimer=2.2;}
+
+/* ---------- Damage ---------- */
+var lowHealthTimer=0;
+var stepAccum=0;       // footstep cadence accumulator
+function hurt(d){
+  if(!P.alive)return;
+  if(P.armor>0){var abs=Math.min(P.armor,d*0.5);P.armor-=abs;d-=abs;}
+  P.health-=d;
+  SentinelAudio.play('playerDamage');
+  dmgflash.style.opacity='1';setTimeout(function(){dmgflash.style.opacity='0';},90);
+  updateHUD();
+  if(P.health<=0){P.health=0;lose();}
+}
+
+/* expose to outer scope for start/restart */
+window.__game={};
+
+/* ---------- Update loop ---------- */
+var zbuffer=new Array(RW);
+function update(dt){
+  // timers
+  if(fireCooldown>0)fireCooldown-=dt;
+  if(P.kick>0)P.kick=Math.max(0,P.kick-dt*6);
+  if(msgTimer>0){msgTimer-=dt;if(msgTimer<=0)msgEl.style.opacity='0';}
+  if(firing)fire();
+
+  // ----- movement -----
+  var mvF=0,mvS=0,trn=0;
+  if(keys['w']||keys['arrowup'])mvF+=1;
+  if(keys['s']||keys['arrowdown'])mvF-=1;
+  if(keys['a'])mvS-=1;
+  if(keys['d'])mvS+=1;
+  if(keys['arrowleft'])trn-=1;
+  if(keys['arrowright'])trn+=1;
+  // touch
+  if(isTouch){mvF+=-moveVec.y;mvS+=moveVec.x;trn+=turnDir;}
+
+  P.a+=trn*P.turn*dt;
+  var moveX=(Math.cos(P.a)*mvF - Math.sin(P.a)*mvS)*P.speed*dt;
+  var moveY=(Math.sin(P.a)*mvF + Math.cos(P.a)*mvS)*P.speed*dt;
+  // Radius-based axis-separated collision with padding — slides along walls,
+  // never sticks. Checks the leading edge at the player radius on each axis.
+  var r=PLAYER_RADIUS;
+  var tx=P.x+moveX;
+  if(!solid(tx + (moveX>0?r:-r), P.y + r) &&
+     !solid(tx + (moveX>0?r:-r), P.y - r) &&
+     !solid(tx + (moveX>0?r:-r), P.y))      P.x=tx;
+  var ty=P.y+moveY;
+  if(!solid(P.x + r, ty + (moveY>0?r:-r)) &&
+     !solid(P.x - r, ty + (moveY>0?r:-r)) &&
+     !solid(P.x,     ty + (moveY>0?r:-r)))   P.y=ty;
+  // gentle anti-stick nudge: if somehow embedded, push toward cell center
+  if(solid(P.x,P.y)){
+    var cxC=Math.floor(P.x)+0.5, cyC=Math.floor(P.y)+0.5;
+    P.x+=(cxC-P.x)*0.2; P.y+=(cyC-P.y)*0.2;
+  }
+  if(Math.abs(mvF)+Math.abs(mvS)>0.05){P.bob+=dt*9;stepAccum+=dt;
+    if(stepAccum>=0.42){stepAccum=0;SentinelAudio.play('step');}
+  } else { stepAccum=0.42; }  // next move triggers an immediate step
+
+  // ----- WIN: reaching the protected Sentinel Node safe zone -----
+  if(inSafeZone(P.x,P.y)){ win(); return; }
+  // proximity hint as the player nears the shield entrance
+  var dNode=Math.hypot(NODE.x-P.x,NODE.y-P.y);
+  if(dNode<5 && msgTimer<=0 && !P._hinted){ P._hinted=true; flash('GOVERNANCE SHIELD AHEAD  ·  REACH THE NODE'); }
+
+  // ----- enemies ----- (governance shield blocks them from the safe zone)
+  function eBlocked(x,y){return solid(x,y)||inSafeZone(x,y);}
+  for(var i=0;i<enemies.length;i++){
+    var e=enemies[i]; if(!e.alive)continue;
+    e.anim+=dt*6; if(e.hit>0)e.hit-=dt;
+    // shield damage: enemies that touch the protected perimeter are purged
+    if(inSafeZone(e.x,e.y) || Math.hypot(NODE.x-e.x,NODE.y-e.y)<4.2){
+      e.hp-=dt*30;
+      if(e.hp<=0){e.alive=false;SentinelAudio.play('enemyDefeated');}
+    }
+    var dx=P.x-e.x, dy=P.y-e.y, dist=Math.hypot(dx,dy); e.dist=dist;
+    if(dist<9 && losClear(e.x,e.y,P.x,P.y)){
+      var ux=dx/dist, uy=dy/dist;
+      if(e.type==='crawler'){
+        // chase + melee
+        if(dist>0.6){
+          var sp=1.5*dt;
+          if(!eBlocked(e.x+ux*sp,e.y))e.x+=ux*sp;
+          if(!eBlocked(e.x,e.y+uy*sp))e.y+=uy*sp;
+        }else{
+          e.cooldown-=dt;
+          if(e.cooldown<=0){e.cooldown=1.0;hurt(9);}
+        }
+      }else{
+        // daemon: keep distance, shoot
+        if(dist<3.5){var sp=1.0*dt;if(!eBlocked(e.x-ux*sp,e.y))e.x-=ux*sp;if(!eBlocked(e.x,e.y-uy*sp))e.y-=uy*sp;}
+        else if(dist>6){var sp=0.8*dt;if(!eBlocked(e.x+ux*sp,e.y))e.x+=ux*sp;if(!eBlocked(e.x,e.y+uy*sp))e.y+=uy*sp;}
+        e.cooldown-=dt;
+        if(e.cooldown<=0){e.cooldown=1.6+Math.random()*0.8;
+          shots.push({x:e.x,y:e.y,vx:ux*4.2,vy:uy*4.2,life:3});}
+      }
+    }
+  }
+
+  // ----- projectiles -----
+  for(var i=shots.length-1;i>=0;i--){
+    var s=shots[i]; s.life-=dt;
+    s.x+=s.vx*dt; s.y+=s.vy*dt;
+    if(s.life<=0||solid(s.x,s.y)){shots.splice(i,1);continue;}
+    if(Math.hypot(s.x-P.x,s.y-P.y)<0.4){shots.splice(i,1);hurt(11);}
+  }
+
+  // ----- low health warning -----
+  if(P.health<=30&&P.alive){lowHealthTimer-=dt;if(lowHealthTimer<=0){lowHealthTimer=1.1;SentinelAudio.play('lowHealth');}}
+}
+
+/* ---------- Wall column renderer: Pocono AI / Sentinel Node identity ----------
+   Draws one vertical strip with procedural detailing per wall type:
+   server racks, audit-chain panels, circuit conduits, hardware panels,
+   containment doors — plus caution strips and glowing accents. Cheap: a few
+   fillRects per column, no image assets. */
+function drawWallColumn(col,y0,h,dist,side,ch,u,cellX,cellY){
+  var base=({'1':[34,58,74],'2':[18,52,104],'3':[20,110,120],'4':[150,120,40],'8':[30,120,130],'9':[110,46,40]})[ch]||[60,60,60];
+  var shade=Math.max(0.22, 1-dist/15)*(side?0.68:1);
+  function rgb(arr,m){m=m||1;return 'rgb('+(arr[0]*shade*m|0)+','+(arr[1]*shade*m|0)+','+(arr[2]*shade*m|0)+')';}
+  // base fill
+  ctx.fillStyle=rgb(base);
+  ctx.fillRect(col,y0,1,h);
+
+  var y1=y0+h;
+  // shared: top + bottom trim rails (caution strip vibe)
+  ctx.fillStyle=rgb([90,90,100],1.1);
+  ctx.fillRect(col,y0,1,Math.max(1,h*0.04));
+  ctx.fillRect(col,y1-Math.max(1,h*0.05),1,Math.max(1,h*0.05));
+
+  if(ch==='2'){
+    // BLUE SERVER RACK — horizontal blade slots with blinking status LEDs
+    var slots=10;
+    for(var s=0;s<slots;s++){
+      var sy=y0+h*(0.10+0.075*s);
+      ctx.fillStyle=rgb([8,20,40]);
+      ctx.fillRect(col,sy,1,Math.max(1,h*0.045));
+      // LED column near a fixed u band
+      if(u>0.12&&u<0.18){
+        var lit=((cellX*7+cellY*13+s)%3===0);
+        var blink=lit&&((Date.now()/400|0+s)%2===0);
+        ctx.fillStyle= blink?'rgb('+(120*shade|0)+','+(255*shade|0)+','+(180*shade|0)+')'
+                            : 'rgb('+(20*shade|0)+','+(90*shade|0)+','+(70*shade|0)+')';
+        ctx.fillRect(col,sy+1,1,Math.max(1,h*0.02));
+      }
+    }
+    // vertical seam between racks
+    if(u<0.04||u>0.96){ctx.fillStyle=rgb([6,12,24]);ctx.fillRect(col,y0,1,h);}
+  } else if(ch==='3'){
+    // TEAL AUDIT-CHAIN PANEL — linked chain glyphs + glowing data line
+    var links=8;
+    for(var l=0;l<links;l++){
+      var ly=y0+h*(0.12+0.095*l);
+      ctx.fillStyle=rgb([10,60,66]);
+      ctx.fillRect(col,ly,1,Math.max(1,h*0.05));
+      if(u>0.3&&u<0.7){ // chain link bright segment
+        ctx.fillStyle='rgb('+(60*shade|0)+','+(220*shade|0)+','+(210*shade|0)+')';
+        ctx.fillRect(col,ly+Math.max(1,h*0.02),1,Math.max(1,h*0.012));
+      }
+    }
+    // glowing horizontal data conduit mid-panel
+    var midY=y0+h*0.5;
+    ctx.fillStyle='rgb('+(125*shade|0)+','+(240*shade|0)+','+(196*shade|0)+')';
+    ctx.fillRect(col,midY,1,Math.max(1,h*0.02));
+  } else if(ch==='4'){
+    // AMBER CIRCUIT / CONDUIT WALL — vertical cable runs + nodes
+    if((cellX*3+cellY*5)%5 < 2 && u>0.4 && u<0.55){
+      ctx.fillStyle='rgb('+(240*shade|0)+','+(200*shade|0)+','+(90*shade|0)+')';
+      ctx.fillRect(col,y0+h*0.1,1,h*0.8); // glowing conduit
+    } else {
+      // panel rivets / grid
+      for(var g=0;g<6;g++){var gy=y0+h*(0.14+0.14*g);ctx.fillStyle=rgb([90,70,30]);ctx.fillRect(col,gy,1,Math.max(1,h*0.02));}
+    }
+    // caution chevron band near base
+    var cy2=y0+h*0.82;
+    ctx.fillStyle=(Math.floor(u*8)%2===0)?rgb([240,200,90],1.0):rgb([20,18,8]);
+    ctx.fillRect(col,cy2,1,Math.max(1,h*0.05));
+  } else if(ch==='8'){
+    // GOVERNANCE SHIELD — translucent glowing energy barrier, animated scan
+    var t=Date.now()/600;
+    var pulse=0.55+0.45*Math.sin(t + (cellX+cellY)*0.5);
+    // vertical energy gradient
+    ctx.fillStyle='rgb('+(40*shade|0)+','+((150+60*pulse)*shade|0)+','+((150+50*pulse)*shade|0)+')';
+    ctx.fillRect(col,y0,1,h);
+    // scrolling scan lines
+    var scan=((y0 + (Date.now()/8)) % 14);
+    for(var sLine=y0+scan; sLine<y0+h; sLine+=14){
+      ctx.fillStyle='rgba(125,240,196,'+(0.4*pulse)+')';
+      ctx.fillRect(col,sLine,1,2);
+    }
+    // bright top/bottom rails
+    ctx.fillStyle='rgb('+(125*shade|0)+','+(240*shade|0)+','+(196*shade|0)+')';
+    ctx.fillRect(col,y0,1,Math.max(1,h*0.06));
+    ctx.fillRect(col,y0+h-Math.max(1,h*0.06),1,Math.max(1,h*0.06));
+  } else if(ch==='9'){
+    // CONTAINMENT DOOR — heavy seam + hazard stripes + center seal
+    if(u>0.46&&u<0.54){ctx.fillStyle=rgb([200,80,60],1.2);ctx.fillRect(col,y0,1,h);} // center seam glow
+    var band=Math.floor(u*10)%2===0;
+    ctx.fillStyle=band?rgb([150,60,50]):rgb([60,24,20]);
+    ctx.fillRect(col,y0+h*0.4,1,h*0.06);
+    ctx.fillRect(col,y0+h*0.54,1,h*0.06);
+  } else {
+    // STEEL HARDWARE PANEL (type 1) — bolted plates, recessed seams
+    for(var p=0;p<4;p++){var py=y0+h*(0.2+0.2*p);ctx.fillStyle=rgb([20,34,44]);ctx.fillRect(col,py,1,Math.max(1,h*0.015));}
+    // panel seams
+    if(u<0.03||u>0.97||(u>0.48&&u<0.52)){ctx.fillStyle=rgb([16,28,36]);ctx.fillRect(col,y0,1,h);}
+    // occasional thin teal status line
+    if(((cellX+cellY)%4===0)&&u>0.2&&u<0.8){ctx.fillStyle='rgb('+(24*shade*1.4|0)+','+(139*shade*1.4|0)+','+(150*shade*1.4|0)+')';ctx.fillRect(col,y0+h*0.5,1,Math.max(1,h*0.01));}
+  }
+
+  // distance darkening overlay for depth
+  if(dist>6){ctx.fillStyle='rgba(2,10,16,'+Math.min(0.6,(dist-6)/16)+')';ctx.fillRect(col,y0,1,h);}
+  // subtle vertical scanline grit
+  if((col&1)===0){ctx.fillStyle='rgba(0,0,0,0.10)';ctx.fillRect(col,y0,1,h);}
+}
+
+/* ---------- Raycast render ---------- */
+function render(){
+  var bobOff=Math.sin(P.bob)*2;
+  // ceiling + floor
+  var g=ctx.createLinearGradient(0,0,0,RH);
+  g.addColorStop(0,'#020a10');g.addColorStop(0.5,'#08202e');ctx.fillStyle=g;
+  ctx.fillRect(0,0,RW,RH/2+bobOff);
+  var g2=ctx.createLinearGradient(0,RH/2,0,RH);
+  g2.addColorStop(0,'#06121a');g2.addColorStop(1,'#020608');ctx.fillStyle=g2;
+  ctx.fillRect(0,RH/2+bobOff,RW,RH/2);
+
+  /* Per-type base palette — server racks, audit panels, conduits, doors */
+  var wallBase={
+    '1':[34,58,74],   // steel hardware panel
+    '2':[18,52,104],  // blue server rack
+    '3':[20,110,120], // teal audit-chain panel
+    '4':[150,120,40], // amber circuit/conduit wall
+    '9':[110,46,40]   // containment door
+  };
+
+  for(var col=0;col<RW;col++){
+    var rayA=P.a - P.fov/2 + (col/RW)*P.fov;
+    var sin=Math.sin(rayA),cos=Math.cos(rayA);
+    var dist=0,hit=false,ch='1',side=0;
+    var step=0.02;
+    var mx,my;
+    while(dist<20){
+      dist+=step;
+      mx=P.x+cos*dist; my=P.y+sin*dist;
+      if(solid(mx,my)){ch=cell(mx,my);hit=true;
+        var fx=mx-Math.floor(mx), fy=my-Math.floor(my);
+        side=(Math.min(fx,1-fx)<Math.min(fy,1-fy))?0:1;
+        break;}
+    }
+    if(!hit)continue;
+    var corrected=dist*Math.cos(rayA-P.a);
+    zbuffer[col]=corrected;
+    var h=Math.min(RH*4, (RH/corrected));
+    var y0=(RH-h)/2+bobOff, y1=y0+h;
+    // wall-face texture coordinate (0..1 across the cell face)
+    var wallU=(side===0)?(my-Math.floor(my)):(mx-Math.floor(mx));
+    drawWallColumn(col,y0,h,corrected,side,ch,wallU,Math.floor(mx),Math.floor(my));
+  }
+
+  // ----- sprites: signs, cores, enemies, shots ----- (painter's: far to near)
+  var sprites=[];
+  SIGNS.forEach(function(g){sprites.push({x:g.x,y:g.y,kind:'sign',data:g});});
+  sprites.push({x:NODE.x,y:NODE.y,kind:'node',data:NODE});
+  OCCUPANTS.forEach(function(o){sprites.push({x:o.x,y:o.y,kind:'person',data:o});});
+  enemies.forEach(function(e){if(e.alive)sprites.push({x:e.x,y:e.y,kind:'enemy',data:e});});
+  shots.forEach(function(s){sprites.push({x:s.x,y:s.y,kind:'shot',data:s});});
+  sprites.forEach(function(sp){sp.d=Math.hypot(sp.x-P.x,sp.y-P.y);});
+  sprites.sort(function(a,b){return b.d-a.d;});
+
+  sprites.forEach(function(sp){
+    var dx=sp.x-P.x, dy=sp.y-P.y;
+    var ang=Math.atan2(dy,dx)-P.a;
+    while(ang<-Math.PI)ang+=2*Math.PI; while(ang>Math.PI)ang-=2*Math.PI;
+    if(Math.abs(ang)>P.fov/2+0.4)return;
+    var dist=sp.d; if(dist<0.2)return;
+    var sx=(0.5+ang/P.fov)*RW;
+    var size=Math.min(RH*1.4, RH/dist);
+    var bobOff2=Math.sin(P.bob)*2;
+    if(sp.kind==='sign')drawSign(sx,size,dist,sp.data,bobOff2);
+    else if(sp.kind==='node')drawNode(sx,size,dist,bobOff2);
+    else if(sp.kind==='person')drawPerson(sx,size,dist,sp.data,bobOff2);
+    else if(sp.kind==='enemy')drawEnemy(sx,size,dist,sp.data,bobOff2);
+    else drawShot(sx,size,dist,bobOff2);
+  });
+
+  drawWeapon();
+}
+
+function occluded(sx,dist){var c=Math.floor(sx);if(c<0||c>=RW)return true;return zbuffer[c]!==undefined&&zbuffer[c]<dist;}
+
+function drawSign(sx,size,dist,sign,bob){
+  if(dist>9)return;
+  if(occluded(sx,dist))return;
+  var cy=RH/2+bob;
+  var scale=Math.min(2.4, 1.6/dist);
+  var fontPx=Math.max(4, Math.round(8*scale));
+  var alpha=Math.max(0.25, Math.min(1, 1-(dist-1)/9));
+  ctx.save();
+  ctx.textAlign='center';
+  ctx.textBaseline='middle';
+  // backing plate
+  var txt=sign.text;
+  ctx.font='700 '+fontPx+'px "Share Tech Mono", monospace';
+  var w=ctx.measureText(txt).width;
+  var padX=fontPx*0.6, padY=fontPx*0.5;
+  var plateY=cy - size*0.18;
+  ctx.globalAlpha=alpha*0.72;
+  ctx.fillStyle='#04141d';
+  ctx.fillRect(sx-w/2-padX, plateY-fontPx/2-padY, w+padX*2, fontPx+padY*2 + (sign.sub?fontPx+2:0));
+  // border glow
+  ctx.globalAlpha=alpha*0.9;
+  ctx.strokeStyle=sign.color;
+  ctx.lineWidth=Math.max(1,scale);
+  ctx.strokeRect(sx-w/2-padX, plateY-fontPx/2-padY, w+padX*2, fontPx+padY*2 + (sign.sub?fontPx+2:0));
+  // text
+  ctx.globalAlpha=alpha;
+  ctx.shadowColor=sign.color; ctx.shadowBlur=fontPx*0.8;
+  ctx.fillStyle=sign.color;
+  ctx.fillText(txt, sx, plateY);
+  if(sign.sub){
+    ctx.font='400 '+Math.max(3,fontPx*0.8)+'px "Share Tech Mono", monospace';
+    ctx.fillStyle='#cfe6ee';
+    ctx.shadowBlur=fontPx*0.4;
+    ctx.fillText(sign.sub, sx, plateY+fontPx+2);
+  }
+  ctx.restore();
+}
+
+/* The protected Sentinel Node — humming, pulsing, alive */
+function drawNode(sx,size,dist,bob){
+  if(occluded(sx,dist))return;
+  var s=size*0.7, cy=RH/2+bob;
+  var t=Date.now()/1000;
+  var pulse=0.5+0.5*Math.sin(t*3);
+  var alpha=Math.max(0.3,Math.min(1,1-(dist-1)/10));
+  ctx.save();
+  // outer governance-shield glow halo
+  var halo=ctx.createRadialGradient(sx,cy,1,sx,cy,s*1.1);
+  halo.addColorStop(0,'rgba(125,240,196,'+(0.5*alpha*pulse)+')');
+  halo.addColorStop(0.5,'rgba(24,139,150,'+(0.25*alpha)+')');
+  halo.addColorStop(1,'rgba(24,139,150,0)');
+  ctx.fillStyle=halo;ctx.beginPath();ctx.arc(sx,cy,s*1.1,0,6.28);ctx.fill();
+  // node tower body
+  var w=s*0.34;
+  ctx.fillStyle='rgba(8,30,42,'+alpha+')';
+  ctx.fillRect(sx-w/2, cy-s*0.5, w, s);
+  ctx.strokeStyle='rgba(125,240,196,'+alpha+')';ctx.lineWidth=Math.max(1,size*0.01);
+  ctx.strokeRect(sx-w/2, cy-s*0.5, w, s);
+  // blinking server LEDs up the tower
+  for(var i=0;i<6;i++){
+    var ly=cy-s*0.4 + i*(s*0.14);
+    var lit=(Math.floor(t*3)+i)%2===0;
+    ctx.fillStyle=lit?'rgba(125,240,196,'+alpha+')':'rgba(24,90,90,'+alpha+')';
+    ctx.fillRect(sx-w*0.3, ly, w*0.6, s*0.04);
+  }
+  // pulsing core orb at center
+  var orb=ctx.createRadialGradient(sx,cy,1,sx,cy,w*0.8*(0.7+pulse*0.4));
+  orb.addColorStop(0,'rgba(255,255,255,'+alpha+')');
+  orb.addColorStop(0.5,'rgba(125,240,196,'+alpha+')');
+  orb.addColorStop(1,'rgba(24,139,150,0)');
+  ctx.fillStyle=orb;ctx.beginPath();ctx.arc(sx,cy,w*0.8*(0.7+pulse*0.4),0,6.28);ctx.fill();
+  ctx.restore();
+}
+
+/* Clinic occupants — doctors, nurses, patients at work, protected */
+function drawPerson(sx,size,dist,person,bob){
+  if(occluded(sx,dist))return;
+  var s=size*0.5, cy=RH/2+bob;
+  var alpha=Math.max(0.3,Math.min(1,1-(dist-1)/10));
+  var palette={doctor:['#dfe9ef','#7dc4f0'],nurse:['#dfe9ef','#7df0c4'],patient:['#cdd6dd','#f0d47d']};
+  var col=palette[person.kind]||palette.patient;
+  var headY=cy-s*0.55, bodyTop=cy-s*0.3;
+  ctx.save();
+  ctx.globalAlpha=alpha;
+  // subtle idle sway
+  var sway=Math.sin(Date.now()/700 + sx)*s*0.02;
+  // body (coat)
+  ctx.fillStyle=col[0];
+  ctx.beginPath();
+  ctx.moveTo(sx-s*0.16+sway,bodyTop);
+  ctx.lineTo(sx+s*0.16+sway,bodyTop);
+  ctx.lineTo(sx+s*0.2+sway,cy+s*0.5);
+  ctx.lineTo(sx-s*0.2+sway,cy+s*0.5);
+  ctx.closePath();ctx.fill();
+  // accent stripe (role color)
+  ctx.fillStyle=col[1];
+  ctx.fillRect(sx-s*0.04+sway,bodyTop,s*0.08,s*0.8);
+  // head
+  ctx.fillStyle='#e8c9a0';
+  ctx.beginPath();ctx.arc(sx+sway,headY,s*0.13,0,6.28);ctx.fill();
+  // shadow
+  ctx.globalAlpha=alpha*0.3;ctx.fillStyle='#000';
+  ctx.beginPath();ctx.ellipse(sx,cy+s*0.5,s*0.2,s*0.05,0,0,6.28);ctx.fill();
+  ctx.restore();
+}
+
+function drawEnemy(sx,size,dist,e,bob){
+  if(occluded(sx,dist))return;
+  var s=size*0.62, cy=RH/2+bob;
+  var top=cy - s*0.5, w=s*0.55;
+  var wob=Math.sin(e.anim)*s*0.04;
+  ctx.save();ctx.translate(sx,top+s*0.5+wob);
+  var hitFlash=e.hit>0;
+  if(e.type==='crawler'){
+    // red angular intrusion crawler
+    var body=hitFlash?'#ffffff':'#f0584a';
+    ctx.fillStyle=body;
+    ctx.beginPath();ctx.moveTo(0,-s*0.45);ctx.lineTo(w*0.5,-s*0.1);ctx.lineTo(w*0.36,s*0.45);
+    ctx.lineTo(-w*0.36,s*0.45);ctx.lineTo(-w*0.5,-s*0.1);ctx.closePath();ctx.fill();
+    // glitch eye
+    ctx.fillStyle=hitFlash?'#f0584a':'#ffd0c0';
+    ctx.fillRect(-w*0.18,-s*0.18,w*0.36,s*0.12);
+    // legs
+    ctx.strokeStyle=body;ctx.lineWidth=Math.max(1,s*0.04);
+    for(var i=-1;i<=1;i+=2){ctx.beginPath();ctx.moveTo(i*w*0.4,s*0.2);ctx.lineTo(i*w*0.62,s*0.5);ctx.stroke();}
+  }else{
+    // daemon: floating amber/violet orb-process
+    var body=hitFlash?'#ffffff':'#b07df0';
+    var grd=ctx.createRadialGradient(0,0,1,0,0,w*0.6);
+    grd.addColorStop(0,hitFlash?'#fff':'#d9b8ff');grd.addColorStop(0.6,body);grd.addColorStop(1,'rgba(176,125,240,0.1)');
+    ctx.fillStyle=grd;ctx.beginPath();ctx.arc(0,0,w*0.55,0,6.28);ctx.fill();
+    // core
+    ctx.fillStyle=hitFlash?'#b07df0':'#2a0a40';ctx.beginPath();ctx.arc(0,0,w*0.2,0,6.28);ctx.fill();
+    // ring
+    ctx.strokeStyle='rgba(240,212,125,0.7)';ctx.lineWidth=Math.max(1,s*0.03);
+    ctx.beginPath();ctx.arc(0,0,w*0.4,e.anim,e.anim+4);ctx.stroke();
+  }
+  ctx.restore();
+  // simple shadow
+  ctx.fillStyle='rgba(0,0,0,0.3)';ctx.beginPath();ctx.ellipse(sx,cy+s*0.5,w*0.4,s*0.06,0,0,6.28);ctx.fill();
+}
+
+function drawShot(sx,size,dist,bob){
+  if(occluded(sx,dist))return;
+  var s=Math.max(2,size*0.08), cy=RH/2+bob;
+  var grd=ctx.createRadialGradient(sx,cy,0,sx,cy,s*2);
+  grd.addColorStop(0,'#fff');grd.addColorStop(0.4,'#b07df0');grd.addColorStop(1,'rgba(176,125,240,0)');
+  ctx.fillStyle=grd;ctx.beginPath();ctx.arc(sx,cy,s*2,0,6.28);ctx.fill();
+}
+
+/* ---------- Weapon viewmodel (drawn on overlay canvas) ---------- */
+function drawWeapon(){
+  wctx.clearRect(0,0,200,150);
+  var kick=P.kick*10;
+  var bob=Math.sin(P.bob)*4;
+  var cx=100+bob, baseY=150-kick;
+  // barrel housing — teal/steel "Audit Chain Blaster"
+  wctx.fillStyle='#0c2230';
+  wctx.fillRect(cx-34,baseY-54,68,54);
+  wctx.fillStyle='#15384a';
+  wctx.fillRect(cx-26,baseY-70,52,22);
+  // emitter
+  wctx.fillStyle='#188B96';
+  wctx.fillRect(cx-12,baseY-86,24,20);
+  // chain links detail
+  wctx.strokeStyle='#7df0c4';wctx.lineWidth=2;
+  for(var i=0;i<3;i++){wctx.strokeRect(cx-9,baseY-82+i*6,18,4);}
+  // muzzle flash on kick
+  if(P.kick>0.5){
+    var fg=wctx.createRadialGradient(cx,baseY-92,1,cx,baseY-92,26);
+    fg.addColorStop(0,'rgba(255,255,255,0.95)');fg.addColorStop(0.4,'rgba(125,240,196,0.8)');fg.addColorStop(1,'rgba(24,139,150,0)');
+    wctx.fillStyle=fg;wctx.beginPath();wctx.arc(cx,baseY-92,26,0,6.28);wctx.fill();
+  }
+  // grip
+  wctx.fillStyle='#0a1a24';wctx.fillRect(cx-10,baseY-20,20,28);
+}
+
+/* ---------- Loop ---------- */
+var running=false, last=0, raf=null;
+function loop(ts){
+  if(!running)return;
+  var dt=Math.min(0.05,(ts-last)/1000)||0.016; last=ts;
+  update(dt); render();
+  raf=requestAnimationFrame(loop);
+}
+
+/* ---------- Game state ---------- */
+var startTime=0, kills=0;
+function startGame(){
+  // reset
+  // SAFE SPAWN — never start inside or hugging a wall
+  var sp=findSafeSpawn();
+  P.x=sp.x;P.y=sp.y;P.a=-0.9;P.health=100;P.armor=0;P.ammo=60;P.cores=0;P.alive=true;P.bob=0;P.kick=0;
+  P._hinted=false;
+  spawnEnemies(); shots=[]; kills=0; startTime=Date.now();
+  updateHUD();
+  document.getElementById('startScreen').classList.add('hidden');
+  document.getElementById('winScreen').classList.add('hidden');
+  document.getElementById('loseScreen').classList.add('hidden');
+  document.getElementById('hud').classList.remove('hidden');
+  document.getElementById('muteBtn').classList.remove('hidden');
+  document.getElementById('backBtn').classList.remove('hidden');
+  setupTouch();
+  running=true; last=performance.now();
+  SentinelAudio.unlock();
+  SentinelAudio.startAmbient();
+  flash('REACH THE SENTINEL NODE  ·  PROTECT THE CLINIC');
+  raf=requestAnimationFrame(loop);
+}
+function win(){
+  running=false; P.alive=false;
+  if(document.pointerLockElement)document.exitPointerLock&&document.exitPointerLock();
+  SentinelAudio.play('win');
+  SentinelAudio.stopAmbient();
+  var t=((Date.now()-startTime)/1000)|0;
+  var purged=enemies.filter(function(e){return !e.alive;}).length;
+  document.getElementById('winStats').innerHTML='TIME '+t+'s &middot; INTEGRITY '+(P.health|0)+'%<br>PROCESSES PURGED '+purged+'/'+enemies.length+' &middot; CLINIC PROTECTED';
+  document.getElementById('hud').classList.add('hidden');
+  document.getElementById('winScreen').classList.remove('hidden');
+}
+function lose(){
+  running=false; P.alive=false;
+  if(document.pointerLockElement)document.exitPointerLock&&document.exitPointerLock();
+  SentinelAudio.play('lose');
+  SentinelAudio.stopAmbient();
+  document.getElementById('loseStats').innerHTML='THE CLINIC FELL &middot; INTEGRITY 0%';
+  document.getElementById('hud').classList.add('hidden');
+  document.getElementById('loseScreen').classList.remove('hidden');
+}
+
+/* ---------- Wire buttons ---------- */
+document.getElementById('startBtn').addEventListener('click',function(){SentinelAudio.unlock();SentinelAudio.play('uiClick');startGame();});
+document.getElementById('winRetry').addEventListener('click',function(){SentinelAudio.play('uiClick');startGame();});
+document.getElementById('loseRetry').addEventListener('click',function(){SentinelAudio.play('uiClick');startGame();});
+var muted=false;
+document.getElementById('muteBtn').addEventListener('click',function(){muted=!muted;SentinelAudio.setMuted(muted);this.innerHTML=muted?'&#128263;':'&#128266;';if(!muted)SentinelAudio.play('uiClick');});
+document.getElementById('backBtn').addEventListener('click',function(){running=false;});
+
+/* ---------- Resize: keep internal res fixed, CSS scales ---------- */
+window.addEventListener('resize',function(){/* canvas CSS-scaled; nothing needed */});
+
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp -->
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How Pocono AI Fails Safely | Pocono AI</title>
+<meta name="description" content="How Sentinel Node handles uncertainty, refuses out-of-scope requests, and enforces human review — safe failure design for regulated environments.">
+<meta name="keywords" content="AI hallucination prevention, AI refusal, attorney review AI, citation verification, AI governance, fail-safe AI, regulated AI, on-premise AI safety">
+<meta name="theme-color" content="#0B0F13">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="favicon-180x180.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+<link rel="canonical" href="https://poconoai.com/how-pocono-ai-fails-safely.html">
+<link rel="stylesheet" href="styles.css?v=402">
+<link rel="stylesheet" href="nav-v2026.css?v=402">
+<link rel="stylesheet" href="brand-v292.css?v=402">
+<meta property="og:title" content="How Pocono AI Fails Safely | Pocono AI">
+<meta property="og:type" content="article">
+<meta property="og:description" content="How Sentinel Node handles uncertainty, refuses out-of-scope requests, enforces attorney review, and contains hallucinations.">
+<meta property="og:url" content="https://poconoai.com/how-pocono-ai-fails-safely.html">
+<meta property="og:image" content="https://poconoai.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="How Pocono AI Fails Safely | Pocono AI">
+<meta name="twitter:description" content="How Sentinel Node handles uncertainty, refuses out-of-scope requests, and enforces human review — safe failure design for regulated environments.">
+
+<style>
+.page-wrap { max-width: 1080px; margin: 0 auto; padding: clamp(28px,4vw,60px) 24px; color: #cfdfeb; }
+
+/* Hero */
+.fs-hero { padding: 32px 0 8px; }
+.fs-kicker { display: inline-flex; align-items: center; gap: 10px; color: #2dd4bf; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; font-size: .76rem; margin-bottom: 14px; padding: 6px 14px; border: 1px solid rgba(45,212,191,.34); border-radius: 100px; background: rgba(0,194,168,.06); }
+.fs-title { font-size: clamp(2rem,5.4vw,3.8rem); line-height: 1.05; letter-spacing: -.025em; color: #fff; margin: 0 0 18px; font-weight: 800; }
+.fs-title em { font-style: normal; color: #fca5a5; }
+.fs-lede { font-size: clamp(1.04rem,1.7vw,1.22rem); line-height: 1.65; color: #b9d9ee; max-width: 880px; margin: 0 0 22px; }
+
+/* Premise box */
+.fs-premise { border-left: 3px solid #2dd4bf; padding: 14px 22px; background: linear-gradient(90deg, rgba(0,194,168,.06), transparent); margin: 28px 0; font-size: 1.05rem; line-height: 1.7; color: #e0eef9; }
+.fs-premise b { color: #fff; }
+
+/* Failure modes (numbered) */
+.fail-mode { border: 1px solid rgba(255,255,255,.1); border-radius: 18px; background: linear-gradient(155deg, rgba(15,23,42,.55), rgba(5,12,22,.35)); padding: 28px 28px 24px; margin: 22px 0; position: relative; }
+.fail-mode::before { content: attr(data-num); position: absolute; top: -14px; left: 22px; background: #06111d; border: 2px solid rgba(45,212,191,.5); color: #2dd4bf; font-weight: 800; padding: 4px 14px; border-radius: 100px; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; }
+.fail-mode h3 { color: #fff; font-size: 1.3rem; margin: 0 0 6px; font-weight: 800; letter-spacing: -.01em; }
+.fail-mode .subhead { color: #fca5a5; font-size: .82rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 16px; }
+.fail-mode p { color: #b9d9ee; line-height: 1.7; margin: 0 0 12px; font-size: .96rem; }
+.fail-mode p:last-child { margin-bottom: 0; }
+.fail-mode .vs { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 18px 0 6px; }
+.vs-col { border-radius: 12px; padding: 14px 16px; }
+.vs-col.bad { border: 1px solid rgba(248,113,113,.25); background: rgba(248,113,113,.06); }
+.vs-col.good { border: 1px solid rgba(74,222,128,.25); background: rgba(74,222,128,.05); }
+.vs-col h5 { margin: 0 0 8px; font-size: .72rem; text-transform: uppercase; letter-spacing: .1em; font-weight: 800; }
+.vs-col.bad h5 { color: #fca5a5; }
+.vs-col.good h5 { color: #86efac; }
+.vs-col p { margin: 0; font-size: .86rem; line-height: 1.6; }
+.vs-col.bad p { color: #fed7d7; }
+.vs-col.good p { color: #bbf7d0; }
+
+/* Diagram */
+.diagram { border: 1px solid rgba(45,212,191,.22); border-radius: 14px; background: #06111d; padding: 18px 20px; margin: 14px 0; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .82rem; color: #cfdfeb; line-height: 1.8; overflow-x: auto; }
+.diagram .lbl { color: #6b8499; }
+.diagram .ok { color: #86efac; }
+.diagram .warn { color: #fde68a; }
+.diagram .bad { color: #fca5a5; }
+.diagram .info { color: #93c5fd; }
+.diagram .arrow { color: #2dd4bf; }
+
+/* Doctrine summary */
+.doctrine { margin: 48px 0 24px; padding: 32px 28px; border: 1px solid rgba(45,212,191,.3); border-radius: 22px; background: linear-gradient(145deg, rgba(0,194,168,.06), rgba(2,8,18,.4)); }
+.doctrine h2 { margin: 0 0 18px; color: #fff; font-size: clamp(1.4rem,2.8vw,2rem); font-weight: 800; }
+.doctrine-list { list-style: none; padding: 0; margin: 0; }
+.doctrine-list li { padding: 10px 0 10px 36px; position: relative; color: #cfdfeb; line-height: 1.65; font-size: 1rem; border-bottom: 1px solid rgba(255,255,255,.05); }
+.doctrine-list li:last-child { border-bottom: 0; }
+.doctrine-list li::before { content: "▸"; position: absolute; left: 12px; top: 10px; color: #2dd4bf; font-weight: 800; }
+.doctrine-list li b { color: #fff; }
+
+/* Section heading */
+.fs-section-head { margin: 56px 0 24px; padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,.08); }
+.fs-section-head h2 { color: #fff; font-size: clamp(1.5rem,3vw,2rem); margin: 0 0 6px; font-weight: 800; }
+.fs-section-head .sub { color: #8fb1c7; font-size: .92rem; margin: 0; }
+
+/* CTA */
+.fs-cta-wrap { margin: 56px 0 24px; padding: 32px 28px; border: 1px solid rgba(45,212,191,.28); border-radius: 22px; background: linear-gradient(145deg, rgba(5,22,34,.7), rgba(2,8,18,.4)); text-align: center; }
+.fs-cta-wrap h3 { margin: 0 0 10px; color: #fff; font-size: clamp(1.3rem,2.4vw,1.8rem); font-weight: 800; }
+.fs-cta-wrap p { margin: 0 auto 22px; color: #b9d9ee; max-width: 620px; line-height: 1.65; font-size: .98rem; }
+.fs-btn-row { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+.fs-btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 22px; border-radius: 100px; text-decoration: none; font-weight: 700; font-size: .94rem; transition: transform .15s, box-shadow .15s; }
+.fs-btn.primary { background: linear-gradient(135deg, rgba(45,212,191,.22), rgba(59,130,246,.14)); color: #eaffff; border: 1px solid rgba(45,212,191,.5); }
+.fs-btn.primary:hover { transform: translateY(-1px); box-shadow: 0 8px 22px rgba(45,212,191,.18); }
+.fs-btn.secondary { background: rgba(15,23,42,.55); color: #9bdcff; border: 1px solid rgba(148,163,184,.28); }
+
+@media (max-width: 760px) {
+  .vs { grid-template-columns: 1fr !important; }
+}
+</style>
+
+<!-- JSON-LD: v329 final structured-data pass -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://poconoai.com/how-pocono-ai-fails-safely.html",
+      "url": "https://poconoai.com/how-pocono-ai-fails-safely.html",
+      "datePublished": "2026-06-01",
+      "dateModified": "2026-06-01"
+      ,
+      "headline": "How Pocono AI Fails Safely | Sentinel Node Failure Modes",
+      "description": "Explicit documentation of how the Sentinel Node fails \u2014 what happens when the model is wrong, when retrieval returns incomplete context, and why human-in-the-loop review is the primary safety mechanism, not the fallback.",
+      "articleSection": "AI Governance",
+      "isPartOf": {
+        "@id": "https://poconoai.com/#website"
+      },
+      "publisher": {
+        "@id": "https://poconoai.com/#organization"
+      },
+      "inLanguage": "en-US"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to content</a>
+
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- INCLUDE:HEADER -->
+<div id="hitl-notice" style="background:#0a1929;padding:4px 16px;text-align:center;font-size:12px;color:#4a5568;border-bottom:1px solid rgba(255,255,255,0.06);letter-spacing:0.01em;">Human-in-the-Loop required: licensed professionals verify all outputs before clinical or legal action</div>
+<header role="banner">
+  <div class="header-inner">
+    <a href="/index.html" class="logo" aria-label="Pocono AI Home">
+      <img src="/logo.svg?v=402" alt="" width="36" height="36" decoding="async" loading="eager" aria-hidden="true" style="display:inline-block;">
+      Pocono <span>AI</span>
+    </a>
+    <nav id="desktop-nav" aria-label="Main navigation">
+      <div class="nav-item"><a href="/index.html" class="nav-direct">Home</a></div>
+      <div class="nav-item"><a href="/for-physicians.html" class="nav-direct">Physicians</a></div>
+      <div class="nav-item"><a href="/for-attorneys.html" class="nav-direct">Attorneys</a></div>
+      <div class="nav-item"><a href="/sentinel-node.html" class="nav-direct nav-hub" style="color:#d5a94f;border:1px solid rgba(213,169,79,0.45);border-radius:999px;padding:6px 13px;">Sentinel Node</a></div>
+      <div class="nav-item"><a href="/living-memorials/" class="nav-direct">Living Echo</a></div>
+      <div class="nav-item"><a href="/contact.html" class="nav-direct">Contact</a></div>
+      <div class="nav-item" data-dropdown="menu-more">
+        <button type="button" class="nav-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="menu-more">More <span class="nav-chevron" aria-hidden="true">&#9662;</span></button>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <a href="/contact.html#pilot" class="nav-cta nav-cta-primary">Request a Pilot</a>
+      <button type="button" class="pa-search-trigger" data-search-open aria-label="Search (press / or Ctrl-K)" aria-haspopup="dialog" aria-expanded="false">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span class="pa-st-label">Search</span><kbd data-pa-keyhint>Ctrl K</kbd>
+      </button>
+      <button type="button" class="header-icon-btn" id="mobile-menu" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav-panel">
+        <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- "More" overflow dropdown — sibling of <header> so position:fixed escapes header's stacking context. Wired by nav.js via data-dropdown="menu-more". -->
+<div class="nav-dropdown" id="menu-more" aria-label="More navigation">
+  <p class="nav-dd-section">Products</p>
+  <a href="/engineering-drafting/">Drafting &amp; Engineering Edition</a>
+  <a href="/sentinel-home/">Sentinel Home Edition</a>
+  <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability — Assistive Tools &#x2605;</a>
+  <a href="/living-memorials/enterprise-estate-continuity.html">Enterprise Estate Continuity</a>
+  <p class="nav-dd-section">Capabilities</p>
+  <a href="/evidence-room.html">Evidence Room</a>
+  <a href="/push-button-deliverables.html">Push-Button Deliverables</a>
+  <a href="/pilot-readiness-kit.html">Pilot Kit</a>
+  <a href="/pilot-program.html">Pilot Program</a>
+  <a href="/how-it-works.html">How It Works</a>
+  <p class="nav-dd-section">Hubs &amp; Company</p>
+  <a href="/training.html">Training Hub</a>
+  <a href="/documentation-hub/">Document Hub</a>
+  <a href="/global/">Global Hub</a>
+  <a href="/investors-hub.html">Investor Hub</a>
+  <a href="/valuation-dashboard.html">Valuation Dashboard</a>
+  <a href="/about.html">About</a>
+  <p class="nav-dd-section">Trust &amp; Legal</p>
+  <a href="/transparency.html">Transparency</a>
+  <a href="/audit.html">Audit Log</a>
+  <a href="/privacy.html">Privacy</a>
+  <a href="/sitemap.html">Sitemap</a>
+</div>
+<!-- Site search is provided by the self-contained search.js asset (command palette: / or Ctrl/Cmd-K). -->
+
+<!-- Mobile panel: full-screen slide-in. v396 nav — hub tiles + grouped links + Sentinel Node + Engineering. -->
+<nav id="mobile-nav-panel" aria-label="Mobile navigation" aria-hidden="true" role="dialog" aria-modal="true">
+
+  <!-- Hub tiles: Sentinel Node, Documentation Hub, Training Hub, Global Hub -->
+  <div style="padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,0.07);">
+    <p style="font-size:0.65em;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.28);margin:0 0 10px;padding:0 2px;">Hubs</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <a href="/sentinel-node.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(213,169,79,0.1);border:1px solid rgba(213,169,79,0.35);border-radius:10px;color:#d5a94f;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Sentinel Node</a>
+      <a href="/documentation-hub/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(0,194,168,0.1);border:1px solid rgba(0,194,168,0.35);border-radius:10px;color:#00c2a8;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Docs Hub</a>
+      <a href="/training.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.35);border-radius:10px;color:#a78bfa;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Training Hub</a>
+      <a href="/global/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(122,240,220,0.07);border:1px solid rgba(122,240,220,0.3);border-radius:10px;color:#7af0dc;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Global Hub</a>
+    </div>
+  </div>
+
+  <!-- Core paths -->
+  <div class="mob-static-links">
+    <a href="/index.html">Home</a>
+    <a href="/for-physicians.html">Physicians</a>
+    <a href="/for-attorneys.html">Attorneys</a>
+    <a href="/engineering-drafting/">Engineering &amp; Drafting</a>
+    <a href="/pilot-program.html">Pilot Program</a>
+    <a href="/how-it-works.html">How It Works</a>
+    <a href="/trust.html">Trust &amp; Audit</a>
+    <a href="/pricing.html">Pricing</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/living-memorials/">Living Echo</a>
+    <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability</a>
+    <a href="/about.html">About</a>
+    <a href="/team.html" style="color:rgba(255,255,255,0.6);">Team &amp; Leadership</a>
+    <a href="/valuation-dashboard.html" style="color:rgba(255,255,255,0.6);">Valuation Dashboard</a>
+    <a href="/careers.html" style="color:rgba(255,255,255,0.6);">Careers</a>
+    <a href="/sentinel-demo.html" style="color:rgba(255,255,255,0.6);">Demo</a>
+    <a href="/sitemap.html" style="color:rgba(255,255,255,0.45);">Sitemap</a>
+    <a href="/transparency.html" style="color:rgba(255,255,255,0.45);">Transparency</a>
+    <a href="/privacy.html" style="color:rgba(255,255,255,0.45);">Privacy</a>
+  </div>
+
+  <a href="/contact.html#pilot" class="mob-cta">Request a Pilot</a>
+</nav>
+<!-- /INCLUDE:HEADER -->
+
+
+<main id="main">
+<div class="page-wrap">
+
+  <!-- HERO -->
+  <div class="fs-hero">
+    <span class="fs-kicker">Governance Doctrine · Refusal &amp; Containment</span>
+    <h1 class="fs-title">How Pocono AI <em>fails safely.</em></h1>
+    <p class="fs-lede">Every AI system fails. The honest question is what happens when it does. This page documents how Sentinel Node is designed to fail — by refusing, escalating, flagging, and stopping — rather than by silently producing wrong work that a licensed professional then has to defend.</p>
+  </div>
+
+  <div class="fs-premise">
+    <b>The premise:</b> AI in regulated industries does not get to fail like consumer AI fails. A wrong chatbot answer at home is annoying. A wrong cited paragraph in a court filing is a bar complaint. A wrong dosing recommendation in a clinical note is a malpractice case. <b>Sentinel Node is designed so that when the model is uncertain, the failure mode is visible refusal — not invisible confabulation.</b>
+  </div>
+
+  <!-- FAILURE MODES -->
+  <div class="fs-section-head">
+    <h2>The six ways Sentinel Node refuses to fail silently.</h2>
+    <p class="sub">Each represents a specific class of AI failure and the corresponding containment mechanism.</p>
+  </div>
+
+  <!-- MODE 1: Hallucinated citation -->
+  <div class="fail-mode" data-num="01">
+    <h3>Citation Verification</h3>
+    <p class="subhead">Failure mode: Hallucinated case law, fabricated quotes, invented page numbers.</p>
+    <p>This is the well-known failure mode — the one that produced public sanctions in <em>Mata v. Avianca</em> and several similar cases since 2023. A cloud LLM confidently cites a case that does not exist. The attorney, trusting the output, files it. The court catches it.</p>
+    <p>Sentinel Node does not source citations from a generative model's parametric memory. It sources them from a sealed retrieval index built from documents the firm explicitly uploaded. <b>Every cited quotation is bound to a clickable source path. Every quote is verified against the underlying document before display.</b> When the retrieved text differs from the AI's paraphrase — even subtly — both versions are shown side by side and the attorney chooses.</p>
+    <div class="vs">
+      <div class="vs-col bad"><h5>Cloud LLM failure</h5><p>"As established in Riley v. Patterson, 412 F.3d 287 (3d Cir. 2010), the moving party..." — the case doesn't exist.</p></div>
+      <div class="vs-col good"><h5>Sentinel Node behavior</h5><p>"Retrieved 3 cases on this issue from firm precedent library. Top match: <em>Cordero v. Brookfield Transport</em> (Monroe County, 2019) — click to verify." No retrieval, no claim.</p></div>
+    </div>
+  </div>
+
+  <!-- MODE 2: Out of scope refusal -->
+  <div class="fail-mode" data-num="02">
+    <h3>Out-of-Scope Refusal</h3>
+    <p class="subhead">Failure mode: AI generates output the firm's governance policy excludes.</p>
+    <p>Many firms have informal positions on what they will and won't allow AI to do. Most never operationalize them. The result: an associate working at 11 PM uses ChatGPT to draft a motion because nothing was stopping them.</p>
+    <p>Sentinel Node enforces the firm's governance policy as configuration, not as suggestion. If the policy says <em>"no AI-drafted motions, briefs, or pleadings,"</em> the system refuses those requests at the system level, with the refusal reason cited back to the policy document and the policy author. <b>The refusal is logged in the audit chain — including who tried, when, and what.</b></p>
+    <div class="diagram">
+<span class="lbl">user.prompt:</span> "Draft a motion to dismiss in Halverson"
+<span class="arrow">  ↓</span>
+<span class="lbl">policy.check:</span> firm_governance_policy.v3 (uploaded D.Walsh 2024-11-08)
+<span class="arrow">  ↓</span>
+<span class="lbl">rule_match:</span> § 4.2 — AI-drafted advocacy excluded
+<span class="arrow">  ↓</span>
+<span class="bad">RESPONSE: DECLINED</span>
+<span class="lbl">audit.envelope:</span> attempt logged · user · timestamp · policy version
+<span class="lbl">suggested.alternatives:</span> evidence retrieval · case law lookup · clause analysis
+    </div>
+  </div>
+
+  <!-- MODE 3: Uncertainty -->
+  <div class="fail-mode" data-num="03">
+    <h3>Uncertainty Flagging</h3>
+    <p class="subhead">Failure mode: The model is unsure, but the output reads as confident.</p>
+    <p>A core danger of LLMs is that fluency masks uncertainty. The same model that knows the answer and the model that is guessing produce sentences of equal smoothness. This is the user-experience layer where most damage happens.</p>
+    <p>Sentinel Node attaches a confidence band to every substantive output. If the retrieval returned no strong matches, the system says so. If OCR confidence on a scanned exhibit is below threshold, the original image is shown inline and the AI does not pretend to know what it says. <b>"I don't know" is a first-class output, not a failure mode.</b></p>
+    <div class="vs">
+      <div class="vs-col bad"><h5>Confident hallucination</h5><p>"The handwritten interim order specifies supervised visitation under terms set forth in the substance abuse treatment provision."</p></div>
+      <div class="vs-col good"><h5>Honest uncertainty</h5><p>"⚠ OCR low confidence. Original scanned image displayed below. Please read directly — system cannot reliably parse this handwriting."</p></div>
+    </div>
+  </div>
+
+  <!-- MODE 4: Mandatory review -->
+  <div class="fail-mode" data-num="04">
+    <h3>Mandatory Attorney Review</h3>
+    <p class="subhead">Failure mode: AI output exits the firm without a licensed reviewer.</p>
+    <p>Regardless of how confident the model is, regardless of how routine the document is, regardless of how late it is or how rushed the attorney is, regulated outputs do not leave the building without a named attorney's signoff. <b>This is enforced at the workflow level. There is no "skip review" button.</b></p>
+    <p>Each output sits in a review queue until an attorney with the appropriate role approves it. The approval is sealed into the audit envelope with the attorney's identity, the version reviewed, the decision (approve / send back / discuss), and any review notes. If a document moves to client delivery, the audit envelope follows it.</p>
+    <div class="diagram">
+<span class="lbl">workflow.stage:</span> AI draft generated
+<span class="arrow">  ↓</span>
+<span class="lbl">review.queue:</span> assigned to reviewing attorney (per matter assignment)
+<span class="arrow">  ↓</span>
+<span class="info">[ attorney review — required ]</span>
+<span class="arrow">  ↓</span>
+<span class="ok">APPROVE</span>  → audit envelope sealed → output released
+<span class="warn">SEND BACK</span> → audit envelope sealed → returns to draft state
+<span class="bad">REJECT</span>    → audit envelope sealed → matter flagged for partner
+    </div>
+  </div>
+
+  <!-- MODE 5: Privilege boundary -->
+  <div class="fail-mode" data-num="05">
+    <h3>Privilege Boundary Enforcement</h3>
+    <p class="subhead">Failure mode: Work product touches infrastructure outside the firm's control.</p>
+    <p>This is the architectural failure cloud AI cannot solve. Any system that sends work product through an external API has, by definition, exposed that work product to a third party. Whether that exposure breaks privilege under <em>ABA Model Rule 1.6</em> is a question reasonable lawyers debate; whether it adds malpractice surface area is not.</p>
+    <p>Sentinel Node is an on-premise physical appliance. No prompt, no retrieval, no draft, no audit envelope leaves the firm's network. <b>There is no telemetry. There is no "anonymized usage data" sent home. There is no cloud failover.</b> If the firm loses internet, Sentinel Node still works. If Pocono AI as a company ceased to exist tomorrow, the appliance continues operating against the firm's own data.</p>
+    <div class="vs">
+      <div class="vs-col bad"><h5>Cloud AI architecture</h5><p>Prompt → vendor API → third-party model host → response. Privilege exposure surface: every hop. Audit trail: vendor-controlled.</p></div>
+      <div class="vs-col good"><h5>Sentinel Node architecture</h5><p>Prompt → local appliance → local model → local response. Privilege exposure surface: zero hops outside the firm. Audit trail: firm-owned.</p></div>
+    </div>
+  </div>
+
+  <!-- MODE 6: Audit -->
+  <div class="fail-mode" data-num="06">
+    <h3>Append-Only Audit Chain</h3>
+    <p class="subhead">Failure mode: Months later, no one can reconstruct what the AI did or why.</p>
+    <p>When something goes wrong — a malpractice carrier asking questions, a bar complaint, opposing counsel demanding discovery on AI-assisted work product — the question is not <em>"did you have AI involved?"</em> It's <em>"can you produce the exact retrieval, the exact draft, the exact reviewer, the exact decision, on the exact version, at the exact time?"</em></p>
+    <p>Sentinel Node produces a sealed audit envelope for every substantive AI interaction. Each envelope contains the prompt, the retrieved sources, the generated draft, the reviewing attorney, the review decision, and the final version. Each envelope is recorded in a reviewable local audit trail. The next audit-layer release (Stage 2) cryptographically links each envelope to the previous one. <b>The record is local, reviewable today and tamper-evident next, and the firm's property — not the vendor's.</b></p>
+    <div class="diagram">
+<span class="lbl">envelope_id:</span> env_2026-03-04_14:17:08Z_a7f3e1b8c9d4...
+<span class="lbl">prompt:</span> "Find every document referencing the modified delivery..."
+<span class="lbl">sources:</span> 23 documents retrieved (Bates-stamped citations attached)
+<span class="lbl">draft:</span> evidence summary v1.0
+<span class="lbl">reviewer:</span> S. Mendez (signed: 2026-03-04 17:34:12Z)
+<span class="lbl">decision:</span> approved with edits → v1.1
+<span class="lbl">prev_hash:</span> env_2026-03-04_14:12:55Z_b8c4f2a1...
+<span class="lbl">next_hash:</span> env_2026-03-04_14:18:33Z_c9d5e3b2...
+<span class="ok">SEALED. APPEND-ONLY. QUERYABLE.</span>
+    </div>
+  </div>
+
+  <!-- DOCTRINE -->
+  <div class="doctrine">
+    <h2>Pocono AI's Doctrine of Refusal</h2>
+    <ul class="doctrine-list">
+      <li><b>Refusal is a feature.</b> Saying "I don't know" or "I won't do that" preserves more value than smooth, wrong output ever could.</li>
+      <li><b>Confidence must be earned per citation.</b> Every quoted source is verified against the underlying document before display. Paraphrases are flagged as paraphrases.</li>
+      <li><b>Governance is configuration, not aspiration.</b> What the firm decides AI can and cannot do is enforced at the system level — not posted on a wall.</li>
+      <li><b>The reviewer is always a person.</b> There is no automated path from AI draft to client delivery. Human-in-the-loop is structural, not optional.</li>
+      <li><b>The chain is the firm's.</b> Audit envelopes are local, append-only, and survive vendor disappearance.</li>
+      <li><b>Silent failure is the only unacceptable failure.</b> Loud failures — refusals, escalations, flags, uncertainty bands — are the system working as designed.</li>
+    </ul>
+  </div>
+
+  <!-- KEY MESSAGE -->
+  <div class="fs-section-head">
+    <h2>The line we will not cross.</h2>
+    <p class="sub">What "fail safely" actually rules out.</p>
+  </div>
+
+  <p style="color:#cfdfeb;line-height:1.75;font-size:1rem;margin:0 0 14px;">AI should never <b style="color:#fff;">silently act</b> inside a law firm or a medical practice. That is the line. We do not build systems that take autonomous action on regulated work. We do not build agentic loops that send communications, file motions, or update records without a named professional reviewing and approving each action.</p>
+
+  <p style="color:#cfdfeb;line-height:1.75;font-size:1rem;margin:0 0 14px;">When you hear vendors describe AI agents that "handle the entire intake," "draft and file routine motions," or "autonomously respond to client communications" — those are systems built to fail silently. Errors compound inside automation loops where no human sees them until the harm is done.</p>
+
+  <p style="color:#cfdfeb;line-height:1.75;font-size:1rem;">Sentinel Node is built on the opposite premise: <b style="color:#fff;">the AI does the document work; the attorney does the lawyering.</b> When in doubt, the system stops and asks. That stop, on purpose, is what makes the system safe to deploy in a setting where mistakes cost more than time.</p>
+
+  <!-- CTA -->
+  <div class="fs-cta-wrap">
+    <h3>If governance is the part you've been waiting for somebody to take seriously, you're in the right place.</h3>
+    <p>Read the architecture page for the technical depth, or read the workflow narrative to see governance in operation across a real day.</p>
+    <div class="fs-btn-row">
+      <a href="architecture.html" class="fs-btn primary">Architecture →</a>
+      <a href="day-in-a-law-firm.html" class="fs-btn secondary">A Day Inside a Small Law Firm</a>
+      <a href="for-attorneys.html" class="fs-btn secondary">For Attorneys</a>
+      <a href="contact.html#pilot" class="fs-btn secondary">Talk to Us</a>
+    </div>
+    <p style="margin:18px 0 0;font-size:.82rem;color:#8fb1c7;font-style:italic;padding-top:14px;border-top:1px solid rgba(255,255,255,.06);">Privilege protected by architecture. Governance before automation.</p>
+  </div>
+
+</div>
+</main>
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 root-relative nav fix, Living Echo rebrand, Engineering & Drafting + Enterprise Estate Continuity links added (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- INCLUDE:FOOTER -->
+<footer role="contentinfo" style="background:#051622;border-top:1px solid rgba(255,255,255,0.08);padding:40px 24px 28px;font-size:0.85em;color:#8899aa;">
+  <div style="max-width:1180px;margin:0 auto;">
+
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:0 0 28px;margin-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.07);">
+      <div style="max-width:560px;">
+        <p style="margin:0 0 6px;font-size:1.05em;font-weight:700;color:#fff;">Local AI infrastructure for regulated practices.</p>
+        <p style="margin:0;font-size:0.95em;line-height:1.5;">Drafts with citations. Human review required. Sensitive documents stay under practice control. Simple path, deep proof.</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="/contact.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;background:#00c2a8;color:#04111a;font-weight:700;text-decoration:none;font-size:0.95em;">Request Pilot</a>
+        <a href="/sentinel-demo.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;border:1px solid rgba(0,194,168,0.55);color:#00c2a8;font-weight:700;text-decoration:none;font-size:0.95em;">Watch Demo</a>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px 32px;margin-bottom:32px;text-align:left;">
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">For You</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/start-here.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Start Here (3 min)</a>
+          <a href="/for-physicians.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Physicians</a>
+          <a href="/for-attorneys.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Attorneys</a>
+          <a href="/engineering-drafting/" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Engineering &amp; Drafting Teams</a>
+          <a href="/pilot-program.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Pilot Program</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Installer Training</a>
+          <a href="/how-it-works.html" style="color:#8899aa;text-decoration:none;">How It Works</a>
+          <a href="/trust.html" style="color:#8899aa;text-decoration:none;">Trust &amp; Audit</a>
+          <a href="/pricing.html" style="color:#8899aa;text-decoration:none;">Pricing</a>
+          <a href="/sentinel-demo.html" style="color:#8899aa;text-decoration:none;">See the Demo</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Documentation Hub</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/documentation-hub/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Hub Home &mdash; Deep Proof</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">Installer Training</a>
+          <a href="/sentinel-node/installation-simulator.html" style="color:#8899aa;text-decoration:none;">&#8627; Installation Simulator</a>
+          <a href="/documentation-hub/clinical/" style="color:#8899aa;text-decoration:none;">Clinical Documentation</a>
+          <a href="/documentation-hub/legal/" style="color:#8899aa;text-decoration:none;">Legal Documentation</a>
+          <a href="/documentation-hub/technical/" style="color:#8899aa;text-decoration:none;">Technical Documentation</a>
+          <a href="/documentation-hub/governance/" style="color:#8899aa;text-decoration:none;">Governance &amp; Audit</a>
+          <a href="/documentation-hub/tools/" style="color:#8899aa;text-decoration:none;">Tools &amp; Simulators</a>
+          <a href="/documentation-hub/research/" style="color:#8899aa;text-decoration:none;">Research &amp; Essays</a>
+          <a href="/documentation-hub/transparency/" style="color:#8899aa;text-decoration:none;">Transparency</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Global Federated AI</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/global/" style="color:#7af0dc;text-decoration:none;font-weight:600;">Global Federated Hub</a>
+          <a href="/global/australia/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Australia</a>
+          <a href="/global/singapore/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Singapore</a>
+          <a href="/global/taiwan/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Taiwan</a>
+          <a href="/global/europe/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Europe</a>
+          <a href="/contact.html" style="color:#8899aa;text-decoration:none;">Partner Inquiry</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Company</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/about.html" style="color:#8899aa;text-decoration:none;">About Pocono AI</a>
+          <a href="/team.html" style="color:#8899aa;text-decoration:none;">Team &amp; Leadership</a>
+          <a href="/why-pocono-ai.html" style="color:#8899aa;text-decoration:none;">Why Pocono AI</a>
+          <a href="/founding-commercial-leadership.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Join Us</a>
+          <a href="/careers.html" style="color:#8899aa;text-decoration:none;">Careers</a>
+          <a href="/how-we-hire.html" style="color:#8899aa;text-decoration:none;">How We Hire</a>
+          <a href="/channel-partners.html" style="color:#8899aa;text-decoration:none;">Technical Partners (MSPs)</a>
+          <a href="/partners.html" style="color:#8899aa;text-decoration:none;">Academic Partnerships</a>
+          <a href="/contact.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Contact</a>
+          <a href="https://forms.gle/VQahnkjMfY6QNEMy8" target="_blank" rel="noopener noreferrer" style="color:#d5a94f;text-decoration:none;font-weight:600;">Interest List &#8599;</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Founder Projects</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/rehability/" style="color:#a78bfa;text-decoration:none;font-weight:700;">Rehability &#x2605;</a>
+          <a href="/rehability/marcus-memory-helper/" style="color:#a78bfa;text-decoration:none;font-weight:600;">&#8627; Marcus's Memory Helper</a>
+          <a href="/sentinel-home/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Sentinel Home Edition</a>
+          <a href="/living-memorials/" style="color:#8899aa;text-decoration:none;">Living Echo</a>
+          <a href="/living-memorials/marcus-odell/" style="color:#8899aa;text-decoration:none;">Marcus&rsquo;s Living Echo</a>
+          <a href="/living-memorials/enterprise-estate-continuity.html" style="color:#8899aa;text-decoration:none;">Enterprise Estate Continuity</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Resources &amp; Legal</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/sitemap.html" style="color:#8899aa;text-decoration:none;">All Pages (Sitemap)</a>
+          <a href="/audit.html" style="color:#8899aa;text-decoration:none;">Transparency &amp; Audit Log</a>
+          <a href="/maturity-disclosure.html" style="color:#8899aa;text-decoration:none;">What We Have / Don&rsquo;t Claim</a>
+          <a href="/plain.html" style="color:#8899aa;text-decoration:none;">Plain Language Guide</a>
+          <a href="/privacy.html" style="color:#8899aa;text-decoration:none;">Privacy</a>
+          <a href="/terms.html" style="color:#8899aa;text-decoration:none;">Terms</a>
+          <a href="/sla.html" style="color:#8899aa;text-decoration:none;">SLA</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:18px;margin-bottom:14px;">
+      <p style="margin:0;font-size:0.82em;line-height:1.6;color:#6f8295;max-width:1000px;">Pocono AI does not provide medical, legal, or engineering advice, does not practice medicine, law, or licensed engineering, and does not make clinical, legal, or engineering decisions. Outputs are drafts or support materials that require review by a qualified professional; final professional judgment remains with the licensed physician, attorney, or engineer. Tools and simulations on this site are educational and use synthetic data.</p>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:20px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+      <p style="margin:0;font-size:0.9em;">&copy; 2026 Pocono AI, LLC &nbsp;&#183;&nbsp; East Stroudsburg, PA &nbsp;&#183;&nbsp; <a href="mailto:marcus@poconoai.com" style="color:#8899aa;">marcus@poconoai.com</a> &nbsp;&#183;&nbsp; <a href="tel:+15705340602" style="color:#8899aa;">(570) 534-0602</a></p>
+      <p style="margin:0;font-size:0.88em;"><a href="/audit.html" style="color:#5dade2;text-decoration:none;">Transparency v402</a></p>
+    </div>
+  </div>
+</footer>
+<script src="/search.js?v=402" defer></script>
+<!-- /INCLUDE:FOOTER -->
+
+
+<script src="search-index.js?v=402" defer></script>
+<script src="nav.js?v=402" defer></script>
+<script src="pilot-cta.js?v=402" defer></script>
+</body>
+</html>

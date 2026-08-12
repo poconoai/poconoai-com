@@ -1,0 +1,78 @@
+<!-- INCLUDE:AUDIT-ROADMAP v384 — self-contained, inline-styled, zero external CSS deps.
+     Source of truth for the sitewide "Reviewable Today, Tamper-Evident Next" card.
+     If you change this, re-inject into evidence-room.html and architecture.html. -->
+<section class="audit-roadmap-card" aria-labelledby="audit-roadmap-h" style="max-width:1040px;margin:42px auto;padding:26px 26px 22px;background:linear-gradient(180deg,#101620,#0b0f13);border:1px solid rgba(0,194,168,0.28);border-radius:14px;box-shadow:0 1px 0 rgba(255,255,255,0.03) inset,0 18px 50px rgba(0,0,0,0.35);">
+  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px;">
+    <span style="font:600 0.66rem/1 system-ui,sans-serif;letter-spacing:0.18em;text-transform:uppercase;color:#00C2A8;">Audit &amp; Security Roadmap</span>
+    <span style="font:600 0.6rem/1 system-ui,sans-serif;letter-spacing:0.08em;text-transform:uppercase;color:#0B0F13;background:#00C2A8;padding:3px 8px;border-radius:999px;">Reviewable today</span>
+    <span style="font:600 0.6rem/1 system-ui,sans-serif;letter-spacing:0.08em;text-transform:uppercase;color:#cfe9ee;background:rgba(10,165,255,0.16);border:1px solid rgba(10,165,255,0.4);padding:3px 8px;border-radius:999px;">Tamper-evident next</span>
+  </div>
+  <h2 id="audit-roadmap-h" style="font:700 1.5rem/1.2 system-ui,sans-serif;color:#E6E9ED;margin:0 0 10px;">Reviewable Today. Tamper-Evident Next.</h2>
+  <p style="font:400 0.98rem/1.6 system-ui,sans-serif;color:#A6ADB7;margin:0 0 6px;max-width:78ch;">
+    Sentinel Node&rsquo;s pilot architecture preserves a <strong style="color:#E6E9ED;">reviewable audit trail</strong> for
+    approved-source retrieval, draft generation, human review, and go-live reporting. We do not claim that citations prove
+    correctness, or that a local log is tamper-proof. Our next audit-layer release adds hash-chained audit events, signed
+    verification bundles, admin-action logging, and optional off-box/WORM retention for stronger tamper-evidence.
+  </p>
+  <p style="font:400 0.82rem/1.5 system-ui,sans-serif;color:#8899aa;margin:0 0 18px;max-width:78ch;">
+    Citations support human review &mdash; they do not prove the AI&rsquo;s interpretation is correct. Sentinel Node produces
+    cited <em>draft</em> output from approved sources; a qualified person reviews before any clinical, legal, or operational use.
+    &ldquo;Tamper-evident&rdquo; here means alteration is detectable, not impossible.
+  </p>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;">
+
+    <div style="background:rgba(0,194,168,0.06);border:1px solid rgba(0,194,168,0.32);border-radius:11px;padding:16px;">
+      <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:8px;">
+        <span style="font:700 0.7rem/1 system-ui;letter-spacing:0.06em;color:#0B0F13;background:#00C2A8;padding:3px 7px;border-radius:6px;">STAGE 1</span>
+        <span style="font:600 0.7rem/1 system-ui;letter-spacing:0.04em;text-transform:uppercase;color:#00d9bb;">Shipping in pilot</span>
+      </div>
+      <h3 style="font:700 1.02rem/1.3 system-ui;color:#E6E9ED;margin:0 0 8px;">Pilot Audit Layer</h3>
+      <ul style="margin:0;padding-left:18px;font:400 0.86rem/1.55 system-ui;color:#A6ADB7;">
+        <li>Local operational audit trail</li>
+        <li>Approved-source manifest &amp; version</li>
+        <li>Draft metadata</li>
+        <li>Reviewer identity captured</li>
+        <li>Human approval record (hard gate)</li>
+        <li>Install / go-live report</li>
+        <li>Exportable review packet</li>
+      </ul>
+    </div>
+
+    <div style="background:rgba(10,165,255,0.05);border:1px solid rgba(10,165,255,0.34);border-radius:11px;padding:16px;">
+      <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:8px;">
+        <span style="font:700 0.7rem/1 system-ui;letter-spacing:0.06em;color:#0B0F13;background:#0AA5FF;padding:3px 7px;border-radius:6px;">STAGE 2</span>
+        <span style="font:600 0.7rem/1 system-ui;letter-spacing:0.04em;text-transform:uppercase;color:#5dade2;">Next audit-layer release</span>
+      </div>
+      <h3 style="font:700 1.02rem/1.3 system-ui;color:#E6E9ED;margin:0 0 8px;">Tamper-Evident Audit Layer</h3>
+      <ul style="margin:0;padding-left:18px;font:400 0.86rem/1.55 system-ui;color:#A6ADB7;">
+        <li>Hash-chained audit events</li>
+        <li>Signed audit entries</li>
+        <li>Admin-action logging</li>
+        <li>Exportable verification bundle</li>
+        <li>Audit integrity checker</li>
+      </ul>
+    </div>
+
+    <div style="background:rgba(166,173,183,0.05);border:1px solid rgba(166,173,183,0.26);border-radius:11px;padding:16px;">
+      <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:8px;">
+        <span style="font:700 0.7rem/1 system-ui;letter-spacing:0.06em;color:#E6E9ED;background:#2A313B;padding:3px 7px;border-radius:6px;">STAGE 3</span>
+        <span style="font:600 0.7rem/1 system-ui;letter-spacing:0.04em;text-transform:uppercase;color:#A6ADB7;">Production roadmap</span>
+      </div>
+      <h3 style="font:700 1.02rem/1.3 system-ui;color:#E6E9ED;margin:0 0 8px;">External Retention Layer</h3>
+      <ul style="margin:0;padding-left:18px;font:400 0.86rem/1.55 system-ui;color:#A6ADB7;">
+        <li>Optional off-box replication</li>
+        <li>Optional WORM archive</li>
+        <li>Customer-controlled retention</li>
+        <li>External timestamping</li>
+        <li>Role-separated audit review</li>
+      </ul>
+    </div>
+
+  </div>
+  <p style="font:400 0.74rem/1.5 system-ui;color:#6b8fa8;margin:16px 0 0;">
+    Roadmap items are planned capabilities, not commitments to a delivery date, and do not change what the current pilot claims.
+    The current pilot does not implement hash-chained or signed audit records as a production control; that work is Stage 2.
+  </p>
+</section>
+<!-- /INCLUDE:AUDIT-ROADMAP -->

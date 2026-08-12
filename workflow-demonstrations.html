@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp -->
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Workflow Demonstrations &mdash; Six Operational Sequences | Pocono AI</title>
+<meta name="description" content="Concrete operational workflows for Sentinel Node: prior auth appeals, referral coordination, and legal research — with local AI.">
+<meta property="og:title" content="Workflow Demonstrations &mdash; Six Operational Sequences — Pocono AI">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Pocono AI">
+<meta property="og:description" content="Concrete operational workflows for the Pocono AI Sentinel Node: prior auth appeals, policy retrieval, legal drafting, governance review, audit trail export, and physician sign-off.">
+<meta property="og:url" content="https://poconoai.com/workflow-demonstrations.html">
+<meta property="og:image" content="https://poconoai.com/infographic-workflow-desktop.webp">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Workflow Demonstrations &mdash; Six Operational Sequences — Pocono AI">
+<meta name="twitter:description" content="Concrete operational workflows for the Pocono AI Sentinel Node: prior auth appeals, policy retrieval, legal drafting, governance review, audit trail export, and physician sign-off.">
+<meta name="theme-color" content="#0B0F13">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="favicon-180x180.png">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="alternate icon" href="favicon.ico">
+<link rel="canonical" href="https://poconoai.com/workflow-demonstrations.html">
+<link rel="stylesheet" href="styles.css?v=402">
+<link rel="stylesheet" href="nav-v2026.css?v=402">
+<link rel="stylesheet" href="brand-v292.css?v=402">
+
+<style>
+/* ═══ Workflow Demonstrations — v274 ═══ */
+
+.wd-hero { padding: 4rem 0 2rem; text-align: left; }
+.wd-hero h1 {
+  font-size: clamp(2rem, 4.4vw, 3rem); line-height: 1.1;
+  color: var(--white, #fff); margin: 0 0 1rem; border-bottom: none;
+}
+.wd-hero h1 em { font-style: normal; color: #00c2a8; }
+.wd-hero .lede {
+  font-size: clamp(1.05rem, 1.8vw, 1.2rem); line-height: 1.55;
+  color: #a8cce8; max-width: 760px; margin: 0 0 1.5rem;
+}
+.wd-eyebrow {
+  display:inline-flex; align-items:center; gap:8px;
+  font-family: ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.14em;
+  color: var(--teal,#00c2a8); margin: 0 0 1rem;
+}
+.wd-eyebrow::before {
+  content:""; width:6px; height:6px; border-radius:50%;
+  background:var(--teal,#00c2a8); box-shadow:0 0 12px rgba(0,194,168,0.6);
+}
+
+/* ── TOC ── */
+.wd-toc {
+  display:flex; gap:8px; flex-wrap:wrap;
+  padding: 14px 16px; margin: 0 0 2.5rem;
+  background: rgba(15,23,42,0.45);
+  border: 1px solid rgba(148,163,184,0.14);
+  border-radius: 10px;
+}
+.wd-toc a {
+  font-family: ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size: 0.74rem; letter-spacing: 0.08em;
+  color: #a8cce8; text-decoration: none;
+  padding: 6px 11px; border-radius: 6px;
+  border: 1px solid rgba(148,163,184,0.16);
+}
+.wd-toc a:hover { color:#00c2a8; border-color:rgba(0,194,168,0.45); background:rgba(0,194,168,0.06); }
+
+/* ── Workflow block ── */
+.wd-flow { margin: 0 0 3.5rem; padding-top: 1rem; }
+.wd-flow-tag {
+  display:inline-block;
+  font-family: ui-monospace,Menlo,monospace;
+  font-size: 0.72rem; letter-spacing: 0.12em;
+  text-transform: uppercase; color: #00c2a8;
+  background: rgba(0,194,168,0.12);
+  padding: 4px 10px; border-radius: 4px;
+  margin: 0 0 10px;
+}
+.wd-flow-tag.legal { color:#a78bfa; background: rgba(167,139,250,0.12); }
+.wd-flow h2 {
+  font-size: clamp(1.4rem, 3vw, 1.9rem); color: var(--white,#fff);
+  margin: 0 0 0.5rem; border-bottom: none; font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.wd-flow-sub {
+  font-size: 0.95rem; color: var(--light-text,#d0dde6);
+  max-width: 740px; line-height: 1.6; margin: 0 0 1.5rem;
+}
+
+/* ── The step sequence ── */
+.wd-seq { display: grid; gap: 14px; margin: 0 0 1.25rem; }
+.wd-step {
+  display: grid; grid-template-columns: 7rem 1fr; gap: 18px;
+  padding: 16px 18px;
+  background: rgba(15,23,42,0.45);
+  border: 1px solid rgba(148,163,184,0.18);
+  border-radius: 10px;
+}
+@media (max-width: 640px) {
+  .wd-step { grid-template-columns: 1fr; gap: 6px; padding: 14px 14px; }
+}
+.wd-step-meta {
+  display: flex; flex-direction: column; gap: 4px;
+}
+.wd-step-num {
+  font-family: ui-monospace,Menlo,monospace;
+  font-size: 1.4rem; font-weight: 700; color: #00c2a8;
+  line-height: 1;
+}
+.wd-step-actor {
+  font-family: ui-monospace,Menlo,monospace;
+  font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: #8a9baa;
+}
+.wd-step-time {
+  font-family: ui-monospace,Menlo,monospace;
+  font-size: 0.72rem; color: #5dade2;
+}
+.wd-step-body h4 {
+  font-size: 1rem; color: var(--white,#fff); margin: 0 0 5px;
+  border-bottom: none; font-weight: 600;
+}
+.wd-step-body p {
+  font-size: 0.9rem; color: var(--light-text,#d0dde6);
+  line-height: 1.55; margin: 0 0 6px;
+}
+.wd-step-body .wd-step-artifact {
+  display:inline-block; margin-top: 6px;
+  font-family: ui-monospace,Menlo,monospace;
+  font-size: 0.74rem; color:#a8cce8;
+  background: rgba(8,18,28,0.6);
+  border: 1px solid rgba(148,163,184,0.18);
+  border-left: 3px solid #00c2a8;
+  border-radius: 4px; padding: 5px 10px;
+}
+.wd-step-body .wd-step-artifact.warn { border-left-color:#fbbf24; color:#fde68a; }
+.wd-step-body .wd-step-artifact.gate { border-left-color:#5dade2; color:#cfe5f3; }
+
+/* ── Before/After mini cards ── */
+.wd-ba {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+  margin: 0 0 1.25rem;
+}
+@media (max-width: 760px) { .wd-ba { grid-template-columns: 1fr; } }
+.wd-ba-pane {
+  padding: 16px; border-radius: 10px;
+  background: rgba(15,23,42,0.45);
+  border: 1px solid rgba(148,163,184,0.18);
+}
+.wd-ba-pane h3 {
+  font-size: 0.8rem; margin: 0 0 10px;
+  font-family: ui-monospace,Menlo,monospace;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  border-bottom: none;
+}
+.wd-ba-pane.bad h3 { color: #f87171; }
+.wd-ba-pane.good h3 { color: #00c2a8; }
+.wd-ba-pane dl { margin: 0; display: grid; gap: 8px; }
+.wd-ba-pane dt {
+  font-family: ui-monospace,Menlo,monospace;
+  font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase;
+  color: #8a9baa;
+}
+.wd-ba-pane dd {
+  margin: 0; font-size: 0.92rem; color: #d8e6f0; line-height: 1.5;
+}
+.wd-ba-pane.bad dd { color: #fecaca; }
+.wd-ba-pane.good dd { color: #d8f0e8; }
+
+/* ── Sealed-output card ── */
+.wd-out {
+  margin-top: 14px;
+  padding: 14px 16px;
+  background: rgba(8,18,28,0.55);
+  border: 1px solid rgba(0,194,168,0.32);
+  border-left: 3px solid #00c2a8;
+  border-radius: 8px;
+}
+.wd-out-label {
+  font-family: ui-monospace,Menlo,monospace;
+  font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: #00c2a8; margin: 0 0 6px;
+}
+.wd-out p { margin: 0; font-size: 0.9rem; line-height: 1.55; color: #d0dde6; }
+
+/* ── Note ── */
+.wd-note {
+  font-size: 0.84rem; color: #8a9baa; line-height: 1.55;
+  padding: 11px 14px;
+  border-left: 2px solid rgba(148,163,184,0.32);
+  margin: 1rem 0;
+  background: rgba(8,18,28,0.35);
+}
+.wd-note strong { color: #c0d4e2; }
+
+/* ── CTA ── */
+.wd-cta {
+  margin: 3rem 0 0;
+  padding: 28px;
+  background: linear-gradient(135deg, rgba(0,194,168,0.06) 0%, rgba(15,23,42,0.5) 100%);
+  border: 1px solid rgba(0,194,168,0.32);
+  border-radius: 14px;
+}
+.wd-cta h3 { font-size: 1.25rem; color: var(--white,#fff); margin: 0 0 8px; border-bottom: none; }
+.wd-cta p { color: var(--light-text,#d0dde6); margin: 0 0 16px; font-size: 0.98rem; }
+.wd-cta-row { display:flex; gap: 12px; flex-wrap: wrap; }
+</style>
+
+
+<!-- JSON-LD: v329 final structured-data pass -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://poconoai.com/workflow-demonstrations.html",
+      "url": "https://poconoai.com/workflow-demonstrations.html",
+      "datePublished": "2026-06-01",
+      "dateModified": "2026-06-01"
+      ,
+      "name": "Workflow Demonstrations | Pocono AI",
+      "description": "Video and interactive demonstrations of the Sentinel Node handling real clinical and legal workflows \u2014 prior authorization preparation, EHR documentation assist, legal document review, and intake processing.",
+      "isPartOf": {
+        "@id": "https://poconoai.com/#website"
+      },
+      "publisher": {
+        "@id": "https://poconoai.com/#organization"
+      },
+      "inLanguage": "en-US"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<div id="pilot-cohort-bar" style="background:rgba(255,255,255,0.025);border-bottom:1px solid rgba(255,255,255,0.07);padding:9px 20px;text-align:center;" role="region" aria-label="Founding Pilot Cohort">
+  <p style="margin:0;font-size:0.78em;line-height:1.6;color:var(--light-text);letter-spacing:0.01em;">
+    <span style="color:var(--teal);font-weight:600;text-transform:uppercase;letter-spacing:0.14em;font-size:0.92em;">Founding Pilot Cohort</span>
+    <span style="display:inline-block;width:1px;height:10px;background:rgba(255,255,255,0.18);margin:0 10px;vertical-align:middle;"></span>
+    Pilot discussions underway with a limited regional cohort of clinical and legal workflow partners. <a href="pilot-brief.html" style="color:var(--teal);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(0,194,168,0.4);">Review the pilot framework &rarr;</a>
+  </p>
+</div>
+
+<a href="#main" class="skip-link">Skip to content</a>
+<div id="reading-progress" aria-hidden="true"></div>
+
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- INCLUDE:HEADER -->
+<div id="hitl-notice" style="background:#0a1929;padding:4px 16px;text-align:center;font-size:12px;color:#4a5568;border-bottom:1px solid rgba(255,255,255,0.06);letter-spacing:0.01em;">Human-in-the-Loop required: licensed professionals verify all outputs before clinical or legal action</div>
+<header role="banner">
+  <div class="header-inner">
+    <a href="/index.html" class="logo" aria-label="Pocono AI Home">
+      <img src="/logo.svg?v=402" alt="" width="36" height="36" decoding="async" loading="eager" aria-hidden="true" style="display:inline-block;">
+      Pocono <span>AI</span>
+    </a>
+    <nav id="desktop-nav" aria-label="Main navigation">
+      <div class="nav-item"><a href="/index.html" class="nav-direct">Home</a></div>
+      <div class="nav-item"><a href="/for-physicians.html" class="nav-direct">Physicians</a></div>
+      <div class="nav-item"><a href="/for-attorneys.html" class="nav-direct">Attorneys</a></div>
+      <div class="nav-item"><a href="/sentinel-node.html" class="nav-direct nav-hub" style="color:#d5a94f;border:1px solid rgba(213,169,79,0.45);border-radius:999px;padding:6px 13px;">Sentinel Node</a></div>
+      <div class="nav-item"><a href="/living-memorials/" class="nav-direct">Living Echo</a></div>
+      <div class="nav-item"><a href="/contact.html" class="nav-direct">Contact</a></div>
+      <div class="nav-item" data-dropdown="menu-more">
+        <button type="button" class="nav-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="menu-more">More <span class="nav-chevron" aria-hidden="true">&#9662;</span></button>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <a href="/contact.html#pilot" class="nav-cta nav-cta-primary">Request a Pilot</a>
+      <button type="button" class="pa-search-trigger" data-search-open aria-label="Search (press / or Ctrl-K)" aria-haspopup="dialog" aria-expanded="false">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span class="pa-st-label">Search</span><kbd data-pa-keyhint>Ctrl K</kbd>
+      </button>
+      <button type="button" class="header-icon-btn" id="mobile-menu" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav-panel">
+        <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- "More" overflow dropdown — sibling of <header> so position:fixed escapes header's stacking context. Wired by nav.js via data-dropdown="menu-more". -->
+<div class="nav-dropdown" id="menu-more" aria-label="More navigation">
+  <p class="nav-dd-section">Products</p>
+  <a href="/engineering-drafting/">Drafting &amp; Engineering Edition</a>
+  <a href="/sentinel-home/">Sentinel Home Edition</a>
+  <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability — Assistive Tools &#x2605;</a>
+  <a href="/living-memorials/enterprise-estate-continuity.html">Enterprise Estate Continuity</a>
+  <p class="nav-dd-section">Capabilities</p>
+  <a href="/evidence-room.html">Evidence Room</a>
+  <a href="/push-button-deliverables.html">Push-Button Deliverables</a>
+  <a href="/pilot-readiness-kit.html">Pilot Kit</a>
+  <a href="/pilot-program.html">Pilot Program</a>
+  <a href="/how-it-works.html">How It Works</a>
+  <p class="nav-dd-section">Hubs &amp; Company</p>
+  <a href="/training.html">Training Hub</a>
+  <a href="/documentation-hub/">Document Hub</a>
+  <a href="/global/">Global Hub</a>
+  <a href="/investors-hub.html">Investor Hub</a>
+  <a href="/valuation-dashboard.html">Valuation Dashboard</a>
+  <a href="/about.html">About</a>
+  <p class="nav-dd-section">Trust &amp; Legal</p>
+  <a href="/transparency.html">Transparency</a>
+  <a href="/audit.html">Audit Log</a>
+  <a href="/privacy.html">Privacy</a>
+  <a href="/sitemap.html">Sitemap</a>
+</div>
+<!-- Site search is provided by the self-contained search.js asset (command palette: / or Ctrl/Cmd-K). -->
+
+<!-- Mobile panel: full-screen slide-in. v396 nav — hub tiles + grouped links + Sentinel Node + Engineering. -->
+<nav id="mobile-nav-panel" aria-label="Mobile navigation" aria-hidden="true" role="dialog" aria-modal="true">
+
+  <!-- Hub tiles: Sentinel Node, Documentation Hub, Training Hub, Global Hub -->
+  <div style="padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,0.07);">
+    <p style="font-size:0.65em;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.28);margin:0 0 10px;padding:0 2px;">Hubs</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <a href="/sentinel-node.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(213,169,79,0.1);border:1px solid rgba(213,169,79,0.35);border-radius:10px;color:#d5a94f;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Sentinel Node</a>
+      <a href="/documentation-hub/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(0,194,168,0.1);border:1px solid rgba(0,194,168,0.35);border-radius:10px;color:#00c2a8;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Docs Hub</a>
+      <a href="/training.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.35);border-radius:10px;color:#a78bfa;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Training Hub</a>
+      <a href="/global/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(122,240,220,0.07);border:1px solid rgba(122,240,220,0.3);border-radius:10px;color:#7af0dc;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Global Hub</a>
+    </div>
+  </div>
+
+  <!-- Core paths -->
+  <div class="mob-static-links">
+    <a href="/index.html">Home</a>
+    <a href="/for-physicians.html">Physicians</a>
+    <a href="/for-attorneys.html">Attorneys</a>
+    <a href="/engineering-drafting/">Engineering &amp; Drafting</a>
+    <a href="/pilot-program.html">Pilot Program</a>
+    <a href="/how-it-works.html">How It Works</a>
+    <a href="/trust.html">Trust &amp; Audit</a>
+    <a href="/pricing.html">Pricing</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/living-memorials/">Living Echo</a>
+    <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability</a>
+    <a href="/about.html">About</a>
+    <a href="/team.html" style="color:rgba(255,255,255,0.6);">Team &amp; Leadership</a>
+    <a href="/valuation-dashboard.html" style="color:rgba(255,255,255,0.6);">Valuation Dashboard</a>
+    <a href="/careers.html" style="color:rgba(255,255,255,0.6);">Careers</a>
+    <a href="/sentinel-demo.html" style="color:rgba(255,255,255,0.6);">Demo</a>
+    <a href="/sitemap.html" style="color:rgba(255,255,255,0.45);">Sitemap</a>
+    <a href="/transparency.html" style="color:rgba(255,255,255,0.45);">Transparency</a>
+    <a href="/privacy.html" style="color:rgba(255,255,255,0.45);">Privacy</a>
+  </div>
+
+  <a href="/contact.html#pilot" class="mob-cta">Request a Pilot</a>
+</nav>
+<!-- /INCLUDE:HEADER -->
+
+
+<main id="main">
+
+<div class="container">
+
+  <!-- ── HERO ─────────────────────────────────────────────────────── -->
+  <section class="wd-hero">
+    <div class="sentinel-lockup" aria-label="Sentinel Node — Workflow Demonstrations">
+              <svg class="sentinel-lockup-mark" viewBox="0 0 64 64" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
+          <!-- v311b: rotated diamond + C-curve loop + summit dot. Inherits currentColor from CSS context. -->
+          <g transform="rotate(45 32 32)">
+            <rect x="12" y="12" width="40" height="40" rx="8" ry="8"/>
+            <path d="M43 22 L26 22 A6 6 0 0 0 20 28 L20 36 A6 6 0 0 0 26 42 L41 42"/>
+          </g>
+          <circle cx="32" cy="9" r="3" fill="currentColor" stroke="none"/>
+        </svg>
+              <div class="sentinel-lockup-rule"></div>
+              <div class="sentinel-lockup-text">
+                <span class="sentinel-lockup-name">Sentinel Node</span>
+                <span class="sentinel-lockup-tag">Workflow Demonstrations &middot; What Real Use Looks Like</span>
+              </div>
+            </div>
+    <h1>Six workflows. Same architecture. <em>Same audit chain.</em></h1>
+    <p class="lede">
+      The Sentinel Node is not a chatbot. It is a workflow appliance. This
+      page walks through six concrete operational sequences &mdash; prior
+      authorization appeals, clinical policy retrieval, citation-bound legal
+      drafting, escalated governance review, audit trail export, and the
+      physician sign-off that the system refuses to skip.
+    </p>
+  </section>
+
+  <!-- ── TOC ──────────────────────────────────────────────────────── -->
+  <nav class="wd-toc" aria-label="On this page">
+    <a href="#wf-prior-auth">A &middot; Prior Auth Appeal</a>
+    <a href="#wf-policy-retrieval">B &middot; Policy Retrieval</a>
+    <a href="#wf-legal-drafting">C &middot; Legal Drafting</a>
+    <a href="#wf-governance-review">D &middot; Governance Review</a>
+    <a href="#wf-audit-trail">E &middot; Audit Trail Export</a>
+    <a href="#wf-signoff">F &middot; Physician Sign-off</a>
+  </nav>
+
+  <!-- VIDEO — v306 sentinel-workflow-loop -->
+  <div style="max-width:900px;margin:0 auto 48px;padding:0 24px;">
+    <div style="position:relative;border-radius:16px;overflow:hidden;border:1px solid rgba(0,194,168,.2);background:#040e18;box-shadow:0 16px 48px rgba(0,0,0,.4);">
+      <video
+        src="sentinel-workflow-loop.mp4"
+        autoplay muted loop playsinline
+        preload="metadata"
+        width="1280" height="720"
+        aria-label="Sentinel Node workflow demonstration — prior authorization, retrieval, governance"
+        style="width:100%;height:auto;display:block;">
+        Your browser does not support HTML5 video.
+      </video>
+      <div style="position:absolute;bottom:0;left:0;right:0;padding:12px 18px;background:linear-gradient(transparent,rgba(4,14,24,.88));display:flex;align-items:center;gap:8px;">
+        <span style="width:7px;height:7px;border-radius:50%;background:#00c2a8;flex-shrink:0;"></span>
+        <span style="color:#9eb9cc;font-size:.79rem;font-weight:600;letter-spacing:.04em;">All six workflows share the same audit chain &mdash; every retrieval cited, every output reviewed</span>
+      </div>
+    </div>
+  </div>
+
+  <section id="wf-prior-auth" class="wd-flow">
+    <span class="wd-flow-tag">Workflow A &middot; Clinical</span>
+    <h2>Prior authorization appeal, drafted with policy citations</h2>
+    <p class="wd-flow-sub">A denial arrives. The practice has 48 hours of effective working time to respond. The clinician opens the case in the Sentinel Node review interface and a draft appeal is prepared against the payer&rsquo;s own policy &mdash; nothing else.</p>
+    
+    <div class="wd-ba">
+      <div class="wd-ba-pane bad">
+        <h3>&#9612; Without Sentinel</h3>
+        <dl><dt>Clinician time</dt><dd>60&ndash;90 min, often after hours</dd>
+<dt>Source of policy quotes</dt><dd>memory, prior letters, search engines</dd>
+<dt>Citation traceability</dt><dd>manual, partial, inconsistent</dd>
+<dt>Audit trail</dt><dd>scattered across email, EHR notes, and the clinician&rsquo;s drafts</dd></dl>
+      </div>
+      <div class="wd-ba-pane good">
+        <h3>&#9612; With Sentinel</h3>
+        <dl><dt>Clinician time</dt><dd>8&ndash;15 min review &amp; sign</dd>
+<dt>Source of policy quotes</dt><dd>the payer&rsquo;s ingested medical policy PDF</dd>
+<dt>Citation traceability</dt><dd>every claim linked to a page &amp; section</dd>
+<dt>Audit trail</dt><dd>one sealed record &mdash; question, evidence, draft, sign-off</dd></dl>
+      </div>
+    </div>
+
+    <div class="wd-seq">
+      ('\n    <div class="wd-step">\n      <div class="wd-step-meta">\n        <span class="wd-step-num">01</span>\n        <span class="wd-step-actor">Front-office staff</span>\n        <span class="wd-step-time">T+0</span>\n      </div>\n      <div class="wd-step-body">\n        <h4>Denial ingested</h4>\n        <p>The denial letter is dropped into the case folder. The Sentinel Node ingests it locally &mdash; no upload, no email.</p>\n        <span class="wd-step-artifact">ingested: denial-letter.pdf &middot; hashed &middot; node-A</span>\n      </div>\n    </div>', '\n    <div class="wd-step">\n      <div class="wd-step-meta">\n        <span class="wd-step-num">02</span>\n        <span class="wd-step-actor">Sentinel Node</span>\n        <span class="wd-step-time">T+0:02</span>\n      </div>\n      <div class="wd-step-body">\n        <h4>Policy retrieval</h4>\n        <p>The node identifies the relevant medical policy from the practice&rsquo;s pre-ingested payer policy library and surfaces the controlling sections.</p>\n        <span class="wd-step-artifact gate">retrieved: 4 passages &middot; 2 sources &middot; rerank applied</span>\n      </div>\n    </div>', '\n    <div class="wd-step">\n      <div class="wd-step-meta">\n        <span class="wd-step-num">03</span>\n        <span class="wd-step-actor">Sentinel Node</span>\n        <span class="wd-step-time">T+0:03</span>\n      </div>\n      <div class="wd-step-body">\n        <h4>Citation-bound drafting</h4>\n        <p>A draft appeal is generated. Each clinical and procedural assertion is tagged with the source passage it relies on.</p>\n        <span class="wd-step-artifact">draft: 4 citations &middot; 0 uncited claims</span>\n      </div>\n    </div>', '\n    <div class="wd-step">\n      <div class="wd-step-meta">\n        <span class="wd-step-num">04</span>\n        <span class="wd-step-actor">Citation gate</span>\n        <span class="wd-step-time">T+0:03</span>\n      </div>\n      <div class="wd-step-body">\n        <h4>Verification</h4>\n        <p>Every sentence in the draft is checked against the retrieved evidence. Any claim without a source is suppressed and logged.</p>\n        <span class="wd-step-artifact gate">gate: passed &middot; 0 suppressions</span>\n      </div>\n    </div>', '\n    <div class="wd-step">\n      <div class="wd-step-meta">\n        <span class="wd-step-num">05</span>\n        <span class="wd-step-actor">Clinician</span>\n        <span class="wd-step-time">T+0:10</span>\n      </div>\n      <div class="wd-step-body">\n        <h4>Human review &amp; sign</h4>\n        <p>The clinician opens the case, reads the draft, inspects the cited passages, edits if needed, and signs. Nothing leaves the node before this.</p>\n        <span class="wd-step-artifact warn">reviewer: dr.r.taylor &middot; action: approve_sign</span>\n      </div>\n    </div>', '\n    <div class="wd-step">\n      <div class="wd-step-meta">\n        <span class="wd-step-num">06</span>\n        <span class="wd-step-actor">Sentinel Node</span>\n        <span class="wd-step-time">T+0:11</span>\n      </div>\n      <div class="wd-step-body">\n        <h4>Sealed receipt</h4>\n        <p>The case is sealed into an append-only audit record &mdash; question, evidence, draft, reviewer identity, signature, timestamp — reviewable today, hash-chained in the Stage 2 audit-layer.</p>\n        <span class="wd-step-artifact">sealed: case-4471 &middot; this_hash sha256:4ff7&hellip;d291</span>\n      </div>\n    </div>')
+    </div>
+    <div class="wd-out">
+      <p class="wd-out-label">Sealed artifact at end of flow</p>
+      <p>One signed appeal letter ready to print or send, plus one reviewable audit entry that can reproduce the entire decision &mdash; the policy page the model relied on, the draft the model wrote, the reviewer who signed it, and the time they signed.</p>
+    </div>
+  </section>
+
+  
+  <section id="wf-policy-retrieval" class="wd-flow">
+    <span class="wd-flow-tag">Workflow B &middot; Clinical</span>
+    <h2>Clinical policy retrieval &mdash; the policy answer, not a guess</h2>
+    <p class="wd-flow-sub">A clinician needs to know what the patient&rsquo;s payer actually requires for a specific procedure. They ask the node. They get an answer drawn from the payer&rsquo;s 2025 medical policy &mdash; with the page and section visible alongside it.</p>
+    
+    <div class="wd-ba">
+      <div class="wd-ba-pane bad">
+        <h3>&#9612; Cloud chatbot</h3>
+        <dl><dt>Answer source</dt><dd>model&rsquo;s training data, possibly stale</dd>
+<dt>Specific to your payer</dt><dd>no &mdash; generic guidance</dd>
+<dt>Citation</dt><dd>occasional, often wrong, not verifiable</dd>
+<dt>Risk</dt><dd>outdated policy advice in a regulated decision</dd></dl>
+      </div>
+      <div class="wd-ba-pane good">
+        <h3>&#9612; Sentinel retrieval</h3>
+        <dl><dt>Answer source</dt><dd>your ingested payer policy library</dd>
+<dt>Specific to your payer</dt><dd>yes &mdash; that payer, that year, that section</dd>
+<dt>Citation</dt><dd>every claim links to page + section + hash</dd>
+<dt>Risk</dt><dd>if the source is not in the library, the model says so</dd></dl>
+      </div>
+    </div>
+
+    <div class="wd-seq">
+      ('\n    <div class="wd-step">\n      <div class="wd-step-meta">\n        <span class="wd-step-num">01</span>\n        <span class="wd-step-actor">Clinician</span>\n        <span class="wd-step-time">T+0</span>\n      </div>\n      <div class="wd-step-body">\n        <h4>Question</h4>\n        <p>&ldquo;Does Anthem PA require a six-week symptom history for cardiac MRI in non-ischemic cardiomyopathy?&rdquo;</p>\n        \n      </div>\n    </div>', '\n    <div class="wd-step">\n      <div class="wd-step-meta">\n        <span class="wd-step-num">02</span>\n        <span class="wd-step-actor">Sentinel Node</span>\n        <span class="wd-step-time">T+0:01</span>\n      </div>\n      <div class="wd-step-body">\n        <h4>Library check</h4>\n        <p>The node confirms the payer&rsquo;s 2025 medical policy is ingested and current. If it weren&rsquo;t, the node would refuse to guess and would say so.</p>\n        <span class="wd-step-artifact">library: anthem &middot; 2025 medical policy &middot; v2025-04 &middot; current</span>\n      </div>\n    </div>', '\n    <div class="wd-step">\n      <div class="wd-step-meta">\n        <span class="wd-step-num">03</span>\n        <span class="wd-step-actor">Sentinel Node</span>\n        <span class="wd-step-time">T+0:01</span>\n      </div>\n      <div class="wd-step-body">\n        <h4>Retrieval</h4>\n        <p>Relevant passages are surfaced with rerank, deduplication, and a confidence score.</p>\n        <span class="wd-step-artifact gate">retrieved: 3 passages &middot; max score 0.91</span>\n      </div>\n    </div>', '\n    <div class="wd-step">\n      <div class="wd-step-meta">\n        <span class="wd-step-num">04</span>\n        <span class="wd-step-actor">Sentinel Node</span>\n        <span class="wd-step-time">T+0:01</span>\n      </div>\n      <div class="wd-step-body">\n        <h4>Bounded answer</h4>\n        <p>The model summarises the retrieved passages and quotes the controlling language. Every assertion is citation-tagged.</p>\n        <span class="wd-step-artifact">answer: 2 citations &middot; gate: passed</span>\n      </div>\n    </div>', '\n    <div class="wd-step">\n      <div class="wd-step-meta">\n        <span class="wd-step-num">05</span>\n        <span class="wd-step-actor">Clinician</span>\n        <span class="wd-step-time">T+0:02</span>\n      </div>\n      <div class="wd-step-body">\n        <h4>Verification</h4>\n        <p>The clinician clicks any citation and the underlying PDF opens to the highlighted page &mdash; in the appliance, never in the cloud.</p>\n        \n      </div>\n    </div>', '\n    <div class="wd-step">\n      <div class="wd-step-meta">\n        <span class="wd-step-num">06</span>\n        <span class="wd-step-actor">Sentinel Node</span>\n        <span class="wd-step-time">T+0:02</span>\n      </div>\n      <div class="wd-step-body">\n        <h4>Logged consult</h4>\n        <p>The retrieval consult is recorded as an audit entry, just like any other workflow output.</p>\n        <span class="wd-step-artifact">logged: consult-08812</span>\n      </div>\n    </div>')
+    </div>
+    <div class="wd-out">
+      <p class="wd-out-label">Sealed artifact at end of flow</p>
+      <p>A clinician answer that is bound to a specific page of a specific policy &mdash; not a paraphrase from a model&rsquo;s memory. The consult itself is logged: if a regulator ever asks &ldquo;how did your clinician know that?&rdquo;, the answer is reproducible from the node.</p>
+    </div>
+  </section>
+
+  
+  <section id="wf-legal-drafting" class="wd-flow">
+    <span class="wd-flow-tag legal">Workflow C &middot; Legal</span>
+    <h2>Citation-bound drafting for legal memos and motions</h2>
+    <p class="wd-flow-sub">An attorney needs a section drafted &mdash; perhaps a fact-and-procedural-history paragraph, or a summary of the controlling authority. The node drafts from the case file the firm has ingested. Every claim ties back to a Bates-stamped exhibit or a cited case.</p>
+    
+    <div class="wd-ba">
+      <div class="wd-ba-pane bad">
+        <h3>&#9612; General-purpose LLM</h3>
+        <dl><dt>Drafting source</dt><dd>training data + open web</dd>
+<dt>Citation quality</dt><dd>frequent fabricated case citations</dd>
+<dt>Confidentiality</dt><dd>prompt &amp; work product leave the firm</dd>
+<dt>Diligence trail</dt><dd>none &mdash; cannot show how the draft was produced</dd></dl>
+      </div>
+      <div class="wd-ba-pane good">
+        <h3>&#9612; Sentinel drafting</h3>
+        <dl><dt>Drafting source</dt><dd>the firm&rsquo;s ingested case file + cited authorities</dd>
+<dt>Citation quality</dt><dd>every cite verified against the ingested record</dd>
+<dt>Confidentiality</dt><dd>nothing leaves the appliance &mdash; privilege intact</dd>
+<dt>Diligence trail</dt><dd>the entire drafting session is replayable from the audit chain</dd></dl>
+      </div>
+    </div>
+
+    <div class="wd-seq">
+      ('\n    <div class="wd-step">\n      <div class="wd-step-meta">\n        <span class="wd-step-num">01</span>\n        <span class="wd-step-actor">Paralegal</span>\n        <span class="wd-step-time">T+0</span>\n      </div>\n      <div class="wd-step-body">\n        <h4>Case file ingested</h4>\n        <p>Pleadings, deposition transcripts, exhibits, and cited authorities are dropped into the matter&rsquo;s case folder on the node.</p>\n        <span class="wd-step-artifact">ingested: 47 documents &middot; OCR &middot; deduplicated</span>\n      </div>\n    </div>', '\n    <div class="wd-step">\n      <div class="wd-step-meta">\n        <span class="wd-step-num">02</span>\n        <span class="wd-step-actor">Attorney</span>\n        <span class="wd-step-time">T+0:05</span>\n      </div>\n      <div class="wd-step-body">\n        <h4>Request</h4>\n        <p>&ldquo;Draft a 200-word statement of facts covering the events of March 12, citing the deposition exhibits.&rdquo;</p>\n        \n      </div>\n    </div>', '\n    <div class="wd-step">\n      <div class="wd-step-meta">\n        <span class="wd-step-num">03</span>\n        <span class="wd-step-actor">Sentinel Node</span>\n        <span class="wd-step-time">T+0:05</span>\n      </div>\n      <div class="wd-step-body">\n        <h4>Retrieval &amp; rerank</h4>\n        <p>The relevant deposition pages and exhibits are surfaced. The model is bound to cite only from these.</p>\n        <span class="wd-step-artifact gate">retrieved: 6 passages &middot; from 4 exhibits</span>\n      </div>\n    </div>', '\n    <div class="wd-step">\n      <div class="wd-step-meta">\n        <span class="wd-step-num">04</span>\n        <span class="wd-step-actor">Sentinel Node</span>\n        <span class="wd-step-time">T+0:06</span>\n      </div>\n      <div class="wd-step-body">\n        <h4>Citation-bound draft</h4>\n        <p>The draft is generated. Each fact is tagged with the specific exhibit and page it relies on.</p>\n        <span class="wd-step-artifact">draft: 5 citations &middot; 0 uncited claims</span>\n      </div>\n    </div>', '\n    <div class="wd-step">\n      <div class="wd-step-meta">\n        <span class="wd-step-num">05</span>\n        <span class="wd-step-actor">Citation gate</span>\n        <span class="wd-step-time">T+0:06</span>\n      </div>\n      <div class="wd-step-body">\n        <h4>Verification</h4>\n        <p>The gate confirms every factual assertion in the draft maps to an ingested source. Uncited claims are suppressed.</p>\n        <span class="wd-step-artifact gate">gate: passed</span>\n      </div>\n    </div>', '\n    <div class="wd-step">\n      <div class="wd-step-meta">\n        <span class="wd-step-num">06</span>\n        <span class="wd-step-actor">Attorney</span>\n        <span class="wd-step-time">T+0:12</span>\n      </div>\n      <div class="wd-step-body">\n        <h4>Human review &amp; sign</h4>\n        <p>The attorney reviews. Clicking any citation opens the underlying exhibit at the cited page. The attorney edits as needed and signs.</p>\n        <span class="wd-step-artifact warn">reviewer: counsel.j.parks &middot; action: approve_sign</span>\n      </div>\n    </div>', '\n    <div class="wd-step">\n      <div class="wd-step-meta">\n        <span class="wd-step-num">07</span>\n        <span class="wd-step-actor">Sentinel Node</span>\n        <span class="wd-step-time">T+0:13</span>\n      </div>\n      <div class="wd-step-body">\n        <h4>Sealed receipt</h4>\n        <p>The drafting session, evidence used, edits made, and final signed text are sealed into the matter&rsquo;s audit chain.</p>\n        <span class="wd-step-artifact">sealed: matter-2026-118 &middot; entry 00913</span>\n      </div>\n    </div>')
+    </div>
+    <div class="wd-out">
+      <p class="wd-out-label">Sealed artifact at end of flow</p>
+      <p>A draft section that is provably grounded in the firm&rsquo;s own case file &mdash; with a sealed record the attorney can show opposing counsel, a judge, or a bar review board if the drafting process is ever questioned.</p>
+    </div>
+  </section>
+
+  
+  <section id="wf-governance-review" class="wd-flow">
+    <span class="wd-flow-tag">Workflow D &middot; Cross-domain</span>
+    <h2>Governance review &mdash; when the system declines to act</h2>
+    <p class="wd-flow-sub">Not every case clears the gate. When evidence is ambiguous, conflicting, or missing, the node escalates. It refuses to make the call. It hands the case to a human &mdash; and tells them exactly why.</p>
+    
+    <div class="wd-ba">
+      <div class="wd-ba-pane bad">
+        <h3>&#9612; Optimistic AI</h3>
+        <dl><dt>On ambiguity</dt><dd>picks one interpretation, presents it as fact</dd>
+<dt>On missing source</dt><dd>fabricates a plausible-sounding citation</dd>
+<dt>On conflict</dt><dd>silently averages or hedges</dd>
+<dt>On low confidence</dt><dd>no signal &mdash; output looks the same as a high-confidence answer</dd></dl>
+      </div>
+      <div class="wd-ba-pane good">
+        <h3>&#9612; Sentinel governance</h3>
+        <dl><dt>On ambiguity</dt><dd>surfaces both readings, asks the reviewer to choose</dd>
+<dt>On missing source</dt><dd>declines and logs the gap</dd>
+<dt>On conflict</dt><dd>shows the conflict, holds the draft</dd>
+<dt>On low confidence</dt><dd>marks the draft, requires elevated review</dd></dl>
+      </div>
+    </div>
+
+    <div class="wd-seq">
+      ('\n    <div class="wd-step">\n      <div class="wd-step-meta">\n        <span class="wd-step-num">01</span>\n        <span class="wd-step-actor">Sentinel Node</span>\n        <span class="wd-step-time">T+0</span>\n      </div>\n      <div class="wd-step-body">\n        <h4>Conflict detected</h4>\n        <p>Retrieval surfaces two policy passages that disagree about the 90-day cardiology consult requirement.</p>\n        <span class="wd-step-artifact warn">evidence: 2 sources &middot; conflict flagged</span>\n      </div>\n    </div>', '\n    <div class="wd-step">\n      <div class="wd-step-meta">\n        <span class="wd-step-num">02</span>\n        <span class="wd-step-actor">Sentinel Node</span>\n        <span class="wd-step-time">T+0:01</span>\n      </div>\n      <div class="wd-step-body">\n        <h4>Draft held</h4>\n        <p>The model produces a draft but flags the conflict. The citation gate moves the case into elevated review.</p>\n        <span class="wd-step-artifact warn">state: Human Review Required</span>\n      </div>\n    </div>', '\n    <div class="wd-step">\n      <div class="wd-step-meta">\n        <span class="wd-step-num">03</span>\n        <span class="wd-step-actor">Reviewer</span>\n        <span class="wd-step-time">T+0:05</span>\n      </div>\n      <div class="wd-step-body">\n        <h4>Triage</h4>\n        <p>The clinician opens the case. The reason for escalation is on the screen, with both conflicting sources visible.</p>\n        \n      </div>\n    </div>', '\n    <div class="wd-step">\n      <div class="wd-step-meta">\n        <span class="wd-step-num">04</span>\n        <span class="wd-step-actor">Reviewer</span>\n        <span class="wd-step-time">T+0:08</span>\n      </div>\n      <div class="wd-step-body">\n        <h4>Decision</h4>\n        <p>The clinician selects which source governs this case &mdash; or sends it back to retrieval for more evidence.</p>\n        <span class="wd-step-artifact">action: choose_governing_source(B)</span>\n      </div>\n    </div>', '\n    <div class="wd-step">\n      <div class="wd-step-meta">\n        <span class="wd-step-num">05</span>\n        <span class="wd-step-actor">Sentinel Node</span>\n        <span class="wd-step-time">T+0:08</span>\n      </div>\n      <div class="wd-step-body">\n        <h4>Continue with reviewer ruling</h4>\n        <p>The draft is regenerated using the chosen source as the controlling authority. The reviewer&rsquo;s decision becomes part of the record.</p>\n        \n      </div>\n    </div>', '\n    <div class="wd-step">\n      <div class="wd-step-meta">\n        <span class="wd-step-num">06</span>\n        <span class="wd-step-actor">Sentinel Node</span>\n        <span class="wd-step-time">T+0:09</span>\n      </div>\n      <div class="wd-step-body">\n        <h4>Sealed</h4>\n        <p>The full sequence &mdash; conflict, escalation, reviewer choice, justification, regenerated draft &mdash; is sealed.</p>\n        <span class="wd-step-artifact">sealed: case-4472 &middot; conflict + resolution recorded</span>\n      </div>\n    </div>')
+    </div>
+    <div class="wd-out">
+      <p class="wd-out-label">Sealed artifact at end of flow</p>
+      <p>An audit record that proves the system did not silently pick a side. It shows the conflict, names the reviewer, and records the governing-source decision. This is what defensibility looks like.</p>
+    </div>
+  </section>
+
+  
+  <section id="wf-audit-trail" class="wd-flow">
+    <span class="wd-flow-tag">Workflow E &middot; Compliance</span>
+    <h2>Audit trail export &mdash; for a regulator, an auditor, or your own counsel</h2>
+    <p class="wd-flow-sub">When someone asks how a decision was made &mdash; a payer auditor, an OIG investigator, a malpractice carrier, opposing counsel &mdash; the practice or firm exports the relevant audit entries from the node. The output is verifiable from the appliance alone.</p>
+    
+    <div class="wd-ba">
+      <div class="wd-ba-pane bad">
+        <h3>&#9612; Cloud AI audit posture</h3>
+        <dl><dt>Where logs live</dt><dd>vendor cloud, partial, vendor-controlled retention</dd>
+<dt>Producible on demand</dt><dd>subject to vendor SLAs and discovery process</dd>
+<dt>Tamper evidence</dt><dd>trust the vendor</dd>
+<dt>Reproducibility</dt><dd>limited &mdash; depends on what the vendor kept</dd></dl>
+      </div>
+      <div class="wd-ba-pane good">
+        <h3>&#9612; Sentinel audit posture</h3>
+        <dl><dt>Where logs live</dt><dd>on the node, append-only, hash-linked</dd>
+<dt>Producible on demand</dt><dd>exportable from the local appliance &mdash; no vendor in the loop</dd>
+<dt>Tamper evidence</dt><dd>any modification breaks the chain mathematically</dd>
+<dt>Reproducibility</dt><dd>the full decision sequence reconstructs from the chain</dd></dl>
+      </div>
+    </div>
+
+    <div class="wd-seq">
+      ('\n    <div class="wd-step">\n      <div class="wd-step-meta">\n        <span class="wd-step-num">01</span>\n        <span class="wd-step-actor">Compliance lead</span>\n        <span class="wd-step-time">T+0</span>\n      </div>\n      <div class="wd-step-body">\n        <h4>Request scoped</h4>\n        <p>An auditor asks for every AI-assisted prior auth appeal in Q2. The compliance lead opens the export tool on the node.</p>\n        \n      </div>\n    </div>', '\n    <div class="wd-step">\n      <div class="wd-step-meta">\n        <span class="wd-step-num">02</span>\n        <span class="wd-step-actor">Sentinel Node</span>\n        <span class="wd-step-time">T+0:01</span>\n      </div>\n      <div class="wd-step-body">\n        <h4>Filter &amp; export</h4>\n        <p>The node filters the reviewable audit log on workflow type and date range. The export bundles the matching entries with their reviewer signatures; the Stage 2 audit-layer adds the chain&rsquo;s cryptographic integrity proof.</p>\n        <span class="wd-step-artifact">export: q2-prior-auth-appeals.audit.json.signed</span>\n      </div>\n    </div>', '\n    <div class="wd-step">\n      <div class="wd-step-meta">\n        <span class="wd-step-num">03</span>\n        <span class="wd-step-actor">Sentinel Node</span>\n        <span class="wd-step-time">T+0:01</span>\n      </div>\n      <div class="wd-step-body">\n        <h4>Verification artifact</h4>\n        <p>Alongside the entries, the export includes a verifier &mdash; a small program that re-checks the Stage 2 hash chain offline.</p>\n        <span class="wd-step-artifact">artifact: verify-chain.bin</span>\n      </div>\n    </div>', '\n    <div class="wd-step">\n      <div class="wd-step-meta">\n        <span class="wd-step-num">04</span>\n        <span class="wd-step-actor">Auditor</span>\n        <span class="wd-step-time">T+later</span>\n      </div>\n      <div class="wd-step-body">\n        <h4>Independent verification</h4>\n        <p>The auditor runs the verifier on their own machine. Either the chain checks out, or it doesn&rsquo;t. There is no third party to trust.</p>\n        <span class="wd-step-artifact">verify: ok &middot; 412 entries &middot; chain head sha256:8a0f&hellip;</span>\n      </div>\n    </div>')
+    </div>
+    <div class="wd-out">
+      <p class="wd-out-label">Sealed artifact at end of flow</p>
+      <p>A signed, hash-linked export that anyone can verify. Not a PDF report someone could have edited. Not a screenshot. A bundle the auditor reproduces themselves &mdash; or rejects on cryptographic grounds.</p>
+    </div>
+  </section>
+
+  
+  <section id="wf-signoff" class="wd-flow">
+    <span class="wd-flow-tag">Workflow F &middot; Sign-off</span>
+    <h2>Physician sign-off &mdash; the act the system refuses to skip</h2>
+    <p class="wd-flow-sub">Every other workflow on this page terminates in a sign-off. The system is designed so that sign-off is a state, not a setting. Nothing leaves the node, nothing reaches a patient or a payer or a court, until a named human takes a recorded action.</p>
+    
+    <div class="wd-ba">
+      <div class="wd-ba-pane bad">
+        <h3>&#9612; &ldquo;Human in the loop&rdquo; as a checkbox</h3>
+        <dl><dt>Sign-off mechanism</dt><dd>an optional setting on a vendor dashboard</dd>
+<dt>Reviewer identity</dt><dd>shared logins, generic accounts, often missing</dd>
+<dt>Audit of the action</dt><dd>&ldquo;approved at 14:08&rdquo; &mdash; that is the whole record</dd>
+<dt>Reversibility</dt><dd>edits made by the reviewer often not captured</dd></dl>
+      </div>
+      <div class="wd-ba-pane good">
+        <h3>&#9612; Sign-off as a state</h3>
+        <dl><dt>Sign-off mechanism</dt><dd>a refused-to-skip step the system enforces</dd>
+<dt>Reviewer identity</dt><dd>named person, role, credential ID</dd>
+<dt>Audit of the action</dt><dd>what they signed, what they edited, when they signed it</dd>
+<dt>Reversibility</dt><dd>every edit produces a diff stored alongside the original draft</dd></dl>
+      </div>
+    </div>
+
+    <div class="wd-seq">
+      ('\n    <div class="wd-step">\n      <div class="wd-step-meta">\n        <span class="wd-step-num">01</span>\n        <span class="wd-step-actor">Reviewer arrives</span>\n        <span class="wd-step-time">T+0</span>\n      </div>\n      <div class="wd-step-body">\n        <h4>Authenticated session</h4>\n        <p>The reviewer authenticates against the node &mdash; their identity, role, and credential ID are bound to the session.</p>\n        <span class="wd-step-artifact">session: dr.r.taylor &middot; role: physician &middot; npi:1234567890</span>\n      </div>\n    </div>', '\n    <div class="wd-step">\n      <div class="wd-step-meta">\n        <span class="wd-step-num">02</span>\n        <span class="wd-step-actor">Reviewer</span>\n        <span class="wd-step-time">T+0:03</span>\n      </div>\n      <div class="wd-step-body">\n        <h4>Inspect evidence</h4>\n        <p>The reviewer sees the cited passages and the draft side by side. Every citation is one click away from the source page.</p>\n        \n      </div>\n    </div>', '\n    <div class="wd-step">\n      <div class="wd-step-meta">\n        <span class="wd-step-num">03</span>\n        <span class="wd-step-actor">Reviewer</span>\n        <span class="wd-step-time">T+0:06</span>\n      </div>\n      <div class="wd-step-body">\n        <h4>Edit (optional)</h4>\n        <p>If the reviewer changes the draft, the original and the edited version are both retained, with a diff stored as part of the record.</p>\n        <span class="wd-step-artifact">edit_diff: 14 chars added, 22 removed</span>\n      </div>\n    </div>', '\n    <div class="wd-step">\n      <div class="wd-step-meta">\n        <span class="wd-step-num">04</span>\n        <span class="wd-step-actor">Reviewer</span>\n        <span class="wd-step-time">T+0:08</span>\n      </div>\n      <div class="wd-step-body">\n        <h4>Sign</h4>\n        <p>The reviewer signs. The action, their identity, the final text, and the timestamp are committed to the audit chain.</p>\n        <span class="wd-step-artifact warn">action: approve_sign &middot; signed_at: 2026-05-22T14:08:33-04:00</span>\n      </div>\n    </div>', '\n    <div class="wd-step">\n      <div class="wd-step-meta">\n        <span class="wd-step-num">05</span>\n        <span class="wd-step-actor">Sentinel Node</span>\n        <span class="wd-step-time">T+0:08</span>\n      </div>\n      <div class="wd-step-body">\n        <h4>Receipt issued</h4>\n        <p>A receipt is generated &mdash; the kind a regulator, a court, or a malpractice carrier can verify against the appliance.</p>\n        <span class="wd-step-artifact">receipt: case-4471 &middot; sha256:4ff7&hellip;d291</span>\n      </div>\n    </div>')
+    </div>
+    <div class="wd-out">
+      <p class="wd-out-label">Sealed artifact at end of flow</p>
+      <p>A named human took a recorded action on a specific document at a specific time. That is what &ldquo;human-in-the-loop&rdquo; means when it is implemented as infrastructure rather than as a checkbox.</p>
+    </div>
+  </section>
+
+
+  <!-- ── A note on realism ── -->
+  <p class="wd-note">
+    <strong>About these examples.</strong> The case numbers, hashes, names,
+    and timestamps in these sequences are illustrative. The structure of
+    each workflow &mdash; the steps, the actors, the gates, the artifacts
+    &mdash; reflects how the Sentinel Node is built to operate during pilot
+    deployment.
+  </p>
+
+  <!-- ── CTA ──────────────────────────────────────────────────────── -->
+  <section class="wd-cta">
+    <h3>See these workflows running on your own documents</h3>
+    <p>
+      During a pilot, the Sentinel Node is loaded with your ingested
+      content &mdash; your payer policies, your case files, your clinical
+      protocols, your firm&rsquo;s internal authorities. The workflows
+      above are then exercised against that real material.
+    </p>
+    <div class="wd-cta-row">
+      <a href="pilot-brief.html" class="cta-primary">Request the pilot brief</a>
+      <a href="pilot-workflow.html" class="cta-secondary">See the pilot workflow</a>
+      <a href="governance-review.html" class="cta-secondary">See governance on screen</a>
+    </div>
+  </section>
+
+</div>
+
+</main>
+
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 root-relative nav fix, Living Echo rebrand, Engineering & Drafting + Enterprise Estate Continuity links added (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- INCLUDE:FOOTER -->
+<footer role="contentinfo" style="background:#051622;border-top:1px solid rgba(255,255,255,0.08);padding:40px 24px 28px;font-size:0.85em;color:#8899aa;">
+  <div style="max-width:1180px;margin:0 auto;">
+
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:0 0 28px;margin-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.07);">
+      <div style="max-width:560px;">
+        <p style="margin:0 0 6px;font-size:1.05em;font-weight:700;color:#fff;">Local AI infrastructure for regulated practices.</p>
+        <p style="margin:0;font-size:0.95em;line-height:1.5;">Drafts with citations. Human review required. Sensitive documents stay under practice control. Simple path, deep proof.</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="/contact.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;background:#00c2a8;color:#04111a;font-weight:700;text-decoration:none;font-size:0.95em;">Request Pilot</a>
+        <a href="/sentinel-demo.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;border:1px solid rgba(0,194,168,0.55);color:#00c2a8;font-weight:700;text-decoration:none;font-size:0.95em;">Watch Demo</a>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px 32px;margin-bottom:32px;text-align:left;">
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">For You</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/start-here.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Start Here (3 min)</a>
+          <a href="/for-physicians.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Physicians</a>
+          <a href="/for-attorneys.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Attorneys</a>
+          <a href="/engineering-drafting/" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Engineering &amp; Drafting Teams</a>
+          <a href="/pilot-program.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Pilot Program</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Installer Training</a>
+          <a href="/how-it-works.html" style="color:#8899aa;text-decoration:none;">How It Works</a>
+          <a href="/trust.html" style="color:#8899aa;text-decoration:none;">Trust &amp; Audit</a>
+          <a href="/pricing.html" style="color:#8899aa;text-decoration:none;">Pricing</a>
+          <a href="/sentinel-demo.html" style="color:#8899aa;text-decoration:none;">See the Demo</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Documentation Hub</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/documentation-hub/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Hub Home &mdash; Deep Proof</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">Installer Training</a>
+          <a href="/sentinel-node/installation-simulator.html" style="color:#8899aa;text-decoration:none;">&#8627; Installation Simulator</a>
+          <a href="/documentation-hub/clinical/" style="color:#8899aa;text-decoration:none;">Clinical Documentation</a>
+          <a href="/documentation-hub/legal/" style="color:#8899aa;text-decoration:none;">Legal Documentation</a>
+          <a href="/documentation-hub/technical/" style="color:#8899aa;text-decoration:none;">Technical Documentation</a>
+          <a href="/documentation-hub/governance/" style="color:#8899aa;text-decoration:none;">Governance &amp; Audit</a>
+          <a href="/documentation-hub/tools/" style="color:#8899aa;text-decoration:none;">Tools &amp; Simulators</a>
+          <a href="/documentation-hub/research/" style="color:#8899aa;text-decoration:none;">Research &amp; Essays</a>
+          <a href="/documentation-hub/transparency/" style="color:#8899aa;text-decoration:none;">Transparency</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Global Federated AI</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/global/" style="color:#7af0dc;text-decoration:none;font-weight:600;">Global Federated Hub</a>
+          <a href="/global/australia/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Australia</a>
+          <a href="/global/singapore/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Singapore</a>
+          <a href="/global/taiwan/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Taiwan</a>
+          <a href="/global/europe/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Europe</a>
+          <a href="/contact.html" style="color:#8899aa;text-decoration:none;">Partner Inquiry</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Company</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/about.html" style="color:#8899aa;text-decoration:none;">About Pocono AI</a>
+          <a href="/team.html" style="color:#8899aa;text-decoration:none;">Team &amp; Leadership</a>
+          <a href="/why-pocono-ai.html" style="color:#8899aa;text-decoration:none;">Why Pocono AI</a>
+          <a href="/founding-commercial-leadership.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Join Us</a>
+          <a href="/careers.html" style="color:#8899aa;text-decoration:none;">Careers</a>
+          <a href="/how-we-hire.html" style="color:#8899aa;text-decoration:none;">How We Hire</a>
+          <a href="/channel-partners.html" style="color:#8899aa;text-decoration:none;">Technical Partners (MSPs)</a>
+          <a href="/partners.html" style="color:#8899aa;text-decoration:none;">Academic Partnerships</a>
+          <a href="/contact.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Contact</a>
+          <a href="https://forms.gle/VQahnkjMfY6QNEMy8" target="_blank" rel="noopener noreferrer" style="color:#d5a94f;text-decoration:none;font-weight:600;">Interest List &#8599;</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Founder Projects</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/rehability/" style="color:#a78bfa;text-decoration:none;font-weight:700;">Rehability &#x2605;</a>
+          <a href="/rehability/marcus-memory-helper/" style="color:#a78bfa;text-decoration:none;font-weight:600;">&#8627; Marcus's Memory Helper</a>
+          <a href="/sentinel-home/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Sentinel Home Edition</a>
+          <a href="/living-memorials/" style="color:#8899aa;text-decoration:none;">Living Echo</a>
+          <a href="/living-memorials/marcus-odell/" style="color:#8899aa;text-decoration:none;">Marcus&rsquo;s Living Echo</a>
+          <a href="/living-memorials/enterprise-estate-continuity.html" style="color:#8899aa;text-decoration:none;">Enterprise Estate Continuity</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Resources &amp; Legal</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/sitemap.html" style="color:#8899aa;text-decoration:none;">All Pages (Sitemap)</a>
+          <a href="/audit.html" style="color:#8899aa;text-decoration:none;">Transparency &amp; Audit Log</a>
+          <a href="/maturity-disclosure.html" style="color:#8899aa;text-decoration:none;">What We Have / Don&rsquo;t Claim</a>
+          <a href="/plain.html" style="color:#8899aa;text-decoration:none;">Plain Language Guide</a>
+          <a href="/privacy.html" style="color:#8899aa;text-decoration:none;">Privacy</a>
+          <a href="/terms.html" style="color:#8899aa;text-decoration:none;">Terms</a>
+          <a href="/sla.html" style="color:#8899aa;text-decoration:none;">SLA</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:18px;margin-bottom:14px;">
+      <p style="margin:0;font-size:0.82em;line-height:1.6;color:#6f8295;max-width:1000px;">Pocono AI does not provide medical, legal, or engineering advice, does not practice medicine, law, or licensed engineering, and does not make clinical, legal, or engineering decisions. Outputs are drafts or support materials that require review by a qualified professional; final professional judgment remains with the licensed physician, attorney, or engineer. Tools and simulations on this site are educational and use synthetic data.</p>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:20px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+      <p style="margin:0;font-size:0.9em;">&copy; 2026 Pocono AI, LLC &nbsp;&#183;&nbsp; East Stroudsburg, PA &nbsp;&#183;&nbsp; <a href="mailto:marcus@poconoai.com" style="color:#8899aa;">marcus@poconoai.com</a> &nbsp;&#183;&nbsp; <a href="tel:+15705340602" style="color:#8899aa;">(570) 534-0602</a></p>
+      <p style="margin:0;font-size:0.88em;"><a href="/audit.html" style="color:#5dade2;text-decoration:none;">Transparency v402</a></p>
+    </div>
+  </div>
+</footer>
+<script src="/search.js?v=402" defer></script>
+<!-- /INCLUDE:FOOTER -->
+
+
+<script src="search-index.js?v=402" defer></script>
+<script src="nav.js?v=402" defer></script>
+<script src="pilot-cta.js?v=402" defer></script>
+
+</body>
+</html>

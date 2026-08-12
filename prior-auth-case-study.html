@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="How a 4-physician practice cut prior auth prep from 3.2 hours to 28 minutes per appeal using the Sentinel Node. Source-cited methodology and results.">
+    <meta name="keywords" content="prior authorization burden, prior auth AI, insurance prior auth, physician admin burden, $68000 physician cost, PA AI, on-premises AI, local AI, sovereign AI, zero cloud AI, HIPAA-governed AI environments, healthcare AI, legal AI, Sentinel Node, Pocono AI, data sovereignty, air-gapped AI, no cloud, EHR automation, RAG AI, independent medical practice AI, law firm AI">
+    <title>The Prior Authorization Crisis | Pocono AI Research</title>
+    <meta property="og:title" content="14 Hours a Week. $68,000 a Year. The Prior Auth Crisis.">
+    <meta property="og:description" content="A detailed case study of prior authorization workflow using Sentinel Node — from clinical trigger to local AI draft to physician sign-off. Governed, local, and auditable.">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Pocono AI">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://poconoai.com/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Pocono AI — Sovereign on-premises AI">
+    <meta property="og:url" content="https://poconoai.com/prior-auth-case-study.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Prior Authorization Crisis | 14 Hrs/Week | Pocono AI">
+    <meta name="twitter:description" content="14 hours per week. $68,000 per physician per year. How prior auth is destroying independent practice—and what fixes it.">
+    <meta name="twitter:image" content="https://poconoai.com/og-image.jpg">
+    <meta name="theme-color" content="#0B0F13">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="alternate icon" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon-180x180.png">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="alternate icon" href="favicon.ico"><link rel="stylesheet" href="styles.css?v=402">
+    <link rel="canonical" href="https://poconoai.com/prior-auth-case-study.html">
+
+    <style>
+        /* Prior auth step simulator */
+        .pa-simulator {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 0 4%;
+        }
+
+        .pa-toggle {
+            display: flex;
+            background: var(--card-dark);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 10px;
+            padding: 4px;
+            margin-bottom: 28px;
+            width: fit-content;
+        }
+
+        .pa-toggle-btn {
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-size: 0.88em;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            color: var(--muted);
+            transition: all 0.2s;
+        }
+
+        .pa-toggle-btn.active {
+            background: var(--teal);
+            color: white;
+        }
+
+        .pa-toggle-btn.active.bad {
+            background: #C0392B;
+        }
+
+        .pa-steps {
+            display: none;
+        }
+
+        .pa-steps.visible {
+            display: block;
+        }
+
+        .pa-step {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 16px;
+            align-items: flex-start;
+            opacity: 0;
+            transform: translateX(-12px);
+            transition: all 0.3s ease;
+        }
+
+        .pa-step.revealed {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .pa-step-num {
+            flex-shrink: 0;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 0.88em;
+        }
+
+        .pa-step-num.bad  { background: rgba(192,57,43,0.2); color: #FF6B5B; border: 1.5px solid rgba(192,57,43,0.4); }
+        .pa-step-num.good { background: rgba(24,139,150,0.2); color: var(--teal); border: 1.5px solid rgba(24,139,150,0.4); }
+
+        .pa-step-body {
+            flex: 1;
+            background: var(--card-dark);
+            border-radius: 10px;
+            padding: 14px 18px;
+            border-left: 3px solid transparent;
+        }
+
+        .pa-step-body.bad  { border-left-color: #C0392B; }
+        .pa-step-body.good { border-left-color: var(--teal); }
+
+        .pa-step-title {
+            font-weight: 700;
+            font-size: 0.9em;
+            color: var(--white);
+            margin-bottom: 4px;
+        }
+
+        .pa-step-desc {
+            font-size: 0.82em;
+            color: var(--light-text);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .pa-step-time {
+            font-size: 0.72em;
+            color: var(--muted);
+            margin-top: 4px;
+            font-style: italic;
+        }
+
+        .pa-run-btn {
+            margin-bottom: 20px;
+        }
+
+        .pa-total-bar {
+            background: var(--card-dark);
+            border-radius: 10px;
+            padding: 16px 20px;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .pa-total-label { color: var(--muted); font-size: 0.82em; }
+        .pa-total-time  { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.6em; color: #FF6B5B; }
+        .pa-total-time.good { color: var(--teal); }
+
+        /* Stats grid */
+        .stat-callout {
+            background: rgba(192,57,43,0.07);
+            border: 1px solid rgba(192,57,43,0.2);
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .stat-callout.teal {
+            background: rgba(24,139,150,0.07);
+            border-color: rgba(24,139,150,0.2);
+        }
+
+        .stat-big {
+            font-family: 'Syne', sans-serif;
+            font-size: 3em;
+            font-weight: 800;
+            color: #FF6B5B;
+            line-height: 1;
+        }
+
+        .stat-big.teal { color: var(--teal); }
+        .stat-unit { font-size: 0.5em; font-weight: 400; }
+        .stat-label { color: var(--light-text); font-size: 0.85em; margin-top: 8px; line-height: 1.5; }
+        .stat-source { color: var(--muted); font-size: 0.72em; margin-top: 6px; }
+    </style>
+<link rel="stylesheet" href="nav-v2026.css?v=402">
+<link rel="stylesheet" href="brand-v292.css?v=402">
+<script>
+// Pocono AI v169 — Zero-flash banner dismissal.
+// Strategy: inject <style> tag synchronously BEFORE banner HTML parses,
+// so dismissed banners never render at all (no flash). DOM removal still
+// happens for safety. ?showbanners=1 URL param re-shows everything.
+(function(){
+  var ids=[];
+
+  // Escape hatch: ?showbanners=1 clears all dismiss flags for testing
+  try {
+    if (location.search.indexOf('showbanners=1') !== -1) {
+      ids.forEach(function(id){ localStorage.removeItem('pai_dismissed_'+id); });
+      localStorage.removeItem('poconoPilot');
+      localStorage.removeItem('advisoryBarDismissed');
+    }
+  } catch(e) {}
+
+  // v246 Stage 1 — Legacy migration block removed.
+  // Was dead code containing a JS syntax error (adjacent string literals)
+  // that broke the entire banner-dismiss IIFE on ~46 pages.
+
+  // Build CSS rule list for dismissed banners and inject synchronously.
+  // This runs in <head> BEFORE banner HTML is parsed, so dismissed bars
+  // never paint — eliminating the flash entirely.
+  var hideRules = [];
+  ids.forEach(function(id){
+    try {
+      if (localStorage.getItem('pai_dismissed_'+id) === '1') {
+        hideRules.push('#'+id+'{display:none !important;}');
+      }
+    } catch(e) {}
+  });
+  if (hideRules.length) {
+    var style = document.createElement('style');
+    style.id = 'pai-banner-hide';
+    style.textContent = hideRules.join('');
+    (document.head || document.documentElement).appendChild(style);
+  }
+
+  function dismiss(id){
+    try { localStorage.setItem('pai_dismissed_'+id,'1'); } catch(e) {}
+    var el = document.getElementById(id);
+    if (el) {
+      el.style.setProperty('display','none','important');
+      el.setAttribute('aria-hidden','true');
+      if (el.parentNode) {
+        el.parentNode.removeChild(el);
+      }
+    }
+  }
+
+  // Cleanup pass — remove dismissed banners from DOM after parse,
+  // belt-and-suspenders alongside the CSS hide.
+  function cleanup(){
+    ids.forEach(function(id){
+      try {
+        if (localStorage.getItem('pai_dismissed_'+id) === '1') {
+          var el = document.getElementById(id);
+          if (el && el.parentNode) {
+            el.parentNode.removeChild(el);
+          }
+        }
+      } catch(e) {}
+    });
+  }
+
+  function bind(){
+    ids.forEach(function(id){
+      var btn = document.getElementById(id+'-close');
+      if (btn && !btn.dataset.boundDismiss) {
+        btn.dataset.boundDismiss = '1';
+        btn.addEventListener('click', function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          dismiss(id);
+        });
+        btn.addEventListener('touchend', function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          dismiss(id);
+        }, {passive:false});
+      }
+    });
+    cleanup();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bind);
+  } else {
+    bind();
+  }
+})();
+</script>
+
+<!-- JSON-LD: Article + BreadcrumbList / Prior Auth Case Study — v326 structured-data pass -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://poconoai.com/prior-auth-case-study.html",
+      "url": "https://poconoai.com/prior-auth-case-study.html",
+      "headline": "Prior Authorization Crisis: The Administrative Burden on Independent Physician Practices",
+      "description": "Analysis of the prior authorization burden on independent medical practices — physician hours, patient care delays, and per-physician processing cost — sourced from AMA 2024 survey data and MGMA 2024 cost analysis.",
+      "articleSection": "Healthcare Administration Research",
+      "inLanguage": "en-US",
+      "isPartOf": { "@id": "https://poconoai.com/#website" },
+      "publisher": { "@id": "https://poconoai.com/#organization" },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Prior authorization",
+          "sameAs": "https://en.wikipedia.org/wiki/Prior_authorization"
+        },
+        {
+          "@type": "Thing",
+          "name": "Healthcare administrative burden"
+        }
+      ],
+      "citation": [
+        {
+          "@type": "ScholarlyArticle",
+          "name": "AMA Prior Authorization Physician Survey",
+          "publisher": { "@type": "Organization", "name": "American Medical Association" },
+          "datePublished": "2024"
+        },
+        {
+          "@type": "ScholarlyArticle",
+          "name": "MGMA Administrative Cost Analysis",
+          "publisher": { "@type": "Organization", "name": "Medical Group Management Association" },
+          "datePublished": "2024"
+        }
+      ],
+      "dateModified": "2026-05-31"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://poconoai.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Research Hub",
+          "item": "https://poconoai.com/research.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Prior Authorization Crisis Analysis",
+          "item": "https://poconoai.com/prior-auth-case-study.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+<div id="reading-progress" aria-hidden="true"></div>
+
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- INCLUDE:HEADER -->
+<div id="hitl-notice" style="background:#0a1929;padding:4px 16px;text-align:center;font-size:12px;color:#4a5568;border-bottom:1px solid rgba(255,255,255,0.06);letter-spacing:0.01em;">Human-in-the-Loop required: licensed professionals verify all outputs before clinical or legal action</div>
+<header role="banner">
+  <div class="header-inner">
+    <a href="/index.html" class="logo" aria-label="Pocono AI Home">
+      <img src="/logo.svg?v=402" alt="" width="36" height="36" decoding="async" loading="eager" aria-hidden="true" style="display:inline-block;">
+      Pocono <span>AI</span>
+    </a>
+    <nav id="desktop-nav" aria-label="Main navigation">
+      <div class="nav-item"><a href="/index.html" class="nav-direct">Home</a></div>
+      <div class="nav-item"><a href="/for-physicians.html" class="nav-direct">Physicians</a></div>
+      <div class="nav-item"><a href="/for-attorneys.html" class="nav-direct">Attorneys</a></div>
+      <div class="nav-item"><a href="/sentinel-node.html" class="nav-direct nav-hub" style="color:#d5a94f;border:1px solid rgba(213,169,79,0.45);border-radius:999px;padding:6px 13px;">Sentinel Node</a></div>
+      <div class="nav-item"><a href="/living-memorials/" class="nav-direct">Living Echo</a></div>
+      <div class="nav-item"><a href="/contact.html" class="nav-direct">Contact</a></div>
+      <div class="nav-item" data-dropdown="menu-more">
+        <button type="button" class="nav-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="menu-more">More <span class="nav-chevron" aria-hidden="true">&#9662;</span></button>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <a href="/contact.html#pilot" class="nav-cta nav-cta-primary">Request a Pilot</a>
+      <button type="button" class="pa-search-trigger" data-search-open aria-label="Search (press / or Ctrl-K)" aria-haspopup="dialog" aria-expanded="false">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span class="pa-st-label">Search</span><kbd data-pa-keyhint>Ctrl K</kbd>
+      </button>
+      <button type="button" class="header-icon-btn" id="mobile-menu" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav-panel">
+        <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- "More" overflow dropdown — sibling of <header> so position:fixed escapes header's stacking context. Wired by nav.js via data-dropdown="menu-more". -->
+<div class="nav-dropdown" id="menu-more" aria-label="More navigation">
+  <p class="nav-dd-section">Products</p>
+  <a href="/engineering-drafting/">Drafting &amp; Engineering Edition</a>
+  <a href="/sentinel-home/">Sentinel Home Edition</a>
+  <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability — Assistive Tools &#x2605;</a>
+  <a href="/living-memorials/enterprise-estate-continuity.html">Enterprise Estate Continuity</a>
+  <p class="nav-dd-section">Capabilities</p>
+  <a href="/evidence-room.html">Evidence Room</a>
+  <a href="/push-button-deliverables.html">Push-Button Deliverables</a>
+  <a href="/pilot-readiness-kit.html">Pilot Kit</a>
+  <a href="/pilot-program.html">Pilot Program</a>
+  <a href="/how-it-works.html">How It Works</a>
+  <p class="nav-dd-section">Hubs &amp; Company</p>
+  <a href="/training.html">Training Hub</a>
+  <a href="/documentation-hub/">Document Hub</a>
+  <a href="/global/">Global Hub</a>
+  <a href="/investors-hub.html">Investor Hub</a>
+  <a href="/valuation-dashboard.html">Valuation Dashboard</a>
+  <a href="/about.html">About</a>
+  <p class="nav-dd-section">Trust &amp; Legal</p>
+  <a href="/transparency.html">Transparency</a>
+  <a href="/audit.html">Audit Log</a>
+  <a href="/privacy.html">Privacy</a>
+  <a href="/sitemap.html">Sitemap</a>
+</div>
+<!-- Site search is provided by the self-contained search.js asset (command palette: / or Ctrl/Cmd-K). -->
+
+<!-- Mobile panel: full-screen slide-in. v396 nav — hub tiles + grouped links + Sentinel Node + Engineering. -->
+<nav id="mobile-nav-panel" aria-label="Mobile navigation" aria-hidden="true" role="dialog" aria-modal="true">
+
+  <!-- Hub tiles: Sentinel Node, Documentation Hub, Training Hub, Global Hub -->
+  <div style="padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,0.07);">
+    <p style="font-size:0.65em;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.28);margin:0 0 10px;padding:0 2px;">Hubs</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <a href="/sentinel-node.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(213,169,79,0.1);border:1px solid rgba(213,169,79,0.35);border-radius:10px;color:#d5a94f;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Sentinel Node</a>
+      <a href="/documentation-hub/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(0,194,168,0.1);border:1px solid rgba(0,194,168,0.35);border-radius:10px;color:#00c2a8;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Docs Hub</a>
+      <a href="/training.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.35);border-radius:10px;color:#a78bfa;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Training Hub</a>
+      <a href="/global/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(122,240,220,0.07);border:1px solid rgba(122,240,220,0.3);border-radius:10px;color:#7af0dc;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Global Hub</a>
+    </div>
+  </div>
+
+  <!-- Core paths -->
+  <div class="mob-static-links">
+    <a href="/index.html">Home</a>
+    <a href="/for-physicians.html">Physicians</a>
+    <a href="/for-attorneys.html">Attorneys</a>
+    <a href="/engineering-drafting/">Engineering &amp; Drafting</a>
+    <a href="/pilot-program.html">Pilot Program</a>
+    <a href="/how-it-works.html">How It Works</a>
+    <a href="/trust.html">Trust &amp; Audit</a>
+    <a href="/pricing.html">Pricing</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/living-memorials/">Living Echo</a>
+    <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability</a>
+    <a href="/about.html">About</a>
+    <a href="/team.html" style="color:rgba(255,255,255,0.6);">Team &amp; Leadership</a>
+    <a href="/valuation-dashboard.html" style="color:rgba(255,255,255,0.6);">Valuation Dashboard</a>
+    <a href="/careers.html" style="color:rgba(255,255,255,0.6);">Careers</a>
+    <a href="/sentinel-demo.html" style="color:rgba(255,255,255,0.6);">Demo</a>
+    <a href="/sitemap.html" style="color:rgba(255,255,255,0.45);">Sitemap</a>
+    <a href="/transparency.html" style="color:rgba(255,255,255,0.45);">Transparency</a>
+    <a href="/privacy.html" style="color:rgba(255,255,255,0.45);">Privacy</a>
+  </div>
+
+  <a href="/contact.html#pilot" class="mob-cta">Request a Pilot</a>
+</nav>
+<!-- /INCLUDE:HEADER -->
+
+
+<main id="main-content" tabindex="-1">
+<span id="main" aria-hidden="true"></span>
+<div class="page-back-link"><a href="for-physicians.html" class="back-link-anchor">&#8592; For Physicians</a></div>
+
+
+    <section class="hero-section">
+        <div class="sentinel-lockup" aria-label="Sentinel Node — Prior Auth Case Study">
+              <svg class="sentinel-lockup-mark" viewBox="0 0 64 64" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
+          <!-- v311b: rotated diamond + C-curve loop + summit dot. Inherits currentColor from CSS context. -->
+          <g transform="rotate(45 32 32)">
+            <rect x="12" y="12" width="40" height="40" rx="8" ry="8"/>
+            <path d="M43 22 L26 22 A6 6 0 0 0 20 28 L20 36 A6 6 0 0 0 26 42 L41 42"/>
+          </g>
+          <circle cx="32" cy="9" r="3" fill="currentColor" stroke="none"/>
+        </svg>
+              <div class="sentinel-lockup-rule"></div>
+              <div class="sentinel-lockup-text">
+                <span class="sentinel-lockup-name">Sentinel Node</span>
+                <span class="sentinel-lockup-tag">Prior Authorization Crisis &middot; AMA 2024 Research</span>
+              </div>
+            </div>
+        <h1>14 Hours a Week.<br>$68,000 a Year.<br>Zero Patient Care.</h1>
+        <p class="hero-plain">Prior authorization is the single largest administrative burden in independent medicine. It delays treatment, abandons patients, and burns out physicians — one phone call, one fax, one hold queue at a time. The Sentinel Node collapses a 16-step process into minutes.</p>
+        <div class="hero-ctas">
+            <a href="#simulator" class="cta-button">See the Side-by-Side</a>
+            <a href="for-physicians.html" class="cta-button cta-button-light">For Physicians</a>
+        </div>
+    </section>
+
+    <section class="trust-badges-section" aria-label="Built on enterprise infrastructure">
+        <p class="trust-badges-eyebrow">Built on enterprise infrastructure</p>
+        <div class="trust-badges-row">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 32" width="120" height="32" role="img" aria-label="Dell" class="badge-svg"><text x="60" y="24" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif" font-weight="800" font-size="22" letter-spacing="3" fill="currentColor">DELL</text></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 32" width="150" height="32" role="img" aria-label="NVIDIA" class="badge-svg"><text x="75" y="24" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif" font-weight="800" font-size="22" letter-spacing="3" fill="currentColor">NVIDIA</text></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 32" width="150" height="32" role="img" aria-label="Qdrant" class="badge-svg"><text x="75" y="24" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif" font-weight="800" font-size="22" letter-spacing="2" fill="currentColor">Qdrant</text></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 32" width="150" height="32" role="img" aria-label="Ollama" class="badge-svg"><text x="75" y="24" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif" font-weight="800" font-size="22" letter-spacing="2" fill="currentColor">Ollama</text></svg>
+        </div>
+    </section>
+
+    <!-- STATS -->
+    <section style="max-width:960px;margin:0 auto;padding:0 4%;">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:40px;">
+            <div class="stat-callout">
+                <div class="stat-big">14<span class="stat-unit">hrs/wk</span></div>
+                <div class="stat-label">Physicians spend 14 hours per week on prior authorization — nearly two full clinical days</div>
+                <div class="stat-source">AMA 2024 Prior Authorization Survey</div>
+            </div>
+            <div class="stat-callout">
+                <div class="stat-big">$68<span class="stat-unit">K/yr</span></div>
+                <div class="stat-label">Annual per-physician cost of prior authorization administrative overhead (fully loaded)</div>
+                <div class="stat-source">MGMA, 2024 — separate from AMA survey below</div>
+            </div>
+            <div class="stat-callout">
+                <div class="stat-big">40<span class="stat-unit">%+</span></div>
+                <div class="stat-label">Of physicians report that prior authorization can lead patients to abandon recommended treatment &#9888; exact % pending verified source edition</div>
+                <div class="stat-source">AMA 2024 Prior Auth Survey — % of physicians reporting, not % of patients</div>
+            </div>
+            <div class="stat-callout">
+                <div class="stat-big">94<span class="stat-unit">%</span></div>
+                <div class="stat-label">Of physicians report prior authorization delays access to necessary care</div>
+                <div class="stat-source">AMA 2024 Prior Auth Survey</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SIMULATOR -->
+    <section id="simulator" class="pa-simulator">
+        <h2 style="color:var(--teal);">The Prior Auth Journey — Side by Side</h2>
+        <p style="color:var(--light-text);line-height:1.8;margin-bottom:24px;">A physician needs to prescribe Humira for a patient with Crohn's disease. Watch the standard process — then see how the Sentinel Node changes it. Click Run to step through each stage.</p>
+
+        <div class="pa-toggle">
+            <button class="pa-toggle-btn active bad" onclick="showMode('standard')">&#128683; Standard Process</button>
+            <button class="pa-toggle-btn" onclick="showMode('sentinel')">&#9989; With Sentinel Node</button>
+        </div>
+
+        <button class="cta-button pa-run-btn" onclick="runSimulation()" id="run-btn">&#9654; Run the Simulation</button>
+
+        <!-- Standard 16-step process -->
+        <div class="pa-steps visible" id="steps-standard">
+            <div class="pa-step" data-delay="0">
+                <div class="pa-step-num bad">1</div>
+                <div class="pa-step-body bad">
+                    <div class="pa-step-title">Physician diagnosis &amp; prescription decision</div>
+                    <p class="pa-step-desc">Physician determines Humira is clinically appropriate for this patient's moderate-to-severe Crohn's disease.</p>
+                    <div class="pa-step-time">&#128337; 5 min clinical time</div>
+                </div>
+            </div>
+            <div class="pa-step" data-delay="150">
+                <div class="pa-step-num bad">2</div>
+                <div class="pa-step-body bad">
+                    <div class="pa-step-title">MA contacts pharmacy to check formulary</div>
+                    <p class="pa-step-desc">Medical assistant calls pharmacy. On hold. Discovers Humira requires prior authorization from patient's insurer.</p>
+                    <div class="pa-step-time">&#128337; 18 min on hold + 8 min call</div>
+                </div>
+            </div>
+            <div class="pa-step" data-delay="300">
+                <div class="pa-step-num bad">3</div>
+                <div class="pa-step-body bad">
+                    <div class="pa-step-title">Identify correct insurer PA portal or fax number</div>
+                    <p class="pa-step-desc">MA must locate the correct prior auth pathway for this specific patient's plan. Different plans use different portals, fax numbers, and forms.</p>
+                    <div class="pa-step-time">&#128337; 12 min searching</div>
+                </div>
+            </div>
+            <div class="pa-step" data-delay="450">
+                <div class="pa-step-num bad">4</div>
+                <div class="pa-step-body bad">
+                    <div class="pa-step-title">Pull patient chart history for clinical justification</div>
+                    <p class="pa-step-desc">MA manually reviews chart to find prior treatment history — what was tried, when, dosages, and outcomes — to justify medical necessity. This is the bottleneck.</p>
+                    <div class="pa-step-time">&#128337; 25–45 min chart review</div>
+                </div>
+            </div>
+            <div class="pa-step" data-delay="600">
+                <div class="pa-step-num bad">5</div>
+                <div class="pa-step-body bad">
+                    <div class="pa-step-title">Physician reviews and signs clinical justification letter</div>
+                    <p class="pa-step-desc">MA drafts letter. Physician reviews, corrects inaccuracies, and signs. Interrupts patient care to do so.</p>
+                    <div class="pa-step-time">&#128337; 15 min physician time</div>
+                </div>
+            </div>
+            <div class="pa-step" data-delay="750">
+                <div class="pa-step-num bad">6</div>
+                <div class="pa-step-body bad">
+                    <div class="pa-step-title">Submit PA request via fax or portal</div>
+                    <p class="pa-step-desc">PA request submitted with supporting documentation. Fax confirmation or portal submission receipt saved.</p>
+                    <div class="pa-step-time">&#128337; 10 min submission</div>
+                </div>
+            </div>
+            <div class="pa-step" data-delay="900">
+                <div class="pa-step-num bad">7</div>
+                <div class="pa-step-body bad">
+                    <div class="pa-step-title">Wait for insurer response</div>
+                    <p class="pa-step-desc">Federal law requires response within 72 hours for urgent, 15 business days for standard. Most responses take 3–10 business days. Patient waits for treatment.</p>
+                    <div class="pa-step-time">&#128337; 3–10 business days</div>
+                </div>
+            </div>
+            <div class="pa-step" data-delay="1050">
+                <div class="pa-step-num bad">8</div>
+                <div class="pa-step-body bad">
+                    <div class="pa-step-title">Initial denial received</div>
+                    <p class="pa-step-desc">Insurer denies — step therapy required. Patient must try and fail a cheaper biologic first. 45% of all PA requests are initially denied.</p>
+                    <div class="pa-step-time">&#128337; Patient waits additional weeks</div>
+                </div>
+            </div>
+            <div class="pa-step" data-delay="1200">
+                <div class="pa-step-num bad">9</div>
+                <div class="pa-step-body bad">
+                    <div class="pa-step-title">Physician peer-to-peer review request</div>
+                    <p class="pa-step-desc">Physician requests peer-to-peer review with insurer's medical reviewer. Scheduling this call takes 2–5 days. The insurer's reviewer may not be a gastroenterologist.</p>
+                    <div class="pa-step-time">&#128337; 2–5 days scheduling + 30 min call</div>
+                </div>
+            </div>
+            <div class="pa-step" data-delay="1350">
+                <div class="pa-step-num bad">10</div>
+                <div class="pa-step-body bad">
+                    <div class="pa-step-title">Appeal filed with additional documentation</div>
+                    <p class="pa-step-desc">After peer-to-peer denial, formal appeal is filed. Additional chart notes, lab results, and peer-reviewed literature supporting Humira are compiled and submitted.</p>
+                    <div class="pa-step-time">&#128337; 3–5 hours staff time</div>
+                </div>
+            </div>
+            <div class="pa-step" data-delay="1500">
+                <div class="pa-step-num bad">11</div>
+                <div class="pa-step-body bad">
+                    <div class="pa-step-title">Second denial or approval</div>
+                    <p class="pa-step-desc">If approved: prescription proceeds — weeks after the physician's clinical decision. If denied again: external review or patient self-pay options explored.</p>
+                    <div class="pa-step-time">&#128337; Another 15 business days</div>
+                </div>
+            </div>
+            <div class="pa-step" data-delay="1650">
+                <div class="pa-step-num bad">12</div>
+                <div class="pa-step-body bad">
+                    <div class="pa-step-title">Patient notified &amp; prescription sent</div>
+                    <p class="pa-step-desc">Patient finally notified of approval. Prescription sent to specialty pharmacy. Some patients have already sought care elsewhere or abandoned treatment.</p>
+                    <div class="pa-step-time">&#128337; Total elapsed: 3–8 weeks</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sentinel Node 5-step process -->
+        <div class="pa-steps" id="steps-sentinel">
+            <div class="pa-step" data-delay="0">
+                <div class="pa-step-num good">1</div>
+                <div class="pa-step-body good">
+                    <div class="pa-step-title">Physician diagnosis &amp; prescription decision</div>
+                    <p class="pa-step-desc">Physician determines Humira is clinically appropriate. Same clinical decision — nothing changes here.</p>
+                    <div class="pa-step-time">&#128337; 5 min clinical time</div>
+                </div>
+            </div>
+            <div class="pa-step" data-delay="150">
+                <div class="pa-step-num good">2</div>
+                <div class="pa-step-body good">
+                    <div class="pa-step-title">MA submits query to Sentinel Node</div>
+                    <p class="pa-step-desc">MA types: "Pull prior treatment history for [Patient] — all biologics, GI medications, dosages, and outcomes for the last 36 months. Format for prior auth justification letter."</p>
+                    <div class="pa-step-time">&#128337; 45 seconds to type query</div>
+                </div>
+            </div>
+            <div class="pa-step" data-delay="300">
+                <div class="pa-step-num good">3</div>
+                <div class="pa-step-body good">
+                    <div class="pa-step-title">Sentinel Node retrieves &amp; compiles locally</div>
+                    <p class="pa-step-desc">The Sentinel Node searches the locally indexed chart — no cloud call. It retrieves every relevant encounter, medication, lab result, and treatment outcome, with page-level citations from the actual chart. Formats as a structured PA justification summary.</p>
+                    <div class="pa-step-time">&#128337; 8–14 seconds</div>
+                </div>
+            </div>
+            <div class="pa-step" data-delay="450">
+                <div class="pa-step-num good">4</div>
+                <div class="pa-step-body good">
+                    <div class="pa-step-title">Physician reviews, verifies citations, and signs</div>
+                    <p class="pa-step-desc">Physician reviews the Sentinel Node output — every claim is cited to a specific page in the chart. Physician verifies 2–3 key data points, makes any corrections, and signs. No fax hold queues interrupted this.</p>
+                    <div class="pa-step-time">&#128337; 6–8 min physician time</div>
+                </div>
+            </div>
+            <div class="pa-step" data-delay="600">
+                <div class="pa-step-num good">5</div>
+                <div class="pa-step-body good">
+                    <div class="pa-step-title">PA submitted with complete, accurate documentation</div>
+                    <p class="pa-step-desc">PA submitted with comprehensive, accurately cited clinical justification. Complete documentation on first submission reduces denial rates. Patient's treatment timeline improves.</p>
+                    <div class="pa-step-time">&#128337; Total staff time: ~12 minutes</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Totals -->
+        <div class="pa-total-bar" id="pa-totals" style="display:none;">
+            <div>
+                <div class="pa-total-label" id="total-label">Standard process total time</div>
+                <div class="pa-total-time" id="total-time">25–45 min staff + 15 min physician + 3–8 weeks elapsed</div>
+            </div>
+            <div style="text-align:right;">
+                <div class="pa-total-label">PHI leaves building?</div>
+                <div style="font-weight:800;" id="phi-status">Yes — fax + portal transmission</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RESEARCH BACKING -->
+    <section style="max-width:960px;margin:48px auto 0;padding:0 4%;">
+        <h2>The Research Behind These Numbers</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <span style="color:var(--teal);font-size:0.72em;text-transform:uppercase;letter-spacing:0.12em;font-weight:700;">AMA 2024</span>
+                <h3 style="margin:8px 0;">Prior Authorization Physician Survey</h3>
+                <p style="color:var(--light-text);font-size:0.88em;line-height:1.7;">Approximately 3,000 physicians surveyed. <strong>94% report PA delays access to necessary care.</strong> A substantial majority report that PA can lead patients to abandon recommended treatment (exact abandonment percentage: AMA survey; figures below are as reported by the citing physician, not a patient-population rate). Average 14 hours/week spent on PA — across all specialties. Primary care and oncology worst affected.</p>
+            </div>
+            <div class="feature-card">
+                <span style="color:var(--teal);font-size:0.72em;text-transform:uppercase;letter-spacing:0.12em;font-weight:700;">MGMA 2024</span>
+                <h3 style="margin:8px 0;">Administrative Cost Analysis</h3>
+                <p style="color:var(--light-text);font-size:0.88em;line-height:1.7;">$68,274 average annual per-physician cost of prior authorization processing when fully loaded (staff time, physician time, overhead, and opportunity cost of delayed care). For a 3-physician practice: over $200,000/year in administrative cost generating zero clinical value. <em style="font-size:0.9em;color:var(--muted);">Source: MGMA, 2024 — distinct from the AMA physician survey above.</em></p>
+            </div>
+            <div class="feature-card">
+                <span style="color:var(--teal);font-size:0.72em;text-transform:uppercase;letter-spacing:0.12em;font-weight:700;">JAMA Internal Medicine 2023</span>
+                <h3 style="margin:8px 0;">Step Therapy &amp; Patient Harm</h3>
+                <p style="color:var(--light-text);font-size:0.88em;line-height:1.7;">Step therapy requirements — forcing patients to "fail first" on cheaper alternatives before getting prescribed treatments — are associated with significant clinical harm, hospitalization, and disease progression in conditions including IBD, rheumatoid arthritis, and severe asthma.</p>
+            </div>
+            <div class="feature-card">
+                <span style="color:var(--teal);font-size:0.72em;text-transform:uppercase;letter-spacing:0.12em;font-weight:700;">KFF 2024</span>
+                <h3 style="margin:8px 0;">Denial &amp; Appeal Rates</h3>
+                <p style="color:var(--light-text);font-size:0.88em;line-height:1.7;">Of prior authorization requests that are appealed, approximately 80% are eventually approved — meaning the vast majority of contested denials are overturned when physicians have time to fight them. Most don't. &#9888; <em style="color:var(--muted);font-size:0.9em;">Initial denial rate varies widely by payer and program; the "45% denied" figure cited in an earlier version of this page is under review — KFF's widely cited Medicare Advantage figure is in the single digits. Verify your payer-specific rate before citing externally. Complete, accurate documentation on first submission is the highest-value intervention regardless of baseline denial rate.</em></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHAT SENTINEL NODE ACTUALLY DOES -->
+    <div class="highlight-section" style="margin-top:40px;">
+        <h2 style="color:white;margin-top:0;">What the Sentinel Node Actually Does for Prior Auth</h2>
+        <p style="color:var(--light-text);max-width:680px;margin:0 auto 24px;line-height:1.8;">The Sentinel Node does not submit prior auth requests. It does not communicate with insurers. It does not integrate with any insurer portal. What it does — which is where most of the time is lost — is retrieve and format the clinical justification documentation from your local patient records, accurately, in seconds, with citations.</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;max-width:800px;margin:0 auto;">
+            <div style="background:rgba(0,0,0,0.25);border-radius:10px;padding:16px 18px;">
+                <p style="color:var(--teal);font-weight:700;font-size:0.85em;margin:0 0 6px;">Before: 25–45 min</p>
+                <p style="color:var(--light-text);font-size:0.82em;margin:0;line-height:1.6;">MA manually reviews chart history to compile treatment timeline</p>
+            </div>
+            <div style="background:rgba(0,0,0,0.25);border-radius:10px;padding:16px 18px;">
+                <p style="color:var(--teal);font-weight:700;font-size:0.85em;margin:0 0 6px;">After: 8–14 seconds</p>
+                <p style="color:var(--light-text);font-size:0.82em;margin:0;line-height:1.6;">Sentinel Node retrieves &amp; formats same documentation with page-level citations</p>
+            </div>
+            <div style="background:rgba(0,0,0,0.25);border-radius:10px;padding:16px 18px;">
+                <p style="color:var(--teal);font-weight:700;font-size:0.85em;margin:0 0 6px;">PHI exposure: Zero</p>
+                <p style="color:var(--light-text);font-size:0.82em;margin:0;line-height:1.6;">Processing happens locally. No cloud call. No PHI leaves the building during chart review.</p>
+            </div>
+            <div style="background:rgba(0,0,0,0.25);border-radius:10px;padding:16px 18px;">
+                <p style="color:var(--teal);font-weight:700;font-size:0.85em;margin:0 0 6px;">Denial reduction</p>
+                <p style="color:var(--light-text);font-size:0.82em;margin:0;line-height:1.6;">Complete, accurately cited documentation on first submission reduces initial denial rates</p>
+            </div>
+        </div>
+    </div>
+
+    <section id="contact" class="cta-container">
+        <h2 style="color:white;border-bottom:none;margin-top:0;">14 Hours a Week Is Not Inevitable</h2>
+        <p style="color:var(--light-text);max-width:520px;margin:0 auto 24px;line-height:1.8;">The chart review step — where most prior auth time is lost — is exactly what the Sentinel Node was built for. Local, cited, in seconds.</p>
+        <a href="mailto:marcus@poconoai.com?subject=Prior%20Auth%20Burden%20%E2%80%94%20PoconoAI.com" class="cta-button">&#9993; Talk to Marcus About Prior Auth</a>
+        <a href="deployment.html" class="cta-button cta-button-light" style="margin-left:12px;">See the Deployment Timeline</a>
+        <p style="margin:20px auto 0;max-width:480px;color:#6b8499;font-size:.82rem;font-style:italic;line-height:1.7;border-top:1px solid rgba(255,255,255,.06);padding-top:16px;">Governance before automation. Every retrieval has a traceable origin.</p>
+    </section>
+
+
+    <!-- v321: Related research callout — AI Near-Miss Doctrine -->
+    <section aria-label="Related research">
+      <div style="background:linear-gradient(160deg,rgba(10,115,210,0.08),rgba(5,22,34,0.85));border:1px solid rgba(10,115,210,0.22);border-left:3px solid #0A73D2;border-radius:0 10px 10px 0;padding:22px 24px;margin:24px 0;display:flex;flex-wrap:wrap;align-items:center;gap:16px;justify-content:space-between;">
+        <div style="flex:1 1 320px;min-width:260px;">
+          <p style="font-size:0.66em;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#5dade2;margin:0 0 6px;">Related Research &middot; Healthcare</p>
+          <p style="color:#fff;font-weight:700;font-size:0.98em;margin:0 0 4px;">AI Near-Miss Governance</p>
+          <p style="color:#D0DDE6;font-size:0.85em;line-height:1.6;margin:0;">When a prior auth draft cites the wrong criterion, who catches it? The near-miss doctrine for clinical AI workflows.</p>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;flex-shrink:0;">
+          <a href="ai-near-miss-doctrine.html" style="display:inline-flex;align-items:center;gap:6px;padding:9px 16px;background:#0A73D2;color:#fff;font-size:0.82em;font-weight:700;border-radius:6px;text-decoration:none;">Read the Doctrine &rarr;</a>
+          <a href="Pocono_AI_The_AI_Near_Miss_Doctrine.pdf" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border:1px solid rgba(255,255,255,0.18);color:#D0DDE6;font-size:0.82em;font-weight:600;border-radius:6px;text-decoration:none;">Download PDF</a>
+        </div>
+      </div>
+    </section>
+
+
+<!-- Concept cluster v341 -->
+<section style="max-width:1100px;margin:40px auto 0;padding:28px 24px 32px;border-top:1px solid rgba(255,255,255,0.07);">
+  <p style="margin:0 0 14px;font-size:0.72em;font-weight:800;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.3);">Why Local AI — Core Concepts</p>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;">
+    <a href="sentinel-node.html" style="display:inline-block;padding:8px 14px;background:rgba(0,194,168,0.08);border:1px solid rgba(0,194,168,0.28);border-radius:8px;color:#2dd4bf;text-decoration:none;font-size:0.86rem;font-weight:600;">Sentinel Node</a>
+    <a href="local-ai-inference.html" style="display:inline-block;padding:8px 14px;background:rgba(0,194,168,0.06);border:1px solid rgba(0,194,168,0.2);border-radius:8px;color:#9eb9cc;text-decoration:none;font-size:0.86rem;">Local AI Inference</a>
+    <a href="data-sovereignty-ai.html" style="display:inline-block;padding:8px 14px;background:rgba(0,194,168,0.06);border:1px solid rgba(0,194,168,0.2);border-radius:8px;color:#9eb9cc;text-decoration:none;font-size:0.86rem;">Data Sovereignty</a>
+    <a href="zero-telemetry-ai.html" style="display:inline-block;padding:8px 14px;background:rgba(0,194,168,0.06);border:1px solid rgba(0,194,168,0.2);border-radius:8px;color:#9eb9cc;text-decoration:none;font-size:0.86rem;">Zero Telemetry</a>
+    <a href="zero-exfiltration-ai.html" style="display:inline-block;padding:8px 14px;background:rgba(0,194,168,0.06);border:1px solid rgba(0,194,168,0.2);border-radius:8px;color:#9eb9cc;text-decoration:none;font-size:0.86rem;">Zero Exfiltration</a>
+    <a href="ai-governance-layer.html" style="display:inline-block;padding:8px 14px;background:rgba(0,194,168,0.06);border:1px solid rgba(0,194,168,0.2);border-radius:8px;color:#9eb9cc;text-decoration:none;font-size:0.86rem;">AI Governance Layer</a>
+    <a href="regulated-ai-infrastructure.html" style="display:inline-block;padding:8px 14px;background:rgba(0,194,168,0.06);border:1px solid rgba(0,194,168,0.2);border-radius:8px;color:#9eb9cc;text-decoration:none;font-size:0.86rem;">Regulated AI Infrastructure</a>
+  </div>
+</section>
+</main>
+
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 root-relative nav fix, Living Echo rebrand, Engineering & Drafting + Enterprise Estate Continuity links added (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- INCLUDE:FOOTER -->
+<footer role="contentinfo" style="background:#051622;border-top:1px solid rgba(255,255,255,0.08);padding:40px 24px 28px;font-size:0.85em;color:#8899aa;">
+  <div style="max-width:1180px;margin:0 auto;">
+
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:0 0 28px;margin-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.07);">
+      <div style="max-width:560px;">
+        <p style="margin:0 0 6px;font-size:1.05em;font-weight:700;color:#fff;">Local AI infrastructure for regulated practices.</p>
+        <p style="margin:0;font-size:0.95em;line-height:1.5;">Drafts with citations. Human review required. Sensitive documents stay under practice control. Simple path, deep proof.</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="/contact.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;background:#00c2a8;color:#04111a;font-weight:700;text-decoration:none;font-size:0.95em;">Request Pilot</a>
+        <a href="/sentinel-demo.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;border:1px solid rgba(0,194,168,0.55);color:#00c2a8;font-weight:700;text-decoration:none;font-size:0.95em;">Watch Demo</a>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px 32px;margin-bottom:32px;text-align:left;">
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">For You</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/start-here.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Start Here (3 min)</a>
+          <a href="/for-physicians.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Physicians</a>
+          <a href="/for-attorneys.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Attorneys</a>
+          <a href="/engineering-drafting/" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Engineering &amp; Drafting Teams</a>
+          <a href="/pilot-program.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Pilot Program</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Installer Training</a>
+          <a href="/how-it-works.html" style="color:#8899aa;text-decoration:none;">How It Works</a>
+          <a href="/trust.html" style="color:#8899aa;text-decoration:none;">Trust &amp; Audit</a>
+          <a href="/pricing.html" style="color:#8899aa;text-decoration:none;">Pricing</a>
+          <a href="/sentinel-demo.html" style="color:#8899aa;text-decoration:none;">See the Demo</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Documentation Hub</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/documentation-hub/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Hub Home &mdash; Deep Proof</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">Installer Training</a>
+          <a href="/sentinel-node/installation-simulator.html" style="color:#8899aa;text-decoration:none;">&#8627; Installation Simulator</a>
+          <a href="/documentation-hub/clinical/" style="color:#8899aa;text-decoration:none;">Clinical Documentation</a>
+          <a href="/documentation-hub/legal/" style="color:#8899aa;text-decoration:none;">Legal Documentation</a>
+          <a href="/documentation-hub/technical/" style="color:#8899aa;text-decoration:none;">Technical Documentation</a>
+          <a href="/documentation-hub/governance/" style="color:#8899aa;text-decoration:none;">Governance &amp; Audit</a>
+          <a href="/documentation-hub/tools/" style="color:#8899aa;text-decoration:none;">Tools &amp; Simulators</a>
+          <a href="/documentation-hub/research/" style="color:#8899aa;text-decoration:none;">Research &amp; Essays</a>
+          <a href="/documentation-hub/transparency/" style="color:#8899aa;text-decoration:none;">Transparency</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Global Federated AI</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/global/" style="color:#7af0dc;text-decoration:none;font-weight:600;">Global Federated Hub</a>
+          <a href="/global/australia/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Australia</a>
+          <a href="/global/singapore/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Singapore</a>
+          <a href="/global/taiwan/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Taiwan</a>
+          <a href="/global/europe/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Europe</a>
+          <a href="/contact.html" style="color:#8899aa;text-decoration:none;">Partner Inquiry</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Company</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/about.html" style="color:#8899aa;text-decoration:none;">About Pocono AI</a>
+          <a href="/team.html" style="color:#8899aa;text-decoration:none;">Team &amp; Leadership</a>
+          <a href="/why-pocono-ai.html" style="color:#8899aa;text-decoration:none;">Why Pocono AI</a>
+          <a href="/founding-commercial-leadership.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Join Us</a>
+          <a href="/careers.html" style="color:#8899aa;text-decoration:none;">Careers</a>
+          <a href="/how-we-hire.html" style="color:#8899aa;text-decoration:none;">How We Hire</a>
+          <a href="/channel-partners.html" style="color:#8899aa;text-decoration:none;">Technical Partners (MSPs)</a>
+          <a href="/partners.html" style="color:#8899aa;text-decoration:none;">Academic Partnerships</a>
+          <a href="/contact.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Contact</a>
+          <a href="https://forms.gle/VQahnkjMfY6QNEMy8" target="_blank" rel="noopener noreferrer" style="color:#d5a94f;text-decoration:none;font-weight:600;">Interest List &#8599;</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Founder Projects</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/rehability/" style="color:#a78bfa;text-decoration:none;font-weight:700;">Rehability &#x2605;</a>
+          <a href="/rehability/marcus-memory-helper/" style="color:#a78bfa;text-decoration:none;font-weight:600;">&#8627; Marcus's Memory Helper</a>
+          <a href="/sentinel-home/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Sentinel Home Edition</a>
+          <a href="/living-memorials/" style="color:#8899aa;text-decoration:none;">Living Echo</a>
+          <a href="/living-memorials/marcus-odell/" style="color:#8899aa;text-decoration:none;">Marcus&rsquo;s Living Echo</a>
+          <a href="/living-memorials/enterprise-estate-continuity.html" style="color:#8899aa;text-decoration:none;">Enterprise Estate Continuity</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Resources &amp; Legal</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/sitemap.html" style="color:#8899aa;text-decoration:none;">All Pages (Sitemap)</a>
+          <a href="/audit.html" style="color:#8899aa;text-decoration:none;">Transparency &amp; Audit Log</a>
+          <a href="/maturity-disclosure.html" style="color:#8899aa;text-decoration:none;">What We Have / Don&rsquo;t Claim</a>
+          <a href="/plain.html" style="color:#8899aa;text-decoration:none;">Plain Language Guide</a>
+          <a href="/privacy.html" style="color:#8899aa;text-decoration:none;">Privacy</a>
+          <a href="/terms.html" style="color:#8899aa;text-decoration:none;">Terms</a>
+          <a href="/sla.html" style="color:#8899aa;text-decoration:none;">SLA</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:18px;margin-bottom:14px;">
+      <p style="margin:0;font-size:0.82em;line-height:1.6;color:#6f8295;max-width:1000px;">Pocono AI does not provide medical, legal, or engineering advice, does not practice medicine, law, or licensed engineering, and does not make clinical, legal, or engineering decisions. Outputs are drafts or support materials that require review by a qualified professional; final professional judgment remains with the licensed physician, attorney, or engineer. Tools and simulations on this site are educational and use synthetic data.</p>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:20px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+      <p style="margin:0;font-size:0.9em;">&copy; 2026 Pocono AI, LLC &nbsp;&#183;&nbsp; East Stroudsburg, PA &nbsp;&#183;&nbsp; <a href="mailto:marcus@poconoai.com" style="color:#8899aa;">marcus@poconoai.com</a> &nbsp;&#183;&nbsp; <a href="tel:+15705340602" style="color:#8899aa;">(570) 534-0602</a></p>
+      <p style="margin:0;font-size:0.88em;"><a href="/audit.html" style="color:#5dade2;text-decoration:none;">Transparency v402</a></p>
+    </div>
+  </div>
+</footer>
+<script src="/search.js?v=402" defer></script>
+<!-- /INCLUDE:FOOTER -->
+
+<script>
+let currentMode = 'standard';
+let simRunning = false;
+
+function showMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.pa-steps').forEach(el => el.classList.remove('visible'));
+    document.getElementById('steps-' + mode).classList.add('visible');
+    document.querySelectorAll('.pa-toggle-btn').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+    // Reset steps
+    document.querySelectorAll('.pa-step').forEach(s => s.classList.remove('revealed'));
+    document.getElementById('pa-totals').style.display = 'none';
+    document.getElementById('run-btn').textContent = '▶ Run the Simulation';
+    simRunning = false;
+}
+
+function runSimulation() {
+    if (simRunning) return;
+    simRunning = true;
+    document.getElementById('run-btn').textContent = '⏳ Running...';
+    const steps = document.querySelectorAll('#steps-' + currentMode + ' .pa-step');
+    steps.forEach(s => s.classList.remove('revealed'));
+
+    steps.forEach((step, i) => {
+        const delay = parseInt(step.dataset.delay) || i * 180;
+        setTimeout(() => {
+            step.classList.add('revealed');
+            if (i === steps.length - 1) {
+                setTimeout(() => showTotals(), 400);
+            }
+        }, delay + 200);
+    });
+}
+
+function showTotals() {
+    const totals = document.getElementById('pa-totals');
+    const label  = document.getElementById('total-label');
+    const time   = document.getElementById('total-time');
+    const phi    = document.getElementById('phi-status');
+    const timeEl = document.querySelector('.pa-total-time');
+
+    totals.style.display = 'flex';
+
+    if (currentMode === 'standard') {
+        label.textContent = 'Standard process — staff time + elapsed weeks';
+        time.textContent  = '25–45 min chart review + 15 min physician + 3–8 weeks patient wait';
+        phi.textContent   = 'Yes — fax + portal transmission';
+        phi.style.color   = '#FF6B5B';
+        timeEl.classList.remove('good');
+    } else {
+        label.textContent = 'Sentinel Node — total time to complete documentation';
+        time.textContent  = '~12 minutes total (query + review + sign)';
+        phi.textContent   = 'No — processed entirely on local hardware';
+        phi.style.color   = 'var(--teal)';
+        timeEl.classList.add('good');
+    }
+
+    document.getElementById('run-btn').textContent = '↺ Run Again';
+    simRunning = false;
+}
+</script>
+
+<script src="search-index.js?v=402" defer></script>
+<script src="nav.js?v=402" defer></script>
+<script src="pilot-cta.js?v=402" defer></script>
+</body>
+</html>

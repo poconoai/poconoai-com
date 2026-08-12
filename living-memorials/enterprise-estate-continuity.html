@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp --><!-- Living Echo — Enterprise Estate Continuity, v399 2026-06-19. Added interest-list CTA. Prior: New page. The enterprise/professional continuity edition of Living Echo, for businesses, estates, fiduciaries, advisors, family enterprises, and key-person-risk situations. Self-contained; intentionally outside the main-site build (no partial markers). -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Enterprise Estate Continuity | Founder &amp; Institutional Memory Preservation | Living Echo</title>
+<meta name="description" content="Enterprise Estate Continuity preserves founder intent, institutional memory, succession context, and continuity instructions for businesses, estates, fiduciaries, and family enterprises. Governed, consent-first, steward-controlled.">
+<link rel="canonical" href="https://poconoai.com/living-memorials/enterprise-estate-continuity.html">
+<link rel="icon" href="living-echo-logo.svg" type="image/svg+xml">
+
+<meta property="og:title" content="Enterprise Estate Continuity | Living Echo">
+<meta property="og:description" content="Preserving founder intent, institutional memory, and succession context for businesses, estates, fiduciaries, advisors, and family enterprises facing key-person risk.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://poconoai.com/living-memorials/enterprise-estate-continuity.html">
+<meta property="og:site_name" content="Living Echo">
+
+<style>
+/* ── Living Echo · scoped .lm- design system (shared with estate-professionals.html) ── */
+:root{
+  --lm-paper:#FDF8EF; --lm-paper-2:#FFFDF7; --lm-ink:#433F38; --lm-ink-soft:#6E6659;
+  --lm-leaf:#5E8062; --lm-leaf-deep:#44613F; --lm-leaf-tint:rgba(94,128,98,.12);
+  --lm-gold:#C9973F; --lm-gold-deep:#8A6620; --lm-gold-tint:rgba(201,151,63,.13);
+  --lm-rose:#C77F93; --lm-rose-deep:#9A546D;
+  --lm-lav:#9D8FBE;  --lm-lav-deep:#6C5C95;
+  --lm-sky:#8FB8CC;  --lm-sky-deep:#46748A;
+  --lm-spectrum:linear-gradient(90deg,var(--lm-leaf),var(--lm-gold),var(--lm-rose),var(--lm-lav),var(--lm-sky));
+  --lm-shadow:0 12px 36px rgba(99,76,43,.10);
+  --le-navy:#12324a; --le-navy-deep:#0a1f30; --le-gold:#d5a94f; --le-teal:#517d83;
+}
+*{box-sizing:border-box}
+html{background:var(--lm-paper)}
+body.lm-body{margin:0;background:var(--lm-paper);color:var(--lm-ink);font-family:Georgia,'Times New Roman',serif;line-height:1.7;overflow-x:hidden}
+.lm-skip{position:absolute;left:-9999px;top:0;background:var(--lm-ink);color:#fff;padding:10px 16px;border-radius:6px;z-index:999}
+.lm-skip:focus{left:12px;top:12px}
+a{color:var(--lm-leaf-deep)}
+a:hover{color:var(--lm-leaf)}
+
+.lm-topbar{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 22px;
+  font-family:system-ui,-apple-system,sans-serif;font-size:.86rem;background:var(--lm-paper-2);
+  border-bottom:1px solid rgba(138,102,32,.14);flex-wrap:wrap}
+.lm-topbar a{text-decoration:none;font-weight:600;color:var(--lm-ink-soft)}
+.lm-topbar a:hover{color:var(--lm-leaf-deep)}
+.lm-wordmark{font-family:Georgia,serif;font-weight:700;font-size:1.05rem;color:var(--le-navy);letter-spacing:.01em}
+
+main{max-width:880px;margin:0 auto;padding:0 22px}
+
+/* Navy professional hero band — distinct register from the warm consumer pages */
+.le-hero{background:linear-gradient(135deg,var(--le-navy) 0%,var(--le-navy-deep) 100%);color:#fff;
+  padding:54px 28px 44px;text-align:center;margin:0 -22px;border-radius:0 0 28px 28px}
+.le-hero-inner{max-width:760px;margin:0 auto}
+.le-eyebrow{font-family:system-ui,sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--le-gold);margin:0 0 14px}
+.le-h1{font-size:clamp(1.9rem,4.6vw,2.7rem);font-weight:700;margin:0 0 8px;line-height:1.16;color:#fff}
+.le-sub{font-size:1.12rem;color:rgba(255,255,255,.78);margin:0 0 18px;font-style:italic}
+.le-lede{font-size:1.02rem;color:rgba(255,255,255,.88);max-width:60ch;margin:0 auto 26px}
+.le-btn{display:inline-block;background:var(--le-gold);color:var(--le-navy);font-family:system-ui,sans-serif;
+  font-weight:700;font-size:.92rem;padding:13px 26px;border-radius:999px;text-decoration:none;
+  transition:background .18s,transform .18s}
+.le-btn:hover{background:#e3bd6c;transform:translateY(-1px);color:var(--le-navy)}
+.le-btn--soft{background:transparent;border:1.5px solid rgba(255,255,255,.5);color:#fff}
+.le-btn--soft:hover{background:rgba(255,255,255,.1);color:#fff}
+.le-btnrow{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+/* layout */
+.lm-section{padding:clamp(48px,7vw,80px) 0}
+.lm-eyebrow{font-family:system-ui,sans-serif;font-size:.74rem;font-weight:600;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--lm-gold-deep);margin:0 0 14px}
+.lm-h2{font-weight:400;font-size:clamp(1.45rem,3.2vw,2.0rem);line-height:1.24;margin:0 0 16px;color:var(--le-navy)}
+.lm-center{text-align:center}
+.lm-soft{color:var(--lm-ink-soft)}
+
+/* infographic-style use-case grid (no infographic image for this page — built as accessible HTML) */
+.le-usecase-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:22px}
+.le-usecase-card{background:var(--lm-paper-2);border:1px solid rgba(18,50,74,.14);border-radius:14px;padding:18px 18px;}
+.le-usecase-card h3{margin:0 0 6px;font-size:.98rem;color:var(--le-navy);font-family:system-ui,sans-serif;font-weight:700}
+.le-usecase-card p{margin:0;font-size:.88rem;color:var(--lm-ink-soft);font-family:system-ui,sans-serif;line-height:1.55}
+
+/* boundary list */
+.le-boundary{background:var(--lm-paper-2);border:1px solid rgba(18,50,74,.14);border-radius:14px;padding:22px 24px;margin-top:18px}
+.le-boundary ul{margin:0;padding:0;list-style:none;display:grid;gap:9px}
+.le-boundary li{display:flex;gap:10px;align-items:flex-start;font-size:.95rem}
+.le-boundary li span.x{color:var(--lm-rose-deep);font-weight:700}
+.le-boundary li span.check{color:var(--lm-leaf-deep);font-weight:700}
+
+.le-disclaimer{background:rgba(213,169,79,.10);border:1px solid rgba(213,169,79,.35);border-radius:12px;
+  padding:18px 20px;margin-top:18px;font-size:.94rem}
+.le-disclaimer strong{color:var(--le-navy)}
+
+.le-cta-band{background:linear-gradient(135deg,var(--le-navy) 0%,var(--le-navy-deep) 100%);border-radius:22px;
+  padding:38px 30px;text-align:center;color:#fff}
+.le-cta-band h2{color:#fff;font-size:1.5rem;margin:0 0 10px;border:none}
+
+.lm-divider{border:0;border-top:1px solid rgba(138,102,32,.18)}
+.lm-foot{padding:30px 22px 40px;text-align:center;font-family:system-ui,sans-serif;font-size:.85rem;color:var(--lm-ink-soft)}
+.lm-foot a{color:var(--lm-leaf-deep);text-decoration:none}
+.lm-foot a:hover{color:var(--lm-gold-deep)}
+
+/* --- v397: Pocono AI interest-list CTA (disclosed external Google Form) --- */
+.le-interest{margin:0 auto;max-width:660px;text-align:center;padding:34px 28px;background:var(--le-navy,#12324a);border-radius:18px;color:#fff}
+.le-interest h3{font-family:Georgia,serif;font-weight:400;font-size:1.3rem;color:#fff;margin:0 0 8px}
+.le-interest p{font-size:.98rem;color:rgba(255,255,255,.82);max-width:54ch;margin:0 auto 20px;line-height:1.6}
+.le-interest-note{font-family:system-ui,sans-serif;font-size:.8rem;color:rgba(255,255,255,.6);margin:18px auto 0;max-width:50ch}
+a.interest-list-cta{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:.9rem 1.6rem;border-radius:999px;font-family:system-ui,sans-serif;font-weight:700;line-height:1.2;white-space:normal;background:var(--le-gold,#d5a94f);color:var(--le-navy,#12324a);border:none;text-decoration:none;transition:background .18s}
+a.interest-list-cta:hover{background:#e3bd6c;color:var(--le-navy,#12324a)}
+a.interest-list-cta:visited,a.interest-list-cta:active{color:var(--le-navy,#12324a)}
+</style>
+</head>
+<body class="lm-body">
+<a class="lm-skip" href="#main-content">Skip to content</a>
+
+<div class="lm-topbar" role="banner">
+  <a href="/" style="display:flex;align-items:center;gap:8px;">
+    <img src="living-echo-logo.svg" alt="" width="24" height="14" style="display:block;" aria-hidden="true"> &larr; Pocono AI
+  </a>
+  <span class="lm-wordmark">Living Echo &middot; Enterprise</span>
+  <a href="/living-memorials/">Continuity Platform</a>
+</div>
+
+<main id="main-content">
+
+  <!-- HERO -->
+  <section class="le-hero" aria-labelledby="le-title">
+    <div class="le-hero-inner">
+      <p class="le-eyebrow">Continuity &middot; Enterprise Edition</p>
+      <h1 class="le-h1" id="le-title">Enterprise Estate Continuity</h1>
+      <p class="le-sub">The enterprise continuity edition of Living Echo</p>
+      <p class="le-lede">Businesses, estates, and family enterprises transfer assets and operating agreements. Enterprise Estate Continuity helps preserve the founder intent, institutional memory, succession context, and continuity instructions that documents alone cannot capture.</p>
+      <div class="le-btnrow">
+        <a class="le-btn" href="mailto:marcus@poconoai.com?subject=Enterprise%20Estate%20Continuity%20Inquiry">Talk to Pocono AI</a>
+        <a class="le-btn le-btn--soft" href="/living-memorials/estate-professionals.html">Estate &amp; Fiduciary Professionals</a>
+        <a class="le-btn le-btn--soft" href="/living-memorials/">View the Continuity Platform</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- TRUST STATEMENT -->
+  <section class="lm-section" id="trust-statement" aria-label="Trust statement" style="padding:18px 0 8px;">
+    <p style="max-width:62ch;margin:0 auto;font-size:1.04rem;line-height:1.65;color:var(--lm-ink);font-style:italic;text-align:center;border-top:1px solid rgba(18,50,74,.14);border-bottom:1px solid rgba(18,50,74,.14);padding:18px 0;">
+      Enterprise Estate Continuity preserves institutional memory. It does not replace estate planning, legal documents, executors, trustees, fiduciaries, company operating agreements, or human leadership.
+    </p>
+  </section>
+
+
+  <!-- 1. WHY IT MATTERS -->
+  <section class="lm-section" id="why-it-matters" aria-labelledby="le-why-h">
+    <p class="lm-eyebrow">The problem</p>
+    <h2 class="lm-h2" id="le-why-h">When the Founder or Key Person Is Gone, the Knowledge Often Goes With Them</h2>
+    <p>Operating agreements transfer ownership. Estate plans transfer assets. Neither captures why decisions were made, how relationships were built, what the founder intended for the next chapter, or the operating doctrine that made the business work.</p>
+    <p>Key-person risk is not just a financial exposure &mdash; it is a knowledge exposure. When a founder, partner, or critical leader becomes incapacitated, departs, or dies, the business, the family, and the successors are often left reconstructing intent from fragments.</p>
+  </section>
+
+
+  <!-- 2. WHAT IT PRESERVES -->
+  <section class="lm-section" id="what-it-preserves" aria-labelledby="le-preserve-h" style="background:var(--lm-paper-2);border-radius:20px;">
+    <div style="padding:0 22px;">
+      <p class="lm-eyebrow">The solution</p>
+      <h2 class="lm-h2" id="le-preserve-h">What Enterprise Estate Continuity Preserves</h2>
+      <p>Enterprise Estate Continuity preserves founder intent, institutional memory, succession context, operating doctrine, relationship knowledge, decision rationale, and continuity instructions for businesses, estates, fiduciaries, advisors, family enterprises, and key-person-risk situations.</p>
+      <div class="le-usecase-grid">
+        <div class="le-usecase-card"><h3>Founder Incapacity Planning</h3><p>Preserve operating context and decision frameworks before they are needed.</p></div>
+        <div class="le-usecase-card"><h3>Founder Death Continuity</h3><p>Give successors access to documented intent, not reconstructed guesswork.</p></div>
+        <div class="le-usecase-card"><h3>Business Succession Memory</h3><p>Preserve the reasoning and relationships behind leadership transitions.</p></div>
+        <div class="le-usecase-card"><h3>Institutional Knowledge Preservation</h3><p>Capture operating doctrine and lessons-learned before key people depart.</p></div>
+        <div class="le-usecase-card"><h3>Trustee / Successor Context</h3><p>Give trustees and successors governed access to documented intent.</p></div>
+        <div class="le-usecase-card"><h3>Family Enterprise Continuity</h3><p>Preserve relationship knowledge and values across generational transitions.</p></div>
+        <div class="le-usecase-card"><h3>Professional Advisor Continuity Packets</h3><p>Structured handoff materials for incoming advisors, counsel, and fiduciaries.</p></div>
+        <div class="le-usecase-card"><h3>Key-Person-Risk Documentation</h3><p>Documented continuity instructions tied to identified key-person risk.</p></div>
+        <div class="le-usecase-card"><h3>Steward-Controlled Access</h3><p>Access governed by designated stewards, not open by default.</p></div>
+        <div class="le-usecase-card"><h3>Governed Retrieval of Preserved Knowledge</h3><p>Source-grounded retrieval from authorized materials, not invention.</p></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- 3. WHO IT'S FOR -->
+  <section class="lm-section" id="who-its-for" aria-labelledby="le-who-h">
+    <p class="lm-eyebrow">Who it serves</p>
+    <h2 class="lm-h2" id="le-who-h">Built for Continuity-Critical Roles</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;">
+      <span style="background:var(--lm-paper-2);border:1px solid rgba(18,50,74,.16);border-radius:999px;padding:8px 16px;font-family:system-ui,sans-serif;font-size:.86rem;">Founders &amp; Key Personnel</span>
+      <span style="background:var(--lm-paper-2);border:1px solid rgba(18,50,74,.16);border-radius:999px;padding:8px 16px;font-family:system-ui,sans-serif;font-size:.86rem;">Family Enterprises</span>
+      <span style="background:var(--lm-paper-2);border:1px solid rgba(18,50,74,.16);border-radius:999px;padding:8px 16px;font-family:system-ui,sans-serif;font-size:.86rem;">Trustees &amp; Executors</span>
+      <span style="background:var(--lm-paper-2);border:1px solid rgba(18,50,74,.16);border-radius:999px;padding:8px 16px;font-family:system-ui,sans-serif;font-size:.86rem;">Estate &amp; Fiduciary Professionals</span>
+      <span style="background:var(--lm-paper-2);border:1px solid rgba(18,50,74,.16);border-radius:999px;padding:8px 16px;font-family:system-ui,sans-serif;font-size:.86rem;">Financial Advisors</span>
+      <span style="background:var(--lm-paper-2);border:1px solid rgba(18,50,74,.16);border-radius:999px;padding:8px 16px;font-family:system-ui,sans-serif;font-size:.86rem;">Boards &amp; Operating Partners</span>
+    </div>
+  </section>
+
+
+  <!-- 4. GOVERNANCE -->
+  <section class="lm-section" id="governance" aria-labelledby="le-gov-h" style="background:var(--lm-paper-2);border-radius:20px;">
+    <div style="padding:0 22px;">
+      <p class="lm-eyebrow">The governance layer</p>
+      <h2 class="lm-h2" id="le-gov-h">Why Sentinel Node Governance Matters Here</h2>
+      <p>Enterprise Estate Continuity runs on the same governance foundation as the rest of the Living Echo platform: documented consent, provenance, steward controls, controlled successor access, and an exportable audit trail. AI is a governed retrieval layer over authorized source material &mdash; not an autonomous decision-maker.</p>
+    </div>
+  </section>
+
+
+  <!-- 5. BOUNDARIES -->
+  <section class="lm-section" id="boundaries" aria-labelledby="le-bound-h">
+    <p class="lm-eyebrow">Required boundaries</p>
+    <h2 class="lm-h2" id="le-bound-h">What This Does Not Replace</h2>
+    <div class="le-boundary">
+      <ul>
+        <li><span class="x">&#10007;</span><span>Estate planning or legal documents</span></li>
+        <li><span class="x">&#10007;</span><span>Executors, trustees, or fiduciaries</span></li>
+        <li><span class="x">&#10007;</span><span>Company operating agreements</span></li>
+        <li><span class="x">&#10007;</span><span>Human leadership and judgment</span></li>
+        <li><span class="x">&#10007;</span><span>Legal, tax, or financial advice</span></li>
+        <li><span class="check">&#10003;</span><span>Documented, source-grounded preservation of intent and context</span></li>
+        <li><span class="check">&#10003;</span><span>Steward-controlled, governed retrieval for authorized successors</span></li>
+      </ul>
+      <div class="le-disclaimer">
+        <strong>Legal Notice.</strong> Enterprise Estate Continuity is not a law firm, fiduciary services provider, or financial advisory service. It does not create wills, trusts, operating agreements, or estate documents, and does not replace executors, trustees, or fiduciaries. Continuity materials should be reviewed by qualified counsel and incorporated into estate and succession plans by licensed professionals.
+      </div>
+    </div>
+  </section>
+
+
+  <!-- CTA -->
+  <section class="lm-section" id="contact" aria-label="Contact and next steps">
+    <div class="le-cta-band">
+      <h2>Start a Continuity Conversation</h2>
+      <p style="color:rgba(255,255,255,.82);max-width:54ch;margin:0 auto 22px;">Tell us about the founder, business, or family enterprise context you want to preserve. Every engagement begins with a conversation, not a form.</p>
+      <div class="le-btnrow">
+        <a class="le-btn" href="mailto:marcus@poconoai.com?subject=Enterprise%20Estate%20Continuity%20Inquiry">Talk to Pocono AI</a>
+        <a class="le-btn le-btn--soft" href="/living-memorials/">View the Continuity Platform</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- v397 · INTEREST LIST -->
+  <section class="lm-section" id="interest-list" aria-labelledby="le-interest-h" style="padding-top:8px">
+    <div class="le-interest">
+      <h3 id="le-interest-h">Interested in this product track?</h3>
+      <p>Prefer to start asynchronously? Join the Pocono AI interest list and tell us where you fit. We route founder-continuity, succession, advisor, and key-person inquiries from here.</p>
+      <a class="interest-list-cta" href="https://forms.gle/VQahnkjMfY6QNEMy8" target="_blank" rel="noopener noreferrer">Join the Interest List</a>
+      <p class="le-interest-note">Please do not submit private medical records, legal files, confidential client materials, or sensitive documents through this form.</p>
+    </div>
+  </section>
+
+</main>
+
+<div class="lm-foot" role="contentinfo">
+  <hr class="lm-divider">
+  <p>Living Echo &mdash; The Continuity Platform. Enterprise Estate Continuity is a private venture built by Pocono AI, separate from Pocono AI&rsquo;s regulated medical and legal AI infrastructure work.</p>
+  <p><a href="/living-memorials/">Living Echo Home</a> &nbsp;&middot;&nbsp; <a href="/living-memorials/estate-professionals.html">Estate Professionals</a> &nbsp;&middot;&nbsp; <a href="/living-memorials/celebration-of-life.html">Origin Story</a> &nbsp;&middot;&nbsp; <a href="/">Pocono AI &rarr;</a></p>
+  <p style="margin-top:14px;font-size:.82rem;opacity:.8">Enterprise Estate Continuity is not a law firm, fiduciary, or financial advisory service. &copy; 2026 Pocono AI, LLC</p>
+</div>
+
+</body>
+</html>

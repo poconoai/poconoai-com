@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp --><!-- Living Echo — v399 2026-06-19. Desktop nav normalized via shared partial (mobile nav preserved). Prior: v398 trimmed memoir to origin page.
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
+<title>Living Echo | Voices Live On — A Private, Source-Grounded Memory Archive</title>
+<meta name="description" content="Living Echo is a private, source-grounded memory archive with optional AI chat and synthetic voice response — a consent-first way to ensure the voices we love live on.">
+<link rel="canonical" href="https://poconoai.com/living-memorials/">
+<link rel="icon" href="living-echo-logo.svg" type="image/svg+xml">
+
+<meta property="og:title" content="Living Echo — Voices Live On">
+<meta property="og:description" content="A private, source-grounded memory archive with optional AI chat and synthetic voice response. Ethical remembrance, consent-first, built to last.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://poconoai.com/living-memorials/">
+<meta property="og:site_name" content="Living Echo">
+
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
+<style>
+/* ── Living Echo · scoped .lm- design system ─────────────
+   Off-brand by intent: sunrise, garden, letters, light through glass.
+   Palette: leaf · gold · rose · lavender · sky on warm cream.          */
+:root{
+  --lm-paper:#FDF8EF; --lm-paper-2:#FFFDF7; --lm-ink:#433F38; --lm-ink-soft:#6E6659;
+  --lm-leaf:#5E8062; --lm-leaf-deep:#44613F; --lm-leaf-tint:rgba(94,128,98,.12);
+  --lm-gold:#C9973F; --lm-gold-deep:#8A6620; --lm-gold-tint:rgba(201,151,63,.13);
+  --lm-rose:#C77F93; --lm-rose-deep:#9A546D; --lm-rose-tint:rgba(199,127,147,.12);
+  --lm-lav:#9D8FBE;  --lm-lav-deep:#6C5C95;  --lm-lav-tint:rgba(157,143,190,.13);
+  --lm-sky:#8FB8CC;  --lm-sky-deep:#46748A;  --lm-sky-tint:rgba(143,184,204,.14);
+  --lm-spectrum:linear-gradient(90deg,var(--lm-leaf),var(--lm-gold),var(--lm-rose),var(--lm-lav),var(--lm-sky));
+  --lm-shadow:0 12px 36px rgba(99,76,43,.10);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body.lm-body{
+  margin:0;background:var(--lm-paper);color:var(--lm-ink);
+  font-family:Georgia,'Iowan Old Style','Times New Roman',serif;
+  font-size:1.06rem;line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+.lm-body ::selection{background:rgba(201,151,63,.30)}
+.lm-skip{position:absolute;left:-999px;top:0;background:var(--lm-leaf-deep);color:#FFF9EC;padding:10px 18px;border-radius:0 0 12px 0;z-index:60;font-family:system-ui,sans-serif}
+.lm-skip:focus{left:0}
+.lm-body a{color:var(--lm-leaf-deep)}
+.lm-body a:focus-visible,.lm-btn:focus-visible{outline:3px solid var(--lm-gold);outline-offset:2px;border-radius:6px}
+
+/* top bar */
+.lm-topbar{position:sticky;top:0;z-index:40;display:flex;justify-content:space-between;align-items:center;gap:14px;
+  padding:12px clamp(16px,4vw,34px);background:rgba(253,248,239,.88);backdrop-filter:blur(8px);
+  border-bottom:1px solid rgba(138,102,32,.16);font-family:system-ui,-apple-system,'Segoe UI',sans-serif}
+.lm-topbar a{color:var(--lm-ink-soft);text-decoration:none;font-size:.92rem}
+.lm-topbar a:hover{color:var(--lm-gold-deep)}
+.lm-wordmark{font-family:Georgia,serif;font-style:italic;color:var(--lm-gold-deep);font-size:.98rem;letter-spacing:.02em}
+.lm-ribbon{background:var(--lm-gold-tint);border-bottom:1px solid rgba(201,151,63,.28);
+  font-family:system-ui,sans-serif;font-size:.84rem;color:var(--lm-gold-deep);
+  text-align:center;padding:7px 16px;letter-spacing:.04em}
+
+/* hero with light orbs + arched window glow (signature) */
+.lm-hero{position:relative;overflow:hidden;text-align:center;
+  padding:clamp(72px,11vw,128px) 22px clamp(64px,9vw,104px);
+  background:linear-gradient(180deg,#FFF8EA 0%,#FCEEDC 38%,#F8E9EA 72%,#F1EDF6 100%)}
+.lm-orb{position:absolute;border-radius:50%;filter:blur(46px);opacity:.45;pointer-events:none}
+.lm-orb--gold{width:380px;height:380px;background:radial-gradient(circle,#F2CE8F,transparent 70%);top:-90px;left:-70px;animation:lmFloat 24s ease-in-out infinite alternate}
+.lm-orb--rose{width:300px;height:300px;background:radial-gradient(circle,#EFB9C9,transparent 70%);top:18%;right:-80px;animation:lmFloat 28s 2s ease-in-out infinite alternate}
+.lm-orb--lav{width:340px;height:340px;background:radial-gradient(circle,#CFC4E8,transparent 70%);bottom:-110px;left:14%;animation:lmFloat 26s 1s ease-in-out infinite alternate}
+.lm-orb--sky{width:260px;height:260px;background:radial-gradient(circle,#BCDCEA,transparent 70%);bottom:-60px;right:16%;animation:lmFloat 30s 3s ease-in-out infinite alternate}
+@keyframes lmFloat{from{transform:translate(0,0)}to{transform:translate(26px,-30px)}}
+@media (prefers-reduced-motion:reduce){.lm-orb{animation:none}}
+.lm-hero-inner{position:relative;max-width:780px;margin:0 auto;padding:clamp(34px,5vw,54px) clamp(18px,4vw,46px) 8px}
+.lm-hero-inner::before{content:"";position:absolute;inset:0;z-index:-1;
+  border-radius:230px 230px 26px 26px;
+  background:linear-gradient(180deg,rgba(255,253,247,.55),rgba(255,253,247,.18) 70%,transparent);
+  border:1px solid rgba(138,102,32,.14)}
+.lm-hero-inner::after{content:"";position:absolute;top:0;left:8%;right:8%;height:5px;z-index:-1;
+  border-radius:230px 230px 0 0;background:var(--lm-spectrum);opacity:.75}
+.lm-eyebrow{font-family:system-ui,sans-serif;font-size:.74rem;font-weight:600;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--lm-gold-deep);margin:0 0 18px}
+.lm-h1{font-weight:400;font-size:clamp(2.05rem,5.6vw,3.3rem);line-height:1.15;margin:0 0 10px;letter-spacing:-.01em}
+.lm-sub{font-style:italic;color:var(--lm-rose-deep);font-size:clamp(1.1rem,2.6vw,1.4rem);margin:0 0 22px}
+.lm-lede{max-width:58ch;margin:0 auto 32px;font-size:1.14rem;color:var(--lm-ink-soft)}
+.lm-btnrow{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.lm-btn{display:inline-block;font-family:system-ui,sans-serif;font-weight:600;font-size:.98rem;
+  text-decoration:none;border-radius:999px;padding:13px 26px;
+  background:var(--lm-leaf-deep);color:#FFF9EC;border:1.5px solid var(--lm-leaf-deep);
+  box-shadow:0 6px 18px rgba(68,97,63,.22)}
+.lm-btn:hover{background:#3A5436}
+.lm-btn--soft{background:transparent;color:var(--lm-gold-deep);border:1.5px solid var(--lm-gold);box-shadow:none}
+.lm-btn--soft:hover{background:var(--lm-gold-tint)}
+.lm-backline{margin:26px 0 0;font-family:system-ui,sans-serif;font-size:.9rem}
+.lm-backline a{color:var(--lm-ink-soft);text-decoration:none}
+.lm-backline a:hover{color:var(--lm-gold-deep)}
+
+/* layout primitives */
+.lm-section{padding:clamp(56px,8vw,92px) 22px}
+.lm-wrap{max-width:760px;margin:0 auto}
+.lm-wrap--wide{max-width:980px;margin:0 auto}
+.lm-h2{font-weight:400;font-size:clamp(1.55rem,3.6vw,2.15rem);line-height:1.22;margin:0 0 18px}
+.lm-center{text-align:center}
+.lm-divider{width:min(380px,62%);height:3px;border:0;border-radius:999px;background:var(--lm-spectrum);opacity:.6;margin:0 auto}
+.lm-soft{color:var(--lm-ink-soft)}
+.lm-pull{font-size:1.22rem;font-style:italic;line-height:1.6;color:var(--lm-ink);margin:26px 0}
+.lm-band--rose{background:linear-gradient(180deg,rgba(199,127,147,.085),rgba(199,127,147,.03))}
+.lm-band--lav{background:linear-gradient(180deg,rgba(157,143,190,.09),rgba(157,143,190,.03))}
+.lm-band--leaf{background:linear-gradient(180deg,rgba(94,128,98,.08),rgba(94,128,98,.025))}
+
+/* arched disclosure window (signature element) */
+.lm-window{position:relative;max-width:680px;margin:0 auto;text-align:center;
+  border-radius:200px 200px 22px 22px;
+  background:linear-gradient(180deg,#FBF3F8 0%,#F5F1FB 55%,var(--lm-paper-2) 100%);
+  border:1px solid rgba(157,143,190,.38);box-shadow:var(--lm-shadow);
+  padding:clamp(58px,8vw,76px) clamp(22px,5vw,52px) clamp(30px,4vw,40px)}
+.lm-window::before{content:"";position:absolute;top:0;left:7%;right:7%;height:5px;
+  border-radius:200px 200px 0 0;background:var(--lm-spectrum);opacity:.85}
+.lm-window blockquote{margin:0;font-size:clamp(1.12rem,2.5vw,1.32rem);font-style:italic;line-height:1.7}
+.lm-window figcaption{margin-top:18px;font-family:system-ui,sans-serif;font-size:.82rem;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--lm-lav-deep)}
+
+/* cards */
+.lm-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:22px}
+.lm-card{position:relative;background:var(--lm-paper-2);border:1px solid rgba(138,102,32,.18);
+  border-radius:18px;padding:28px 26px;box-shadow:var(--lm-shadow)}
+.lm-card--rim::before{content:"";position:absolute;top:0;left:18px;right:18px;height:4px;
+  border-radius:0 0 6px 6px;background:var(--lm-spectrum);opacity:.8}
+.lm-card h3{font-weight:400;font-size:1.22rem;margin:6px 0 14px}
+.lm-list{list-style:none;margin:0;padding:0}
+.lm-list li{padding:5px 0 5px 28px;position:relative}
+.lm-list--is li::before{content:"✓";position:absolute;left:2px;color:var(--lm-leaf-deep);font-family:system-ui,sans-serif;font-weight:700}
+.lm-list--not li::before{content:"—";position:absolute;left:0;color:var(--lm-rose-deep);font-weight:700}
+
+/* warm archive grid: tiles rotate through the five life colors */
+.lm-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;list-style:none;margin:30px 0 0;padding:0}
+.lm-grid li{background:var(--lm-paper-2);border:1px solid;border-radius:14px;padding:16px 18px;
+  font-size:.98rem;box-shadow:0 6px 18px rgba(99,76,43,.07)}
+.lm-grid li:nth-child(5n+1){border-color:rgba(94,128,98,.45);background:linear-gradient(180deg,var(--lm-leaf-tint),var(--lm-paper-2) 60%)}
+.lm-grid li:nth-child(5n+2){border-color:rgba(201,151,63,.45);background:linear-gradient(180deg,var(--lm-gold-tint),var(--lm-paper-2) 60%)}
+.lm-grid li:nth-child(5n+3){border-color:rgba(199,127,147,.45);background:linear-gradient(180deg,var(--lm-rose-tint),var(--lm-paper-2) 60%)}
+.lm-grid li:nth-child(5n+4){border-color:rgba(157,143,190,.45);background:linear-gradient(180deg,var(--lm-lav-tint),var(--lm-paper-2) 60%)}
+.lm-grid li:nth-child(5n+5){border-color:rgba(143,184,204,.5);background:linear-gradient(180deg,var(--lm-sky-tint),var(--lm-paper-2) 60%)}
+
+/* numbered sequences */
+.lm-steps{list-style:none;counter-reset:lm;margin:30px 0 0;padding:0;max-width:640px}
+.lm-steps li{counter-increment:lm;position:relative;padding:10px 0 10px 56px}
+.lm-steps li::before{content:counter(lm);position:absolute;left:0;top:8px;width:36px;height:36px;
+  border-radius:50%;background:var(--lm-gold-tint);border:1px solid rgba(201,151,63,.5);
+  color:var(--lm-gold-deep);font-family:Georgia,serif;font-style:italic;font-size:1.05rem;
+  display:flex;align-items:center;justify-content:center}
+.lm-ethics{margin:30px 0 0;padding-left:0;list-style:none;counter-reset:lme;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px 36px}
+.lm-ethics li{counter-increment:lme;position:relative;padding:8px 0 8px 44px}
+.lm-ethics li::before{content:counter(lme,decimal-leading-zero);position:absolute;left:0;top:9px;
+  font-family:Georgia,serif;font-style:italic;color:var(--lm-gold-deep);font-size:1.05rem;letter-spacing:.04em}
+
+/* prototype feature card */
+.lm-proto{background:linear-gradient(135deg,rgba(201,151,63,.10),rgba(199,127,147,.08) 50%,rgba(157,143,190,.10));
+  border:1px solid rgba(201,151,63,.4);border-radius:22px;padding:clamp(28px,5vw,44px);
+  box-shadow:var(--lm-shadow);text-align:center}
+.lm-proto h3{font-weight:400;font-size:clamp(1.3rem,3vw,1.7rem);margin:0 0 12px}
+
+/* foot */
+.lm-foot{padding:54px 22px 46px;text-align:center;font-family:system-ui,sans-serif;font-size:.9rem;color:var(--lm-ink-soft)}
+.lm-foot .lm-divider{margin-bottom:30px}
+.lm-foot p{max-width:62ch;margin:0 auto 12px}
+@media (max-width:640px){
+  .lm-btn{width:100%;max-width:340px;text-align:center}
+  .lm-hero-inner::before{border-radius:120px 120px 22px 22px}
+  .lm-hero-inner::after{border-radius:120px 120px 0 0}
+  .lm-window{border-radius:120px 120px 20px 20px}
+  .lm-window::before{border-radius:120px 120px 0 0}
+}
+
+/* --- Living Echo concept video --- */
+.lm-video-section{margin:0 auto;padding:clamp(40px,6vw,72px) 22px;text-align:center}
+.lm-video-section h2{font-weight:400;font-size:clamp(1.45rem,3.3vw,2rem);line-height:1.22;margin:0 0 14px;color:var(--lm-ink)}
+.lm-video-section>p{max-width:58ch;margin:0 auto 0;color:var(--lm-ink-soft);line-height:1.72}
+.lm-video-wrap{width:100%;max-width:420px;margin:1.5rem auto;border-radius:18px;overflow:hidden;
+  box-shadow:0 18px 45px rgba(0,0,0,.22);background:#111}
+.lm-video-wrap video{display:block;width:100%;height:auto}
+.lm-video-disc{font-size:.93rem;line-height:1.65;color:var(--lm-ink-soft);max-width:680px;
+  margin:1.1rem auto 0;border-left:3px solid var(--lm-rose);padding-left:16px;text-align:left}
+
+/* --- v2 fix: .lm-body a (0,1,1) was out-specifying .lm-btn (0,1,0); button text rendered green-on-green --- */
+.lm-body a.lm-btn{color:#FFF9EC}
+.lm-body a.lm-btn:hover,.lm-body a.lm-btn:visited,.lm-body a.lm-btn:active{color:#FFF9EC}
+.lm-body a.lm-btn--soft{color:var(--lm-gold-deep)}
+.lm-body a.lm-btn--soft:hover,.lm-body a.lm-btn--soft:visited,.lm-body a.lm-btn--soft:active{color:var(--lm-gold-deep)}
+
+/* --- v397: Pocono AI interest-list CTA (disclosed external Google Form) --- */
+.lm-interest{margin:0 auto;max-width:640px;text-align:center;padding:30px 26px;background:var(--lm-paper-2);border:1px solid rgba(138,102,32,.2);border-radius:18px}
+.lm-interest h3{font-family:Georgia,serif;font-weight:400;font-size:1.22rem;color:var(--lm-leaf-deep);margin:0 0 8px}
+.lm-interest p{font-size:.96rem;color:var(--lm-ink-soft);max-width:52ch;margin:0 auto 18px;line-height:1.6}
+.lm-interest-note{font-family:system-ui,sans-serif;font-size:.8rem;color:var(--lm-ink-soft);opacity:.85;margin:16px auto 0;max-width:48ch}
+.lm-body a.interest-list-cta{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:.9rem 1.5rem;border-radius:999px;font-weight:700;line-height:1.2;white-space:normal;background:var(--lm-gold-deep);color:#FFF9EC;border:1.5px solid var(--lm-gold-deep);text-decoration:none;box-shadow:0 6px 18px rgba(138,102,32,.22)}
+.lm-body a.interest-list-cta:hover,.lm-body a.interest-list-cta:visited,.lm-body a.interest-list-cta:active{color:#FFF9EC}
+.lm-body a.interest-list-cta:hover{background:#74551b}
+</style>
+</head>
+<body class="lm-body">
+<a class="lm-skip" href="#vision">Skip to content</a>
+
+<div class="lm-topbar" role="banner">
+  <a href="/" style="display:flex;align-items:center;gap:8px;"><img src="living-echo-logo.svg" alt="" width="28" height="16" style="display:block;" aria-hidden="true"> &larr; Pocono AI</a>
+  <span class="lm-wordmark">Living Echo</span>
+</div>
+<div class="lm-ribbon">Founder Echo Program Open &nbsp;&middot;&nbsp; <a href="pricing.html" style="color:var(--lm-leaf-deep);font-weight:700;text-decoration:underline;">See pricing &rarr;</a> &nbsp;&middot;&nbsp; <a href="celebration-of-life.html" style="color:var(--lm-leaf-deep);font-weight:700;text-decoration:underline;">Read the origin story &rarr;</a></div>
+
+<main id="lm-main">
+
+  <!-- 1 · HERO -->
+  <section class="lm-hero" aria-labelledby="lm-title">
+    <div class="lm-orb lm-orb--gold" aria-hidden="true"></div>
+    <div class="lm-orb lm-orb--rose" aria-hidden="true"></div>
+    <div class="lm-orb lm-orb--lav" aria-hidden="true"></div>
+    <div class="lm-orb lm-orb--sky" aria-hidden="true"></div>
+    <div class="lm-hero-inner">
+      <img src="living-echo-logo.svg" alt="Living Echo — Voices Live On" style="width:min(220px,60vw);height:auto;margin:0 auto 18px;display:block;">
+      <p class="lm-eyebrow">The Continuity Platform &middot; Built by Pocono AI</p>
+      <h1 class="lm-h1" id="lm-title">Living Echo</h1>
+      <p class="lm-sub" style="font-weight:700;letter-spacing:.04em;text-transform:uppercase;font-size:.92rem;color:var(--lm-gold-deep);">Preserve what matters before it is lost.</p>
+      <p class="lm-lede">Living Echo helps families, veterans, fiduciaries, advisors, care teams, and organizations preserve human knowledge, stories, values, intent, and institutional memory through consent-first capture, secure preservation, controlled access, and governed retrieval.</p>
+      <div class="lm-btnrow">
+        <a class="lm-btn" href="pricing.html">Begin Your Living Echo</a>
+        <a class="lm-btn lm-btn--soft" href="#vision">Preserve a Family Story</a>
+      </div>
+      <div class="lm-btnrow" style="margin-top:8px;margin-bottom:8px;">
+        <a class="lm-btn lm-btn--soft" href="estate-professionals.html">Explore Estate Professional Use</a>
+        <a class="lm-btn lm-btn--soft" href="mailto:marcus@poconoai.com?subject=Living%20Echo%20%E2%80%94%20Talk%20to%20Pocono%20AI">Talk to Pocono AI</a>
+      </div>
+      <p style="margin-top:10px;"><a class="lm-btn lm-btn--soft" href="celebration-of-life.html" style="font-size:.86rem;">Read the Origin Story &rarr;</a></p>
+    <p class="lm-backline"><a href="/">&larr; Back to Pocono AI</a></p>
+    </div>
+  </section>
+
+
+  <!-- TRUST STATEMENT — Continuity Platform positioning -->
+  <section class="lm-section" id="trust-statement" aria-label="Trust statement" style="padding:18px 0 8px;">
+    <div class="lm-wrap lm-center">
+      <p style="max-width:62ch;margin:0 auto;font-size:1.08rem;line-height:1.65;color:var(--lm-ink);font-style:italic;border-top:1px solid rgba(138,102,32,.18);border-bottom:1px solid rgba(138,102,32,.18);padding:18px 0;">
+        Living Echo is not the person. It is a governed archive and retrieval layer built from authorized source material, documented consent, and human stewardship.
+      </p>
+    </div>
+  </section>
+
+  <!-- LIVING ECHO AT A GLANCE — General infographic -->
+  <section class="lm-section" id="glance" aria-labelledby="lm-glance-h">
+    <div class="lm-wrap--wide lm-center">
+      <p class="lm-eyebrow">The platform</p>
+      <h2 class="lm-h2" id="lm-glance-h">Living Echo at a Glance</h2>
+      <p style="max-width:62ch;margin:0 auto 26px;">Living Echo preserves more than documents. It helps protect the knowledge, judgment, stories, values, and human context that are often lost when someone retires, becomes incapacitated, leaves, or dies.</p>
+
+      <figure style="margin:0 auto 8px;max-width:760px;">
+        <a href="assets/living_echo_continuity_platform.png" target="_blank" rel="noopener" aria-label="Open full-size Living Echo continuity platform infographic in a new tab" style="display:block;border-radius:16px;overflow:hidden;box-shadow:var(--lm-shadow);border:1px solid rgba(138,102,32,.18);">
+          <picture>
+            <source srcset="assets/living_echo_continuity_platform.webp" type="image/webp">
+            <img src="assets/living_echo_continuity_platform.png"
+                 alt="Living Echo continuity platform infographic showing the problem of lost human knowledge, the solution of governed preservation, a phased roadmap from legacy interview to legacy vault to continuity engine to Living Echo, the markets served, and Sentinel Node governance features including provenance, access control, human oversight, auditability, succession management, and trustworthy preservation."
+                 loading="lazy" decoding="async" width="1022" height="1539"
+                 style="display:block;width:100%;height:auto;cursor:zoom-in;">
+          </picture>
+        </a>
+        <figcaption style="margin-top:10px;font-family:system-ui,sans-serif;font-size:.82rem;color:var(--lm-ink-soft);">Tap or click the infographic to view full size.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 1. THE PROBLEM -->
+  <section class="lm-section" id="the-problem" aria-labelledby="lm-problem-h">
+    <div class="lm-wrap">
+      <p class="lm-eyebrow">The problem</p>
+      <h2 class="lm-h2" id="lm-problem-h">Critical Knowledge Lives in People</h2>
+      <p>Every family, organization, and community eventually faces the same risk: critical knowledge lives inside people. When that person retires, becomes incapacitated, leaves, or dies, much of that knowledge disappears.</p>
+      <p>Traditional estate planning transfers assets. Traditional document storage preserves files. Traditional memorials preserve memories. <strong>Living Echo preserves human intent, context, wisdom, values, stories, and decision frameworks.</strong></p>
+    </div>
+  </section>
+
+  <!-- 2. THE SOLUTION -->
+  <section class="lm-section lm-band--leaf" id="the-solution" aria-labelledby="lm-solution-h">
+    <div class="lm-wrap">
+      <p class="lm-eyebrow">The solution</p>
+      <h2 class="lm-h2" id="lm-solution-h">A Governed Continuity Platform</h2>
+      <p>Living Echo captures and preserves human stories, values, lessons, source materials, decision frameworks, and institutional knowledge with consent, provenance, steward controls, and governed access.</p>
+    </div>
+  </section>
+
+  <!-- 3. PHASED DEVELOPMENT -->
+  <section class="lm-section" id="phased-development" aria-labelledby="lm-phases-h">
+    <div class="lm-wrap--wide">
+      <p class="lm-eyebrow lm-center" style="display:block;text-align:center;">The roadmap</p>
+      <h2 class="lm-h2 lm-center" id="lm-phases-h">Phased Development</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:28px;">
+        <div style="background:var(--lm-paper-2);border:1px solid rgba(138,102,32,.18);border-radius:14px;padding:20px;">
+          <p style="font-family:system-ui,sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--lm-gold-deep);margin:0 0 8px;">Phase 1</p>
+          <p style="font-weight:700;margin:0 0 6px;">Legacy Interview</p>
+          <p style="font-size:.92rem;color:var(--lm-ink-soft);margin:0;">Capture stories, values, experiences, lessons, guidance, and decision frameworks.</p>
+        </div>
+        <div style="background:var(--lm-paper-2);border:1px solid rgba(138,102,32,.18);border-radius:14px;padding:20px;">
+          <p style="font-family:system-ui,sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--lm-gold-deep);margin:0 0 8px;">Phase 2</p>
+          <p style="font-weight:700;margin:0 0 6px;">Legacy Vault</p>
+          <p style="font-size:.92rem;color:var(--lm-ink-soft);margin:0;">Preserve approved audio, video, documents, photos, writings, and personal or organizational archives.</p>
+        </div>
+        <div style="background:var(--lm-paper-2);border:1px solid rgba(138,102,32,.18);border-radius:14px;padding:20px;">
+          <p style="font-family:system-ui,sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--lm-gold-deep);margin:0 0 8px;">Phase 3</p>
+          <p style="font-weight:700;margin:0 0 6px;">Continuity Engine</p>
+          <p style="font-size:.92rem;color:var(--lm-ink-soft);margin:0;">Establish consent, permissions, steward controls, revocation rights, successor access, fiduciary-aware instructions, and audit trails.</p>
+        </div>
+        <div style="background:var(--lm-paper-2);border:1px solid rgba(138,102,32,.18);border-radius:14px;padding:20px;">
+          <p style="font-family:system-ui,sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--lm-gold-deep);margin:0 0 8px;">Phase 4</p>
+          <p style="font-weight:700;margin:0 0 6px;">Governed Living Echo Retrieval</p>
+          <p style="font-size:.92rem;color:var(--lm-ink-soft);margin:0;">Enable source-grounded retrieval from authorized materials under human oversight.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. WHO WE SERVE -->
+  <section class="lm-section lm-band--lav" id="who-we-serve" aria-labelledby="lm-serve-h">
+    <div class="lm-wrap--wide lm-center">
+      <p class="lm-eyebrow">The audience</p>
+      <h2 class="lm-h2" id="lm-serve-h">Who We Serve</h2>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:18px;">
+        <span style="background:var(--lm-paper-2);border:1px solid rgba(138,102,32,.2);border-radius:999px;padding:8px 18px;font-family:system-ui,sans-serif;font-size:.88rem;">Families</span>
+        <span style="background:var(--lm-paper-2);border:1px solid rgba(138,102,32,.2);border-radius:999px;padding:8px 18px;font-family:system-ui,sans-serif;font-size:.88rem;">Veterans</span>
+        <span style="background:var(--lm-paper-2);border:1px solid rgba(138,102,32,.2);border-radius:999px;padding:8px 18px;font-family:system-ui,sans-serif;font-size:.88rem;">Estate Planning Professionals</span>
+        <span style="background:var(--lm-paper-2);border:1px solid rgba(138,102,32,.2);border-radius:999px;padding:8px 18px;font-family:system-ui,sans-serif;font-size:.88rem;">Financial Advisors</span>
+        <span style="background:var(--lm-paper-2);border:1px solid rgba(138,102,32,.2);border-radius:999px;padding:8px 18px;font-family:system-ui,sans-serif;font-size:.88rem;">Hospice &amp; Palliative Care Teams</span>
+        <span style="background:var(--lm-paper-2);border:1px solid rgba(138,102,32,.2);border-radius:999px;padding:8px 18px;font-family:system-ui,sans-serif;font-size:.88rem;">Organizations</span>
+        <span style="background:var(--lm-paper-2);border:1px solid rgba(138,102,32,.2);border-radius:999px;padding:8px 18px;font-family:system-ui,sans-serif;font-size:.88rem;">Founders &amp; Key Personnel</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. WHY SENTINEL NODE MATTERS -->
+  <section class="lm-section" id="why-sentinel" aria-labelledby="lm-sentinel-h">
+    <div class="lm-wrap">
+      <p class="lm-eyebrow">The governance layer</p>
+      <h2 class="lm-h2" id="lm-sentinel-h">Why Sentinel Node Matters</h2>
+      <p>Sentinel Node provides the governance layer for provenance, access control, human oversight, auditability, source-grounded retrieval, and succession management. AI is only a governed retrieval layer inside the system &mdash; trust, provenance, consent, stewardship, and controlled access are the product.</p>
+    </div>
+  </section>
+
+  <!-- 6. ETHICS AND CONSENT -->
+  <section class="lm-section lm-band--leaf" id="ethics-consent" aria-labelledby="lm-ethics2-h">
+    <div class="lm-wrap--wide">
+      <p class="lm-eyebrow lm-center" style="display:block;text-align:center;">Our commitments</p>
+      <h2 class="lm-h2 lm-center" id="lm-ethics2-h">Ethics and Consent</h2>
+      <ul style="max-width:640px;margin:20px auto 0;padding:0;list-style:none;display:grid;gap:10px;">
+        <li style="display:flex;gap:10px;align-items:flex-start;"><span style="color:var(--lm-leaf-deep);font-weight:700;">&#10003;</span><span>Consent first.</span></li>
+        <li style="display:flex;gap:10px;align-items:flex-start;"><span style="color:var(--lm-leaf-deep);font-weight:700;">&#10003;</span><span>Source-grounded.</span></li>
+        <li style="display:flex;gap:10px;align-items:flex-start;"><span style="color:var(--lm-leaf-deep);font-weight:700;">&#10003;</span><span>Human steward controls.</span></li>
+        <li style="display:flex;gap:10px;align-items:flex-start;"><span style="color:var(--lm-leaf-deep);font-weight:700;">&#10003;</span><span>Separate permission for synthetic voice or likeness.</span></li>
+        <li style="display:flex;gap:10px;align-items:flex-start;"><span style="color:var(--lm-rose-deep);font-weight:700;">&#10007;</span><span>No false resurrection.</span></li>
+        <li style="display:flex;gap:10px;align-items:flex-start;"><span style="color:var(--lm-rose-deep);font-weight:700;">&#10007;</span><span>No pretending the person is alive.</span></li>
+        <li style="display:flex;gap:10px;align-items:flex-start;"><span style="color:var(--lm-rose-deep);font-weight:700;">&#10007;</span><span>No therapy claims.</span></li>
+        <li style="display:flex;gap:10px;align-items:flex-start;"><span style="color:var(--lm-rose-deep);font-weight:700;">&#10007;</span><span>No legal advice claims.</span></li>
+        <li style="display:flex;gap:10px;align-items:flex-start;"><span style="color:var(--lm-rose-deep);font-weight:700;">&#10007;</span><span>No autonomous decision-making.</span></li>
+        <li style="display:flex;gap:10px;align-items:flex-start;"><span style="color:var(--lm-leaf-deep);font-weight:700;">&#10003;</span><span>Right to restrict, correct, revoke, or retire an Echo where applicable.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CROSS-LINK CARDS: Estate Professionals + Enterprise Estate Continuity -->
+  <section class="lm-section" id="estate-crosslink" aria-labelledby="lm-estate-card-h">
+    <div class="lm-wrap--wide lm-center">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;max-width:880px;margin:0 auto;">
+        <div style="background:var(--le-navy,#12324a);border-radius:18px;padding:32px 28px;color:#fff;">
+          <h2 id="lm-estate-card-h" style="color:#fff;font-size:1.3rem;margin:0 0 10px;border:none;">For Estate and Fiduciary Professionals</h2>
+          <p style="color:rgba(255,255,255,.82);margin:0 0 20px;font-size:.96rem;">Help clients preserve the knowledge, intent, family context, and lived wisdom that traditional estate documents cannot fully capture.</p>
+          <a href="estate-professionals.html" style="display:inline-block;background:var(--le-gold,#d5a94f);color:#12324a;font-family:system-ui,sans-serif;font-weight:700;font-size:.9rem;padding:11px 24px;border-radius:999px;text-decoration:none;">Explore Estate Professional Use</a>
+        </div>
+        <div style="background:var(--le-navy-deep,#0a1f30);border-radius:18px;padding:32px 28px;color:#fff;">
+          <h2 style="color:#fff;font-size:1.3rem;margin:0 0 10px;border:none;">Enterprise Estate Continuity</h2>
+          <p style="color:rgba(255,255,255,.82);margin:0 0 20px;font-size:.96rem;">Founder intent, institutional memory, and succession context for businesses, family enterprises, and key-person-risk situations.</p>
+          <a href="enterprise-estate-continuity.html" style="display:inline-block;background:var(--le-gold,#d5a94f);color:#12324a;font-family:system-ui,sans-serif;font-weight:700;font-size:.9rem;padding:11px 24px;border-radius:999px;text-decoration:none;">Explore Enterprise Continuity</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING PREVIEW — early participant section -->
+  <section class="lm-section lm-band--leaf" id="early-participant" aria-labelledby="lm-ep-h">
+    <div class="lm-wrap--wide lm-center">
+      <span style="display:inline-flex;align-items:center;gap:7px;background:rgba(94,128,98,.15);border:1px solid rgba(94,128,98,.35);border-radius:999px;padding:5px 15px;font-family:system-ui,sans-serif;font-size:.78rem;font-weight:600;letter-spacing:.07em;color:var(--lm-leaf-deep);margin-bottom:18px;">&#x25CF;&nbsp; Founder Echo Program — Open</span>
+      <h2 class="lm-h2" id="lm-ep-h">Now accepting Founder Echo applications</h2>
+      <p style="max-width:58ch;margin:0 auto 12px;">After strong early interest and market signals around the Marcus O&rsquo;Dell Living Echo prototype, we are opening 10 Founder Echo slots for the first people who want to build their own consent-based Living Echo.</p>
+      <p class="lm-soft" style="max-width:54ch;margin:0 auto 36px;">Build it while you are here. Preserve it for the people you love.</p>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;max-width:860px;margin:0 auto 36px;text-align:left;">
+        <div style="background:var(--lm-paper-2);border:1px solid rgba(138,102,32,.18);border-radius:18px;padding:24px 22px;">
+          <p style="font-family:system-ui,sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--lm-leaf-deep);margin:0 0 8px;">Personal Echo</p>
+          <p style="font-size:1.6rem;font-family:Georgia,serif;color:var(--lm-leaf-deep);margin:0;line-height:1;">$99 <span style="font-size:.9rem;color:var(--lm-ink-soft);"> setup</span></p>
+          <p style="font-family:system-ui,sans-serif;font-size:.88rem;color:var(--lm-ink-soft);margin:4px 0 10px;">+ $9.95 / month</p>
+          <p style="font-size:.91rem;margin:0;color:var(--lm-ink-soft);">Static page with stories, values, photos, and basic preservation.</p>
+        </div>
+        <div style="background:var(--lm-paper-2);border:1px solid rgba(199,127,147,.25);border-radius:18px;padding:24px 22px;">
+          <p style="font-family:system-ui,sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--lm-rose-deep);margin:0 0 8px;">Family Echo</p>
+          <p style="font-size:1.6rem;font-family:Georgia,serif;color:var(--lm-leaf-deep);margin:0;line-height:1;">$199 <span style="font-size:.9rem;color:var(--lm-ink-soft);"> setup</span></p>
+          <p style="font-family:system-ui,sans-serif;font-size:.88rem;color:var(--lm-ink-soft);margin:4px 0 10px;">+ $19.95 / month</p>
+          <p style="font-size:.91rem;margin:0;color:var(--lm-ink-soft);">Shared family archive, expanded materials, multiple reviewers or stewards.</p>
+        </div>
+        <div style="background:var(--lm-paper-2);border:1px solid rgba(157,143,190,.28);border-radius:18px;padding:24px 22px;">
+          <p style="font-family:system-ui,sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--lm-lav-deep);margin:0 0 8px;">Concierge Echo</p>
+          <p style="font-size:1.6rem;font-family:Georgia,serif;color:var(--lm-leaf-deep);margin:0;line-height:1;">$995 <span style="font-size:.9rem;color:var(--lm-ink-soft);"> setup</span></p>
+          <p style="font-family:system-ui,sans-serif;font-size:.88rem;color:var(--lm-ink-soft);margin:4px 0 10px;">+ $49.95 / month</p>
+          <p style="font-size:.91rem;margin:0;color:var(--lm-ink-soft);">Guided interviews, assisted story capture, expanded archive preparation, and optional approved voice layer. Synthetic voice or likeness requires separate explicit consent.</p>
+        </div>
+      </div>
+
+      <div class="lm-btnrow" style="justify-content:center;">
+        <a class="lm-btn" href="pricing.html">See Full Pricing &amp; Begin</a>
+      </div>
+      <p style="margin-top:18px;font-family:system-ui,sans-serif;font-size:.84rem;color:var(--lm-ink-soft);">Not sure where to start? <a href="mailto:marcus@poconoai.com?subject=Living%20Echo%20Founder%20Echo%20Application">Email Marcus directly</a> &mdash; no forms, no commitments.</p>
+    </div>
+  </section>
+
+  <!-- WHY LIVING ECHO EXISTS — cleaned emotional poster -->
+  <section class="lm-section" id="why-it-exists" aria-labelledby="lm-why-exists-h">
+    <div class="lm-wrap lm-center">
+      <p class="lm-eyebrow">The origin</p>
+      <h2 class="lm-h2" id="lm-why-exists-h">Why Living Echo Exists</h2>
+      <p style="max-width:60ch;margin:0 auto 28px;">Living Echo began with a human question: what happens to the stories, guidance, voice, and wisdom that never make it into documents?</p>
+      <figure style="margin:0 auto 26px;max-width:660px;">
+        <a href="assets/when_you_die_who_remembers_you.png" target="_blank" rel="noopener" aria-label="Open full-size Living Echo origin poster in a new tab" style="display:block;border-radius:16px;overflow:hidden;box-shadow:var(--lm-shadow);border:1px solid rgba(138,102,32,.18);">
+          <img src="assets/when_you_die_who_remembers_you.png"
+               alt="Living Echo poster asking &ldquo;When you die, who remembers you?&rdquo; and explaining that Living Echo preserves pre-recorded voice, stories, wisdom, and guidance through consent-first, source-grounded, human-stewarded preservation."
+               loading="lazy" decoding="async" style="display:block;width:100%;height:auto;">
+        </a>
+        <figcaption style="margin-top:10px;font-family:system-ui,sans-serif;font-size:.82rem;color:var(--lm-ink-soft);">Tap or click to view full size.</figcaption>
+      </figure>
+      <a class="lm-btn lm-btn--soft" href="celebration-of-life.html">Read the Full Origin Story &rarr;</a>
+    </div>
+  </section>
+
+  <!-- CLOSING -->
+  <section class="lm-section lm-center" id="closing" aria-label="Closing" style="padding-top:20px">
+    <div class="lm-wrap">
+      <hr class="lm-divider" style="margin-bottom:34px">
+      <p class="lm-pull" style="margin-top:0">People are important. Their voices matter. Their words matter. Their memory deserves care.</p>
+      <p class="lm-soft">As long as people remember us, some part of us remains present. A living memorial gives that remembrance a place to speak.</p>
+    </div>
+  </section>
+
+  <!-- v397 · INTEREST LIST -->
+  <section class="lm-section" id="interest-list" aria-labelledby="lm-interest-h" style="padding-top:8px">
+    <div class="lm-interest">
+      <h3 id="lm-interest-h">Interested in Living Echo?</h3>
+      <p>Join the early participant list and tell us where you fit. We will reach out as the program opens.</p>
+      <a class="interest-list-cta" href="https://forms.gle/VQahnkjMfY6QNEMy8" target="_blank" rel="noopener noreferrer">Join the Interest List</a>
+      <p class="lm-interest-note">Please do not submit private medical records, legal files, confidential client materials, or sensitive documents through this form.</p>
+    </div>
+  </section>
+
+</main>
+
+<div class="lm-foot" role="contentinfo">
+  <hr class="lm-divider">
+  <p>Living Echo &mdash; Voices Live On. A private venture built by Pocono AI. It is separate from Pocono AI’s regulated medical and legal AI infrastructure work.</p>
+  <p><a href="pricing.html">Pricing</a> &nbsp;&middot;&nbsp; <a href="celebration-of-life.html">Origin Story</a> &nbsp;&middot;&nbsp; <a href="estate-professionals.html">Estate Professionals</a> &nbsp;&middot;&nbsp; <a href="enterprise-estate-continuity.html">Enterprise Continuity</a> &nbsp;&middot;&nbsp; <a href="/">&larr; Back to Pocono AI</a></p>
+  <p style="margin-top:18px;font-size:.82rem;opacity:.8">Created with consent, while alive · © 2026 Marcus O’Dell</p>
+</div>
+
+</body>
+</html>

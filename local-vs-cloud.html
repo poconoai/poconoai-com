@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp -->
+<head>
+<meta charset="UTF-8"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0"><meta name="referrer" content="strict-origin-when-cross-origin"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Local AI vs. Cloud AI — Why Sovereignty Matters | Pocono AI</title><meta name="description" content="Why local AI infrastructure outperforms cloud AI for healthcare and legal practices — data sovereignty, audit trail, and resilience."><meta name="theme-color" content="#0B0F13"><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="alternate icon" href="favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="favicon-180x180.png">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="alternate icon" href="favicon.ico"><link rel="sitemap" type="application/xml" href="/sitemap.xml"><link rel="canonical" href="https://poconoai.com/local-vs-cloud.html"><link rel="stylesheet" href="styles.css?v=402"><link rel="stylesheet" href="nav-v2026.css?v=402">
+<link rel="stylesheet" href="brand-v292.css?v=402">
+<meta property="og:title" content="Local AI vs. Cloud AI — Why Sovereignty Matters | Pocono AI"><meta property="og:site_name" content="Pocono AI"><meta property="og:type" content="article"><meta property="og:description" content="Why local AI infrastructure beats cloud AI for healthcare and legal practices: sovereignty, resilience, privacy, and audit control compared visually."><meta property="og:url" content="https://poconoai.com/local-vs-cloud.html">
+<meta property="og:image" content="https://poconoai.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630"><meta name="twitter:card" content="summary">
+<meta name="twitter:description" content="Why local AI infrastructure outperforms cloud AI for healthcare and legal practices — data sovereignty, audit trail, and resilience."><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"Why local AI infrastructure matters for regulated practices.","description":"Operational screen concepts for Sentinel Node: evidence review, draft status, human approval, audit envelope, and chain-of-custody views.","publisher":{"@type":"Organization","name":"Pocono AI, LLC"},"datePublished":"2026-05-22","dateModified":"2026-05-22"}</script>
+<style>
+.page-wrap{max-width:1160px;margin:0 auto;padding:clamp(28px,4vw,60px) 24px}.hero{padding:40px 0 18px}.kicker{display:inline-flex;color:#2dd4bf;font-weight:900;letter-spacing:.14em;text-transform:uppercase;font-size:.78rem;margin-bottom:14px}.title{font-size:clamp(2.2rem,5vw,4.4rem);line-height:1.02;letter-spacing:-.04em;color:#fff;margin:0 0 18px}.lede{font-size:clamp(1.08rem,1.8vw,1.3rem);line-height:1.62;color:#b9d9ee;max-width:920px}.btnrow{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}.btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 18px;border-radius:999px;text-decoration:none;font-weight:850;border:1px solid rgba(45,212,191,.38);background:linear-gradient(135deg,rgba(45,212,191,.16),rgba(59,130,246,.12));color:#eaffff}.btn.secondary{background:rgba(15,23,42,.45);color:#9bdcff;border-color:rgba(148,163,184,.25)}.panel{border:1px solid rgba(45,212,191,.18);border-radius:28px;background:linear-gradient(145deg,rgba(5,22,34,.86),rgba(2,8,18,.92));box-shadow:0 24px 80px rgba(0,0,0,.34);padding:clamp(20px,3vw,34px);margin:26px 0;overflow:hidden}.panel h2{font-size:clamp(1.5rem,3vw,2.25rem);line-height:1.16;color:#fff;margin:0 0 12px}.panel p,.panel li{color:#9eb9cc;line-height:1.58}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:20px}.grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}.card{border:1px solid rgba(255,255,255,.11);background:rgba(15,23,42,.5);border-radius:22px;padding:18px}.card h3{margin:0 0 9px;color:#fff}.card b{color:#fff}.small{font-size:.92rem;color:#8fb1c7}.step{display:flex;gap:14px;align-items:flex-start}.num{flex:0 0 auto;width:34px;height:34px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;background:rgba(45,212,191,.14);border:1px solid rgba(45,212,191,.36);color:#8ff7e4;font-weight:900}.screen{border:1px solid rgba(45,212,191,.24);border-radius:24px;background:#06111d;box-shadow:inset 0 0 0 1px rgba(255,255,255,.04),0 24px 60px rgba(0,0,0,.38);padding:18px}.screenbar{display:flex;gap:7px;border-bottom:1px solid rgba(255,255,255,.08);padding-bottom:12px;margin-bottom:16px}.dot{width:10px;height:10px;border-radius:999px;background:#2dd4bf}.row{display:grid;grid-template-columns:1fr auto;gap:12px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);border-radius:14px;padding:12px;margin:10px 0;color:#cfefff}.tag{display:inline-flex;border:1px solid rgba(45,212,191,.3);color:#8ff7e4;border-radius:999px;padding:4px 9px;font-size:.75rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em}.warn{border-color:rgba(251,191,36,.35);color:#facc15}.danger{border-color:rgba(248,113,113,.35);color:#fca5a5}.callout{border:1px solid rgba(45,212,191,.34);background:rgba(45,212,191,.08);border-radius:22px;padding:18px;color:#c9f7f1;line-height:1.6;margin-top:20px}@media(max-width:900px){.grid,.grid.two{grid-template-columns:1fr}.page-wrap{padding-left:18px;padding-right:18px}}
+
+/* Additional styles for enhanced governance-dashboard */
+.status-bar{display:flex;align-items:center;gap:18px;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:10px 18px;margin-bottom:18px;font-size:.82rem;color:#7fb3cc;flex-wrap:wrap}
+.status-item{display:flex;align-items:center;gap:7px}
+.status-dot{width:8px;height:8px;border-radius:999px;background:#2dd4bf}
+.status-dot.warn{background:#facc15}
+.status-dot.danger{background:#f87171}
+.status-dot.ok{background:#4ade80}
+.evidence-row{display:grid;grid-template-columns:28px 1fr auto auto;align-items:center;gap:10px;border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.025);border-radius:12px;padding:10px 14px;margin:8px 0;font-size:.84rem}
+.evidence-row.accepted{border-color:rgba(45,212,191,.22)}
+.evidence-row.rejected{border-color:rgba(248,113,113,.15);opacity:.62}
+.ev-num{color:#2dd4bf;font-weight:900;font-size:.76rem;text-align:center}
+.ev-src{color:#c5dff0}
+.ev-conf{font-size:.75rem;color:#8fb1c7;text-align:right}
+.ev-status{}
+.draft-block{border:1px solid rgba(251,191,36,.28);background:rgba(251,191,36,.05);border-radius:18px;padding:16px;margin:14px 0}
+.draft-text{color:#e8d585;line-height:1.7;font-size:.9rem}
+.draft-text .cite{display:inline-block;background:rgba(45,212,191,.15);border:1px solid rgba(45,212,191,.3);color:#8ff7e4;border-radius:4px;font-size:.72rem;padding:1px 5px;font-weight:800;margin:0 2px;vertical-align:middle}
+.action-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.action-btn{display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border-radius:999px;font-size:.8rem;font-weight:800;cursor:default;border:1px solid}
+.action-btn.approve{background:rgba(74,222,128,.12);border-color:rgba(74,222,128,.35);color:#86efac}
+.action-btn.revise{background:rgba(251,191,36,.1);border-color:rgba(251,191,36,.32);color:#fde68a}
+.action-btn.reject{background:rgba(248,113,113,.1);border-color:rgba(248,113,113,.3);color:#fca5a5}
+.action-btn.escalate{background:rgba(168,85,247,.1);border-color:rgba(168,85,247,.28);color:#d8b4fe}
+.audit-row{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:start;border-bottom:1px solid rgba(255,255,255,.06);padding:10px 0;font-size:.83rem}
+.audit-time{color:#4a6a80;font-variant-numeric:tabular-nums;white-space:nowrap;min-width:54px}
+.audit-event{color:#b0cde0}
+.audit-actor{color:#2dd4bf;white-space:nowrap}
+.chain-row{display:flex;gap:0;align-items:stretch;margin:10px 0}
+.chain-step{flex:1;border:1px solid rgba(45,212,191,.18);border-right:none;background:rgba(15,23,42,.5);padding:12px;font-size:.8rem;position:relative}
+.chain-step:first-child{border-radius:14px 0 0 14px}
+.chain-step:last-child{border-right:1px solid rgba(45,212,191,.18);border-radius:0 14px 14px 0}
+.chain-step-label{color:#2dd4bf;font-weight:800;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
+.chain-step-val{color:#c5dff0}
+.chain-arrow{display:flex;align-items:center;color:#2dd4bf;font-size:1.1rem;padding:0 2px}
+.exception-row{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;border:1px solid rgba(251,191,36,.2);background:rgba(251,191,36,.04);border-radius:12px;padding:11px 14px;margin:8px 0;font-size:.83rem}
+.ex-icon{font-size:1.1rem}
+.ex-text{color:#e8d585}
+.ex-action{font-size:.76rem;color:#8fb1c7}
+.policy-fence{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
+.allowed{border:1px solid rgba(74,222,128,.25);background:rgba(74,222,128,.06);border-radius:16px;padding:14px}
+.allowed h4{color:#86efac;margin:0 0 10px;font-size:.9rem}
+.allowed li{color:#b6f5c8;font-size:.82rem;line-height:1.6}
+.blocked-zone{border:1px solid rgba(248,113,113,.25);background:rgba(248,113,113,.06);border-radius:16px;padding:14px}
+.blocked-zone h4{color:#fca5a5;margin:0 0 10px;font-size:.9rem}
+.blocked-zone li{color:#fed7d7;font-size:.82rem;line-height:1.6}
+.metric-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0}
+.metric{border:1px solid rgba(45,212,191,.15);background:rgba(15,23,42,.5);border-radius:18px;padding:14px;text-align:center}
+.metric-val{font-size:1.8rem;font-weight:900;color:#2dd4bf;line-height:1}
+.metric-label{font-size:.76rem;color:#7fb3cc;margin-top:5px;text-transform:uppercase;letter-spacing:.06em}
+.section-label{font-size:.72rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#2dd4bf;margin:22px 0 12px;border-bottom:1px solid rgba(45,212,191,.15);padding-bottom:6px}
+@media(max-width:700px){.metric-row{grid-template-columns:repeat(2,1fr)}.policy-fence{grid-template-columns:1fr}.chain-row{flex-direction:column}.chain-step{border-right:1px solid rgba(45,212,191,.18);border-bottom:none;border-radius:0}.chain-step:first-child{border-radius:14px 14px 0 0}.chain-step:last-child{border-radius:0 0 14px 14px}}
+
+
+.vs-grid{display:grid;grid-template-columns:1fr 60px 1fr;gap:0;align-items:stretch;margin:22px 0}
+.vs-col{border-radius:20px;overflow:hidden}
+.vs-col.cloud{border:1px solid rgba(248,113,113,.25);background:rgba(248,113,113,.04)}
+.vs-col.local{border:1px solid rgba(74,222,128,.25);background:rgba(74,222,128,.04)}
+.vs-header{padding:14px 18px;font-weight:900;font-size:.85rem;text-align:center;text-transform:uppercase;letter-spacing:.1em}
+.vs-col.cloud .vs-header{background:rgba(248,113,113,.12);color:#fca5a5}
+.vs-col.local .vs-header{background:rgba(74,222,128,.12);color:#86efac}
+.vs-vs{display:flex;align-items:center;justify-content:center;font-weight:900;color:#4a6a80;font-size:.9rem}
+.vs-row{display:grid;grid-template-columns:1fr 60px 1fr;gap:0;border-top:1px solid rgba(255,255,255,.06)}
+.vs-cell{padding:13px 18px;font-size:.84rem;line-height:1.5}
+.vs-cell.cloud{color:#fecaca;border-right:1px solid rgba(255,255,255,.06)}
+.vs-cell.mid{display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:800;color:#4a6a80;text-align:center;border-right:1px solid rgba(255,255,255,.06);padding:8px 4px}
+.vs-cell.local{color:#bbf7d0}
+.vs-cell.cloud.bad{color:#f87171}
+.vs-cell.local.good{color:#4ade80}
+.scenario{border:1px solid rgba(45,212,191,.15);border-radius:22px;padding:22px;margin:16px 0;position:relative;overflow:hidden}
+.scenario-label{font-size:.72rem;font-weight:900;text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px}
+.scenario.danger-zone .scenario-label{color:#f87171}
+.scenario.safe-zone .scenario-label{color:#4ade80}
+.scenario-title{font-size:1.15rem;font-weight:900;color:#fff;margin-bottom:10px}
+.scenario-body{color:#9eb9cc;font-size:.88rem;line-height:1.65}
+.scenario-outcome{margin-top:14px;padding:11px 14px;border-radius:12px;font-size:.84rem;font-weight:700}
+.scenario.danger-zone .scenario-outcome{background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.2);color:#fca5a5}
+.scenario.safe-zone .scenario-outcome{background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.2);color:#86efac}
+.boundary-svg-wrap{background:#06111d;border:1px solid rgba(45,212,191,.2);border-radius:22px;padding:24px;margin:18px 0}
+.boundary-label{font-size:.76rem;font-weight:900;text-transform:uppercase;letter-spacing:.1em;color:#2dd4bf;margin-bottom:14px}
+.arch-row{display:flex;align-items:center;gap:10px;margin:10px 0}
+.arch-box{border-radius:10px;padding:10px 14px;font-size:.8rem;font-weight:800;text-align:center;min-width:100px}
+.arch-box.local-box{background:rgba(45,212,191,.12);border:1px solid rgba(45,212,191,.35);color:#8ff7e4}
+.arch-box.cloud-box{background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.3);color:#fca5a5}
+.arch-box.boundary{background:rgba(255,255,255,.05);border:2px dashed rgba(255,255,255,.2);color:#6a8a9a;font-size:.72rem}
+.arch-arrow{color:#4a6a80;font-size:1.2rem;flex:0 0 auto}
+.arch-arrow.blocked{color:#f87171}
+.latency-bar{display:flex;align-items:center;gap:12px;margin:12px 0}
+.latency-label{min-width:130px;font-size:.82rem;color:#9eb9cc}
+.latency-track{flex:1;background:rgba(255,255,255,.07);border-radius:999px;height:14px;overflow:hidden;position:relative}
+.latency-fill{height:100%;border-radius:999px;display:flex;align-items:center;padding-right:8px;justify-content:flex-end}
+.latency-fill.local{background:linear-gradient(90deg,rgba(45,212,191,.5),rgba(45,212,191,.8))}
+.latency-fill.cloud{background:linear-gradient(90deg,rgba(248,113,113,.4),rgba(248,113,113,.7))}
+.latency-val{font-size:.74rem;font-weight:800;color:#fff;white-space:nowrap;min-width:48px;text-align:right}
+.outage-timeline{display:flex;gap:0;margin:18px 0;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.1)}
+.outage-phase{flex:1;padding:14px;border-right:1px solid rgba(255,255,255,.08);font-size:.8rem}
+.outage-phase:last-child{border-right:none}
+.outage-phase-label{font-size:.7rem;font-weight:900;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px}
+.outage-phase.impact .outage-phase-label{color:#f87171}
+.outage-phase.recovery .outage-phase-label{color:#facc15}
+.outage-phase.resilient .outage-phase-label{color:#4ade80}
+.outage-phase-cloud{background:rgba(248,113,113,.08)}
+.outage-phase-local{background:rgba(74,222,128,.06)}
+.outage-phase-time{font-weight:800;color:#fff;margin-bottom:4px}
+.outage-phase-desc{color:#9eb9cc;line-height:1.5}
+.privacy-fence{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0}
+.fence-side{border-radius:18px;padding:18px}
+.fence-side.exposure{border:1px solid rgba(248,113,113,.25);background:rgba(248,113,113,.05)}
+.fence-side.contained{border:1px solid rgba(74,222,128,.25);background:rgba(74,222,128,.05)}
+.fence-side h4{margin:0 0 12px;font-size:.92rem}
+.fence-side.exposure h4{color:#fca5a5}
+.fence-side.contained h4{color:#86efac}
+.fence-side li{font-size:.83rem;line-height:1.7}
+.fence-side.exposure li{color:#fecaca}
+.fence-side.contained li{color:#bbf7d0}
+@media(max-width:700px){.vs-grid,.vs-row{grid-template-columns:1fr;}.vs-vs{display:none}.vs-cell.mid{display:none}.privacy-fence{grid-template-columns:1fr}.outage-timeline{flex-direction:column}.latency-label{min-width:90px;font-size:.76rem}}
+
+</style>
+</head><body>
+<a href="#main" class="skip-link">Skip to content</a><div id="reading-progress" aria-hidden="true"></div>
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- INCLUDE:HEADER -->
+<div id="hitl-notice" style="background:#0a1929;padding:4px 16px;text-align:center;font-size:12px;color:#4a5568;border-bottom:1px solid rgba(255,255,255,0.06);letter-spacing:0.01em;">Human-in-the-Loop required: licensed professionals verify all outputs before clinical or legal action</div>
+<header role="banner">
+  <div class="header-inner">
+    <a href="/index.html" class="logo" aria-label="Pocono AI Home">
+      <img src="/logo.svg?v=402" alt="" width="36" height="36" decoding="async" loading="eager" aria-hidden="true" style="display:inline-block;">
+      Pocono <span>AI</span>
+    </a>
+    <nav id="desktop-nav" aria-label="Main navigation">
+      <div class="nav-item"><a href="/index.html" class="nav-direct">Home</a></div>
+      <div class="nav-item"><a href="/for-physicians.html" class="nav-direct">Physicians</a></div>
+      <div class="nav-item"><a href="/for-attorneys.html" class="nav-direct">Attorneys</a></div>
+      <div class="nav-item"><a href="/sentinel-node.html" class="nav-direct nav-hub" style="color:#d5a94f;border:1px solid rgba(213,169,79,0.45);border-radius:999px;padding:6px 13px;">Sentinel Node</a></div>
+      <div class="nav-item"><a href="/living-memorials/" class="nav-direct">Living Echo</a></div>
+      <div class="nav-item"><a href="/contact.html" class="nav-direct">Contact</a></div>
+      <div class="nav-item" data-dropdown="menu-more">
+        <button type="button" class="nav-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="menu-more">More <span class="nav-chevron" aria-hidden="true">&#9662;</span></button>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <a href="/contact.html#pilot" class="nav-cta nav-cta-primary">Request a Pilot</a>
+      <button type="button" class="pa-search-trigger" data-search-open aria-label="Search (press / or Ctrl-K)" aria-haspopup="dialog" aria-expanded="false">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span class="pa-st-label">Search</span><kbd data-pa-keyhint>Ctrl K</kbd>
+      </button>
+      <button type="button" class="header-icon-btn" id="mobile-menu" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav-panel">
+        <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- "More" overflow dropdown — sibling of <header> so position:fixed escapes header's stacking context. Wired by nav.js via data-dropdown="menu-more". -->
+<div class="nav-dropdown" id="menu-more" aria-label="More navigation">
+  <p class="nav-dd-section">Products</p>
+  <a href="/engineering-drafting/">Drafting &amp; Engineering Edition</a>
+  <a href="/sentinel-home/">Sentinel Home Edition</a>
+  <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability — Assistive Tools &#x2605;</a>
+  <a href="/living-memorials/enterprise-estate-continuity.html">Enterprise Estate Continuity</a>
+  <p class="nav-dd-section">Capabilities</p>
+  <a href="/evidence-room.html">Evidence Room</a>
+  <a href="/push-button-deliverables.html">Push-Button Deliverables</a>
+  <a href="/pilot-readiness-kit.html">Pilot Kit</a>
+  <a href="/pilot-program.html">Pilot Program</a>
+  <a href="/how-it-works.html">How It Works</a>
+  <p class="nav-dd-section">Hubs &amp; Company</p>
+  <a href="/training.html">Training Hub</a>
+  <a href="/documentation-hub/">Document Hub</a>
+  <a href="/global/">Global Hub</a>
+  <a href="/investors-hub.html">Investor Hub</a>
+  <a href="/valuation-dashboard.html">Valuation Dashboard</a>
+  <a href="/about.html">About</a>
+  <p class="nav-dd-section">Trust &amp; Legal</p>
+  <a href="/transparency.html">Transparency</a>
+  <a href="/audit.html">Audit Log</a>
+  <a href="/privacy.html">Privacy</a>
+  <a href="/sitemap.html">Sitemap</a>
+</div>
+<!-- Site search is provided by the self-contained search.js asset (command palette: / or Ctrl/Cmd-K). -->
+
+<!-- Mobile panel: full-screen slide-in. v396 nav — hub tiles + grouped links + Sentinel Node + Engineering. -->
+<nav id="mobile-nav-panel" aria-label="Mobile navigation" aria-hidden="true" role="dialog" aria-modal="true">
+
+  <!-- Hub tiles: Sentinel Node, Documentation Hub, Training Hub, Global Hub -->
+  <div style="padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,0.07);">
+    <p style="font-size:0.65em;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.28);margin:0 0 10px;padding:0 2px;">Hubs</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <a href="/sentinel-node.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(213,169,79,0.1);border:1px solid rgba(213,169,79,0.35);border-radius:10px;color:#d5a94f;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Sentinel Node</a>
+      <a href="/documentation-hub/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(0,194,168,0.1);border:1px solid rgba(0,194,168,0.35);border-radius:10px;color:#00c2a8;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Docs Hub</a>
+      <a href="/training.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.35);border-radius:10px;color:#a78bfa;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Training Hub</a>
+      <a href="/global/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(122,240,220,0.07);border:1px solid rgba(122,240,220,0.3);border-radius:10px;color:#7af0dc;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Global Hub</a>
+    </div>
+  </div>
+
+  <!-- Core paths -->
+  <div class="mob-static-links">
+    <a href="/index.html">Home</a>
+    <a href="/for-physicians.html">Physicians</a>
+    <a href="/for-attorneys.html">Attorneys</a>
+    <a href="/engineering-drafting/">Engineering &amp; Drafting</a>
+    <a href="/pilot-program.html">Pilot Program</a>
+    <a href="/how-it-works.html">How It Works</a>
+    <a href="/trust.html">Trust &amp; Audit</a>
+    <a href="/pricing.html">Pricing</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/living-memorials/">Living Echo</a>
+    <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability</a>
+    <a href="/about.html">About</a>
+    <a href="/team.html" style="color:rgba(255,255,255,0.6);">Team &amp; Leadership</a>
+    <a href="/valuation-dashboard.html" style="color:rgba(255,255,255,0.6);">Valuation Dashboard</a>
+    <a href="/careers.html" style="color:rgba(255,255,255,0.6);">Careers</a>
+    <a href="/sentinel-demo.html" style="color:rgba(255,255,255,0.6);">Demo</a>
+    <a href="/sitemap.html" style="color:rgba(255,255,255,0.45);">Sitemap</a>
+    <a href="/transparency.html" style="color:rgba(255,255,255,0.45);">Transparency</a>
+    <a href="/privacy.html" style="color:rgba(255,255,255,0.45);">Privacy</a>
+  </div>
+
+  <a href="/contact.html#pilot" class="mob-cta">Request a Pilot</a>
+</nav>
+<!-- /INCLUDE:HEADER -->
+
+
+<main id="main" class="page-wrap" tabindex="-1">
+
+<section class="hero">
+  <div class="sentinel-lockup" aria-label="Sentinel Node — Local vs Cloud">
+              <svg class="sentinel-lockup-mark" viewBox="0 0 64 64" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
+          <!-- v311b: rotated diamond + C-curve loop + summit dot. Inherits currentColor from CSS context. -->
+          <g transform="rotate(45 32 32)">
+            <rect x="12" y="12" width="40" height="40" rx="8" ry="8"/>
+            <path d="M43 22 L26 22 A6 6 0 0 0 20 28 L20 36 A6 6 0 0 0 26 42 L41 42"/>
+          </g>
+          <circle cx="32" cy="9" r="3" fill="currentColor" stroke="none"/>
+        </svg>
+              <div class="sentinel-lockup-rule"></div>
+              <div class="sentinel-lockup-text">
+                <span class="sentinel-lockup-name">Sentinel Node</span>
+                <span class="sentinel-lockup-tag">Local vs. Cloud</span>
+              </div>
+            </div>
+  <h1 class="title">Why local AI infrastructure matters for regulated practices.</h1>
+  <p class="lede">Cloud AI works well for many applications. It does not work well when data cannot leave the building, when the network goes down, when audit chains must be locally owned, or when a malpractice carrier asks what you shared with a third-party server. This page explains the structural differences — not as marketing, but as operational reality.</p>
+  <div class="btnrow">
+    <a class="btn" href="contact.html#pilot">Discuss a local deployment</a>
+    <a class="btn secondary" href="architecture.html">Architecture overview →</a>
+    <a class="btn secondary" href="deployment-topology.html">Deployment topology →</a>
+  </div>
+</section>
+
+<!-- MASTER COMPARISON TABLE -->
+<section class="panel">
+  <h2>Direct comparison: 12 dimensions that matter for regulated practices.</h2>
+  <p>These are the operational differences that matter when AI is used in clinical or legal workflows — not benchmark scores or parameter counts.</p>
+  <div style="overflow-x:auto">
+    <div class="vs-grid" style="min-width:580px">
+      <div class="vs-col cloud"><div class="vs-header">☁ Cloud AI (API / SaaS)</div></div>
+      <div class="vs-vs">vs.</div>
+      <div class="vs-col local"><div class="vs-header">🖥 Local AI (Sentinel Node)</div></div>
+    </div>
+    <div class="vs-row" style="min-width:580px">
+      <div class="vs-cell cloud bad">Patient and client data leaves the building on every query</div>
+      <div class="vs-cell mid">Data custody</div>
+      <div class="vs-cell local good">All data remains inside the practice's own network</div>
+    </div>
+    <div class="vs-row" style="min-width:580px">
+      <div class="vs-cell cloud bad">Dependent on internet connectivity — outages halt operations</div>
+      <div class="vs-cell mid">Availability</div>
+      <div class="vs-cell local good">Fully functional during internet outages — local inference only</div>
+    </div>
+    <div class="vs-row" style="min-width:580px">
+      <div class="vs-cell cloud bad">Audit logs held by vendor — may not be accessible or admissible</div>
+      <div class="vs-cell mid">Audit control</div>
+      <div class="vs-cell local good">Audit envelope generated and stored locally — owned by the practice</div>
+    </div>
+    <div class="vs-row" style="min-width:580px">
+      <div class="vs-cell cloud">Typically 300ms–2s round trip including network latency</div>
+      <div class="vs-cell mid">Response time</div>
+      <div class="vs-cell local good">Under 2s local inference — no network variable</div>
+    </div>
+    <div class="vs-row" style="min-width:580px">
+      <div class="vs-cell cloud bad">BAA available but third-party data processing still occurs</div>
+      <div class="vs-cell mid">HIPAA posture</div>
+      <div class="vs-cell local good">No third-party processing — data never leaves the premises</div>
+    </div>
+    <div class="vs-row" style="min-width:580px">
+      <div class="vs-cell cloud bad">Model updates deployed by vendor without practice control</div>
+      <div class="vs-cell mid">Model governance</div>
+      <div class="vs-cell local good">Updates delivered on the practice's schedule — not the vendor's</div>
+    </div>
+    <div class="vs-row" style="min-width:580px">
+      <div class="vs-cell cloud bad">Attorney-client privilege boundary unclear when data reaches cloud</div>
+      <div class="vs-cell mid">Privilege protection</div>
+      <div class="vs-cell local good">Privileged materials never leave the firm's own infrastructure</div>
+    </div>
+    <div class="vs-row" style="min-width:580px">
+      <div class="vs-cell cloud">Subscription pricing — scales with usage volume</div>
+      <div class="vs-cell mid">Cost model</div>
+      <div class="vs-cell local">Fixed infrastructure cost — no per-query fees</div>
+    </div>
+    <div class="vs-row" style="min-width:580px">
+      <div class="vs-cell cloud bad">Queries may be used for model training (varies by vendor / agreement)</div>
+      <div class="vs-cell mid">Training exposure</div>
+      <div class="vs-cell local good">No queries, documents, or outputs ever used for model training</div>
+    </div>
+    <div class="vs-row" style="min-width:580px">
+      <div class="vs-cell cloud bad">Breach liability extends to third-party vendor's security posture</div>
+      <div class="vs-cell mid">Breach surface</div>
+      <div class="vs-cell local good">Attack surface limited to the practice's own network — no cloud exposure</div>
+    </div>
+    <div class="vs-row" style="min-width:580px">
+      <div class="vs-cell cloud bad">Governance is a policy agreement — not an enforced workflow state</div>
+      <div class="vs-cell mid">Review enforcement</div>
+      <div class="vs-cell local good">Human gate enforced in software — no output finalized without attribution</div>
+    </div>
+    <div class="vs-row" style="min-width:580px">
+      <div class="vs-cell cloud">Widely available — low friction to start</div>
+      <div class="vs-cell mid">Setup</div>
+      <div class="vs-cell local">Physical deployment — higher setup investment, full operational ownership</div>
+    </div>
+  </div>
+</section>
+
+<!-- INTERNET OUTAGE SCENARIO -->
+<section class="panel">
+  <h2>Scenario: the internet goes out at 9:00 AM.</h2>
+  <p>Internet outages happen. For a cloud-dependent AI practice tool, the impact is immediate and complete. For a local deployment, the morning continues normally.</p>
+
+  <div style="margin:20px 0">
+    <div style="font-size:.8rem;font-weight:900;text-transform:uppercase;letter-spacing:.1em;color:#f87171;margin-bottom:8px">☁ Cloud AI practice — what happens</div>
+    <div class="outage-timeline">
+      <div class="outage-phase outage-phase-cloud impact">
+        <div class="outage-phase-label">9:00 AM — Outage</div>
+        <div class="outage-phase-time">Immediate halt</div>
+        <div class="outage-phase-desc">Every AI-assisted workflow stops. Prior auth tool, denial response drafting, chart review — all unavailable.</div>
+      </div>
+      <div class="outage-phase outage-phase-cloud impact">
+        <div class="outage-phase-label">9:00 AM – recovery</div>
+        <div class="outage-phase-time">Manual fallback</div>
+        <div class="outage-phase-desc">Staff reverts to manual document search and drafting. Efficiency gains disappear. Work queues back up.</div>
+      </div>
+      <div class="outage-phase outage-phase-cloud recovery">
+        <div class="outage-phase-label">Outage resolved</div>
+        <div class="outage-phase-time">Partial recovery</div>
+        <div class="outage-phase-desc">Work restarts — but the backlog created during the outage creates cascading delays. Audit logs for the outage period may be incomplete.</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin:20px 0">
+    <div style="font-size:.8rem;font-weight:900;text-transform:uppercase;letter-spacing:.1em;color:#4ade80;margin-bottom:8px">🖥 Local AI practice (Sentinel Node) — what happens</div>
+    <div class="outage-timeline">
+      <div class="outage-phase outage-phase-local resilient">
+        <div class="outage-phase-label">9:00 AM — Outage</div>
+        <div class="outage-phase-time">No impact</div>
+        <div class="outage-phase-desc">Sentinel Node does not contact any external server. Inference, retrieval, review, and audit logging continue without interruption.</div>
+      </div>
+      <div class="outage-phase outage-phase-local resilient">
+        <div class="outage-phase-label">9:00 AM – recovery</div>
+        <div class="outage-phase-time">Normal operation</div>
+        <div class="outage-phase-desc">Staff complete their normal workflows. Approvals are logged locally. Audit envelopes are generated and stored on the appliance.</div>
+      </div>
+      <div class="outage-phase outage-phase-local resilient">
+        <div class="outage-phase-label">Outage resolved</div>
+        <div class="outage-phase-time">Nothing to catch up</div>
+        <div class="outage-phase-desc">The practice has a complete, unbroken audit record for the entire period. The outage is operationally invisible to the AI workflow.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout"><strong>Why this matters beyond convenience:</strong> a broken audit chain during an outage period is not just an efficiency problem. In a regulated workflow, a gap in the review record during the period in question is a compliance exposure. Local infrastructure eliminates that exposure.</div>
+</section>
+
+<!-- LATENCY COMPARISON -->
+<section class="panel">
+  <h2>Latency: what "fast enough" means in a clinical workflow.</h2>
+  <p>Raw inference speed matters less than total round-trip time in a real clinical or legal workflow. Cloud AI adds network latency on every query. Local inference does not.</p>
+
+  <div style="margin:20px 0">
+    <div class="latency-bar">
+      <div class="latency-label">Local inference</div>
+      <div class="latency-track" style="max-width:500px">
+        <div class="latency-fill local" style="width:18%"></div>
+      </div>
+      <div class="latency-val">~400ms</div>
+    </div>
+    <div class="latency-bar">
+      <div class="latency-label">Cloud API (fast)</div>
+      <div class="latency-track" style="max-width:500px">
+        <div class="latency-fill cloud" style="width:40%"></div>
+      </div>
+      <div class="latency-val">~900ms</div>
+    </div>
+    <div class="latency-bar">
+      <div class="latency-label">Cloud API (loaded)</div>
+      <div class="latency-track" style="max-width:500px">
+        <div class="latency-fill cloud" style="width:70%"></div>
+      </div>
+      <div class="latency-val">~1.6s</div>
+    </div>
+    <div class="latency-bar">
+      <div class="latency-label">Cloud + retrieval</div>
+      <div class="latency-track" style="max-width:500px">
+        <div class="latency-fill cloud" style="width:90%"></div>
+      </div>
+      <div class="latency-val">~2.1s</div>
+    </div>
+    <p class="small" style="margin-top:12px">Illustrative ranges based on typical API performance. Actual times vary by model, load, and network conditions. Local inference times are hardware-dependent.</p>
+  </div>
+
+  <div class="grid two">
+    <div class="card">
+      <h3>Why latency accumulates</h3>
+      <p>In a clinical workflow, AI is used iteratively — not once. A prior auth assembly may involve 6–12 retrieval queries as staff review and refine the evidence set. Each query adds latency. Local inference eliminates the network component from every single query.</p>
+    </div>
+    <div class="card">
+      <h3>Network variability vs. hardware variability</h3>
+      <p>Cloud latency varies with internet conditions, API load, and rate limiting — all of which are outside the practice's control. Local inference variability is limited to hardware load, which the practice controls and can scale independently.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRIVACY BOUNDARY -->
+<section class="panel">
+  <h2>What leaves the building when you use cloud AI.</h2>
+  <p>Cloud AI tools typically require the query — and often attached documents — to be transmitted to a remote server for processing. This is not a design flaw. It is the fundamental architecture. The question is whether that transmission is acceptable for the data in question.</p>
+
+  <div class="boundary-svg-wrap">
+    <div class="boundary-label">Cloud AI data flow — what crosses the boundary</div>
+    <div class="arch-row">
+      <div class="arch-box local-box">Staff workstation<br><span style="font-size:.7rem;font-weight:400;color:#6a9a8a">Inside practice</span></div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-box local-box">Query + document<br><span style="font-size:.7rem;font-weight:400;color:#6a9a8a">Patient/client data</span></div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-box boundary">🔓 Network boundary<br>Data leaves building</div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-box cloud-box">Cloud AI server<br><span style="font-size:.7rem;font-weight:400;color:#b08080">Third-party custody</span></div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-box cloud-box">Response returned<br><span style="font-size:.7rem;font-weight:400;color:#b08080">Data already transmitted</span></div>
+    </div>
+    <div style="margin-top:18px"></div>
+    <div class="boundary-label" style="color:#4ade80">Sentinel Node data flow — what stays inside</div>
+    <div class="arch-row">
+      <div class="arch-box local-box">Staff workstation<br><span style="font-size:.7rem;font-weight:400;color:#6a9a8a">Inside practice</span></div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-box local-box">Query + document<br><span style="font-size:.7rem;font-weight:400;color:#6a9a8a">Patient/client data</span></div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-box local-box">Sentinel Node<br><span style="font-size:.7rem;font-weight:400;color:#6a9a8a">On-premises appliance</span></div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-box local-box">Response returned<br><span style="font-size:.7rem;font-weight:400;color:#6a9a8a">Never left the building</span></div>
+      <div class="arch-arrow blocked">✕</div>
+      <div class="arch-box cloud-box" style="opacity:.3">Internet<br><span style="font-size:.7rem">Not contacted</span></div>
+    </div>
+  </div>
+
+  <div class="privacy-fence">
+    <div class="fence-side exposure">
+      <h4>☁ What cloud AI processing means for regulated data</h4>
+      <ul>
+        <li>Patient chart excerpts processed on vendor servers</li>
+        <li>Privileged case documents transmitted outside the firm</li>
+        <li>Query content potentially used for model improvement (vendor-dependent)</li>
+        <li>Breach liability now includes vendor's security posture</li>
+        <li>BAA required — but processing still occurs outside your walls</li>
+        <li>Audit record for AI session held by vendor — may be inaccessible</li>
+        <li>If vendor has a breach, your client data is in scope</li>
+      </ul>
+    </div>
+    <div class="fence-side contained">
+      <h4>🖥 What local processing means for regulated data</h4>
+      <ul>
+        <li>Patient chart excerpts never leave the practice network</li>
+        <li>Privileged documents processed on firm-owned hardware</li>
+        <li>No query content transmitted to any external server</li>
+        <li>Breach surface limited to practice's own network</li>
+        <li>No BAA required — no third-party processing occurs</li>
+        <li>Audit record generated locally and owned by the practice</li>
+        <li>Vendor breach has zero impact on patient or client data</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- REAL SCENARIOS -->
+<section class="panel">
+  <h2>Four scenarios where local matters.</h2>
+
+  <div class="grid two">
+    <div class="scenario danger-zone">
+      <div class="scenario-label">☁ Cloud AI — Scenario 1</div>
+      <div class="scenario-title">The malpractice deposition question</div>
+      <div class="scenario-body">A physician is deposed after an adverse outcome. The plaintiff's attorney asks: "Did you use AI in the preparation of this clinical document, and did that AI system transmit the patient's information to a third-party server?" The practice used a cloud AI tool. The answer is yes. The follow-up questions concern what was transmitted, when, and what the vendor's data retention policy was.</div>
+      <div class="scenario-outcome">⚠ Cloud deployment creates a third-party data custody question in every deposition context.</div>
+    </div>
+    <div class="scenario safe-zone">
+      <div class="scenario-label">🖥 Local AI — Scenario 1 response</div>
+      <div class="scenario-title">The same deposition question</div>
+      <div class="scenario-body">The physician answers: "Yes, we used a local AI system installed on our own hardware. The patient's data never left our network. Here is the audit record showing the query, the evidence retrieved from our own documents, the draft, and my approval." The audit envelope was generated locally and has been available since the day of the session.</div>
+      <div class="scenario-outcome">✓ Local deployment produces a complete, locally-owned audit record that exists independent of any vendor.</div>
+    </div>
+    <div class="scenario danger-zone">
+      <div class="scenario-label">☁ Cloud AI — Scenario 2</div>
+      <div class="scenario-title">The privilege waiver question</div>
+      <div class="scenario-body">A law firm uses a cloud AI tool to assist with case strategy analysis. A document containing privileged client communications is included in the query context. The communications are transmitted to the vendor's servers. Whether this constitutes a waiver of privilege — or creates a disclosure obligation — is a live question in several jurisdictions.</div>
+      <div class="scenario-outcome">⚠ Cloud transmission of privileged material creates a privilege boundary question that varies by jurisdiction and has no settled answer.</div>
+    </div>
+    <div class="scenario safe-zone">
+      <div class="scenario-label">🖥 Local AI — Scenario 2 response</div>
+      <div class="scenario-title">Privilege stays inside the firm</div>
+      <div class="scenario-body">The same analysis occurs on the firm's own hardware. The privileged document is retrieved from the firm's local corpus, processed by a local inference model, and the resulting draft is reviewed and approved within the firm's own systems. No privileged content ever reaches an external server.</div>
+      <div class="scenario-outcome">✓ Local processing keeps privileged material within the firm's own custody at all times — the same boundary as any other internal work product.</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHEN CLOUD IS FINE -->
+<section class="panel">
+  <h2>When cloud AI is the right answer — and when it isn't.</h2>
+  <p>Cloud AI is not wrong. It is the wrong architecture for specific use cases. Being clear about this distinction is part of how Pocono AI maintains credibility with technically sophisticated buyers.</p>
+  <div class="grid two">
+    <div class="card" style="border-color:rgba(74,222,128,.2)">
+      <h3 style="color:#86efac">Cloud AI works well when:</h3>
+      <ul>
+        <li style="color:#9eb9cc;line-height:1.7;font-size:.87rem">Data is not regulated or sensitive</li>
+        <li style="color:#9eb9cc;line-height:1.7;font-size:.87rem">No audit chain ownership is required</li>
+        <li style="color:#9eb9cc;line-height:1.7;font-size:.87rem">Internet availability can be assumed</li>
+        <li style="color:#9eb9cc;line-height:1.7;font-size:.87rem">General-purpose tasks (drafting, summarizing non-sensitive content)</li>
+        <li style="color:#9eb9cc;line-height:1.7;font-size:.87rem">Startup costs must be minimized and per-use pricing is acceptable</li>
+        <li style="color:#9eb9cc;line-height:1.7;font-size:.87rem">The organization has no compliance obligation around data residency</li>
+      </ul>
+    </div>
+    <div class="card" style="border-color:rgba(248,113,113,.2)">
+      <h3 style="color:#fca5a5">Local AI is the better answer when:</h3>
+      <ul>
+        <li style="color:#9eb9cc;line-height:1.7;font-size:.87rem">Patient, client, or privileged data is part of the workflow</li>
+        <li style="color:#9eb9cc;line-height:1.7;font-size:.87rem">The organization must own and produce its audit record</li>
+        <li style="color:#9eb9cc;line-height:1.7;font-size:.87rem">Operations must survive internet outages</li>
+        <li style="color:#9eb9cc;line-height:1.7;font-size:.87rem">Regulated output must not be finalized without human review attribution</li>
+        <li style="color:#9eb9cc;line-height:1.7;font-size:.87rem">The malpractice carrier or ethics board asks where data was processed</li>
+        <li style="color:#9eb9cc;line-height:1.7;font-size:.87rem">The practice cannot accept third-party data custody in any form</li>
+      </ul>
+    </div>
+  </div>
+  <div class="callout"><strong>The honest framing:</strong> Pocono AI sells to the second category. If a practice is in the first category, cloud AI is probably fine and Sentinel Node is probably over-built for their needs. We are not interested in selling to buyers who don't need what we build.</div>
+</section>
+
+<!-- CTA -->
+<section class="panel" style="text-align:center;padding:36px">
+  <h2 style="margin-bottom:12px">See local deployment in practice.</h2>
+  <p style="color:#9eb9cc;max-width:680px;margin:0 auto 22px">If your practice handles data that should not leave the building, we are worth a conversation. A pilot engagement starts with your actual document environment — not a demo sandbox.</p>
+  <div class="btnrow" style="justify-content:center">
+    <a class="btn" href="contact.html#pilot">Start a conversation</a>
+    <a class="btn secondary" href="governance-dashboard.html">Governance UI →</a>
+    <a class="btn secondary" href="architecture.html">Architecture →</a>
+    <a class="btn secondary" href="comparison.html">Full competitive analysis →</a>
+  </div>
+</section>
+
+</main><!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 root-relative nav fix, Living Echo rebrand, Engineering & Drafting + Enterprise Estate Continuity links added (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- INCLUDE:FOOTER -->
+<footer role="contentinfo" style="background:#051622;border-top:1px solid rgba(255,255,255,0.08);padding:40px 24px 28px;font-size:0.85em;color:#8899aa;">
+  <div style="max-width:1180px;margin:0 auto;">
+
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:0 0 28px;margin-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.07);">
+      <div style="max-width:560px;">
+        <p style="margin:0 0 6px;font-size:1.05em;font-weight:700;color:#fff;">Local AI infrastructure for regulated practices.</p>
+        <p style="margin:0;font-size:0.95em;line-height:1.5;">Drafts with citations. Human review required. Sensitive documents stay under practice control. Simple path, deep proof.</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="/contact.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;background:#00c2a8;color:#04111a;font-weight:700;text-decoration:none;font-size:0.95em;">Request Pilot</a>
+        <a href="/sentinel-demo.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;border:1px solid rgba(0,194,168,0.55);color:#00c2a8;font-weight:700;text-decoration:none;font-size:0.95em;">Watch Demo</a>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px 32px;margin-bottom:32px;text-align:left;">
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">For You</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/start-here.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Start Here (3 min)</a>
+          <a href="/for-physicians.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Physicians</a>
+          <a href="/for-attorneys.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Attorneys</a>
+          <a href="/engineering-drafting/" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Engineering &amp; Drafting Teams</a>
+          <a href="/pilot-program.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Pilot Program</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Installer Training</a>
+          <a href="/how-it-works.html" style="color:#8899aa;text-decoration:none;">How It Works</a>
+          <a href="/trust.html" style="color:#8899aa;text-decoration:none;">Trust &amp; Audit</a>
+          <a href="/pricing.html" style="color:#8899aa;text-decoration:none;">Pricing</a>
+          <a href="/sentinel-demo.html" style="color:#8899aa;text-decoration:none;">See the Demo</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Documentation Hub</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/documentation-hub/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Hub Home &mdash; Deep Proof</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">Installer Training</a>
+          <a href="/sentinel-node/installation-simulator.html" style="color:#8899aa;text-decoration:none;">&#8627; Installation Simulator</a>
+          <a href="/documentation-hub/clinical/" style="color:#8899aa;text-decoration:none;">Clinical Documentation</a>
+          <a href="/documentation-hub/legal/" style="color:#8899aa;text-decoration:none;">Legal Documentation</a>
+          <a href="/documentation-hub/technical/" style="color:#8899aa;text-decoration:none;">Technical Documentation</a>
+          <a href="/documentation-hub/governance/" style="color:#8899aa;text-decoration:none;">Governance &amp; Audit</a>
+          <a href="/documentation-hub/tools/" style="color:#8899aa;text-decoration:none;">Tools &amp; Simulators</a>
+          <a href="/documentation-hub/research/" style="color:#8899aa;text-decoration:none;">Research &amp; Essays</a>
+          <a href="/documentation-hub/transparency/" style="color:#8899aa;text-decoration:none;">Transparency</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Global Federated AI</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/global/" style="color:#7af0dc;text-decoration:none;font-weight:600;">Global Federated Hub</a>
+          <a href="/global/australia/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Australia</a>
+          <a href="/global/singapore/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Singapore</a>
+          <a href="/global/taiwan/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Taiwan</a>
+          <a href="/global/europe/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Europe</a>
+          <a href="/contact.html" style="color:#8899aa;text-decoration:none;">Partner Inquiry</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Company</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/about.html" style="color:#8899aa;text-decoration:none;">About Pocono AI</a>
+          <a href="/team.html" style="color:#8899aa;text-decoration:none;">Team &amp; Leadership</a>
+          <a href="/why-pocono-ai.html" style="color:#8899aa;text-decoration:none;">Why Pocono AI</a>
+          <a href="/founding-commercial-leadership.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Join Us</a>
+          <a href="/careers.html" style="color:#8899aa;text-decoration:none;">Careers</a>
+          <a href="/how-we-hire.html" style="color:#8899aa;text-decoration:none;">How We Hire</a>
+          <a href="/channel-partners.html" style="color:#8899aa;text-decoration:none;">Technical Partners (MSPs)</a>
+          <a href="/partners.html" style="color:#8899aa;text-decoration:none;">Academic Partnerships</a>
+          <a href="/contact.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Contact</a>
+          <a href="https://forms.gle/VQahnkjMfY6QNEMy8" target="_blank" rel="noopener noreferrer" style="color:#d5a94f;text-decoration:none;font-weight:600;">Interest List &#8599;</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Founder Projects</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/rehability/" style="color:#a78bfa;text-decoration:none;font-weight:700;">Rehability &#x2605;</a>
+          <a href="/rehability/marcus-memory-helper/" style="color:#a78bfa;text-decoration:none;font-weight:600;">&#8627; Marcus's Memory Helper</a>
+          <a href="/sentinel-home/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Sentinel Home Edition</a>
+          <a href="/living-memorials/" style="color:#8899aa;text-decoration:none;">Living Echo</a>
+          <a href="/living-memorials/marcus-odell/" style="color:#8899aa;text-decoration:none;">Marcus&rsquo;s Living Echo</a>
+          <a href="/living-memorials/enterprise-estate-continuity.html" style="color:#8899aa;text-decoration:none;">Enterprise Estate Continuity</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Resources &amp; Legal</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/sitemap.html" style="color:#8899aa;text-decoration:none;">All Pages (Sitemap)</a>
+          <a href="/audit.html" style="color:#8899aa;text-decoration:none;">Transparency &amp; Audit Log</a>
+          <a href="/maturity-disclosure.html" style="color:#8899aa;text-decoration:none;">What We Have / Don&rsquo;t Claim</a>
+          <a href="/plain.html" style="color:#8899aa;text-decoration:none;">Plain Language Guide</a>
+          <a href="/privacy.html" style="color:#8899aa;text-decoration:none;">Privacy</a>
+          <a href="/terms.html" style="color:#8899aa;text-decoration:none;">Terms</a>
+          <a href="/sla.html" style="color:#8899aa;text-decoration:none;">SLA</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:18px;margin-bottom:14px;">
+      <p style="margin:0;font-size:0.82em;line-height:1.6;color:#6f8295;max-width:1000px;">Pocono AI does not provide medical, legal, or engineering advice, does not practice medicine, law, or licensed engineering, and does not make clinical, legal, or engineering decisions. Outputs are drafts or support materials that require review by a qualified professional; final professional judgment remains with the licensed physician, attorney, or engineer. Tools and simulations on this site are educational and use synthetic data.</p>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:20px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+      <p style="margin:0;font-size:0.9em;">&copy; 2026 Pocono AI, LLC &nbsp;&#183;&nbsp; East Stroudsburg, PA &nbsp;&#183;&nbsp; <a href="mailto:marcus@poconoai.com" style="color:#8899aa;">marcus@poconoai.com</a> &nbsp;&#183;&nbsp; <a href="tel:+15705340602" style="color:#8899aa;">(570) 534-0602</a></p>
+      <p style="margin:0;font-size:0.88em;"><a href="/audit.html" style="color:#5dade2;text-decoration:none;">Transparency v402</a></p>
+    </div>
+  </div>
+</footer>
+<script src="/search.js?v=402" defer></script>
+<!-- /INCLUDE:FOOTER -->
+<script src="search-index.js?v=402" defer></script><script src="nav.js?v=402" defer></script><script src="pilot-cta.js?v=402" defer></script></body></html>

@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="description" content="Marcus's Memory Helper is the first Rehability plugin: six local-first assistive tools for pain capture, appointment prep, medication tracking, letter drafting, daily memory, and call summaries. Private. Draft-only. Human-reviewed.">
+<meta name="keywords" content="pain episode capture, appointment prep AI, medication trial tracker, advocate letter builder, daily memory log, call summary AI, local AI disability tools, assistive AI private, Rehability Pocono AI">
+<title>Marcus's Memory Helper — First Rehability Plugin | Pocono AI</title>
+
+<meta property="og:title" content="Marcus's Memory Helper — First Rehability Plugin | Pocono AI">
+<meta property="og:description" content="Six local-first assistive tools: pain capture, appointment prep, medication tracker, letter builder, daily log, and call summary. Built first because the founder needed it.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Pocono AI">
+<meta property="og:url" content="https://poconoai.com/rehability/marcus-memory-helper/">
+<meta property="og:image" content="https://poconoai.com/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#04111a">
+
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="stylesheet" href="/styles.css?v=402">
+<link rel="stylesheet" href="/nav-v2026.css?v=402">
+<link rel="stylesheet" href="/brand-v292.css?v=402">
+<link rel="canonical" href="https://poconoai.com/rehability/marcus-memory-helper/">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Marcus's Memory Helper — First Rehability Plugin",
+  "description": "Six local-first assistive tools for pain capture, appointment prep, medication tracking, letter drafting, daily memory, and call summaries. Built from lived experience. Draft-only, human-reviewed, no cloud.",
+  "url": "https://poconoai.com/rehability/marcus-memory-helper/",
+  "isPartOf": { "@type": "WebSite", "url": "https://poconoai.com", "name": "Pocono AI, LLC" },
+  "publisher": { "@type": "Organization", "name": "Pocono AI, LLC", "url": "https://poconoai.com" },
+  "datePublished": "2026-06-25",
+  "dateModified": "2026-06-25"
+}
+</script>
+
+<style>
+/* ── Marcus's Memory Helper — scoped .mmh- design system ── */
+:root {
+  --mmh-bg:        #04111a;
+  --mmh-surface:   #060e1a;
+  --mmh-card:      rgba(255,255,255,0.038);
+  --mmh-border:    rgba(255,255,255,0.09);
+  --mmh-purple:    #a78bfa;
+  --mmh-purple-dim:rgba(167,139,250,0.15);
+  --mmh-teal:      #00c2a8;
+  --mmh-teal-dim:  rgba(0,194,168,0.13);
+  --mmh-amber:     #f0a500;
+  --mmh-green:     #4ade80;
+  --mmh-green-dim: rgba(74,222,128,0.12);
+  --mmh-text:      #c8d8e4;
+  --mmh-muted:     #7a8fa0;
+  --mmh-max:       1040px;
+}
+body { background: var(--mmh-bg); color: var(--mmh-text); }
+.mmh-wrap { max-width: var(--mmh-max); margin: 0 auto; padding: 0 22px; }
+
+/* breadcrumb */
+.mmh-breadcrumb {
+  padding: 16px 22px; font-size: 0.82em; color: var(--mmh-muted);
+  border-bottom: 1px solid var(--mmh-border);
+}
+.mmh-breadcrumb a { color: var(--mmh-purple); text-decoration: none; }
+.mmh-breadcrumb a:hover { text-decoration: underline; }
+
+/* hero */
+.mmh-hero {
+  padding: 68px 22px 56px; text-align: center;
+  border-bottom: 1px solid var(--mmh-border);
+  background: radial-gradient(ellipse 800px 400px at 50% -80px, rgba(167,139,250,0.08), transparent);
+}
+.mmh-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--mmh-green-dim); border: 1px solid rgba(74,222,128,0.35);
+  border-radius: 999px; padding: 5px 14px; font-size: 0.78em;
+  font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--mmh-green); margin-bottom: 20px;
+}
+.mmh-badge::before { content: ''; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--mmh-green); }
+.mmh-hero h1 {
+  font-size: clamp(2rem, 4.5vw, 3.1rem); font-weight: 800; line-height: 1.15;
+  color: #fff; margin: 0 0 16px; letter-spacing: -0.02em;
+}
+.mmh-hero h1 em { font-style: normal; color: var(--mmh-purple); }
+.mmh-hero .mmh-sub {
+  font-size: clamp(1rem, 2vw, 1.2rem); color: var(--mmh-muted);
+  max-width: 600px; margin: 0 auto 28px; line-height: 1.65;
+}
+.mmh-ctas { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+.mmh-btn-primary {
+  display: inline-flex; align-items: center; padding: 12px 26px;
+  border-radius: 999px; background: var(--mmh-purple); color: #04111a;
+  font-weight: 700; text-decoration: none; font-size: 0.97em; transition: opacity .15s;
+}
+.mmh-btn-primary:hover { opacity: .88; }
+.mmh-btn-ghost {
+  display: inline-flex; align-items: center; padding: 11px 26px;
+  border-radius: 999px; border: 1px solid rgba(167,139,250,0.45);
+  color: var(--mmh-purple); font-weight: 600; text-decoration: none; font-size: 0.97em;
+}
+.mmh-btn-ghost:hover { border-color: var(--mmh-purple); }
+
+/* founder note */
+.mmh-founder-note {
+  max-width: 660px; margin: 28px auto 0;
+  padding: 18px 22px; background: rgba(167,139,250,0.07);
+  border: 1px solid rgba(167,139,250,0.22); border-radius: 14px;
+  font-size: 0.92em; line-height: 1.65; color: var(--mmh-muted); text-align: left;
+}
+.mmh-founder-note strong { color: #fff; }
+
+/* sections */
+.mmh-section { padding: 60px 22px; }
+.mmh-section--alt { background: var(--mmh-surface); }
+.mmh-section-label {
+  display: block; font-size: 0.72em; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.15em; color: var(--mmh-purple); margin-bottom: 10px;
+}
+.mmh-section h2 {
+  font-size: clamp(1.45rem, 3vw, 2rem); font-weight: 800; color: #fff;
+  margin: 0 0 14px; letter-spacing: -0.015em;
+}
+.mmh-lead {
+  font-size: clamp(0.97rem, 1.7vw, 1.1rem); color: var(--mmh-muted);
+  line-height: 1.7; max-width: 740px; margin: 0 0 32px;
+}
+
+/* tool detail cards */
+.mmh-tool-detail {
+  background: var(--mmh-card); border: 1px solid var(--mmh-border);
+  border-radius: 16px; padding: 28px; margin-bottom: 16px;
+  display: grid; grid-template-columns: auto 1fr; gap: 18px; align-items: start;
+}
+.mmh-tool-detail:hover { border-color: rgba(167,139,250,0.35); }
+.mmh-tool-num {
+  font-size: 2rem; line-height: 1; padding-top: 4px;
+}
+.mmh-tool-content h3 {
+  font-size: 1.08em; font-weight: 800; color: #fff; margin: 0 0 4px;
+}
+.mmh-tool-content .mmh-tool-tag {
+  display: inline-flex; align-items: center; padding: 3px 10px;
+  background: var(--mmh-green-dim); border: 1px solid rgba(74,222,128,0.3);
+  border-radius: 999px; font-size: 0.7em; font-weight: 700;
+  color: var(--mmh-green); text-transform: uppercase; letter-spacing: 0.08em;
+  margin-bottom: 10px;
+}
+.mmh-tool-content p {
+  margin: 0 0 10px; font-size: 0.92em; color: var(--mmh-muted); line-height: 1.6;
+}
+.mmh-output-list {
+  margin: 8px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 4px;
+}
+.mmh-output-list li {
+  font-size: 0.87em; color: var(--mmh-muted); padding-left: 18px; position: relative;
+}
+.mmh-output-list li::before {
+  content: '→'; position: absolute; left: 0; color: var(--mmh-teal); font-size: 0.9em;
+}
+.mmh-boundary {
+  margin-top: 10px; padding: 10px 14px;
+  background: rgba(240,165,0,0.06); border: 1px solid rgba(240,165,0,0.22);
+  border-radius: 8px; font-size: 0.82em; color: var(--mmh-amber); line-height: 1.5;
+}
+
+/* planned tools */
+.mmh-planned-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px;
+}
+.mmh-planned-card {
+  background: var(--mmh-card); border: 1px solid var(--mmh-border);
+  border-radius: 14px; padding: 18px; opacity: 0.78;
+}
+.mmh-planned-card h3 { font-size: 0.97em; font-weight: 700; color: #fff; margin: 0 0 6px; }
+.mmh-planned-card p { margin: 0; font-size: 0.87em; color: var(--mmh-muted); line-height: 1.55; }
+.mmh-planned-pill {
+  display: inline-flex; padding: 3px 10px; border-radius: 999px;
+  font-size: 0.68em; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+  background: rgba(240,165,0,0.1); border: 1px solid rgba(240,165,0,0.25);
+  color: var(--mmh-amber); margin-bottom: 8px;
+}
+
+/* how it works */
+.mmh-how-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px;
+  margin-top: 28px;
+}
+.mmh-how-step {
+  background: var(--mmh-card); border: 1px solid var(--mmh-border);
+  border-radius: 14px; padding: 20px;
+}
+.mmh-how-step .n {
+  display: inline-grid; place-items: center; width: 32px; height: 32px;
+  border-radius: 50%; background: var(--mmh-purple-dim);
+  border: 1px solid rgba(167,139,250,0.35);
+  color: var(--mmh-purple); font-family: ui-monospace, monospace;
+  font-weight: 800; font-size: 0.85em; margin-bottom: 10px;
+}
+.mmh-how-step h3 { font-size: 0.93em; font-weight: 700; color: #fff; margin: 0 0 6px; }
+.mmh-how-step p { margin: 0; font-size: 0.87em; color: var(--mmh-muted); line-height: 1.55; }
+
+/* UI preview */
+.mmh-ui-preview {
+  background: #0d1f2e; border: 1px solid rgba(167,139,250,0.25);
+  border-radius: 16px; padding: 24px; font-family: ui-monospace, 'Cascadia Code', Consolas, monospace;
+}
+.mmh-ui-preview .ui-header {
+  text-align: center; padding-bottom: 18px; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 18px;
+}
+.mmh-ui-preview .ui-title {
+  font-size: 1.3em; font-weight: 700; color: #fff; display: block; margin-bottom: 4px;
+}
+.mmh-ui-preview .ui-subtitle {
+  font-size: 0.78em; color: #5f8090; letter-spacing: 0.05em;
+}
+.mmh-ui-preview .ui-tabs {
+  display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px;
+}
+.mmh-ui-preview .ui-tab {
+  padding: 8px 14px; border-radius: 8px; background: rgba(167,139,250,0.1);
+  border: 1px solid rgba(167,139,250,0.3); color: var(--mmh-purple);
+  font-size: 0.78em; font-weight: 700; font-family: ui-monospace, monospace;
+}
+.mmh-ui-preview .ui-tab.active {
+  background: rgba(167,139,250,0.25);
+}
+.mmh-ui-preview .ui-btn {
+  display: block; width: 100%; padding: 16px; border-radius: 10px;
+  background: rgba(167,139,250,0.18); border: 1px solid rgba(167,139,250,0.35);
+  color: var(--mmh-purple); font-size: 0.9em; font-weight: 700; text-align: center;
+  margin-bottom: 10px; font-family: ui-monospace, monospace;
+}
+.mmh-ui-preview .ui-notice {
+  padding: 10px 14px; background: rgba(240,165,0,0.08);
+  border: 1px solid rgba(240,165,0,0.22); border-radius: 8px;
+  font-size: 0.75em; color: var(--mmh-amber); line-height: 1.5;
+}
+
+/* disclaimer */
+.mmh-disclaimer {
+  margin-top: 32px; padding: 16px 20px;
+  border: 1px solid rgba(255,255,255,0.07); border-radius: 12px;
+  font-size: 0.83em; color: var(--mmh-muted); line-height: 1.6;
+}
+
+/* chips */
+.mmh-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.mmh-chip {
+  display: inline-flex; padding: 5px 12px;
+  background: rgba(167,139,250,0.08); border: 1px solid rgba(167,139,250,0.2);
+  border-radius: 999px; font-size: 0.8em; color: var(--mmh-purple); font-weight: 600;
+}
+
+@media (max-width: 600px) {
+  .mmh-hero { padding: 48px 18px 38px; }
+  .mmh-section { padding: 40px 18px; }
+  .mmh-tool-detail { grid-template-columns: 1fr; gap: 10px; }
+  .mmh-tool-num { display: none; }
+}
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link" style="position:absolute;left:-999px;top:0;background:var(--mmh-purple);color:#04111a;padding:10px 18px;border-radius:0 0 12px 0;z-index:60;font-weight:700;">Skip to main content</a>
+
+<!-- HITL notice -->
+<div id="hitl-notice" style="background:#0a1929;padding:4px 16px;text-align:center;font-size:12px;color:#4a5568;border-bottom:1px solid rgba(255,255,255,0.06);letter-spacing:0.01em;">Human-in-the-Loop required: all Memory Helper outputs are personal drafts — not clinical, medical, or professional decisions</div>
+
+<!-- Header -->
+<header role="banner">
+  <div class="header-inner">
+    <a href="/index.html" class="logo" aria-label="Pocono AI Home">
+      <img src="/logo.svg?v=402" alt="" width="36" height="36" decoding="async" loading="eager" aria-hidden="true" style="display:inline-block;">
+      Pocono <span>AI</span>
+    </a>
+    <nav id="desktop-nav" aria-label="Main navigation">
+      <div class="nav-item"><a href="/index.html" class="nav-direct">Home</a></div>
+      <div class="nav-item"><a href="/for-physicians.html" class="nav-direct">Physicians</a></div>
+      <div class="nav-item"><a href="/for-attorneys.html" class="nav-direct">Attorneys</a></div>
+      <div class="nav-item"><a href="/sentinel-node.html" class="nav-direct nav-hub" style="color:#d5a94f;border:1px solid rgba(213,169,79,0.45);border-radius:999px;padding:6px 13px;">Sentinel Node</a></div>
+      <div class="nav-item"><a href="/living-memorials/" class="nav-direct">Living Echo</a></div>
+      <div class="nav-item"><a href="/contact.html" class="nav-direct">Contact</a></div>
+      <div class="nav-item" data-dropdown="menu-more">
+        <button type="button" class="nav-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="menu-more">More <span class="nav-chevron" aria-hidden="true">&#9662;</span></button>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <a href="/contact.html" class="nav-cta nav-cta-primary">Get in Touch</a>
+      <button type="button" class="pa-search-trigger" data-search-open aria-label="Search (press / or Ctrl-K)" aria-haspopup="dialog" aria-expanded="false">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span class="pa-st-label">Search</span><kbd data-pa-keyhint>Ctrl K</kbd>
+      </button>
+      <button type="button" class="header-icon-btn" id="mobile-menu" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav-panel">
+        <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="nav-dropdown" id="menu-more" aria-label="More navigation">
+  <p class="nav-dd-section">Products</p>
+  <a href="/engineering-drafting/">Drafting &amp; Engineering Edition</a>
+  <a href="/sentinel-home/">Sentinel Home Edition</a>
+  <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability — Assistive Tools &#x2605;</a>
+  <a href="/living-memorials/enterprise-estate-continuity.html">Enterprise Estate Continuity</a>
+  <p class="nav-dd-section">Capabilities</p>
+  <a href="/evidence-room.html">Evidence Room</a>
+  <a href="/push-button-deliverables.html">Push-Button Deliverables</a>
+  <a href="/pilot-readiness-kit.html">Pilot Kit</a>
+  <a href="/pilot-program.html">Pilot Program</a>
+  <a href="/how-it-works.html">How It Works</a>
+  <p class="nav-dd-section">Hubs &amp; Company</p>
+  <a href="/training.html">Training Hub</a>
+  <a href="/documentation-hub/">Document Hub</a>
+  <a href="/global/">Global Hub</a>
+  <a href="/about.html">About</a>
+  <p class="nav-dd-section">Trust &amp; Legal</p>
+  <a href="/transparency.html">Transparency</a>
+  <a href="/audit.html">Audit Log</a>
+  <a href="/privacy.html">Privacy</a>
+  <a href="/sitemap.html">Sitemap</a>
+</div>
+
+<nav id="mobile-nav-panel" aria-label="Mobile navigation" aria-hidden="true" role="dialog" aria-modal="true">
+  <div style="padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,0.07);">
+    <p style="font-size:0.65em;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.28);margin:0 0 10px;padding:0 2px;">Hubs</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <a href="/sentinel-node.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(213,169,79,0.1);border:1px solid rgba(213,169,79,0.35);border-radius:10px;color:#d5a94f;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Sentinel Node</a>
+      <a href="/documentation-hub/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(0,194,168,0.1);border:1px solid rgba(0,194,168,0.35);border-radius:10px;color:#00c2a8;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Docs Hub</a>
+      <a href="/rehability/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.35);border-radius:10px;color:#a78bfa;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Rehability</a>
+      <a href="/global/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(122,240,220,0.07);border:1px solid rgba(122,240,220,0.3);border-radius:10px;color:#7af0dc;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Global Hub</a>
+    </div>
+  </div>
+  <div class="mob-static-links">
+    <a href="/index.html">Home</a>
+    <a href="/for-physicians.html">Physicians</a>
+    <a href="/for-attorneys.html">Attorneys</a>
+    <a href="/engineering-drafting/">Engineering &amp; Drafting</a>
+    <a href="/pilot-program.html">Pilot Program</a>
+    <a href="/how-it-works.html">How It Works</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/living-memorials/">Living Echo</a>
+    <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability</a>
+    <a href="/about.html">About</a>
+    <a href="/sitemap.html" style="color:rgba(255,255,255,0.45);">Sitemap</a>
+    <a href="/privacy.html" style="color:rgba(255,255,255,0.45);">Privacy</a>
+  </div>
+  <a href="/contact.html" class="mob-cta">Get in Touch</a>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════════════ MAIN -->
+<main id="main-content">
+
+<!-- Breadcrumb -->
+<div class="mmh-breadcrumb">
+  <a href="/rehability/">Rehability</a> &nbsp;/&nbsp; Marcus's Memory Helper
+</div>
+
+<!-- Hero -->
+<section class="mmh-hero">
+  <div class="mmh-wrap">
+    <div class="mmh-badge">Plugin 1 — Available Now</div>
+    <h1>🧠 Marcus's <em>Memory Helper</em></h1>
+    <p class="mmh-sub">The first Rehability plugin. Six local-first assistive tools for pain management, appointment prep, medication tracking, letter drafting, daily memory, and call summaries. Private. Draft-only. No cloud.</p>
+    <div class="mmh-ctas">
+      <a href="mailto:marcus@poconoai.com?subject=Marcus%27s%20Memory%20Helper%20Interest&body=Hi%20Marcus%2C%0A%0AI%20am%20interested%20in%20Marcus%27s%20Memory%20Helper.%0A%0A(Tell%20us%20a%20bit%20about%20your%20situation%20and%20what%20you%20need%20most.)" class="mmh-btn-primary">Express interest &rarr;</a>
+      <a href="#tools" class="mmh-btn-ghost">See all six tools</a>
+    </div>
+    <div class="mmh-founder-note">
+      <strong>Why this exists:</strong> I built it because I needed it. When you're managing chronic pain and cognitive overload, the things that should be easy — writing down what happened, preparing for an appointment, tracking what you tried — become genuinely hard. I needed tools that work when I'm lying down on my phone, in pain, with limited energy. So I built them. These are the tools I use. Generalized so others can use them too.
+    </div>
+  </div>
+</section>
+
+<!-- What it is -->
+<section class="mmh-section mmh-section--alt">
+  <div class="mmh-wrap">
+    <span class="mmh-section-label">What It Is</span>
+    <h2>A plugin under Sentinel Home / Rehability.</h2>
+    <p class="mmh-lead">Marcus's Memory Helper is a bounded, purposeful plugin. It runs locally. It stores your data locally. It doesn't call the cloud. Every output it produces is a draft — you review it, you approve it, you decide what to do with it.</p>
+    <div class="mmh-chips">
+      <span class="mmh-chip">Local-first storage</span>
+      <span class="mmh-chip">No cloud LLM calls</span>
+      <span class="mmh-chip">No internet required</span>
+      <span class="mmh-chip">human_review_required = true on all exports</span>
+      <span class="mmh-chip">PDF / Markdown export</span>
+      <span class="mmh-chip">Audit trail to Core</span>
+      <span class="mmh-chip">Non-medical boundary</span>
+      <span class="mmh-chip">Large-button accessible UI</span>
+    </div>
+  </div>
+</section>
+
+<!-- UI preview -->
+<section class="mmh-section">
+  <div class="mmh-wrap">
+    <span class="mmh-section-label">Interface</span>
+    <h2>Designed for hard days.</h2>
+    <p class="mmh-lead">The Memory Helper UI uses large tap targets (minimum 60px button height), high contrast, plain language, and a simple five-tab layout. Designed for someone who may be lying down, in pain, or using dictation on a phone.</p>
+
+    <div style="max-width:480px;margin:0 auto;">
+      <div class="mmh-ui-preview" role="img" aria-label="Marcus's Memory Helper interface preview">
+        <div class="ui-header">
+          <span class="ui-title">🧠 Marcus's Memory Helper</span>
+          <span class="ui-subtitle">Marcus Mode &nbsp;·&nbsp; Sentinel Node &nbsp;·&nbsp; Local-First &nbsp;·&nbsp; Private</span>
+        </div>
+        <div class="ui-tabs">
+          <div class="ui-tab active">🎙️ Capture</div>
+          <div class="ui-tab">🔍 Search</div>
+          <div class="ui-tab">📋 Continuity</div>
+          <div class="ui-tab">📤 Export</div>
+          <div class="ui-tab">⚙️ Status</div>
+        </div>
+        <div class="ui-btn">📝 Create Memory Card</div>
+        <div class="ui-btn">🎙️ Audio Memory</div>
+        <div class="ui-btn">📅 Today's Summary</div>
+        <div class="ui-notice">⚠️ Non-Medical Boundary: This tool captures personal memory notes only. It does not provide medical, clinical, diagnostic, or treatment advice. Human review required before sharing with any clinician.</div>
+      </div>
+      <p style="text-align:center;font-size:0.82em;color:var(--mmh-muted);margin-top:12px;">Interface representation generated from application source code (plugin version 0.1.0)</p>
+    </div>
+  </div>
+</section>
+
+<!-- Six tools detail -->
+<section class="mmh-section mmh-section--alt" id="tools">
+  <div class="mmh-wrap">
+    <span class="mmh-section-label">Active Tools</span>
+    <h2>Six tools. Built and available.</h2>
+    <p class="mmh-lead">Each tool is a bounded module. It does one thing. It produces one kind of output. All outputs require human review before any action is taken.</p>
+
+    <div class="mmh-tool-detail">
+      <div class="mmh-tool-num">🩺</div>
+      <div class="mmh-tool-content">
+        <h3>Pain Episode Capture</h3>
+        <span class="mmh-tool-tag">Available</span>
+        <p>When you're hurting and need to record what's happening before you forget — before the details blur, before the flare passes and you can't remember the specifics. Captures pain level, location, duration, suspected triggers, what you tried, what helped, what didn't.</p>
+        <ul class="mmh-output-list">
+          <li>Structured JSON record</li>
+          <li>Plain-English symptom note and timeline</li>
+          <li>Doctor-ready concise paragraph</li>
+        </ul>
+        <div class="mmh-boundary">Not emergency triage or diagnosis. If you have red-flag symptoms, seek emergency care. This tool does not replace that judgment.</div>
+      </div>
+    </div>
+
+    <div class="mmh-tool-detail">
+      <div class="mmh-tool-num">📋</div>
+      <div class="mmh-tool-content">
+        <h3>Medical Appointment Prep</h3>
+        <span class="mmh-tool-tag">Available</span>
+        <p>Turns recent notes and current state into a structured visit package. Because appointments are short and you're often not at your best when you get there. Helps you use your limited time with the clinician effectively without having to improvise.</p>
+        <ul class="mmh-output-list">
+          <li>Top concerns ranked by urgency</li>
+          <li>Concise agenda for the visit</li>
+          <li>Questions to ask</li>
+          <li>One-page visit summary</li>
+          <li>What to bring checklist</li>
+          <li>Follow-up tracking list</li>
+        </ul>
+        <div class="mmh-boundary">Patient communication support only. You or your clinician decides what matters clinically. Does not diagnose or recommend treatments.</div>
+      </div>
+    </div>
+
+    <div class="mmh-tool-detail">
+      <div class="mmh-tool-num">✉️</div>
+      <div class="mmh-tool-content">
+        <h3>Doctor / Advocate Letter Builder</h3>
+        <span class="mmh-tool-tag">Available</span>
+        <p>Creates letters to pain specialists, neurologists, hospitals, insurance advocates, patient advocates, and specialist referrals. Professional, factual, non-accusatory by default. Designed to help you say what you need to say clearly when pain, fatigue, or cognitive load makes writing hard.</p>
+        <ul class="mmh-output-list">
+          <li>Short letter (primary)</li>
+          <li>Fax-friendly plain text version</li>
+          <li>Email version</li>
+          <li>Bullet summary</li>
+        </ul>
+        <div class="mmh-boundary">Draft letter only. Human review required before sending. Tool separates patient-stated facts from medical conclusions and never invents clinical records.</div>
+      </div>
+    </div>
+
+    <div class="mmh-tool-detail">
+      <div class="mmh-tool-num">💊</div>
+      <div class="mmh-tool-content">
+        <h3>Medication / Treatment Trial Tracker</h3>
+        <span class="mmh-tool-tag">Available</span>
+        <p>Tracks medications, supplements, or treatments you've tried — dosing, timing, effects, side effects, start and stop dates. Builds a timeline. Produces a comparison table when you've tried multiple things. Generates a clinician briefing paragraph from what you reported.</p>
+        <ul class="mmh-output-list">
+          <li>Structured trial record per medication or treatment</li>
+          <li>Plain-English timeline</li>
+          <li>Comparison table (when multiple trials exist)</li>
+          <li>Clinician briefing paragraph</li>
+        </ul>
+        <div class="mmh-boundary">Patient-reported experience only. Does not tell you to start, stop, or change any medication. Does not interpret results clinically. All medication decisions require clinician supervision.</div>
+      </div>
+    </div>
+
+    <div class="mmh-tool-detail">
+      <div class="mmh-tool-num">📓</div>
+      <div class="mmh-tool-content">
+        <h3>Daily Memory Log</h3>
+        <span class="mmh-tool-tag">Available</span>
+        <p>Simple daily capture of what happened, how you felt, tasks, calls, and promises — structured so it can be reviewed, searched, and carried forward to the next day without losing context. For people whose memory doesn't reliably hold the day's detail.</p>
+        <ul class="mmh-output-list">
+          <li>Structured JSON log entry</li>
+          <li>Readable daily summary</li>
+          <li>Next-action list (carry-forward)</li>
+          <li>Carry-forward reminders for promises and pending tasks</li>
+        </ul>
+        <div class="mmh-boundary">Memory support tool only. Not a clinical documentation system. Not a substitute for professional memory assessment.</div>
+      </div>
+    </div>
+
+    <div class="mmh-tool-detail">
+      <div class="mmh-tool-num">📞</div>
+      <div class="mmh-tool-content">
+        <h3>Conversation / Call Summary</h3>
+        <span class="mmh-tool-tag">Available</span>
+        <p>Turns rough notes from a call, appointment, investor meeting, or technical session into a clean, searchable, action-ready summary. Built for voice-to-text input — for people who dictate notes or can't type quickly when they're in a call.</p>
+        <ul class="mmh-output-list">
+          <li>Structured JSON record</li>
+          <li>Clean written summary</li>
+          <li>Action item list</li>
+          <li>Follow-up tracking list</li>
+          <li>Next-session prompt (for recurring conversations)</li>
+        </ul>
+        <div class="mmh-boundary">Records what was said; does not interpret clinical content. Human review required before acting on any recorded commitments.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Planned tools -->
+<section class="mmh-section">
+  <div class="mmh-wrap">
+    <span class="mmh-section-label">What's Next</span>
+    <h2>Planned tools.</h2>
+    <p class="mmh-lead">The Memory Helper plugin is designed to grow. These are the tools in planning and design — labeled honestly as planned, not available.</p>
+
+    <div class="mmh-planned-grid">
+      <div class="mmh-planned-card">
+        <div class="mmh-planned-pill">Planned</div>
+        <h3>📂 Evidence Binder Builder</h3>
+        <p>Organize and export a structured binder of personal health, legal, or advocacy records — ready for a professional to review.</p>
+      </div>
+      <div class="mmh-planned-card">
+        <div class="mmh-planned-pill">Planned</div>
+        <h3>✅ Task Rescue / Next Step Tool</h3>
+        <p>When you've stalled on something, help identify the next single action without reloading the full context.</p>
+      </div>
+      <div class="mmh-planned-card">
+        <div class="mmh-planned-pill">Planned</div>
+        <h3>📚 Research Transfer Tool</h3>
+        <p>Preserve and transfer research from a session so it's searchable and usable next time — without losing what you learned.</p>
+      </div>
+      <div class="mmh-planned-card">
+        <div class="mmh-planned-pill">Planned</div>
+        <h3>🔨 Product Build Session Tool</h3>
+        <p>Structured session notes for building software, websites, or technical projects — capturing decisions, blockers, and progress.</p>
+      </div>
+      <div class="mmh-planned-card">
+        <div class="mmh-planned-pill">Planned</div>
+        <h3>📤 Outreach Draft Tool</h3>
+        <p>Draft professional outreach without losing the personal voice or the important detail under cognitive load.</p>
+      </div>
+      <div class="mmh-planned-card">
+        <div class="mmh-planned-pill">Planned</div>
+        <h3>🧠 Living Echo Memory Capture</h3>
+        <p>Bridge between personal memory logging and the Living Echo continuity archive, with clear consent and privacy controls.</p>
+      </div>
+    </div>
+
+    <!-- Who's Who callout -->
+    <div style="margin-top:32px;background:rgba(167,139,250,0.07);border:1px solid rgba(167,139,250,0.22);border-radius:16px;padding:24px;">
+      <div style="font-size:0.7em;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--mmh-amber);margin-bottom:8px;">Next standalone plugin</div>
+      <h3 style="font-size:1.1em;font-weight:800;color:#fff;margin:0 0 8px;">👤 Who's Who</h3>
+      <p style="color:var(--mmh-muted);line-height:1.65;margin:0 0 14px;font-size:0.93em;">A personal recognition and context helper for people who have difficulty recognizing faces, names, roles, or relationships. Local-first, user-controlled, and designed for dignity — not surveillance.</p>
+      <a href="/rehability/whos-who/" style="color:var(--mmh-purple);text-decoration:none;font-weight:600;font-size:0.93em;">Read the Who's Who design brief &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- How it works -->
+<section class="mmh-section mmh-section--alt">
+  <div class="mmh-wrap">
+    <span class="mmh-section-label">How It Works</span>
+    <h2>Local AI. Your device. Your data.</h2>
+    <p class="mmh-lead">Marcus's Memory Helper runs as a plugin under the Sentinel Node local AI runtime. No subscriptions, no cloud dependencies, no one else reading your notes.</p>
+    <div class="mmh-how-grid">
+      <div class="mmh-how-step">
+        <div class="n">1</div>
+        <h3>You run the tool</h3>
+        <p>Choose a tool — Pain Capture, Appointment Prep, etc. The plugin runs locally on your device. No internet connection required.</p>
+      </div>
+      <div class="mmh-how-step">
+        <div class="n">2</div>
+        <h3>You review the draft</h3>
+        <p>Every output is a draft. The system shows it to you before anything leaves the tool. You confirm, edit, or discard it.</p>
+      </div>
+      <div class="mmh-how-step">
+        <div class="n">3</div>
+        <h3>You choose what to do with it</h3>
+        <p>Export to PDF, save to Markdown, print for a clinician, or keep it local. Your decision, your export, your data.</p>
+      </div>
+      <div class="mmh-how-step">
+        <div class="n">4</div>
+        <h3>Audit trail stays local</h3>
+        <p>Every action is logged locally — what was created, when, by whom, and what review status it carried. No telemetry to any external server.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Interest / CTA -->
+<section class="mmh-section">
+  <div class="mmh-wrap">
+    <span class="mmh-section-label">Get Involved</span>
+    <h2>Who should reach out.</h2>
+    <p class="mmh-lead">Marcus's Memory Helper is in active development under Sentinel Home. We want to hear from the people who would actually use it.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-bottom:28px;">
+      <div style="background:var(--mmh-card);border:1px solid var(--mmh-border);border-radius:14px;padding:20px;">
+        <h3 style="color:#fff;font-size:0.97em;margin:0 0 8px;">People with disability or chronic illness</h3>
+        <p style="color:var(--mmh-muted);font-size:0.88em;line-height:1.55;margin:0 0 12px;">If you live with pain, cognitive overload, memory difficulty, or communication barriers — and these tools would help you have more usable days.</p>
+        <a href="mailto:marcus@poconoai.com?subject=Memory%20Helper%20%E2%80%94%20Personal%20Interest&body=Hi%20Marcus%2C%0A%0AI%20am%20interested%20in%20Marcus%27s%20Memory%20Helper.%0A%0A(Tell%20us%20about%20your%20situation%20and%20what%20tool%20would%20help%20most.)" style="color:var(--mmh-purple);text-decoration:none;font-size:0.88em;font-weight:600;">Express interest &rarr;</a>
+      </div>
+      <div style="background:var(--mmh-card);border:1px solid var(--mmh-border);border-radius:14px;padding:20px;">
+        <h3 style="color:#fff;font-size:0.97em;margin:0 0 8px;">Caregivers and family members</h3>
+        <p style="color:var(--mmh-muted);font-size:0.88em;line-height:1.55;margin:0 0 12px;">If you support someone who would benefit from these tools — and you want to understand how the privacy and consent controls work for a caregiving context.</p>
+        <a href="mailto:marcus@poconoai.com?subject=Memory%20Helper%20%E2%80%94%20Caregiver%20Interest&body=Hi%20Marcus%2C%0A%0AI%20am%20a%20caregiver%20interested%20in%20Marcus%27s%20Memory%20Helper.%0A%0A(Tell%20us%20about%20the%20situation%20and%20what%20you%20need.)" style="color:var(--mmh-purple);text-decoration:none;font-size:0.88em;font-weight:600;">Caregiver inquiry &rarr;</a>
+      </div>
+      <div style="background:var(--mmh-card);border:1px solid var(--mmh-border);border-radius:14px;padding:20px;">
+        <h3 style="color:#fff;font-size:0.97em;margin:0 0 8px;">Clinicians and patient advocates</h3>
+        <p style="color:var(--mmh-muted);font-size:0.88em;line-height:1.55;margin:0 0 12px;">If your patients could benefit from better appointment prep, medication tracking, or pain documentation — and you'd like to understand the clinical boundaries and output format.</p>
+        <a href="mailto:marcus@poconoai.com?subject=Memory%20Helper%20%E2%80%94%20Clinician%20Inquiry&body=Hi%20Marcus%2C%0A%0AI%20am%20a%20clinician%20%2F%20patient%20advocate%20interested%20in%20Marcus%27s%20Memory%20Helper.%0A%0A(Tell%20us%20about%20your%20role%20and%20how%20you%27d%20like%20to%20see%20it%20used.)" style="color:var(--mmh-teal);text-decoration:none;font-size:0.88em;font-weight:600;">Clinician inquiry &rarr;</a>
+      </div>
+      <div style="background:var(--mmh-card);border:1px solid var(--mmh-border);border-radius:14px;padding:20px;">
+        <h3 style="color:#fff;font-size:0.97em;margin:0 0 8px;">Disability orgs and accessibility builders</h3>
+        <p style="color:var(--mmh-muted);font-size:0.88em;line-height:1.55;margin:0 0 12px;">If you represent an organization working with disabled people and want to discuss fit, partnership, or tool suggestions from your community.</p>
+        <a href="mailto:marcus@poconoai.com?subject=Memory%20Helper%20%E2%80%94%20Organization%20Inquiry&body=Hi%20Marcus%2C%0A%0AWe%20represent%20an%20organization%20interested%20in%20Marcus%27s%20Memory%20Helper.%0A%0A(Tell%20us%20about%20your%20organization%20and%20the%20people%20you%20serve.)" style="color:var(--mmh-teal);text-decoration:none;font-size:0.88em;font-weight:600;">Organization inquiry &rarr;</a>
+      </div>
+    </div>
+
+    <div class="mmh-disclaimer">
+      <strong>Non-medical boundary:</strong> Marcus's Memory Helper is a personal memory and continuity support tool. It does not provide medical, clinical, diagnostic, or treatment advice. It is not a healthcare application. It does not create, store, or process protected health information (PHI). All outputs are personal drafts that require human review before sharing with any clinician or professional. Emergency situations require emergency services — not this tool.
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- Footer -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- INCLUDE:FOOTER -->
+<footer role="contentinfo" style="background:#051622;border-top:1px solid rgba(255,255,255,0.08);padding:40px 24px 28px;font-size:0.85em;color:#8899aa;">
+  <div style="max-width:1180px;margin:0 auto;">
+
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:0 0 28px;margin-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.07);">
+      <div style="max-width:560px;">
+        <p style="margin:0 0 6px;font-size:1.05em;font-weight:700;color:#fff;">Local AI infrastructure for regulated practices.</p>
+        <p style="margin:0;font-size:0.95em;line-height:1.5;">Drafts with citations. Human review required. Sensitive documents stay under practice control. Simple path, deep proof.</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="/contact.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;background:#00c2a8;color:#04111a;font-weight:700;text-decoration:none;font-size:0.95em;">Request Pilot</a>
+        <a href="/sentinel-demo.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;border:1px solid rgba(0,194,168,0.55);color:#00c2a8;font-weight:700;text-decoration:none;font-size:0.95em;">Watch Demo</a>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px 32px;margin-bottom:32px;text-align:left;">
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">For You</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/start-here.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Start Here (3 min)</a>
+          <a href="/for-physicians.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Physicians</a>
+          <a href="/for-attorneys.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Attorneys</a>
+          <a href="/engineering-drafting/" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Engineering &amp; Drafting Teams</a>
+          <a href="/pilot-program.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Pilot Program</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Installer Training</a>
+          <a href="/how-it-works.html" style="color:#8899aa;text-decoration:none;">How It Works</a>
+          <a href="/trust.html" style="color:#8899aa;text-decoration:none;">Trust &amp; Audit</a>
+          <a href="/pricing.html" style="color:#8899aa;text-decoration:none;">Pricing</a>
+          <a href="/sentinel-demo.html" style="color:#8899aa;text-decoration:none;">See the Demo</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Documentation Hub</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/documentation-hub/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Hub Home &mdash; Deep Proof</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">Installer Training</a>
+          <a href="/sentinel-node/installation-simulator.html" style="color:#8899aa;text-decoration:none;">&#8627; Installation Simulator</a>
+          <a href="/documentation-hub/clinical/" style="color:#8899aa;text-decoration:none;">Clinical Documentation</a>
+          <a href="/documentation-hub/legal/" style="color:#8899aa;text-decoration:none;">Legal Documentation</a>
+          <a href="/documentation-hub/technical/" style="color:#8899aa;text-decoration:none;">Technical Documentation</a>
+          <a href="/documentation-hub/governance/" style="color:#8899aa;text-decoration:none;">Governance &amp; Audit</a>
+          <a href="/documentation-hub/tools/" style="color:#8899aa;text-decoration:none;">Tools &amp; Simulators</a>
+          <a href="/documentation-hub/research/" style="color:#8899aa;text-decoration:none;">Research &amp; Essays</a>
+          <a href="/documentation-hub/transparency/" style="color:#8899aa;text-decoration:none;">Transparency</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Global Federated AI</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/global/" style="color:#7af0dc;text-decoration:none;font-weight:600;">Global Federated Hub</a>
+          <a href="/global/australia/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Australia</a>
+          <a href="/global/singapore/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Singapore</a>
+          <a href="/global/taiwan/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Taiwan</a>
+          <a href="/global/europe/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Europe</a>
+          <a href="/contact.html" style="color:#8899aa;text-decoration:none;">Partner Inquiry</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Company</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/about.html" style="color:#8899aa;text-decoration:none;">About Pocono AI</a>
+          <a href="/team.html" style="color:#8899aa;text-decoration:none;">Team &amp; Leadership</a>
+          <a href="/why-pocono-ai.html" style="color:#8899aa;text-decoration:none;">Why Pocono AI</a>
+          <a href="/founding-commercial-leadership.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Join Us</a>
+          <a href="/careers.html" style="color:#8899aa;text-decoration:none;">Careers</a>
+          <a href="/how-we-hire.html" style="color:#8899aa;text-decoration:none;">How We Hire</a>
+          <a href="/channel-partners.html" style="color:#8899aa;text-decoration:none;">Technical Partners (MSPs)</a>
+          <a href="/partners.html" style="color:#8899aa;text-decoration:none;">Academic Partnerships</a>
+          <a href="/contact.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Contact</a>
+          <a href="https://forms.gle/VQahnkjMfY6QNEMy8" target="_blank" rel="noopener noreferrer" style="color:#d5a94f;text-decoration:none;font-weight:600;">Interest List &#8599;</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Founder Projects</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/rehability/" style="color:#a78bfa;text-decoration:none;font-weight:700;">Rehability &#x2605;</a>
+          <a href="/rehability/marcus-memory-helper/" style="color:#a78bfa;text-decoration:none;font-weight:600;">&#8627; Marcus's Memory Helper</a>
+          <a href="/sentinel-home/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Sentinel Home Edition</a>
+          <a href="/living-memorials/" style="color:#8899aa;text-decoration:none;">Living Echo</a>
+          <a href="/living-memorials/marcus-odell/" style="color:#8899aa;text-decoration:none;">Marcus&rsquo;s Living Echo</a>
+          <a href="/living-memorials/enterprise-estate-continuity.html" style="color:#8899aa;text-decoration:none;">Enterprise Estate Continuity</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Resources &amp; Legal</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/sitemap.html" style="color:#8899aa;text-decoration:none;">All Pages (Sitemap)</a>
+          <a href="/audit.html" style="color:#8899aa;text-decoration:none;">Transparency &amp; Audit Log</a>
+          <a href="/maturity-disclosure.html" style="color:#8899aa;text-decoration:none;">What We Have / Don&rsquo;t Claim</a>
+          <a href="/plain.html" style="color:#8899aa;text-decoration:none;">Plain Language Guide</a>
+          <a href="/privacy.html" style="color:#8899aa;text-decoration:none;">Privacy</a>
+          <a href="/terms.html" style="color:#8899aa;text-decoration:none;">Terms</a>
+          <a href="/sla.html" style="color:#8899aa;text-decoration:none;">SLA</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:18px;margin-bottom:14px;">
+      <p style="margin:0;font-size:0.82em;line-height:1.6;color:#6f8295;max-width:1000px;">Pocono AI does not provide medical, legal, or engineering advice, does not practice medicine, law, or licensed engineering, and does not make clinical, legal, or engineering decisions. Outputs are drafts or support materials that require review by a qualified professional; final professional judgment remains with the licensed physician, attorney, or engineer. Tools and simulations on this site are educational and use synthetic data.</p>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:20px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+      <p style="margin:0;font-size:0.9em;">&copy; 2026 Pocono AI, LLC &nbsp;&#183;&nbsp; East Stroudsburg, PA &nbsp;&#183;&nbsp; <a href="mailto:marcus@poconoai.com" style="color:#8899aa;">marcus@poconoai.com</a> &nbsp;&#183;&nbsp; <a href="tel:+15705340602" style="color:#8899aa;">(570) 534-0602</a></p>
+      <p style="margin:0;font-size:0.88em;"><a href="/audit.html" style="color:#5dade2;text-decoration:none;">Transparency v402</a></p>
+    </div>
+  </div>
+</footer>
+<script src="/search.js?v=402" defer></script>
+<!-- /INCLUDE:FOOTER -->
+
+<script src="/nav.js?v=402" defer></script>
+<script src="/search.js?v=402" defer></script>
+</body>
+</html>

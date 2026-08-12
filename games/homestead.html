@@ -1,0 +1,1974 @@
+<!DOCTYPE html>
+<html><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Homestead Survival v2</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a150a;color:#fff;font-family:monospace;overflow:hidden}
+#game{width:100vw;height:100vh;background:#152015;position:relative;overflow:hidden}
+#world{position:absolute;width:1600px;height:1600px;background-image:repeating-linear-gradient(0deg,transparent 31px,#1a2a1a 32px),repeating-linear-gradient(90deg,transparent 31px,#1a2a1a 32px)}
+.e{position:absolute;font-size:28px}
+#player{z-index:100}
+#home{font-size:72px;transition:filter 0.3s ease}
+#moat{position:absolute;width:240px;height:240px;border-radius:50%;border:8px solid #2a4a6a;left:680px;top:680px;display:none;opacity:0.7;box-shadow:inset 0 0 20px rgba(42,74,106,0.5);z-index:5}
+#safeZone{position:absolute;width:220px;height:220px;border-radius:50%;border:3px dashed rgba(68,255,136,0.4);left:690px;top:690px;display:none;z-index:6;pointer-events:none;box-shadow:0 0 30px rgba(68,255,136,0.2),inset 0 0 30px rgba(68,255,136,0.1);animation:pulseSafeZone 2s ease-in-out infinite}
+@keyframes pulseSafeZone{0%,100%{opacity:0.3}50%{opacity:0.6}}
+.outpostZone{position:absolute;width:160px;height:160px;border-radius:50%;border:2px dashed rgba(255,204,68,0.5);z-index:6;pointer-events:none;box-shadow:0 0 20px rgba(255,204,68,0.2);animation:pulseSafeZone 2s ease-in-out infinite}
+.den{position:absolute;font-size:48px;z-index:15;filter:drop-shadow(0 0 8px rgba(255,0,0,0.4))}
+.den.cleared{filter:drop-shadow(0 0 8px rgba(68,255,136,0.6));opacity:0.9}
+#chest{position:absolute;font-size:48px;left:680px;top:820px;display:none;z-index:10}
+#arrow{position:absolute;font-size:26px;color:#4f8;transform-origin:center;pointer-events:none}
+#ui{position:fixed;top:10px;left:10px;background:rgba(0,0,0,.55);padding:6px 8px;border-radius:8px;z-index:999;line-height:1.4;border:1px solid rgba(68,255,136,0.15);font-size:12px;max-width:130px;backdrop-filter:blur(4px)}
+#timeUI{border-bottom:1px solid #355;padding-bottom:4px;margin-bottom:4px;font-size:11px}
+#outpostUI{border-top:1px solid #355;padding-top:4px;margin-top:4px;font-size:10px;color:#fc4}
+.btn{position:fixed;bottom:20px;left:20px;width:75px;height:75px;border-radius:18px;border:3px solid #4f8;background:#1a3a1a;color:white;font-size:30px;z-index:999}
+#attackBtn{position:fixed;bottom:110px;left:20px;width:75px;height:75px;border-radius:18px;border:3px solid #f44;background:#3a1a1a;color:white;font-size:30px;z-index:999}
+#joystick{position:fixed;bottom:20px;right:20px;width:140px;height:140px;border-radius:50%;background:rgba(255,255,255,.08);border:3px solid #4f8;z-index:999;touch-action:none}
+#stick{position:absolute;left:45px;top:45px;width:50px;height:50px;border-radius:50%;background:#4f8}
+#minimap{position:fixed;top:55px;right:10px;width:130px;height:130px;background:rgba(0,0,0,0.85);border:2px solid #4f8;border-radius:8px;z-index:998;overflow:hidden}
+#minimapCanvas{width:100%;height:100%}
+#fogCanvas{position:absolute;top:0;left:0;width:1600px;height:1600px;pointer-events:none;z-index:20}
+@keyframes drift1{0%{transform:translateY(0) rotate(0deg)}100%{transform:translateY(-100vh) rotate(360deg)}}
+@keyframes drift2{0%{transform:translateY(0) translateX(0) rotate(0deg)}50%{transform:translateY(-50vh) translateX(30px) rotate(180deg)}100%{transform:translateY(-100vh) translateX(0) rotate(360deg)}}
+@keyframes drift3{0%{transform:translateY(100vh) rotate(0deg)}100%{transform:translateY(-20px) rotate(-360deg)}}
+.sheepEl{position:absolute;font-size:28px;z-index:50;pointer-events:none;}
+#dayNightOverlay{position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:500;background:rgba(5,10,25,0.85);opacity:0;transition:opacity 2s ease}
+#dayNightOverlay.night{opacity:1}
+#visionMask{position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:501;opacity:0;transition:opacity 2s ease}
+#visionMask.night{opacity:1;background:radial-gradient(circle 200px at center,transparent 0%,rgba(5,10,25,0.95) 100%)}
+#sunMoonTrack{position:fixed;top:40px;left:10%;right:10%;height:4px;background:rgba(255,255,255,0.2);border-radius:2px;z-index:998}
+#sunMoon{position:absolute;top:-12px;font-size:28px;transition:left 0.5s linear;filter:drop-shadow(0 0 8px rgba(255,255,255,0.5))}
+
+/* VIBE OVERLAYS */
+#vibeOverlay{position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:499;opacity:0;transition:all 3s ease}
+#vibeOverlay.cottage{opacity:0;/* default - no overlay */}
+#vibeOverlay.spring{background:radial-gradient(ellipse at 50% 100%,rgba(255,182,193,0.08) 0%,transparent 70%);opacity:1}
+#vibeOverlay.autumn{background:radial-gradient(ellipse at 50% 0%,rgba(180,80,20,0.1) 0%,transparent 70%);opacity:1}
+#vibeOverlay.winter{background:radial-gradient(ellipse at 50% 0%,rgba(150,200,255,0.1) 0%,transparent 70%);opacity:1}
+
+/* BELL ALERT */
+#bellAlert{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(255,50,50,0.95);border:2px solid #f44;border-radius:12px;padding:12px 20px;z-index:2500;display:none;font-size:16px;color:#fff;animation:fadeInOut 2s ease;text-align:center}
+
+/* MENU */
+#homeMenu{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,.95);width:340px;max-height:82vh;border-radius:12px;border:2px solid #4f8;z-index:2000;display:none;flex-direction:column;padding:12px;overflow:hidden}
+#menuTabs{display:flex;gap:6px;margin-bottom:12px;border-bottom:2px solid #355;padding-bottom:8px;flex-wrap:wrap}
+.tabBtn{flex:1;min-width:60px;padding:6px 4px;background:#132313;border:1px solid #355;color:#aaa;border-radius:6px;cursor:pointer;font-family:monospace;font-size:11px;transition:all 0.2s ease}
+.tabBtn.active{background:#1a3a1a;border-color:#4f8;color:#fff}
+.tabContent{display:none;overflow-y:auto;flex:1}
+.tabContent.active{display:block}
+.craftItem{background:#132313;border:1px solid #355;padding:8px;border-radius:8px;margin-bottom:6px;transition:all 0.2s ease;position:relative}
+.craftItem.completed{background:#1a3a1a;border-color:#4f8;box-shadow:0 0 8px rgba(68,255,136,0.3)}
+.craftItem.completed .itemLabel::after{content:' ✅'}
+.craftItem.locked{opacity:0.5}
+.lockBadge{position:absolute;top:8px;right:8px;font-size:11px;color:#fc4;background:rgba(255,204,68,0.15);padding:2px 6px;border-radius:4px;border:1px solid rgba(255,204,68,0.3)}
+.craftItem button{width:100%;margin-top:6px;padding:8px;background:#1a3a1a;border:2px solid #4f8;color:white;border-radius:6px;cursor:pointer;transition:all 0.2s ease;font-family:monospace}
+.craftItem button:hover:not(:disabled){background:#2a4a2a}
+.craftItem button:disabled{background:#1a1a1a;border-color:#355;color:#666;cursor:not-allowed}
+.craftItem.completed button{background:#2a4a2a;border-color:#6fa}
+.colorOptions{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap}
+.colorBtn{width:36px;height:36px;border-radius:6px;border:2px solid #355;cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center;transition:all 0.2s ease}
+.colorBtn:hover{border-color:#4f8;transform:scale(1.1)}
+.colorBtn.selected{border-color:#4f8;box-shadow:0 0 8px rgba(68,255,136,0.5)}
+.vibeBtn{width:100%;padding:8px;margin-top:4px;background:#132313;border:1px solid #355;color:#ccc;border-radius:6px;cursor:pointer;font-family:monospace;font-size:12px;text-align:left;transition:all 0.2s ease;position:relative;z-index:10}
+.vibeBtn:hover{border-color:#4f8;background:#1a3a1a;color:#fff}
+.vibeBtn.selected{border-color:#4f8;background:#1a3a1a;color:#fff;box-shadow:0 0 6px rgba(68,255,136,0.3)}
+.exitBtn{width:100%;margin-top:8px;padding:10px;background:#3a1a1a;border:2px solid #f44;color:white;border-radius:6px;cursor:pointer;font-family:monospace}
+#repairProgress{margin-top:6px;padding-top:6px;border-top:1px solid #355;font-size:14px}
+#customTitle{font-size:16px;text-align:center;margin-bottom:8px;color:#4f8}
+
+/* TOASTS */
+#healToast{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(20,60,20,.95);border:2px solid #4f8;border-radius:12px;padding:16px 24px;z-index:2500;display:none;font-size:18px;color:#4f8;box-shadow:0 0 20px rgba(68,255,136,0.6);animation:fadeInOut 1.5s ease}
+#captureToast{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(255,204,68,.95);border:2px solid #fc4;border-radius:12px;padding:16px 24px;z-index:2500;display:none;font-size:18px;color:#fff;box-shadow:0 0 20px rgba(255,204,68,0.6);animation:fadeInOut 2s ease}
+#metalToast{position:fixed;bottom:200px;left:50%;transform:translateX(-50%);background:rgba(100,150,200,.9);border:2px solid #8af;border-radius:8px;padding:8px 16px;z-index:2500;display:none;font-size:14px;color:#fff;animation:slideUp 1.5s ease forwards}
+@keyframes slideUp{0%{opacity:0;transform:translateX(-50%) translateY(10px)}20%{opacity:1;transform:translateX(-50%) translateY(0)}80%{opacity:1}100%{opacity:0;transform:translateX(-50%) translateY(-10px)}}
+.damageIndicator{position:absolute;font-size:20px;font-weight:bold;color:#f44;z-index:200;pointer-events:none;animation:floatUp 0.8s ease-out forwards}
+@keyframes floatUp{0%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-40px)}}
+@keyframes fadeInOut{0%{opacity:0;transform:translate(-50%,-50%) scale(0.8)}20%{opacity:1;transform:translate(-50%,-50%) scale(1.05)}25%{transform:translate(-50%,-50%) scale(1)}80%{opacity:1}100%{opacity:0}}
+
+/* INSTRUCTIONS */
+#instructionsOverlay{position:fixed;top:0;left:0;width:100vw;height:100vh;background:radial-gradient(ellipse at 50% 30%,#0d2a0d 0%,#060e06 100%);z-index:3000;display:flex;align-items:center;justify-content:center;overflow-y:auto;}
+#instructionsBox{background:#132313;border:3px solid #4f8;border-radius:16px;padding:24px;max-width:420px;width:100%;max-height:calc(100vh - 80px);overflow-y:auto;text-align:center;box-shadow:0 0 30px rgba(68,255,136,0.3);margin:auto}
+#instructionsBox h2{color:#4f8;margin-bottom:16px;font-size:24px}
+#instructionsBox ul{text-align:left;margin:16px 0;padding-left:20px;line-height:1.8;font-size:13px}
+#instructionsBox li{margin-bottom:8px}
+#startGameBtn{width:100%;padding:16px;background:#1a3a1a;border:3px solid #4f8;color:white;border-radius:8px;cursor:pointer;font-family:monospace;font-size:18px;margin-top:16px;margin-bottom:8px;transition:all 0.2s ease;font-weight:bold;box-shadow:0 4px 12px rgba(68,255,136,0.4)}
+#startGameBtn:hover{background:#2a4a2a;transform:scale(1.02)}
+#starvedOverlay{position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:1500;box-shadow:inset 0 0 200px rgba(200,0,0,0.6);display:none}
+.denHealthBar{position:absolute;width:60px;height:6px;background:rgba(0,0,0,0.7);border:1px solid #f44;border-radius:3px;z-index:16;display:none}
+.denHealthFill{height:100%;background:#4f8;border-radius:2px;transition:width 0.2s ease}
+#gameOverOverlay{position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.95);z-index:4000;display:none;align-items:center;justify-content:center;backdrop-filter:blur(6px)}
+#gameOverBox{background:#231313;border:3px solid #f44;border-radius:16px;padding:32px;max-width:400px;width:90%;text-align:center;box-shadow:0 0 40px rgba(255,68,68,0.5)}
+#gameOverBox h2{color:#f44;margin-bottom:16px;font-size:32px;text-shadow:0 0 10px rgba(255,68,68,0.8)}
+#gameOverStats{margin:20px 0;padding:16px;background:rgba(0,0,0,0.5);border-radius:8px;line-height:1.8}
+#restartBtn{width:100%;padding:14px;background:#3a1a1a;border:3px solid #f44;color:white;border-radius:8px;cursor:pointer;font-family:monospace;font-size:16px;margin-top:12px;transition:all 0.2s ease}
+#restartBtn:hover{background:#4a2a2a;transform:scale(1.02)}
+.wolf{position:absolute;font-size:28px;z-index:50}
+.wolfState{position:absolute;top:-20px;left:50%;transform:translateX(-50%);font-size:14px;z-index:51;text-shadow:0 0 4px rgba(0,0,0,0.8);pointer-events:none;white-space:nowrap}
+.wolf.aggressive{filter:drop-shadow(0 0 6px rgba(255,0,0,0.8))}
+.wolf.passive{filter:drop-shadow(0 0 4px rgba(100,100,100,0.4))}
+@media(max-width:480px){#instructionsBox{padding:20px 16px;max-height:calc(100vh - 120px)}#instructionsBox h2{font-size:20px}#instructionsBox ul{font-size:12px}#startGameBtn{padding:14px;font-size:16px}#minimap{width:120px;height:120px}}
+
+@keyframes entityShake{0%,100%{opacity:1}50%{opacity:0.6}}
+.shaking{animation:entityShake 0.3s ease;}
+
+/* GROUNDS DECORATIONS */
+.groundDeco{position:absolute;z-index:8;pointer-events:none;font-size:32px}
+.lanternGlow{position:absolute;width:60px;height:60px;border-radius:50%;background:radial-gradient(circle,rgba(255,200,50,0.25) 0%,transparent 70%);z-index:7;pointer-events:none;animation:lanternPulse 2s ease-in-out infinite}
+@keyframes lanternPulse{0%,100%{opacity:0.6}50%{opacity:1}}
+.fountainAnim{animation:fountainBob 1.5s ease-in-out infinite}
+@keyframes fountainBob{0%,100%{opacity:0.9}50%{opacity:1}}
+.pathTile{position:absolute;font-size:22px;z-index:7;opacity:0.8}
+
+/* INTERIOR VIBES - home glow */
+.home-cozy{filter:drop-shadow(0 0 12px rgba(255,180,80,0.5))}
+.home-library{filter:drop-shadow(0 0 12px rgba(100,150,255,0.5))}
+.home-bakery{filter:drop-shadow(0 0 12px rgba(255,220,100,0.6))}
+.home-bell{filter:drop-shadow(0 0 14px rgba(255,255,255,0.6))}
+
+.sectionHeader{color:#4f8;font-size:12px;margin:8px 0 4px;opacity:0.7;text-transform:uppercase;letter-spacing:1px;padding:0 2px}
+</style>
+</head>
+<body>
+
+<div id="instructionsOverlay">
+
+<!-- TITLE SCREEN -->
+<div id="titleScreen" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;width:100%;padding:20px;text-align:center;">
+  <div style="position:relative;margin-bottom:8px;">
+    <div style="font-size:64px;filter:drop-shadow(0 0 20px rgba(68,255,136,0.6));">🏚️</div>
+  </div>
+  <h1 style="font-size:32px;color:#4f8;margin:0 0 6px;text-shadow:0 0 20px rgba(68,255,136,0.5);letter-spacing:2px;font-family:monospace;">HOMESTEAD</h1>
+  <h2 style="font-size:20px;color:#6fa;margin:0 0 4px;font-family:monospace;font-weight:normal;letter-spacing:4px;">SURVIVAL</h2>
+  <p style="color:#6a8a6a;font-size:12px;margin:0 0 24px;font-family:monospace;">by Tanya Weaver</p>
+  <div style="display:flex;flex-direction:column;gap:12px;width:100%;max-width:300px;">
+    <button onclick="showInstructions()" style="padding:16px;background:#1a3a1a;border:2px solid #4f8;color:#4f8;border-radius:8px;cursor:pointer;font-family:monospace;font-size:16px;font-weight:bold;letter-spacing:1px;">🌿 PLAY</button>
+    <button onclick="showCredits()" style="padding:12px;background:transparent;border:1px solid #355;color:#6a8a6a;border-radius:8px;cursor:pointer;font-family:monospace;font-size:13px;">Credits</button>
+  </div>
+  <div id="driftParticles" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:hidden;z-index:-1;"></div>
+</div>
+
+<!-- INSTRUCTIONS SCREEN -->
+<div id="instructionsScreen" style="display:none;flex-direction:column;align-items:center;justify-content:flex-start;min-height:100vh;width:100%;padding:20px;max-width:420px;margin:0 auto;">
+  <h2 style="color:#4f8;margin:16px 0 12px;font-family:monospace;">How to Play</h2>
+  <div style="background:#0d1f0d;border:1px solid #2a4a2a;border-radius:10px;padding:14px;width:100%;margin-bottom:12px;">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12px;line-height:1.8;">
+      <div>🎮 Joystick to move</div><div>✋ Gather/interact</div>
+      <div>⚔️ Attack wolves</div><div>🏠 Near home = menu</div>
+      <div>🌳 Wood from trees</div><div>🪨 Metal from rocks</div>
+      <div>🍖 Cook for health</div><div>🐑 Shear sheep = 🧵</div>
+      <div>🏚️ Capture dens</div><div>🧔 Bram = quests</div>
+      <div>☀️ Day = safe-ish</div><div>🌙 Night = danger</div>
+    </div>
+  </div>
+  <div style="background:#1a1000;border:1px solid #3a2a00;border-radius:8px;padding:10px 14px;width:100%;margin-bottom:12px;font-size:12px;line-height:1.8;">
+    <div style="color:#fc4;margin-bottom:4px;font-size:13px;">🏰 Progression</div>
+    <div>Repair 4 parts → level up home (max Lv5)</div>
+    <div>Clear all 4 dens → outpost safe zones</div>
+    <div>Cloth upgrades → curtains, bedroll, tent</div>
+    <div>📚 Library: +1🪵/30s • 🍞 Bakery: +1🍖/60s</div>
+  </div>
+  <p style="color:#f84;font-size:12px;margin:0 0 16px;">⚠️ Hunger drops every 20s (faster at night)</p>
+  <button id="startGameBtn" style="width:100%;padding:16px;background:#1a3a1a;border:3px solid #4f8;color:#4f8;border-radius:8px;cursor:pointer;font-family:monospace;font-size:18px;font-weight:bold;letter-spacing:1px;margin-bottom:8px;">🌿 START GAME</button>
+  <button onclick="showTitle()" style="padding:8px 20px;background:transparent;border:1px solid #355;color:#6a8a6a;border-radius:6px;cursor:pointer;font-family:monospace;font-size:12px;">← Back</button>
+</div>
+
+<!-- CREDITS SCREEN -->
+<div id="creditsScreen" style="display:none;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;width:100%;padding:30px;text-align:center;">
+  <div style="font-size:48px;margin-bottom:16px;">🏰</div>
+  <h2 style="color:#4f8;font-family:monospace;margin:0 0 24px;letter-spacing:2px;">CREDITS</h2>
+  <div style="background:#0d1f0d;border:1px solid #2a4a2a;border-radius:12px;padding:24px;max-width:320px;width:100%;line-height:2;">
+    <div style="font-size:14px;color:#aaa;margin-bottom:6px;">Game Design & Direction</div>
+    <div style="font-size:20px;color:#4f8;font-weight:bold;margin-bottom:20px;">Tanya Weaver</div>
+    <div style="font-size:14px;color:#aaa;margin-bottom:6px;">Built with</div>
+    <div style="font-size:16px;color:#6fa;margin-bottom:20px;">Claude by Anthropic</div>
+    <div style="font-size:14px;color:#aaa;margin-bottom:6px;">Characters</div>
+    <div style="font-size:14px;color:#6fa;margin-bottom:20px;">🧔 Bram the Collector<br>🐑 The Sheep (no names, just vibes)</div>
+    <div style="font-size:11px;color:#355;border-top:1px solid #2a4a2a;padding-top:12px;margin-top:4px;">Made with love, caffeine,<br>and an unreasonable number of iterations.</div>
+  </div>
+  <button onclick="showTitle()" style="margin-top:20px;padding:10px 24px;background:transparent;border:1px solid #4f8;color:#4f8;border-radius:8px;cursor:pointer;font-family:monospace;font-size:14px;">← Back</button>
+</div>
+
+</div>
+
+<div id="firelightOverlay" style="position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:498;opacity:0;transition:opacity 3s ease;background:radial-gradient(circle 300px at 50% 55%,rgba(255,140,20,0.08) 0%,transparent 100%);"></div>
+<canvas id="windCanvas" style="position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:497;opacity:0.5;"></canvas>
+<div id="visionMask"></div>
+<div id="vibeOverlay"></div>
+<div id="starvedOverlay"></div>
+<div id="hitFlash" style="position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:1500;box-shadow:inset 0 0 80px rgba(255,0,0,0.7);opacity:0;transition:opacity 0.12s ease;"></div>
+<div id="healToast">+30 Hunger, +7 Health</div>
+<div id="captureToast">Den Captured! +50🪵 +20⚙️</div>
+<div id="metalToast">📚 +1🪵 Library income!</div>
+<div id="bellAlert">🔔 Wolves going aggressive!</div>
+
+<div id="gameOverOverlay">
+<div id="gameOverBox">
+<h2>💀 GAME OVER</h2>
+<p>The wolves got you...</p>
+<div id="gameOverStats">
+<p>🏠 Reached Level: <span id="finalLevel">1</span></p>
+<p>⏱️ Survived: <span id="finalTime">0:00</span></p>
+<p>🐺 Wolves Defeated: <span id="finalKills">0</span></p>
+<p>🏚️ Dens Captured: <span id="finalDens">0</span></p>
+</div>
+<button id="restartBtn" onclick="location.reload()">Try Again</button>
+</div>
+</div>
+
+<div id="minimap"><canvas id="minimapCanvas"></canvas></div>
+<div id="inGameCredits" style="position:fixed;bottom:210px;right:10px;font-size:11px;color:#2a4a2a;font-family:monospace;z-index:998;text-align:right;pointer-events:none;">by Tanya Weaver</div>
+<div id="sunMoonTrack"><div id="sunMoon">☀️</div></div>
+
+<div id="game">
+<div id="world">
+<canvas id="fogCanvas"></canvas>
+<div id="safeZone"></div>
+<div id="moat"></div>
+<div class="e" id="chest">💰</div>
+<div class="e" id="home" style="left:760px;top:760px;font-size:72px;">🏚️</div>
+<div class="e" id="player" style="left:800px;top:800px;z-index:100;">🧍<div id="arrow" style="position:absolute;font-size:16px;color:#4f8;left:4px;top:-22px;">➤</div></div>
+</div>
+</div>
+
+<div id="ui">
+<div id="timeUI">☀️ Day: <span id="timeDisplay">1:20</span></div>
+<div style="margin:3px 0;">❤️ <span id="health">100</span> <span style="display:inline-block;width:55px;height:6px;background:#333;border-radius:3px;vertical-align:middle;"><span id="healthBar" style="display:block;height:100%;background:#e74c3c;border-radius:3px;width:100%;transition:width 0.3s"></span></span></div>
+<div style="margin:3px 0;">😋 <span id="hunger">100</span> <span style="display:inline-block;width:55px;height:6px;background:#333;border-radius:3px;vertical-align:middle;"><span id="hungerBar" style="display:block;height:100%;background:#f39c12;border-radius:3px;width:100%;transition:width 0.3s"></span></span></div>
+🪵 <span id="wood">0</span><br>
+⚙️ <span id="metal">0</span><br>
+🍖 <span id="food">5</span><br>
+🧵 <span id="cloth">0</span><br>
+💰 <span id="gold">0</span><br>
+🏠 Level: <span id="level">1</span>
+<div id="repairProgress">Repairs: 🪟❌ 🧱❌ 🚪❌ 🪵❌</div>
+<div id="outpostUI">🏚️ Dens: 0/4 Cleared</div>
+</div>
+
+<button class="btn" id="act">✋</button>
+<button id="attackBtn">⚔️</button>
+<div id="joystick"><div id="stick"></div></div>
+
+<!-- MENU -->
+<div id="homeMenu">
+<div id="menuTabs">
+<button class="tabBtn active" onclick="switchTab('repairs')">🔨 Repair</button>
+<button class="tabBtn" onclick="switchTab('grounds')">🌿 Grounds</button>
+<button class="tabBtn" onclick="switchTab('interior')">🏠 Interior</button>
+<button class="tabBtn" id="customTabBtn" style="display:none;" onclick="switchTab('custom')">🎨 Custom</button>
+</div>
+
+<!-- REPAIRS TAB -->
+<div id="repairTab" class="tabContent active">
+<div class="craftItem" id="item-cook">
+<span class="itemLabel">🍖 Cook Food (1🍖)</span>
+<span style="font-size:11px;display:block;color:#aaa;margin-top:4px;">Restore 30 hunger & 7 health</span>
+<button onclick="cookFood()">Cook</button>
+</div>
+<div class="craftItem" id="item-window">
+<span class="itemLabel">🪟 Window (2🪵)</span>
+<button onclick="repair('window')">Repair</button>
+</div>
+<div class="craftItem" id="item-wall">
+<span class="itemLabel">🧱 Wall (2🪵 1⚙️)</span>
+<button onclick="repair('wall')">Repair</button>
+</div>
+<div class="craftItem" id="item-door">
+<span class="itemLabel">🚪 Door (1🪵 2⚙️)</span>
+<button onclick="repair('door')">Repair</button>
+</div>
+<div class="craftItem" id="item-roof">
+<span class="itemLabel">🪵 Roof (3🪵 2⚙️)</span>
+<button onclick="repair('roof')">Repair</button>
+</div>
+</div>
+
+<!-- GROUNDS TAB -->
+<div id="groundsTab" class="tabContent">
+<p style="font-size:11px;color:#aaa;margin-bottom:8px;">Decorate the land around your homestead.</p>
+
+<div class="craftItem" id="item-lanterns">
+<span class="itemLabel">🏮 Lanterns (3🪵 2⚙️)</span>
+<span style="font-size:11px;display:block;color:#aaa;margin-top:4px;">Glowing lights around your home</span>
+<button onclick="craftGrounds('lanterns')">Place</button>
+</div>
+
+<div class="craftItem" id="item-path">
+<span class="itemLabel">🪨 Stone Path (4🪵 2⚙️)</span>
+<span style="font-size:11px;display:block;color:#aaa;margin-top:4px;">Cobblestone trail around home</span>
+<button onclick="craftGrounds('path')">Lay Path</button>
+</div>
+
+<div class="craftItem" id="item-fountain">
+<span class="itemLabel">⛲ Fountain (6🪵 4⚙️)</span>
+<span style="font-size:11px;display:block;color:#aaa;margin-top:4px;">Peaceful water feature</span>
+<button onclick="craftGrounds('fountain')">Build</button>
+</div>
+
+<div class="craftItem" id="item-statue">
+<span class="itemLabel">🗿 Guardian Statue (5🪵 3⚙️)</span>
+<span style="font-size:11px;display:block;color:#aaa;margin-top:4px;">Stone guardian at your gate</span>
+<button onclick="craftGrounds('statue')">Carve</button>
+</div>
+
+<div class="craftItem" id="item-garden">
+<span class="itemLabel">🌻 Garden (4🪵 2🍖)</span>
+<div class="colorOptions" id="gardenOptions">
+<div class="colorBtn" onclick="craftGarden('pink')">🌸</div>
+<div class="colorBtn" onclick="craftGarden('yellow')">🌻</div>
+<div class="colorBtn" onclick="craftGarden('red')">🌹</div>
+<div class="colorBtn" onclick="craftGarden('purple')">🌷</div>
+<div class="colorBtn" onclick="craftGarden('white')">🌼</div>
+</div>
+</div>
+
+<div class="craftItem" id="item-moat">
+<span class="itemLabel">🌊 Moat (12🪵 8⚙️)</span>
+<span style="font-size:11px;display:block;color:#aaa;margin-top:4px;">Defensive water ring - expands safe zone!</span>
+<button onclick="craftUpgrade('moat')">Build</button>
+</div>
+</div>
+
+<!-- INTERIOR TAB -->
+<div id="interiorTab" class="tabContent">
+<p style="font-size:11px;color:#aaa;margin-bottom:8px;">Upgrade the inside of your homestead.</p>
+
+<div class="craftItem" id="item-cozy">
+<div class="lockBadge">Lv 2+</div>
+<span class="itemLabel">Cozy Corner (4🪵)</span>
+<span style="font-size:11px;display:block;color:#aaa;margin-top:4px;">Warm glow + expands safe zone to 130px</span>
+<button onclick="craftInterior('cozy')">Furnish</button>
+</div>
+
+<div class="craftItem" id="item-library">
+<div class="lockBadge">Lv 3+</div>
+<span class="itemLabel">📚 Library (6🪵 2⚙️)</span>
+<span style="font-size:11px;display:block;color:#aaa;margin-top:4px;">+1🪵 wood every 30 seconds</span>
+<button onclick="craftInterior('library')">Build</button>
+</div>
+
+<div class="craftItem" id="item-bakery">
+<div class="lockBadge">Lv 4+</div>
+<span class="itemLabel">🍞 Bakery (5🪵 3🍖)</span>
+<span style="font-size:11px;display:block;color:#aaa;margin-top:4px;">+1🍖 food every 60 seconds</span>
+<button onclick="craftInterior('bakery')">Build</button>
+</div>
+
+<div class="craftItem" id="item-bell">
+<div class="lockBadge">Lv 5+</div>
+<span class="itemLabel">🔔 Bell Tower (8🪵 5⚙️)</span>
+<span style="font-size:11px;display:block;color:#aaa;margin-top:4px;">Warns when wolves go aggressive at night</span>
+<button onclick="craftInterior('bell')">Build</button>
+</div>
+
+<div class="sectionHeader" style="color:#4f8;font-size:11px;margin:8px 0 4px;opacity:0.7;text-transform:uppercase;letter-spacing:1px;">🧵 Cloth Upgrades</div>
+
+<div class="craftItem" id="item-curtains">
+<div class="lockBadge">Lv 2+</div>
+<span class="itemLabel">🪟 Curtains (2🧵 2🪵)</span>
+<span style="font-size:11px;display:block;color:#aaa;margin-top:4px;">+15 max hunger capacity</span>
+<button onclick="craftCloth('curtains')">Hang</button>
+</div>
+
+<div class="craftItem" id="item-bedroll">
+<div class="lockBadge">Lv 3+</div>
+<span class="itemLabel">🛏️ Bedroll (4🧵 2🪵)</span>
+<span style="font-size:11px;display:block;color:#aaa;margin-top:4px;">Resting heals +5 health when near home</span>
+<button onclick="craftCloth('bedroll')">Craft</button>
+</div>
+
+<div class="craftItem" id="item-tent">
+<div class="lockBadge">Lv 4+</div>
+<span class="itemLabel">⛺ Outpost Tent (6🧵 4🪵)</span>
+<span style="font-size:11px;display:block;color:#aaa;margin-top:4px;">Expands captured den safe zones to 120px</span>
+<button onclick="craftCloth('tent')">Pitch</button>
+</div>
+</div>
+
+<!-- CUSTOM TAB (Lv 5) -->
+<div id="customTab" class="tabContent">
+<div id="customTitle">🏰 Castle Customizations</div>
+
+<div class="sectionHeader">🎨 Paint House</div>
+<div class="craftItem" id="item-paint">
+<span style="font-size:11px;display:block;color:#aaa;margin-bottom:8px;">Craft a color (3🪵 1⚙️). Apply as many times as you like once owned.</span>
+<div style="display:flex;flex-wrap:wrap;gap:6px;" id="paintCraftOptions">
+<button class="paintCraftBtn" data-color="red" onclick="craftOrApplyPaint('red')" style="padding:6px 10px;border-radius:6px;border:2px solid #355;background:#132313;color:#fff;font-family:monospace;font-size:12px;cursor:pointer;">🔴 Craft</button>
+<button class="paintCraftBtn" data-color="blue" onclick="craftOrApplyPaint('blue')" style="padding:6px 10px;border-radius:6px;border:2px solid #355;background:#132313;color:#fff;font-family:monospace;font-size:12px;cursor:pointer;">🔵 Craft</button>
+<button class="paintCraftBtn" data-color="green" onclick="craftOrApplyPaint('green')" style="padding:6px 10px;border-radius:6px;border:2px solid #355;background:#132313;color:#fff;font-family:monospace;font-size:12px;cursor:pointer;">🟢 Craft</button>
+<button class="paintCraftBtn" data-color="yellow" onclick="craftOrApplyPaint('yellow')" style="padding:6px 10px;border-radius:6px;border:2px solid #355;background:#132313;color:#fff;font-family:monospace;font-size:12px;cursor:pointer;">🟡 Craft</button>
+<button class="paintCraftBtn" data-color="purple" onclick="craftOrApplyPaint('purple')" style="padding:6px 10px;border-radius:6px;border:2px solid #355;background:#132313;color:#fff;font-family:monospace;font-size:12px;cursor:pointer;">🟣 Craft</button>
+<button class="paintCraftBtn" data-color="none" onclick="craftOrApplyPaint('none')" style="padding:6px 10px;border-radius:6px;border:2px solid #355;background:#132313;color:#fff;font-family:monospace;font-size:12px;cursor:pointer;">⚪ Default</button>
+</div>
+<div style="margin-top:8px;font-size:12px;color:#4f8;" id="paintOwned">Owned: none</div>
+</div>
+
+<div class="sectionHeader">🌿 Homestead Vibe</div>
+<div class="craftItem" id="item-vibe">
+<span style="font-size:11px;display:block;color:#aaa;margin-bottom:6px;">Choose the atmosphere of your homestead</span>
+<button class="vibeBtn selected" id="vibe-cottage" onclick="setVibe('cottage')">🌿 Cozy Cottage — soft greens, warm default</button>
+<button class="vibeBtn" id="vibe-spring" onclick="setVibe('spring')">🌸 Spring Garden — pink blossoms & warmth</button>
+<button class="vibeBtn" id="vibe-autumn" onclick="setVibe('autumn')">🍂 Autumn Homestead — amber & harvest tones</button>
+<button class="vibeBtn" id="vibe-winter" onclick="setVibe('winter')">❄️ Winter Lodge — frosty blues & silver</button>
+</div>
+
+<div class="sectionHeader">⚒️ Tools</div>
+<div class="craftItem" id="item-sledgehammer">
+<span class="itemLabel">🔨 Sledgehammer (8🪵 5⚙️)</span>
+<span style="font-size:11px;display:block;color:#aaa;margin-top:4px;">+1 resource per gather</span>
+<button onclick="craftUpgrade('sledgehammer')">Craft</button>
+</div>
+
+<div class="craftItem" id="item-chest">
+<span class="itemLabel">💰 Treasure Chest (10🪵 6⚙️)</span>
+<span style="font-size:11px;display:block;color:#aaa;margin-top:4px;">Store your extra resources</span>
+<button onclick="craftUpgrade('chest')">Craft</button>
+</div>
+</div>
+
+<button class="exitBtn" onclick="closeMenu()">✖ Exit</button>
+</div>
+
+<div id="denMenu" style="position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,.95);width:280px;border-radius:12px;border:2px solid #fc4;z-index:2000;display:none;flex-direction:column;padding:16px;gap:10px;">
+  <div style="color:#fc4;font-size:16px;text-align:center;">🏰 Captured Den</div>
+  <div style="font-size:12px;color:#aaa;text-align:center;">Use the campfire to cook</div>
+  <div style="background:#132313;border:1px solid #355;padding:10px;border-radius:8px;">
+    <span style="font-size:14px;">🍖 Cook Food (1🍖)</span>
+    <span style="font-size:11px;display:block;color:#aaa;margin-top:4px;">+30 hunger & +7 health</span>
+    <button onclick="cookFoodAtDen()" style="width:100%;margin-top:8px;padding:8px;background:#1a3a1a;border:2px solid #4f8;color:white;border-radius:6px;cursor:pointer;font-family:monospace;" id="denCookBtn">Cook</button>
+  </div>
+  <button onclick="closeDenMenu()" style="width:100%;padding:10px;background:#3a1a1a;border:2px solid #f44;color:white;border-radius:6px;cursor:pointer;font-family:monospace;">✖ Exit</button>
+</div>
+
+<div id="bramMenu" style="position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(10,15,10,.97);width:310px;border-radius:12px;border:2px solid #fc4;z-index:2000;display:none;flex-direction:column;padding:16px;gap:10px;">
+  <div style="font-size:20px;text-align:center;">🧔 Bram the Collector</div>
+  <div id="bramDialog" style="font-size:13px;color:#ddd;background:#1a2a1a;border-radius:8px;padding:10px;line-height:1.6;min-height:60px;font-style:italic;"></div>
+  <div id="bramQuestArea" style="display:none;">
+    <div id="bramQuestText" style="font-size:12px;color:#fc4;background:#1a1a00;border:1px solid #fc4;border-radius:6px;padding:8px;margin-bottom:6px;"></div>
+    <button id="bramAcceptBtn" onclick="acceptQuest()" style="width:100%;padding:8px;background:#1a3a1a;border:2px solid #4f8;color:white;border-radius:6px;cursor:pointer;font-family:monospace;">Accept Quest</button>
+    <button id="bramTurnInBtn" onclick="turnInQuest()" style="width:100%;padding:8px;background:#1a2a3a;border:2px solid #48f;color:white;border-radius:6px;cursor:pointer;font-family:monospace;display:none;">Turn In Quest ✅</button>
+  </div>
+  <div id="bramShopArea" style="display:none;">
+    <div style="font-size:12px;color:#aaa;margin-bottom:6px;">💰 Bram's Shop — spend gold on supplies:</div>
+    <button onclick="bramBuy('wood')" style="width:100%;padding:7px;background:#132313;border:1px solid #4f8;color:white;border-radius:6px;cursor:pointer;font-family:monospace;margin-bottom:4px;">5🪵 Wood — 2💰</button>
+    <button onclick="bramBuy('metal')" style="width:100%;padding:7px;background:#132313;border:1px solid #8af;color:white;border-radius:6px;cursor:pointer;font-family:monospace;margin-bottom:4px;">3⚙️ Metal — 2💰</button>
+    <button onclick="bramBuy('food')" style="width:100%;padding:7px;background:#132313;border:1px solid #f84;color:white;border-radius:6px;cursor:pointer;font-family:monospace;">3🍖 Food — 1💰</button>
+  </div>
+  <button onclick="closeBramMenu()" style="width:100%;padding:10px;background:#3a1a1a;border:2px solid #f44;color:white;border-radius:6px;cursor:pointer;font-family:monospace;">✖ Leave Bram Alone</button>
+</div>
+
+<style>
+.questMarker{position:absolute;font-size:22px;z-index:60;pointer-events:none;animation:questBob 1s ease-in-out infinite;}
+@keyframes questBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.bramNpc{position:absolute;font-size:32px;z-index:55;cursor:pointer;}
+</style>
+<script>
+function showTitle(){
+  document.getElementById('titleScreen').style.display='flex'
+  document.getElementById('instructionsScreen').style.display='none'
+  document.getElementById('creditsScreen').style.display='none'
+}
+function showInstructions(){
+  document.getElementById('titleScreen').style.display='none'
+  document.getElementById('instructionsScreen').style.display='flex'
+  document.getElementById('creditsScreen').style.display='none'
+}
+function showCredits(){
+  document.getElementById('titleScreen').style.display='none'
+  document.getElementById('instructionsScreen').style.display='none'
+  document.getElementById('creditsScreen').style.display='flex'
+}
+const world=document.getElementById('world')
+const player=document.getElementById('player')
+const arrow=document.getElementById('arrow')
+const home=document.getElementById('home')
+const safeZone=document.getElementById('safeZone')
+const dayNightOverlay=document.getElementById('dayNightOverlay')
+const visionMask=document.getElementById('visionMask')
+const vibeOverlay=document.getElementById('vibeOverlay')
+const sunMoon=document.getElementById('sunMoon')
+const healToast=document.getElementById('healToast')
+const captureToast=document.getElementById('captureToast')
+const metalToast=document.getElementById('metalToast')
+const bellAlert=document.getElementById('bellAlert')
+const minimapCanvas=document.getElementById('minimapCanvas')
+const fogCanvas=document.getElementById('fogCanvas')
+const mCtx=minimapCanvas.getContext('2d')
+const fCtx=fogCanvas.getContext('2d')
+
+const WORLD_SIZE=1600
+fogCanvas.width=800
+fogCanvas.height=800
+minimapCanvas.width=160
+minimapCanvas.height=160
+
+let x=800,y=800
+const homeX=760,homeY=760
+
+let wood=0,metal=0,food=5,hunger=100,health=100,gold=0,cloth=0
+let maxHunger=100
+let homeLevel=1
+
+let clothUpgrades={curtains:false,bedroll:false,tent:false}
+
+const BRAM_X=720,BRAM_Y=920
+let bramEl=null,bramQuestMarkerEl=null
+let currentQuest=null 
+let questComplete=false
+
+const BRAM_IDLE=[
+  "I used to be an adventurer like you. Then I got a mortgage.",
+  "Don't mind me. Just standing here. Definitely not judging your castle.",
+  "My back hurts. Has nothing to do with you. Just thought you should know.",
+  "I tried fighting a wolf once. It did not go well. Hence... this job.",
+  "Beautiful day, isn't it? Well, for you maybe. My boots have a hole.",
+  "I collect things. Resources, mostly. Regrets, occasionally."
+]
+const BRAM_ACCEPT=[
+  "Excellent! I knew I could count on a person of your... particular desperation.",
+  "Splendid! You won't regret this. Well, YOU won't.",
+  "Off you go then! Chop chop! Or mine mine. Whatever applies.",
+  "My faith in you is... let's say cautious. But present."
+]
+const BRAM_COMPLETE=[
+  "Magnificent! You're almost as useful as my donkey. Almost.",
+  "Well I'll be a wolf's uncle. You actually did it.",
+  "Extraordinary. I had maybe a 40% confidence in you. You've exceeded expectations.",
+  "Here's your gold. Don't spend it all on one thing. Spend it on two things."
+]
+const BRAM_SHOP=[
+  "Everything's fairly priced. My wife said so and I don't argue with her.",
+  "Quality goods, suspicious provenance. Standard market stuff.",
+  "Buy something. I have a family to feed. Well. A cat. But she's demanding."
+]
+
+const CYCLE_LENGTH=120000,DAY_LENGTH=80000,NIGHT_LENGTH=40000
+let cycleStartTime=Date.now()
+let isNight=false
+let gameStarted=false
+let gameStartTime=Date.now()
+let gameOver=false
+let wasNight=false
+
+let wolves=[]
+let wolvesKilled=0
+const WOLF_SPEED=1.2,WOLF_DAMAGE=15,WOLF_HEALTH=20,WOLF_ATTACK_DAMAGE=8
+const HOME_SAFE_RADIUS=110,MOAT_SAFE_RADIUS=150,COZY_SAFE_RADIUS=130
+const WOLF_PATROL_RADIUS=150,OUTPOST_SAFE_RADIUS=80
+const WOLF_DAY_AGGRO_DIST=60,WOLF_DAY_DEN_AGGRO_DIST=100
+const WOLF_NIGHT_AGGRO_DIST=150,WOLF_DEAGGRO_TIME=3000
+
+let dens=[]
+let densCleared=0
+const DEN_POSITIONS=[{x:250,y:250},{x:1350,y:200},{x:1200,y:1300},{x:300,y:1200}]
+
+const EXPLORE_LOCATIONS=[
+  {x:250,y:1350,name:'Old Ruins',emoji:'🏛️',dialog:"I heard there's treasure buried in the old ruins. Probably. My sources are a dream I had."},
+  {x:1350,y:300,name:'Abandoned Camp',emoji:'💀',dialog:"Someone left that camp in a hurry. Find out why. Actually... be careful. Never mind. Do be careful."},
+  {x:400,y:1400,name:'Strange Rock Formation',emoji:'🌋',dialog:"It glows at night. I'm told that's normal. I don't believe that but here we are."},
+  {x:1300,y:1300,name:'Forgotten Shrine',emoji:'⛩️',dialog:"An old shrine, deep in the wilderness. Probably haunted. Worth 10 gold to me to find out."},
+  {x:800,y:150,name:'Frozen Peak',emoji:'🏔️',dialog:"Cold up there. Dangerously cold. Bring a jacket. I don't have one to lend you. Sorry."}
+]
+let activeExploreLocation=null
+let exploreMarkerEl=null
+
+let exploredTiles=new Set()
+const TILE_SIZE=40,VIEW_RADIUS=250
+
+let hasSledgehammer=false,hasChest=false,hasMoat=false
+let gardenColor=null,houseColor='none',currentVibe='cottage'
+let gardenElements=[]
+let groundsBuilt={lanterns:false,path:false,fountain:false,statue:false}
+let interiorsBuilt={cozy:false,library:false,bakery:false,bell:false}
+let libraryTimer=0,bakeryTimer=0
+let ownedPaints=new Set() 
+
+const PAINT_COLORS={
+  red:{emoji:'🔴',bg:'#f44',label:'Red'},
+  blue:{emoji:'🔵',bg:'#44f',label:'Blue'},
+  green:{emoji:'🟢',bg:'#4f4',label:'Green'},
+  yellow:{emoji:'🟡',bg:'#ff4',label:'Yellow'},
+  purple:{emoji:'🟣',bg:'#94f',label:'Purple'}
+}
+
+let repairProgress={window:0,wall:0,door:0,roof:0}
+let entities=[]
+
+function spawnBram(){
+  bramEl=document.createElement('div')
+  bramEl.className='bramNpc'
+  bramEl.textContent='🧔'
+  bramEl.style.left=BRAM_X+'px'
+  bramEl.style.top=BRAM_Y+'px'
+  bramEl.style.position='absolute'
+  bramEl.style.fontSize='32px'
+  bramEl.style.zIndex='55'
+
+  bramQuestMarkerEl=document.createElement('div')
+  bramQuestMarkerEl.textContent='❗'
+  bramQuestMarkerEl.style.cssText='position:absolute;font-size:20px;left:6px;top:-28px;z-index:60;pointer-events:none;animation:questBob 1s ease-in-out infinite;'
+  bramEl.appendChild(bramQuestMarkerEl)
+
+  world.appendChild(bramEl)
+}
+
+function generateQuest(){
+  const types=['wood','metal','food','cloth']
+  const icons={wood:'🪵',metal:'⚙️',food:'🍖',cloth:'🧵'}
+  
+  if(Math.random()<0.3){
+    const loc=EXPLORE_LOCATIONS[Math.floor(Math.random()*EXPLORE_LOCATIONS.length)]
+    return {type:'explore',location:loc,reward:Math.floor(Math.random()*5)+5,accepted:false}
+  }
+  const count=Math.random()<0.5?1:2
+  const shuffled=types.sort(()=>Math.random()-0.5).slice(0,count)
+  let resources=[]
+  let totalUnits=0
+  shuffled.forEach(type=>{
+    const amount=Math.floor(Math.random()*8)+4
+    resources.push({type,amount,icon:icons[type]})
+    totalUnits+=amount
+  })
+  const reward=Math.min(10,Math.max(1,Math.floor(totalUnits/3)))
+  return {type:'resource',resources,reward,accepted:false}
+}
+
+function spawnExploreMarker(loc){
+  if(exploreMarkerEl)exploreMarkerEl.remove()
+  exploreMarkerEl=document.createElement('div')
+  exploreMarkerEl.style.cssText=`position:absolute;font-size:36px;left:${loc.x}px;top:${loc.y}px;z-index:30;pointer-events:none;filter:drop-shadow(0 0 8px rgba(255,200,50,0.8));animation:questBob 1s ease-in-out infinite;`
+  exploreMarkerEl.textContent=loc.emoji
+  world.appendChild(exploreMarkerEl)
+  activeExploreLocation=loc
+}
+
+function removeExploreMarker(){
+  if(exploreMarkerEl)exploreMarkerEl.remove()
+  exploreMarkerEl=null
+  activeExploreLocation=null
+}
+
+function questMet(){
+  if(!currentQuest)return false
+  return currentQuest.resources.every(r=>{
+    if(r.type==='wood')return wood>=r.amount
+    if(r.type==='metal')return metal>=r.amount
+    if(r.type==='food')return food>=r.amount
+    if(r.type==='cloth')return cloth>=r.amount
+    return false
+  })
+}
+
+function openBramMenu(){
+  const menu=document.getElementById('bramMenu')
+  if(menu.style.display==='flex')return 
+  const dialog=document.getElementById('bramDialog')
+  const questArea=document.getElementById('bramQuestArea')
+  const questText=document.getElementById('bramQuestText')
+  const acceptBtn=document.getElementById('bramAcceptBtn')
+  const turnInBtn=document.getElementById('bramTurnInBtn')
+  const shopArea=document.getElementById('bramShopArea')
+  menu.style.display='flex'
+
+  if(!currentQuest){
+    currentQuest=generateQuest()
+    if(currentQuest.type==='explore'){
+      dialog.textContent=`"${currentQuest.location.dialog}"`
+      questText.textContent=`📋 Explore: Find the ${currentQuest.location.name} ${currentQuest.location.emoji} → Reward: ${currentQuest.reward}💰`
+    }else{
+      const questDesc=currentQuest.resources.map(r=>`${r.amount}${r.icon} ${r.type}`).join(' and ')
+      dialog.textContent=`"${BRAM_IDLE[Math.floor(Math.random()*BRAM_IDLE.length)]} Anyway — I need ${questDesc}. Think you can handle that?"`
+      questText.textContent=`📋 Quest: Bring Bram ${currentQuest.resources.map(r=>`${r.amount}${r.icon}`).join(' + ')} → Reward: ${currentQuest.reward}💰`
+    }
+    questArea.style.display='block'
+    acceptBtn.style.display='block'
+    turnInBtn.style.display='none'
+    shopArea.style.display='none'
+  }else if(currentQuest.accepted&&currentQuest.type==='explore'&&!activeExploreLocation){
+    
+    dialog.textContent=`"${BRAM_COMPLETE[Math.floor(Math.random()*BRAM_COMPLETE.length)]}"`
+    questText.textContent=`✅ You found the ${currentQuest.location.name}! Reward: ${currentQuest.reward}💰`
+    questArea.style.display='block'
+    acceptBtn.style.display='none'
+    turnInBtn.style.display='block'
+    shopArea.style.display='none'
+  }else if(currentQuest.accepted&&currentQuest.type==='resource'&&questMet()){
+    dialog.textContent=`"${BRAM_COMPLETE[Math.floor(Math.random()*BRAM_COMPLETE.length)]}"`
+    questText.textContent=`✅ Quest complete! Reward: ${currentQuest.reward}💰`
+    questArea.style.display='block'
+    acceptBtn.style.display='none'
+    turnInBtn.style.display='block'
+    shopArea.style.display='none'
+  }else if(currentQuest.accepted){
+    if(currentQuest.type==='explore'){
+      dialog.textContent=`"The ${currentQuest.location.name} is marked on your map. It won't find itself. Probably."`
+      questText.textContent=`📋 Find: ${currentQuest.location.name} ${currentQuest.location.emoji} → ${currentQuest.reward}💰`
+    }else{
+      const questDesc=currentQuest.resources.map(r=>`${r.amount}${r.icon}`).join(' + ')
+      dialog.textContent=`"Still waiting on that ${questDesc}. No pressure. Mild pressure. SOME pressure."`
+      questText.textContent=`📋 Active: ${questDesc} → ${currentQuest.reward}💰`
+    }
+    questArea.style.display='block'
+    acceptBtn.style.display='none'
+    turnInBtn.style.display='none'
+    shopArea.style.display='block'
+  }else{
+    dialog.textContent=`"${BRAM_SHOP[Math.floor(Math.random()*BRAM_SHOP.length)]}"`
+    questArea.style.display='none'
+    shopArea.style.display='block'
+  }
+}
+
+function acceptQuest(){
+  if(!currentQuest)return
+  currentQuest.accepted=true
+  const acceptLine=BRAM_ACCEPT[Math.floor(Math.random()*BRAM_ACCEPT.length)]
+  document.getElementById('bramDialog').textContent=`"${acceptLine}"`
+  document.getElementById('bramAcceptBtn').style.display='none'
+  document.getElementById('bramShopArea').style.display='block'
+  if(bramQuestMarkerEl)bramQuestMarkerEl.style.display='none'
+  if(currentQuest.type==='explore')spawnExploreMarker(currentQuest.location)
+}
+
+function turnInQuest(){
+  if(!currentQuest)return
+  if(currentQuest.type==='resource'&&!questMet())return
+  if(currentQuest.type==='explore'&&activeExploreLocation)return
+  if(currentQuest.type==='resource'){
+    currentQuest.resources.forEach(r=>{
+      if(r.type==='wood')wood-=r.amount
+      if(r.type==='metal')metal-=r.amount
+      if(r.type==='food')food-=r.amount
+      if(r.type==='cloth')cloth-=r.amount
+    })
+  }
+  gold+=currentQuest.reward
+  currentQuest=null
+  questComplete=false
+  if(bramQuestMarkerEl)bramQuestMarkerEl.style.display='block'
+  document.getElementById('bramDialog').textContent='"Come back when you want another job. Or just to chat. Please. It gets lonely."'
+  document.getElementById('bramQuestArea').style.display='none'
+  document.getElementById('bramShopArea').style.display='block'
+}
+
+function bramBuy(type){
+  const costs={wood:2,metal:2,food:1}
+  const amounts={wood:5,metal:3,food:3}
+  if(gold<costs[type])return
+  gold-=costs[type]
+  if(type==='wood')wood+=amounts[type]
+  if(type==='metal')metal+=amounts[type]
+  if(type==='food')food+=amounts[type]
+  const funny=["A pleasure doing business.","My cat thanks you.","Finest resources in the land. Probably.","Bold choice. Respect."]
+  document.getElementById('bramDialog').textContent=`"${funny[Math.floor(Math.random()*funny.length)]}"`
+}
+
+function closeBramMenu(){
+  document.getElementById('bramMenu').style.display='none'
+}
+
+function initFog(){
+  fCtx.fillStyle='rgba(5,10,5,1)'
+  fCtx.fillRect(0,0,800,800)
+}
+
+function spawn(type,emoji,px,py){
+  const e=document.createElement('div')
+  e.className='e'
+  e.textContent=emoji
+  e.style.left=px+'px'
+  e.style.top=py+'px'
+  world.appendChild(e)
+  entities.push({type,x:px,y:py,el:e,hp:3})
+}
+
+function spawnAllEntities(){
+  const batchSize=20
+  let treeCount=0,rockCount=0,foodCount=0
+  function batch(){
+    for(let i=0;i<batchSize;i++){
+      if(treeCount<80){spawn('tree','🌳',Math.random()*1500+50,Math.random()*1500+50);treeCount++}
+      else if(rockCount<40){spawn('rock','🪨',Math.random()*1500+50,Math.random()*1500+50);rockCount++}
+      else if(foodCount<25){spawn('food','🍖',Math.random()*1500+50,Math.random()*1500+50);foodCount++}
+    }
+    if(treeCount<80||rockCount<40||foodCount<25){
+      setTimeout(batch,50)
+    }
+  }
+  batch()
+}
+
+// Sheep render in a separate overlay above fog
+let sheep=[]
+
+function spawnSheep(px,py){
+  const el=document.createElement('div')
+  el.style.cssText='position:absolute;font-size:28px;left:'+px+'px;top:'+py+'px;z-index:9999;'
+  el.textContent='🐑'
+  world.appendChild(el)
+  sheep.push({x:px,y:py,el,spawnX:px,spawnY:py,roamAngle:Math.random()*Math.PI*2,sheared:false,shearTimer:0})
+}
+
+function updateSheep(){
+  if(!gameStarted||gameOver)return
+  sheep.forEach(s=>{
+    if(s.sheared){
+      s.shearTimer++
+      if(s.shearTimer>600){
+        s.sheared=false
+        s.shearTimer=0
+        s.el.textContent='🐑'
+        s.el.style.opacity='1'
+      }
+      return
+    }
+    
+    if(Math.random()<0.005)s.roamAngle+=(Math.random()-0.5)*0.8
+    
+    const distFromSpawn=Math.hypot(s.x-s.spawnX,s.y-s.spawnY)
+    if(distFromSpawn>100){
+      const ax=s.spawnX-s.x,ay=s.spawnY-s.y
+      const ad=Math.hypot(ax,ay)
+      s.roamAngle=Math.atan2(ay/ad,ax/ad)+(Math.random()-0.5)*0.3
+    }
+    s.x+=Math.cos(s.roamAngle)*0.18
+    s.y+=Math.sin(s.roamAngle)*0.18
+    s.x=Math.max(50,Math.min(WORLD_SIZE-50,s.x))
+    s.y=Math.max(50,Math.min(WORLD_SIZE-50,s.y))
+    s.el.style.left=s.x+'px'
+    s.el.style.top=s.y+'px'
+  })
+}
+
+const MAX_TREES=80,MAX_ROCKS=40,MAX_FOOD=25
+function respawnEntities(){
+  if(!gameStarted||gameOver)return
+  const trees=entities.filter(e=>e.type==='tree').length
+  const rocks=entities.filter(e=>e.type==='rock').length
+  const food=entities.filter(e=>e.type==='food').length
+  if(trees<MAX_TREES)spawn('tree','🌳',Math.random()*1500+50,Math.random()*1500+50)
+  if(rocks<MAX_ROCKS)spawn('rock','🪨',Math.random()*1500+50,Math.random()*1500+50)
+  if(food<MAX_FOOD)spawn('food','🍖',Math.random()*1500+50,Math.random()*1500+50)
+}
+setInterval(()=>{try{respawnEntities()}catch(e){}},12000)
+
+function spawnDens(){
+  DEN_POSITIONS.forEach((pos,i)=>{
+    const den=document.createElement('div')
+    den.className='e den'
+    den.textContent='🏚️'
+    den.style.left=pos.x+'px'
+    den.style.top=pos.y+'px'
+    world.appendChild(den)
+    const healthBar=document.createElement('div')
+    healthBar.className='denHealthBar'
+    healthBar.style.left=(pos.x-30)+'px'
+    healthBar.style.top=(pos.y-15)+'px'
+    const fill=document.createElement('div')
+    fill.className='denHealthFill'
+    fill.style.width='100%'
+    healthBar.appendChild(fill)
+    world.appendChild(healthBar)
+    dens.push({x:pos.x,y:pos.y,el:den,healthBar,healthFill:fill,wolves:[],maxWolves:2,cleared:false,id:i,hasSpawned:false})
+  })
+}
+spawnDens()
+
+function spawnInitialWolves(){
+  dens.forEach(den=>{for(let i=0;i<den.maxWolves;i++)spawnWolfAtDen(den)})
+}
+
+function spawnWolfAtDen(den){
+  if(den.cleared||den.wolves.length>=den.maxWolves)return
+  const angle=Math.random()*Math.PI*2
+  const dist=60+Math.random()*40
+  const wx=den.x+Math.cos(angle)*dist
+  const wy=den.y+Math.sin(angle)*dist
+  const wolf=createWolfEl(wx,wy)
+  wolf.denId=den.id
+  wolf.denX=den.x
+  wolf.denY=den.y
+  wolf.roaming=false
+  wolves.push(wolf)
+  den.wolves.push(wolf)
+  den.hasSpawned=true
+}
+
+function spawnRoamingWolf(){
+  
+  const edge=Math.floor(Math.random()*4)
+  let wx,wy
+  if(edge===0){wx=Math.random()*WORLD_SIZE;wy=0}
+  else if(edge===1){wx=Math.random()*WORLD_SIZE;wy=WORLD_SIZE}
+  else if(edge===2){wx=0;wy=Math.random()*WORLD_SIZE}
+  else{wx=WORLD_SIZE;wy=Math.random()*WORLD_SIZE}
+  const wolf=createWolfEl(wx,wy)
+  wolf.denId=null
+  wolf.denX=null
+  wolf.denY=null
+  wolf.roaming=true
+  wolf.roamAngle=Math.random()*Math.PI*2
+  wolves.push(wolf)
+}
+
+function createWolfEl(wx,wy){
+  const wolfEl=document.createElement('div')
+  wolfEl.className='wolf'
+  wolfEl.textContent='🐺'
+  wolfEl.style.left=wx+'px'
+  wolfEl.style.top=wy+'px'
+  const stateEl=document.createElement('div')
+  stateEl.className='wolfState'
+  stateEl.textContent='💤'
+  wolfEl.appendChild(stateEl)
+  world.appendChild(wolfEl)
+  return {x:wx,y:wy,el:wolfEl,stateEl,hp:WOLF_HEALTH,attackCooldown:0,aggressive:false,deaggroTimer:0,patrolAngle:Math.random()*Math.PI*2,patrolSpeed:0.5,roaming:false}
+}
+
+function checkWolfRespawn(){
+  if(!gameStarted||gameOver)return
+  if(wolves.length<5)spawnRoamingWolf()
+}
+setInterval(()=>{try{checkWolfRespawn()}catch(e){}},8000)
+
+function updateFog(){
+  const FOG_SCALE=0.5 
+  const gridX=Math.floor(x/TILE_SIZE)
+  const gridY=Math.floor(y/TILE_SIZE)
+  const viewTiles=Math.ceil(VIEW_RADIUS/TILE_SIZE)
+  for(let dx=-viewTiles;dx<=viewTiles;dx++){
+    for(let dy=-viewTiles;dy<=viewTiles;dy++){
+      const tx=gridX+dx,ty=gridY+dy
+      if(tx>=0&&tx<WORLD_SIZE/TILE_SIZE&&ty>=0&&ty<WORLD_SIZE/TILE_SIZE&&Math.hypot(dx,dy)<=viewTiles){
+        exploredTiles.add(`${tx},${ty}`)
+      }
+    }
+  }
+  fCtx.clearRect(0,0,800,800)
+  fCtx.fillStyle='rgba(5,10,5,1)'
+  fCtx.fillRect(0,0,800,800)
+  fCtx.save()
+  fCtx.globalCompositeOperation='destination-out'
+  exploredTiles.forEach(key=>{
+    const [tx,ty]=key.split(',').map(Number)
+    fCtx.clearRect(tx*TILE_SIZE*FOG_SCALE,ty*TILE_SIZE*FOG_SCALE,TILE_SIZE*FOG_SCALE+1,TILE_SIZE*FOG_SCALE+1)
+  })
+  dens.forEach(den=>{
+    if(den.cleared){
+      fCtx.beginPath()
+      fCtx.arc((den.x+24)*FOG_SCALE,(den.y+24)*FOG_SCALE,OUTPOST_SAFE_RADIUS*FOG_SCALE,0,Math.PI*2)
+      fCtx.fill()
+    }
+  })
+  fCtx.restore()
+}
+
+function updateRepairVisuals(){
+  const parts=['window','wall','door','roof']
+  const icons={window:'🪟',wall:'🧱',door:'🚪',roof:'🪵'}
+  let progressText='Repairs: '
+  parts.forEach(part=>{
+    const item=document.getElementById('item-'+part)
+    if(!item)return
+    const btn=item.querySelector('button')
+    if(repairProgress[part]===1){
+      item.classList.add('completed')
+      btn.textContent='Done'
+      btn.disabled=true
+      progressText+=icons[part]+'✅ '
+    }else{
+      item.classList.remove('completed')
+      btn.textContent='Repair'
+      btn.disabled=false
+      progressText+=icons[part]+'❌ '
+    }
+  })
+  document.getElementById('repairProgress').textContent=progressText.trim()
+}
+
+function showToast(el,duration){
+  el.style.display='block'
+  el.style.animation='none'
+  setTimeout(()=>{el.style.animation=''},10)
+  setTimeout(()=>{el.style.display='none'},duration)
+}
+
+function showHealToast(){showToast(healToast,1500)}
+function showCaptureToast(){showToast(captureToast,2000)}
+
+function showMetalToast(){
+  metalToast.style.display='block'
+  metalToast.style.animation='none'
+  setTimeout(()=>{metalToast.style.animation='slideUp 1.5s ease forwards'},10)
+  setTimeout(()=>{metalToast.style.display='none'},1500)
+}
+
+function showBellAlert(){
+  bellAlert.style.display='block'
+  bellAlert.style.animation='none'
+  setTimeout(()=>{bellAlert.style.animation='fadeInOut 2s ease'},10)
+  setTimeout(()=>{bellAlert.style.display='none'},2000)
+}
+
+function showDamageIndicator(targetX,targetY,dmg){
+  const ind=document.createElement('div')
+  ind.className='damageIndicator'
+  ind.textContent='-'+dmg
+  ind.style.left=targetX+'px'
+  ind.style.top=targetY+'px'
+  world.appendChild(ind)
+  setTimeout(()=>ind.remove(),800)
+}
+
+const windCanvas=document.getElementById('windCanvas')
+windCanvas.width=window.innerWidth
+windCanvas.height=window.innerHeight
+const wCtx=windCanvas.getContext('2d')
+const windParticles=[]
+for(let i=0;i<60;i++){
+  windParticles.push({
+    x:Math.random()*window.innerWidth,
+    y:Math.random()*window.innerHeight,
+    len:Math.random()*20+8,
+    speed:Math.random()*1.5+0.5,
+    opacity:Math.random()*0.15+0.05
+  })
+}
+function drawWind(){
+  wCtx.clearRect(0,0,windCanvas.width,windCanvas.height)
+  windParticles.forEach(p=>{
+    wCtx.strokeStyle=`rgba(200,220,240,${p.opacity})`
+    wCtx.lineWidth=1
+    wCtx.beginPath()
+    wCtx.moveTo(p.x,p.y)
+    wCtx.lineTo(p.x+p.len,p.y+p.len*0.3)
+    wCtx.stroke()
+    p.x+=p.speed
+    p.y+=p.speed*0.2
+    if(p.x>window.innerWidth+30){p.x=-30;p.y=Math.random()*window.innerHeight}
+    if(p.y>window.innerHeight+10){p.y=-10}
+  })
+}
+setInterval(drawWind,50)
+
+function updateFirelight(){
+  const fl=document.getElementById('firelightOverlay')
+  fl.style.opacity=isNight?'1':'0'
+}
+
+function screenShake(){
+  const game=document.getElementById('game')
+  game.style.transform='translate(3px,-2px)'
+  setTimeout(()=>game.style.transform='translate(-2px,2px)',50)
+  setTimeout(()=>game.style.transform='translate(1px,-1px)',100)
+  setTimeout(()=>game.style.transform='',150)
+}
+function runPassiveIncome(){
+  if(!gameStarted||gameOver)return
+  const now=Date.now()
+  if(interiorsBuilt.library){
+    libraryTimer+=500
+    if(libraryTimer>=30000){
+      wood+=1
+      libraryTimer=0
+      showMetalToast()
+      draw()
+    }
+  }
+  if(interiorsBuilt.bakery){
+    bakeryTimer+=500
+    if(bakeryTimer>=60000){
+      food+=1
+      bakeryTimer=0
+      draw()
+    }
+  }
+}
+setInterval(()=>{try{runPassiveIncome()}catch(e){}},500)
+
+function checkBellWarning(){
+  if(interiorsBuilt.bell&&isNight&&!wasNight){
+    showBellAlert()
+  }
+  wasNight=isNight
+}
+
+function updateWolves(){
+  if(!gameStarted||gameOver)return
+  const wolvesNear=wolves.some(w=>Math.hypot(w.x-x,w.y-y)<300)
+  safeZone.style.display=wolvesNear?'block':'none'
+  const currentSafeRadius=hasMoat?MOAT_SAFE_RADIUS:interiorsBuilt.cozy?COZY_SAFE_RADIUS:HOME_SAFE_RADIUS
+  const zoneSize=currentSafeRadius*2,zoneOffset=800-currentSafeRadius
+  safeZone.style.width=zoneSize+'px'
+  safeZone.style.height=zoneSize+'px'
+  safeZone.style.left=zoneOffset+'px'
+  safeZone.style.top=zoneOffset+'px'
+
+  for(let i=wolves.length-1;i>=0;i--){
+    const w=wolves[i]
+    if(!w.el||!w.el.isConnected){wolves.splice(i,1);continue}
+    try{
+    const denDist=w.roaming?Infinity:Math.hypot(w.denX-w.x,w.denY-w.y)
+    const playerDist=Math.hypot(x-w.x,y-w.y)
+    const homeDist=Math.hypot(homeX-w.x,homeY-w.y)
+    const playerHomeDist=Math.hypot(homeX-x,homeY-y)
+    const playerDenDist=w.roaming?Infinity:Math.hypot(w.denX-x,w.denY-y)
+    const wolfSafeRadius=hasMoat?MOAT_SAFE_RADIUS:interiorsBuilt.cozy?COZY_SAFE_RADIUS:HOME_SAFE_RADIUS
+    const playerInSafeZone=playerHomeDist<wolfSafeRadius
+    const inOutpost=dens.some(d=>d.cleared&&Math.hypot(d.x-x,d.y-y)<OUTPOST_SAFE_RADIUS)
+    let shouldBeAggressive=false
+    if(!isNight){
+      const dayAggro=w.roaming?WOLF_DAY_AGGRO_DIST*1.5:WOLF_DAY_AGGRO_DIST
+      
+      if(playerDist<dayAggro||playerDenDist<WOLF_DAY_DEN_AGGRO_DIST||playerDist<50){
+        shouldBeAggressive=true;w.deaggroTimer=0
+      }else if(w.aggressive){
+        w.deaggroTimer+=16
+        if(w.deaggroTimer>=WOLF_DEAGGRO_TIME)w.aggressive=false
+      }
+    }else{
+      
+      shouldBeAggressive=true
+    }
+    const wasAggressive=w.aggressive
+    w.aggressive=shouldBeAggressive
+    if(w.aggressive!==wasAggressive){
+      if(w.aggressive){
+        w.el.classList.add('aggressive');w.el.classList.remove('passive')
+        w.stateEl.textContent='👁️'
+      }else{
+        w.el.classList.add('passive');w.el.classList.remove('aggressive')
+        w.stateEl.textContent='💤'
+      }
+    }
+    
+    if(homeDist<wolfSafeRadius){
+      
+      const hx=homeX-w.x,hy=homeY-w.y,hd=Math.hypot(hx,hy)
+      if(hd>0){w.x-=hx/hd*WOLF_SPEED;w.y-=hy/hd*WOLF_SPEED}
+    }else if(w.aggressive&&!playerInSafeZone&&!inOutpost&&playerDist>28){
+      
+      const dx=x-w.x,dy=y-w.y
+      if(playerDist>0){w.x+=dx/playerDist*WOLF_SPEED*1.1;w.y+=dy/playerDist*WOLF_SPEED*1.1}
+    }else if(!w.roaming&&denDist>WOLF_PATROL_RADIUS){
+      
+      const dx=w.denX-w.x,dy=w.denY-w.y,d=Math.hypot(dx,dy)
+      if(d>0){w.x+=dx/d*WOLF_SPEED*0.7;w.y+=dy/d*WOLF_SPEED*0.7}
+    }else if(w.roaming){
+      
+      if(Math.random()<0.01)w.roamAngle+=(Math.random()-0.5)*1.5
+      w.x+=Math.cos(w.roamAngle)*WOLF_SPEED*0.6
+      w.y+=Math.sin(w.roamAngle)*WOLF_SPEED*0.6
+      if(w.x<20||w.x>WORLD_SIZE-20)w.roamAngle=Math.PI-w.roamAngle
+      if(w.y<20||w.y>WORLD_SIZE-20)w.roamAngle=-w.roamAngle
+    }else{
+      
+      w.patrolAngle+=0.02
+      w.x+=Math.cos(w.patrolAngle)*w.patrolSpeed
+      w.y+=Math.sin(w.patrolAngle)*w.patrolSpeed
+    }
+    w.el.style.left=w.x+'px'
+    w.el.style.top=w.y+'px'
+    
+    if(playerDist<40){
+      w.aggressive=true
+      w.deaggroTimer=0
+    }
+    
+    if(w.attackCooldown>0)w.attackCooldown--
+    else if(playerDist<36&&w.aggressive&&!gameOver&&!playerInSafeZone&&!inOutpost){
+      health=Math.max(0,health-WOLF_DAMAGE)
+      w.attackCooldown=80
+      document.getElementById('hitFlash').style.opacity='1'
+      setTimeout(()=>document.getElementById('hitFlash').style.opacity='0',120)
+      screenShake()
+      if(health<=0)triggerGameOver()
+    }
+    w.x=Math.max(0,Math.min(WORLD_SIZE,w.x))
+    w.y=Math.max(0,Math.min(WORLD_SIZE,w.y))
+    }catch(e){} 
+  }
+}
+
+function checkDenCapture(){
+  dens.forEach(den=>{
+    if(!den.cleared&&den.hasSpawned&&(den.killCount||0)>=den.maxWolves){
+      den.cleared=true
+      den.el.textContent='🏰'
+      if(den.el)den.el.classList.add('cleared')
+      densCleared++
+      wood+=50
+      metal+=20
+      document.getElementById('wood').textContent=String(wood)
+      document.getElementById('metal').textContent=String(metal)
+      document.getElementById('outpostUI').textContent=`🏚️ Dens: ${densCleared}/3 Cleared`
+      const zone=document.createElement('div')
+      zone.className='outpostZone'
+      zone.style.left=(den.x-80)+'px'
+      zone.style.top=(den.y-80)+'px'
+      world.appendChild(zone)
+      showCaptureToast()
+      updateOutpostUI()
+      draw()
+    }
+  })
+}
+
+function updateOutpostUI(){
+  document.getElementById('outpostUI').textContent=`🏚️ Dens: ${densCleared}/4 Cleared`
+}
+
+function triggerGameOver(){
+  gameOver=true
+  const survived=Date.now()-gameStartTime
+  const mins=Math.floor(survived/60000)
+  const secs=Math.floor((survived%60000)/1000)
+  document.getElementById('finalLevel').textContent=homeLevel
+  document.getElementById('finalTime').textContent=`${mins}:${secs.toString().padStart(2,'0')}`
+  document.getElementById('finalKills').textContent=wolvesKilled
+  document.getElementById('finalDens').textContent=densCleared
+  document.getElementById('gameOverOverlay').style.display='flex'
+}
+
+function updateDayNight(){
+  if(!gameStarted)return
+  const elapsed=(Date.now()-cycleStartTime)%CYCLE_LENGTH
+  const isNightNow=elapsed>=DAY_LENGTH
+  const timeInPhase=isNightNow?elapsed-DAY_LENGTH:elapsed
+  const phaseTotal=isNightNow?NIGHT_LENGTH:DAY_LENGTH
+  const timeRemaining=Math.ceil((phaseTotal-timeInPhase)/1000)
+  if(isNightNow!==isNight){
+    isNight=isNightNow
+    if(isNight){
+      dayNightOverlay.classList.add('night')
+      visionMask.classList.add('night')
+      sunMoon.textContent='🌙'
+      checkBellWarning()
+      updateFirelight()
+    }else{
+      dayNightOverlay.classList.remove('night')
+      visionMask.classList.remove('night')
+      sunMoon.textContent='☀️'
+      updateFirelight()
+      
+      wolves.forEach(w=>{
+        w.aggressive=false
+        w.deaggroTimer=0
+        if(w.el&&w.el.isConnected){
+          w.el.classList.add('passive')
+          w.el.classList.remove('aggressive')
+          if(w.stateEl)w.stateEl.textContent='💤'
+        }
+      })
+    }
+  }
+  const mins=Math.floor(timeRemaining/60)
+  const secs=timeRemaining%60
+  const phaseIcon=isNight?'🌙':'☀️'
+  document.getElementById('timeUI').innerHTML=`${phaseIcon} ${isNight?'Night':'Day'}: <span id="timeDisplay">${mins}:${secs.toString().padStart(2,'0')}</span>`
+  const cycleProgress=elapsed/CYCLE_LENGTH
+  const trackWidth=document.getElementById('sunMoonTrack').offsetWidth
+  sunMoon.style.left=(cycleProgress*(trackWidth-28))+'px'
+  if(isNight){
+    const px=window.innerWidth/2,py=window.innerHeight/2
+    visionMask.style.background=`radial-gradient(circle 200px at ${px}px ${py}px,transparent 0%,rgba(5,10,25,0.95) 100%)`
+  }
+}
+
+function drawMinimap(){
+  mCtx.clearRect(0,0,160,160)
+  mCtx.fillStyle='#0a150a'
+  mCtx.fillRect(0,0,160,160)
+  const scale=160/WORLD_SIZE
+  mCtx.fillStyle='rgba(0,0,0,0.85)'
+  mCtx.fillRect(0,0,160,160)
+  mCtx.fillStyle='#1a2a1a'
+  exploredTiles.forEach(key=>{
+    const [tx,ty]=key.split(',').map(Number)
+    mCtx.fillRect(tx*TILE_SIZE*scale,ty*TILE_SIZE*scale,TILE_SIZE*scale,TILE_SIZE*scale)
+  })
+  dens.forEach(den=>{
+    if(den.cleared){
+      mCtx.fillStyle='rgba(255,204,68,0.1)'
+      mCtx.beginPath()
+      mCtx.arc(den.x*scale,den.y*scale,OUTPOST_SAFE_RADIUS*scale,0,Math.PI*2)
+      mCtx.fill()
+    }
+  })
+  mCtx.fillStyle='#4f8'
+  mCtx.fillRect(homeX*scale-4,homeY*scale-4,8,8)
+  dens.forEach(den=>{
+    mCtx.fillStyle=den.cleared?'#fc4':'#f44'
+    mCtx.fillRect(den.x*scale-3,den.y*scale-3,6,6)
+  })
+  mCtx.fillStyle='#fff'
+  mCtx.beginPath()
+  mCtx.arc(x*scale,y*scale,3,0,Math.PI*2)
+  mCtx.fill()
+  
+  sheep.forEach(s=>{
+    mCtx.fillStyle=s.sheared?'#aaa':'#fff'
+    mCtx.beginPath()
+    mCtx.arc(s.x*scale,s.y*scale,2,0,Math.PI*2)
+    mCtx.fill()
+  })
+  mCtx.font='10px serif'
+  mCtx.fillText('🧔',BRAM_X*scale-5,BRAM_Y*scale+4)
+  
+  if(activeExploreLocation){
+    mCtx.font='10px serif'
+    mCtx.fillText('📍',activeExploreLocation.x*scale-5,activeExploreLocation.y*scale+4)
+  }
+  wolves.forEach(w=>{
+    mCtx.fillStyle=w.aggressive?'#f44':'#f88'
+    mCtx.beginPath()
+    mCtx.arc(w.x*scale,w.y*scale,2,0,Math.PI*2)
+    mCtx.fill()
+  })
+}
+
+let lastFogX=-999,lastFogY=-999
+
+function draw(){
+  world.style.left=Math.round(-x+window.innerWidth/2)+'px'
+  world.style.top=Math.round(-y+window.innerHeight/2)+'px'
+  player.style.left=x+'px'
+  player.style.top=y+'px'
+  const dx=homeX-x,dy=homeY-y,angle=Math.atan2(dy,dx)*180/Math.PI
+  arrow.style.transform=`rotate(${angle}deg)`
+  arrow.style.left='10px'
+  arrow.style.top='-30px'
+  if(Math.hypot(x-lastFogX,y-lastFogY)>TILE_SIZE){
+    updateFog()
+    lastFogX=x;lastFogY=y
+  }
+  updateDayNight()
+}
+setInterval(()=>{try{drawMinimap()}catch(e){}},500)
+
+function updateUI(){
+  document.getElementById('health').textContent=health
+  document.getElementById('wood').textContent=wood
+  document.getElementById('metal').textContent=metal
+  document.getElementById('food').textContent=food
+  document.getElementById('hunger').textContent=hunger
+  document.getElementById('level').textContent=homeLevel
+  document.getElementById('gold').textContent=gold
+  const clothEl=document.getElementById('cloth')
+  if(clothEl)clothEl.textContent=cloth
+  const hBar=document.getElementById('healthBar')
+  const huBar=document.getElementById('hungerBar')
+  if(hBar)hBar.style.width=Math.max(0,health)+'%'
+  if(huBar)huBar.style.width=Math.max(0,hunger)+'%'
+  if(bramQuestMarkerEl){
+    bramQuestMarkerEl.style.display=(!currentQuest||(currentQuest&&!currentQuest.accepted))?'block':'none'
+  }
+}
+setInterval(()=>{try{updateUI()}catch(e){}},150)
+
+let vibeDecoEls=[]
+
+function clearVibeDecos(){
+  vibeDecoEls.forEach(el=>el.remove())
+  vibeDecoEls=[]
+}
+
+function spawnVibeDecos(vibe){
+  clearVibeDecos()
+  if(vibe==='cottage')return
+  const sets={
+    spring:['🌸','🌼','🌿','🌱','🍀'],
+    autumn:['🍂','🍁','🌾','🍄'],
+    winter:['❄️','⛄','❄️','✨']
+  }
+  const emojis=sets[vibe]
+  for(let i=0;i<8;i++){
+    const angle=Math.random()*Math.PI*2
+    const dist=65+Math.random()*75
+    const el=document.createElement('div')
+    el.style.cssText=`position:absolute;font-size:11px;left:${homeX+Math.cos(angle)*dist}px;top:${homeY+Math.sin(angle)*dist}px;z-index:8;pointer-events:none;opacity:0.8`
+    el.textContent=emojis[Math.floor(Math.random()*emojis.length)]
+    world.appendChild(el)
+    vibeDecoEls.push(el)
+  }
+}
+
+function updateHomeVisuals(){
+  const emojis=['🏚️','🏠','🏡','🏘️','🏰']
+  home.textContent=emojis[Math.min(homeLevel-1,4)]
+  document.getElementById('customTabBtn').style.display=homeLevel>=5?'block':'none'
+  applyHomeGlow()
+  applyPaintFilter()
+}
+
+function applyHomeGlow(){
+  if(!home)return
+  home.classList.remove('home-cozy','home-library','home-bakery','home-bell')
+  if(interiorsBuilt.bell)home.classList.add('home-bell')
+  else if(interiorsBuilt.bakery)home.classList.add('home-bakery')
+  else if(interiorsBuilt.library)home.classList.add('home-library')
+  else if(interiorsBuilt.cozy)home.classList.add('home-cozy')
+}
+
+function applyPaintFilter(){
+  const filters={none:'none',red:'hue-rotate(0deg) saturate(1.5) brightness(1.1)',blue:'hue-rotate(220deg) saturate(1.4) brightness(1.05)',green:'hue-rotate(120deg) saturate(1.4) brightness(1.05)',yellow:'hue-rotate(60deg) saturate(1.6) brightness(1.1)',purple:'hue-rotate(280deg) saturate(1.5) brightness(1.05)'}
+  const glowClass=interiorsBuilt.bell?'drop-shadow(0 0 14px rgba(255,255,255,0.6))':interiorsBuilt.bakery?'drop-shadow(0 0 12px rgba(255,220,100,0.6))':interiorsBuilt.library?'drop-shadow(0 0 12px rgba(100,150,255,0.5))':interiorsBuilt.cozy?'drop-shadow(0 0 12px rgba(255,180,80,0.5))':''
+  const paintF=filters[houseColor]||'none'
+  home.style.filter=[glowClass,paintF].filter(f=>f&&f!=='none').join(' ')||'none'
+}
+
+function setVibe(vibe){
+  currentVibe=vibe
+  vibeOverlay.className=''
+  if(vibeOverlay)vibeOverlay.classList.add(vibe)
+  const bgColors={cottage:'#152015',spring:'#1a1f16',autumn:'#1a1508',winter:'#101520'}
+  document.getElementById('world').style.background=`radial-gradient(ellipse at center, ${bgColors[vibe]} 0%, #0a100a 100%)`
+  document.querySelectorAll('.vibeBtn').forEach(b=>b.classList.remove('selected'))
+  const btn=document.getElementById('vibe-'+vibe)
+  if(btn)btn.classList.add('selected')
+  spawnVibeDecos(vibe)
+  updateVibeDecorations()
+  updateHomeVisuals()
+}
+
+function updateVibeDecorations(){
+  
+  if(currentVibe==='winter'){
+    gardenElements.forEach(el=>{el.style.opacity='0.7';el.style.filter='brightness(0.8) saturate(0.5) hue-rotate(180deg)'})
+  }else if(currentVibe==='autumn'){
+    gardenElements.forEach(el=>{el.style.opacity='0.9';el.style.filter='brightness(1) saturate(1.2) hue-rotate(20deg)'})
+  }else{
+    gardenElements.forEach(el=>{el.style.opacity='1';el.style.filter=''})
+  }
+}
+
+function switchTab(tab){
+  document.querySelectorAll('.tabBtn').forEach(b=>b.classList.remove('active'))
+  document.querySelectorAll('.tabContent').forEach(c=>c.classList.remove('active'))
+  const tabMap={repairs:['repairTab',0],grounds:['groundsTab',1],interior:['interiorTab',2],custom:['customTab',3]}
+  const [contentId,btnIdx]=tabMap[tab]
+  const tabEl=document.getElementById(contentId);if(tabEl)tabEl.classList.add('active')
+  const btns=document.querySelectorAll('.tabBtn')
+  const visibleBtns=Array.from(btns).filter(b=>b.style.display!=='none')
+  
+  visibleBtns.forEach(b=>{if(b.getAttribute('onclick')===`switchTab('${tab}')`)b.classList.add('active')})
+  if(tab==='interior')updateInteriorUI()
+  if(tab==='grounds')updateGroundsUI()
+  if(tab==='custom')updateCustomizationUI()
+}
+
+function updateInteriorUI(){
+  const levels={cozy:2,library:3,bakery:4,bell:5}
+  Object.keys(interiorsBuilt).forEach(key=>{
+    const item=document.getElementById('item-'+key)
+    if(!item)return
+    const btn=item.querySelector('button')
+    const requiredLevel=levels[key]
+    const locked=homeLevel<requiredLevel
+    const built=interiorsBuilt[key]
+    if(item)item.classList.toggle('locked',locked&&!built)
+    if(built){
+      if(item)item.classList.add('completed')
+      btn.textContent='Built ✅'
+      btn.disabled=true
+    }else if(locked){
+      btn.textContent=`Need Lv ${requiredLevel}`
+      btn.disabled=true
+    }else{
+      if(item)item.classList.remove('completed')
+      const costs={cozy:{wood:4,metal:0},library:{wood:6,metal:2},bakery:{wood:5,metal:0,food:3},bell:{wood:8,metal:5}}
+      const c=costs[key]
+      const canAfford=(wood>=c.wood)&&(metal>=(c.metal||0))&&(food>=(c.food||0))
+      btn.disabled=!canAfford
+      btn.textContent='Build'
+    }
+  })
+  
+  const clothItems={curtains:{level:2,cloth:2,wood:2},bedroll:{level:3,cloth:4,wood:2},tent:{level:4,cloth:6,wood:4}}
+  Object.keys(clothItems).forEach(key=>{
+    const item=document.getElementById('item-'+key)
+    if(!item)return
+    const btn=item.querySelector('button')
+    const c=clothItems[key]
+    const built=clothUpgrades[key]
+    const locked=homeLevel<c.level
+    if(item)item.classList.toggle('locked',locked&&!built)
+    if(built){if(item)item.classList.add('completed');btn.textContent='Built ✅';btn.disabled=true}
+    else if(locked){btn.textContent=`Need Lv ${c.level}`;btn.disabled=true}
+    else{if(item)item.classList.remove('completed');btn.disabled=cloth<c.cloth||wood<c.wood}
+  })
+}
+
+function updateGroundsUI(){
+  const items=['lanterns','path','fountain','statue']
+  items.forEach(key=>{
+    const item=document.getElementById('item-'+key)
+    if(!item)return
+    const btn=item.querySelector('button')
+    if(groundsBuilt[key]){
+      item.classList.add('completed')
+      btn.textContent='Built ✅'
+      btn.disabled=true
+    }else{
+      item.classList.remove('completed')
+      const costs={lanterns:{wood:3,metal:2},path:{wood:4,metal:2},fountain:{wood:6,metal:4},statue:{wood:5,metal:3}}
+      const c=costs[key]
+      btn.disabled=wood<c.wood||metal<c.metal
+    }
+  })
+  
+  const gardenItem=document.getElementById('item-garden')
+  if(gardenColor){
+    if(gardenItem)gardenItem.classList.add('completed')
+    document.getElementById('gardenOptions').style.display='none'
+  }else{
+    const canCraft=wood>=4&&food>=2
+    document.querySelectorAll('#gardenOptions .colorBtn').forEach(btn=>{
+      btn.style.opacity=canCraft?'1':'0.3'
+      btn.style.pointerEvents=canCraft?'auto':'none'
+    })
+  }
+  
+  const moatItem=document.getElementById('item-moat')
+  const moatBtn=moatItem.querySelector('button')
+  if(hasMoat){
+    if(moatItem)moatItem.classList.add('completed')
+    moatBtn.textContent='Built ✅'
+    moatBtn.disabled=true
+  }else{
+    moatBtn.disabled=wood<12||metal<8
+  }
+}
+
+function updateCustomizationUI(){
+  const upgrades={sledgehammer:{wood:8,metal:5},chest:{wood:10,metal:6}}
+  Object.keys(upgrades).forEach(key=>{
+    const item=document.getElementById('item-'+key)
+    if(!item)return
+    const btn=item.querySelector('button')
+    const owned=(key==='sledgehammer'&&hasSledgehammer)||(key==='chest'&&hasChest)
+    if(owned){item.classList.add('completed');btn.textContent='Owned ✅';btn.disabled=true}
+    else{const c=upgrades[key];btn.disabled=wood<c.wood||metal<c.metal}
+  })
+  
+  document.querySelectorAll('.paintCraftBtn').forEach(btn=>{
+    const color=btn.dataset.color
+    if(color==='none'){
+      btn.style.borderColor=houseColor==='none'?'#4f8':'#355'
+      btn.textContent='⚪ Default'
+      return
+    }
+    const emojis={red:'🔴',blue:'🔵',green:'🟢',yellow:'🟡',purple:'🟣'}
+    const owned=ownedPaints.has(color)
+    const active=houseColor===color
+    btn.style.borderColor=active?'#4f8':owned?'#888':'#355'
+    btn.style.background=active?'#1a3a1a':owned?'#1a1a2a':'#132313'
+    btn.textContent=active?`${emojis[color]} Applied ✅`:owned?`${emojis[color]} Apply`:`${emojis[color]} Craft (3🪵1⚙️)`
+    btn.disabled=false
+  })
+  const ownedList=[...ownedPaints]
+  const paintOwnedEl=document.getElementById('paintOwned')
+  if(paintOwnedEl)paintOwnedEl.textContent=ownedList.length?'Owned: '+ownedList.map(c=>({red:'🔴',blue:'🔵',green:'🟢',yellow:'🟡',purple:'🟣'}[c])).join(' '):'Owned: none'
+}
+
+function initTitleParticles(){
+  const container=document.getElementById('driftParticles')
+  if(!container)return
+  const emojis=['🍃','🌿','✨','🌱','🍂','⭐']
+  for(let i=0;i<18;i++){
+    const p=document.createElement('div')
+    p.style.cssText=`position:absolute;font-size:${12+Math.random()*16}px;opacity:${0.2+Math.random()*0.4};left:${Math.random()*100}%;top:${Math.random()*100}%;animation:drift${Math.floor(Math.random()*3)+1} ${8+Math.random()*12}s linear infinite;animation-delay:${-Math.random()*10}s;`
+    p.textContent=emojis[Math.floor(Math.random()*emojis.length)]
+    container.appendChild(p)
+  }
+}
+
+initTitleParticles()
+
+function startGame(){
+  const overlay=document.getElementById('instructionsOverlay')
+  overlay.style.display='none'
+  overlay.style.pointerEvents='none'
+  gameStarted=true
+  gameStartTime=Date.now()
+  cycleStartTime=Date.now()
+  initFog()
+  updateFog()
+  spawnSheep(homeX+90,homeY+80)
+  spawnSheep(homeX-80,homeY+100)
+  spawnSheep(homeX+120,homeY-60)
+  spawnSheep(homeX-60,homeY-80)
+  for(let i=0;i<4;i++)spawnSheep(Math.random()*1400+100,Math.random()*1400+100)
+  spawnInitialWolves()
+  spawnBram()
+  spawnAllEntities()
+  draw()
+  loop()
+}
+document.getElementById('startGameBtn').addEventListener('click', startGame)
+
+function cookFood(){
+  if(food<=0)return
+  food-=1
+  hunger=Math.min(100,hunger+30)
+  health=Math.min(100,health+7)
+  showHealToast()
+  if(hunger>0)document.getElementById('starvedOverlay').style.display='none'
+  draw()
+  updateRepairVisuals()
+}
+
+function depleteHunger(){
+  if(gameOver)return
+  hunger=Math.max(0,hunger-(isNight?6:3))
+  if(hunger===0)document.getElementById('starvedOverlay').style.display='block'
+  draw()
+}
+setInterval(()=>{try{depleteHunger()}catch(e){}},20000)
+
+function repair(part){
+  const cost={window:{wood:2,metal:0},wall:{wood:2,metal:1},door:{wood:1,metal:2},roof:{wood:3,metal:2}}
+  const c=cost[part]
+  if(repairProgress[part]===1||wood<c.wood||metal<c.metal)return
+  wood-=c.wood;metal-=c.metal
+  repairProgress[part]=1
+  updateRepairVisuals()
+  const done=repairProgress.window+repairProgress.wall+repairProgress.door+repairProgress.roof
+  if(done===4){
+    homeLevel++
+    repairProgress={window:0,wall:0,door:0,roof:0}
+    updateHomeVisuals()
+    updateRepairVisuals()
+  }
+  draw()
+}
+
+function craftGrounds(type){
+  const costs={lanterns:{wood:3,metal:2},path:{wood:4,metal:2},fountain:{wood:6,metal:4},statue:{wood:5,metal:3}}
+  const c=costs[type]
+  if(wood<c.wood||metal<c.metal||groundsBuilt[type])return
+  wood-=c.wood;metal-=c.metal
+  groundsBuilt[type]=true
+
+  if(type==='lanterns'){
+    const pos={x:homeX-60,y:homeY-50}
+    const glow=document.createElement('div')
+    glow.className='lanternGlow'
+    glow.style.left=(pos.x-30)+'px'
+    glow.style.top=(pos.y-30)+'px'
+    world.appendChild(glow)
+    const lantern=document.createElement('div')
+    lantern.className='groundDeco'
+    lantern.textContent='🏮'
+    lantern.style.left=pos.x+'px'
+    lantern.style.top=pos.y+'px'
+    world.appendChild(lantern)
+  }else if(type==='path'){
+    const doorX=homeX+36
+    const doorY=homeY+72
+    for(let i=0;i<3;i++){
+      const tile=document.createElement('div')
+      tile.className='pathTile'
+      tile.textContent='🪨'
+      tile.style.left=(doorX-10)+'px'
+      tile.style.top=(doorY+i*22)+'px'
+      tile.style.fontSize='20px'
+      tile.style.zIndex='7'
+      world.appendChild(tile)
+    }
+  }else if(type==='fountain'){
+    const fountain=document.createElement('div')
+    fountain.className='groundDeco fountainAnim'
+    fountain.textContent='⛲'
+    fountain.style.left=(homeX-140)+'px'
+    fountain.style.top=(homeY+20)+'px'
+    fountain.style.fontSize='40px'
+    fountain.style.zIndex='8'
+    world.appendChild(fountain)
+    
+    const ripple=document.createElement('div')
+    ripple.style.cssText=`position:absolute;width:70px;height:30px;border-radius:50%;border:2px solid rgba(100,180,255,0.4);left:${homeX-155}px;top:${homeY+55}px;z-index:7;animation:lanternPulse 2s ease-in-out infinite;`
+    world.appendChild(ripple)
+  }else if(type==='statue'){
+    const statue=document.createElement('div')
+    statue.className='groundDeco'
+    statue.textContent='🗿'
+    statue.style.left=(homeX+130)+'px'
+    statue.style.top=(homeY-20)+'px'
+    statue.style.fontSize='44px'
+    statue.style.zIndex='9'
+    statue.style.filter='drop-shadow(0 0 8px rgba(150,150,150,0.5))'
+    world.appendChild(statue)
+  }
+
+  updateGroundsUI()
+  draw()
+}
+
+function craftInterior(type){
+  const levels={cozy:2,library:3,bakery:4,bell:5}
+  const costs={cozy:{wood:4,metal:0},library:{wood:6,metal:2},bakery:{wood:5,metal:0,food:3},bell:{wood:8,metal:5}}
+  if(homeLevel<levels[type]||interiorsBuilt[type])return
+  const c=costs[type]
+  if(wood<c.wood||metal<(c.metal||0)||food<(c.food||0))return
+  wood-=c.wood;metal-=(c.metal||0);food-=(c.food||0)
+  interiorsBuilt[type]=true
+  applyHomeGlow()
+
+  updateInteriorUI()
+  draw()
+}
+
+function craftUpgrade(type){
+  const costs={sledgehammer:{wood:8,metal:5},chest:{wood:10,metal:6},moat:{wood:12,metal:8}}
+  const cost=costs[type]
+  if(wood<cost.wood||metal<cost.metal)return
+  wood-=cost.wood;metal-=cost.metal
+  if(type==='sledgehammer')hasSledgehammer=true
+  else if(type==='chest'){hasChest=true;document.getElementById('chest').style.display='block'}
+  else if(type==='moat'){hasMoat=true;document.getElementById('moat').style.display='block'}
+  updateCustomizationUI()
+  updateGroundsUI()
+  draw()
+}
+
+function craftOrApplyPaint(color){
+  if(color==='none'){
+    houseColor='none'
+    applyPaintFilter()
+    updateCustomizationUI()
+    return
+  }
+  if(ownedPaints.has(color)){
+    
+    houseColor=color
+    applyPaintFilter()
+    updateCustomizationUI()
+  }else{
+    
+    if(wood<3||metal<1)return
+    wood-=3;metal-=1
+    ownedPaints.add(color)
+    houseColor=color
+    applyPaintFilter()
+    updateCustomizationUI()
+    draw()
+  }
+}
+
+function craftGarden(color){
+  if(wood<4||food<2||gardenColor)return
+  wood-=4;food-=2;gardenColor=color
+  const flowerMap={pink:'🌸',yellow:'🌻',red:'🌹',purple:'🌷',white:'🌼'}
+  const emoji=flowerMap[color]
+  const positions=[
+    {x:homeX-60,y:homeY-40},{x:homeX+80,y:homeY-40},
+    {x:homeX-80,y:homeY+20},{x:homeX+100,y:homeY+20},
+    {x:homeX-40,y:homeY+90},{x:homeX+60,y:homeY+90}
+  ]
+  positions.forEach(pos=>{
+    const flower=document.createElement('div')
+    flower.className='e'
+    flower.textContent=emoji
+    flower.style.left=pos.x+'px'
+    flower.style.top=pos.y+'px'
+    flower.style.zIndex='8'
+    world.appendChild(flower)
+    gardenElements.push(flower)
+  })
+  updateGroundsUI()
+  draw()
+}
+
+function openMenu(){
+  if(Math.hypot(homeX-x,homeY-y)<120){
+    const menu=document.getElementById('homeMenu')
+    if(menu.style.display==='flex')return
+    menu.style.display='flex'
+    updateRepairVisuals()
+    updateInteriorUI()
+    updateGroundsUI()
+    updateCustomizationUI()
+  }
+}
+
+function closeMenu(){document.getElementById('homeMenu').style.display='none'}
+
+function craftCloth(type){
+  const levels={curtains:2,bedroll:3,tent:4}
+  const costs={curtains:{cloth:2,wood:2},bedroll:{cloth:4,wood:2},tent:{cloth:6,wood:4}}
+  if(homeLevel<levels[type]||clothUpgrades[type])return
+  const c=costs[type]
+  if(cloth<c.cloth||wood<c.wood)return
+  cloth-=c.cloth;wood-=c.wood
+  clothUpgrades[type]=true
+  if(type==='curtains')maxHunger=115
+  updateInteriorUI()
+  draw()
+}
+
+function openDenMenu(){
+  document.getElementById('denCookBtn').disabled=food<=0||(hunger>=100&&health>=100)
+  document.getElementById('denMenu').style.display='flex'
+}
+
+function closeDenMenu(){document.getElementById('denMenu').style.display='none'}
+
+function cookFoodAtDen(){
+  if(food<=0)return
+  food-=1;hunger=Math.min(100,hunger+30);health=Math.min(100,health+7)
+  document.getElementById('denCookBtn').disabled=food<=0||(hunger>=100&&health>=100)
+  showHealToast()
+  if(hunger>0)document.getElementById('starvedOverlay').style.display='none'
+  draw()
+}
+
+function checkHome(){
+  if(Math.hypot(homeX-x,homeY-y)<120)openMenu()
+}
+
+function attack(){
+  if(gameOver)return
+  let hitSomething=false
+  for(let i=wolves.length-1;i>=0;i--){
+    const w=wolves[i]
+    if(Math.hypot(w.x-x,w.y-y)<100){
+      w.hp-=WOLF_ATTACK_DAMAGE
+      w.aggressive=true;w.deaggroTimer=0
+      hitSomething=true
+      if(w.hp<=0){
+        w.el.remove()
+        const den=dens.find(d=>d.id===w.denId)
+        if(den){
+          const idx=den.wolves.indexOf(w)
+          if(idx>=0)den.wolves.splice(idx,1)
+          den.killCount=(den.killCount||0)+1
+        }
+        wolves.splice(i,1);wolvesKilled++
+        if(Math.random()<0.3){spawn('food','🍖',x+(Math.random()-0.5)*100,y+(Math.random()-0.5)*100)}
+        checkDenCapture()
+      }
+      break
+    }
+  }
+  if(!hitSomething)checkHome()
+}
+
+document.getElementById('act').onclick=()=>{
+  if(gameOver)return
+  
+  const nearDen=dens.find(d=>d.cleared&&Math.hypot(d.x-x,d.y-y)<120)
+  if(nearDen){openDenMenu();return}
+  
+  const nearSheep=sheep.find(s=>!s.sheared&&Math.hypot(s.x-x,s.y-y)<90)
+  if(nearSheep){
+    nearSheep.sheared=true
+    nearSheep.shearTimer=0
+    nearSheep.el.textContent='🐏'
+    nearSheep.el.style.opacity='0.6'
+    cloth+=1+(Math.random()<0.4?1:0)
+    const toast=document.getElementById('captureToast')
+    toast.textContent='🧵 Sheared! Got cloth!'
+    toast.style.display='block'
+    setTimeout(()=>{toast.style.display='none';toast.textContent='Den Captured! +50🪵 +20⚙️'},1500)
+    return
+  }
+  
+  if(Math.hypot(BRAM_X-x,BRAM_Y-y)<70){openBramMenu();return}
+  
+  if(activeExploreLocation&&Math.hypot(activeExploreLocation.x-x,activeExploreLocation.y-y)<80){
+    removeExploreMarker()
+    wood+=10;metal+=5
+    const toast=document.getElementById('captureToast')
+    toast.textContent=`${currentQuest?.location?.name||'Location'} found! +10🪵 +5⚙️`
+    toast.style.display='block'
+    setTimeout(()=>{toast.style.display='none';toast.textContent='Den Captured! +50🪵 +20⚙️'},2500)
+    return
+  }
+  
+  let target=null
+  for(const e of entities){if(Math.hypot(e.x-x,e.y-y)<80){target=e;break}}
+  if(!target){checkHome();return}
+  target.hp--
+  if(target.el&&target.el.isConnected){
+    if(target.el&&target.el.isConnected){target.el.classList.remove('shaking');target.el.classList.add('shaking')}
+    setTimeout(()=>{if(target.el&&target.el.isConnected)target.el.classList.remove('shaking')},300)
+  }
+  if(target.hp<=0){
+    const bonus=hasSledgehammer?1:0
+    if(target.type==='tree')wood+=3+bonus
+    if(target.type==='rock')metal+=2+bonus
+    if(target.type==='food')food+=1
+    if(target.el&&target.el.isConnected)target.el.style.opacity='0'
+    setTimeout(()=>{if(target.el)target.el.remove()},150)
+    entities=entities.filter(v=>v!==target)
+  }
+}
+
+document.getElementById('attackBtn').onclick=attack
+
+let mx=0,my=0,drag=false
+let vx=0,vy=0
+const js=document.getElementById('joystick'),st=document.getElementById('stick')
+const MAX_SPEED=4.5,DEADZONE=0.12,MAX_DRAG=50,ACCEL=0.28,FRICTION=0.80
+let jsRect=null
+
+js.addEventListener('touchstart',e=>{
+  drag=true
+  jsRect=js.getBoundingClientRect()
+  e.stopPropagation()
+},{passive:true})
+
+window.addEventListener('touchend',()=>{
+  drag=false;mx=my=0
+  st.style.left='45px';st.style.top='45px'
+})
+
+window.addEventListener('touchmove',e=>{
+  if(!drag||!jsRect)return
+  e.preventDefault()
+  const t=e.touches[0]
+  let dx=t.clientX-jsRect.left-70,dy=t.clientY-jsRect.top-70
+  const d=Math.hypot(dx,dy)
+  if(d>MAX_DRAG){dx=dx/d*MAX_DRAG;dy=dy/d*MAX_DRAG}
+  st.style.left=(dx+45)+'px';st.style.top=(dy+45)+'px'
+  mx=dx/MAX_DRAG;my=dy/MAX_DRAG
+  if(Math.hypot(mx,my)<DEADZONE){mx=0;my=0}
+},{passive:false})
+
+window.addEventListener('keydown',e=>{
+  if(e.key===' ')attack()
+  if(e.key==='e'||e.key==='E')document.getElementById('act').click()
+})
+
+function loop(){
+  try{
+    if(!gameOver){
+      vx+=(mx*MAX_SPEED-vx)*ACCEL
+      vy+=(my*MAX_SPEED-vy)*ACCEL
+      if(mx===0&&my===0){vx*=FRICTION;vy*=FRICTION}
+      if(Math.abs(vx)<0.01)vx=0
+      if(Math.abs(vy)<0.01)vy=0
+      x+=vx;y+=vy
+      x=Math.max(0,Math.min(WORLD_SIZE,x));y=Math.max(0,Math.min(WORLD_SIZE,y))
+      updateWolves()
+      updateSheep()
+      if(clothUpgrades.bedroll&&Math.hypot(homeX-x,homeY-y)<150){
+        health=Math.min(100,health+0.01)
+      }
+    }
+    draw()
+  }catch(e){
+    console.warn('Loop error:',e.message)
+  }
+  requestAnimationFrame(loop)
+}
+
+updateRepairVisuals()
+updateHomeVisuals()
+updateOutpostUI()
+
+</script>
+</body>
+</html>

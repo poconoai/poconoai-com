@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="description" content="A future Pocono AI plan for private local AI home infrastructure supporting disability, communication, executive function, memory, safety, and independence.">
+<meta name="keywords" content="local AI home appliance, disability AI assistant, private home AI, neurodivergent AI tools, caregiver AI, home independence technology, executive function AI, local AI no cloud, Sentinel Home Edition, Pocono AI future plans">
+<title>Sentinel Home Edition | Pocono AI</title>
+
+<meta property="og:title" content="Sentinel Home Edition — Private Local AI for Independence | Pocono AI">
+<meta property="og:description" content="A future Pocono AI plan for private local AI home infrastructure: communication, memory, executive function, home control, and dignity — built from lived experience, not market research.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Pocono AI">
+<meta property="og:url" content="https://poconoai.com/sentinel-home/">
+<meta property="og:image" content="https://poconoai.com/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#04111a">
+
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+
+<link rel="stylesheet" href="/styles.css?v=402">
+<link rel="stylesheet" href="/nav-v2026.css?v=402">
+<link rel="stylesheet" href="/brand-v292.css?v=402">
+<link rel="canonical" href="https://poconoai.com/sentinel-home/">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+
+<style>
+/* ── Sentinel Home Edition — page-specific styles ── */
+:root {
+  --sh-bg:       #04111a;
+  --sh-surface:  #061824;
+  --sh-card:     rgba(255,255,255,0.035);
+  --sh-border:   rgba(255,255,255,0.09);
+  --sh-teal:     #00c2a8;
+  --sh-teal-dim: rgba(0,194,168,0.15);
+  --sh-amber:    #f0a500;
+  --sh-amber-dim:rgba(240,165,0,0.12);
+  --sh-text:     #c8d8e4;
+  --sh-muted:    #7a8fa0;
+  --sh-max:      1100px;
+}
+body { background: var(--sh-bg); color: var(--sh-text); }
+.sh-wrap { max-width: var(--sh-max); margin: 0 auto; padding: 0 22px; }
+
+/* status badge */
+.sh-status {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--sh-amber-dim); border: 1px solid rgba(240,165,0,0.35);
+  border-radius: 999px; padding: 5px 14px; font-size: 0.78em;
+  font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--sh-amber); margin-bottom: 22px;
+}
+.sh-status::before { content: ''; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--sh-amber); }
+
+/* hero */
+.sh-hero {
+  padding: 80px 22px 64px; text-align: center; background: var(--sh-bg);
+  border-bottom: 1px solid var(--sh-border);
+}
+.sh-hero h1 {
+  font-size: clamp(2.1rem, 5vw, 3.4rem); font-weight: 800; line-height: 1.15;
+  color: #fff; margin: 0 0 18px; letter-spacing: -0.02em;
+}
+.sh-hero .sh-sub {
+  font-size: clamp(1.05rem, 2.5vw, 1.3rem); color: var(--sh-muted);
+  max-width: 640px; margin: 0 auto 34px; line-height: 1.6;
+}
+.sh-ctas { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-bottom: 32px; }
+.sh-btn-primary {
+  display: inline-flex; align-items: center; padding: 13px 28px;
+  border-radius: 999px; background: var(--sh-teal); color: #04111a;
+  font-weight: 700; text-decoration: none; font-size: 1em; transition: opacity .15s;
+}
+.sh-btn-primary:hover { opacity: .88; }
+.sh-btn-ghost {
+  display: inline-flex; align-items: center; padding: 12px 26px;
+  border-radius: 999px; border: 1px solid rgba(0,194,168,0.45);
+  color: var(--sh-teal); font-weight: 600; text-decoration: none; font-size: 1em; transition: background .15s;
+}
+.sh-btn-ghost:hover { background: var(--sh-teal-dim); }
+.sh-founder-note {
+  max-width: 540px; margin: 0 auto; padding: 18px 22px;
+  background: rgba(255,255,255,0.03); border: 1px solid var(--sh-border);
+  border-radius: 12px; font-size: 0.93em; line-height: 1.65; color: var(--sh-muted);
+  text-align: left;
+}
+.sh-founder-note strong { color: #c8d8e4; }
+
+/* sections */
+.sh-section {
+  padding: 64px 22px;
+  border-bottom: 1px solid var(--sh-border);
+}
+.sh-section--alt { background: var(--sh-surface); }
+.sh-section h2 {
+  font-size: clamp(1.4rem, 3vw, 1.9rem); font-weight: 700; color: #fff;
+  margin: 0 0 10px; letter-spacing: -0.01em;
+}
+.sh-section .sh-lead {
+  font-size: 1.05em; color: var(--sh-muted); line-height: 1.7;
+  max-width: 760px; margin: 0 0 36px;
+}
+.sh-section-label {
+  font-size: 0.72em; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.14em; color: var(--sh-teal); margin-bottom: 10px; display: block;
+}
+
+/* feature cards grid */
+.sh-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px;
+}
+.sh-card {
+  background: var(--sh-card); border: 1px solid var(--sh-border);
+  border-radius: 12px; padding: 20px 20px 18px; transition: border-color .15s;
+}
+.sh-card:hover { border-color: rgba(0,194,168,0.35); }
+.sh-card-icon {
+  width: 36px; height: 36px; margin-bottom: 12px; color: var(--sh-teal);
+}
+.sh-card h3 { font-size: 0.97em; font-weight: 700; color: #fff; margin: 0 0 6px; }
+.sh-card p  { font-size: 0.87em; color: var(--sh-muted); margin: 0; line-height: 1.55; }
+
+/* privacy / safety lists */
+.sh-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.sh-list li {
+  display: flex; gap: 12px; align-items: flex-start;
+  padding: 14px 16px; background: var(--sh-card);
+  border: 1px solid var(--sh-border); border-radius: 10px;
+  font-size: 0.93em; line-height: 1.55;
+}
+.sh-list li svg { flex-shrink: 0; margin-top: 2px; }
+.sh-list li strong { color: #d0e0ec; }
+.sh-list--warning li { border-color: rgba(240,165,0,0.2); }
+.sh-list--warning li svg { color: var(--sh-amber); }
+.sh-list--ok li svg { color: var(--sh-teal); }
+
+/* community / price boxes */
+.sh-callout {
+  background: var(--sh-card); border: 1px solid var(--sh-border);
+  border-radius: 14px; padding: 28px 28px 24px; margin-bottom: 20px;
+}
+.sh-callout h3 { font-size: 1.1em; font-weight: 700; color: #fff; margin: 0 0 10px; }
+.sh-callout p { margin: 0 0 14px; line-height: 1.65; font-size: 0.95em; }
+.sh-callout p:last-child { margin-bottom: 0; }
+.sh-price-box {
+  background: var(--sh-teal-dim); border: 1px solid rgba(0,194,168,0.35);
+  border-radius: 14px; padding: 28px 28px 24px; text-align: center;
+}
+.sh-price-box .sh-price { font-size: 2.6rem; font-weight: 800; color: var(--sh-teal); line-height: 1; }
+.sh-price-box .sh-price-label { font-size: 0.82em; color: var(--sh-muted); margin-top: 6px; }
+.sh-price-box .sh-price-note {
+  margin-top: 16px; font-size: 0.86em; color: var(--sh-muted);
+  line-height: 1.6; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+/* interest list / CTA form */
+.sh-interest-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px;
+}
+.sh-interest-card {
+  display: flex; flex-direction: column; gap: 10px;
+  background: var(--sh-card); border: 1px solid var(--sh-border);
+  border-radius: 12px; padding: 20px;
+}
+.sh-interest-card h3 { font-size: 0.96em; font-weight: 700; color: #fff; margin: 0; }
+.sh-interest-card p { font-size: 0.86em; color: var(--sh-muted); margin: 0; line-height: 1.5; flex: 1; }
+.sh-interest-card a {
+  display: inline-flex; align-items: center; padding: 10px 18px;
+  border-radius: 999px; background: var(--sh-teal); color: #04111a;
+  font-weight: 700; text-decoration: none; font-size: 0.88em;
+  width: fit-content; transition: opacity .15s;
+}
+.sh-interest-card a:hover { opacity: .88; }
+.sh-formcta { text-align:center; margin:28px 0 0; padding:22px 24px; background:rgba(240,165,0,.07); border:1px solid rgba(240,165,0,.28); border-radius:14px; }
+.sh-formcta p { color:var(--sh-muted); font-size:0.92em; margin:0 0 16px; line-height:1.6; }
+.sh-formcta .sh-formcta-note { font-size:0.78em; color:rgba(122,143,160,.85); margin:14px auto 0; max-width:58ch; }
+a.interest-list-cta { display:inline-flex; align-items:center; justify-content:center; min-height:48px; padding:0.85rem 1.6rem; border-radius:999px; background:var(--sh-amber); color:#1a1200; font-weight:700; font-size:0.92em; line-height:1.2; white-space:normal; text-decoration:none; transition:opacity .15s; }
+a.interest-list-cta:hover { opacity:.9; color:#1a1200; }
+a.interest-list-cta:visited, a.interest-list-cta:active { color:#1a1200; }
+
+/* dev status banner */
+.sh-status-banner {
+  background: var(--sh-amber-dim); border: 1px solid rgba(240,165,0,0.3);
+  border-radius: 12px; padding: 22px 24px; margin-bottom: 32px;
+}
+.sh-status-banner h3 { color: var(--sh-amber); font-size: 0.92em; text-transform: uppercase; letter-spacing: 0.1em; margin: 0 0 8px; }
+.sh-status-banner p  { margin: 0; font-size: 0.92em; line-height: 1.6; color: var(--sh-muted); }
+
+/* ethical footer note */
+.sh-legal-note {
+  background: rgba(255,255,255,0.025); border: 1px solid var(--sh-border);
+  border-radius: 10px; padding: 18px 20px; font-size: 0.82em;
+  color: var(--sh-muted); line-height: 1.65; margin-top: 40px;
+}
+
+/* hardware chips */
+.sh-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.sh-chip {
+  padding: 5px 13px; border-radius: 999px;
+  border: 1px solid var(--sh-border); font-size: 0.8em;
+  color: var(--sh-muted); background: rgba(255,255,255,0.03);
+}
+
+@media (max-width: 600px) {
+  .sh-hero { padding: 56px 18px 44px; }
+  .sh-section { padding: 44px 18px; }
+  .sh-callout, .sh-price-box { padding: 20px 18px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HITL Notice -->
+<div id="hitl-notice" style="background:#0a1929;padding:4px 16px;text-align:center;font-size:12px;color:#4a5568;border-bottom:1px solid rgba(255,255,255,0.06);letter-spacing:0.01em;">Human-in-the-Loop required: licensed professionals verify all outputs before clinical or legal action</div>
+
+<!-- Site Header (root-relative) -->
+<header role="banner">
+  <div class="header-inner">
+    <a href="/index.html" class="logo" aria-label="Pocono AI Home">
+      <img src="/logo.svg?v=402" alt="" width="36" height="36" decoding="async" loading="eager" aria-hidden="true" style="display:inline-block;">
+      Pocono <span>AI</span>
+    </a>
+    <nav id="desktop-nav" aria-label="Main navigation">
+      <div class="nav-item"><a href="/index.html" class="nav-direct">Home</a></div>
+      <div class="nav-item"><a href="/for-physicians.html" class="nav-direct">Physicians</a></div>
+      <div class="nav-item"><a href="/for-attorneys.html" class="nav-direct">Attorneys</a></div>
+      <div class="nav-item"><a href="/sentinel-node.html" class="nav-direct nav-hub" style="color:#d5a94f;border:1px solid rgba(213,169,79,0.45);border-radius:999px;padding:6px 13px;">Sentinel Node</a></div>
+      <div class="nav-item"><a href="/living-memorials/" class="nav-direct">Living Echo</a></div>
+      <div class="nav-item"><a href="/contact.html" class="nav-direct">Contact</a></div>
+      <div class="nav-item" data-dropdown="menu-more">
+        <button type="button" class="nav-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="menu-more">More <span class="nav-chevron" aria-hidden="true">&#9662;</span></button>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <a href="/contact.html#pilot" class="nav-cta nav-cta-primary">Request a Pilot</a>
+      <button type="button" class="pa-search-trigger" data-search-open aria-label="Search (press / or Ctrl-K)" aria-haspopup="dialog" aria-expanded="false">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span class="pa-st-label">Search</span><kbd data-pa-keyhint>Ctrl K</kbd>
+      </button>
+      <button type="button" class="header-icon-btn" id="mobile-menu" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav-panel">
+        <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- v399 "More" overflow dropdown (sibling of header) -->
+<div class="nav-dropdown" id="menu-more" aria-label="More navigation">
+  <p class="nav-dd-section">Products</p>
+  <a href="/engineering-drafting/">Drafting &amp; Engineering Edition</a>
+  <a href="/sentinel-home/">Sentinel Home Edition</a>
+  <a href="/living-memorials/enterprise-estate-continuity.html">Enterprise Estate Continuity</a>
+  <p class="nav-dd-section">Capabilities</p>
+  <a href="/evidence-room.html">Evidence Room</a>
+  <a href="/push-button-deliverables.html">Push-Button Deliverables</a>
+  <a href="/pilot-readiness-kit.html">Pilot Kit</a>
+  <a href="/pilot-program.html">Pilot Program</a>
+  <a href="/how-it-works.html">How It Works</a>
+  <p class="nav-dd-section">Hubs &amp; Company</p>
+  <a href="/training.html">Training Hub</a>
+  <a href="/documentation-hub/">Document Hub</a>
+  <a href="/global/">Global Hub</a>
+  <a href="/about.html">About</a>
+  <p class="nav-dd-section">Trust &amp; Legal</p>
+  <a href="/transparency.html">Transparency</a>
+  <a href="/audit.html">Audit Log</a>
+  <a href="/privacy.html">Privacy</a>
+  <a href="/sitemap.html">Sitemap</a>
+</div>
+
+
+<!-- Mobile panel -->
+<nav id="mobile-nav-panel" aria-label="Mobile navigation" aria-hidden="true">
+  <div class="mob-static-links">
+    <a href="/index.html">Home</a>
+    <a href="/for-physicians.html">Physicians</a>
+    <a href="/for-attorneys.html">Attorneys</a>
+    <a href="/pilot-program.html">Pilot Program</a>
+    <a href="/how-it-works.html">How It Works</a>
+    <a href="/trust.html">Trust &amp; Audit</a>
+    <a href="/about.html">About</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/documentation-hub/" style="color:#00c2a8;font-weight:700;">Documentation Hub &rarr;</a>
+    <a href="/global/" style="color:#00c2a8;font-weight:700;">Global &rarr;</a>
+  </div>
+  <a href="/contact.html#pilot" class="mob-cta">Request a Pilot</a>
+</nav>
+
+<main id="main-content">
+
+<!-- ══════════════════════════════════════════════
+     1. HERO
+══════════════════════════════════════════════ -->
+<section class="sh-hero">
+  <div class="sh-wrap">
+    <div class="sh-status">Full Platform — Future Plan &nbsp;|&nbsp; <span style="color:#4ade80;">First Layer Available</span></div>
+    <h1>Sentinel Home Edition</h1>
+    <p class="sh-sub">Private local AI for independence, communication, memory, and home control. Built from lived experience, not market research.</p>
+    <div class="sh-ctas">
+      <a href="/rehability/" class="sh-btn-primary" style="background:#a78bfa;color:#04111a;">Rehability — First Tools Available &rarr;</a>
+      <a href="#vision" class="sh-btn-ghost">Our Vision</a>
+      <a href="#interest" class="sh-btn-ghost">Join the Interest List</a>
+    </div>
+    <div style="margin-top:18px;padding:14px 18px;background:rgba(167,139,250,0.07);border:1px solid rgba(167,139,250,0.25);border-radius:12px;font-size:0.88em;line-height:1.6;color:#7a8fa0;max-width:640px;margin-left:auto;margin-right:auto;">
+      <strong style="color:#a78bfa;">First tools now available under Rehability:</strong> Marcus's Memory Helper — six local-first assistive tools for pain capture, appointment prep, medication tracking, letter drafting, daily memory, and call summaries. <a href="/rehability/marcus-memory-helper/" style="color:#a78bfa;text-decoration:none;font-weight:600;">See Marcus's Memory Helper &rarr;</a>
+    </div>
+    <div class="sh-founder-note">
+      <strong>A note from Marcus O&rsquo;Dell, Founder &amp; Chief Technologist:</strong> I built Pocono AI from a bed, on a phone, while living with executive dysfunction, chronic pain, and the daily difficulty of turning urgent thoughts into clear action. Sentinel Home Edition is not a product born from market research. It is a product born from knowing, personally, what it costs when the tools that could help you do not exist yet — or are priced and designed as if you do not matter.
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     2. WHY THIS MATTERS
+══════════════════════════════════════════════ -->
+<section class="sh-section sh-section--alt" id="vision">
+  <div class="sh-wrap">
+    <span class="sh-section-label">Why This Matters</span>
+    <h2>People do not primarily need more apps.</h2>
+    <p class="sh-lead">For many people living with disability, chronic illness, neurodivergent cognition, aging, grief, fatigue, or caregiving burden, ordinary life tasks are not ordinary. Executive dysfunction, chronic pain, communication barriers, cognitive load, and illness do not respond to productivity frameworks. They require infrastructure.</p>
+
+    <div class="sh-grid" style="grid-template-columns: repeat(auto-fill, minmax(280px,1fr));">
+      <div class="sh-card">
+        <svg class="sh-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        <h3>Help me say what I mean</h3>
+        <p>Communication barriers are not failures of intelligence. They are failures of infrastructure. Sentinel Home Edition drafts, rewrites, and translates what you mean into what you need to say.</p>
+      </div>
+      <div class="sh-card">
+        <svg class="sh-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <h3>Executive function support</h3>
+        <p>When starting, sequencing, prioritizing, and finishing tasks are barriers — not character flaws — a system that scaffolds the day without judgment is not a luxury. It is infrastructure.</p>
+      </div>
+      <div class="sh-card">
+        <svg class="sh-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <h3>Home control without barriers</h3>
+        <p>Turning a light on or adjusting a thermostat should not require a person in pain to stand, cross a room, or fight a confusing interface. Home control is dignity.</p>
+      </div>
+      <div class="sh-card">
+        <svg class="sh-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <h3>Privacy as a right</h3>
+        <p>A person living with disability or illness should not have to hand their entire private home life to a cloud service to get the help they need. Privacy is not a premium feature. It is a right.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     3. WHAT IT IS
+══════════════════════════════════════════════ -->
+<section class="sh-section">
+  <div class="sh-wrap">
+    <span class="sh-section-label">What Sentinel Home Edition Is</span>
+    <h2>A private, local-first AI node for the home.</h2>
+    <p class="sh-lead">Sentinel Home Edition is planned as a local AI appliance — a dedicated, private computing node in your home that processes your data locally, stores your documents under your control, and assists you without routing your private life through someone else&rsquo;s servers.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;">
+      <div class="sh-callout">
+        <h3>Local processing where it counts</h3>
+        <p>The system is designed to run AI inference on local hardware. Your conversations, documents, reminders, and home routines are processed in your home — not uploaded to a cloud provider by default.</p>
+        <p>This is not a voice assistant that mails your words to a data center. It is infrastructure you own, in your home, under your control.</p>
+      </div>
+      <div class="sh-callout">
+        <h3>Connects to your life, your devices</h3>
+        <p>Sentinel Home Edition is planned to connect with a phone, headset, tablet, or computer interface and integrate with approved smart-home devices — lights, fans, thermostat, television, doors, and more — through standard protocols.</p>
+        <p>You choose what connects. You choose what it remembers. You set the permissions.</p>
+      </div>
+    </div>
+
+    <div class="sh-chips">
+      <span class="sh-chip">Local AI inference</span>
+      <span class="sh-chip">Phone / headset / tablet interface</span>
+      <span class="sh-chip">Smart-home integration</span>
+      <span class="sh-chip">Encrypted local storage</span>
+      <span class="sh-chip">Caregiver / family permission system</span>
+      <span class="sh-chip">Audit trail for sensitive actions</span>
+      <span class="sh-chip">Human override always preserved</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     4. WHAT IT COULD HELP WITH
+══════════════════════════════════════════════ -->
+<section class="sh-section sh-section--alt">
+  <div class="sh-wrap">
+    <span class="sh-section-label">What It Could Help With</span>
+    <h2>The things that actually make a day harder.</h2>
+    <p class="sh-lead">These are planned capabilities. Final scope will depend on prototyping, safety testing, and hardware. Nothing here is a promise of delivery — it is the direction of intent, shaped by the people who live these needs daily.</p>
+
+    <div class="sh-grid">
+
+      <div class="sh-card">
+        <svg class="sh-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <h3>Help me say what I mean</h3>
+        <p>Draft, rewrite, and translate what you want to communicate into clear language for email, voicemail, forms, messages, or medical conversations.</p>
+      </div>
+
+      <div class="sh-card">
+        <svg class="sh-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        <h3>Email and message rewriting</h3>
+        <p>Turn a rough voice note, scattered thoughts, or an emotional draft into a clear, calm message — without losing your meaning.</p>
+      </div>
+
+      <div class="sh-card">
+        <svg class="sh-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <h3>Appointment preparation</h3>
+        <p>Before a medical appointment, legal meeting, or difficult call — prepare your list of questions, organize what you need to say, and summarize what you want the other person to know.</p>
+      </div>
+
+      <div class="sh-card">
+        <svg class="sh-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        <h3>Medical and disability paperwork</h3>
+        <p>Organize, summarize, and retrieve documents: insurance forms, disability appeals, prior authorizations, accommodation letters, prescription lists, and medical history.</p>
+      </div>
+
+      <div class="sh-card">
+        <svg class="sh-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+        <h3>Personal document memory</h3>
+        <p>Your documents, stored locally, retrieved by you. &ldquo;What was the doctor&rsquo;s recommendation from my last visit?&rdquo; &ldquo;Where is my accommodation form?&rdquo; — answered from your own files, not the cloud.</p>
+      </div>
+
+      <div class="sh-card">
+        <svg class="sh-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+        <h3>Daily task breakdown</h3>
+        <p>Break any task — large or small — into ordered, manageable steps without shame or judgment. Start where you are. Skip what you can&rsquo;t do today.</p>
+      </div>
+
+      <div class="sh-card">
+        <svg class="sh-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <h3>Executive function support</h3>
+        <p>Initiation, sequencing, and follow-through support — without pressure, without judgment, on your schedule, at your pace.</p>
+      </div>
+
+      <div class="sh-card">
+        <svg class="sh-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <h3>Reminders and follow-up tracking</h3>
+        <p>Medication reminders, appointment follow-ups, document deadlines, callbacks — tracked locally, surfaced when you need them, never sold to an advertiser.</p>
+      </div>
+
+      <div class="sh-card">
+        <svg class="sh-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <h3>Home environment control</h3>
+        <p>Lights, fans, thermostat, television, doors, and garage — controlled by voice, headset, phone, or scheduled routine. From bed. From the couch. Without standing up.</p>
+      </div>
+
+      <div class="sh-card">
+        <svg class="sh-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <h3>Family and caregiver coordination</h3>
+        <p>Grant specific, limited access to family members or caregivers — no more, no less. Coordination without surveillance. Help without loss of privacy.</p>
+      </div>
+
+      <div class="sh-card">
+        <svg class="sh-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <h3>Visitor and access permissions</h3>
+        <p>Control who can interact with the system, what they can see or do, and for how long. Clear, revocable, auditable permissions — no surprises.</p>
+      </div>
+
+      <div class="sh-card">
+        <svg class="sh-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <h3>Consent-based memory archive</h3>
+        <p>With explicit, ongoing consent, the system can preserve personal memories, writings, and voice — for the person themselves, not for marketing, not for training a model.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     5. PRIVACY-FIRST
+══════════════════════════════════════════════ -->
+<section class="sh-section">
+  <div class="sh-wrap">
+    <span class="sh-section-label">Privacy-First by Design</span>
+    <h2>Your home life is not a training dataset.</h2>
+    <p class="sh-lead">The same architecture that keeps medical records inside a clinic keeps your private life inside your home. Local processing, user-controlled permissions, encrypted storage, no default cloud upload of your home.</p>
+
+    <ul class="sh-list sh-list--ok">
+      <li>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+        <div><strong>Local processing where feasible.</strong> AI inference runs on the local appliance. Private documents, conversations, and routines are not uploaded by default.</div>
+      </li>
+      <li>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+        <div><strong>No default cloud upload of your private home life.</strong> The system is designed around the principle that what happens in your home stays in your home, unless you choose otherwise.</div>
+      </li>
+      <li>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+        <div><strong>User-controlled permissions.</strong> You decide who can access the system, what they can see, and for how long. Permissions are revocable at any time.</div>
+      </li>
+      <li>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+        <div><strong>Encrypted local storage.</strong> Documents and memory are stored with encryption on-device. Not in someone else&rsquo;s database.</div>
+      </li>
+      <li>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+        <div><strong>Audit trail for sensitive actions.</strong> Sensitive automations, access grants, and document retrievals are logged locally so you can see what happened.</div>
+      </li>
+      <li>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+        <div><strong>Family and caregiver access only by your permission.</strong> A caregiver with access can only see what you have explicitly granted. Access is not inherited, assumed, or automatic.</div>
+      </li>
+      <li>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+        <div><strong>Microphones and cameras are optional, disclosed, and not the default requirement.</strong> The preferred interface is headset or push-to-talk — not always-on listening.</div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     6. SAFETY BOUNDARIES
+══════════════════════════════════════════════ -->
+<section class="sh-section sh-section--alt">
+  <div class="sh-wrap">
+    <span class="sh-section-label">Safety Boundaries</span>
+    <h2>What Sentinel Home Edition will never do.</h2>
+    <p class="sh-lead">Clear boundaries are not limitations — they are the design. A system that claims to do everything, including things that require a licensed professional or a physical safety override, is a dangerous system.</p>
+
+    <ul class="sh-list sh-list--warning">
+      <li>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+        <div><strong>No hidden recording.</strong> The system will not record audio or video without explicit, disclosed, ongoing consent.</div>
+      </li>
+      <li>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+        <div><strong>No pretending to be a doctor, lawyer, therapist, or emergency service.</strong> Sentinel Home Edition drafts and assists. It does not diagnose, prescribe, represent, counsel, or dispatch. A human professional must always be consulted for clinical, legal, or emergency decisions.</div>
+      </li>
+      <li>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+        <div><strong>No autonomous medical decision-making.</strong> The system does not adjust medication, contradict medical advice, or make clinical judgments.</div>
+      </li>
+      <li>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+        <div><strong>No autonomous lock-in or lock-out without manual override and safety controls.</strong> Any door or access routine must include physical manual override capability. Human agency over physical space is always preserved.</div>
+      </li>
+      <li>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+        <div><strong>No unsafe bath, water, stove, or electrical automation without hardware safeguards.</strong> Environmental controls that carry physical risk require proper hardware interlocks, not just software instructions.</div>
+      </li>
+      <li>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+        <div><strong>No memorial or personality simulation without explicit, informed, ongoing consent.</strong> Any consent-based memory or archive feature will be clearly disclosed, easily revocable, and ethically framed.</div>
+      </li>
+      <li>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+        <div><strong>Human override always preserved.</strong> Every automation, routine, or permission can be interrupted, revoked, or overridden manually. A person&rsquo;s physical sovereignty over their own home is non-negotiable.</div>
+      </li>
+      <li>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+        <div><strong>Dignity and agency always preserved.</strong> The system serves the person. It does not surveil, report on, restrict, or control a person on behalf of anyone else without that person&rsquo;s explicit, ongoing consent.</div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     7. HARDWARE DIRECTION
+══════════════════════════════════════════════ -->
+<section class="sh-section">
+  <div class="sh-wrap">
+    <span class="sh-section-label">Hardware Direction</span>
+    <h2>Serious local hardware for serious local inference.</h2>
+    <p class="sh-lead">The premium Sentinel Home Edition is planned around a high-memory local AI workstation or appliance — hardware powerful enough to run capable AI models privately, without cloud inference, reliably enough to be trusted in a home environment.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin-bottom:32px;">
+      <div class="sh-callout">
+        <h3>Target architecture</h3>
+        <div class="sh-chips" style="margin-top:0;">
+          <span class="sh-chip">Local AI appliance</span>
+          <span class="sh-chip">Phone / headset / tablet interface</span>
+          <span class="sh-chip">Home Assistant compatible</span>
+          <span class="sh-chip">Matter / Thread / Zigbee / Z-Wave integration</span>
+          <span class="sh-chip">Encrypted local storage</span>
+          <span class="sh-chip">Backup and recovery</span>
+          <span class="sh-chip">Permission system</span>
+          <span class="sh-chip">Audit log</span>
+          <span class="sh-chip">Optional professional installation</span>
+        </div>
+      </div>
+      <div class="sh-callout">
+        <h3>Hardware selection criteria</h3>
+        <p>Hardware will be selected based on safety, reliability, local inference capability, serviceability, and cost — in that order. The current direction includes NVIDIA DGX Spark / Project DIGITS-class hardware or workstation-class alternatives, depending on final performance, pricing, and availability at the time of development.</p>
+        <p style="font-size:0.88em;color:var(--sh-muted);">No exact hardware is promised. The category and capability level are the commitment, not a specific product model.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     8. COMMUNITY GIVEBACK
+══════════════════════════════════════════════ -->
+<section class="sh-section sh-section--alt" id="giveback">
+  <div class="sh-wrap">
+    <span class="sh-section-label">Community Giveback Model</span>
+    <h2>Paid installations help fund independence installations.</h2>
+    <p class="sh-lead">Pocono AI intends to use part of future profits to fund donated or heavily subsidized Sentinel Home installations for disabled people, chronically ill people, neurodivergent people, elders, and families in need who could materially benefit from the system but cannot afford it.</p>
+
+    <div class="sh-callout" style="border-color:rgba(0,194,168,0.3);background:var(--sh-teal-dim);margin-bottom:20px;">
+      <h3 style="color:var(--sh-teal);">The principle</h3>
+      <p style="font-size:1.05em;">The long-term goal is that families who can afford private local AI help make it possible for people in need to receive it.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;">
+      <div class="sh-callout">
+        <h3>Private installations</h3>
+        <p>Paid private installations at the planned price point support the engineering, deployment, support, and community program costs. Every private installation is a direct contribution to the giveback fund.</p>
+      </div>
+      <div class="sh-callout">
+        <h3>Community deployments</h3>
+        <p>Once Pocono AI reaches profitability, the company intends to fund donated or heavily subsidized installations. The first deployments may be very limited — perhaps only one or two homes at first, depending on funding. The principle scales as the company scales.</p>
+      </div>
+      <div class="sh-callout">
+        <h3>Sponsors and partners</h3>
+        <p>Organizations, disability advocates, foundations, and individuals who want to sponsor a future installation for a person in need are invited to express interest. No funds are collected at this stage — this is a planning commitment.</p>
+        <a href="#interest" class="sh-btn-ghost" style="margin-top:8px;font-size:0.88em;">Express sponsor interest</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     9. PLANNED PRICE
+══════════════════════════════════════════════ -->
+<section class="sh-section">
+  <div class="sh-wrap">
+    <span class="sh-section-label">Planned Private Price</span>
+    <h2>A planning figure, not a purchase option.</h2>
+    <p class="sh-lead">Sentinel Home Edition is not currently available for purchase. The following is a planning figure to help interested individuals, families, sponsors, and partners understand the intended pricing direction.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;align-items:start;">
+      <div class="sh-price-box">
+        <div class="sh-price">$9,995</div>
+        <div class="sh-price-label">Planned early private installation target</div>
+        <div class="sh-price-note">This is a planning figure only. The actual price may change based on hardware costs, installation complexity, support requirements, safety review, and final product scope. This is not an invoice, offer, or contract. Pocono AI will not accept payment for Sentinel Home Edition until a formal pilot or waitlist is explicitly opened.</div>
+      </div>
+      <div>
+        <div class="sh-callout">
+          <h3>What this is expected to include</h3>
+          <p>Hardware (local AI appliance), installation, initial configuration, permission setup, training for the user and up to two family members or caregivers, and a defined support period. Final scope subject to change.</p>
+        </div>
+        <div class="sh-callout" style="margin-top:14px;">
+          <h3>Community installation pricing</h3>
+          <p>Donated or subsidized installations for individuals in need will be funded through the community giveback program — not through personal payment by the recipient. The intent is that the cost to the family in need is zero or minimal, subject to program availability and funding.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     10. DEVELOPMENT STATUS
+══════════════════════════════════════════════ -->
+<section class="sh-section sh-section--alt">
+  <div class="sh-wrap">
+    <span class="sh-section-label">Development Status</span>
+    <h2>Where we are, honestly.</h2>
+
+    <div class="sh-status-banner" style="border-color:rgba(74,222,128,0.3);background:rgba(74,222,128,0.05);">
+      <h3 style="color:#4ade80;">First layer available — full platform still in development</h3>
+      <p><strong style="color:#c8d8e4;">What's available now:</strong> <a href="/rehability/" style="color:#a78bfa;text-decoration:none;font-weight:600;">Rehability</a> is the first implemented layer of Sentinel Home — six local-first assistive tools under <a href="/rehability/marcus-memory-helper/" style="color:#a78bfa;text-decoration:none;font-weight:600;">Marcus's Memory Helper</a> (pain capture, appointment prep, medication tracker, letter builder, daily log, call summary). These tools run locally, produce human-reviewed drafts, and require no cloud connection.</p>
+      <p style="margin-top:8px;"><strong style="color:#c8d8e4;">What is still planned:</strong> The full Sentinel Home Edition — the dedicated local AI appliance for the home covering communication, executive function, home control, safety, and independence — is a future plan. It is not currently available for purchase or installation. The statements below describe the intended direction.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;">
+      <div class="sh-callout">
+        <h3>Current focus</h3>
+        <p>Pocono AI&rsquo;s current work centers on the Sentinel Node infrastructure product for regulated professional environments — independent medical practices and small law firms. That product must succeed first.</p>
+      </div>
+      <div class="sh-callout">
+        <h3>Timeline</h3>
+        <p>The current target is to begin planning, prototyping, or limited community deployment near the end of Year One or Year Two after Pocono AI reaches sufficient funding, pilot traction, revenue, and operational stability. No fixed date is promised.</p>
+      </div>
+      <div class="sh-callout">
+        <h3>What Sentinel Home Edition is</h3>
+        <p>A community-facing extension of the same local-first, audit-first, human-override-always philosophy that guides the Sentinel Node. Same values. Different context. Built with and for the people who need it most.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     11. INTEREST LIST
+══════════════════════════════════════════════ -->
+<section class="sh-section" id="interest">
+  <div class="sh-wrap">
+    <span class="sh-section-label">Interest List</span>
+    <h2>Let us know you are here.</h2>
+    <p class="sh-lead">No payment is collected. No commitment is required. Expressing interest helps Pocono AI understand who needs this, in what form, and what matters most — and ensures you hear about it when the time comes.</p>
+
+    <div class="sh-interest-grid">
+
+      <div class="sh-interest-card">
+        <h3>For myself or a family member</h3>
+        <p>You are a person with disability, chronic illness, neurodivergent cognition, or a family member of someone who needs this kind of support.</p>
+        <a href="mailto:marcus@poconoai.com?subject=Sentinel%20Home%20Edition%20%E2%80%94%20Personal%20Interest&body=Hi%20Marcus%2C%0A%0AI%20am%20interested%20in%20Sentinel%20Home%20Edition%20for%20myself%20or%20a%20family%20member.%0A%0A(Please%20tell%20us%20briefly%20about%20your%20situation%20and%20what%20you%20need%20most.)">Express Interest</a>
+      </div>
+
+      <div class="sh-interest-card">
+        <h3>Sponsor a future installation</h3>
+        <p>You want to fund a donated or subsidized Sentinel Home installation for a person or family who cannot afford it. No funds collected yet — this is an expression of intent.</p>
+        <a href="mailto:marcus@poconoai.com?subject=Sentinel%20Home%20Edition%20%E2%80%94%20Sponsor%20Interest&body=Hi%20Marcus%2C%0A%0AI%20am%20interested%20in%20sponsoring%20a%20future%20Sentinel%20Home%20Edition%20installation%20for%20someone%20in%20need.%0A%0A(Please%20tell%20us%20about%20your%20organization%20or%20capacity%20to%20help.)">Sponsor Interest</a>
+      </div>
+
+      <div class="sh-interest-card">
+        <h3>Disability organization</h3>
+        <p>You represent a disability organization, advocacy group, or nonprofit that works with populations who could benefit from private local AI home infrastructure.</p>
+        <a href="mailto:marcus@poconoai.com?subject=Sentinel%20Home%20Edition%20%E2%80%94%20Organization%20Interest&body=Hi%20Marcus%2C%0A%0AWe%20represent%20a%20disability%20or%20advocacy%20organization%20interested%20in%20Sentinel%20Home%20Edition.%0A%0A(Please%20tell%20us%20about%20your%20organization%20and%20the%20people%20you%20serve.)">Organization Interest</a>
+      </div>
+
+      <div class="sh-interest-card">
+        <h3>Technical partner</h3>
+        <p>You are an engineer, smart-home integrator, accessibility technology specialist, or hardware partner interested in contributing to or distributing Sentinel Home Edition.</p>
+        <a href="mailto:marcus@poconoai.com?subject=Sentinel%20Home%20Edition%20%E2%80%94%20Technical%20Partner%20Interest&body=Hi%20Marcus%2C%0A%0AI%20am%20interested%20in%20exploring%20a%20technical%20partnership%20for%20Sentinel%20Home%20Edition.%0A%0A(Please%20describe%20your%20background%20and%20area%20of%20expertise.)">Technical Partner</a>
+      </div>
+
+      <div class="sh-interest-card">
+        <h3>Caregiver or clinician</h3>
+        <p>You are a caregiver, occupational therapist, home health professional, or clinician working with people who might benefit from private local AI home support.</p>
+        <a href="mailto:marcus@poconoai.com?subject=Sentinel%20Home%20Edition%20%E2%80%94%20Caregiver%20%2F%20Clinician%20Interest&body=Hi%20Marcus%2C%0A%0AI%20am%20a%20caregiver%20or%20clinician%20interested%20in%20Sentinel%20Home%20Edition%20for%20the%20people%20I%20support.%0A%0A(Please%20describe%20your%20role%20and%20the%20population%20you%20work%20with.)">Caregiver / Clinician</a>
+      </div>
+
+    </div>
+
+    <!-- v397 · GOOGLE FORM INTEREST CTA -->
+    <div class="sh-formcta">
+      <p>Prefer a quick form? Join the Pocono AI interest list and tell us where you fit.</p>
+      <a class="interest-list-cta" href="https://forms.gle/VQahnkjMfY6QNEMy8" target="_blank" rel="noopener noreferrer">Join the Interest List</a>
+      <p class="sh-formcta-note">Disclosed external Google Form. Please do not submit private medical records, legal files, confidential client materials, or sensitive documents through this form.</p>
+    </div>
+
+    <div class="sh-legal-note" style="margin-top:32px;">
+      <strong>Sentinel Home Edition is a future concept</strong> and is not currently offered as a medical device, emergency-response system, clinical decision system, or substitute for professional care, caregivers, family support, or emergency services. Final features, pricing, hardware, availability, and eligibility for donated installations are subject to change. Expressing interest creates no obligation on either side.
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- Site Footer (root-relative) -->
+<footer role="contentinfo" style="background:#051622;border-top:1px solid rgba(255,255,255,0.08);padding:40px 24px 28px;font-size:0.85em;color:#8899aa;">
+  <div style="max-width:1180px;margin:0 auto;">
+
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:0 0 28px;margin-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.07);">
+      <div style="max-width:560px;">
+        <p style="margin:0 0 6px;font-size:1.05em;font-weight:700;color:#fff;">Local AI infrastructure for regulated practices.</p>
+        <p style="margin:0;font-size:0.95em;line-height:1.5;">Drafts with citations. Human review required. Sensitive documents stay under practice control. Simple path, deep proof.</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="/contact.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;background:#00c2a8;color:#04111a;font-weight:700;text-decoration:none;font-size:0.95em;">Request Pilot</a>
+        <a href="/sentinel-demo.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;border:1px solid rgba(0,194,168,0.55);color:#00c2a8;font-weight:700;text-decoration:none;font-size:0.95em;">Watch Demo</a>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px 32px;margin-bottom:32px;text-align:left;">
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">For You</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/start-here.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Start Here (3 min)</a>
+          <a href="/for-physicians.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Physicians</a>
+          <a href="/for-attorneys.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Attorneys</a>
+          <a href="/pilot-program.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Pilot Program</a>
+          <a href="/how-it-works.html" style="color:#8899aa;text-decoration:none;">How It Works</a>
+          <a href="/trust.html" style="color:#8899aa;text-decoration:none;">Trust &amp; Audit</a>
+          <a href="/pricing.html" style="color:#8899aa;text-decoration:none;">Pricing</a>
+          <a href="/sentinel-demo.html" style="color:#8899aa;text-decoration:none;">See the Demo</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Documentation Hub</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/documentation-hub/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Hub Home &mdash; Deep Proof</a>
+          <a href="/documentation-hub/clinical/" style="color:#8899aa;text-decoration:none;">Clinical Documentation</a>
+          <a href="/documentation-hub/legal/" style="color:#8899aa;text-decoration:none;">Legal Documentation</a>
+          <a href="/documentation-hub/technical/" style="color:#8899aa;text-decoration:none;">Technical Documentation</a>
+          <a href="/documentation-hub/governance/" style="color:#8899aa;text-decoration:none;">Governance &amp; Audit</a>
+          <a href="/documentation-hub/tools/" style="color:#8899aa;text-decoration:none;">Tools &amp; Simulators</a>
+          <a href="/documentation-hub/investors/" style="color:#8899aa;text-decoration:none;">Investors</a>
+          <a href="/documentation-hub/research/" style="color:#8899aa;text-decoration:none;">Research &amp; Essays</a>
+          <a href="/global/" style="color:#8899aa;text-decoration:none;">Global Federated Rollout</a>
+          <a href="/documentation-hub/transparency/" style="color:#8899aa;text-decoration:none;">Transparency</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Company</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/about.html" style="color:#8899aa;text-decoration:none;">About Pocono AI</a>
+          <a href="/team.html" style="color:#8899aa;text-decoration:none;">Team &amp; Leadership</a>
+          <a href="/why-pocono-ai.html" style="color:#8899aa;text-decoration:none;">Why Pocono AI</a>
+          <a href="/founding-commercial-leadership.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Join Us</a>
+          <a href="/careers.html" style="color:#8899aa;text-decoration:none;">Careers</a>
+          <a href="/how-we-hire.html" style="color:#8899aa;text-decoration:none;">How We Hire</a>
+          <a href="/channel-partners.html" style="color:#8899aa;text-decoration:none;">Technical Partners (MSPs)</a>
+          <a href="/partners.html" style="color:#8899aa;text-decoration:none;">Academic Partnerships</a>
+          <a href="/contact.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Contact</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Founder Projects</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/sentinel-home/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Sentinel Home Edition</a>
+          <a href="/living-memorials/" style="color:#8899aa;text-decoration:none;">Living Echo</a>
+          <a href="/living-memorials/marcus-odell/" style="color:#8899aa;text-decoration:none;">Marcus&rsquo;s Living Echo</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Resources &amp; Legal</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/sitemap.html" style="color:#8899aa;text-decoration:none;">All Pages (Sitemap)</a>
+          <a href="/audit.html" style="color:#8899aa;text-decoration:none;">Transparency &amp; Audit Log</a>
+          <a href="/maturity-disclosure.html" style="color:#8899aa;text-decoration:none;">What We Have / Don&rsquo;t Claim</a>
+          <a href="/plain.html" style="color:#8899aa;text-decoration:none;">Plain Language Guide</a>
+          <a href="/privacy.html" style="color:#8899aa;text-decoration:none;">Privacy</a>
+          <a href="/terms.html" style="color:#8899aa;text-decoration:none;">Terms</a>
+          <a href="/sla.html" style="color:#8899aa;text-decoration:none;">SLA</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:18px;margin-bottom:14px;">
+      <p style="margin:0;font-size:0.82em;line-height:1.6;color:#6f8295;max-width:1000px;">Pocono AI does not provide medical or legal advice, does not practice medicine or law, and does not make clinical or legal decisions. Outputs are drafts or support materials that require review by a qualified professional; final professional judgment remains with the licensed physician or attorney. Tools and simulations on this site are educational and use synthetic data. <strong style="color:#6f8295;">Sentinel Home Edition is a future concept and is not currently offered as a medical device, emergency-response system, clinical decision system, or substitute for professional care, caregivers, family support, or emergency services.</strong></p>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:20px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+      <p style="margin:0;font-size:0.9em;">&copy; 2026 Pocono AI, LLC &nbsp;&#183;&nbsp; East Stroudsburg, PA &nbsp;&#183;&nbsp; <a href="mailto:marcus@poconoai.com" style="color:#8899aa;">marcus@poconoai.com</a> &nbsp;&#183;&nbsp; <a href="tel:+15705340602" style="color:#8899aa;">(570) 534-0602</a></p>
+      <p style="margin:0;font-size:0.88em;"><a href="/audit.html" style="color:#5dade2;text-decoration:none;">Transparency v402</a></p>
+    </div>
+  </div>
+</footer>
+
+<script src="/search.js?v=402" defer></script>
+<script src="/search-index.js?v=402" defer></script>
+<script src="/nav.js?v=402" defer></script>
+<script src="/pilot-cta.js?v=402" defer></script>
+</body>
+</html>

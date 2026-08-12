@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp --><!-- Sentinel Node — Drafting & Engineering Edition — v399 2026-06-19. Added interest-list CTA. Prior: Repositioned into Sentinel Node product family per v396 full-site optimization pass. Expanded use cases: CAD/BIM-adjacent documentation, change-order support, discrepancy reports, SOPs, project record custody. Self-contained; uses Pocono AI / Sentinel Node dark sovereign aesthetic. -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Sentinel Node — Drafting &amp; Engineering Edition | Governed AI for Drawings, Specs, and Project Knowledge</title>
+<meta name="description" content="Sentinel Node — Drafting &amp; Engineering Edition: governed AI support for drawings, specifications, redlines, RFIs, submittals, and project knowledge. Local-first custody, human review, zero telemetry, audit trails.">
+<link rel="canonical" href="https://poconoai.com/engineering-drafting/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/favicon.ico">
+
+<meta property="og:title" content="Sentinel Node — Drafting &amp; Engineering Edition | Governed AI for Technical Teams">
+<meta property="og:description" content="Local-first governed AI for engineering and drafting offices. Redline summaries, RFI drafts, spec lookup, QA/QC checklists — under human review, zero telemetry.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://poconoai.com/engineering-drafting/">
+<meta property="og:site_name" content="Pocono AI">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Sentinel Node — Drafting &amp; Engineering Edition",
+  "description": "Governed AI documentation and workflow support for engineering and drafting teams. Local-first, human-reviewed, zero telemetry.",
+  "url": "https://poconoai.com/engineering-drafting/",
+  "isPartOf": { "@type": "WebSite", "url": "https://poconoai.com", "name": "Pocono AI, LLC" },
+  "publisher": { "@type": "Organization", "name": "Pocono AI, LLC", "url": "https://poconoai.com" },
+  "audience": { "@type": "Audience", "audienceType": "Engineers, Architects, Surveyors, AEC Professionals" },
+  "datePublished": "2026-06-19",
+  "dateModified": "2026-06-19"
+}
+</script>
+
+<style>
+/* ── Pocono AI / Sentinel Node sovereign aesthetic ─────────────────────
+   Engineering & Drafting Edition — scoped .ed- classes.
+   Dark navy base, warm gold accents, teal highlights, white text.
+   Precise, technical, professional register.                            */
+:root{
+  --ed-navy:#0E1F30;
+  --ed-navy-mid:#12293C;
+  --ed-navy-card:#162034;
+  --ed-navy-light:#1C2B40;
+  --ed-gold:#C9973F;
+  --ed-gold-bright:#E3BC6A;
+  --ed-gold-tint:rgba(201,151,63,.12);
+  --ed-teal:#00B5A4;
+  --ed-teal-tint:rgba(0,181,164,.10);
+  --ed-white:#EDF0F4;
+  --ed-muted:#94A3B4;
+  --ed-border:rgba(201,151,63,.16);
+  --ed-border-subtle:rgba(255,255,255,.09);
+  --ed-shadow:0 16px 48px rgba(0,0,0,.30);
+  --ed-radius:14px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--ed-navy)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body.ed-body{
+  margin:0;
+  background:var(--ed-navy);
+  color:var(--ed-white);
+  font-family:'Segoe UI',system-ui,-apple-system,Roboto,sans-serif;
+  font-size:1.04rem;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+.ed-body ::selection{background:rgba(201,151,63,.32)}
+.ed-skip{position:absolute;left:-9999px;top:0;background:var(--ed-gold);color:var(--ed-navy);padding:10px 18px;border-radius:0 0 10px 0;z-index:100;font-weight:700}
+.ed-skip:focus{left:0}
+a{color:var(--ed-teal);text-decoration:none}
+a:hover{color:var(--ed-gold-bright)}
+a:focus-visible{outline:2px solid var(--ed-gold);outline-offset:3px;border-radius:4px}
+
+/* ─── topbar ─────────────────────────────────────── */
+.ed-topbar{
+  position:sticky;top:0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  padding:12px clamp(16px,4vw,36px);
+  background:rgba(14,31,48,.95);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--ed-border);
+  font-size:.88rem;
+}
+.ed-topbar a{color:var(--ed-muted);text-decoration:none}
+.ed-topbar a:hover{color:var(--ed-gold)}
+.ed-topbar-links{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.ed-wordmark{font-weight:700;color:var(--ed-white);letter-spacing:.01em;font-size:.96rem}
+.ed-wordmark span{color:var(--ed-gold)}
+
+/* ─── hero ───────────────────────────────────────── */
+.ed-hero{
+  position:relative;overflow:hidden;
+  padding:clamp(72px,10vw,120px) clamp(22px,5vw,60px) clamp(56px,8vw,100px);
+  background:linear-gradient(135deg,#060F18 0%,var(--ed-navy-mid) 50%,#0A1828 100%);
+  border-bottom:1px solid var(--ed-border);
+}
+.ed-hero::before{
+  content:"";position:absolute;top:-60px;right:-80px;
+  width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,rgba(201,151,63,.12),transparent 65%);
+  pointer-events:none;
+}
+.ed-hero::after{
+  content:"";position:absolute;bottom:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--ed-teal),var(--ed-gold),var(--ed-teal));opacity:.6;
+}
+.ed-hero-inner{position:relative;max-width:780px}
+.ed-pilot-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(201,151,63,.14);border:1px solid rgba(201,151,63,.32);
+  border-radius:999px;padding:5px 14px;margin:0 0 20px;
+  font-size:.77rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ed-gold);
+}
+.ed-pilot-badge::before{content:"◆";font-size:.6rem}
+.ed-h1{
+  font-size:clamp(2.0rem,5vw,3.0rem);font-weight:800;line-height:1.12;
+  margin:0 0 8px;letter-spacing:-.02em;color:var(--ed-white);
+}
+.ed-h1 span{color:var(--ed-gold)}
+.ed-sub{
+  font-size:clamp(1.05rem,2.4vw,1.3rem);color:rgba(237,240,244,.72);
+  margin:0 0 22px;font-weight:400;
+}
+.ed-lede{max-width:62ch;margin:0 0 32px;font-size:1.06rem;color:rgba(237,240,244,.84);line-height:1.68}
+.ed-btnrow{display:flex;gap:12px;flex-wrap:wrap}
+
+/* ─── buttons ─────────────────────────────────────── */
+.ed-btn{
+  display:inline-block;font-weight:700;font-size:.92rem;
+  padding:13px 26px;border-radius:999px;text-decoration:none;
+  background:var(--ed-gold);color:var(--ed-navy);
+  box-shadow:0 4px 16px rgba(201,151,63,.28);
+  transition:background .18s,transform .14s;
+  border:2px solid var(--ed-gold);
+}
+.ed-btn:hover{background:var(--ed-gold-bright);color:var(--ed-navy);transform:translateY(-1px)}
+.ed-btn--outline{background:transparent;color:var(--ed-gold);box-shadow:none}
+.ed-btn--outline:hover{background:var(--ed-gold-tint);color:var(--ed-gold-bright);transform:none}
+.ed-btn--teal{background:var(--ed-teal);color:var(--ed-navy);border-color:var(--ed-teal);box-shadow:0 4px 16px rgba(0,181,164,.22)}
+.ed-btn--teal:hover{background:#00C9B8;color:var(--ed-navy)}
+
+/* ─── layout ──────────────────────────────────────── */
+.ed-section{padding:clamp(52px,7vw,88px) clamp(22px,5vw,60px)}
+.ed-wrap{max-width:780px;margin:0 auto}
+.ed-wrap--wide{max-width:1020px;margin:0 auto}
+.ed-eyebrow{
+  font-size:.73rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ed-gold);margin:0 0 14px;
+}
+.ed-h2{
+  font-size:clamp(1.5rem,3.2vw,2.05rem);font-weight:700;line-height:1.22;
+  margin:0 0 18px;color:var(--ed-white);
+}
+.ed-h3{font-size:1.1rem;font-weight:700;margin:0 0 8px;color:var(--ed-white)}
+.ed-muted{color:var(--ed-muted)}
+
+/* alternating band colors */
+.ed-band--mid{background:var(--ed-navy-mid)}
+.ed-band--card{background:var(--ed-navy-card)}
+.ed-band--teal{background:rgba(0,181,164,.06);border-top:1px solid var(--ed-teal-tint);border-bottom:1px solid var(--ed-teal-tint)}
+
+/* ─── infographic ─────────────────────────────────── */
+.ed-infographic-fig{margin:0 auto;max-width:840px}
+.ed-infographic-fig a{
+  display:block;border-radius:16px;overflow:hidden;
+  box-shadow:var(--ed-shadow);border:1px solid var(--ed-border);
+}
+.ed-infographic-fig img{display:block;width:100%;height:auto;cursor:zoom-in}
+.ed-infographic-cap{margin-top:10px;text-align:center;font-size:.8rem;color:var(--ed-muted)}
+
+/* ─── grid cards ──────────────────────────────────── */
+.ed-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;margin-top:24px}
+.ed-card{
+  background:var(--ed-navy-light);border:1px solid var(--ed-border-subtle);
+  border-radius:var(--ed-radius);padding:22px 20px;
+}
+.ed-card--gold{border-color:var(--ed-border)}
+.ed-card--teal{border-color:rgba(0,181,164,.22)}
+
+/* ─── workflow list ───────────────────────────────── */
+.ed-workflow{padding:0;margin:18px 0 0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px}
+.ed-workflow li{
+  display:flex;align-items:flex-start;gap:10px;
+  padding:10px 14px;background:var(--ed-navy-light);border-radius:8px;
+  border:1px solid var(--ed-border-subtle);font-size:.92rem;color:var(--ed-white);
+}
+.ed-workflow li::before{content:"→";color:var(--ed-teal);font-weight:700;flex-shrink:0;margin-top:1px}
+
+.ed-workflow--stop li{border-color:rgba(248,113,113,.18);background:rgba(248,113,113,.06)}
+.ed-workflow--stop li::before{content:"✕";color:#F87171}
+
+/* ─── disclaimer box ──────────────────────────────── */
+.ed-disclaimer{
+  background:rgba(201,151,63,.08);border:1px solid rgba(201,151,63,.28);
+  border-radius:var(--ed-radius);padding:22px 24px;margin-top:28px;
+}
+.ed-disclaimer strong{color:var(--ed-gold)}
+
+/* ─── CTA band ────────────────────────────────────── */
+.ed-cta-band{
+  background:linear-gradient(135deg,var(--ed-navy-mid),#091520);
+  border:1px solid var(--ed-border);border-radius:20px;
+  padding:clamp(36px,5vw,56px) clamp(24px,4vw,48px);
+  text-align:center;max-width:760px;margin:0 auto;
+}
+.ed-cta-band h2{color:var(--ed-white);font-size:clamp(1.5rem,3.2vw,2.0rem);margin:0 0 12px}
+.ed-cta-band p{color:rgba(237,240,244,.78);max-width:54ch;margin:0 auto 28px}
+.ed-cta-btnrow{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+/* ─── footer ──────────────────────────────────────── */
+.ed-foot{
+  padding:32px clamp(22px,5vw,60px) 48px;text-align:center;
+  font-size:.86rem;color:var(--ed-muted);
+  border-top:1px solid var(--ed-border-subtle);
+}
+.ed-foot a{color:var(--ed-muted)}
+.ed-foot a:hover{color:var(--ed-gold)}
+.ed-foot-links{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin:12px 0}
+
+/* ─── inline-HTML accessible fallback for infographic ─ */
+.ed-a11y-content{
+  background:var(--ed-navy-card);border:1px solid var(--ed-border-subtle);
+  border-radius:var(--ed-radius);padding:28px 26px;margin-top:24px;
+}
+.ed-a11y-content summary{cursor:pointer;color:var(--ed-gold);font-weight:700;font-size:.92rem;letter-spacing:.03em}
+.ed-a11y-content summary:focus{outline:2px solid var(--ed-gold);outline-offset:2px;border-radius:4px}
+.ed-interest{max-width:760px;margin:22px auto 0;padding:24px 26px;background:rgba(201,151,63,.07);border:1px solid var(--ed-border);border-radius:16px;text-align:center}
+.ed-interest p{color:var(--ed-muted);font-size:.96rem;margin:0 0 16px;line-height:1.6}
+.ed-interest .ed-interest-note{font-size:.8rem;color:rgba(148,163,180,.7);margin:14px auto 0;max-width:58ch}
+a.interest-list-cta{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:.85rem 1.5rem;border-radius:999px;background:var(--ed-gold);color:var(--ed-navy);font-weight:700;font-size:.95rem;line-height:1.2;white-space:normal;text-decoration:none;transition:background .18s}
+a.interest-list-cta:hover{background:var(--ed-gold-bright);color:var(--ed-navy)}
+a.interest-list-cta:visited,a.interest-list-cta:active{color:var(--ed-navy)}
+</style>
+</head>
+<body class="ed-body">
+<a class="ed-skip" href="#main-content">Skip to content</a>
+
+<!-- ─── TOPBAR ─────────────────────────────────────────── -->
+<div class="ed-topbar" role="banner">
+  <a href="/" class="ed-wordmark">Pocono <span>AI</span></a>
+  <nav class="ed-topbar-links" aria-label="Site pages">
+    <a href="/sentinel-node.html">Sentinel Node</a>
+    <a href="/for-physicians.html">Medical</a>
+    <a href="/for-attorneys.html">Legal</a>
+    <a href="/living-memorials/">Living Echo</a>
+    <a href="/">Home</a>
+  </nav>
+</div>
+
+<main id="main-content">
+
+  <!-- ─── HERO ──────────────────────────────────────────── -->
+  <section class="ed-hero" aria-labelledby="ed-title">
+    <div class="ed-hero-inner">
+      <div class="ed-pilot-badge">Pilot Candidate &nbsp;&middot;&nbsp; Sentinel Node Product Family</div>
+      <h1 class="ed-h1" id="ed-title">Sentinel Node <span>— Drafting &amp;<br>Engineering Edition</span></h1>
+      <p class="ed-sub">Governed AI for drawings, specifications, redlines, RFIs, submittals, and project knowledge.</p>
+      <p class="ed-lede">Engineering and drafting teams manage thousands of project details across drawings, specifications, redlines, RFIs, submittals, meeting notes, standards, and closeout documents. Pocono AI helps organize, retrieve, summarize, and draft from those materials while keeping professional judgment, review, and responsibility with human experts.</p>
+      <div class="ed-btnrow">
+        <a class="ed-btn" href="mailto:marc@poconoai.com?subject=Engineering%20Workflow%20Review%20Request">Request an Engineering Workflow Review</a>
+        <a class="ed-btn ed-btn--outline" href="/sentinel-node.html">Explore Sentinel Node</a>
+        <a class="ed-btn ed-btn--teal" href="mailto:marc@poconoai.com?subject=Engineering%20%26%20Drafting%20Edition">Talk to Pocono AI</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ─── INFOGRAPHIC ───────────────────────────────────── -->
+  <section class="ed-section ed-band--mid" id="at-a-glance" aria-labelledby="ed-glance-h">
+    <div class="ed-wrap--wide">
+      <p class="ed-eyebrow">The platform at a glance</p>
+      <h2 class="ed-h2" id="ed-glance-h">Engineering &amp; Drafting at a Glance</h2>
+      <p style="max-width:62ch;margin:0 0 28px;color:rgba(237,240,244,.82);">Sentinel Node — Drafting &amp; Engineering Edition is built for technical teams that need faster document handling, better project memory, and governed AI support without surrendering professional control.</p>
+
+      <figure class="ed-infographic-fig">
+        <a href="assets/ai_powered_engineering_workspace_design.png" target="_blank" rel="noopener" aria-label="Open full-size Engineering &amp; Drafting Edition infographic in a new tab">
+          <img src="assets/ai_powered_engineering_workspace_design.png"
+               alt="Pocono AI Engineering and Drafting Edition infographic showing governed AI support for drawings, specifications, redlines, RFIs, submittals, and project knowledge, with local-first custody, human review, zero telemetry, audit trails, and professional control."
+               loading="eager" decoding="async" style="display:block;width:100%;height:auto;">
+        </a>
+        <p class="ed-infographic-cap">Tap or click to view full size &middot; All outputs subject to qualified human review</p>
+      </figure>
+
+      <!-- Accessible HTML fallback of infographic content -->
+      <div class="ed-a11y-content" style="margin-top:20px;">
+        <details>
+          <summary>Expand: Key points from the infographic</summary>
+          <div style="margin-top:16px;display:grid;gap:14px;">
+            <div>
+              <strong style="color:var(--ed-gold);">What it supports</strong>
+              <p style="margin:6px 0 0;color:var(--ed-muted);font-size:.93rem;">Redline summaries, revision comparison, RFI drafts, submittal packet summaries, specification lookup, drawing note search, meeting note action items, QA/QC checklists, closeout package organization, proposal and scope drafts, firm standards retrieval, lessons-learned capture.</p>
+            </div>
+            <div>
+              <strong style="color:var(--ed-gold);">Governance model</strong>
+              <p style="margin:6px 0 0;color:var(--ed-muted);font-size:.93rem;">Local-first custody, zero telemetry, human-reviewed outputs, source-grounded retrieval, provenance tracking, audit trails, professional control at every step.</p>
+            </div>
+            <div>
+              <strong style="color:var(--ed-gold);">What it never does</strong>
+              <p style="margin:6px 0 0;color:var(--ed-muted);font-size:.93rem;">Does not sign, seal, certify, or independently approve engineering work. Does not replace licensed professionals. Does not guarantee code compliance. Does not produce permit-ready documents without qualified professional review.</p>
+            </div>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ─── 1. THE PROBLEM ────────────────────────────────── -->
+  <section class="ed-section" id="the-problem" aria-labelledby="ed-prob-h">
+    <div class="ed-wrap">
+      <p class="ed-eyebrow">The problem</p>
+      <h2 class="ed-h2" id="ed-prob-h">Where Engineering Time Gets Lost</h2>
+      <p>Engineering and drafting offices lose time searching through project documents, comparing revisions, summarizing redlines, drafting RFIs, organizing submittals, and preserving project knowledge. Senior professionals often spend valuable time on documentation work that can be accelerated without surrendering professional control.</p>
+      <p>As projects grow more complex and deadlines tighten, the cost of slow document handling compounds: missed RFI deadlines, redundant research into previous project decisions, submittal delays, and institutional knowledge that walks out the door when a key team member leaves.</p>
+    </div>
+  </section>
+
+
+  <!-- ─── 2. THE APPROACH ───────────────────────────────── -->
+  <section class="ed-section ed-band--mid" id="the-approach" aria-labelledby="ed-app-h">
+    <div class="ed-wrap">
+      <p class="ed-eyebrow">The Pocono AI approach</p>
+      <h2 class="ed-h2" id="ed-app-h">A Governed AI Layer Around Engineering Documentation</h2>
+      <p>Pocono AI adds a governed AI layer around engineering documentation. It helps teams retrieve source material, summarize changes, draft internal responses, organize project records, and prepare review packets. Every output remains subject to human review.</p>
+      <p>Sentinel Node runs on-premises inside the engineering firm. Project files, drawings, specifications, and records stay local. Nothing leaves the building by default. The AI retrieves from your documents; it does not connect to external knowledge bases for your project data.</p>
+      <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:26px;">
+        <div class="ed-card ed-card--teal" style="flex:1;min-width:200px;">
+          <div class="ed-h3" style="color:var(--ed-teal);">Local-First</div>
+          <p style="font-size:.9rem;color:var(--ed-muted);margin:0;">Project files stay on your hardware. Zero egress by default.</p>
+        </div>
+        <div class="ed-card ed-card--gold" style="flex:1;min-width:200px;">
+          <div class="ed-h3" style="color:var(--ed-gold);">Human-Reviewed</div>
+          <p style="font-size:.9rem;color:var(--ed-muted);margin:0;">Every output reviewed by qualified professionals before use.</p>
+        </div>
+        <div class="ed-card" style="flex:1;min-width:200px;">
+          <div class="ed-h3" style="color:var(--ed-white);">Source-Grounded</div>
+          <p style="font-size:.9rem;color:var(--ed-muted);margin:0;">Retrieval from your documents, not from invention or guesswork.</p>
+        </div>
+        <div class="ed-card" style="flex:1;min-width:200px;">
+          <div class="ed-h3" style="color:var(--ed-white);">Audit Trail</div>
+          <p style="font-size:.9rem;color:var(--ed-muted);margin:0;">Exportable, reviewable logs of what was retrieved and drafted.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ─── 3. WHAT IT CAN HELP WITH ─────────────────────── -->
+  <section class="ed-section" id="what-it-helps" aria-labelledby="ed-helps-h">
+    <div class="ed-wrap--wide">
+      <p class="ed-eyebrow">Pilot workflow candidates</p>
+      <h2 class="ed-h2" id="ed-helps-h">What Pocono AI Can Help With</h2>
+      <p style="max-width:60ch;color:rgba(237,240,244,.78);margin:0 0 4px;">Start with low-risk, high-value documentation workflows. These are the categories where Sentinel Node — Drafting &amp; Engineering Edition adds the most leverage with the lowest risk to professional judgment.</p>
+      <ul class="ed-workflow" aria-label="Supported workflow types">
+        <li>Redline summaries</li>
+        <li>Revision comparison</li>
+        <li>RFI draft assistance</li>
+        <li>Submittal packet summaries</li>
+        <li>Specification lookup</li>
+        <li>Drawing note search</li>
+        <li>Meeting note action items</li>
+        <li>QA/QC checklist assistance</li>
+        <li>Closeout package organization</li>
+        <li>Proposal and scope drafts</li>
+        <li>Firm standards retrieval</li>
+        <li>Lessons-learned capture</li>
+        <li>CAD/BIM-adjacent documentation</li>
+        <li>Change-order support</li>
+        <li>Discrepancy reports</li>
+        <li>Standard operating procedures</li>
+        <li>Project record custody</li>
+      </ul>
+    </div>
+  </section>
+
+
+  <!-- ─── 4. WHAT IT DOES NOT DO ───────────────────────── -->
+  <section class="ed-section ed-band--card" id="what-it-does-not-do" aria-labelledby="ed-notdo-h">
+    <div class="ed-wrap--wide">
+      <p class="ed-eyebrow">Professional boundaries</p>
+      <h2 class="ed-h2" id="ed-notdo-h">What It Does Not Do</h2>
+      <p style="max-width:60ch;color:rgba(237,240,244,.78);margin:0 0 4px;">These are hard stops &mdash; not pilot limitations. They will not change as the product matures.</p>
+      <ul class="ed-workflow ed-workflow--stop" aria-label="Out-of-scope capabilities">
+        <li>Autonomous design or engineering</li>
+        <li>Structural calculations</li>
+        <li>Code compliance guarantees</li>
+        <li>Permit-ready drawing generation</li>
+        <li>Sealed document automation</li>
+        <li>Safety-critical design decisions</li>
+        <li>Replacing licensed engineers, architects, or surveyors</li>
+        <li>Signing, sealing, or certifying engineering work</li>
+      </ul>
+      <p style="max-width:60ch;color:rgba(237,240,244,.72);margin-top:18px;font-size:.93rem;">Licensed professionals remain responsible for engineering judgment, calculations, code compliance, public safety, and any signed or sealed documents. Sentinel Node — Drafting &amp; Engineering Edition is a documentation and workflow support system &mdash; not an engineering service.</p>
+    </div>
+  </section>
+
+
+  <!-- ─── 5. WHY LOCAL-FIRST MATTERS ───────────────────── -->
+  <section class="ed-section ed-band--teal" id="local-first" aria-labelledby="ed-local-h">
+    <div class="ed-wrap">
+      <p class="ed-eyebrow">Data custody</p>
+      <h2 class="ed-h2" id="ed-local-h">Why Local-First Matters for Engineering Firms</h2>
+      <p>Engineering drawings, specifications, proposals, client records, and project files can contain sensitive business, safety, infrastructure, and proprietary information. Uploading those files to cloud AI services creates data custody risks that many clients, contracts, and regulatory frameworks prohibit.</p>
+      <p>Sentinel Node is designed for local-first custody, source-grounded retrieval, auditability, and human approval. Your project data is processed on hardware inside your facility. By default, nothing leaves your network.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:24px;">
+        <div class="ed-card">
+          <div class="ed-h3" style="color:var(--ed-teal);">Zero Telemetry</div>
+          <p style="font-size:.88rem;color:var(--ed-muted);margin:0;">No call home, no usage analytics sent to cloud services.</p>
+        </div>
+        <div class="ed-card">
+          <div class="ed-h3" style="color:var(--ed-teal);">On-Premises Inference</div>
+          <p style="font-size:.88rem;color:var(--ed-muted);margin:0;">AI inference runs on Sentinel Node hardware, not vendor servers.</p>
+        </div>
+        <div class="ed-card">
+          <div class="ed-h3" style="color:var(--ed-teal);">Exportable Audit Trail</div>
+          <p style="font-size:.88rem;color:var(--ed-muted);margin:0;">Reviewable, exportable record of what was retrieved and drafted.</p>
+        </div>
+        <div class="ed-card">
+          <div class="ed-h3" style="color:var(--ed-teal);">Client Data Stays Local</div>
+          <p style="font-size:.88rem;color:var(--ed-muted);margin:0;">Project files, specs, and drawings never leave your building by default.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ─── 6. HUMAN REVIEW AND RESPONSIBLE CHARGE ───────── -->
+  <section class="ed-section" id="human-review" aria-labelledby="ed-human-h">
+    <div class="ed-wrap">
+      <p class="ed-eyebrow">Professional responsibility</p>
+      <h2 class="ed-h2" id="ed-human-h">Human Review and Responsible Charge</h2>
+      <p>All engineering outputs must remain under qualified human review. Sentinel Node — Drafting &amp; Engineering Edition produces draft content &mdash; not finished deliverables. Every output is a starting point for professional review, not a finished product.</p>
+      <p>Licensed professionals remain responsible for:</p>
+      <ul style="margin:14px 0 0;padding:0 0 0 1.6em;list-style:disc;color:rgba(237,240,244,.88);">
+        <li>Engineering judgment and calculations</li>
+        <li>Code compliance verification</li>
+        <li>Public safety determinations</li>
+        <li>Any signed or sealed documents</li>
+        <li>Review and approval of AI-assisted drafts before use</li>
+      </ul>
+
+      <div class="ed-disclaimer">
+        <strong>Legal Notice.</strong> Sentinel Node — Drafting &amp; Engineering Edition is a documentation and workflow support system. It is not a licensed engineering, architecture, surveying, or legal service. It does not replace qualified professional judgment. Licensed professionals remain responsible for final review, calculations, code compliance, public safety, and any signed or sealed documents.
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ─── 7. PILOT WORKFLOW CANDIDATES ─────────────────── -->
+  <section class="ed-section ed-band--mid" id="where-to-start" aria-labelledby="ed-pilot-h">
+    <div class="ed-wrap">
+      <p class="ed-eyebrow">Where to start</p>
+      <h2 class="ed-h2" id="ed-pilot-h">Recommended Pilot Workflow Starting Points</h2>
+      <p style="color:rgba(237,240,244,.78);margin:0 0 20px;">If you are evaluating Pocono AI for your engineering or drafting operation, these are the best entry points: high value, low risk, clear human oversight.</p>
+      <div class="ed-grid">
+        <div class="ed-card ed-card--gold">
+          <div class="ed-h3" style="color:var(--ed-gold);">Redline Summary Assistant</div>
+          <p style="font-size:.9rem;color:var(--ed-muted);margin:0;">Summarize markup changes across drawing sets for internal coordination or review meetings.</p>
+        </div>
+        <div class="ed-card ed-card--gold">
+          <div class="ed-h3" style="color:var(--ed-gold);">RFI Draft Assistant</div>
+          <p style="font-size:.9rem;color:var(--ed-muted);margin:0;">Draft RFI text from project documentation for professional review and issuance.</p>
+        </div>
+        <div class="ed-card ed-card--gold">
+          <div class="ed-h3" style="color:var(--ed-gold);">Submittal Summary Assistant</div>
+          <p style="font-size:.9rem;color:var(--ed-muted);margin:0;">Extract and organize submittal information from documents for review preparation.</p>
+        </div>
+        <div class="ed-card ed-card--gold">
+          <div class="ed-h3" style="color:var(--ed-gold);">Project Document Search</div>
+          <p style="font-size:.9rem;color:var(--ed-muted);margin:0;">Retrieve relevant specifications, notes, or drawing references from project archives.</p>
+        </div>
+        <div class="ed-card ed-card--gold">
+          <div class="ed-h3" style="color:var(--ed-gold);">QA/QC Checklist Assistant</div>
+          <p style="font-size:.9rem;color:var(--ed-muted);margin:0;">Assist with generating and organizing QA/QC documentation from project records.</p>
+        </div>
+        <div class="ed-card ed-card--gold">
+          <div class="ed-h3" style="color:var(--ed-gold);">Closeout Package Organizer</div>
+          <p style="font-size:.9rem;color:var(--ed-muted);margin:0;">Assist with assembling and summarizing project closeout packages from existing documents.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ─── CTA ───────────────────────────────────────────── -->
+  <section class="ed-section" id="contact" aria-label="Contact and next steps">
+    <div class="ed-cta-band">
+      <div class="ed-pilot-badge" style="display:inline-flex;margin:0 auto 18px;">Pilot Program &mdash; Request a Review</div>
+      <h2>Start with an Engineering Workflow Review</h2>
+      <p>Tell us about your team&rsquo;s document workflows and we&rsquo;ll identify where Sentinel Node — Drafting &amp; Engineering Edition can add the most value with the least risk.</p>
+      <div class="ed-cta-btnrow">
+        <a class="ed-btn" href="mailto:marc@poconoai.com?subject=Engineering%20Workflow%20Review%20Request">Request an Engineering Workflow Review</a>
+        <a class="ed-btn ed-btn--outline" href="/sentinel-node.html">Explore Sentinel Node</a>
+        <a class="ed-btn ed-btn--teal" href="mailto:marc@poconoai.com?subject=Engineering%20%26%20Drafting%20Edition">Talk to Pocono AI</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- v397 · INTEREST LIST -->
+  <section class="ed-section" aria-labelledby="ed-interest-h" style="padding-top:0">
+    <div class="ed-interest">
+      <p id="ed-interest-h">Interested in this product track? Join the Pocono AI interest list and tell us where you fit.</p>
+      <a class="interest-list-cta" href="https://forms.gle/VQahnkjMfY6QNEMy8" target="_blank" rel="noopener noreferrer">Join the Interest List</a>
+      <p class="ed-interest-note">Disclosed external Google Form. Please do not submit private medical records, legal files, confidential client materials, or sensitive documents through this form.</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- ─── FOOTER ────────────────────────────────────────────── -->
+<div class="ed-foot" role="contentinfo">
+  <p style="color:var(--ed-muted);max-width:640px;margin:0 auto 16px;font-size:.88rem;">
+    Sentinel Node — Drafting &amp; Engineering Edition is a documentation and workflow support system, not a licensed engineering or design service. Licensed professionals remain responsible for all review, calculations, code compliance, and signed or sealed documents.
+  </p>
+  <nav class="ed-foot-links" aria-label="Footer navigation">
+    <a href="/">Home</a>
+    <a href="/sentinel-node.html">Sentinel Node</a>
+    <a href="/for-physicians.html">Medical</a>
+    <a href="/for-attorneys.html">Legal</a>
+    <a href="/living-memorials/">Living Echo</a>
+    <a href="/audit.html">Transparency</a>
+    <a href="/about.html">About</a>
+  </nav>
+  <p style="margin-top:16px;font-size:.8rem;color:rgba(148,163,180,.55);">&copy; 2026 Pocono AI, LLC &middot; East Stroudsburg, PA &middot; Zero-telemetry. Local-first. Human-reviewed.</p>
+</div>
+
+</body>
+</html>

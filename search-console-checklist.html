@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Search Console Submission Checklist — Pocono AI</title>
+<meta name="description" content="Internal deployment checklist for Google Search Console URL submission, keyword tracking, and crawl monitoring for poconoai.com.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://poconoai.com/search-console-checklist.html">
+<link rel="stylesheet" href="styles.css?v=402">
+<link rel="stylesheet" href="nav-v2026.css?v=402">
+<link rel="stylesheet" href="brand-v292.css?v=402">
+<style>
+:root { --teal: #00c2a8; }
+.page-wrap { max-width: 960px; margin: 0 auto; padding: clamp(28px,4vw,56px) 24px; color: #cfdfeb; }
+.page-title { font-size: clamp(1.6rem,3.5vw,2.4rem); font-weight: 800; color: #fff; margin: 0 0 8px; letter-spacing: -.02em; }
+.kicker { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .14em; color: #2dd4bf; margin-bottom: 12px; }
+.page-lede { font-size: 1rem; color: #9eb9cc; line-height: 1.65; margin: 0 0 36px; max-width: 720px; }
+.disclosure { background: rgba(251,191,36,.06); border: 1px solid rgba(251,191,36,.22); border-radius: 12px; padding: 14px 18px; font-size: .9rem; color: #fde68a; margin: 0 0 36px; line-height: 1.6; }
+
+.section-title { font-size: 1.1rem; font-weight: 700; color: #fff; margin: 32px 0 12px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,.08); letter-spacing: -.01em; }
+
+/* URL table */
+.url-table { width: 100%; border-collapse: collapse; font-size: .88rem; margin: 0 0 8px; }
+.url-table th { text-align: left; padding: 8px 12px; font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: #7a98b0; border-bottom: 2px solid rgba(255,255,255,.08); }
+.url-table td { padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,.05); vertical-align: top; }
+.url-table td:first-child { font-family: monospace; font-size: .82rem; color: #2dd4bf; word-break: break-all; }
+.url-table td:nth-child(2) { color: #b9d9ee; }
+.url-table td:nth-child(3) { color: #7a98b0; font-size: .82rem; }
+.url-table tr:hover td { background: rgba(255,255,255,.02); }
+.priority-high td:first-child { color: #00c2a8; font-weight: 700; }
+.priority-new td:first-child { color: #a78bfa; }
+
+/* Keyword list */
+.kw-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 0 0 8px; }
+@media(max-width:560px){ .kw-grid { grid-template-columns: 1fr; } }
+.kw-group { background: rgba(15,23,42,.4); border: 1px solid rgba(255,255,255,.08); border-radius: 12px; padding: 16px 18px; }
+.kw-group h3 { font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: #7a98b0; margin: 0 0 10px; }
+.kw-group ul { margin: 0; padding: 0; list-style: none; }
+.kw-group ul li { padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,.04); font-size: .87rem; color: #b9d9ee; line-height: 1.4; }
+.kw-group ul li:last-child { border-bottom: none; }
+.kw-group ul li .intent { font-size: .72rem; color: #7a98b0; margin-left: 6px; }
+
+/* Checklist */
+.checklist { list-style: none; padding: 0; margin: 0 0 8px; }
+.checklist li { display: flex; gap: 10px; align-items: flex-start; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,.04); font-size: .9rem; color: #b9d9ee; line-height: 1.5; }
+.checklist li:last-child { border-bottom: none; }
+.checklist li .box { flex-shrink: 0; width: 18px; height: 18px; border: 2px solid rgba(0,194,168,.4); border-radius: 4px; margin-top: 2px; }
+.checklist li.done .box { background: var(--teal); border-color: var(--teal); }
+.checklist li.done .box::after { content: '✓'; color: #0b0f13; font-size: .7rem; font-weight: 900; display: flex; align-items: center; justify-content: center; height: 100%; }
+
+/* Monitoring table */
+.monitor-table { width: 100%; border-collapse: collapse; font-size: .87rem; margin: 0 0 8px; }
+.monitor-table th { text-align: left; padding: 8px 12px; font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: #7a98b0; border-bottom: 2px solid rgba(255,255,255,.08); }
+.monitor-table td { padding: 9px 12px; border-bottom: 1px solid rgba(255,255,255,.05); color: #b9d9ee; font-size: .85rem; vertical-align: top; }
+.monitor-table tr:hover td { background: rgba(255,255,255,.02); }
+
+.note { font-size: .84rem; color: #7a98b0; line-height: 1.6; margin: 8px 0 0; font-style: italic; }
+.sep { border: none; border-top: 1px solid rgba(255,255,255,.07); margin: 36px 0; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; margin-left: 6px; }
+.badge-new { background: rgba(167,139,250,.15); color: #a78bfa; }
+.badge-priority { background: rgba(0,194,168,.15); color: #2dd4bf; }
+.badge-update { background: rgba(251,191,36,.1); color: #fbbf24; }
+</style>
+</head>
+<body>
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- INCLUDE:HEADER -->
+<div id="hitl-notice" style="background:#0a1929;padding:4px 16px;text-align:center;font-size:12px;color:#4a5568;border-bottom:1px solid rgba(255,255,255,0.06);letter-spacing:0.01em;">Human-in-the-Loop required: licensed professionals verify all outputs before clinical or legal action</div>
+<header role="banner">
+  <div class="header-inner">
+    <a href="/index.html" class="logo" aria-label="Pocono AI Home">
+      <img src="/logo.svg?v=402" alt="" width="36" height="36" decoding="async" loading="eager" aria-hidden="true" style="display:inline-block;">
+      Pocono <span>AI</span>
+    </a>
+    <nav id="desktop-nav" aria-label="Main navigation">
+      <div class="nav-item"><a href="/index.html" class="nav-direct">Home</a></div>
+      <div class="nav-item"><a href="/for-physicians.html" class="nav-direct">Physicians</a></div>
+      <div class="nav-item"><a href="/for-attorneys.html" class="nav-direct">Attorneys</a></div>
+      <div class="nav-item"><a href="/sentinel-node.html" class="nav-direct nav-hub" style="color:#d5a94f;border:1px solid rgba(213,169,79,0.45);border-radius:999px;padding:6px 13px;">Sentinel Node</a></div>
+      <div class="nav-item"><a href="/living-memorials/" class="nav-direct">Living Echo</a></div>
+      <div class="nav-item"><a href="/contact.html" class="nav-direct">Contact</a></div>
+      <div class="nav-item" data-dropdown="menu-more">
+        <button type="button" class="nav-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="menu-more">More <span class="nav-chevron" aria-hidden="true">&#9662;</span></button>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <a href="/contact.html#pilot" class="nav-cta nav-cta-primary">Request a Pilot</a>
+      <button type="button" class="pa-search-trigger" data-search-open aria-label="Search (press / or Ctrl-K)" aria-haspopup="dialog" aria-expanded="false">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span class="pa-st-label">Search</span><kbd data-pa-keyhint>Ctrl K</kbd>
+      </button>
+      <button type="button" class="header-icon-btn" id="mobile-menu" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav-panel">
+        <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- "More" overflow dropdown — sibling of <header> so position:fixed escapes header's stacking context. Wired by nav.js via data-dropdown="menu-more". -->
+<div class="nav-dropdown" id="menu-more" aria-label="More navigation">
+  <p class="nav-dd-section">Products</p>
+  <a href="/engineering-drafting/">Drafting &amp; Engineering Edition</a>
+  <a href="/sentinel-home/">Sentinel Home Edition</a>
+  <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability — Assistive Tools &#x2605;</a>
+  <a href="/living-memorials/enterprise-estate-continuity.html">Enterprise Estate Continuity</a>
+  <p class="nav-dd-section">Capabilities</p>
+  <a href="/evidence-room.html">Evidence Room</a>
+  <a href="/push-button-deliverables.html">Push-Button Deliverables</a>
+  <a href="/pilot-readiness-kit.html">Pilot Kit</a>
+  <a href="/pilot-program.html">Pilot Program</a>
+  <a href="/how-it-works.html">How It Works</a>
+  <p class="nav-dd-section">Hubs &amp; Company</p>
+  <a href="/training.html">Training Hub</a>
+  <a href="/documentation-hub/">Document Hub</a>
+  <a href="/global/">Global Hub</a>
+  <a href="/investors-hub.html">Investor Hub</a>
+  <a href="/valuation-dashboard.html">Valuation Dashboard</a>
+  <a href="/about.html">About</a>
+  <p class="nav-dd-section">Trust &amp; Legal</p>
+  <a href="/transparency.html">Transparency</a>
+  <a href="/audit.html">Audit Log</a>
+  <a href="/privacy.html">Privacy</a>
+  <a href="/sitemap.html">Sitemap</a>
+</div>
+<!-- Site search is provided by the self-contained search.js asset (command palette: / or Ctrl/Cmd-K). -->
+
+<!-- Mobile panel: full-screen slide-in. v396 nav — hub tiles + grouped links + Sentinel Node + Engineering. -->
+<nav id="mobile-nav-panel" aria-label="Mobile navigation" aria-hidden="true" role="dialog" aria-modal="true">
+
+  <!-- Hub tiles: Sentinel Node, Documentation Hub, Training Hub, Global Hub -->
+  <div style="padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,0.07);">
+    <p style="font-size:0.65em;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.28);margin:0 0 10px;padding:0 2px;">Hubs</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <a href="/sentinel-node.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(213,169,79,0.1);border:1px solid rgba(213,169,79,0.35);border-radius:10px;color:#d5a94f;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Sentinel Node</a>
+      <a href="/documentation-hub/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(0,194,168,0.1);border:1px solid rgba(0,194,168,0.35);border-radius:10px;color:#00c2a8;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Docs Hub</a>
+      <a href="/training.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.35);border-radius:10px;color:#a78bfa;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Training Hub</a>
+      <a href="/global/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(122,240,220,0.07);border:1px solid rgba(122,240,220,0.3);border-radius:10px;color:#7af0dc;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Global Hub</a>
+    </div>
+  </div>
+
+  <!-- Core paths -->
+  <div class="mob-static-links">
+    <a href="/index.html">Home</a>
+    <a href="/for-physicians.html">Physicians</a>
+    <a href="/for-attorneys.html">Attorneys</a>
+    <a href="/engineering-drafting/">Engineering &amp; Drafting</a>
+    <a href="/pilot-program.html">Pilot Program</a>
+    <a href="/how-it-works.html">How It Works</a>
+    <a href="/trust.html">Trust &amp; Audit</a>
+    <a href="/pricing.html">Pricing</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/living-memorials/">Living Echo</a>
+    <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability</a>
+    <a href="/about.html">About</a>
+    <a href="/team.html" style="color:rgba(255,255,255,0.6);">Team &amp; Leadership</a>
+    <a href="/valuation-dashboard.html" style="color:rgba(255,255,255,0.6);">Valuation Dashboard</a>
+    <a href="/careers.html" style="color:rgba(255,255,255,0.6);">Careers</a>
+    <a href="/sentinel-demo.html" style="color:rgba(255,255,255,0.6);">Demo</a>
+    <a href="/sitemap.html" style="color:rgba(255,255,255,0.45);">Sitemap</a>
+    <a href="/transparency.html" style="color:rgba(255,255,255,0.45);">Transparency</a>
+    <a href="/privacy.html" style="color:rgba(255,255,255,0.45);">Privacy</a>
+  </div>
+
+  <a href="/contact.html#pilot" class="mob-cta">Request a Pilot</a>
+</nav>
+<!-- /INCLUDE:HEADER -->
+<!-- /nav-injected by v347 -->
+
+<main>
+<div class="page-wrap">
+
+  <div class="kicker">Internal Operations Document</div>
+  <h1 class="page-title">Search Console Submission &amp; Monitoring Checklist</h1>
+  <p class="page-lede">Deployment reference for Google Search Console URL submission, keyword tracking baselines, and ongoing crawl monitoring. Updated with each release. Not intended for public indexing.</p>
+
+  <div class="disclosure">
+    &#9888; <strong>Internal use only.</strong> This page is noindexed. Do not link to it from public-facing pages or share the URL externally. It is published here for operational convenience during the v341/v342 deployment window.
+  </div>
+
+  <!-- SECTION 1: URL Submission -->
+  <h2 class="section-title">1 — URL Submission Queue</h2>
+  <p class="note" style="margin:0 0 14px;">Submit these URLs via Google Search Console → URL Inspection → Request Indexing. Priority tier first. New concept pages may take 2–6 weeks to appear in results after submission.</p>
+
+  <table class="url-table">
+    <thead>
+      <tr><th>URL</th><th>Page Purpose</th><th>Priority / Status</th></tr>
+    </thead>
+    <tbody>
+      <tr class="priority-high">
+        <td>https://poconoai.com/</td>
+        <td>Homepage — primary entity page</td>
+        <td><span class="badge badge-priority">Submit first</span></td>
+      </tr>
+      <tr class="priority-high">
+        <td>https://poconoai.com/sitemap.xml</td>
+        <td>XML sitemap — submit to Search Console sitemaps panel, not URL inspection</td>
+        <td><span class="badge badge-priority">Sitemap panel</span></td>
+      </tr>
+      <tr class="priority-new">
+        <td>https://poconoai.com/sentinel-node.html</td>
+        <td>Product entity page — Sentinel Node appliance (Product schema)</td>
+        <td><span class="badge badge-new">New — high priority</span></td>
+      </tr>
+      <tr class="priority-new">
+        <td>https://poconoai.com/zero-telemetry-ai.html</td>
+        <td>Concept cluster — zero telemetry architecture</td>
+        <td><span class="badge badge-new">New</span></td>
+      </tr>
+      <tr class="priority-new">
+        <td>https://poconoai.com/zero-exfiltration-ai.html</td>
+        <td>Concept cluster — zero data exfiltration</td>
+        <td><span class="badge badge-new">New</span></td>
+      </tr>
+      <tr class="priority-new">
+        <td>https://poconoai.com/local-ai-inference.html</td>
+        <td>Concept cluster — on-premises AI inference</td>
+        <td><span class="badge badge-new">New</span></td>
+      </tr>
+      <tr class="priority-new">
+        <td>https://poconoai.com/data-sovereignty-ai.html</td>
+        <td>Concept cluster — data sovereignty</td>
+        <td><span class="badge badge-new">New</span></td>
+      </tr>
+      <tr class="priority-new">
+        <td>https://poconoai.com/ai-governance-layer.html</td>
+        <td>Concept cluster — governance layer and audit trail</td>
+        <td><span class="badge badge-new">New</span></td>
+      </tr>
+      <tr class="priority-new">
+        <td>https://poconoai.com/regulated-ai-infrastructure.html</td>
+        <td>Concept cluster — regulated AI category page</td>
+        <td><span class="badge badge-new">New</span></td>
+      </tr>
+      <tr>
+        <td>https://poconoai.com/architecture.html</td>
+        <td>Technical architecture — sovereign pipeline</td>
+        <td><span class="badge badge-update">Re-index (updated)</span></td>
+      </tr>
+      <tr>
+        <td>https://poconoai.com/physicians-hub.html</td>
+        <td>Hub — physician audience (CollectionPage schema)</td>
+        <td><span class="badge badge-update">Re-index (updated)</span></td>
+      </tr>
+      <tr>
+        <td>https://poconoai.com/attorneys-hub.html</td>
+        <td>Hub — attorney audience (CollectionPage schema)</td>
+        <td><span class="badge badge-update">Re-index (updated)</span></td>
+      </tr>
+      <tr>
+        <td>https://poconoai.com/day-in-the-clinic.html</td>
+        <td>Medical workflow walkthrough — AI result surface trigger</td>
+        <td><span class="badge badge-update">Re-index (updated)</span></td>
+      </tr>
+      <tr>
+        <td>https://poconoai.com/governance.html</td>
+        <td>Governance overview — high authority page</td>
+        <td><span class="badge badge-update">Re-index (updated)</span></td>
+      </tr>
+      <tr>
+        <td>https://poconoai.com/trust.html</td>
+        <td>Trust and security — high authority page</td>
+        <td><span class="badge badge-update">Re-index</span></td>
+      </tr>
+      <tr>
+        <td>https://poconoai.com/research.html</td>
+        <td>Research evidence base</td>
+        <td><span class="badge badge-update">Re-index (updated)</span></td>
+      </tr>
+      <tr>
+        <td>https://poconoai.com/contact.html</td>
+        <td>Contact / pilot inquiry</td>
+        <td>Standard</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr class="sep">
+
+  <!-- SECTION 2: Keyword Tracking -->
+  <h2 class="section-title">2 — Keyword &amp; Impression Tracking Baselines</h2>
+  <p class="note" style="margin:0 0 16px;">Establish baseline impressions in Search Console → Performance → Search results. Filter by URL or query to isolate. Check 4 weeks after sitemap submission, then monthly.</p>
+
+  <div class="kw-grid">
+    <div class="kw-group">
+      <h3>Brand Queries</h3>
+      <ul>
+        <li>Pocono AI <span class="intent">brand</span></li>
+        <li>Pocono AI Sentinel Node <span class="intent">brand + product</span></li>
+        <li>Pocono AI zero telemetry <span class="intent">brand + concept</span></li>
+        <li>Pocono AI zero exfiltration <span class="intent">brand + concept</span></li>
+        <li>Pocono AI local AI <span class="intent">brand + category</span></li>
+        <li>Marcus O'Dell AI <span class="intent">founder entity</span></li>
+      </ul>
+    </div>
+    <div class="kw-group">
+      <h3>Product / Entity Queries</h3>
+      <ul>
+        <li>Sentinel Node AI <span class="intent">product</span></li>
+        <li>local AI appliance healthcare <span class="intent">product category</span></li>
+        <li>on-premises AI for medical practices <span class="intent">product fit</span></li>
+        <li>on-prem AI for law firms <span class="intent">product fit</span></li>
+        <li>local AI inference appliance <span class="intent">product category</span></li>
+        <li>AI appliance HIPAA <span class="intent">regulated product</span></li>
+      </ul>
+    </div>
+    <div class="kw-group">
+      <h3>Concept / Long-Tail Queries</h3>
+      <ul>
+        <li>zero telemetry AI for medical practices <span class="intent">concept</span></li>
+        <li>zero exfiltration AI infrastructure <span class="intent">concept</span></li>
+        <li>local AI inference for regulated environments <span class="intent">concept</span></li>
+        <li>data sovereignty AI healthcare <span class="intent">concept</span></li>
+        <li>AI governance layer for regulated industries <span class="intent">concept</span></li>
+        <li>human-gated AI review healthcare <span class="intent">concept</span></li>
+        <li>AI audit trail for medical practices <span class="intent">concept</span></li>
+        <li>sovereign AI infrastructure regulated workflows <span class="intent">concept</span></li>
+        <li>regulated AI infrastructure medical legal <span class="intent">category</span></li>
+      </ul>
+    </div>
+    <div class="kw-group">
+      <h3>Problem / Use-Case Queries</h3>
+      <ul>
+        <li>AI for prior authorization small practice <span class="intent">use case</span></li>
+        <li>HIPAA-aligned AI for independent practice <span class="intent">use case</span></li>
+        <li>attorney-client privilege AI <span class="intent">use case</span></li>
+        <li>AI that doesn't send data to cloud <span class="intent">problem</span></li>
+        <li>local AI without cloud routing <span class="intent">problem</span></li>
+        <li>AI for small law firm confidentiality <span class="intent">problem</span></li>
+        <li>day in the clinic AI workflow <span class="intent">content</span></li>
+        <li>prior auth AI medical practice <span class="intent">use case</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <hr class="sep">
+
+  <!-- SECTION 3: Submission Checklist -->
+  <h2 class="section-title">3 — Step-by-Step Submission Checklist</h2>
+
+  <ul class="checklist">
+    <li><div class="box"></div><span><strong>Step 1:</strong> Log in to <a href="https://search.google.com/search-console" target="_blank" rel="noopener" style="color:var(--teal);">Google Search Console</a> for poconoai.com.</span></li>
+    <li><div class="box"></div><span><strong>Step 2:</strong> Go to Sitemaps panel → add <code>https://poconoai.com/sitemap.xml</code> if not already submitted. Check for any errors or warnings.</span></li>
+    <li><div class="box"></div><span><strong>Step 3:</strong> URL Inspection → enter <code>https://poconoai.com/sentinel-node.html</code> → Request Indexing. Confirm Google can render the page (check screenshot).</span></li>
+    <li><div class="box"></div><span><strong>Step 4:</strong> Repeat URL Inspection → Request Indexing for each new concept page: zero-telemetry-ai.html, zero-exfiltration-ai.html, local-ai-inference.html, data-sovereignty-ai.html, ai-governance-layer.html, regulated-ai-infrastructure.html.</span></li>
+    <li><div class="box"></div><span><strong>Step 5:</strong> URL Inspection → Request Indexing for updated hub pages: index.html, day-in-the-clinic.html, physicians-hub.html, attorneys-hub.html, governance.html, trust.html, research.html, investors.html.</span></li>
+    <li><div class="box"></div><span><strong>Step 6:</strong> Check Coverage report for any Excluded or Error pages. Confirm breach-calculator.html, comparison.html, competitive-analysis.html appear as "Excluded by noindex" — this is intentional.</span></li>
+    <li><div class="box"></div><span><strong>Step 7:</strong> Check Enhancements → Breadcrumbs (should show physicians-hub, attorneys-hub and other hub pages with BreadcrumbList schema).</span></li>
+    <li><div class="box"></div><span><strong>Step 8:</strong> Check Rich Results Test at <a href="https://search.google.com/test/rich-results" target="_blank" rel="noopener" style="color:var(--teal);">search.google.com/test/rich-results</a> for sentinel-node.html (Product schema) and each concept page (FAQPage schema).</span></li>
+    <li><div class="box"></div><span><strong>Step 9:</strong> Bookmark the Performance → Search Results view filtered to poconoai.com. Return in 4 weeks to establish impression baselines.</span></li>
+    <li><div class="box"></div><span><strong>Step 10:</strong> Set a calendar reminder for 6 weeks post-deploy to run Stage 5C: review impressions and identify pages ranking position 20–80 for refinement.</span></li>
+  </ul>
+
+  <hr class="sep">
+
+  <!-- SECTION 4: Crawl Monitoring -->
+  <h2 class="section-title">4 — Crawl Health Monitoring</h2>
+  <p class="note" style="margin:0 0 14px;">Check these metrics in Search Console monthly, or after any site update.</p>
+
+  <table class="monitor-table">
+    <thead>
+      <tr><th>Metric</th><th>Where to Find</th><th>What to Watch For</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Crawl coverage</td>
+        <td>Coverage → Valid</td>
+        <td>Should show ~104 valid indexed pages. Significant drops indicate crawl blocks.</td>
+      </tr>
+      <tr>
+        <td>Excluded pages</td>
+        <td>Coverage → Excluded</td>
+        <td>breach-calculator, comparison, competitive-analysis should appear here as "noindex." 404 and utility pages also expected excluded.</td>
+      </tr>
+      <tr>
+        <td>Concept cluster impressions</td>
+        <td>Performance → filter by URL</td>
+        <td>Each of the 7 concept pages should show impressions within 4–8 weeks of indexing. Zero impressions at 8 weeks = title/content signal problem.</td>
+      </tr>
+      <tr>
+        <td>day-in-the-clinic.html</td>
+        <td>Performance → filter by URL</td>
+        <td>Original AI result trigger. Should show impressions and some clicks from medical practice queries. Watch for position trend.</td>
+      </tr>
+      <tr>
+        <td>Brand query impressions</td>
+        <td>Performance → Queries → filter "Pocono AI"</td>
+        <td>Branded impressions should be stable or growing. Position 1–3 expected for exact brand. Drops indicate indexing or penalty issues.</td>
+      </tr>
+      <tr>
+        <td>Core Web Vitals</td>
+        <td>Core Web Vitals report</td>
+        <td>All pages are static HTML with minimal JS — should pass. Flag any LCP &gt; 2.5s.</td>
+      </tr>
+      <tr>
+        <td>Manual actions</td>
+        <td>Security &amp; Manual Actions</td>
+        <td>Should always show "No issues detected." Check monthly.</td>
+      </tr>
+      <tr>
+        <td>Rich results eligibility</td>
+        <td>Enhancements → FAQs, Breadcrumbs, Products</td>
+        <td>7 concept pages carry FAQPage schema. 5 hub pages carry BreadcrumbList. sentinel-node.html carries Product schema. These should appear in enhancements.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr class="sep">
+
+  <!-- SECTION 5: Stage 5C Trigger Conditions -->
+  <h2 class="section-title">5 — Stage 5C Trigger Conditions</h2>
+  <p class="note" style="margin:0 0 14px;">Stage 5C is data-driven refinement. Do not begin it until these conditions are met:</p>
+
+  <ul class="checklist">
+    <li><div class="box"></div><span>At least <strong>4 weeks</strong> have elapsed since sitemap submission.</span></li>
+    <li><div class="box"></div><span>Search Console Performance shows <strong>impressions for at least 3 concept pages.</strong></span></li>
+    <li><div class="box"></div><span>At least <strong>one query cluster</strong> is identifiable (brand, concept, or use-case) with position data.</span></li>
+    <li><div class="box"></div><span>Coverage report shows <strong>no unexpected Errors</strong> in the Valid/Excluded breakdown.</span></li>
+  </ul>
+
+  <p class="note">When these conditions are met, export the Performance → Queries CSV and bring it to Stage 5C. Do not refine pages without query evidence.</p>
+
+  <hr class="sep">
+
+  <!-- SECTION 6: Site State Reference -->
+  <h2 class="section-title">6 — Site State at v342</h2>
+  <table class="monitor-table">
+    <thead><tr><th>Metric</th><th>Value</th></tr></thead>
+    <tbody>
+      <tr><td>Total HTML pages</td><td>115 (108 indexable, 7 utility/noindex)</td></tr>
+      <tr><td>Sitemap entries</td><td>104 (all public indexable pages)</td></tr>
+      <tr><td>Noindex pages (intentional)</td><td>breach-calculator.html, comparison.html, competitive-analysis.html, 404.html + utility pages</td></tr>
+      <tr><td>JSON-LD coverage</td><td>108/108 indexable pages</td></tr>
+      <tr><td>datePublished coverage</td><td>108/108</td></tr>
+      <tr><td>og:image coverage</td><td>108/108 (fallback: og-image.jpg)</td></tr>
+      <tr><td>meta description ≤155c</td><td>108/108</td></tr>
+      <tr><td>twitter:description</td><td>108/108</td></tr>
+      <tr><td>Broken internal links</td><td>0</td></tr>
+      <tr><td>SEO concept pages</td><td>7 (fully cross-linked, in sitemap)</td></tr>
+      <tr><td>Hub pages linking to concept cluster</td><td>13/13</td></tr>
+      <tr><td>Concept cluster cross-links</td><td>7×7 complete mesh</td></tr>
+    </tbody>
+  </table>
+
+</div>
+</main>
+
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 root-relative nav fix, Living Echo rebrand, Engineering & Drafting + Enterprise Estate Continuity links added (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- INCLUDE:FOOTER -->
+<footer role="contentinfo" style="background:#051622;border-top:1px solid rgba(255,255,255,0.08);padding:40px 24px 28px;font-size:0.85em;color:#8899aa;">
+  <div style="max-width:1180px;margin:0 auto;">
+
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:0 0 28px;margin-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.07);">
+      <div style="max-width:560px;">
+        <p style="margin:0 0 6px;font-size:1.05em;font-weight:700;color:#fff;">Local AI infrastructure for regulated practices.</p>
+        <p style="margin:0;font-size:0.95em;line-height:1.5;">Drafts with citations. Human review required. Sensitive documents stay under practice control. Simple path, deep proof.</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="/contact.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;background:#00c2a8;color:#04111a;font-weight:700;text-decoration:none;font-size:0.95em;">Request Pilot</a>
+        <a href="/sentinel-demo.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;border:1px solid rgba(0,194,168,0.55);color:#00c2a8;font-weight:700;text-decoration:none;font-size:0.95em;">Watch Demo</a>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px 32px;margin-bottom:32px;text-align:left;">
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">For You</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/start-here.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Start Here (3 min)</a>
+          <a href="/for-physicians.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Physicians</a>
+          <a href="/for-attorneys.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Attorneys</a>
+          <a href="/engineering-drafting/" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Engineering &amp; Drafting Teams</a>
+          <a href="/pilot-program.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Pilot Program</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Installer Training</a>
+          <a href="/how-it-works.html" style="color:#8899aa;text-decoration:none;">How It Works</a>
+          <a href="/trust.html" style="color:#8899aa;text-decoration:none;">Trust &amp; Audit</a>
+          <a href="/pricing.html" style="color:#8899aa;text-decoration:none;">Pricing</a>
+          <a href="/sentinel-demo.html" style="color:#8899aa;text-decoration:none;">See the Demo</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Documentation Hub</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/documentation-hub/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Hub Home &mdash; Deep Proof</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">Installer Training</a>
+          <a href="/sentinel-node/installation-simulator.html" style="color:#8899aa;text-decoration:none;">&#8627; Installation Simulator</a>
+          <a href="/documentation-hub/clinical/" style="color:#8899aa;text-decoration:none;">Clinical Documentation</a>
+          <a href="/documentation-hub/legal/" style="color:#8899aa;text-decoration:none;">Legal Documentation</a>
+          <a href="/documentation-hub/technical/" style="color:#8899aa;text-decoration:none;">Technical Documentation</a>
+          <a href="/documentation-hub/governance/" style="color:#8899aa;text-decoration:none;">Governance &amp; Audit</a>
+          <a href="/documentation-hub/tools/" style="color:#8899aa;text-decoration:none;">Tools &amp; Simulators</a>
+          <a href="/documentation-hub/research/" style="color:#8899aa;text-decoration:none;">Research &amp; Essays</a>
+          <a href="/documentation-hub/transparency/" style="color:#8899aa;text-decoration:none;">Transparency</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Global Federated AI</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/global/" style="color:#7af0dc;text-decoration:none;font-weight:600;">Global Federated Hub</a>
+          <a href="/global/australia/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Australia</a>
+          <a href="/global/singapore/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Singapore</a>
+          <a href="/global/taiwan/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Taiwan</a>
+          <a href="/global/europe/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Europe</a>
+          <a href="/contact.html" style="color:#8899aa;text-decoration:none;">Partner Inquiry</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Company</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/about.html" style="color:#8899aa;text-decoration:none;">About Pocono AI</a>
+          <a href="/team.html" style="color:#8899aa;text-decoration:none;">Team &amp; Leadership</a>
+          <a href="/why-pocono-ai.html" style="color:#8899aa;text-decoration:none;">Why Pocono AI</a>
+          <a href="/founding-commercial-leadership.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Join Us</a>
+          <a href="/careers.html" style="color:#8899aa;text-decoration:none;">Careers</a>
+          <a href="/how-we-hire.html" style="color:#8899aa;text-decoration:none;">How We Hire</a>
+          <a href="/channel-partners.html" style="color:#8899aa;text-decoration:none;">Technical Partners (MSPs)</a>
+          <a href="/partners.html" style="color:#8899aa;text-decoration:none;">Academic Partnerships</a>
+          <a href="/contact.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Contact</a>
+          <a href="https://forms.gle/VQahnkjMfY6QNEMy8" target="_blank" rel="noopener noreferrer" style="color:#d5a94f;text-decoration:none;font-weight:600;">Interest List &#8599;</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Founder Projects</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/rehability/" style="color:#a78bfa;text-decoration:none;font-weight:700;">Rehability &#x2605;</a>
+          <a href="/rehability/marcus-memory-helper/" style="color:#a78bfa;text-decoration:none;font-weight:600;">&#8627; Marcus's Memory Helper</a>
+          <a href="/sentinel-home/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Sentinel Home Edition</a>
+          <a href="/living-memorials/" style="color:#8899aa;text-decoration:none;">Living Echo</a>
+          <a href="/living-memorials/marcus-odell/" style="color:#8899aa;text-decoration:none;">Marcus&rsquo;s Living Echo</a>
+          <a href="/living-memorials/enterprise-estate-continuity.html" style="color:#8899aa;text-decoration:none;">Enterprise Estate Continuity</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Resources &amp; Legal</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/sitemap.html" style="color:#8899aa;text-decoration:none;">All Pages (Sitemap)</a>
+          <a href="/audit.html" style="color:#8899aa;text-decoration:none;">Transparency &amp; Audit Log</a>
+          <a href="/maturity-disclosure.html" style="color:#8899aa;text-decoration:none;">What We Have / Don&rsquo;t Claim</a>
+          <a href="/plain.html" style="color:#8899aa;text-decoration:none;">Plain Language Guide</a>
+          <a href="/privacy.html" style="color:#8899aa;text-decoration:none;">Privacy</a>
+          <a href="/terms.html" style="color:#8899aa;text-decoration:none;">Terms</a>
+          <a href="/sla.html" style="color:#8899aa;text-decoration:none;">SLA</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:18px;margin-bottom:14px;">
+      <p style="margin:0;font-size:0.82em;line-height:1.6;color:#6f8295;max-width:1000px;">Pocono AI does not provide medical, legal, or engineering advice, does not practice medicine, law, or licensed engineering, and does not make clinical, legal, or engineering decisions. Outputs are drafts or support materials that require review by a qualified professional; final professional judgment remains with the licensed physician, attorney, or engineer. Tools and simulations on this site are educational and use synthetic data.</p>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:20px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+      <p style="margin:0;font-size:0.9em;">&copy; 2026 Pocono AI, LLC &nbsp;&#183;&nbsp; East Stroudsburg, PA &nbsp;&#183;&nbsp; <a href="mailto:marcus@poconoai.com" style="color:#8899aa;">marcus@poconoai.com</a> &nbsp;&#183;&nbsp; <a href="tel:+15705340602" style="color:#8899aa;">(570) 534-0602</a></p>
+      <p style="margin:0;font-size:0.88em;"><a href="/audit.html" style="color:#5dade2;text-decoration:none;">Transparency v402</a></p>
+    </div>
+  </div>
+</footer>
+<script src="/search.js?v=402" defer></script>
+<!-- /INCLUDE:FOOTER -->
+
+<script src="search-index.js?v=402" defer></script>
+<script src="nav.js?v=402" defer></script>
+</body>
+</html>

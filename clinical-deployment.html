@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Clinical deployment framework for Sentinel Node: role-aware AI access, physician oversight, and staff onboarding for small practices.">
+    <meta name="keywords" content="clinical deployment, clinical RAG, role-aware AI, human-in-the-loop, physician AI workflow, prior authorization AI, medical documentation AI, sovereign clinical AI, Sentinel Node, Pocono AI, HIPAA aligned, local clinical AI, audit trail, medical practice AI deployment">
+    <title>Clinical Deployment Framework | Pocono AI</title>
+    <meta property="og:title" content="Clinical Deployment Framework | Pocono AI">
+    <meta property="og:description" content="How the Sentinel Node is deployed inside a medical practice: role-aware access, human-in-the-loop verification, audited workflows, zero cloud telemetry.">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Pocono AI">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:url" content="https://poconoai.com/clinical-deployment.html">
+    <meta property="og:image" content="https://poconoai.com/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Pocono AI &mdash; Clinical Deployment Framework">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Clinical Deployment Framework | Pocono AI">
+    <meta name="twitter:description" content="How the Sentinel Node is deployed inside a medical practice: role-aware access, human-in-the-loop verification, audited workflows.">
+    <meta name="twitter:image" content="https://poconoai.com/hero.jpg">
+    <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+    <meta name="theme-color" content="#0B0F13">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="alternate icon" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon-180x180.png">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="alternate icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles.css?v=402">
+    <link rel="stylesheet" href="nav-v2026.css?v=402">
+<link rel="stylesheet" href="brand-v292.css?v=402">
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+    <link rel="canonical" href="https://poconoai.com/clinical-deployment.html">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Clinical Deployment Framework | Pocono AI",
+      "description": "Role-aware deployment of the Sentinel Node inside medical practices: licensed providers, clinical support staff, and administrative roles, with mandatory human-in-the-loop verification.",
+      "url": "https://poconoai.com/clinical-deployment.html",
+      "isPartOf": { "@type": "WebSite", "url": "https://poconoai.com", "name": "Pocono AI, LLC" },
+      "publisher": { "@type": "Organization", "name": "Pocono AI, LLC", "url": "https://poconoai.com" },
+      "audience": { "@type": "Audience", "audienceType": "Medical practice owners, physicians, clinical staff, administrators" },
+      "datePublished": "2026-06-01",
+      "dateModified": "2026-06-01"
+    }</script>
+
+<style id="v253-cd-styles">
+.cd-page { color: var(--light-text, #d0dde6); }
+.cd-hero { padding: 3.5rem 0 1rem; }
+.cd-hero h1 { font-size: clamp(1.75rem, 4.5vw, 2.6rem); line-height: 1.15; color: var(--white, #fff); margin: 0 0 0.9rem; }
+.cd-hero .lede { font-size: clamp(1rem, 1.6vw, 1.12rem); line-height: 1.6; color: var(--light-text, #d0dde6); max-width: 62ch; margin: 0 0 1.4rem; }
+.cd-eyebrow { display: inline-block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--teal, #2dd4bf); margin: 0 0 0.9rem; font-family: var(--font-mono, 'DM Mono', monospace); }
+.cd-section { padding: 2.5rem 0; }
+.cd-section h2 { font-size: clamp(1.3rem, 2.4vw, 1.7rem); color: var(--white, #fff); border: none; margin: 0 0 0.8rem; }
+.cd-section h3 { font-size: clamp(1.05rem, 1.6vw, 1.2rem); color: var(--white, #fff); margin: 1.2rem 0 0.5rem; }
+.cd-section p { line-height: 1.65; max-width: 65ch; color: var(--light-text, #d0dde6); }
+.cd-section ul { line-height: 1.7; max-width: 62ch; color: var(--light-text, #d0dde6); padding-left: 1.2rem; }
+.cd-section li { margin: 0.35rem 0; }
+.cd-divider { border: none; border-top: 1px solid rgba(255,255,255,0.07); margin: 2.5rem 0 0; }
+
+/* Tier grid */
+.cd-tier-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; margin: 1.5rem 0 0.5rem; }
+@media (max-width: 880px) { .cd-tier-grid { grid-template-columns: 1fr; } }
+.cd-tier-card { background: rgba(2,16,26,0.55); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 1.5rem 1.35rem; transition: border-color 0.2s, transform 0.2s; }
+.cd-tier-card.tier-a { border-top: 3px solid #ef4444; }
+.cd-tier-card.tier-b { border-top: 3px solid #f59e0b; }
+.cd-tier-card.tier-c { border-top: 3px solid #2dd4bf; }
+.cd-tier-card h3 { margin: 0.2rem 0 0.4rem; font-size: 1.1rem; }
+.cd-tier-card .cd-tier-label { display: block; font-family: var(--font-mono, 'DM Mono', monospace); font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; margin-bottom: 0.5rem; }
+.cd-tier-card.tier-a .cd-tier-label { color: #ef4444; }
+.cd-tier-card.tier-b .cd-tier-label { color: #f59e0b; }
+.cd-tier-card.tier-c .cd-tier-label { color: #2dd4bf; }
+.cd-tier-card p { font-size: 0.92rem; line-height: 1.6; margin: 0 0 0.7rem; max-width: none; }
+.cd-tier-card ul { font-size: 0.88rem; line-height: 1.7; margin: 0.5rem 0 0; padding-left: 1.15rem; max-width: none; }
+.cd-tier-card li { margin: 0.2rem 0; color: #8a9baa; }
+
+/* HITL highlight */
+.cd-hitl-box { background: linear-gradient(135deg, rgba(45,212,191,0.06), rgba(2,16,26,0.85)); border: 1px solid rgba(45,212,191,0.22); border-radius: 14px; padding: 1.5rem 1.65rem; margin: 1.5rem 0; }
+.cd-hitl-box h3 { color: #5eead4; font-family: var(--font-mono, 'DM Mono', monospace); font-size: 0.78rem; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; margin: 0 0 0.6rem; }
+.cd-hitl-box p { margin: 0 0 0.5rem; }
+
+/* Workflow examples */
+.cd-workflow-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin: 1.2rem 0; }
+@media (max-width: 720px) { .cd-workflow-grid { grid-template-columns: 1fr; } }
+.cd-workflow-card { background: rgba(2,16,26,0.45); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 1.25rem 1.35rem; }
+.cd-workflow-card h4 { color: var(--white, #fff); font-size: 1rem; margin: 0 0 0.6rem; line-height: 1.35; }
+.cd-workflow-card .cd-flow-steps { display: flex; flex-direction: column; gap: 0.4rem; margin: 0.6rem 0 0; padding: 0; list-style: none; }
+.cd-workflow-card .cd-flow-step { padding: 0.45rem 0.65rem; background: rgba(2,16,26,0.6); border-left: 2px solid rgba(45,212,191,0.5); border-radius: 4px; font-size: 0.85rem; line-height: 1.45; color: var(--light-text, #d0dde6); }
+.cd-workflow-card .cd-flow-step .cd-step-tag { display: inline-block; font-family: var(--font-mono, 'DM Mono', monospace); font-size: 0.66rem; font-weight: 700; letter-spacing: 0.1em; color: #8a9baa; text-transform: uppercase; margin-right: 0.5rem; }
+
+/* Governance checkpoints */
+.cd-checkpoint-list { list-style: none; padding: 0; margin: 1.2rem 0 0; display: grid; gap: 0.7rem; }
+.cd-checkpoint-list li { background: rgba(2,16,26,0.4); border-left: 3px solid rgba(45,212,191,0.5); padding: 0.85rem 1.1rem; border-radius: 0 6px 6px 0; font-size: 0.92rem; line-height: 1.55; }
+.cd-checkpoint-list li strong { color: var(--white, #fff); display: block; margin-bottom: 0.2rem; font-size: 0.95rem; }
+
+/* Timeline */
+.cd-timeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.8rem; margin: 1.4rem 0; }
+@media (max-width: 880px) { .cd-timeline { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .cd-timeline { grid-template-columns: 1fr; } }
+.cd-timeline-step { background: rgba(2,16,26,0.5); border: 1px solid rgba(255,255,255,0.07); border-radius: 10px; padding: 1rem 1.1rem; }
+.cd-timeline-step .cd-tl-num { font-family: var(--font-mono, 'DM Mono', monospace); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; color: var(--teal, #2dd4bf); margin-bottom: 0.35rem; }
+.cd-timeline-step h4 { color: var(--white, #fff); font-size: 0.95rem; margin: 0 0 0.4rem; line-height: 1.3; }
+.cd-timeline-step p { font-size: 0.82rem; color: #8a9baa; margin: 0; line-height: 1.5; max-width: none; }
+
+/* CTA block */
+.cd-cta { background: linear-gradient(135deg, rgba(45,212,191,0.08), rgba(2,16,26,0.95)); border: 1px solid rgba(45,212,191,0.28); border-radius: 16px; padding: 2.2rem 2rem; margin: 2.5rem 0 1rem; text-align: center; }
+.cd-cta h2 { margin: 0 0 0.7rem; }
+.cd-cta p { margin: 0 auto 1.3rem; max-width: 56ch; }
+.cd-cta-actions { display: flex; gap: 0.7rem; flex-wrap: wrap; justify-content: center; }
+.cd-cta-btn { display: inline-block; padding: 0.85rem 1.5rem; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 0.95rem; transition: filter 0.15s; min-height: 44px; line-height: 1.4; }
+.cd-cta-btn-primary { background: #2dd4bf; color: #02101a; }
+.cd-cta-btn-primary:hover { filter: brightness(1.1); }
+.cd-cta-btn-secondary { background: transparent; border: 1px solid rgba(255,255,255,0.2); color: var(--light-text, #d0dde6); }
+.cd-cta-btn-secondary:hover { background: rgba(255,255,255,0.05); }
+
+/* Related links */
+.cd-related { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.8rem; margin: 1.2rem 0 0; }
+.cd-related a { display: block; padding: 1rem 1.15rem; background: rgba(2,16,26,0.45); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; color: var(--light-text, #d0dde6); text-decoration: none; font-size: 0.9rem; line-height: 1.4; transition: border-color 0.15s, transform 0.15s; }
+.cd-related a:hover, .cd-related a:focus-visible { border-color: rgba(45,212,191,0.4); transform: translateY(-1px); }
+.cd-related a strong { display: block; color: var(--white, #fff); margin-bottom: 0.2rem; font-size: 0.95rem; }
+
+/* Container helper */
+.cd-container { max-width: 1080px; margin: 0 auto; padding: 0 1.25rem; }
+@media (max-width: 600px) { .cd-container { padding: 0 1rem; } }
+</style>
+
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+<div id="reading-progress" aria-hidden="true"></div>
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- INCLUDE:HEADER -->
+<div id="hitl-notice" style="background:#0a1929;padding:4px 16px;text-align:center;font-size:12px;color:#4a5568;border-bottom:1px solid rgba(255,255,255,0.06);letter-spacing:0.01em;">Human-in-the-Loop required: licensed professionals verify all outputs before clinical or legal action</div>
+<header role="banner">
+  <div class="header-inner">
+    <a href="/index.html" class="logo" aria-label="Pocono AI Home">
+      <img src="/logo.svg?v=402" alt="" width="36" height="36" decoding="async" loading="eager" aria-hidden="true" style="display:inline-block;">
+      Pocono <span>AI</span>
+    </a>
+    <nav id="desktop-nav" aria-label="Main navigation">
+      <div class="nav-item"><a href="/index.html" class="nav-direct">Home</a></div>
+      <div class="nav-item"><a href="/for-physicians.html" class="nav-direct">Physicians</a></div>
+      <div class="nav-item"><a href="/for-attorneys.html" class="nav-direct">Attorneys</a></div>
+      <div class="nav-item"><a href="/sentinel-node.html" class="nav-direct nav-hub" style="color:#d5a94f;border:1px solid rgba(213,169,79,0.45);border-radius:999px;padding:6px 13px;">Sentinel Node</a></div>
+      <div class="nav-item"><a href="/living-memorials/" class="nav-direct">Living Echo</a></div>
+      <div class="nav-item"><a href="/contact.html" class="nav-direct">Contact</a></div>
+      <div class="nav-item" data-dropdown="menu-more">
+        <button type="button" class="nav-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="menu-more">More <span class="nav-chevron" aria-hidden="true">&#9662;</span></button>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <a href="/contact.html#pilot" class="nav-cta nav-cta-primary">Request a Pilot</a>
+      <button type="button" class="pa-search-trigger" data-search-open aria-label="Search (press / or Ctrl-K)" aria-haspopup="dialog" aria-expanded="false">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span class="pa-st-label">Search</span><kbd data-pa-keyhint>Ctrl K</kbd>
+      </button>
+      <button type="button" class="header-icon-btn" id="mobile-menu" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav-panel">
+        <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- "More" overflow dropdown — sibling of <header> so position:fixed escapes header's stacking context. Wired by nav.js via data-dropdown="menu-more". -->
+<div class="nav-dropdown" id="menu-more" aria-label="More navigation">
+  <p class="nav-dd-section">Products</p>
+  <a href="/engineering-drafting/">Drafting &amp; Engineering Edition</a>
+  <a href="/sentinel-home/">Sentinel Home Edition</a>
+  <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability — Assistive Tools &#x2605;</a>
+  <a href="/living-memorials/enterprise-estate-continuity.html">Enterprise Estate Continuity</a>
+  <p class="nav-dd-section">Capabilities</p>
+  <a href="/evidence-room.html">Evidence Room</a>
+  <a href="/push-button-deliverables.html">Push-Button Deliverables</a>
+  <a href="/pilot-readiness-kit.html">Pilot Kit</a>
+  <a href="/pilot-program.html">Pilot Program</a>
+  <a href="/how-it-works.html">How It Works</a>
+  <p class="nav-dd-section">Hubs &amp; Company</p>
+  <a href="/training.html">Training Hub</a>
+  <a href="/documentation-hub/">Document Hub</a>
+  <a href="/global/">Global Hub</a>
+  <a href="/investors-hub.html">Investor Hub</a>
+  <a href="/valuation-dashboard.html">Valuation Dashboard</a>
+  <a href="/about.html">About</a>
+  <p class="nav-dd-section">Trust &amp; Legal</p>
+  <a href="/transparency.html">Transparency</a>
+  <a href="/audit.html">Audit Log</a>
+  <a href="/privacy.html">Privacy</a>
+  <a href="/sitemap.html">Sitemap</a>
+</div>
+<!-- Site search is provided by the self-contained search.js asset (command palette: / or Ctrl/Cmd-K). -->
+
+<!-- Mobile panel: full-screen slide-in. v396 nav — hub tiles + grouped links + Sentinel Node + Engineering. -->
+<nav id="mobile-nav-panel" aria-label="Mobile navigation" aria-hidden="true" role="dialog" aria-modal="true">
+
+  <!-- Hub tiles: Sentinel Node, Documentation Hub, Training Hub, Global Hub -->
+  <div style="padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,0.07);">
+    <p style="font-size:0.65em;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.28);margin:0 0 10px;padding:0 2px;">Hubs</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <a href="/sentinel-node.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(213,169,79,0.1);border:1px solid rgba(213,169,79,0.35);border-radius:10px;color:#d5a94f;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Sentinel Node</a>
+      <a href="/documentation-hub/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(0,194,168,0.1);border:1px solid rgba(0,194,168,0.35);border-radius:10px;color:#00c2a8;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Docs Hub</a>
+      <a href="/training.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.35);border-radius:10px;color:#a78bfa;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Training Hub</a>
+      <a href="/global/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(122,240,220,0.07);border:1px solid rgba(122,240,220,0.3);border-radius:10px;color:#7af0dc;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Global Hub</a>
+    </div>
+  </div>
+
+  <!-- Core paths -->
+  <div class="mob-static-links">
+    <a href="/index.html">Home</a>
+    <a href="/for-physicians.html">Physicians</a>
+    <a href="/for-attorneys.html">Attorneys</a>
+    <a href="/engineering-drafting/">Engineering &amp; Drafting</a>
+    <a href="/pilot-program.html">Pilot Program</a>
+    <a href="/how-it-works.html">How It Works</a>
+    <a href="/trust.html">Trust &amp; Audit</a>
+    <a href="/pricing.html">Pricing</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/living-memorials/">Living Echo</a>
+    <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability</a>
+    <a href="/about.html">About</a>
+    <a href="/team.html" style="color:rgba(255,255,255,0.6);">Team &amp; Leadership</a>
+    <a href="/valuation-dashboard.html" style="color:rgba(255,255,255,0.6);">Valuation Dashboard</a>
+    <a href="/careers.html" style="color:rgba(255,255,255,0.6);">Careers</a>
+    <a href="/sentinel-demo.html" style="color:rgba(255,255,255,0.6);">Demo</a>
+    <a href="/sitemap.html" style="color:rgba(255,255,255,0.45);">Sitemap</a>
+    <a href="/transparency.html" style="color:rgba(255,255,255,0.45);">Transparency</a>
+    <a href="/privacy.html" style="color:rgba(255,255,255,0.45);">Privacy</a>
+  </div>
+
+  <a href="/contact.html#pilot" class="mob-cta">Request a Pilot</a>
+</nav>
+<!-- /INCLUDE:HEADER -->
+
+
+<main id="main-content" tabindex="-1" class="cd-page">
+<span id="main" aria-hidden="true"></span>
+
+  <!-- HERO -->
+  <section class="cd-hero">
+    <div class="cd-container">
+      <div class="sentinel-lockup" aria-label="Sentinel Node — Clinical Deployment">
+              <svg class="sentinel-lockup-mark" viewBox="0 0 64 64" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
+          <!-- v311b: rotated diamond + C-curve loop + summit dot. Inherits currentColor from CSS context. -->
+          <g transform="rotate(45 32 32)">
+            <rect x="12" y="12" width="40" height="40" rx="8" ry="8"/>
+            <path d="M43 22 L26 22 A6 6 0 0 0 20 28 L20 36 A6 6 0 0 0 26 42 L41 42"/>
+          </g>
+          <circle cx="32" cy="9" r="3" fill="currentColor" stroke="none"/>
+        </svg>
+              <div class="sentinel-lockup-rule"></div>
+              <div class="sentinel-lockup-text">
+                <span class="sentinel-lockup-name">Sentinel Node</span>
+                <span class="sentinel-lockup-tag">Clinical Deployment Framework</span>
+              </div>
+            </div>
+      <h1>How the Sentinel Node lives inside your practice</h1>
+      <p class="lede">A role-aware, audited deployment model for independent medical practices. Licensed providers, clinical support staff, and administrative staff each see a different slice of the same locally-indexed record &mdash; with mandatory human-in-the-loop review before any clinical or billing action.</p>
+      <p style="font-size:0.88rem;color:#8a9baa;max-width:62ch;margin:0;">Built for practices of 2&ndash;10 providers. No cloud calls. No vendor employees with access to your records. Every output cites a retrieved chunk from a document you own.</p>
+    </div>
+  </section>
+
+  <!-- WHO IT'S FOR -->
+  <section class="cd-section" aria-labelledby="cd-who">
+    <div class="cd-container">
+      <h2 id="cd-who">Who this deployment model is for</h2>
+      <p>The Clinical Deployment Framework is designed for independent medical practices &mdash; family medicine, internal medicine, pediatrics, behavioral health, specialty solo and small group practices &mdash; that want AI assistance for documentation, prior authorization, chart prep, and care coordination <strong>without sending protected health information to a cloud vendor</strong>.</p>
+      <ul>
+        <li><strong>Practice size:</strong> 2 to 10 licensed providers, with associated nursing, MA, and administrative staff.</li>
+        <li><strong>Technical posture:</strong> You have an EHR you can export documents from. You do not need a custom EHR integration to start.</li>
+        <li><strong>Compliance posture:</strong> You are a covered entity. You take HIPAA seriously. You read the Notice of Privacy Practices you give patients and you mean it.</li>
+        <li><strong>Time pressure:</strong> Your providers are spending 4&ndash;6 hours a day on EHR work (Sinsky et al., <em>Annals of Family Medicine</em>) and you have a prior-auth backlog that eats nursing time.</li>
+      </ul>
+      <p>If you are a hospital system with 400+ beds and an enterprise Epic / Nuance DAX contract, this is not the right deployment for you. This page describes the practice-scale model.</p>
+    </div>
+  </section>
+
+  <hr class="cd-divider">
+
+  <!-- ROLE-AWARE ACCESS MODEL -->
+  <section class="cd-section" aria-labelledby="cd-roles">
+    <div class="cd-container">
+      <h2 id="cd-roles">Role-aware access &mdash; the three-tier model</h2>
+      <p>The Sentinel Node is not one tool that everyone uses the same way. It is a role-aware AI deployment. The same locally-stored documents are accessible to all three tiers, but the query types, output formatting, and verification requirements are scoped to what each role is licensed and trained to do.</p>
+
+      <div class="cd-tier-grid" role="list">
+        <article class="cd-tier-card tier-a" role="listitem">
+          <span class="cd-tier-label">Tier A &middot; Licensed Providers</span>
+          <h3>Clinical Decision Support</h3>
+          <p>Physicians, NPs, and PAs query the node for cited patient history before appointments, during care coordination, and for referral documentation. Every response cites the retrieved chunk from the locally-indexed record. The provider verifies before any clinical decision.</p>
+          <ul>
+            <li>Pre-visit chart summaries with source citations</li>
+            <li>Differential support grounded in indexed records</li>
+            <li>Referral package generation</li>
+            <li>Discharge summary drafting</li>
+            <li>All outputs flagged "requires physician review"</li>
+          </ul>
+        </article>
+
+        <article class="cd-tier-card tier-b" role="listitem">
+          <span class="cd-tier-label">Tier B &middot; Clinical Support</span>
+          <h3>Prep, Triage &amp; Prior Auth</h3>
+          <p>Medical assistants and nurses use the node to build complete prior authorization submissions from locally-indexed records, prep triage notes, and assemble medication histories. The aim is to reduce the wrongful denial rate by making sure submissions are complete on the first attempt.</p>
+          <ul>
+            <li>Prior-auth packet assembly with linked source records</li>
+            <li>Medication history retrieval and verification</li>
+            <li>Intake triage documentation prep</li>
+            <li>Lab and imaging result context for nursing follow-up</li>
+            <li>Scope-limited to non-licensed clinical functions</li>
+          </ul>
+        </article>
+
+        <article class="cd-tier-card tier-c" role="listitem">
+          <span class="cd-tier-label">Tier C &middot; Administrative</span>
+          <h3>Operations &amp; Billing</h3>
+          <p>Front-desk and billing staff query for policy context, code lookups, and patient communication history &mdash; <em>without</em> access to the full clinical record. Role-based query scoping keeps the right data in front of the right staff member.</p>
+          <ul>
+            <li>Billing inquiry context retrieval</li>
+            <li>Insurance policy document queries</li>
+            <li>CPT and procedure code lookups</li>
+            <li>Patient communication history summaries</li>
+            <li>No access to provider clinical notes or differentials</li>
+          </ul>
+        </article>
+      </div>
+
+      <p style="font-size:0.88rem;color:#8a9baa;margin-top:1.4rem;">Role-based access control (RBAC) is enforced at the API layer of the Sentinel Node, not just in the user interface. A billing clerk cannot construct a query that returns clinical notes, regardless of how the query is phrased.</p>
+    </div>
+  </section>
+
+  <hr class="cd-divider">
+
+  <!-- HUMAN-IN-THE-LOOP -->
+  <section class="cd-section" aria-labelledby="cd-hitl">
+    <div class="cd-container">
+      <h2 id="cd-hitl">Human-in-the-loop verification &mdash; the non-negotiable</h2>
+      <p>The Sentinel Node does not make clinical or legal decisions. Every output is reviewed, edited, or approved by a licensed professional before it is used. This is not a marketing statement &mdash; it is enforced by the workflow.</p>
+
+      <div class="cd-hitl-box">
+        <h3>How HITL is enforced</h3>
+        <p><strong>1. Every output cites a retrieved chunk.</strong> The clinician or staff member can see the source document inline alongside the generation. There is no "trust the model" path &mdash; the source is always visible.</p>
+        <p><strong>2. Every output is flagged by tier.</strong> Tier A outputs are flagged "requires physician sign-off." Tier B outputs are flagged "requires licensed review before submission." Tier C outputs are flagged "for administrative use only &mdash; not clinical."</p>
+        <p><strong>3. No autonomous action is taken.</strong> The node does not write to the EHR. It does not submit prior authorizations on its own. It does not send messages to patients. The output is staged for a human to review, edit, and act on.</p>
+        <p><strong>4. The audit trail records the human step.</strong> Every query, retrieval, and human review action is recorded in the local audit log, retained 90 days locally, before archive per your data retention policy.</p>
+      </div>
+
+      <p>This is the architectural answer to the <em>Mata v. Avianca</em> hallucination problem in legal and the documented hallucination risk in clinical settings: don't trust generation alone &mdash; ground it in retrieval, cite the source, and require human verification.</p>
+    </div>
+  </section>
+
+  <hr class="cd-divider">
+
+  <!-- SAMPLE CLINICAL WORKFLOWS -->
+  <section class="cd-section" aria-labelledby="cd-workflows">
+    <div class="cd-container">
+      <h2 id="cd-workflows">Sample clinical workflows</h2>
+      <p>Concrete examples of how the three tiers use the Sentinel Node day-to-day. Every workflow ends with a licensed professional reviewing and approving the output before action.</p>
+
+      <div class="cd-workflow-grid">
+
+        <article class="cd-workflow-card">
+          <h4>Prior authorization assembly (Tier B &rarr; Tier A)</h4>
+          <ul class="cd-flow-steps">
+            <li class="cd-flow-step"><span class="cd-step-tag">Step 1</span>Nurse queries: "Build a prior-auth packet for patient #12345, GLP-1 prescription, documenting prior failed therapies and current A1C."</li>
+            <li class="cd-flow-step"><span class="cd-step-tag">Step 2</span>Node retrieves chunks from the patient's record: A1C history, prior medication trial notes, current BMI documentation, prior cardiovascular workup.</li>
+            <li class="cd-flow-step"><span class="cd-step-tag">Step 3</span>Node assembles a draft packet citing each source chunk inline.</li>
+            <li class="cd-flow-step"><span class="cd-step-tag">Step 4</span>Nurse reviews, edits, attaches missing documents.</li>
+            <li class="cd-flow-step"><span class="cd-step-tag">Step 5</span>Physician signs off on clinical justification.</li>
+            <li class="cd-flow-step"><span class="cd-step-tag">Step 6</span>Audit log records: query, retrieved chunks, nurse review, physician sign-off, submission.</li>
+          </ul>
+        </article>
+
+        <article class="cd-workflow-card">
+          <h4>Pre-visit chart prep (Tier A)</h4>
+          <ul class="cd-flow-steps">
+            <li class="cd-flow-step"><span class="cd-step-tag">Step 1</span>Physician queries: "Summarize patient #67890's last three visits, focus on diabetes management and current med list."</li>
+            <li class="cd-flow-step"><span class="cd-step-tag">Step 2</span>Node retrieves the three most recent encounter notes and the active medication list from the locally-indexed record.</li>
+            <li class="cd-flow-step"><span class="cd-step-tag">Step 3</span>Node generates a 2&ndash;3 paragraph summary with inline citations to the source visits.</li>
+            <li class="cd-flow-step"><span class="cd-step-tag">Step 4</span>Physician reads, clicks through to a citation to verify a specific A1C trajectory, edits the summary, saves to prep notes.</li>
+            <li class="cd-flow-step"><span class="cd-step-tag">Step 5</span>Audit log records: query, retrieved sources, physician edit, time-on-task.</li>
+          </ul>
+        </article>
+
+        <article class="cd-workflow-card">
+          <h4>Referral package generation (Tier A)</h4>
+          <ul class="cd-flow-steps">
+            <li class="cd-flow-step"><span class="cd-step-tag">Step 1</span>Physician queries: "Generate a cardiology referral for patient #45678, include chest pain history, EKG findings, family history."</li>
+            <li class="cd-flow-step"><span class="cd-step-tag">Step 2</span>Node retrieves relevant cardiac history chunks, lab values, and imaging reports.</li>
+            <li class="cd-flow-step"><span class="cd-step-tag">Step 3</span>Node drafts a referral letter with cited findings and structured patient summary.</li>
+            <li class="cd-flow-step"><span class="cd-step-tag">Step 4</span>Physician reviews, edits the clinical question being asked of cardiology, signs.</li>
+            <li class="cd-flow-step"><span class="cd-step-tag">Step 5</span>Staff member faxes or transmits per practice protocol.</li>
+          </ul>
+        </article>
+
+        <article class="cd-workflow-card">
+          <h4>Patient communication context (Tier C)</h4>
+          <ul class="cd-flow-steps">
+            <li class="cd-flow-step"><span class="cd-step-tag">Step 1</span>Front desk receives patient call asking about a billing question.</li>
+            <li class="cd-flow-step"><span class="cd-step-tag">Step 2</span>Staff queries: "Show last three communications with patient #11223 and current outstanding balance &mdash; billing context only."</li>
+            <li class="cd-flow-step"><span class="cd-step-tag">Step 3</span>Node returns only communication history and billing data &mdash; no clinical notes (RBAC enforced at the API layer).</li>
+            <li class="cd-flow-step"><span class="cd-step-tag">Step 4</span>Staff resolves the inquiry with the context in hand.</li>
+            <li class="cd-flow-step"><span class="cd-step-tag">Step 5</span>Audit log records: query scope, retrieved data class, staff member identity.</li>
+          </ul>
+        </article>
+
+      </div>
+
+      <p style="font-size:0.88rem;color:#8a9baa;margin-top:1.2rem;">These are illustrative workflows. Actual workflow configuration happens during the deployment scoping conversation &mdash; what your practice needs depends on your EHR, your staff structure, and your specialty.</p>
+    </div>
+  </section>
+
+  <hr class="cd-divider">
+
+  <!-- GOVERNANCE CHECKPOINTS -->
+  <section class="cd-section" aria-labelledby="cd-governance">
+    <div class="cd-container">
+      <h2 id="cd-governance">Governance checkpoints</h2>
+      <p>A clinical AI deployment is not "install and go." It is a governed system with explicit review points. The Pocono AI Clinical Deployment Framework includes these checkpoints by default:</p>
+      <ul class="cd-checkpoint-list">
+        <li><strong>Pre-deployment scoping</strong>Practice manager and lead physician sign off on which document classes are indexed, which roles get which tiers, and which workflows are enabled in the first 60 days. Documented in writing.</li>
+        <li><strong>30-day workflow review</strong>Practice reviews initial query patterns, output quality, time-on-task data, and any flagged outputs. Adjustments to RBAC scoping and workflow definitions made before broader rollout.</li>
+        <li><strong>60-day pilot review</strong>End of Proof-of-Value engagement: aggregate metrics reviewed (queries served, retrieval accuracy spot-checks, time reclaimed, errors caught at human-review stage). Decision point: convert to ongoing SLA or end engagement.</li>
+        <li><strong>Quarterly audit log review</strong>Practice compliance officer or owner reviews the audit log: who queried what, what was generated, which outputs were flagged or rejected, any anomalous patterns. Required as a HIPAA technical safeguard.</li>
+        <li><strong>Annual RBAC scope review</strong>Staff turnover, role changes, and workflow evolution mean the role-based access scope drifts. Annual review keeps the scoping accurate.</li>
+        <li><strong>Incident response protocol</strong>If the node produces an output that contributes to a clinical near-miss or error, the audit log provides the full retrieval chain. Root cause analysis is documented as part of the practice's existing clinical quality improvement process.</li>
+      </ul>
+    </div>
+  </section>
+
+  <hr class="cd-divider">
+
+  <!-- AUDIT TRAIL -->
+  <section class="cd-section" aria-labelledby="cd-audit">
+    <div class="cd-container">
+      <h2 id="cd-audit">The audit trail</h2>
+      <p>Every interaction with the Sentinel Node is recorded in a reviewable local audit log. This is a HIPAA technical safeguard requirement and a malpractice-defense asset. The log captures:</p>
+      <ul>
+        <li><strong>Query event:</strong> timestamp, authenticated user, role tier, query content, query scope (which document classes were searched).</li>
+        <li><strong>Retrieval event:</strong> which document chunks were returned, their source records, confidence scores.</li>
+        <li><strong>Generation event:</strong> the model output produced, with its citation links to the retrieved chunks.</li>
+        <li><strong>Human review event:</strong> who reviewed, what edits were made, whether the output was approved, rejected, or modified.</li>
+        <li><strong>Action event:</strong> if and when the reviewed output was used downstream (e.g., submitted to the EHR, sent to an insurer, attached to a referral).</li>
+      </ul>
+      <p>Today, in the pilot, the audit log is append-only and reviewable: entries are written locally and are not modified or deleted in normal operation, and the system provides no in-product edit or delete path. The next audit-layer release (Stage 2) adds hash-chained entries &mdash; each entry including a cryptographic hash of the previous entry &mdash; so that tampering with historical entries breaks the chain and becomes cryptographically detectable. The log is retained locally for 90 days at high resolution, then archived per the practice's data retention policy. <strong>The log never leaves the practice.</strong> Pocono AI does not receive audit data.</p>
+    </div>
+  </section>
+
+  <hr class="cd-divider">
+
+  <!-- DEPLOYMENT TIMELINE -->
+  <section class="cd-section" aria-labelledby="cd-timeline">
+    <div class="cd-container">
+      <h2 id="cd-timeline">Deployment timeline &mdash; from contract to operational</h2>
+      <p>A typical clinical deployment runs about 60 days from signed engagement to operational, full role-aware workflow. The pace is set by the practice, not the vendor.</p>
+
+      <div class="cd-timeline">
+        <div class="cd-timeline-step">
+          <div class="cd-tl-num">Week 1&ndash;2</div>
+          <h4>Scoping &amp; document inventory</h4>
+          <p>Identify which document classes get indexed (clinical notes, labs, imaging reports, billing records). Define RBAC tiers and assign staff to each.</p>
+        </div>
+        <div class="cd-timeline-step">
+          <div class="cd-tl-num">Week 2&ndash;3</div>
+          <h4>Hardware delivery &amp; network siting</h4>
+          <p>Sentinel Node arrives. Practice IT (or our deployment partner) places it on a dedicated VLAN with no outbound internet route during inference.</p>
+        </div>
+        <div class="cd-timeline-step">
+          <div class="cd-tl-num">Week 3&ndash;5</div>
+          <h4>Indexing &amp; pilot workflows</h4>
+          <p>Initial document set indexed. Two or three priority workflows configured (typically prior-auth and chart-prep). First Tier A and Tier B users onboarded.</p>
+        </div>
+        <div class="cd-timeline-step">
+          <div class="cd-tl-num">Week 5&ndash;8</div>
+          <h4>Live operation &amp; review</h4>
+          <p>All tiers active. 30-day workflow review. Adjustments to scoping, prompts, and RBAC as needed before formal Proof-of-Value sign-off at day 60.</p>
+        </div>
+      </div>
+
+      <p style="font-size:0.88rem;color:#8a9baa;">Engagement is structured as a Paid Proof-of-Value (POV). The POV fee covers scoping, deployment, and the 60-day pilot review. Conversion to ongoing SLA is the practice's decision at the end of the pilot.</p>
+    </div>
+  </section>
+
+  <hr class="cd-divider">
+
+  <!-- STAFF TRAINING -->
+  <section class="cd-section" aria-labelledby="cd-training">
+    <div class="cd-container">
+      <h2 id="cd-training">Staff training &amp; change management</h2>
+      <p>Clinical AI fails when staff are not trained, not when the technology is wrong. The Pocono AI deployment includes role-specific training as a non-optional part of the 60-day engagement:</p>
+      <ul>
+        <li><strong>Tier A training (licensed providers):</strong> 90 minutes &mdash; how to query, how to read citation chains, when to override the output, how the audit log protects you.</li>
+        <li><strong>Tier B training (clinical support staff):</strong> 60 minutes &mdash; prior-auth workflow walkthrough, when to escalate to a provider, scope boundaries.</li>
+        <li><strong>Tier C training (administrative staff):</strong> 45 minutes &mdash; query scope, what they cannot see and why, how to handle out-of-scope questions.</li>
+        <li><strong>Practice manager training:</strong> 60 minutes &mdash; audit log review, RBAC adjustment, monthly metrics interpretation.</li>
+        <li><strong>Refresher cadence:</strong> 30-minute refresher at month 6 and annually thereafter.</li>
+      </ul>
+      <p>Training is recorded for new staff onboarding. Practice retains the training materials &mdash; they are not licensed back from Pocono AI.</p>
+    </div>
+  </section>
+
+  <hr class="cd-divider">
+
+  <!-- RELATED -->
+  <section class="cd-section" aria-labelledby="cd-related">
+    <div class="cd-container">
+      <h2 id="cd-related">Related &mdash; how this connects to the rest of the platform</h2>
+      <div class="cd-related">
+        <a href="for-physicians.html"><strong>For Physicians</strong>Pain points, workflows, time reclamation evidence.</a>
+        <a href="physicians-hub.html"><strong>Physicians Knowledge Hub</strong>The full clinical evidence library.</a>
+        <a href="architecture.html"><strong>Architecture</strong>The technical stack underneath all of this.</a>
+        <a href="hybrid-ai-orchestration.html"><strong>Hybrid Orchestration</strong>How local-first routing works.</a>
+        <a href="compliance-hub.html"><strong>Compliance Hub</strong>HIPAA technical safeguards, OCR enforcement context.</a>
+        <a href="trust.html"><strong>Trust &amp; Security</strong>Zero-egress default, hardware custody, audit.</a>
+        <a href="pricing.html"><strong>Pricing &amp; POV Structure</strong>Engagement model and economics.</a>
+        <a href="audit.html"><strong>Audit System</strong>Reviewable log structure and retrieval (hash-chained: Stage 2).</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cd-section" aria-labelledby="cd-cta">
+    <div class="cd-container">
+      <div class="cd-cta">
+        <h2 id="cd-cta">Scope a clinical deployment for your practice</h2>
+        <p>A 20&ndash;30 minute scoping call covers document classes, staff structure, priority workflows, and what a 60-day Proof-of-Value would look like in your specific setting. No slides. No pressure.</p>
+        <div class="cd-cta-actions">
+          <a href="sentinel-demo.html" class="cd-cta-btn cd-cta-btn-primary">Book a 15-minute call &rarr;</a>
+          <a href="mailto:marcus@poconoai.com?subject=Clinical%20Deployment%20Scoping" class="cd-cta-btn cd-cta-btn-secondary">Email marcus@poconoai.com</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 root-relative nav fix, Living Echo rebrand, Engineering & Drafting + Enterprise Estate Continuity links added (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- INCLUDE:FOOTER -->
+<footer role="contentinfo" style="background:#051622;border-top:1px solid rgba(255,255,255,0.08);padding:40px 24px 28px;font-size:0.85em;color:#8899aa;">
+  <div style="max-width:1180px;margin:0 auto;">
+
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:0 0 28px;margin-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.07);">
+      <div style="max-width:560px;">
+        <p style="margin:0 0 6px;font-size:1.05em;font-weight:700;color:#fff;">Local AI infrastructure for regulated practices.</p>
+        <p style="margin:0;font-size:0.95em;line-height:1.5;">Drafts with citations. Human review required. Sensitive documents stay under practice control. Simple path, deep proof.</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="/contact.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;background:#00c2a8;color:#04111a;font-weight:700;text-decoration:none;font-size:0.95em;">Request Pilot</a>
+        <a href="/sentinel-demo.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;border:1px solid rgba(0,194,168,0.55);color:#00c2a8;font-weight:700;text-decoration:none;font-size:0.95em;">Watch Demo</a>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px 32px;margin-bottom:32px;text-align:left;">
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">For You</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/start-here.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Start Here (3 min)</a>
+          <a href="/for-physicians.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Physicians</a>
+          <a href="/for-attorneys.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Attorneys</a>
+          <a href="/engineering-drafting/" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Engineering &amp; Drafting Teams</a>
+          <a href="/pilot-program.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Pilot Program</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Installer Training</a>
+          <a href="/how-it-works.html" style="color:#8899aa;text-decoration:none;">How It Works</a>
+          <a href="/trust.html" style="color:#8899aa;text-decoration:none;">Trust &amp; Audit</a>
+          <a href="/pricing.html" style="color:#8899aa;text-decoration:none;">Pricing</a>
+          <a href="/sentinel-demo.html" style="color:#8899aa;text-decoration:none;">See the Demo</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Documentation Hub</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/documentation-hub/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Hub Home &mdash; Deep Proof</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">Installer Training</a>
+          <a href="/sentinel-node/installation-simulator.html" style="color:#8899aa;text-decoration:none;">&#8627; Installation Simulator</a>
+          <a href="/documentation-hub/clinical/" style="color:#8899aa;text-decoration:none;">Clinical Documentation</a>
+          <a href="/documentation-hub/legal/" style="color:#8899aa;text-decoration:none;">Legal Documentation</a>
+          <a href="/documentation-hub/technical/" style="color:#8899aa;text-decoration:none;">Technical Documentation</a>
+          <a href="/documentation-hub/governance/" style="color:#8899aa;text-decoration:none;">Governance &amp; Audit</a>
+          <a href="/documentation-hub/tools/" style="color:#8899aa;text-decoration:none;">Tools &amp; Simulators</a>
+          <a href="/documentation-hub/research/" style="color:#8899aa;text-decoration:none;">Research &amp; Essays</a>
+          <a href="/documentation-hub/transparency/" style="color:#8899aa;text-decoration:none;">Transparency</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Global Federated AI</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/global/" style="color:#7af0dc;text-decoration:none;font-weight:600;">Global Federated Hub</a>
+          <a href="/global/australia/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Australia</a>
+          <a href="/global/singapore/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Singapore</a>
+          <a href="/global/taiwan/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Taiwan</a>
+          <a href="/global/europe/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Europe</a>
+          <a href="/contact.html" style="color:#8899aa;text-decoration:none;">Partner Inquiry</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Company</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/about.html" style="color:#8899aa;text-decoration:none;">About Pocono AI</a>
+          <a href="/team.html" style="color:#8899aa;text-decoration:none;">Team &amp; Leadership</a>
+          <a href="/why-pocono-ai.html" style="color:#8899aa;text-decoration:none;">Why Pocono AI</a>
+          <a href="/founding-commercial-leadership.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Join Us</a>
+          <a href="/careers.html" style="color:#8899aa;text-decoration:none;">Careers</a>
+          <a href="/how-we-hire.html" style="color:#8899aa;text-decoration:none;">How We Hire</a>
+          <a href="/channel-partners.html" style="color:#8899aa;text-decoration:none;">Technical Partners (MSPs)</a>
+          <a href="/partners.html" style="color:#8899aa;text-decoration:none;">Academic Partnerships</a>
+          <a href="/contact.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Contact</a>
+          <a href="https://forms.gle/VQahnkjMfY6QNEMy8" target="_blank" rel="noopener noreferrer" style="color:#d5a94f;text-decoration:none;font-weight:600;">Interest List &#8599;</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Founder Projects</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/rehability/" style="color:#a78bfa;text-decoration:none;font-weight:700;">Rehability &#x2605;</a>
+          <a href="/rehability/marcus-memory-helper/" style="color:#a78bfa;text-decoration:none;font-weight:600;">&#8627; Marcus's Memory Helper</a>
+          <a href="/sentinel-home/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Sentinel Home Edition</a>
+          <a href="/living-memorials/" style="color:#8899aa;text-decoration:none;">Living Echo</a>
+          <a href="/living-memorials/marcus-odell/" style="color:#8899aa;text-decoration:none;">Marcus&rsquo;s Living Echo</a>
+          <a href="/living-memorials/enterprise-estate-continuity.html" style="color:#8899aa;text-decoration:none;">Enterprise Estate Continuity</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Resources &amp; Legal</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/sitemap.html" style="color:#8899aa;text-decoration:none;">All Pages (Sitemap)</a>
+          <a href="/audit.html" style="color:#8899aa;text-decoration:none;">Transparency &amp; Audit Log</a>
+          <a href="/maturity-disclosure.html" style="color:#8899aa;text-decoration:none;">What We Have / Don&rsquo;t Claim</a>
+          <a href="/plain.html" style="color:#8899aa;text-decoration:none;">Plain Language Guide</a>
+          <a href="/privacy.html" style="color:#8899aa;text-decoration:none;">Privacy</a>
+          <a href="/terms.html" style="color:#8899aa;text-decoration:none;">Terms</a>
+          <a href="/sla.html" style="color:#8899aa;text-decoration:none;">SLA</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:18px;margin-bottom:14px;">
+      <p style="margin:0;font-size:0.82em;line-height:1.6;color:#6f8295;max-width:1000px;">Pocono AI does not provide medical, legal, or engineering advice, does not practice medicine, law, or licensed engineering, and does not make clinical, legal, or engineering decisions. Outputs are drafts or support materials that require review by a qualified professional; final professional judgment remains with the licensed physician, attorney, or engineer. Tools and simulations on this site are educational and use synthetic data.</p>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:20px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+      <p style="margin:0;font-size:0.9em;">&copy; 2026 Pocono AI, LLC &nbsp;&#183;&nbsp; East Stroudsburg, PA &nbsp;&#183;&nbsp; <a href="mailto:marcus@poconoai.com" style="color:#8899aa;">marcus@poconoai.com</a> &nbsp;&#183;&nbsp; <a href="tel:+15705340602" style="color:#8899aa;">(570) 534-0602</a></p>
+      <p style="margin:0;font-size:0.88em;"><a href="/audit.html" style="color:#5dade2;text-decoration:none;">Transparency v402</a></p>
+    </div>
+  </div>
+</footer>
+<script src="/search.js?v=402" defer></script>
+<!-- /INCLUDE:FOOTER -->
+
+<script src="search-index.js?v=402" defer></script>
+<script src="nav.js?v=402" defer></script>
+<script src="pilot-cta.js?v=402" defer></script>
+
+<div style="position:fixed;bottom:0;left:0;right:0;background:#188B96;color:white;text-align:center;padding:12px;z-index:9999;display:none;" class="mobile-cta">Email Marcus: marcus@poconoai.com</div>
+
+<style>
+@media (max-width: 767px) {
+  .mobile-cta {
+    display: block !important;
+  }
+}
+</style>
+
+</body>
+</html>

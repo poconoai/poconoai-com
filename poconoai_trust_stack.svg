@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" role="img" aria-labelledby="title desc">
+  <title id="title">The Pocono AI Trust Stack — Five Layers of Sovereignty</title>
+  <desc id="desc">A stacked diagram of the five trust layers: physical hardware, secure inference, governance enforcement, human oversight, and immutable audit — each layer reinforcing the one above.</desc>
+
+  <defs>
+    <linearGradient id="tsBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a0f1c"/>
+      <stop offset="100%" stop-color="#040810"/>
+    </linearGradient>
+    <linearGradient id="tier1" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#3fbf82"/>
+      <stop offset="100%" stop-color="#2c8f5c"/>
+    </linearGradient>
+    <linearGradient id="tier2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#5b9cf6"/>
+      <stop offset="100%" stop-color="#4078c6"/>
+    </linearGradient>
+    <linearGradient id="tier3" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#a78bfa"/>
+      <stop offset="100%" stop-color="#7c5ad8"/>
+    </linearGradient>
+    <linearGradient id="tier4" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#e8a838"/>
+      <stop offset="100%" stop-color="#c08018"/>
+    </linearGradient>
+    <linearGradient id="tier5" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#e85c5c"/>
+      <stop offset="100%" stop-color="#b03838"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="900" height="600" fill="url(#tsBg)"/>
+
+  <!-- Header -->
+  <text x="450" y="48" text-anchor="middle" font-family="'IBM Plex Sans', system-ui, sans-serif" font-size="22" font-weight="700" fill="#e8edf2" letter-spacing="-0.01em">The Trust Stack</text>
+  <text x="450" y="72" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="11" fill="#3fbf82" letter-spacing="0.18em">FIVE LAYERS · ONE PROMISE · ZERO COMPROMISE</text>
+
+  <!-- Stack (bottom-up = foundation-up) -->
+  <!-- Layer 5: AUDIT (top) -->
+  <g transform="translate(180, 110)">
+    <rect width="540" height="70" rx="6" fill="url(#tier5)" opacity="0.18" stroke="#e85c5c" stroke-width="1"/>
+    <rect x="0" y="0" width="6" height="70" fill="url(#tier5)"/>
+    <text x="28" y="28" font-family="'IBM Plex Mono', monospace" font-size="10" fill="#e85c5c" letter-spacing="0.18em">LAYER 05 — AUDIT</text>
+    <text x="28" y="50" font-family="'IBM Plex Sans', sans-serif" font-size="16" font-weight="600" fill="#e8edf2">Immutable record</text>
+    <text x="380" y="50" font-family="'IBM Plex Sans', sans-serif" font-size="11" fill="#a0a8b0">Every input. Every output. Forever.</text>
+  </g>
+
+  <!-- Layer 4: HUMAN -->
+  <g transform="translate(180, 200)">
+    <rect width="540" height="70" rx="6" fill="url(#tier4)" opacity="0.18" stroke="#e8a838" stroke-width="1"/>
+    <rect x="0" y="0" width="6" height="70" fill="url(#tier4)"/>
+    <text x="28" y="28" font-family="'IBM Plex Mono', monospace" font-size="10" fill="#e8a838" letter-spacing="0.18em">LAYER 04 — HUMAN</text>
+    <text x="28" y="50" font-family="'IBM Plex Sans', sans-serif" font-size="16" font-weight="600" fill="#e8edf2">Mandatory oversight</text>
+    <text x="380" y="50" font-family="'IBM Plex Sans', sans-serif" font-size="11" fill="#a0a8b0">A person decides. Always.</text>
+  </g>
+
+  <!-- Layer 3: GOVERNANCE -->
+  <g transform="translate(180, 290)">
+    <rect width="540" height="70" rx="6" fill="url(#tier3)" opacity="0.18" stroke="#a78bfa" stroke-width="1"/>
+    <rect x="0" y="0" width="6" height="70" fill="url(#tier3)"/>
+    <text x="28" y="28" font-family="'IBM Plex Mono', monospace" font-size="10" fill="#a78bfa" letter-spacing="0.18em">LAYER 03 — GOVERNANCE</text>
+    <text x="28" y="50" font-family="'IBM Plex Sans', sans-serif" font-size="16" font-weight="600" fill="#e8edf2">Policy enforcement</text>
+    <text x="380" y="50" font-family="'IBM Plex Sans', sans-serif" font-size="11" fill="#a0a8b0">Built into the system, not bolted on.</text>
+  </g>
+
+  <!-- Layer 2: INFERENCE -->
+  <g transform="translate(180, 380)">
+    <rect width="540" height="70" rx="6" fill="url(#tier2)" opacity="0.18" stroke="#5b9cf6" stroke-width="1"/>
+    <rect x="0" y="0" width="6" height="70" fill="url(#tier2)"/>
+    <text x="28" y="28" font-family="'IBM Plex Mono', monospace" font-size="10" fill="#5b9cf6" letter-spacing="0.18em">LAYER 02 — INFERENCE</text>
+    <text x="28" y="50" font-family="'IBM Plex Sans', sans-serif" font-size="16" font-weight="600" fill="#e8edf2">Local model execution</text>
+    <text x="380" y="50" font-family="'IBM Plex Sans', sans-serif" font-size="11" fill="#a0a8b0">Air-gapped, traceable, fully on-device.</text>
+  </g>
+
+  <!-- Layer 1: HARDWARE (foundation) -->
+  <g transform="translate(180, 470)">
+    <rect width="540" height="70" rx="6" fill="url(#tier1)" opacity="0.18" stroke="#3fbf82" stroke-width="1"/>
+    <rect x="0" y="0" width="6" height="70" fill="url(#tier1)"/>
+    <text x="28" y="28" font-family="'IBM Plex Mono', monospace" font-size="10" fill="#3fbf82" letter-spacing="0.18em">LAYER 01 — HARDWARE</text>
+    <text x="28" y="50" font-family="'IBM Plex Sans', sans-serif" font-size="16" font-weight="600" fill="#e8edf2">Sentinel Node, on-premises</text>
+    <text x="380" y="50" font-family="'IBM Plex Sans', sans-serif" font-size="11" fill="#a0a8b0">Your network. Your perimeter. Your control.</text>
+  </g>
+
+  <!-- Side annotation -->
+  <text x="80" y="345" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="9" fill="#5a6a7a" letter-spacing="0.2em" transform="rotate(-90, 80, 345)">FOUNDATION → ACCOUNTABILITY</text>
+</svg>

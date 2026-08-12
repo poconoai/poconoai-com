@@ -1,0 +1,2007 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wired Different — Life Sim</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap');
+
+:root {
+  --bg: #0e0e14;
+  --surface: #16161f;
+  --surface2: #1e1e2a;
+  --border: #2a2a3a;
+  --text: #e8e8f0;
+  --muted: #6b6b88;
+  --accent: #7df0c4;
+  --accent2: #f07dd8;
+  --accent3: #f0d47d;
+  --accent4: #7dc4f0;
+  --danger: #f07d7d;
+  --energy: #7df0c4;
+  --focus: #7dc4f0;
+  --social: #f07dd8;
+  --sensory: #f0d47d;
+  --radius: 12px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Space Mono', monospace;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* NOISE TEXTURE OVERLAY */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.4;
+}
+
+/* SCREENS */
+.screen { display: none; min-height: 100vh; padding: 24px; }
+.screen.active { display: flex; flex-direction: column; }
+
+/* ===== TITLE SCREEN ===== */
+#title-screen {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.title-bg-circles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.title-bg-circles span {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.06;
+  animation: pulse-circle 4s ease-in-out infinite;
+}
+.title-bg-circles span:nth-child(1) { width: 600px; height: 600px; background: var(--accent); top: -200px; left: -200px; animation-delay: 0s; }
+.title-bg-circles span:nth-child(2) { width: 400px; height: 400px; background: var(--accent2); bottom: -100px; right: -100px; animation-delay: 1.5s; }
+.title-bg-circles span:nth-child(3) { width: 300px; height: 300px; background: var(--accent3); top: 40%; left: 60%; animation-delay: 3s; }
+
+@keyframes pulse-circle {
+  0%, 100% { transform: scale(1); opacity: 0.06; }
+  50% { transform: scale(1.1); opacity: 0.1; }
+}
+
+.title-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: fade-up 0.6s ease forwards 0.2s;
+}
+
+.title-main {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(52px, 10vw, 88px);
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: -2px;
+  margin-bottom: 8px;
+  opacity: 0;
+  animation: fade-up 0.6s ease forwards 0.4s;
+}
+
+.title-main .line1 { color: var(--text); }
+.title-main .line2 {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--accent2);
+}
+
+.title-sub {
+  font-size: 13px;
+  color: var(--muted);
+  margin: 20px 0 40px;
+  line-height: 1.8;
+  max-width: 440px;
+  opacity: 0;
+  animation: fade-up 0.6s ease forwards 0.6s;
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 16px 40px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.2s;
+  opacity: 0;
+  animation: fade-up 0.6s ease forwards 0.8s;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(125,240,196,0.3); }
+.btn-primary:active { transform: translateY(0); }
+
+/* ===== CHARACTER CREATE ===== */
+#create-screen {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 40px 24px;
+  flex-direction: column;
+  gap: 0;
+}
+
+.screen-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+.screen-sub {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 32px;
+}
+
+.form-group { margin-bottom: 24px; }
+.form-label {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: block;
+  margin-bottom: 10px;
+}
+.form-input {
+  width: 100%;
+  background: var(--surface2);
+  border: 1.5px solid var(--border);
+  color: var(--text);
+  font-family: 'Space Mono', monospace;
+  font-size: 15px;
+  padding: 14px 16px;
+  border-radius: var(--radius);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.form-input:focus { border-color: var(--accent); }
+
+.trait-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.trait-card {
+  background: var(--surface2);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.trait-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  opacity: 0;
+  transition: opacity 0.2s;
+  border-radius: var(--radius);
+}
+.trait-card.selected {
+  border-color: var(--accent);
+  background: rgba(125,240,196,0.08);
+}
+.trait-card.selected::after { opacity: 0.05; }
+.trait-card:hover { border-color: var(--muted); }
+.trait-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  position: relative;
+  z-index: 1;
+}
+.trait-desc {
+  font-size: 10px;
+  color: var(--muted);
+  line-height: 1.5;
+  position: relative;
+  z-index: 1;
+}
+.trait-emoji { font-size: 20px; margin-bottom: 6px; display: block; }
+
+.trait-check {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: var(--bg);
+  z-index: 2;
+}
+.trait-card.selected .trait-check { display: flex; }
+
+.avatar-grid {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.avatar-opt {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--surface2);
+  border: 2px solid var(--border);
+  cursor: pointer;
+  font-size: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+.avatar-opt.selected { border-color: var(--accent); background: rgba(125,240,196,0.1); }
+.avatar-opt:hover { border-color: var(--muted); }
+
+/* ===== MAIN GAME ===== */
+#game-screen {
+  flex-direction: column;
+  gap: 0;
+  padding: 0;
+}
+
+.game-header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.game-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--surface2);
+  border: 2px solid var(--accent);
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.game-info { flex: 1; }
+.game-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+.game-day {
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 1px;
+}
+
+.game-stats {
+  display: flex;
+  gap: 10px;
+}
+.stat-pill {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+.stat-label {
+  font-size: 8px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.stat-bar-wrap {
+  width: 50px;
+  height: 6px;
+  background: var(--surface2);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.stat-bar {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.5s ease;
+}
+.stat-bar.energy { background: var(--energy); }
+.stat-bar.focus { background: var(--focus); }
+.stat-bar.social { background: var(--social); }
+.stat-bar.sensory { background: var(--sensory); }
+
+.stat-val {
+  font-size: 8px;
+  color: var(--muted);
+}
+
+/* GAME BODY */
+.game-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 20px;
+  gap: 16px;
+}
+
+/* CHARACTER WIDGET */
+.char-widget {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  position: relative;
+  overflow: hidden;
+}
+.char-widget::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 80% 50%, rgba(125,240,196,0.04), transparent 60%);
+}
+
+.char-big-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--surface2);
+  border: 2px solid var(--border);
+  font-size: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.mood-bubble {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.char-details { flex: 1; }
+.char-state {
+  font-family: 'Syne', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.char-thought {
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.6;
+  font-style: italic;
+  border-left: 2px solid var(--border);
+  padding-left: 10px;
+  margin-top: 8px;
+}
+
+/* OVERLOAD INDICATOR */
+.overload-bar {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+.overload-label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.overload-title {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.overload-val {
+  font-size: 10px;
+  color: var(--accent3);
+}
+.overload-track {
+  height: 8px;
+  background: var(--surface2);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.overload-fill {
+  height: 100%;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--accent3), var(--danger));
+  transition: width 0.5s ease;
+}
+
+/* SCENARIO CARD */
+.scenario-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px;
+  animation: slide-in 0.3s ease;
+}
+@keyframes slide-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.scenario-time {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.scenario-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.scenario-text {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: 18px;
+}
+
+.choices { display: flex; flex-direction: column; gap: 10px; }
+
+.choice-btn {
+  background: var(--surface2);
+  border: 1.5px solid var(--border);
+  color: var(--text);
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  padding: 14px 16px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  position: relative;
+  overflow: hidden;
+}
+.choice-btn::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--accent);
+  transform: scaleY(0);
+  transition: transform 0.2s;
+  border-radius: 0 2px 2px 0;
+}
+.choice-btn:hover { border-color: var(--accent); background: rgba(125,240,196,0.05); }
+.choice-btn:hover::before { transform: scaleY(1); }
+
+.choice-text { line-height: 1.5; }
+.choice-effects {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.effect-tag {
+  font-size: 9px;
+  padding: 2px 7px;
+  border-radius: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+.effect-tag.pos { color: var(--accent); border-color: rgba(125,240,196,0.3); }
+.effect-tag.neg { color: var(--danger); border-color: rgba(240,125,125,0.3); }
+.effect-tag.neu { color: var(--accent3); border-color: rgba(240,212,125,0.3); }
+
+/* OUTCOME CARD */
+.outcome-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px;
+  animation: slide-in 0.3s ease;
+}
+.outcome-icon { font-size: 36px; margin-bottom: 12px; }
+.outcome-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.outcome-text {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+.outcome-changes {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+.change-chip {
+  font-size: 11px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: 700;
+}
+.change-chip.pos { background: rgba(125,240,196,0.12); color: var(--accent); }
+.change-chip.neg { background: rgba(240,125,125,0.12); color: var(--danger); }
+
+/* MINI GAME */
+.minigame-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px;
+  animation: slide-in 0.3s ease;
+}
+.mg-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.mg-desc { font-size: 12px; color: var(--muted); margin-bottom: 16px; line-height: 1.6; }
+
+/* TASK SORT MINI GAME */
+.task-pool {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-height: 60px;
+  padding: 12px;
+  background: var(--surface2);
+  border-radius: 10px;
+  margin-bottom: 10px;
+  border: 1.5px dashed var(--border);
+  transition: border-color 0.2s;
+}
+.task-pool.highlight { border-color: var(--accent); }
+.task-token {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.15s;
+  user-select: none;
+}
+.task-token:hover { border-color: var(--accent); background: rgba(125,240,196,0.08); }
+.task-token.selected { border-color: var(--accent); background: rgba(125,240,196,0.15); }
+.task-token.urgent { border-color: var(--danger); }
+.task-token.deep { border-color: var(--focus); }
+.task-token.social { border-color: var(--social); }
+
+.drop-zones {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.drop-zone {
+  min-height: 80px;
+  border-radius: 10px;
+  padding: 10px;
+  border: 1.5px dashed var(--border);
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.drop-zone.do-now { border-color: rgba(125,240,196,0.3); }
+.drop-zone.later { border-color: rgba(125,196,240,0.3); }
+.drop-zone.decline { border-color: rgba(240,125,125,0.3); }
+.drop-zone-label { margin-bottom: 8px; font-size: 9px; }
+.drop-zone .task-token { font-size: 9px; padding: 5px 8px; }
+
+/* FOCUS BURST MINI GAME */
+.focus-track {
+  position: relative;
+  height: 60px;
+  background: var(--surface2);
+  border-radius: 10px;
+  margin-bottom: 14px;
+  overflow: hidden;
+}
+.focus-zone {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background: rgba(125,240,196,0.15);
+  border-left: 2px solid var(--accent);
+  border-right: 2px solid var(--accent);
+  transition: left 0.05s;
+}
+.focus-cursor {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 40px;
+  background: var(--accent2);
+  border-radius: 4px;
+  transition: left 0.05s;
+}
+.focus-btn {
+  width: 100%;
+  padding: 14px;
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+  border-radius: var(--radius);
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.1s;
+  letter-spacing: 1px;
+}
+.focus-btn:active { transform: scale(0.98); }
+
+/* SENSORY REGULATE MINI GAME */
+.sensory-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.sensory-knob {
+  background: var(--surface2);
+  border-radius: 10px;
+  padding: 14px;
+  border: 1.5px solid var(--border);
+}
+.sensory-knob-label {
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+.sensory-knob-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.sensory-slider {
+  flex: 1;
+  -webkit-appearance: none;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--surface);
+  outline: none;
+}
+.sensory-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent3);
+  cursor: pointer;
+  border: 2px solid var(--bg);
+}
+.sensory-val { font-size: 12px; width: 24px; text-align: center; }
+
+/* STATS DETAILS */
+.stats-detail {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
+}
+.stats-row {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.stat-full {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.stat-full-label {
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  width: 70px;
+  flex-shrink: 0;
+}
+.stat-full-bar {
+  flex: 1;
+  height: 8px;
+  background: var(--surface2);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.stat-full-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+.stat-full-val {
+  font-size: 11px;
+  color: var(--muted);
+  width: 28px;
+  text-align: right;
+}
+
+/* DAY SUMMARY */
+.day-summary {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  animation: slide-in 0.3s ease;
+}
+.summary-header {
+  font-family: 'Syne', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+.summary-sub { font-size: 11px; color: var(--muted); margin-bottom: 20px; }
+.summary-items { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+.summary-item:last-child { border-bottom: none; }
+.summary-key { color: var(--muted); }
+.summary-chip {
+  font-size: 11px;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-weight: 700;
+}
+.summary-chip.pos { background: rgba(125,240,196,0.15); color: var(--accent); }
+.summary-chip.neg { background: rgba(240,125,125,0.15); color: var(--danger); }
+.summary-chip.neu { background: rgba(240,212,125,0.15); color: var(--accent3); }
+
+/* ACHIEVEMENT TOAST */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: var(--surface);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 14px 20px;
+  font-size: 12px;
+  z-index: 1000;
+  transition: transform 0.3s ease;
+  white-space: nowrap;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+}
+.toast.visible { transform: translateX(-50%) translateY(0); }
+.toast-title { color: var(--accent); font-weight: 700; margin-bottom: 2px; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; }
+
+/* NAV */
+.game-nav {
+  display: flex;
+  gap: 0;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  position: sticky;
+  bottom: 0;
+  z-index: 100;
+}
+.nav-btn {
+  flex: 1;
+  padding: 14px 8px 10px;
+  background: none;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 9px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  transition: color 0.2s;
+  font-family: 'Space Mono', monospace;
+}
+.nav-icon { font-size: 20px; }
+.nav-btn.active { color: var(--accent); }
+.nav-btn:hover { color: var(--text); }
+
+/* TABS */
+.tab-view { display: none; }
+.tab-view.active { display: flex; flex-direction: column; gap: 16px; }
+
+/* JOURNAL */
+.journal-entry {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+}
+.journal-date { font-size: 10px; color: var(--muted); letter-spacing: 1px; margin-bottom: 6px; }
+.journal-text { font-size: 12px; line-height: 1.7; color: var(--text); }
+.journal-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+.journal-tag {
+  font-size: 9px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: var(--surface2);
+  color: var(--muted);
+  border: 1px solid var(--border);
+}
+
+/* SKILLS TREE */
+.skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.skill-card {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  padding: 14px;
+  position: relative;
+}
+.skill-card.unlocked { border-color: rgba(125,240,196,0.4); }
+.skill-card.locked { opacity: 0.5; }
+.skill-icon { font-size: 24px; margin-bottom: 8px; }
+.skill-name { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+.skill-desc { font-size: 10px; color: var(--muted); line-height: 1.5; }
+.skill-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 9px;
+  padding: 2px 8px;
+  border-radius: 20px;
+  background: rgba(125,240,196,0.15);
+  color: var(--accent);
+  letter-spacing: 1px;
+}
+
+/* OVERLOAD CRISIS */
+.crisis-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(14,14,20,0.92);
+  z-index: 500;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.crisis-overlay.visible { display: flex; }
+.crisis-card {
+  background: var(--surface);
+  border: 2px solid var(--danger);
+  border-radius: 16px;
+  padding: 28px;
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+  animation: crisis-shake 0.4s ease;
+}
+@keyframes crisis-shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-8px); }
+  40% { transform: translateX(8px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+.crisis-icon { font-size: 52px; margin-bottom: 16px; }
+.crisis-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--danger);
+  margin-bottom: 10px;
+}
+.crisis-text { font-size: 12px; color: var(--muted); line-height: 1.7; margin-bottom: 20px; }
+.crisis-options { display: flex; flex-direction: column; gap: 8px; }
+.crisis-btn {
+  padding: 13px 20px;
+  border-radius: var(--radius);
+  border: 1.5px solid var(--border);
+  background: var(--surface2);
+  color: var(--text);
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.crisis-btn:hover { border-color: var(--accent); background: rgba(125,240,196,0.08); }
+
+.btn-next {
+  width: 100%;
+  padding: 15px;
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+  border-radius: var(--radius);
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: all 0.2s;
+}
+.btn-next:hover { opacity: 0.9; }
+
+/* EMPTY STATE */
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.8;
+}
+.empty-icon { font-size: 40px; margin-bottom: 12px; }
+</style>
+</head>
+<body>
+
+<!-- ===== TITLE SCREEN ===== -->
+<div id="title-screen" class="screen active">
+  <div class="title-bg-circles">
+    <span></span><span></span><span></span>
+  </div>
+  <div class="title-tag">a life simulation</div>
+  <div class="title-main">
+    <div class="line1">WIRED</div>
+    <div class="line2">DIFFERENT</div>
+  </div>
+  <p class="title-sub">Navigate adult working life with ADHD &amp; autism. Manage your energy, find your flow, and build a life that works for <em>you</em>.</p>
+  <button class="btn-primary" onclick="goTo('create-screen')">BEGIN</button>
+</div>
+
+<!-- ===== CREATE SCREEN ===== -->
+<div id="create-screen" class="screen">
+  <div class="screen-title">Your Character</div>
+  <div class="screen-sub">Who are you?</div>
+
+  <div class="form-group">
+    <label class="form-label">Name</label>
+    <input class="form-input" id="char-name" placeholder="Enter your name..." maxlength="20">
+  </div>
+
+  <div class="form-group">
+    <label class="form-label">Avatar</label>
+    <div class="avatar-grid" id="avatar-grid">
+      <div class="avatar-opt selected" data-val="🧑">🧑</div>
+      <div class="avatar-opt" data-val="👩">👩</div>
+      <div class="avatar-opt" data-val="🧔">🧔</div>
+      <div class="avatar-opt" data-val="🧕">🧕</div>
+      <div class="avatar-opt" data-val="🧑‍🦱">🧑‍🦱</div>
+      <div class="avatar-opt" data-val="🧑‍🦲">🧑‍🦲</div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="form-label">Primary Trait (pick up to 2)</label>
+    <div class="trait-grid" id="trait-grid">
+      <div class="trait-card" data-trait="adhd-hyper">
+        <span class="trait-emoji">⚡</span>
+        <div class="trait-check">✓</div>
+        <div class="trait-name">ADHD — Hyperactive</div>
+        <div class="trait-desc">High energy bursts, impulsivity, talks fast. Gets things done when hyperfocused.</div>
+      </div>
+      <div class="trait-card" data-trait="adhd-inattentive">
+        <span class="trait-emoji">🌊</span>
+        <div class="trait-check">✓</div>
+        <div class="trait-name">ADHD — Inattentive</div>
+        <div class="trait-desc">Easily lost in thought. Struggles with deadlines but sees patterns others miss.</div>
+      </div>
+      <div class="trait-card" data-trait="autism-social">
+        <span class="trait-emoji">🔍</span>
+        <div class="trait-check">✓</div>
+        <div class="trait-name">Autism — Pattern Thinker</div>
+        <div class="trait-desc">Deep expertise, logical thinking. Social situations cost more energy.</div>
+      </div>
+      <div class="trait-card" data-trait="autism-sensory">
+        <span class="trait-emoji">🎧</span>
+        <div class="trait-check">✓</div>
+        <div class="trait-name">Autism — Sensory Sensitive</div>
+        <div class="trait-desc">Heightened senses. Loud places are hard, but rich inner world.</div>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn-primary" onclick="startGame()" style="animation:none;opacity:1;margin-top:8px;">Start Your Day →</button>
+</div>
+
+<!-- ===== MAIN GAME SCREEN ===== -->
+<div id="game-screen" class="screen">
+  <div class="game-header">
+    <div class="game-avatar" id="hdr-avatar">🧑</div>
+    <div class="game-info">
+      <div class="game-name" id="hdr-name">Alex</div>
+      <div class="game-day" id="hdr-day">DAY 1 — MONDAY</div>
+    </div>
+    <div class="game-stats">
+      <div class="stat-pill">
+        <div class="stat-label">NRG</div>
+        <div class="stat-bar-wrap"><div class="stat-bar energy" id="bar-energy" style="width:80%"></div></div>
+        <div class="stat-val" id="val-energy">80</div>
+      </div>
+      <div class="stat-pill">
+        <div class="stat-label">FOC</div>
+        <div class="stat-bar-wrap"><div class="stat-bar focus" id="bar-focus" style="width:70%"></div></div>
+        <div class="stat-val" id="val-focus">70</div>
+      </div>
+      <div class="stat-pill">
+        <div class="stat-label">SOC</div>
+        <div class="stat-bar-wrap"><div class="stat-bar social" id="bar-social" style="width:60%"></div></div>
+        <div class="stat-val" id="val-social">60</div>
+      </div>
+      <div class="stat-pill">
+        <div class="stat-label">SEN</div>
+        <div class="stat-bar-wrap"><div class="stat-bar sensory" id="bar-sensory" style="width:30%"></div></div>
+        <div class="stat-val" id="val-sensory">30</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="game-body">
+    <!-- DAY TAB -->
+    <div class="tab-view active" id="tab-day">
+      <!-- Character widget -->
+      <div class="char-widget">
+        <div class="char-big-avatar" id="big-avatar">
+          🧑
+          <div class="mood-bubble" id="mood-bubble">😐</div>
+        </div>
+        <div class="char-details">
+          <div class="char-state" id="char-state">Getting ready for work...</div>
+          <div class="char-thought" id="char-thought">"Another morning. Let's see what today brings."</div>
+        </div>
+      </div>
+
+      <!-- Sensory overload meter -->
+      <div class="overload-bar">
+        <div class="overload-label">
+          <span class="overload-title">⚡ Sensory Load</span>
+          <span class="overload-val" id="overload-val">Low</span>
+        </div>
+        <div class="overload-track">
+          <div class="overload-fill" id="overload-fill" style="width:20%"></div>
+        </div>
+      </div>
+
+      <!-- Main content area -->
+      <div id="main-content"></div>
+    </div>
+
+    <!-- STATS TAB -->
+    <div class="tab-view" id="tab-stats">
+      <div class="stats-detail">
+        <div class="screen-sub" style="margin-bottom:16px;">Current Status</div>
+        <div class="stats-row">
+          <div class="stat-full">
+            <div class="stat-full-label" style="color:var(--energy)">Energy</div>
+            <div class="stat-full-bar"><div class="stat-full-fill" id="sf-energy" style="background:var(--energy);width:80%"></div></div>
+            <div class="stat-full-val" id="sv-energy">80</div>
+          </div>
+          <div class="stat-full">
+            <div class="stat-full-label" style="color:var(--focus)">Focus</div>
+            <div class="stat-full-bar"><div class="stat-full-fill" id="sf-focus" style="background:var(--focus);width:70%"></div></div>
+            <div class="stat-full-val" id="sv-focus">70</div>
+          </div>
+          <div class="stat-full">
+            <div class="stat-full-label" style="color:var(--social)">Social</div>
+            <div class="stat-full-bar"><div class="stat-full-fill" id="sf-social" style="background:var(--social);width:60%"></div></div>
+            <div class="stat-full-val" id="sv-social">60</div>
+          </div>
+          <div class="stat-full">
+            <div class="stat-full-label" style="color:var(--sensory)">Sensory</div>
+            <div class="stat-full-bar"><div class="stat-full-fill" id="sf-sensory" style="background:var(--sensory);width:30%"></div></div>
+            <div class="stat-full-val" id="sv-sensory">30</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stats-detail">
+        <div class="screen-sub" style="margin-bottom:16px;">Traits Active</div>
+        <div id="traits-display" style="display:flex;flex-direction:column;gap:10px;font-size:12px;color:var(--muted);line-height:1.7;"></div>
+      </div>
+
+      <div class="stats-detail">
+        <div class="screen-sub" style="margin-bottom:16px;">Progress</div>
+        <div id="progress-display" style="display:flex;flex-direction:column;gap:8px;font-size:12px;"></div>
+      </div>
+    </div>
+
+    <!-- JOURNAL TAB -->
+    <div class="tab-view" id="tab-journal">
+      <div id="journal-entries">
+        <div class="empty-state"><div class="empty-icon">📓</div>Your journal will fill up as you play through each day.</div>
+      </div>
+    </div>
+
+    <!-- SKILLS TAB -->
+    <div class="tab-view" id="tab-skills">
+      <div class="screen-sub" style="margin-bottom:0;">Coping Toolkit</div>
+      <div class="skills-grid" id="skills-grid"></div>
+    </div>
+  </div>
+
+  <nav class="game-nav">
+    <button class="nav-btn active" onclick="switchTab('day')" id="nav-day"><span class="nav-icon">🏠</span>Day</button>
+    <button class="nav-btn" onclick="switchTab('stats')" id="nav-stats"><span class="nav-icon">📊</span>Stats</button>
+    <button class="nav-btn" onclick="switchTab('journal')" id="nav-journal"><span class="nav-icon">📓</span>Journal</button>
+    <button class="nav-btn" onclick="switchTab('skills')" id="nav-skills"><span class="nav-icon">🛠</span>Skills</button>
+  </nav>
+</div>
+
+<!-- CRISIS OVERLAY -->
+<div class="crisis-overlay" id="crisis-overlay">
+  <div class="crisis-card">
+    <div class="crisis-icon">🌊</div>
+    <div class="crisis-title">Sensory Overload</div>
+    <div class="crisis-text" id="crisis-text">Everything feels like too much right now. The world is too loud, too bright, too fast. You need to regulate.</div>
+    <div class="crisis-options" id="crisis-options"></div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <div class="toast-title" id="toast-title">Achievement</div>
+  <div id="toast-body">You did something great!</div>
+</div>
+
+<script>
+// ===== GAME STATE =====
+const state = {
+  name: 'Alex',
+  avatar: '🧑',
+  traits: [],
+  day: 1,
+  week: 1,
+  stats: { energy: 80, focus: 70, social: 60, sensory: 30 },
+  overload: 20,
+  scenarioIndex: 0,
+  phase: 'scenario', // scenario | minigame | outcome | summary
+  journal: [],
+  unlockedSkills: ['routine'],
+  dayLog: [],
+  xp: 0,
+  streaks: { focused: 0, social: 0 }
+};
+
+const DAYS = ['MONDAY','TUESDAY','WEDNESDAY','THURSDAY','FRIDAY','SATURDAY','SUNDAY'];
+
+// ===== SCENARIOS =====
+const SCENARIOS = [
+  {
+    id: 'morning_commute',
+    time: '8:14 AM — Commute',
+    title: 'Packed Train',
+    text: 'The train is shoulder-to-shoulder. Someone is playing music without headphones. The fluorescent light flickers. Your sensory load is rising fast.',
+    choices: [
+      { text: '🎧 Put on noise-cancelling headphones and stim quietly', effects: { sensory: -15, energy: -5 }, tags: ['+calm', '-energy'], tone: 'self-care' },
+      { text: '📱 Scroll your phone to distract from the input', effects: { sensory: -8, focus: -10 }, tags: ['+cope', '-focus'], tone: 'neutral' },
+      { text: '🚶 Get off a stop early and walk the rest', effects: { sensory: -20, energy: -15, focus: +10 }, tags: ['+movement', '+focus', '-energy'], tone: 'positive' },
+      { text: '⚡ Power through — you\'re already late', effects: { sensory: +20, energy: -10 }, tags: ['-overload!', '-energy'], tone: 'negative' }
+    ],
+    outcome: {
+      'self-care': { icon: '😌', title: 'Wise choice', text: 'The headphones create a bubble of calm. You arrive at work a little more regulated.' },
+      'neutral': { icon: '📱', title: 'Managed', text: 'You dissociated into social media. Works, but your focus is scattered now.' },
+      'positive': { icon: '🚶', title: 'Good call', text: 'The walk helps. Fresh air, movement, and quiet. You feel more grounded arriving at work.' },
+      'negative': { icon: '😖', title: 'Rough start', text: 'By the time you arrive you\'re already in a state. The overload is stacking up early.' }
+    },
+    minigame: null
+  },
+  {
+    id: 'morning_standup',
+    time: '9:30 AM — Work',
+    title: 'The Standup Meeting',
+    text: 'Your team\'s daily standup. 8 people, video call. Your manager asks everyone to give a verbal update. You weren\'t quite listening and now it\'s your turn.',
+    choices: [
+      { text: '✋ Be honest: "Sorry, give me a moment to check my notes"', effects: { social: -5, focus: +10, energy: -5 }, tags: ['+honest', '+focus'], tone: 'honest' },
+      { text: '🎭 Wing it confidently — fake it till you make it', effects: { social: +5, energy: -15, focus: -10 }, tags: ['+social', '-energy', '-focus'], tone: 'mask' },
+      { text: '💬 Give a minimal update: "No blockers, continuing from yesterday"', effects: { energy: -5, social: 0 }, tags: ['+safe'], tone: 'safe' },
+      { text: '📝 Suggest async standups are more effective', effects: { social: -15, energy: +5, focus: +10 }, tags: ['+advocate', '-social'], tone: 'advocate' }
+    ],
+    outcome: {
+      'honest': { icon: '✅', title: 'Authenticity', text: 'People respect your honesty more than you think. Your manager gives you a thumbs up.' },
+      'mask': { icon: '🎭', title: 'Masked', text: 'You got through it, but masking takes a real toll. That performance cost you.' },
+      'safe': { icon: '😶', title: 'Safe harbour', text: 'No one noticed, no one cared. You preserved your energy for the actual work.' },
+      'advocate': { icon: '💡', title: 'Bold move', text: 'It landed awkwardly but your manager says "interesting idea, let\'s discuss."' }
+    },
+    minigame: 'task-sort'
+  },
+  {
+    id: 'hyperfocus',
+    time: '11:00 AM — Deep Work',
+    title: 'Hyperfocus Incoming',
+    text: 'You\'ve locked into a task. The whole world has melted away. You\'re in the zone — but you\'ve been at this for 3 hours and skipped breakfast. Your phone has 12 unread messages.',
+    choices: [
+      { text: '🍎 Force a break — eat something, move', effects: { energy: +20, focus: -15, social: +5 }, tags: ['+health', '+social'], tone: 'break' },
+      { text: '⚡ Ride the hyperfocus — this is gold', effects: { focus: +20, energy: -20, sensory: +10 }, tags: ['+focus++', '-energy', '+overload'], tone: 'hyperfocus' },
+      { text: '⏱ Set a 25 min timer then break', effects: { focus: +10, energy: -5 }, tags: ['+balanced'], tone: 'balanced' }
+    ],
+    outcome: {
+      'break': { icon: '🍎', title: 'Self-regulated', text: 'The break was the right call. You come back with a clearer head and actually solve the problem faster.' },
+      'hyperfocus': { icon: '⚡', title: 'Flow state', text: 'Incredible output — but your energy is tanked and the sensory load crept up while you ignored everything.' },
+      'balanced': { icon: '⏱', title: 'Smart pacing', text: 'Pomodoro technique to the rescue. You maintain flow and health. Steady wins.' }
+    },
+    minigame: 'focus-burst'
+  },
+  {
+    id: 'lunch_office',
+    time: '12:30 PM — Lunch',
+    title: 'The Open Office Lunch',
+    text: 'The team is gathering in the loud open-plan kitchen to eat together. It\'s bright, busy, and everyone\'s talking over each other. You have 45 minutes.',
+    choices: [
+      { text: '🥗 Join briefly, eat quickly, then find a quiet corner', effects: { social: +10, energy: -10, sensory: +10 }, tags: ['+social', '+overload'], tone: 'hybrid' },
+      { text: '🎧 Eat at your desk alone with headphones', effects: { energy: +15, sensory: -15, social: -10 }, tags: ['+energy', '+regulate', '-social'], tone: 'solo' },
+      { text: '🌿 Walk outside to eat alone', effects: { energy: +20, sensory: -20, social: -5 }, tags: ['+best energy', '+regulate'], tone: 'outside' },
+      { text: '💬 Push yourself to socialize — you need the connection', effects: { social: +20, energy: -20, sensory: +20 }, tags: ['+social++', '-energy', '-overload'], tone: 'social' }
+    ],
+    outcome: {
+      'hybrid': { icon: '⚖️', title: 'Balance found', text: 'A little connection, a little retreat. You managed both needs.' },
+      'solo': { icon: '🎧', title: 'Recharged', text: 'Deep breath. The afternoon looks more manageable now.' },
+      'outside': { icon: '🌿', title: 'Restored', text: 'Nature is the best regulator. You feel genuinely refreshed.' },
+      'social': { icon: '😩', title: 'Socially overdrawn', text: 'You gave a lot. People liked you today, but your tank is low.' }
+    },
+    minigame: 'sensory-regulate'
+  },
+  {
+    id: 'afternoon_crisis',
+    time: '3:00 PM — Crisis',
+    title: 'Last-Minute Request',
+    text: 'Your manager just dumped a "quick task" on your desk. It\'s not quick. You have an unread email from yesterday you forgot to reply to. And your brain is now utterly refusing to cooperate.',
+    choices: [
+      { text: '🗂 Make a quick triage list — what\'s actually urgent', effects: { focus: +15, energy: -5 }, tags: ['+organized'], tone: 'triage' },
+      { text: '📧 Send the email first to clear the guilt', effects: { social: +10, focus: -5, energy: -10 }, tags: ['+social', '-focus'], tone: 'email' },
+      { text: '🚿 Bathroom break + 5 min reset', effects: { sensory: -10, energy: +10, focus: +5 }, tags: ['+reset'], tone: 'reset' },
+      { text: '😰 Try to do everything at once and spiral', effects: { energy: -25, focus: -20, sensory: +20 }, tags: ['-everything'], tone: 'spiral' }
+    ],
+    outcome: {
+      'triage': { icon: '🗂', title: 'Organized mind', text: 'The list made the chaos manageable. You tackled what mattered.' },
+      'email': { icon: '📧', title: 'Guilt cleared', text: 'The relief of sending that email freed up mental space for the real task.' },
+      'reset': { icon: '✨', title: 'Smart reset', text: 'Those 5 minutes were the most productive of the day. Your brain restarted.' },
+      'spiral': { icon: '😰', title: 'Crashed out', text: 'Nothing got done and you feel awful. This is a sign your plate was too full.' }
+    },
+    minigame: 'task-sort'
+  },
+  {
+    id: 'end_of_day',
+    time: '5:30 PM — End of Day',
+    title: 'Shutdown Ritual',
+    text: 'Work\'s over. Your brain is still spinning — you keep replaying that awkward comment you made in the meeting. You know you need to shut down properly.',
+    choices: [
+      { text: '📝 Write a short "done" list + tomorrow\'s top 3', effects: { focus: +10, energy: +5, sensory: -5 }, tags: ['+closure'], tone: 'shutdown' },
+      { text: '🎮 Dive straight into your special interest / hyper-fixation', effects: { energy: +25, sensory: -20, social: -10 }, tags: ['+recharge', '+regulate'], tone: 'hyperfixation' },
+      { text: '📞 Call or text a trusted person about the day', effects: { social: +20, energy: -5 }, tags: ['+connection'], tone: 'connect' },
+      { text: '🛋 Collapse. Doom scroll. Nothing. Just exist.', effects: { energy: +10, focus: -15 }, tags: ['+rest', '-focus'], tone: 'vegetate' }
+    ],
+    outcome: {
+      'shutdown': { icon: '📝', title: 'Clean close', text: 'The list gives your brain permission to stop. Tomorrow\'s you will thank you.' },
+      'hyperfixation': { icon: '🎮', title: 'Joy recharge', text: 'This is your thing and it fills you back up like nothing else. Important recovery.' },
+      'connect': { icon: '📞', title: 'Processed', text: 'Talking it out helped. You don\'t feel so alone in this.' },
+      'vegetate': { icon: '🛋', title: 'Survival mode', text: 'You needed this. Sometimes existing is enough. No shame.' }
+    },
+    minigame: null
+  }
+];
+
+// ===== SKILLS =====
+const ALL_SKILLS = [
+  { id: 'routine', name: 'Morning Routine', icon: '🌅', desc: 'A consistent morning ritual reduces decision fatigue and sensory overload early.', unlocked: true },
+  { id: 'headphones', name: 'Noise Armour', icon: '🎧', desc: 'Noise-cancelling headphones as a sensory shield. Always available.', unlocked: false },
+  { id: 'pomodoro', name: 'Focus Bursts', icon: '⏱', desc: 'Work in timed sprints. Hyperfocus without crash.', unlocked: false },
+  { id: 'stim', name: 'Stim Toolkit', icon: '🪀', desc: 'Fidget tools, movement, repetitive patterns. Regulation through the body.', unlocked: false },
+  { id: 'boundaries', name: 'Social Battery', icon: '🔋', desc: 'Know your limits. Protect your energy like capital.', unlocked: false },
+  { id: 'body-doubling', name: 'Body Doubling', icon: '👥', desc: 'Work alongside another person. Activates focus through social presence.', unlocked: false },
+  { id: 'shutdown', name: 'Shutdown Ritual', icon: '🌙', desc: 'End the workday with a consistent routine. Tells your brain it\'s safe to stop.', unlocked: false },
+  { id: 'advocacy', name: 'Self-Advocate', icon: '📣', desc: 'Know your needs. Ask for accommodations. You deserve to work in a way that works for you.', unlocked: false },
+];
+
+// ===== SETUP =====
+function goTo(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+document.getElementById('avatar-grid').addEventListener('click', e => {
+  const opt = e.target.closest('.avatar-opt');
+  if (!opt) return;
+  document.querySelectorAll('.avatar-opt').forEach(a => a.classList.remove('selected'));
+  opt.classList.add('selected');
+});
+
+document.getElementById('trait-grid').addEventListener('click', e => {
+  const card = e.target.closest('.trait-card');
+  if (!card) return;
+  const selected = document.querySelectorAll('.trait-card.selected');
+  if (card.classList.contains('selected')) {
+    card.classList.remove('selected');
+  } else if (selected.length < 2) {
+    card.classList.add('selected');
+  }
+});
+
+function startGame() {
+  const nameInput = document.getElementById('char-name').value.trim();
+  state.name = nameInput || 'Alex';
+  state.avatar = document.querySelector('.avatar-opt.selected')?.dataset.val || '🧑';
+  state.traits = [...document.querySelectorAll('.trait-card.selected')].map(c => c.dataset.trait);
+  if (!state.traits.length) state.traits = ['adhd-inattentive'];
+
+  // Apply trait starting stat modifiers
+  if (state.traits.includes('autism-sensory')) state.stats.sensory = 45;
+  if (state.traits.includes('adhd-hyper')) { state.stats.energy = 90; state.stats.focus = 55; }
+  if (state.traits.includes('adhd-inattentive')) state.stats.focus = 50;
+  if (state.traits.includes('autism-social')) state.stats.social = 45;
+
+  goTo('game-screen');
+  renderHeader();
+  renderSkills();
+  renderTraits();
+  renderProgress();
+  showNextScenario();
+}
+
+function renderHeader() {
+  document.getElementById('hdr-avatar').textContent = state.avatar;
+  document.getElementById('big-avatar').innerHTML = state.avatar + '<div class="mood-bubble" id="mood-bubble">' + getMood() + '</div>';
+  document.getElementById('hdr-name').textContent = state.name;
+  document.getElementById('hdr-day').textContent = `DAY ${state.day} — ${DAYS[(state.day - 1) % 7]}`;
+  updateStatBars();
+}
+
+function getMood() {
+  const avg = (state.stats.energy + state.stats.focus) / 2;
+  const overload = state.overload;
+  if (overload > 75) return '😵';
+  if (overload > 55) return '😟';
+  if (avg > 70 && overload < 30) return '😊';
+  if (avg > 50) return '😐';
+  if (avg > 30) return '😔';
+  return '😞';
+}
+
+function getThought() {
+  const avg = (state.stats.energy + state.stats.focus) / 2;
+  if (state.overload > 75) return '"Too much. Too loud. Need to get out of here."';
+  if (state.overload > 55) return '"Everything is starting to feel like too much..."';
+  if (avg > 75) return '"I\'ve got this. Things feel clear today."';
+  if (avg > 55) return '"Okay, getting through it. One thing at a time."';
+  if (avg > 35) return '"Bit rough. But I know myself. I can do this."';
+  return '"This is really hard today. Just survive."';
+}
+
+function getCharState() {
+  const scenario = SCENARIOS[state.scenarioIndex];
+  if (scenario) return scenario.time.split(' — ')[1] || 'Working...';
+  return 'End of day';
+}
+
+function clamp(v) { return Math.max(0, Math.min(100, v)); }
+
+function applyEffects(effects) {
+  for (const [k, v] of Object.entries(effects)) {
+    if (k === 'sensory') {
+      state.overload = clamp(state.overload + v);
+    } else if (state.stats[k] !== undefined) {
+      state.stats[k] = clamp(state.stats[k] + v);
+    }
+  }
+  updateStatBars();
+  checkOverload();
+}
+
+function updateStatBars() {
+  const s = state.stats;
+  ['energy','focus','social','sensory'].forEach(k => {
+    const v = k === 'sensory' ? Math.round(state.overload) : s[k];
+    const bar = document.getElementById(`bar-${k}`);
+    const val = document.getElementById(`val-${k}`);
+    const sf = document.getElementById(`sf-${k}`);
+    const sv = document.getElementById(`sv-${k}`);
+    if (bar) bar.style.width = v + '%';
+    if (val) val.textContent = v;
+    if (sf) sf.style.width = v + '%';
+    if (sv) sv.textContent = v;
+  });
+  document.getElementById('mood-bubble').textContent = getMood();
+  document.getElementById('char-thought').textContent = getThought();
+  const overloadEl = document.getElementById('overload-fill');
+  const overloadVal = document.getElementById('overload-val');
+  if (overloadEl) overloadEl.style.width = state.overload + '%';
+  if (overloadVal) {
+    if (state.overload < 30) overloadVal.textContent = 'Low';
+    else if (state.overload < 55) overloadVal.textContent = 'Moderate';
+    else if (state.overload < 75) overloadVal.textContent = 'High';
+    else overloadVal.textContent = 'CRITICAL';
+  }
+}
+
+function checkOverload() {
+  if (state.overload >= 85) {
+    triggerCrisis();
+  }
+}
+
+function triggerCrisis() {
+  const overlay = document.getElementById('crisis-overlay');
+  const opts = document.getElementById('crisis-options');
+  overlay.classList.add('visible');
+  opts.innerHTML = `
+    <button class="crisis-btn" onclick="resolveCrisis('headphones')">🎧 Headphones + stim discreetly (-30 load)</button>
+    <button class="crisis-btn" onclick="resolveCrisis('leave')">🚪 Excuse yourself for 5 mins (-40 load, -energy)</button>
+    <button class="crisis-btn" onclick="resolveCrisis('breathe')">🫁 Breathing exercises at desk (-20 load)</button>
+  `;
+}
+
+function resolveCrisis(type) {
+  document.getElementById('crisis-overlay').classList.remove('visible');
+  const changes = {
+    headphones: { sensory: -30 },
+    leave: { sensory: -40, energy: -10 },
+    breathe: { sensory: -20 }
+  };
+  applyEffects(changes[type] || { sensory: -20 });
+  const messages = {
+    headphones: '🎧 Headphones on. The world dialed down.',
+    leave: '🚪 You stepped away. It helped.',
+    breathe: '🫁 Breathing brought you back.'
+  };
+  showToast('Regulated', messages[type] || 'You managed the overload.');
+  unlockSkill('headphones');
+}
+
+// ===== SCENARIO ENGINE =====
+function showNextScenario() {
+  if (state.scenarioIndex >= SCENARIOS.length) {
+    showDaySummary();
+    return;
+  }
+  const scenario = SCENARIOS[state.scenarioIndex];
+  document.getElementById('char-state').textContent = scenario.time.split(' — ')[1] || 'At work';
+  renderScenario(scenario);
+}
+
+function renderScenario(scenario) {
+  const content = document.getElementById('main-content');
+  const choicesHtml = scenario.choices.map((c, i) => `
+    <button class="choice-btn" onclick="makeChoice(${i})">
+      <span class="choice-text">${c.text}</span>
+      <div class="choice-effects">
+        ${c.tags.map(t => `<span class="effect-tag ${t.startsWith('+') ? (t.includes('!') ? 'neg' : 'pos') : 'neg'}">${t}</span>`).join('')}
+      </div>
+    </button>
+  `).join('');
+
+  content.innerHTML = `
+    <div class="scenario-card">
+      <div class="scenario-time">${scenario.time}</div>
+      <div class="scenario-title">${scenario.title}</div>
+      <div class="scenario-text">${scenario.text}</div>
+      <div class="choices">${choicesHtml}</div>
+    </div>
+  `;
+}
+
+let pendingChoice = null;
+
+function makeChoice(idx) {
+  const scenario = SCENARIOS[state.scenarioIndex];
+  const choice = scenario.choices[idx];
+  pendingChoice = choice;
+  applyEffects(choice.effects);
+  state.dayLog.push({ time: scenario.time, action: choice.text.replace(/^.{2}\s/, ''), tone: choice.tone });
+
+  if (scenario.minigame) {
+    renderMinigame(scenario.minigame, scenario, choice);
+  } else {
+    showOutcome(scenario, choice);
+  }
+}
+
+function showOutcome(scenario, choice) {
+  const outcome = scenario.outcome[choice.tone];
+  const content = document.getElementById('main-content');
+  const changeHtml = Object.entries(choice.effects)
+    .filter(([,v]) => v !== 0)
+    .map(([k, v]) => {
+      const label = k === 'sensory' ? 'Sensory Load' : k.charAt(0).toUpperCase()+k.slice(1);
+      return `<span class="change-chip ${v > 0 && k !== 'sensory' ? 'pos' : (k === 'sensory' && v > 0) ? 'neg' : v < 0 && k !== 'sensory' ? 'neg' : 'pos'}">${label} ${v > 0 ? '+' : ''}${v}</span>`;
+    }).join('');
+
+  content.innerHTML = `
+    <div class="outcome-card">
+      <div class="outcome-icon">${outcome.icon}</div>
+      <div class="outcome-title">${outcome.title}</div>
+      <div class="outcome-text">${outcome.text}</div>
+      <div class="outcome-changes">${changeHtml}</div>
+      <button class="btn-next" onclick="nextScenario()">Continue →</button>
+    </div>
+  `;
+  addJournalEntry(scenario, choice, outcome);
+}
+
+function nextScenario() {
+  state.scenarioIndex++;
+  maybeUnlockSkill();
+  showNextScenario();
+}
+
+function addJournalEntry(scenario, choice, outcome) {
+  state.journal.push({
+    day: state.day,
+    time: scenario.time,
+    title: scenario.title,
+    outcome: outcome.title,
+    text: outcome.text,
+    tags: choice.tags
+  });
+  renderJournal();
+}
+
+function renderJournal() {
+  const container = document.getElementById('journal-entries');
+  if (!state.journal.length) return;
+  container.innerHTML = [...state.journal].reverse().map(e => `
+    <div class="journal-entry">
+      <div class="journal-date">DAY ${e.day} — ${e.time}</div>
+      <div class="journal-text"><strong>${e.title}:</strong> ${e.outcome}. ${e.text}</div>
+      <div class="journal-tags">${e.tags.map(t => `<span class="journal-tag">${t}</span>`).join('')}</div>
+    </div>
+  `).join('');
+}
+
+// ===== MINI GAMES =====
+function renderMinigame(type, scenario, choice) {
+  if (type === 'task-sort') renderTaskSort(scenario, choice);
+  else if (type === 'focus-burst') renderFocusBurst(scenario, choice);
+  else if (type === 'sensory-regulate') renderSensoryRegulate(scenario, choice);
+  else showOutcome(scenario, choice);
+}
+
+const TASK_TOKENS = [
+  { id: 'report', text: '📊 Finish Q2 report', type: 'urgent' },
+  { id: 'slack', text: '💬 Reply to Slack', type: 'social' },
+  { id: 'meeting', text: '📅 Prep next meeting', type: 'deep' },
+  { id: 'email', text: '📧 Clear email inbox', type: 'social' },
+  { id: 'pr', text: '🔍 Review PR', type: 'deep' },
+  { id: 'admin', text: '🗂 Expense report', type: 'urgent' },
+];
+
+let taskState = { doNow: [], later: [], decline: [] };
+
+function renderTaskSort(scenario, choice) {
+  taskState = { doNow: [], later: [], decline: [] };
+  const content = document.getElementById('main-content');
+  content.innerHTML = `
+    <div class="minigame-card">
+      <div class="mg-title">⚡ Brain Triage</div>
+      <div class="mg-desc">Your ADHD brain sees all tasks as equally urgent. Tap a task, then tap where it goes. Prioritize 2 "Do Now" tasks max — protect your focus.</div>
+      <div class="task-pool" id="task-pool">
+        ${TASK_TOKENS.map(t => `<div class="task-token ${t.type}" id="task-${t.id}" onclick="selectTask('${t.id}')">${t.text}</div>`).join('')}
+      </div>
+      <div class="drop-zones">
+        <div class="drop-zone do-now" id="zone-doNow" onclick="placeTask('doNow')">
+          <div class="drop-zone-label" style="color:var(--accent)">🔴 DO NOW</div>
+          <div id="tokens-doNow"></div>
+        </div>
+        <div class="drop-zone later" id="zone-later" onclick="placeTask('later')">
+          <div class="drop-zone-label" style="color:var(--focus)">🔵 LATER</div>
+          <div id="tokens-later"></div>
+        </div>
+        <div class="drop-zone decline" id="zone-decline" onclick="placeTask('decline')">
+          <div class="drop-zone-label" style="color:var(--danger)">⚫ DECLINE</div>
+          <div id="tokens-decline"></div>
+        </div>
+      </div>
+      <button class="btn-next" onclick="finishTaskSort('${scenario.id}', ${JSON.stringify(choice).replace(/"/g, '&quot;')})">Done Sorting →</button>
+    </div>
+  `;
+}
+
+let selectedTaskId = null;
+function selectTask(id) {
+  document.querySelectorAll('.task-token').forEach(t => t.classList.remove('selected'));
+  selectedTaskId = id;
+  const el = document.getElementById(`task-${id}`);
+  if (el) el.classList.add('selected');
+}
+
+function placeTask(zone) {
+  if (!selectedTaskId) return;
+  const token = TASK_TOKENS.find(t => t.id === selectedTaskId);
+  if (!token) return;
+  if (zone === 'doNow' && taskState.doNow.length >= 2) {
+    showToast('Max 2!', 'Keep your Do Now list to 2 tasks max. Move something to Later.');
+    return;
+  }
+  // Remove from wherever it was
+  for (const z of ['doNow','later','decline']) {
+    taskState[z] = taskState[z].filter(t => t.id !== selectedTaskId);
+  }
+  taskState[zone].push(token);
+  // Remove from pool
+  const poolEl = document.getElementById(`task-${selectedTaskId}`);
+  if (poolEl && poolEl.closest('#task-pool')) poolEl.remove();
+
+  const zoneEl = document.getElementById(`tokens-${zone}`);
+  if (zoneEl) {
+    const el = document.createElement('div');
+    el.className = `task-token ${token.type}`;
+    el.id = `task-${token.id}`;
+    el.textContent = token.text;
+    el.onclick = () => { selectTask(token.id); };
+    zoneEl.appendChild(el);
+  }
+  selectedTaskId = null;
+  document.querySelectorAll('.task-token').forEach(t => t.classList.remove('selected'));
+}
+
+function finishTaskSort(scenarioId, choice) {
+  const doNowCount = taskState.doNow.length;
+  let bonus = {};
+  let msg = '';
+  if (doNowCount <= 2 && taskState.decline.length >= 1) {
+    bonus = { focus: 10 };
+    msg = 'Great triage! You protected your focus window.';
+    unlockSkill('boundaries');
+  } else if (doNowCount > 2) {
+    bonus = { energy: -10 };
+    msg = 'Too much on the Do Now list. Overcommitting drains you.';
+  } else {
+    msg = 'Decent sort. Trust your gut next time.';
+  }
+  applyEffects(bonus);
+  const scenario = SCENARIOS.find(s => s.id === scenarioId);
+  if (scenario) showOutcome(scenario, pendingChoice || scenario.choices[0]);
+  else nextScenario();
+}
+
+// FOCUS BURST MINI GAME
+let focusGame = { interval: null, cursorPos: 0, cursorDir: 1, zonePos: 30, zoneWidth: 25, speed: 1.5, taps: 0, hits: 0 };
+
+function renderFocusBurst(scenario, choice) {
+  const content = document.getElementById('main-content');
+  content.innerHTML = `
+    <div class="minigame-card">
+      <div class="mg-title">⚡ Focus Burst</div>
+      <div class="mg-desc">Time your tap to land in the green zone — like catching hyperfocus at the right moment. 5 rounds.</div>
+      <div class="focus-track" id="focus-track">
+        <div class="focus-zone" id="focus-zone" style="left:${focusGame.zonePos}%;width:${focusGame.zoneWidth}%"></div>
+        <div class="focus-cursor" id="focus-cursor" style="left:5%"></div>
+      </div>
+      <div style="text-align:center;font-size:12px;color:var(--muted);margin-bottom:14px;">
+        Taps: <span id="focus-taps">0</span>/5 — Hits: <span id="focus-hits">0</span>
+      </div>
+      <button class="focus-btn" id="focus-tap-btn" onclick="tapFocus()">TAP TO FOCUS</button>
+    </div>
+  `;
+  focusGame = { interval: null, cursorPos: 5, cursorDir: 1, zonePos: 30, zoneWidth: 25, speed: 1.5, taps: 0, hits: 0 };
+  focusGame.interval = setInterval(moveFocusCursor, 30);
+  focusGame._scenario = scenario;
+  focusGame._choice = choice;
+}
+
+function moveFocusCursor() {
+  focusGame.cursorPos += focusGame.speed * focusGame.cursorDir;
+  if (focusGame.cursorPos >= 90 || focusGame.cursorPos <= 2) focusGame.cursorDir *= -1;
+  const el = document.getElementById('focus-cursor');
+  if (el) el.style.left = focusGame.cursorPos + '%';
+}
+
+function tapFocus() {
+  if (focusGame.taps >= 5) return;
+  focusGame.taps++;
+  const inZone = focusGame.cursorPos >= focusGame.zonePos && focusGame.cursorPos <= (focusGame.zonePos + focusGame.zoneWidth);
+  if (inZone) {
+    focusGame.hits++;
+    showToast('Hit!', '⚡ In the zone!');
+  }
+  document.getElementById('focus-taps').textContent = focusGame.taps;
+  document.getElementById('focus-hits').textContent = focusGame.hits;
+
+  // Move zone for next tap
+  focusGame.zonePos = 10 + Math.random() * 55;
+  const zoneEl = document.getElementById('focus-zone');
+  if (zoneEl) zoneEl.style.left = focusGame.zonePos + '%';
+
+  if (focusGame.taps >= 5) {
+    clearInterval(focusGame.interval);
+    const btn = document.getElementById('focus-tap-btn');
+    if (btn) { btn.textContent = 'See Results'; btn.onclick = finishFocusBurst; }
+  }
+}
+
+function finishFocusBurst() {
+  clearInterval(focusGame.interval);
+  const ratio = focusGame.hits / 5;
+  let bonus = {};
+  if (ratio >= 0.6) { bonus = { focus: 15 }; unlockSkill('pomodoro'); }
+  else if (ratio >= 0.4) { bonus = { focus: 5 }; }
+  else { bonus = { focus: -5 }; }
+  applyEffects(bonus);
+  if (focusGame._scenario) showOutcome(focusGame._scenario, focusGame._choice || pendingChoice);
+  else nextScenario();
+}
+
+// SENSORY REGULATE MINI GAME
+function renderSensoryRegulate(scenario, choice) {
+  const content = document.getElementById('main-content');
+  content.innerHTML = `
+    <div class="minigame-card">
+      <div class="mg-title">🧘 Regulate</div>
+      <div class="mg-desc">Adjust your sensory inputs to find your comfortable zone. Drag sliders to balance light, sound, and stimulation.</div>
+      <div class="sensory-inputs">
+        <div class="sensory-knob">
+          <div class="sensory-knob-label">💡 Light</div>
+          <div class="sensory-knob-row">
+            <input type="range" class="sensory-slider" min="0" max="10" value="8" id="sl-light" oninput="updateSensory()">
+            <span class="sensory-val" id="sv-light">8</span>
+          </div>
+        </div>
+        <div class="sensory-knob">
+          <div class="sensory-knob-label">🔊 Sound</div>
+          <div class="sensory-knob-row">
+            <input type="range" class="sensory-slider" min="0" max="10" value="7" id="sl-sound" oninput="updateSensory()">
+            <span class="sensory-val" id="sv-sound">7</span>
+          </div>
+        </div>
+        <div class="sensory-knob">
+          <div class="sensory-knob-label">🤝 Social</div>
+          <div class="sensory-knob-row">
+            <input type="range" class="sensory-slider" min="0" max="10" value="6" id="sl-social-s" oninput="updateSensory()">
+            <span class="sensory-val" id="sv-social-s">6</span>
+          </div>
+        </div>
+        <div class="sensory-knob">
+          <div class="sensory-knob-label">🪀 Stim</div>
+          <div class="sensory-knob-row">
+            <input type="range" class="sensory-slider" min="0" max="10" value="3" id="sl-stim" oninput="updateSensory()">
+            <span class="sensory-val" id="sv-stim">3</span>
+          </div>
+        </div>
+      </div>
+      <div style="text-align:center;margin-bottom:14px;">
+        <div style="font-size:11px;color:var(--muted);letter-spacing:1px;margin-bottom:6px;">COMFORT SCORE</div>
+        <div id="comfort-score" style="font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:var(--accent3)">50</div>
+      </div>
+      <button class="btn-next" onclick="finishSensory('${scenario.id}')">Apply Settings →</button>
+    </div>
+  `;
+  updateSensory();
+  window._sensoryScenario = scenario;
+  window._sensoryChoice = choice;
+}
+
+function updateSensory() {
+  const light = +document.getElementById('sl-light').value;
+  const sound = +document.getElementById('sl-sound').value;
+  const soc = +document.getElementById('sl-social-s').value;
+  const stim = +document.getElementById('sl-stim').value;
+  document.getElementById('sv-light').textContent = light;
+  document.getElementById('sv-sound').textContent = sound;
+  document.getElementById('sv-social-s').textContent = soc;
+  document.getElementById('sv-stim').textContent = stim;
+  // Ideal: low light, low sound, low social, some stim
+  const score = Math.round(((10-light)*10 + (10-sound)*10 + (10-soc)*5 + stim*5) / 4);
+  const clamped = Math.min(100, Math.max(0, score));
+  const el = document.getElementById('comfort-score');
+  if (el) {
+    el.textContent = clamped;
+    el.style.color = clamped > 70 ? 'var(--accent)' : clamped > 40 ? 'var(--accent3)' : 'var(--danger)';
+  }
+}
+
+function finishSensory(scenarioId) {
+  const light = +document.getElementById('sl-light').value;
+  const sound = +document.getElementById('sl-sound').value;
+  const stim = +document.getElementById('sl-stim').value;
+  const score = Math.round(((10-light)*10 + (10-sound)*10 + stim*5) / 3);
+  let bonus = {};
+  if (score > 70) { bonus = { sensory: -25 }; unlockSkill('stim'); }
+  else if (score > 40) { bonus = { sensory: -10 }; }
+  else { bonus = { sensory: +10 }; }
+  applyEffects(bonus);
+  const scenario = window._sensoryScenario;
+  if (scenario) showOutcome(scenario, window._sensoryChoice || pendingChoice);
+  else nextScenario();
+}
+
+// ===== DAY SUMMARY =====
+function showDaySummary() {
+  const content = document.getElementById('main-content');
+  const bestStat = Object.entries(state.stats).sort(([,a],[,b]) => b-a)[0];
+  const worstStat = Object.entries(state.stats).sort(([,a],[,b]) => a-b)[0];
+
+  const summaryItems = [
+    { key: 'Energy', val: state.stats.energy, chip: state.stats.energy > 50 ? 'pos' : 'neg' },
+    { key: 'Focus', val: state.stats.focus, chip: state.stats.focus > 50 ? 'pos' : 'neg' },
+    { key: 'Social Battery', val: state.stats.social, chip: state.stats.social > 50 ? 'pos' : 'neg' },
+    { key: 'Sensory Load', val: state.overload, chip: state.overload < 50 ? 'pos' : 'neg' },
+  ];
+
+  content.innerHTML = `
+    <div class="day-summary">
+      <div class="summary-header">Day ${state.day} Done</div>
+      <div class="summary-sub">${DAYS[(state.day-1)%7]} — End of Day Summary</div>
+      <div class="summary-items">
+        ${summaryItems.map(i => `
+          <div class="summary-item">
+            <span class="summary-key">${i.key}</span>
+            <span class="summary-chip ${i.chip}">${i.val}/100</span>
+          </div>
+        `).join('')}
+      </div>
+      <div style="font-size:12px;color:var(--muted);line-height:1.8;margin-bottom:20px;">
+        ${getDaySummaryText()}
+      </div>
+      <button class="btn-next" onclick="startNewDay()">Sleep & Start Day ${state.day + 1} →</button>
+    </div>
+  `;
+  renderProgress();
+}
+
+function getDaySummaryText() {
+  const avg = (state.stats.energy + state.stats.focus + state.stats.social) / 3;
+  if (avg > 70) return "You navigated today well. You made choices that respected your needs and still got things done. That's real skill.";
+  if (avg > 50) return "A decent day with some rough patches. You're learning what works and what doesn't for your brain. That takes time.";
+  if (avg > 30) return "Today was tough. But you got through it. Tomorrow you know a little more about yourself.";
+  return "Today was really hard. Rest is not optional — it's how you survive. Your brain worked overtime today.";
+}
+
+function startNewDay() {
+  state.day++;
+  state.scenarioIndex = 0;
+  state.dayLog = [];
+  // Sleep recovery
+  state.stats.energy = clamp(state.stats.energy + 30);
+  state.stats.focus = clamp(state.stats.focus + 20);
+  state.stats.social = clamp(state.stats.social + 15);
+  state.overload = clamp(state.overload - 40);
+  state.xp += 10;
+  updateStatBars();
+  renderHeader();
+  showNextScenario();
+  showToast('New Day', `☀️ Day ${state.day} begins. You rested and recovered.`);
+}
+
+// ===== SKILLS =====
+function renderSkills() {
+  const grid = document.getElementById('skills-grid');
+  if (!grid) return;
+  grid.innerHTML = ALL_SKILLS.map(s => `
+    <div class="skill-card ${state.unlockedSkills.includes(s.id) ? 'unlocked' : 'locked'}">
+      <div class="skill-icon">${s.icon}</div>
+      <div class="skill-name">${s.name}</div>
+      <div class="skill-desc">${s.desc}</div>
+      ${state.unlockedSkills.includes(s.id) ? '<div class="skill-badge">UNLOCKED</div>' : '<div class="skill-badge" style="background:var(--surface2);color:var(--muted);border:1px solid var(--border);">LOCKED</div>'}
+    </div>
+  `).join('');
+}
+
+function unlockSkill(id) {
+  if (!state.unlockedSkills.includes(id)) {
+    state.unlockedSkills.push(id);
+    const skill = ALL_SKILLS.find(s => s.id === id);
+    if (skill) showToast('Skill Unlocked!', `${skill.icon} ${skill.name}`);
+    renderSkills();
+  }
+}
+
+function maybeUnlockSkill() {
+  if (state.scenarioIndex >= 3) unlockSkill('shutdown');
+  if (state.stats.focus > 75) unlockSkill('pomodoro');
+  if (state.stats.social < 30) unlockSkill('boundaries');
+  if (state.day >= 2) unlockSkill('body-doubling');
+  if (state.day >= 3) unlockSkill('advocacy');
+}
+
+function renderTraits() {
+  const el = document.getElementById('traits-display');
+  if (!el) return;
+  const descriptions = {
+    'adhd-hyper': '⚡ ADHD (Hyperactive) — High energy, impulsive, can hyperfocus intensely. Needs movement and variety.',
+    'adhd-inattentive': '🌊 ADHD (Inattentive) — Easily distracted, loses track of time, creative pattern-thinker.',
+    'autism-social': '🔍 Autism (Pattern Thinker) — Deep systems thinking, needs social energy budget carefully managed.',
+    'autism-sensory': '🎧 Autism (Sensory Sensitive) — Rich sensory experience, needs low-stimulation recovery time.',
+  };
+  el.innerHTML = state.traits.map(t => `<div>${descriptions[t] || t}</div>`).join('');
+}
+
+function renderProgress() {
+  const el = document.getElementById('progress-display');
+  if (!el) return;
+  el.innerHTML = `
+    <div class="summary-item"><span class="summary-key">Days Survived</span><span class="summary-chip pos">${state.day}</span></div>
+    <div class="summary-item"><span class="summary-key">Skills Unlocked</span><span class="summary-chip pos">${state.unlockedSkills.length} / ${ALL_SKILLS.length}</span></div>
+    <div class="summary-item"><span class="summary-key">Journal Entries</span><span class="summary-chip neu">${state.journal.length}</span></div>
+    <div class="summary-item"><span class="summary-key">XP</span><span class="summary-chip pos">${state.xp}</span></div>
+  `;
+}
+
+// ===== NAV =====
+function switchTab(tab) {
+  document.querySelectorAll('.tab-view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(`tab-${tab}`).classList.add('active');
+  document.getElementById(`nav-${tab}`).classList.add('active');
+  if (tab === 'stats') { renderTraits(); renderProgress(); }
+  if (tab === 'journal') renderJournal();
+  if (tab === 'skills') renderSkills();
+}
+
+// ===== TOAST =====
+function showToast(title, msg) {
+  const toast = document.getElementById('toast');
+  document.getElementById('toast-title').textContent = title;
+  document.getElementById('toast-body').textContent = msg;
+  toast.classList.add('visible');
+  setTimeout(() => toast.classList.remove('visible'), 3000);
+}
+</script>
+</body>
+</html>

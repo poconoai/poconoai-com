@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp --><!-- Living Echo — Estate & Fiduciary Professionals page, v399 2026-06-19. Added interest-list CTA. Prior: Removed funding link from footer, changed "Required disclaimer" to "Legal Notice", added origin-story footer link. Self-contained; intentionally outside the main-site build (no partial markers). -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Living Echo for Estate and Fiduciary Professionals</title>
+<meta name="description" content="Estate plans transfer assets. Living Echo helps preserve the knowledge, intent, values, and human context that assets cannot capture — for estate attorneys, trust counsel, and fiduciary professionals.">
+<link rel="canonical" href="https://poconoai.com/living-memorials/estate-professionals.html">
+<meta property="og:title" content="Living Echo for Estate and Fiduciary Professionals">
+<meta property="og:description" content="A governance-first continuity platform that helps estate attorneys, trust counsel, and fiduciary professionals support clients preserving knowledge, intent, and family guidance alongside their estate plan.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://poconoai.com/living-memorials/estate-professionals.html">
+<meta property="og:site_name" content="Living Echo">
+<link rel="icon" href="living-echo-logo.svg" type="image/svg+xml">
+
+<style>
+/* ── Living Echo · scoped .lm- design system (shared) ── */
+:root{
+  --lm-paper:#FDF8EF; --lm-paper-2:#FFFDF7; --lm-ink:#433F38; --lm-ink-soft:#6E6659;
+  --lm-leaf:#5E8062; --lm-leaf-deep:#44613F; --lm-leaf-tint:rgba(94,128,98,.12);
+  --lm-gold:#C9973F; --lm-gold-deep:#8A6620; --lm-gold-tint:rgba(201,151,63,.13);
+  --lm-rose:#C77F93; --lm-rose-deep:#9A546D;
+  --lm-lav:#9D8FBE;  --lm-lav-deep:#6C5C95;
+  --lm-sky:#8FB8CC;  --lm-sky-deep:#46748A;
+  --lm-spectrum:linear-gradient(90deg,var(--lm-leaf),var(--lm-gold),var(--lm-rose),var(--lm-lav),var(--lm-sky));
+  --lm-shadow:0 12px 36px rgba(99,76,43,.10);
+  --le-navy:#12324a; --le-navy-deep:#0a1f30; --le-gold:#d5a94f; --le-teal:#517d83;
+}
+*{box-sizing:border-box}
+html{background:var(--lm-paper)}
+body.lm-body{margin:0;background:var(--lm-paper);color:var(--lm-ink);font-family:Georgia,'Times New Roman',serif;line-height:1.7;overflow-x:hidden}
+.lm-skip{position:absolute;left:-9999px;top:0;background:var(--lm-ink);color:#fff;padding:10px 16px;border-radius:6px;z-index:999}
+.lm-skip:focus{left:12px;top:12px}
+a{color:var(--lm-leaf-deep)}
+a:hover{color:var(--lm-leaf)}
+
+.lm-topbar{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 22px;
+  font-family:system-ui,-apple-system,sans-serif;font-size:.86rem;background:var(--lm-paper-2);
+  border-bottom:1px solid rgba(138,102,32,.14);flex-wrap:wrap}
+.lm-topbar a{text-decoration:none;font-weight:600;color:var(--lm-ink-soft)}
+.lm-topbar a:hover{color:var(--lm-leaf-deep)}
+.lm-wordmark{font-family:Georgia,serif;font-weight:700;font-size:1.05rem;color:var(--le-navy);letter-spacing:.01em}
+
+main{max-width:880px;margin:0 auto;padding:0 22px}
+
+/* Navy professional hero band — distinct register from the warm consumer pages */
+.le-hero{background:linear-gradient(135deg,var(--le-navy) 0%,var(--le-navy-deep) 100%);color:#fff;
+  padding:54px 28px 44px;text-align:center;margin:0 -22px;border-radius:0 0 28px 28px}
+.le-hero-inner{max-width:760px;margin:0 auto}
+.le-eyebrow{font-family:system-ui,sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--le-gold);margin:0 0 14px}
+.le-h1{font-size:clamp(1.9rem,4.6vw,2.7rem);font-weight:700;margin:0 0 8px;line-height:1.16;color:#fff}
+.le-sub{font-size:1.12rem;color:rgba(255,255,255,.78);margin:0 0 18px;font-style:italic}
+.le-lede{font-size:1.02rem;color:rgba(255,255,255,.88);max-width:60ch;margin:0 auto 26px}
+.le-btn{display:inline-block;background:var(--le-gold);color:var(--le-navy);font-family:system-ui,sans-serif;
+  font-weight:700;font-size:.92rem;padding:13px 26px;border-radius:999px;text-decoration:none;
+  transition:background .18s,transform .18s}
+.le-btn:hover{background:#e3bd6c;transform:translateY(-1px);color:var(--le-navy)}
+.le-btn--soft{background:transparent;border:1.5px solid rgba(255,255,255,.5);color:#fff}
+.le-btn--soft:hover{background:rgba(255,255,255,.1);color:#fff}
+
+.lm-section{padding:40px 0}
+.lm-eyebrow{font-family:system-ui,sans-serif;font-size:.76rem;font-weight:700;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--lm-leaf-deep)}
+.lm-h2{font-size:1.5rem;font-weight:700;color:var(--le-navy);margin:10px 0 14px}
+.lm-center{text-align:center}
+.lm-divider{width:min(380px,62%);height:3px;border:0;border-radius:999px;background:var(--lm-spectrum);opacity:.6;margin:0 auto}
+
+.le-usecase-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:22px}
+.le-usecase{background:var(--lm-paper-2);border:1px solid rgba(18,50,74,.14);border-radius:14px;padding:18px 20px}
+.le-usecase p{margin:0;font-size:.93rem;color:var(--lm-ink-soft)}
+.le-usecase strong{display:block;color:var(--le-navy);font-size:.98rem;margin-bottom:4px;font-family:system-ui,sans-serif;}
+
+.le-disclaimer{background:rgba(18,50,74,.06);border:1px solid rgba(18,50,74,.2);border-left:4px solid var(--le-navy);
+  border-radius:10px;padding:18px 20px;font-family:system-ui,sans-serif;font-size:.88rem;color:var(--lm-ink);line-height:1.6}
+
+.le-cta-band{background:var(--le-navy);border-radius:18px;padding:32px 28px;color:#fff;text-align:center}
+.le-cta-band h2{color:#fff;border:none}
+
+.lm-foot{padding:44px 22px 40px;text-align:center;font-family:system-ui,sans-serif;font-size:.86rem;color:var(--lm-ink-soft)}
+.lm-foot .lm-divider{margin-bottom:26px}
+.lm-foot p{max-width:62ch;margin:0 auto 10px}
+.lm-foot a{font-weight:600}
+
+@media(max-width:480px){
+  .le-hero{padding:38px 18px 32px;margin:0 -22px;border-radius:0 0 20px 20px}
+  .lm-section{padding:28px 0}
+}
+
+/* --- v397: Pocono AI interest-list CTA (disclosed external Google Form) --- */
+.le-interest{margin:0 auto;max-width:660px;text-align:center;padding:34px 28px;background:var(--le-navy,#12324a);border-radius:18px;color:#fff}
+.le-interest h3{font-family:Georgia,serif;font-weight:400;font-size:1.3rem;color:#fff;margin:0 0 8px}
+.le-interest p{font-size:.98rem;color:rgba(255,255,255,.82);max-width:54ch;margin:0 auto 20px;line-height:1.6}
+.le-interest-note{font-family:system-ui,sans-serif;font-size:.8rem;color:rgba(255,255,255,.6);margin:18px auto 0;max-width:50ch}
+.le-body a.interest-list-cta,a.interest-list-cta{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:.9rem 1.6rem;border-radius:999px;font-family:system-ui,sans-serif;font-weight:700;line-height:1.2;white-space:normal;background:var(--le-gold,#d5a94f);color:var(--le-navy,#12324a);border:none;text-decoration:none;transition:background .18s}
+a.interest-list-cta:hover{background:#e3bd6c;color:var(--le-navy,#12324a)}
+a.interest-list-cta:visited,a.interest-list-cta:active{color:var(--le-navy,#12324a)}
+</style>
+</head>
+<body class="lm-body">
+<a class="lm-skip" href="#main-content">Skip to content</a>
+
+<div class="lm-topbar" role="banner">
+  <a href="/living-memorials/">&larr; Living Echo Home</a>
+  <span class="lm-wordmark">Living Echo</span>
+  <a href="/">Pocono AI &rarr;</a>
+</div>
+
+<main id="main-content">
+
+  <!-- HERO -->
+  <section class="le-hero" aria-labelledby="le-title">
+    <div class="le-hero-inner">
+      <p class="le-eyebrow">The Continuity Platform &middot; For Estate Attorneys, Trust Counsel, and Fiduciary Professionals</p>
+      <h1 class="le-h1" id="le-title">Living Echo for Estate and Fiduciary Professionals</h1>
+      <p class="le-sub">Estate plans transfer assets. Living Echo helps preserve the knowledge, intent, values, and human context that assets cannot capture.</p>
+      <p class="le-lede">Estate planning protects what a client owns. Living Echo helps preserve what a client knows: their judgment, stories, values, family guidance, leadership lessons, and documented intent.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
+        <a class="le-btn" href="mailto:marcus@poconoai.com?subject=Living%20Echo%20%E2%80%94%20Estate%20Professional%20Inquiry">Schedule a Consultation</a>
+        <a class="le-btn le-btn--soft" href="/living-memorials/">View the Living Echo Continuity Platform</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ESTATE INFOGRAPHIC -->
+  <section class="lm-section" id="estate-infographic" aria-label="Living Echo for estate professionals infographic">
+    <figure style="margin:0 auto 8px;max-width:780px;">
+      <a href="assets/living_echo_estate_titan.png" target="_blank" rel="noopener" aria-label="Open full-size Living Echo estate professionals infographic in a new tab" style="display:block;border-radius:16px;overflow:hidden;box-shadow:var(--lm-shadow);border:1px solid rgba(18,50,74,.14);">
+        <picture>
+          <source srcset="assets/living_echo_estate_titan.webp" type="image/webp">
+          <img src="assets/living_echo_estate_titan.png"
+               alt="Living Echo estate professionals infographic explaining how estate attorneys, fiduciaries, trustees, and advisors can support preservation of human knowledge, intent, values, and family guidance through documented consent, provenance, controlled access, fiduciary-aware planning, and Sentinel Node governance."
+               loading="lazy" decoding="async" width="1024" height="1536"
+               style="display:block;width:100%;height:auto;cursor:zoom-in;">
+        </picture>
+      </a>
+      <figcaption style="margin-top:10px;text-align:center;font-family:system-ui,sans-serif;font-size:.82rem;color:var(--lm-ink-soft);">Tap or click the infographic to view full size.</figcaption>
+    </figure>
+  </section>
+
+  <!-- 1. WHY ESTATE PROFESSIONALS SHOULD CARE -->
+  <section class="lm-section" id="why-care" aria-labelledby="le-why-h">
+    <p class="lm-eyebrow">The gap</p>
+    <h2 class="lm-h2" id="le-why-h">Why Estate Professionals Should Care</h2>
+    <p>Clients transfer wealth, but families often lose the wisdom, context, stories, and intent behind that wealth. Estate plans rarely transfer the judgment, experience, and guidance that gave that wealth meaning &mdash; and when that knowledge is gone, families and institutions are left without the context to use it well.</p>
+  </section>
+
+  <!-- 2. WHAT LIVING ECHO ADDS -->
+  <section class="lm-section" id="what-it-adds" style="background:var(--lm-leaf-tint);border-radius:18px;">
+    <p class="lm-eyebrow">The addition</p>
+    <h2 class="lm-h2" id="le-adds-h">What Living Echo Adds</h2>
+    <p>Living Echo provides structured legacy capture, governed archival storage, documented consent, provenance, controlled successor access, and steward-approved retrieval &mdash; a complement to the estate plan, not a replacement for it.</p>
+  </section>
+
+  <!-- 3. PROFESSIONAL USE CASES -->
+  <section class="lm-section" id="use-cases" aria-labelledby="le-use-h">
+    <p class="lm-eyebrow lm-center" style="display:block;">Applications</p>
+    <h2 class="lm-h2 lm-center" id="le-use-h">Professional Use Cases</h2>
+    <div class="le-usecase-grid">
+      <div class="le-usecase"><strong>Legacy Interviews</strong><p>Structured capture before incapacity or end of life.</p></div>
+      <div class="le-usecase"><strong>Family Values &amp; Guidance</strong><p>Preservation of family guidance and values for the next generation.</p></div>
+      <div class="le-usecase"><strong>Founder &amp; Business Succession</strong><p>Capturing institutional and leadership knowledge ahead of succession.</p></div>
+      <div class="le-usecase"><strong>Veteran &amp; Service History</strong><p>Preservation of service history and lived experience.</p></div>
+      <div class="le-usecase"><strong>Trustee &amp; Successor Access Planning</strong><p>Documented, structured access planning for trustees and successors.</p></div>
+      <div class="le-usecase"><strong>Wisdom Transfer Alongside Wealth Transfer</strong><p>Pairing the estate plan with the human context behind it.</p></div>
+    </div>
+  </section>
+
+  <!-- 4. FIDUCIARY-AWARE GUARDRAILS -->
+  <section class="lm-section" id="guardrails" aria-labelledby="le-guard-h">
+    <p class="lm-eyebrow">Guardrails</p>
+    <h2 class="lm-h2" id="le-guard-h">Fiduciary-Aware Guardrails</h2>
+    <p>Living Echo should not claim to create legal documents or replace attorney judgment. It supports planning conversations through documented consent, structured access, provenance, and attorney-reviewed instructions.</p>
+    <div class="le-disclaimer">
+      <strong>Legal Notice.</strong> Living Echo is not a law firm and does not provide legal advice. Living Echo does not create wills, trusts, powers of attorney, or estate documents. Fiduciary access and succession instructions should be reviewed by qualified counsel.
+    </div>
+  </section>
+
+  <!-- RETURN CTA -->
+  <section class="lm-section" id="return-cta" aria-label="Return to main platform">
+    <div class="le-cta-band">
+      <h2>See the Full Continuity Platform</h2>
+      <p style="color:rgba(255,255,255,.82);max-width:54ch;margin:0 auto 22px;">The Living Echo continuity platform serves families, veterans, organizations, and the professionals who support them &mdash; all built on the same governance foundation.</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <a class="le-btn" href="/living-memorials/">View the Living Echo Continuity Platform</a>
+        <a class="le-btn le-btn--soft" href="/living-memorials/enterprise-estate-continuity.html">Enterprise Estate Continuity</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- v397 · INTEREST LIST -->
+  <section class="lm-section" id="interest-list" aria-labelledby="le-interest-h" style="padding-top:8px">
+    <div class="le-interest">
+      <h3 id="le-interest-h">Interested in this product track?</h3>
+      <p>Join the Pocono AI interest list and tell us where you fit. The fastest way to route estate, fiduciary, advisor, and product-interest inquiries.</p>
+      <a class="interest-list-cta" href="https://forms.gle/VQahnkjMfY6QNEMy8" target="_blank" rel="noopener noreferrer">Join the Interest List</a>
+      <p class="le-interest-note">Please do not submit private medical records, legal files, confidential client materials, or sensitive documents through this form.</p>
+    </div>
+  </section>
+
+</main>
+
+<div class="lm-foot" role="contentinfo">
+  <hr class="lm-divider">
+  <p>Living Echo &mdash; The Continuity Platform. A private venture built by Pocono AI. Separate from Pocono AI&rsquo;s regulated medical and legal AI infrastructure work.</p>
+  <p><a href="/living-memorials/">Living Echo Home</a> &nbsp;&middot;&nbsp; <a href="/living-memorials/pricing.html">Pricing</a> &nbsp;&middot;&nbsp; <a href="/living-memorials/celebration-of-life.html">Origin Story</a> &nbsp;&middot;&nbsp; <a href="/living-memorials/enterprise-estate-continuity.html">Enterprise Continuity</a> &nbsp;&middot;&nbsp; <a href="/">Pocono AI &rarr;</a></p>
+  <p style="margin-top:14px;font-size:.82rem;opacity:.8">Living Echo is not a law firm and does not provide legal advice. © 2026 Marcus O&rsquo;Dell</p>
+</div>
+
+</body>
+</html>

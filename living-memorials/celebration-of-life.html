@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp --><!-- Living Echo — Celebration of Life & Origin Story, v399 2026-06-19. Absorbed 5 relocated sections from index (archive, how-it-works, grandmother, long-term vision, research proposal). Prior: Separated from the main Living Echo commercial page. Cleaned when_you_die poster integrated. No funding language. Self-contained; intentionally outside the main-site build (no partial markers). -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>The Origin Story: Why Living Echo Exists | Living Echo</title>
+<meta name="description" content="Living Echo began with a human question: what happens to the stories, wisdom, values, and guidance that never make it into documents? This is the origin story behind the platform.">
+<link rel="canonical" href="https://poconoai.com/living-memorials/celebration-of-life.html">
+<link rel="icon" href="living-echo-logo.svg" type="image/svg+xml">
+
+<meta property="og:title" content="The Origin Story: Why Living Echo Exists">
+<meta property="og:description" content="Living Echo began with a human question: what happens to the stories, wisdom, values, and guidance that never make it into documents?">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://poconoai.com/living-memorials/celebration-of-life.html">
+<meta property="og:site_name" content="Living Echo">
+
+<style>
+/* ── Living Echo · scoped .lm- design system ─────────────
+   Shared with main Living Echo pages.
+   Celebration / origin-story register: emotional, personal, reflective.  */
+:root{
+  --lm-paper:#FDF8EF; --lm-paper-2:#FFFDF7; --lm-ink:#433F38; --lm-ink-soft:#6E6659;
+  --lm-leaf:#5E8062; --lm-leaf-deep:#44613F; --lm-leaf-tint:rgba(94,128,98,.12);
+  --lm-gold:#C9973F; --lm-gold-deep:#8A6620; --lm-gold-tint:rgba(201,151,63,.13);
+  --lm-rose:#C77F93; --lm-rose-deep:#9A546D; --lm-rose-tint:rgba(199,127,147,.12);
+  --lm-lav:#9D8FBE;  --lm-lav-deep:#6C5C95;  --lm-lav-tint:rgba(157,143,190,.13);
+  --lm-sky:#8FB8CC;  --lm-sky-deep:#46748A;  --lm-sky-tint:rgba(143,184,204,.14);
+  --lm-spectrum:linear-gradient(90deg,var(--lm-leaf),var(--lm-gold),var(--lm-rose),var(--lm-lav),var(--lm-sky));
+  --lm-shadow:0 12px 36px rgba(99,76,43,.10);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body.lm-body{
+  margin:0;background:var(--lm-paper);color:var(--lm-ink);
+  font-family:Georgia,'Iowan Old Style','Times New Roman',serif;
+  font-size:1.06rem;line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+.lm-body ::selection{background:rgba(201,151,63,.30)}
+.lm-skip{position:absolute;left:-999px;top:0;background:var(--lm-leaf-deep);color:#FFF9EC;padding:10px 18px;border-radius:0 0 12px 0;z-index:60;font-family:system-ui,sans-serif}
+.lm-skip:focus{left:0}
+.lm-body a{color:var(--lm-leaf-deep)}
+.lm-body a:focus-visible{outline:3px solid var(--lm-gold);outline-offset:2px;border-radius:6px}
+
+/* topbar */
+.lm-topbar{position:sticky;top:0;z-index:40;display:flex;justify-content:space-between;align-items:center;gap:14px;
+  padding:12px clamp(16px,4vw,34px);background:rgba(253,248,239,.92);backdrop-filter:blur(8px);
+  border-bottom:1px solid rgba(138,102,32,.16);font-family:system-ui,-apple-system,'Segoe UI',sans-serif;flex-wrap:wrap}
+.lm-topbar a{color:var(--lm-ink-soft);text-decoration:none;font-size:.9rem}
+.lm-topbar a:hover{color:var(--lm-gold-deep)}
+.lm-wordmark{font-family:Georgia,serif;font-style:italic;color:var(--lm-gold-deep);font-size:.98rem;letter-spacing:.02em}
+.lm-topbar-links{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+
+/* layout primitives */
+.lm-section{padding:clamp(52px,7vw,84px) 22px}
+.lm-wrap{max-width:720px;margin:0 auto}
+.lm-wrap--wide{max-width:940px;margin:0 auto}
+.lm-center{text-align:center}
+.lm-h2{font-weight:400;font-size:clamp(1.5rem,3.4vw,2.1rem);line-height:1.22;margin:0 0 18px}
+.lm-eyebrow{font-family:system-ui,sans-serif;font-size:.74rem;font-weight:600;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--lm-gold-deep);margin:0 0 16px}
+.lm-pull{font-size:1.2rem;line-height:1.5;border-left:3px solid var(--lm-gold);padding-left:22px;
+  margin:28px 0;color:var(--lm-ink);font-style:italic}
+.lm-soft{color:var(--lm-ink-soft)}
+
+/* hero — celebration register: warm, reflective, human */
+.lm-hero-cel{
+  text-align:center;
+  padding:clamp(60px,9vw,100px) 22px clamp(48px,7vw,80px);
+  background:linear-gradient(180deg,#FFF8EA 0%,#FCEEDC 45%,#F8E9EA 80%,#F6EEF6 100%);
+  position:relative;overflow:hidden;
+}
+.lm-hero-cel::after{
+  content:"";position:absolute;bottom:0;left:0;right:0;height:6px;
+  background:var(--lm-spectrum);opacity:.6;
+}
+.lm-hero-inner{max-width:680px;margin:0 auto}
+.lm-h1-cel{
+  font-weight:400;font-size:clamp(1.9rem,5vw,2.9rem);line-height:1.15;
+  margin:0 0 12px;letter-spacing:-.01em;
+}
+.lm-sub-cel{font-style:italic;color:var(--lm-rose-deep);font-size:clamp(1.05rem,2.4vw,1.3rem);margin:0 0 20px}
+.lm-lede-cel{max-width:58ch;margin:0 auto 30px;font-size:1.08rem;color:var(--lm-ink-soft)}
+
+/* buttons */
+.lm-btn{display:inline-block;font-family:system-ui,sans-serif;font-weight:600;font-size:.96rem;
+  text-decoration:none;border-radius:999px;padding:12px 26px;
+  background:var(--lm-leaf-deep);color:#FFF9EC;border:1.5px solid var(--lm-leaf-deep);
+  box-shadow:0 5px 16px rgba(68,97,63,.20)}
+.lm-btn:hover{background:#3A5436;color:#FFF9EC}
+.lm-btn--soft{background:transparent;color:var(--lm-gold-deep);border:1.5px solid var(--lm-gold);box-shadow:none}
+.lm-btn--soft:hover{background:var(--lm-gold-tint)}
+.lm-btnrow{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+/* band backgrounds */
+.lm-band--leaf{background:linear-gradient(135deg,rgba(94,128,98,.08),rgba(94,128,98,.04))}
+.lm-band--rose{background:rgba(199,127,147,.07)}
+.lm-band--lav{background:rgba(157,143,190,.08)}
+
+/* poster figure */
+.lm-poster-fig{margin:0 auto 28px;max-width:580px}
+.lm-poster-fig a{display:block;border-radius:14px;overflow:hidden;
+  box-shadow:var(--lm-shadow);border:1px solid rgba(138,102,32,.18)}
+.lm-poster-fig img{display:block;width:100%;height:auto;cursor:zoom-in}
+.lm-poster-cap{margin-top:10px;font-family:system-ui,sans-serif;font-size:.8rem;color:var(--lm-ink-soft);text-align:center}
+
+/* blockquote window */
+.lm-window{margin:0;padding:32px 28px;background:var(--lm-paper-2);
+  border:1px solid rgba(138,102,32,.2);border-radius:14px;
+  border-left:4px solid var(--lm-gold)}
+.lm-window blockquote{margin:0 0 10px;font-style:italic;font-size:1.08rem;line-height:1.65}
+.lm-window figcaption{font-family:system-ui,sans-serif;font-size:.82rem;color:var(--lm-ink-soft)}
+
+/* ethics ol */
+.lm-ethics{padding:0 0 0 1.5em;margin:20px 0 0;list-style-type:decimal}
+
+/* --- v398: classes for sections relocated from the commercial index page --- */
+.lm-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;list-style:none;margin:30px 0 0;padding:0}
+.lm-grid li{background:var(--lm-paper-2);border:1px solid;border-radius:14px;padding:16px 18px;font-size:.98rem;box-shadow:0 6px 18px rgba(99,76,43,.07)}
+.lm-grid li:nth-child(5n+1){border-color:rgba(94,128,98,.45);background:linear-gradient(180deg,var(--lm-leaf-tint),var(--lm-paper-2) 60%)}
+.lm-grid li:nth-child(5n+2){border-color:rgba(201,151,63,.45);background:linear-gradient(180deg,var(--lm-gold-tint),var(--lm-paper-2) 60%)}
+.lm-grid li:nth-child(5n+3){border-color:rgba(199,127,147,.45);background:linear-gradient(180deg,var(--lm-rose-tint),var(--lm-paper-2) 60%)}
+.lm-grid li:nth-child(5n+4){border-color:rgba(157,143,190,.45);background:linear-gradient(180deg,var(--lm-lav-tint),var(--lm-paper-2) 60%)}
+.lm-grid li:nth-child(5n+5){border-color:rgba(143,184,204,.5);background:linear-gradient(180deg,var(--lm-sky-tint),var(--lm-paper-2) 60%)}
+.lm-steps{list-style:none;counter-reset:lm;margin:30px 0 0;padding:0;max-width:640px}
+.lm-steps li{counter-increment:lm;position:relative;padding:10px 0 10px 56px}
+.lm-steps li::before{content:counter(lm);position:absolute;left:0;top:8px;width:36px;height:36px;border-radius:50%;background:var(--lm-gold-tint);border:1px solid rgba(201,151,63,.5);color:var(--lm-gold-deep);font-family:Georgia,serif;font-style:italic;font-size:1.05rem;display:flex;align-items:center;justify-content:center}
+.lm-ethics li{margin:0 0 8px;padding-left:4px}
+
+/* footer */
+.lm-foot{padding:32px 22px 40px;text-align:center;font-family:system-ui,sans-serif;font-size:.86rem;color:var(--lm-ink-soft)}
+.lm-foot a{color:var(--lm-leaf-deep);text-decoration:none}
+.lm-foot a:hover{color:var(--lm-gold-deep)}
+.lm-divider{border:0;border-top:1px solid rgba(138,102,32,.18);margin:0 0 24px}
+
+/* --- v397 fix: .lm-body a (0,1,1) out-specified .lm-btn (0,1,0); filled button text rendered green-on-green and read as invisible on mobile. Pin button label colors at matching specificity. --- */
+.lm-body a.lm-btn{color:#FFF9EC}
+.lm-body a.lm-btn:hover,.lm-body a.lm-btn:visited,.lm-body a.lm-btn:active{color:#FFF9EC}
+.lm-body a.lm-btn--soft{color:var(--lm-gold-deep)}
+.lm-body a.lm-btn--soft:hover,.lm-body a.lm-btn--soft:visited,.lm-body a.lm-btn--soft:active{color:var(--lm-gold-deep)}
+
+/* --- v397: Pocono AI interest-list CTA (disclosed external Google Form) --- */
+.lm-interest{margin:0 auto;max-width:640px;text-align:center;padding:30px 26px;background:var(--lm-paper-2);border:1px solid rgba(138,102,32,.2);border-radius:18px}
+.lm-interest h3{font-family:Georgia,serif;font-weight:400;font-size:1.22rem;color:var(--lm-leaf-deep);margin:0 0 8px}
+.lm-interest p{font-size:.96rem;color:var(--lm-ink-soft);max-width:52ch;margin:0 auto 18px;line-height:1.6}
+.lm-interest-note{font-family:system-ui,sans-serif;font-size:.8rem;color:var(--lm-ink-soft);opacity:.85;margin:16px auto 0;max-width:48ch}
+.lm-body a.interest-list-cta{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:.9rem 1.5rem;border-radius:999px;font-weight:700;line-height:1.2;white-space:normal;background:var(--lm-gold-deep);color:#FFF9EC;border:1.5px solid var(--lm-gold-deep);text-decoration:none;box-shadow:0 6px 18px rgba(138,102,32,.22)}
+.lm-body a.interest-list-cta:hover,.lm-body a.interest-list-cta:visited,.lm-body a.interest-list-cta:active{color:#FFF9EC}
+.lm-body a.interest-list-cta:hover{background:#74551b}
+</style>
+</head>
+<body class="lm-body">
+<a class="lm-skip" href="#main-content">Skip to content</a>
+
+<div class="lm-topbar" role="banner">
+  <a href="/" style="display:flex;align-items:center;gap:8px;">
+    <img src="living-echo-logo.svg" alt="" width="28" height="16" style="display:block;" aria-hidden="true"> &larr; Pocono AI
+  </a>
+  <span class="lm-wordmark">Living Echo</span>
+  <nav class="lm-topbar-links" aria-label="Living Echo pages">
+    <a href="/living-memorials/">Continuity Platform</a>
+    <a href="/living-memorials/estate-professionals.html">Estate Professionals</a>
+    <a href="/living-memorials/pricing.html">Pricing</a>
+  </nav>
+</div>
+
+<main id="main-content">
+
+  <!-- HERO -->
+  <section class="lm-hero-cel" aria-labelledby="cel-title">
+    <div class="lm-hero-inner">
+      <img src="living-echo-logo.svg" alt="Living Echo — Voices Live On" style="width:min(180px,50vw);height:auto;margin:0 auto 18px;display:block;">
+      <p class="lm-eyebrow">The Origin Story</p>
+      <h1 class="lm-h1-cel" id="cel-title">A Celebration of Life,<br>Not a Denial of Death</h1>
+      <p class="lm-sub-cel">Why Living Echo exists</p>
+      <p class="lm-lede-cel">Living Echo began with a deeply human question: what happens to the stories, wisdom, values, and guidance that never make it into documents?</p>
+      <div class="lm-btnrow">
+        <a class="lm-btn lm-btn--soft" href="/living-memorials/">View the Continuity Platform</a>
+        <a class="lm-btn lm-btn--soft" href="/living-memorials/marcus-odell/">Marcus&rsquo;s Living Echo</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- CLEANED EMOTIONAL POSTER -->
+  <section class="lm-section" id="poster" aria-label="Living Echo origin poster">
+    <div class="lm-wrap lm-center">
+      <p class="lm-eyebrow">The question</p>
+      <h2 class="lm-h2">When you die, who remembers you?</h2>
+      <p class="lm-soft" style="max-width:54ch;margin:0 auto 26px;">This question is the foundation of Living Echo. Not as a way to avoid death — but as a way to preserve what a life actually contained.</p>
+      <figure class="lm-poster-fig">
+        <a href="assets/when_you_die_who_remembers_you.png" target="_blank" rel="noopener" aria-label="Open full-size Living Echo origin poster in a new tab">
+          <img src="assets/when_you_die_who_remembers_you.png"
+               alt="Living Echo origin-story poster asking &ldquo;When you die, who remembers you?&rdquo; and describing Living Echo as a Pocono AI project that preserves pre-recorded voice, stories, thoughts, and guidance without pretending to be the person."
+               loading="eager" decoding="async" style="display:block;width:100%;height:auto;cursor:zoom-in;">
+        </a>
+        <p class="lm-poster-cap">Tap or click to view full size.</p>
+      </figure>
+    </div>
+  </section>
+
+
+  <!-- 1. THE HUMAN QUESTION -->
+  <section class="lm-section lm-band--leaf" id="the-question" aria-labelledby="cel-q-h">
+    <div class="lm-wrap">
+      <p class="lm-eyebrow">The idea</p>
+      <h2 class="lm-h2" id="cel-q-h">The Human Question</h2>
+      <p>What happens to the wisdom, memories, values, humor, voice, and guidance that never make it into estate documents or photo albums?</p>
+      <p>People are not just dates on a stone. People are voices, stories, phrases, letters, jokes, arguments, values, memories, and love. A gravestone holds two numbers and a dash; a life holds everything the dash stood for.</p>
+      <p class="lm-pull">The goal is not to make grief disappear. The goal is to give memory a place to breathe.</p>
+    </div>
+  </section>
+
+
+  <!-- 2. PRESERVATION BEFORE SIMULATION -->
+  <section class="lm-section" id="preservation-first" aria-labelledby="cel-pres-h">
+    <div class="lm-wrap">
+      <p class="lm-eyebrow">The approach</p>
+      <h2 class="lm-h2" id="cel-pres-h">Preservation Before Simulation</h2>
+      <p>Living Echo is designed to preserve source material first. Any interactive retrieval remains grounded in authorized recordings, writings, documents, and human-approved materials.</p>
+      <p>The system is not an invention engine. If something was never recorded, the system says so. Source-grounded answers, clear labels, human steward controls — those are the product.</p>
+
+      <figure class="lm-window" style="margin-top:28px">
+        <blockquote>
+          <p>&ldquo;I am a remembrance model built from the preserved writings, recordings, and authorized materials of this person. I am not that person. But I can help you remember them.&rdquo;</p>
+        </blockquote>
+        <figcaption>The standing disclosure of every Living Echo</figcaption>
+      </figure>
+    </div>
+  </section>
+
+
+  <!-- 3. NOT A DEADBOT -->
+  <section class="lm-section lm-band--rose" id="not-a-deadbot" aria-labelledby="cel-nd-h">
+    <div class="lm-wrap">
+      <p class="lm-eyebrow">The boundaries</p>
+      <h2 class="lm-h2" id="cel-nd-h">Not a Deadbot</h2>
+      <p>Living Echo should be clearly understood for what it is not:</p>
+      <ul style="margin:16px 0 0;padding:0 0 0 1.5em;list-style:disc">
+        <li>It is not resurrection.</li>
+        <li>It is not pretending the person is alive.</li>
+        <li>It does not invent certainty where none exists.</li>
+        <li>If something was never recorded, the system says so.</li>
+        <li>It is not therapy.</li>
+        <li>It is not legal advice.</li>
+        <li>It is not autonomous decision-making.</li>
+        <li>It is not an unrestricted impersonation engine.</li>
+      </ul>
+      <p style="margin-top:22px;">What it is: a source-grounded, consent-first archive and governed retrieval layer built from what a person actually left behind.</p>
+    </div>
+  </section>
+
+
+  <!-- WHAT A LIVING MEMORIAL COULD INCLUDE (relocated from index.html, v398) -->
+  <section class="lm-section" id="archive" aria-labelledby="cel-archive-h">
+    <div class="lm-wrap--wide">
+      <p class="lm-eyebrow lm-center" style="display:block;text-align:center;">The material</p>
+      <h2 class="lm-h2 lm-center" id="cel-archive-h">What a living memorial could include</h2>
+      <p class="lm-center lm-soft" style="max-width:56ch;margin:0 auto">Everything below already exists in most lives. The work is gathering it gently, with permission, before it scatters.</p>
+      <ul class="lm-grid">
+        <li>Letters</li><li>Emails</li><li>Journals</li><li>Academic papers</li><li>Personal essays</li>
+        <li>Voice recordings</li><li>Video transcripts</li><li>Public posts</li><li>Family stories</li><li>Interviews</li>
+        <li>Creative work</li><li>Ethical instructions</li><li>Boundaries and permissions</li><li>Messages for future generations</li>
+      </ul>
+    </div>
+  </section>
+
+
+  <!-- HOW IT MIGHT WORK (relocated from index.html, v398) -->
+  <section class="lm-section lm-band--leaf" id="how" aria-labelledby="cel-how-h">
+    <div class="lm-wrap">
+      <h2 class="lm-h2" id="cel-how-h">How it might work</h2>
+      <p class="lm-soft">Plain-language steps &mdash; retrieval over invention, labels over guesses, a human steward over everything.</p>
+      <ol class="lm-steps">
+        <li>Gather preserved materials.</li>
+        <li>Sort private, public, and family-authorized sources.</li>
+        <li>Create a searchable archive.</li>
+        <li>Use retrieval-grounded AI rather than free invention.</li>
+        <li>Label whether an answer is quoted, paraphrased, or reconstructed.</li>
+        <li>Add clear disclosures.</li>
+        <li>Allow a family steward to correct, restrict, or retire the memorial.</li>
+      </ol>
+    </div>
+  </section>
+
+
+  <!-- 4. WHY I AM BUILDING THIS NOW — Marcus -->
+  <section class="lm-section" id="why-now" aria-labelledby="cel-why-h">
+    <div class="lm-wrap">
+      <p class="lm-eyebrow">In Marcus&rsquo;s words</p>
+      <h2 class="lm-h2" id="cel-why-h">Why I Am Building This Now</h2>
+      <p>I am building this because I am very sick. Some mornings I wake up screaming. Some days I am too weak to complete even basic work. This is not behavioral. It is the reality of severe illness.</p>
+      <p>When your body is failing, legacy stops being abstract.</p>
+      <p>I am not trying to create an AI version of myself that runs Pocono AI after I am gone. Pocono AI&rsquo;s continuity must come from people &mdash; documentation, leadership, governance, delegation, and a resilient team.</p>
+      <p>This side project is different. It is about memory and presence.</p>
+      <p>I have written a large body of work: academic papers, emails, notes, arguments, reflections, project documentation, and personal thoughts. If those materials can be organized carefully, ethically, and honestly, then my family and friends may one day still be able to encounter something of how I thought, what I cared about, what I built, and what I wanted them to know.</p>
+      <p class="lm-pull">This project is meant to resist disappearance.</p>
+    </div>
+  </section>
+
+
+  <!-- 5. CORY PETTIT -->
+  <section class="lm-section lm-band--lav" id="cory" aria-labelledby="cel-cory-h">
+    <div class="lm-wrap">
+      <p class="lm-eyebrow">Part of why this matters</p>
+      <h2 class="lm-h2" id="cel-cory-h">My Friend Cory Pettit</h2>
+      <p>Cory Pettit was my best friend. He died more than ten years ago.</p>
+      <p class="lm-pull">It does not bite any less. I still want to talk to him.</p>
+      <p>No actual Cory memorial model should be built without family permission &mdash; especially from his parents or authorized family. That boundary is not negotiable here.</p>
+      <p class="lm-soft">There may or may not be enough writing, audio, video, or media to create a meaningful remembrance model. But Cory&rsquo;s loss is part of why this project matters.</p>
+    </div>
+  </section>
+
+
+  <!-- MY GRANDMOTHER (relocated from index.html, v398) -->
+  <section class="lm-section lm-band--rose" id="grandmother" aria-labelledby="cel-gm-h">
+    <div class="lm-wrap">
+      <p class="lm-eyebrow">Someday, carefully</p>
+      <h2 class="lm-h2" id="cel-gm-h">My Grandmother</h2>
+      <p>One day, Marcus would like to explore this for his grandmother. She wrote enough in her lifetime that her letters and writings may preserve something meaningful about her voice.</p>
+      <p>Because he does not have her direct permission, this would be framed carefully: an <em>archival remembrance</em> built from the writings she left behind &mdash; not a full simulation of her personhood. Her own words, organized and findable. Nothing more claimed.</p>
+      <p class="lm-soft">The system should not speak beyond the record.</p>
+    </div>
+  </section>
+
+
+  <!-- 6. MARCUS'S LIVING ECHO -->
+  <section class="lm-section" id="marcus-prototype" aria-labelledby="cel-proto-h">
+    <div class="lm-wrap lm-center">
+      <p class="lm-eyebrow">The first prototype</p>
+      <h2 class="lm-h2" id="cel-proto-h">Marcus&rsquo;s Living Echo</h2>
+      <p class="lm-soft" style="max-width:54ch;margin:0 auto 24px;">Marcus is building his own Living Echo while still here &mdash; while consent, context, and voice can still be shaped directly by him. It is the first prototype of the platform, created before death.</p>
+      <a class="lm-btn" href="/living-memorials/marcus-odell/">Visit Marcus&rsquo;s Living Memorial Prototype</a>
+    </div>
+  </section>
+
+
+  <!-- LONG-TERM VISION (relocated from index.html, v398) -->
+  <section class="lm-section lm-band--rose" id="long-term" aria-labelledby="cel-vision-h">
+    <div class="lm-wrap">
+      <p class="lm-eyebrow">The long-term vision</p>
+      <h2 class="lm-h2" id="cel-vision-h">Me First, Then Anyone Who Wants to Preserve a Life</h2>
+      <p>Marcus will be the first prototype &mdash; because he can consent while alive, shape the archive himself, and set the boundaries in his own words.</p>
+      <p>From there, the idea could grow: family members, friends, grandparents, ancestors, teachers, writers, founders, elders, people facing serious illness &mdash; anyone who wants to preserve their voice, stories, writings, and values.</p>
+      <p class="lm-pull">Me first, because I can consent. Then family, friends, and eventually anyone who wants to preserve a life with dignity.</p>
+      <p class="lm-soft">This is a long-term vision, not a finished product.</p>
+    </div>
+  </section>
+
+
+  <!-- 7. ETHICAL COMMITMENTS -->
+  <section class="lm-section lm-band--leaf" id="ethics" aria-labelledby="cel-ethics-h">
+    <div class="lm-wrap--wide">
+      <p class="lm-eyebrow lm-center" style="display:block;text-align:center;">Ten commitments</p>
+      <h2 class="lm-h2 lm-center" id="cel-ethics-h">Ethical Commitments</h2>
+      <p class="lm-soft lm-center" style="max-width:56ch;margin:0 auto 20px;">In plain language. They are the price of doing this at all.</p>
+      <ol class="lm-ethics" style="max-width:600px;margin:0 auto;">
+        <li>No false resurrection.</li>
+        <li>Consent first, whenever possible.</li>
+        <li>Family permission when needed.</li>
+        <li>Source-grounded answers.</li>
+        <li>Clear labels: quotation, paraphrase, reconstruction.</li>
+        <li>No exploitation of grief.</li>
+        <li>Dignity after death.</li>
+        <li>Stewardship, and the right to retire a memorial.</li>
+        <li>Separate permission for synthetic voice or likeness.</li>
+        <li>Privacy protection for living third parties.</li>
+      </ol>
+    </div>
+  </section>
+
+
+  <!-- RESEARCH PROPOSAL (relocated from index.html, v398) -->
+  <section class="lm-section lm-band--lav" id="proposal" aria-labelledby="cel-pdf-h">
+    <div class="lm-wrap lm-center">
+      <h2 class="lm-h2" id="cel-pdf-h">Research Proposal</h2>
+      <p class="lm-soft" style="max-width:58ch;margin:0 auto 26px">The working proposal, <em>AI Memorialization and the Ethics of Preserved Presence</em>, outlines the ethical, technical, and human questions behind Living Echo.</p>
+      <a class="lm-btn" href="/assets/pdfs/AI_Memorialization_Ethics_Preserved_Presence_Pocono_AI_Living_Memorials.pdf">Download the PDF</a>
+    </div>
+  </section>
+
+
+  <!-- 8. RETURN CTA -->
+  <section class="lm-section" id="return-cta" aria-label="Return to main platform">
+    <div class="lm-wrap lm-center">
+      <p class="lm-eyebrow">Continue exploring</p>
+      <h2 class="lm-h2">View the Living Echo Continuity Platform</h2>
+      <p class="lm-soft" style="max-width:52ch;margin:0 auto 28px;">The full platform serves families, veterans, estate professionals, organizations, and care teams &mdash; all built on the same ethical foundation.</p>
+      <div class="lm-btnrow">
+        <a class="lm-btn" href="/living-memorials/">View the Continuity Platform</a>
+        <a class="lm-btn lm-btn--soft" href="/living-memorials/estate-professionals.html">Estate &amp; Fiduciary Professionals</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- v397 · INTEREST LIST -->
+  <section class="lm-section" id="interest-list" aria-labelledby="lm-interest-h" style="padding-top:8px">
+    <div class="lm-interest">
+      <h3 id="lm-interest-h">Interested in Living Echo?</h3>
+      <p>Join the early participant list and tell us where you fit. We will reach out as the program opens.</p>
+      <a class="interest-list-cta" href="https://forms.gle/VQahnkjMfY6QNEMy8" target="_blank" rel="noopener noreferrer">Join the Interest List</a>
+      <p class="lm-interest-note">Please do not submit private medical records, legal files, confidential client materials, or sensitive documents through this form.</p>
+    </div>
+  </section>
+
+</main>
+
+<div class="lm-foot" role="contentinfo">
+  <hr class="lm-divider">
+  <p>Living Echo &mdash; The Continuity Platform. A private venture built by Pocono AI. Separate from Pocono AI&rsquo;s regulated medical and legal AI infrastructure work.</p>
+  <p><a href="/living-memorials/">Living Echo Home</a> &nbsp;&middot;&nbsp; <a href="/living-memorials/pricing.html">Pricing</a> &nbsp;&middot;&nbsp; <a href="/living-memorials/estate-professionals.html">Estate Professionals</a> &nbsp;&middot;&nbsp; <a href="/living-memorials/enterprise-estate-continuity.html">Enterprise Continuity</a> &nbsp;&middot;&nbsp; <a href="/">Pocono AI &rarr;</a></p>
+  <p style="margin-top:14px;font-size:.82rem;opacity:.8">Created with consent, while alive &middot; &copy; 2026 Marcus O&rsquo;Dell</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!-- ─────────────────────────────────────────────────────────────
+     SHARED HEADER + NAVIGATION PARTIAL — Pocono AI v343
+     ─────────────────────────────────────────────────────────────
+     This file is included into every page by build.py at the
+     <!-- INCLUDE: header.html --> marker. Edit this file to
+     change global navigation across the entire site, then run:
+         python3 build.py
+     before deploying.
+     ─────────────────────────────────────────────────────────────
+-->
+<header role="banner">
+  <div class="header-inner">
+    <a href="index.html" class="logo" aria-label="Pocono AI Home">
+      <img src="logo.svg?v=402" alt="" width="36" height="36" decoding="async" loading="eager" aria-hidden="true" style="display:inline-block;">
+      Pocono <span>AI</span>
+    </a>
+    <nav id="desktop-nav" aria-label="Main navigation">
+      <a href="start-here.html" class="nav-direct">Start Here</a>
+      <a href="executive-brief.html" class="nav-direct">Executive Brief</a>
+      <a href="liability-simulator.html" class="nav-direct">See It Run</a>
+      <a href="architecture.html" class="nav-direct">Architecture</a>
+      <div class="nav-item" data-dropdown="menu-practice">
+        <button type="button" class="nav-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="menu-practice">For Your Practice
+          <svg class="nav-chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><polyline points="2,3 5,7 8,3"/></svg>
+        </button>
+      </div>
+      <a href="pricing.html" class="nav-direct">Pricing</a>
+      <div class="nav-item" data-dropdown="menu-company">
+        <button type="button" class="nav-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="menu-company">Company
+          <svg class="nav-chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><polyline points="2,3 5,7 8,3"/></svg>
+        </button>
+      </div>
+      <a href="contact.html" class="nav-direct nav-cta-link">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <button type="button" class="header-icon-btn" id="search-icon-btn" aria-label="Open search" aria-expanded="false" aria-controls="search-panel">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+      <button type="button" class="header-icon-btn" id="mobile-menu" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav-panel">
+        <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+<!-- PARTIAL:header END -->
+
+<!-- PARTIAL:nav-drop-root START -->
+<div id="nav-drop-root">
+<div id="menu-practice" class="nav-dropdown" role="menu" aria-label="For Your Practice">
+  <span class="nav-section-label">Medical Practices</span>
+  <a href="for-physicians.html" class="nav-featured" role="menuitem">For Physicians &amp; Practices</a>
+  <a href="physicians-hub.html" role="menuitem">Physician Knowledge Hub</a>
+  <a href="prior-auth-case-study.html" role="menuitem">Prior Auth Use Case</a>
+  <a href="physicians-denials-appeals.html" role="menuitem">Denials &amp; Appeals</a>
+  <a href="day-in-the-clinic.html" role="menuitem">A Day in the Clinic</a>
+  <a href="nurses-ai-briefing.html" role="menuitem">For Nursing Staff</a>
+  <a href="support-staff-clinic-workflows.html" role="menuitem">For Clinic Support Staff</a>
+  <a href="works-with-your-clinic.html" role="menuitem">Works With Your Clinic Systems</a>
+  <span class="nav-section-label">Law Firms</span>
+  <a href="for-attorneys.html" role="menuitem">For Attorneys</a>
+  <a href="law-firm-pilot.html" role="menuitem">Law Firm Pilot Program</a>
+  <a href="day-in-a-law-firm.html" role="menuitem">A Day Inside a Small Firm</a>
+  <a href="legal-workflows-by-practice.html" role="menuitem">Workflows by Practice</a>
+  <a href="how-pocono-ai-fails-safely.html" role="menuitem">How We Fail Safely</a>
+  <a href="before-after-small-firm.html" role="menuitem">Before vs. After</a>
+  <a href="support-staff-workflows.html" role="menuitem">For Paralegals &amp; Support Staff</a>
+  <a href="works-with-your-stack.html" role="menuitem">Works With Your Stack</a>
+  <span class="nav-section-label">See It On Screen</span>
+  <a href="governance-review.html" class="nav-featured" role="menuitem">Governance Review</a>
+  <a href="governance-dashboard.html" role="menuitem">Governance Dashboard</a>
+  <a href="local-vs-cloud.html" role="menuitem">Local vs. Cloud</a>
+  <a href="day-in-the-clinic.html" role="menuitem">Day in the Clinic</a>
+  <a href="workflow-demonstrations.html" role="menuitem">Workflow Demonstrations</a>
+  <a href="pilot-workflow.html" role="menuitem">Pilot Workflow</a>
+  <a href="deployment-topology.html" role="menuitem">Deployment Topology</a>
+  <span class="nav-section-label">IT &amp; Compliance</span>
+  <a href="sentinel-audit-system.html" role="menuitem">Audit System</a>
+  <a href="sentinel-specs.html" role="menuitem">Sentinel Node Specs</a>
+  <a href="deployment-topology.html" role="menuitem">Deployment Topology</a>
+  <a href="compliance.html" role="menuitem">Compliance Attestation</a>
+  <span class="nav-section-label">Solutions by Use Case</span>
+  <a href="regulated-ai-solutions.html" class="nav-featured" role="menuitem">Regulated AI Solutions</a>
+  <span class="nav-section-label">Engagement</span>
+  <a href="what-happens-after-contact.html" role="menuitem">What Happens After Contact</a>
+  <a href="clinical-collaboration-framework.html" role="menuitem">Clinical Collaboration</a>
+  <a href="pilot-evidence-framework.html" role="menuitem">Pilot Evidence Framework</a>
+  <a href="operational-impact-model.html" role="menuitem">Operational Impact Model</a>
+  <a href="continuity-and-resilience.html" role="menuitem">Continuity &amp; Resilience</a>
+  <a href="pilot-brief.html" role="menuitem">Pilot Brief</a>
+  <a href="pilot-readiness-kit.html" role="menuitem">Pilot Readiness Kit</a>
+  <a href="channel-partners.html" role="menuitem">MSP / Channel Partners</a>
+</div>
+<div id="menu-company" class="nav-dropdown" role="menu" aria-label="Company">
+  <span class="nav-section-label">Company</span>
+  <a href="about.html" class="nav-featured" role="menuitem">About Pocono AI</a>
+  <a href="team.html" role="menuitem">Team &amp; Leadership</a>
+  <a href="investors.html" role="menuitem">Investors</a>
+  <a href="research.html" role="menuitem">Research Hub</a>
+  <a href="ai-near-miss-doctrine.html" role="menuitem">AI Near-Miss Doctrine</a>
+  <span class="nav-section-label">Join &amp; Engage</span>
+  <a href="founding-commercial-leadership.html" role="menuitem">Join Us</a>
+  <a href="careers.html" role="menuitem">Careers</a>
+  <a href="partners.html" role="menuitem">Partners</a>
+  <a href="contact.html" class="nav-featured" role="menuitem">Contact</a>
+</div>
+</div>
+<!-- PARTIAL:nav-drop-root END -->
+
+<!-- PARTIAL:search-panel START -->
+<!-- Search panel: sticky top:70px, outside header flex context -->
+<div id="search-panel" role="search" aria-label="Site search" aria-hidden="true">
+  <div class="search-panel-inner">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="search" id="search-panel-input" placeholder="Search Pocono AI&hellip;" autocomplete="off" spellcheck="false" enterkeyhint="search" aria-label="Search site" aria-autocomplete="list" aria-controls="search-results-drop">
+    <button type="button" class="search-submit-btn" aria-label="Submit search">Search</button>
+    <button type="button" id="search-panel-close" aria-label="Close search">
+      <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="1" y1="1" x2="12" y2="12"/><line x1="12" y1="1" x2="1" y2="12"/></svg>
+    </button>
+    <div id="search-results-drop" role="listbox" aria-label="Search results"></div>
+  </div>
+</div>
+<!-- PARTIAL:search-panel END -->
+
+<!-- PARTIAL:mobile-nav START -->
+<!-- Mobile panel: full-screen slide-in -->
+<nav id="mobile-nav-panel" aria-label="Mobile navigation" aria-hidden="true">
+  <div class="mob-static-links"><a href="index.html">Home</a><a href="start-here.html" style="color:#00c2a8;font-weight:600;">Start Here</a><a href="executive-brief.html">Executive Brief</a><a href="liability-simulator.html">See It Run</a><a href="architecture.html">Architecture</a><a href="pricing.html">Pricing</a><a href="contact.html" style="color:#00c2a8;font-weight:600;">Contact</a></div>
+  <div class="mob-section">
+    <button type="button" class="mob-section-toggle" aria-expanded="false">Medical Practices
+      <svg class="mob-chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><polyline points="2,3 5,7 8,3"/></svg>
+    </button>
+    <div class="mob-section-links">
+      <a href="for-physicians.html" class="mob-featured">For Physicians &amp; Practices</a>
+      <a href="physicians-hub.html">Physician Knowledge Hub</a>
+      <a href="prior-auth-case-study.html">Prior Auth Use Case</a>
+      <a href="physicians-denials-appeals.html">Denials &amp; Appeals</a>
+      <a href="day-in-the-clinic.html">A Day in the Clinic</a>
+      <a href="nurses-ai-briefing.html">For Nursing Staff</a>
+      <a href="support-staff-clinic-workflows.html">For Clinic Support Staff</a>
+      <a href="works-with-your-clinic.html">Works With Your Clinic Systems</a>
+      <a href="patient-advocacy.html">Patient Safety</a>
+      <a href="ehr-burden-research.html">EHR Burden Research</a>
+    </div>
+  </div>
+  <div class="mob-section">
+    <button type="button" class="mob-section-toggle" aria-expanded="false">Law Firms
+      <svg class="mob-chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><polyline points="2,3 5,7 8,3"/></svg>
+    </button>
+    <div class="mob-section-links">
+      <a href="for-attorneys.html" class="mob-featured">For Attorneys</a>
+      <a href="law-firm-pilot.html">Law Firm Pilot Program</a>
+      <a href="day-in-a-law-firm.html">A Day Inside a Small Firm</a>
+      <a href="legal-workflows-by-practice.html">Workflows by Practice</a>
+      <a href="how-pocono-ai-fails-safely.html">How We Fail Safely</a>
+      <a href="before-after-small-firm.html">Before vs. After</a>
+      <a href="support-staff-workflows.html">For Paralegals &amp; Support Staff</a>
+      <a href="works-with-your-stack.html">Works With Your Stack</a>
+      <a href="legal-admin-burden.html">Legal Admin Burden</a>
+      <a href="paradox-automated-abandonment.html">Malpractice Analysis</a>
+    </div>
+  </div>
+  <div class="mob-section">
+    <button type="button" class="mob-section-toggle" aria-expanded="false">See It On Screen
+      <svg class="mob-chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><polyline points="2,3 5,7 8,3"/></svg>
+    </button>
+    <div class="mob-section-links">
+      <a href="governance-review.html" class="mob-featured">Governance Review</a>
+      <a href="governance-dashboard.html">Governance Dashboard</a>
+      <a href="local-vs-cloud.html">Local vs. Cloud</a>
+      <a href="day-in-the-clinic.html">Day in the Clinic</a>
+      <a href="workflow-demonstrations.html">Workflow Demonstrations</a>
+      <a href="pilot-workflow.html">Pilot Workflow</a>
+      <a href="operational-artifacts.html">Operational Artifacts</a>
+      <a href="deployment-topology.html">Deployment Topology</a>
+    </div>
+  </div>
+  <div class="mob-section">
+    <button type="button" class="mob-section-toggle" aria-expanded="false">IT &amp; Compliance
+      <svg class="mob-chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><polyline points="2,3 5,7 8,3"/></svg>
+    </button>
+    <div class="mob-section-links">
+      <a href="sentinel-audit-system.html" class="mob-featured">Audit System</a>
+      <a href="sentinel-specs.html">Sentinel Node Specs</a>
+      <a href="compliance.html">Compliance Attestation</a>
+      <a href="deployment.html">Deployment Timeline</a>
+      <a href="deployment-topology.html">Deployment Topology</a>
+      <a href="security.html">Security</a>
+    </div>
+  </div>
+  <div class="mob-section">
+    <button type="button" class="mob-section-toggle" aria-expanded="false">Engagement
+      <svg class="mob-chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><polyline points="2,3 5,7 8,3"/></svg>
+    </button>
+    <div class="mob-section-links">
+      <a href="what-happens-after-contact.html" class="mob-featured">What Happens After Contact</a>
+      <a href="clinical-collaboration-framework.html">Clinical Collaboration</a>
+      <a href="pilot-evidence-framework.html">Pilot Evidence Framework</a>
+      <a href="operational-impact-model.html">Operational Impact Model</a>
+      <a href="continuity-and-resilience.html">Continuity &amp; Resilience</a>
+      <a href="pilot-brief.html">Pilot Brief</a>
+      <a href="pilot-readiness-kit.html">Pilot Readiness Kit</a>
+      <a href="channel-partners.html">MSP / Channel Partners</a>
+      <a href="pricing.html">Pricing</a>
+    </div>
+  </div>
+  <div class="mob-section">
+    <button type="button" class="mob-section-toggle" aria-expanded="false">Company
+      <svg class="mob-chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><polyline points="2,3 5,7 8,3"/></svg>
+    </button>
+    <div class="mob-section-links">
+      <a href="about.html" class="mob-featured">About Pocono AI</a>
+      <a href="team.html">Team &amp; Leadership</a>
+      <a href="investors.html">Investors</a>
+      <a href="research.html">Research Hub</a>
+      <a href="ai-near-miss-doctrine.html">AI Near-Miss Doctrine</a>
+      <a href="founding-commercial-leadership.html">Join Us</a>
+      <a href="careers.html">Careers</a>
+      <a href="partners.html">Partners</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+  <div class="mob-section">
+    <button type="button" class="mob-section-toggle" aria-expanded="false">More
+      <svg class="mob-chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><polyline points="2,3 5,7 8,3"/></svg>
+    </button>
+    <div class="mob-section-links">
+      <a href="governance.html">AI Governance</a>
+      <a href="trust.html">Trust &amp; Claims</a>
+      <a href="regulated-ai-solutions.html">Regulated AI Solutions</a>
+      <a href="audit.html">Transparency Report</a>
+      <a href="sitemap.html">All Pages</a>
+    </div>
+  </div>
+  <a href="mailto:marcus@poconoai.com" class="mob-cta">Email Marcus: marcus@poconoai.com</a>
+</nav>
+<!-- PARTIAL:mobile-nav END -->

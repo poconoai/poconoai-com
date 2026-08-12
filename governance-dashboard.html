@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp -->
+<head>
+<meta charset="UTF-8"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0"><meta name="referrer" content="strict-origin-when-cross-origin"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Governance Dashboard Mockups — Sentinel Node | Pocono AI</title><meta name="description" content="Operational screen concepts for Sentinel Node: evidence review, draft status, human approval, audit envelope, and chain-of-custody views."><meta name="theme-color" content="#0B0F13"><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="alternate icon" href="favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="favicon-180x180.png">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="alternate icon" href="favicon.ico"><link rel="sitemap" type="application/xml" href="/sitemap.xml"><link rel="canonical" href="https://poconoai.com/governance-dashboard.html"><link rel="stylesheet" href="styles.css?v=402"><link rel="stylesheet" href="nav-v2026.css?v=402">
+<link rel="stylesheet" href="brand-v292.css?v=402">
+<meta property="og:title" content="Governance Dashboard Mockups — Sentinel Node | Pocono AI"><meta property="og:site_name" content="Pocono AI"><meta property="og:type" content="article"><meta property="og:description" content="Operational screen concepts for Sentinel Node: evidence review, draft status, human approval, audit envelope, and chain-of-custody views."><meta property="og:url" content="https://poconoai.com/governance-dashboard.html">
+<meta property="og:image" content="https://poconoai.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630"><meta name="twitter:card" content="summary">
+<meta name="twitter:description" content="Operational screen concepts for Sentinel Node: evidence review, draft status, human approval, audit envelope, and chain-of-custody views."><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"What governed AI looks like on screen.","description":"Operational screen concepts for Sentinel Node: evidence review, draft status, human approval, audit envelope, and chain-of-custody views.","publisher":{"@type":"Organization","name":"Pocono AI, LLC"},"datePublished":"2026-05-22","dateModified":"2026-05-22"}</script>
+<style>
+.page-wrap{max-width:1160px;margin:0 auto;padding:clamp(28px,4vw,60px) 24px}.hero{padding:40px 0 18px}.kicker{display:inline-flex;color:#2dd4bf;font-weight:900;letter-spacing:.14em;text-transform:uppercase;font-size:.78rem;margin-bottom:14px}.title{font-size:clamp(2.2rem,5vw,4.4rem);line-height:1.02;letter-spacing:-.04em;color:#fff;margin:0 0 18px}.lede{font-size:clamp(1.08rem,1.8vw,1.3rem);line-height:1.62;color:#b9d9ee;max-width:920px}.btnrow{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}.btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 18px;border-radius:999px;text-decoration:none;font-weight:850;border:1px solid rgba(45,212,191,.38);background:linear-gradient(135deg,rgba(45,212,191,.16),rgba(59,130,246,.12));color:#eaffff}.btn.secondary{background:rgba(15,23,42,.45);color:#9bdcff;border-color:rgba(148,163,184,.25)}.panel{border:1px solid rgba(45,212,191,.18);border-radius:28px;background:linear-gradient(145deg,rgba(5,22,34,.86),rgba(2,8,18,.92));box-shadow:0 24px 80px rgba(0,0,0,.34);padding:clamp(20px,3vw,34px);margin:26px 0;overflow:hidden}.panel h2{font-size:clamp(1.5rem,3vw,2.25rem);line-height:1.16;color:#fff;margin:0 0 12px}.panel p,.panel li{color:#9eb9cc;line-height:1.58}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:20px}.grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}.card{border:1px solid rgba(255,255,255,.11);background:rgba(15,23,42,.5);border-radius:22px;padding:18px}.card h3{margin:0 0 9px;color:#fff}.card b{color:#fff}.small{font-size:.92rem;color:#8fb1c7}.step{display:flex;gap:14px;align-items:flex-start}.num{flex:0 0 auto;width:34px;height:34px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;background:rgba(45,212,191,.14);border:1px solid rgba(45,212,191,.36);color:#8ff7e4;font-weight:900}.screen{border:1px solid rgba(45,212,191,.24);border-radius:24px;background:#06111d;box-shadow:inset 0 0 0 1px rgba(255,255,255,.04),0 24px 60px rgba(0,0,0,.38);padding:18px}.screenbar{display:flex;gap:7px;border-bottom:1px solid rgba(255,255,255,.08);padding-bottom:12px;margin-bottom:16px}.dot{width:10px;height:10px;border-radius:999px;background:#2dd4bf}.row{display:grid;grid-template-columns:1fr auto;gap:12px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);border-radius:14px;padding:12px;margin:10px 0;color:#cfefff}.tag{display:inline-flex;border:1px solid rgba(45,212,191,.3);color:#8ff7e4;border-radius:999px;padding:4px 9px;font-size:.75rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em}.warn{border-color:rgba(251,191,36,.35);color:#facc15}.danger{border-color:rgba(248,113,113,.35);color:#fca5a5}.callout{border:1px solid rgba(45,212,191,.34);background:rgba(45,212,191,.08);border-radius:22px;padding:18px;color:#c9f7f1;line-height:1.6;margin-top:20px}@media(max-width:900px){.grid,.grid.two{grid-template-columns:1fr}.page-wrap{padding-left:18px;padding-right:18px}}
+
+/* Additional styles for enhanced governance-dashboard */
+.status-bar{display:flex;align-items:center;gap:18px;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:10px 18px;margin-bottom:18px;font-size:.82rem;color:#7fb3cc;flex-wrap:wrap}
+.status-item{display:flex;align-items:center;gap:7px}
+.status-dot{width:8px;height:8px;border-radius:999px;background:#2dd4bf}
+.status-dot.warn{background:#facc15}
+.status-dot.danger{background:#f87171}
+.status-dot.ok{background:#4ade80}
+.evidence-row{display:grid;grid-template-columns:28px 1fr auto auto;align-items:center;gap:10px;border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.025);border-radius:12px;padding:10px 14px;margin:8px 0;font-size:.84rem}
+.evidence-row.accepted{border-color:rgba(45,212,191,.22)}
+.evidence-row.rejected{border-color:rgba(248,113,113,.15);opacity:.62}
+.ev-num{color:#2dd4bf;font-weight:900;font-size:.76rem;text-align:center}
+.ev-src{color:#c5dff0}
+.ev-conf{font-size:.75rem;color:#8fb1c7;text-align:right}
+.ev-status{}
+.draft-block{border:1px solid rgba(251,191,36,.28);background:rgba(251,191,36,.05);border-radius:18px;padding:16px;margin:14px 0}
+.draft-text{color:#e8d585;line-height:1.7;font-size:.9rem}
+.draft-text .cite{display:inline-block;background:rgba(45,212,191,.15);border:1px solid rgba(45,212,191,.3);color:#8ff7e4;border-radius:4px;font-size:.72rem;padding:1px 5px;font-weight:800;margin:0 2px;vertical-align:middle}
+.action-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.action-btn{display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border-radius:999px;font-size:.8rem;font-weight:800;cursor:default;border:1px solid}
+.action-btn.approve{background:rgba(74,222,128,.12);border-color:rgba(74,222,128,.35);color:#86efac}
+.action-btn.revise{background:rgba(251,191,36,.1);border-color:rgba(251,191,36,.32);color:#fde68a}
+.action-btn.reject{background:rgba(248,113,113,.1);border-color:rgba(248,113,113,.3);color:#fca5a5}
+.action-btn.escalate{background:rgba(168,85,247,.1);border-color:rgba(168,85,247,.28);color:#d8b4fe}
+.audit-row{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:start;border-bottom:1px solid rgba(255,255,255,.06);padding:10px 0;font-size:.83rem}
+.audit-time{color:#4a6a80;font-variant-numeric:tabular-nums;white-space:nowrap;min-width:54px}
+.audit-event{color:#b0cde0}
+.audit-actor{color:#2dd4bf;white-space:nowrap}
+.chain-row{display:flex;gap:0;align-items:stretch;margin:10px 0}
+.chain-step{flex:1;border:1px solid rgba(45,212,191,.18);border-right:none;background:rgba(15,23,42,.5);padding:12px;font-size:.8rem;position:relative}
+.chain-step:first-child{border-radius:14px 0 0 14px}
+.chain-step:last-child{border-right:1px solid rgba(45,212,191,.18);border-radius:0 14px 14px 0}
+.chain-step-label{color:#2dd4bf;font-weight:800;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
+.chain-step-val{color:#c5dff0}
+.chain-arrow{display:flex;align-items:center;color:#2dd4bf;font-size:1.1rem;padding:0 2px}
+.exception-row{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;border:1px solid rgba(251,191,36,.2);background:rgba(251,191,36,.04);border-radius:12px;padding:11px 14px;margin:8px 0;font-size:.83rem}
+.ex-icon{font-size:1.1rem}
+.ex-text{color:#e8d585}
+.ex-action{font-size:.76rem;color:#8fb1c7}
+.policy-fence{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
+.allowed{border:1px solid rgba(74,222,128,.25);background:rgba(74,222,128,.06);border-radius:16px;padding:14px}
+.allowed h4{color:#86efac;margin:0 0 10px;font-size:.9rem}
+.allowed li{color:#b6f5c8;font-size:.82rem;line-height:1.6}
+.blocked-zone{border:1px solid rgba(248,113,113,.25);background:rgba(248,113,113,.06);border-radius:16px;padding:14px}
+.blocked-zone h4{color:#fca5a5;margin:0 0 10px;font-size:.9rem}
+.blocked-zone li{color:#fed7d7;font-size:.82rem;line-height:1.6}
+.metric-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0}
+.metric{border:1px solid rgba(45,212,191,.15);background:rgba(15,23,42,.5);border-radius:18px;padding:14px;text-align:center}
+.metric-val{font-size:1.8rem;font-weight:900;color:#2dd4bf;line-height:1}
+.metric-label{font-size:.76rem;color:#7fb3cc;margin-top:5px;text-transform:uppercase;letter-spacing:.06em}
+.section-label{font-size:.72rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#2dd4bf;margin:22px 0 12px;border-bottom:1px solid rgba(45,212,191,.15);padding-bottom:6px}
+@media(max-width:700px){.metric-row{grid-template-columns:repeat(2,1fr)}.policy-fence{grid-template-columns:1fr}.chain-row{flex-direction:column}.chain-step{border-right:1px solid rgba(45,212,191,.18);border-bottom:none;border-radius:0}.chain-step:first-child{border-radius:14px 14px 0 0}.chain-step:last-child{border-radius:0 0 14px 14px}}
+</style>
+</head><body>
+<a href="#main" class="skip-link">Skip to content</a><div id="reading-progress" aria-hidden="true"></div>
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- INCLUDE:HEADER -->
+<div id="hitl-notice" style="background:#0a1929;padding:4px 16px;text-align:center;font-size:12px;color:#4a5568;border-bottom:1px solid rgba(255,255,255,0.06);letter-spacing:0.01em;">Human-in-the-Loop required: licensed professionals verify all outputs before clinical or legal action</div>
+<header role="banner">
+  <div class="header-inner">
+    <a href="/index.html" class="logo" aria-label="Pocono AI Home">
+      <img src="/logo.svg?v=402" alt="" width="36" height="36" decoding="async" loading="eager" aria-hidden="true" style="display:inline-block;">
+      Pocono <span>AI</span>
+    </a>
+    <nav id="desktop-nav" aria-label="Main navigation">
+      <div class="nav-item"><a href="/index.html" class="nav-direct">Home</a></div>
+      <div class="nav-item"><a href="/for-physicians.html" class="nav-direct">Physicians</a></div>
+      <div class="nav-item"><a href="/for-attorneys.html" class="nav-direct">Attorneys</a></div>
+      <div class="nav-item"><a href="/sentinel-node.html" class="nav-direct nav-hub" style="color:#d5a94f;border:1px solid rgba(213,169,79,0.45);border-radius:999px;padding:6px 13px;">Sentinel Node</a></div>
+      <div class="nav-item"><a href="/living-memorials/" class="nav-direct">Living Echo</a></div>
+      <div class="nav-item"><a href="/contact.html" class="nav-direct">Contact</a></div>
+      <div class="nav-item" data-dropdown="menu-more">
+        <button type="button" class="nav-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="menu-more">More <span class="nav-chevron" aria-hidden="true">&#9662;</span></button>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <a href="/contact.html#pilot" class="nav-cta nav-cta-primary">Request a Pilot</a>
+      <button type="button" class="pa-search-trigger" data-search-open aria-label="Search (press / or Ctrl-K)" aria-haspopup="dialog" aria-expanded="false">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span class="pa-st-label">Search</span><kbd data-pa-keyhint>Ctrl K</kbd>
+      </button>
+      <button type="button" class="header-icon-btn" id="mobile-menu" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav-panel">
+        <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- "More" overflow dropdown — sibling of <header> so position:fixed escapes header's stacking context. Wired by nav.js via data-dropdown="menu-more". -->
+<div class="nav-dropdown" id="menu-more" aria-label="More navigation">
+  <p class="nav-dd-section">Products</p>
+  <a href="/engineering-drafting/">Drafting &amp; Engineering Edition</a>
+  <a href="/sentinel-home/">Sentinel Home Edition</a>
+  <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability — Assistive Tools &#x2605;</a>
+  <a href="/living-memorials/enterprise-estate-continuity.html">Enterprise Estate Continuity</a>
+  <p class="nav-dd-section">Capabilities</p>
+  <a href="/evidence-room.html">Evidence Room</a>
+  <a href="/push-button-deliverables.html">Push-Button Deliverables</a>
+  <a href="/pilot-readiness-kit.html">Pilot Kit</a>
+  <a href="/pilot-program.html">Pilot Program</a>
+  <a href="/how-it-works.html">How It Works</a>
+  <p class="nav-dd-section">Hubs &amp; Company</p>
+  <a href="/training.html">Training Hub</a>
+  <a href="/documentation-hub/">Document Hub</a>
+  <a href="/global/">Global Hub</a>
+  <a href="/investors-hub.html">Investor Hub</a>
+  <a href="/valuation-dashboard.html">Valuation Dashboard</a>
+  <a href="/about.html">About</a>
+  <p class="nav-dd-section">Trust &amp; Legal</p>
+  <a href="/transparency.html">Transparency</a>
+  <a href="/audit.html">Audit Log</a>
+  <a href="/privacy.html">Privacy</a>
+  <a href="/sitemap.html">Sitemap</a>
+</div>
+<!-- Site search is provided by the self-contained search.js asset (command palette: / or Ctrl/Cmd-K). -->
+
+<!-- Mobile panel: full-screen slide-in. v396 nav — hub tiles + grouped links + Sentinel Node + Engineering. -->
+<nav id="mobile-nav-panel" aria-label="Mobile navigation" aria-hidden="true" role="dialog" aria-modal="true">
+
+  <!-- Hub tiles: Sentinel Node, Documentation Hub, Training Hub, Global Hub -->
+  <div style="padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,0.07);">
+    <p style="font-size:0.65em;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.28);margin:0 0 10px;padding:0 2px;">Hubs</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <a href="/sentinel-node.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(213,169,79,0.1);border:1px solid rgba(213,169,79,0.35);border-radius:10px;color:#d5a94f;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Sentinel Node</a>
+      <a href="/documentation-hub/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(0,194,168,0.1);border:1px solid rgba(0,194,168,0.35);border-radius:10px;color:#00c2a8;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Docs Hub</a>
+      <a href="/training.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.35);border-radius:10px;color:#a78bfa;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Training Hub</a>
+      <a href="/global/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(122,240,220,0.07);border:1px solid rgba(122,240,220,0.3);border-radius:10px;color:#7af0dc;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Global Hub</a>
+    </div>
+  </div>
+
+  <!-- Core paths -->
+  <div class="mob-static-links">
+    <a href="/index.html">Home</a>
+    <a href="/for-physicians.html">Physicians</a>
+    <a href="/for-attorneys.html">Attorneys</a>
+    <a href="/engineering-drafting/">Engineering &amp; Drafting</a>
+    <a href="/pilot-program.html">Pilot Program</a>
+    <a href="/how-it-works.html">How It Works</a>
+    <a href="/trust.html">Trust &amp; Audit</a>
+    <a href="/pricing.html">Pricing</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/living-memorials/">Living Echo</a>
+    <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability</a>
+    <a href="/about.html">About</a>
+    <a href="/team.html" style="color:rgba(255,255,255,0.6);">Team &amp; Leadership</a>
+    <a href="/valuation-dashboard.html" style="color:rgba(255,255,255,0.6);">Valuation Dashboard</a>
+    <a href="/careers.html" style="color:rgba(255,255,255,0.6);">Careers</a>
+    <a href="/sentinel-demo.html" style="color:rgba(255,255,255,0.6);">Demo</a>
+    <a href="/sitemap.html" style="color:rgba(255,255,255,0.45);">Sitemap</a>
+    <a href="/transparency.html" style="color:rgba(255,255,255,0.45);">Transparency</a>
+    <a href="/privacy.html" style="color:rgba(255,255,255,0.45);">Privacy</a>
+  </div>
+
+  <a href="/contact.html#pilot" class="mob-cta">Request a Pilot</a>
+</nav>
+<!-- /INCLUDE:HEADER -->
+
+
+<main id="main" class="page-wrap" tabindex="-1">
+
+<section class="hero">
+  <div class="sentinel-lockup" aria-label="Sentinel Node — Governance Dashboard">
+              <svg class="sentinel-lockup-mark" viewBox="0 0 64 64" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
+          <!-- v311b: rotated diamond + C-curve loop + summit dot. Inherits currentColor from CSS context. -->
+          <g transform="rotate(45 32 32)">
+            <rect x="12" y="12" width="40" height="40" rx="8" ry="8"/>
+            <path d="M43 22 L26 22 A6 6 0 0 0 20 28 L20 36 A6 6 0 0 0 26 42 L41 42"/>
+          </g>
+          <circle cx="32" cy="9" r="3" fill="currentColor" stroke="none"/>
+        </svg>
+              <div class="sentinel-lockup-rule"></div>
+              <div class="sentinel-lockup-text">
+                <span class="sentinel-lockup-name">Sentinel Node</span>
+                <span class="sentinel-lockup-tag">Governance UI Mockups</span>
+              </div>
+            </div>
+  <h1 class="title">What governed AI looks like on screen.</h1>
+  <p class="lede">Sentinel Node is easier to trust when the review state is visible. These screen concepts show the operating surface buyers should expect: retrieved evidence, draft status, citation gates, named reviewer action, chain-of-custody logging, and audit export. Every element is local. Nothing is silently finalized.</p>
+  <div class="btnrow">
+    <a class="btn" href="contact.html#pilot">Discuss a pilot</a>
+    <a class="btn secondary" href="sentinel-demo.html">See the live demo</a>
+    <a class="btn secondary" href="day-in-the-clinic.html">Day in the clinic</a>
+  </div>
+</section>
+
+<!-- SECTION 1: LIVE DASHBOARD OVERVIEW METRICS -->
+<section class="panel">
+  <h2>Dashboard: session at a glance.</h2>
+  <p>The top of every Sentinel Node session shows current operational state. No guessing whether the system is working. No hidden background inference.</p>
+  <div class="metric-row">
+    <div class="metric"><div class="metric-val">7</div><div class="metric-label">Evidence chunks retrieved</div></div>
+    <div class="metric"><div class="metric-val">4</div><div class="metric-label">Chunks accepted to draft</div></div>
+    <div class="metric"><div class="metric-val" style="color:#facc15">1</div><div class="metric-label">Exceptions flagged</div></div>
+    <div class="metric"><div class="metric-val" style="color:#f87171">0</div><div class="metric-label">Outputs finalized</div></div>
+  </div>
+  <div class="status-bar">
+    <div class="status-item"><span class="status-dot ok"></span> Corpus: local only</div>
+    <div class="status-item"><span class="status-dot ok"></span> Network: air-gapped confirmed</div>
+    <div class="status-item"><span class="status-dot warn"></span> Draft: pending review</div>
+    <div class="status-item"><span class="status-dot danger"></span> Human gate: not cleared</div>
+    <div class="status-item"><span class="status-dot ok"></span> Audit log: active</div>
+  </div>
+  <div class="callout">The status bar is not decorative. It reflects real system state at query time. A reviewer who sees "Human gate: not cleared" knows this draft is not ready for submission.</div>
+</section>
+
+<!-- SECTION 2: RETRIEVAL TRACE -->
+<section class="panel">
+  <h2>Retrieval trace: what the system found, and what it used.</h2>
+  <p>Before any draft is generated, Sentinel Node shows its evidence set. Each source is identified by document, chunk position, and retrieval confidence. The reviewer sees the evidence before the answer.</p>
+  <div class="screen">
+    <div class="screenbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span style="font-size:.8rem;color:#4a6a80;margin-left:8px">Retrieval Trace — Task: Prior Auth Support / Patient 4412-B</span></div>
+    <p class="section-label">Retrieved evidence — 7 items</p>
+    <div class="evidence-row accepted">
+      <span class="ev-num">1</span>
+      <span class="ev-src"><b>Payer Policy Manual</b> — Section 14.3: Prior Authorization Requirements for Imaging<br><span style="color:#4a6a80;font-size:.76rem">payer-policy-2025-Q4.pdf · chunk 47 · retrieved 09:14:02</span></span>
+      <span class="ev-conf">conf 0.91</span>
+      <span class="tag">Accepted</span>
+    </div>
+    <div class="evidence-row accepted">
+      <span class="ev-num">2</span>
+      <span class="ev-src"><b>Practice Protocol</b> — MRI ordering criteria, musculoskeletal<br><span style="color:#4a6a80;font-size:.76rem">practice-protocols-v12.pdf · chunk 8 · retrieved 09:14:02</span></span>
+      <span class="ev-conf">conf 0.87</span>
+      <span class="tag">Accepted</span>
+    </div>
+    <div class="evidence-row accepted">
+      <span class="ev-num">3</span>
+      <span class="ev-src"><b>Chart Export</b> — Clinical note 2025-11-03: imaging history, lumbar region<br><span style="color:#4a6a80;font-size:.76rem">ehr-export-4412B.pdf · chunk 3 · retrieved 09:14:03</span></span>
+      <span class="ev-conf">conf 0.84</span>
+      <span class="tag">Accepted</span>
+    </div>
+    <div class="evidence-row accepted">
+      <span class="ev-num">4</span>
+      <span class="ev-src"><b>Prior Auth Example</b> — Approved submission, similar diagnosis, Q3 2025<br><span style="color:#4a6a80;font-size:.76rem">approved-auths-archive.pdf · chunk 21 · retrieved 09:14:03</span></span>
+      <span class="ev-conf">conf 0.79</span>
+      <span class="tag">Accepted</span>
+    </div>
+    <div class="evidence-row rejected">
+      <span class="ev-num">5</span>
+      <span class="ev-src"><b>Payer Policy Manual</b> — Section 22.1: Radiology prior auth timelines<br><span style="color:#4a6a80;font-size:.76rem">payer-policy-2025-Q4.pdf · chunk 112 · retrieved 09:14:04</span></span>
+      <span class="ev-conf">conf 0.51</span>
+      <span class="tag warn">Below threshold</span>
+    </div>
+    <div class="evidence-row rejected">
+      <span class="ev-num">6</span>
+      <span class="ev-src"><b>Chart Export</b> — Medication reconciliation note<br><span style="color:#4a6a80;font-size:.76rem">ehr-export-4412B.pdf · chunk 9 · retrieved 09:14:04</span></span>
+      <span class="ev-conf">conf 0.43</span>
+      <span class="tag warn">Below threshold</span>
+    </div>
+    <div class="evidence-row rejected">
+      <span class="ev-num">7</span>
+      <span class="ev-src"><b>Practice Protocol</b> — General scheduling guidelines<br><span style="color:#4a6a80;font-size:.76rem">practice-protocols-v12.pdf · chunk 34 · retrieved 09:14:05</span></span>
+      <span class="ev-conf">conf 0.38</span>
+      <span class="tag warn">Below threshold</span>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:18px"><strong>What the reviewer knows before reading the draft:</strong> which documents were searched, which passed the confidence threshold, and which were excluded — all before a single word of the generated output is presented for action.</div>
+</section>
+
+<!-- SECTION 3: DRAFT WORKSPACE -->
+<section class="panel">
+  <h2>Draft workspace: cited, marked, and explicitly not final.</h2>
+  <p>The draft is presented as a controlled working document. Every material statement carries an inline citation badge linked to the retrieved evidence set. Unsupported claims cannot appear without flagging.</p>
+  <div class="screen">
+    <div class="screenbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span style="font-size:.8rem;color:#4a6a80;margin-left:8px">Draft Workspace — NOT FINAL — Human review required</span></div>
+    <div class="draft-block">
+      <p style="color:#facc15;font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;margin:0 0 12px">⚠ Draft — Not submitted — Not approved — Pending licensed reviewer</p>
+      <div class="draft-text">
+        <p>Patient 4412-B presents with a documented history of lumbar region imaging performed in Q4 2024 <span class="cite">src:3</span>, consistent with prior authorization eligibility criteria under Section 14.3 of the applicable payer policy <span class="cite">src:1</span>.</p>
+        <p style="margin-top:10px">The practice ordering criteria for musculoskeletal MRI have been met based on the clinical notes on file <span class="cite">src:2</span>. A comparable authorization was approved for a similar diagnostic profile in Q3 2025 <span class="cite">src:4</span>, which may be referenced as precedent during submission.</p>
+        <p style="margin-top:10px;color:#f87171;background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.2);border-radius:8px;padding:10px">⛔ <strong>Citation gap flagged:</strong> Claim about "no prior authorization denials" cannot be sourced from the current evidence set. This sentence has been withheld from the draft and flagged for reviewer resolution.</p>
+      </div>
+    </div>
+    <div class="action-row">
+      <span class="action-btn approve">✓ Approve and sign</span>
+      <span class="action-btn revise">✎ Revise draft</span>
+      <span class="action-btn reject">✕ Reject and restart</span>
+      <span class="action-btn escalate">↑ Escalate to physician</span>
+    </div>
+    <div style="margin-top:14px;font-size:.79rem;color:#4a6a80">Reviewer: [Licensed staff name] · Session: 2025-12-09 09:14 · No action recorded yet</div>
+  </div>
+  <div class="grid two" style="margin-top:18px">
+    <div class="card">
+      <h3>Citation gates</h3>
+      <p>Every material claim in the draft is mapped to a source. Claims without supporting evidence are blocked from the draft and placed in the exception queue. Reviewers see which claims passed and which were withheld.</p>
+    </div>
+    <div class="card">
+      <h3>Explicit draft status</h3>
+      <p>The system cannot finalize its own output. "Draft" is a system state, not a label. No submission-ready document can be produced without a named human reviewer clearing the human gate.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: EXCEPTION QUEUE -->
+<section class="panel">
+  <h2>Exception queue: problems the system surfaces, not hides.</h2>
+  <p>Rather than generating confident-sounding text when evidence is missing, Sentinel Node surfaces exceptions for staff resolution. The queue shows what needs attention before review can proceed.</p>
+  <div class="screen">
+    <div class="screenbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span style="font-size:.8rem;color:#4a6a80;margin-left:8px">Exception Queue — 3 items requiring resolution</span></div>
+    <div class="exception-row">
+      <span class="ex-icon">⚠</span>
+      <div>
+        <div class="ex-text"><b>Citation gap:</b> Claim about prior denial history cannot be sourced.</div>
+        <div class="ex-action">Resolution: staff to locate denial history or remove claim from draft.</div>
+      </div>
+      <span class="tag warn">Open</span>
+    </div>
+    <div class="exception-row">
+      <span class="ex-icon">📄</span>
+      <div>
+        <div class="ex-text"><b>Stale document:</b> payer-policy-2025-Q4.pdf — last indexed 47 days ago. Policy may have been updated.</div>
+        <div class="ex-action">Resolution: confirm current policy version or re-ingest updated document before submission.</div>
+      </div>
+      <span class="tag warn">Open</span>
+    </div>
+    <div class="exception-row" style="border-color:rgba(248,113,113,.2);background:rgba(248,113,113,.04)">
+      <span class="ex-icon">🔒</span>
+      <div>
+        <div class="ex-text"><b>Policy boundary:</b> Query contained language requesting a "definitive clinical recommendation." This output category is outside the appliance authorization scope.</div>
+        <div class="ex-action">Resolution: physician must provide independent clinical judgment. Draft shows evidence support only.</div>
+      </div>
+      <span class="tag danger">Blocked</span>
+    </div>
+  </div>
+  <div class="callout"><strong>Operational principle:</strong> an exception queue is not a failure state. It is the system working correctly. Surface uncertainty early; resolve it with humans before regulated output leaves the practice.</div>
+</section>
+
+<!-- SECTION 5: HUMAN GATE + AUDIT TRAIL -->
+<section class="panel">
+  <h2>Human gate and audit trail: every action is logged locally.</h2>
+  <p>Sentinel Node maintains a reviewable local audit trail. Every query, retrieval event, draft generation, reviewer action, and export is recorded in sequence — never sent to cloud logging services.</p>
+  <div class="grid two">
+    <div class="screen">
+      <div class="screenbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span style="font-size:.8rem;color:#4a6a80;margin-left:8px">Audit Log — Session 2025-12-09</span></div>
+      <div class="audit-row">
+        <span class="audit-time">09:14:01</span>
+        <span class="audit-event">Task opened: Prior Auth Support / Patient 4412-B</span>
+        <span class="audit-actor">J. Torres (staff)</span>
+      </div>
+      <div class="audit-row">
+        <span class="audit-time">09:14:02</span>
+        <span class="audit-event">Retrieval initiated — 3 corpora queried locally</span>
+        <span class="audit-actor">system</span>
+      </div>
+      <div class="audit-row">
+        <span class="audit-time">09:14:05</span>
+        <span class="audit-event">7 chunks retrieved — 4 accepted (conf ≥0.75) — 3 below threshold</span>
+        <span class="audit-actor">system</span>
+      </div>
+      <div class="audit-row">
+        <span class="audit-time">09:14:08</span>
+        <span class="audit-event">Draft generated — 1 citation gap flagged — draft held pending review</span>
+        <span class="audit-actor">system</span>
+      </div>
+      <div class="audit-row">
+        <span class="audit-time">09:19:44</span>
+        <span class="audit-event">Draft reviewed — exception acknowledged — citation gap note added</span>
+        <span class="audit-actor">M. Kim (RN)</span>
+      </div>
+      <div class="audit-row" style="border-bottom:none">
+        <span class="audit-time">09:22:17</span>
+        <span class="audit-event">Draft approved — signed — audit envelope exported to local record</span>
+        <span class="audit-actor">Dr. R. Patel</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>What the audit envelope contains</h3>
+      <ul>
+        <li>Original query text</li>
+        <li>Corpus list at time of retrieval</li>
+        <li>Full retrieval set with confidence scores</li>
+        <li>Draft as presented to reviewer</li>
+        <li>All exceptions flagged by system</li>
+        <li>Reviewer identity and action</li>
+        <li>Approval timestamp and final status</li>
+        <li>Export hash for integrity verification</li>
+      </ul>
+      <p class="small" style="margin-top:12px">The audit envelope is generated locally and stored in the practice's own record system. No telemetry leaves the appliance. The chain of custody is owned by the practice, not by Pocono AI.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 6: CHAIN OF CUSTODY -->
+<section class="panel">
+  <h2>Chain of custody: the full lifecycle in one view.</h2>
+  <p>Every output from Sentinel Node has a traceable chain: from query to retrieval, from retrieval to draft, from draft to reviewer decision, from decision to local archive. No step is invisible.</p>
+  <div class="chain-row">
+    <div class="chain-step">
+      <div class="chain-step-label">1 · Query</div>
+      <div class="chain-step-val">Staff submits scoped task</div>
+      <div class="ev-conf" style="margin-top:5px">09:14:01 · J. Torres</div>
+    </div>
+    <div class="chain-step">
+      <div class="chain-step-label">2 · Retrieval</div>
+      <div class="chain-step-val">Local corpus searched</div>
+      <div class="ev-conf" style="margin-top:5px">09:14:02–05 · system</div>
+    </div>
+    <div class="chain-step">
+      <div class="chain-step-label">3 · Draft</div>
+      <div class="chain-step-val">Cited, gated, flagged</div>
+      <div class="ev-conf" style="margin-top:5px">09:14:08 · system</div>
+    </div>
+    <div class="chain-step">
+      <div class="chain-step-label">4 · Review</div>
+      <div class="chain-step-val">Exception resolved</div>
+      <div class="ev-conf" style="margin-top:5px">09:19:44 · M. Kim RN</div>
+    </div>
+    <div class="chain-step">
+      <div class="chain-step-label">5 · Approval</div>
+      <div class="chain-step-val">Licensed sign-off</div>
+      <div class="ev-conf" style="margin-top:5px">09:22:17 · Dr. Patel</div>
+    </div>
+    <div class="chain-step" style="border-right:1px solid rgba(45,212,191,.18);border-radius:0 14px 14px 0">
+      <div class="chain-step-label">6 · Archive</div>
+      <div class="chain-step-val">Local envelope saved</div>
+      <div class="ev-conf" style="margin-top:5px">09:22:18 · local only</div>
+    </div>
+  </div>
+  <div class="callout"><strong>Admissibility note:</strong> the chain of custody record is generated entirely within the practice's own infrastructure. No external party has visibility into session content, and no external server is required for the audit record to exist.</div>
+</section>
+
+<!-- SECTION 7: POLICY BOUNDARY -->
+<section class="panel">
+  <h2>Policy boundary: what the appliance will and will not do.</h2>
+  <p>Sentinel Node operates within an explicit authorization scope. The interface surfaces this scope as a visible operational constraint — not fine print, not a disclaimer buried in documentation.</p>
+  <div class="policy-fence">
+    <div class="allowed">
+      <h4>✓ Within scope</h4>
+      <ul>
+        <li>Evidence retrieval from approved local corpora</li>
+        <li>Cited draft generation for human review</li>
+        <li>Prior authorization support documents</li>
+        <li>Denial response drafting</li>
+        <li>Policy and protocol lookup</li>
+        <li>Chart summary for staff use</li>
+        <li>Document gap identification</li>
+        <li>Audit envelope generation</li>
+      </ul>
+    </div>
+    <div class="blocked-zone">
+      <h4>⛔ Outside scope — system will not execute</h4>
+      <ul>
+        <li>Definitive clinical diagnosis</li>
+        <li>Autonomous submission to payers</li>
+        <li>Legal advice or opinion</li>
+        <li>Output generation without human gate</li>
+        <li>Retrieval from external or cloud sources</li>
+        <li>Patient communication drafting without physician review</li>
+        <li>Prescribing or treatment recommendations</li>
+        <li>Any output classified as regulatory submission</li>
+      </ul>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:18px"><strong>Design rationale:</strong> the boundary is not a liability hedge. It is an operational design choice. Buyers should be able to explain what the system does and does not do to their compliance officer, their malpractice carrier, and their patients. The boundary makes that possible.</div>
+</section>
+
+<!-- SECTION 8: APPROVAL STATES -->
+<section class="panel">
+  <h2>Approval state reference.</h2>
+  <p>Every draft in Sentinel Node carries a single current state. Reviewers always know where a work item stands.</p>
+  <div class="grid">
+    <div class="card">
+      <span class="tag warn">Draft</span>
+      <h3>Evidence gathered</h3>
+      <p>Generated content exists and is cited, but is explicitly not final. Staff can read, revise, or route for licensed review.</p>
+      <p class="small">Next action: route to reviewer</p>
+    </div>
+    <div class="card">
+      <span class="tag warn" style="border-color:rgba(251,191,36,.5)">Flagged</span>
+      <h3>Exception pending</h3>
+      <p>One or more citation gaps, stale documents, or policy boundary issues require staff resolution before review can proceed.</p>
+      <p class="small">Next action: resolve exceptions</p>
+    </div>
+    <div class="card">
+      <span class="tag danger">Blocked</span>
+      <h3>Citation gate failed</h3>
+      <p>A required claim has no supporting evidence. The output is withheld from the draft. Reviewer cannot approve without resolution.</p>
+      <p class="small">Next action: locate source or remove claim</p>
+    </div>
+    <div class="card">
+      <span class="tag" style="border-color:rgba(168,85,247,.35);color:#d8b4fe">Escalated</span>
+      <h3>Physician required</h3>
+      <p>Staff reviewer has determined the item requires licensed clinical judgment. Routed to physician queue without staff resolution.</p>
+      <p class="small">Next action: physician review</p>
+    </div>
+    <div class="card">
+      <span class="tag" style="border-color:rgba(74,222,128,.35);color:#86efac">Approved</span>
+      <h3>Human signed</h3>
+      <p>A named licensed professional has approved the draft. Approval is attributed, timestamped, and added to the local audit envelope.</p>
+      <p class="small">Next action: export / submit / file</p>
+    </div>
+    <div class="card">
+      <span class="tag danger">Rejected</span>
+      <h3>Not usable</h3>
+      <p>Reviewer has rejected the draft. Rejection reason is logged. A new task can be initiated with revised parameters or additional source documents.</p>
+      <p class="small">Next action: new task or corpus update</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="panel" style="text-align:center;padding:36px">
+  <h2 style="margin-bottom:12px">See this operating in a real pilot context.</h2>
+  <p style="color:#9eb9cc;max-width:680px;margin:0 auto 22px">These screen concepts are design-faithful representations of the Sentinel Node review interface. A pilot engagement includes access to the actual running system in a scoped deployment context.</p>
+  <div class="btnrow" style="justify-content:center">
+    <a class="btn" href="contact.html#pilot">Discuss a pilot</a>
+    <a class="btn secondary" href="day-in-the-clinic.html">Day in the clinic →</a>
+    <a class="btn secondary" href="sentinel-demo.html">Live RAG demo →</a>
+  </div>
+</section>
+
+</main>
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 root-relative nav fix, Living Echo rebrand, Engineering & Drafting + Enterprise Estate Continuity links added (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- INCLUDE:FOOTER -->
+<footer role="contentinfo" style="background:#051622;border-top:1px solid rgba(255,255,255,0.08);padding:40px 24px 28px;font-size:0.85em;color:#8899aa;">
+  <div style="max-width:1180px;margin:0 auto;">
+
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:0 0 28px;margin-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.07);">
+      <div style="max-width:560px;">
+        <p style="margin:0 0 6px;font-size:1.05em;font-weight:700;color:#fff;">Local AI infrastructure for regulated practices.</p>
+        <p style="margin:0;font-size:0.95em;line-height:1.5;">Drafts with citations. Human review required. Sensitive documents stay under practice control. Simple path, deep proof.</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="/contact.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;background:#00c2a8;color:#04111a;font-weight:700;text-decoration:none;font-size:0.95em;">Request Pilot</a>
+        <a href="/sentinel-demo.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;border:1px solid rgba(0,194,168,0.55);color:#00c2a8;font-weight:700;text-decoration:none;font-size:0.95em;">Watch Demo</a>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px 32px;margin-bottom:32px;text-align:left;">
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">For You</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/start-here.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Start Here (3 min)</a>
+          <a href="/for-physicians.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Physicians</a>
+          <a href="/for-attorneys.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Attorneys</a>
+          <a href="/engineering-drafting/" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Engineering &amp; Drafting Teams</a>
+          <a href="/pilot-program.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Pilot Program</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Installer Training</a>
+          <a href="/how-it-works.html" style="color:#8899aa;text-decoration:none;">How It Works</a>
+          <a href="/trust.html" style="color:#8899aa;text-decoration:none;">Trust &amp; Audit</a>
+          <a href="/pricing.html" style="color:#8899aa;text-decoration:none;">Pricing</a>
+          <a href="/sentinel-demo.html" style="color:#8899aa;text-decoration:none;">See the Demo</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Documentation Hub</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/documentation-hub/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Hub Home &mdash; Deep Proof</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">Installer Training</a>
+          <a href="/sentinel-node/installation-simulator.html" style="color:#8899aa;text-decoration:none;">&#8627; Installation Simulator</a>
+          <a href="/documentation-hub/clinical/" style="color:#8899aa;text-decoration:none;">Clinical Documentation</a>
+          <a href="/documentation-hub/legal/" style="color:#8899aa;text-decoration:none;">Legal Documentation</a>
+          <a href="/documentation-hub/technical/" style="color:#8899aa;text-decoration:none;">Technical Documentation</a>
+          <a href="/documentation-hub/governance/" style="color:#8899aa;text-decoration:none;">Governance &amp; Audit</a>
+          <a href="/documentation-hub/tools/" style="color:#8899aa;text-decoration:none;">Tools &amp; Simulators</a>
+          <a href="/documentation-hub/research/" style="color:#8899aa;text-decoration:none;">Research &amp; Essays</a>
+          <a href="/documentation-hub/transparency/" style="color:#8899aa;text-decoration:none;">Transparency</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Global Federated AI</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/global/" style="color:#7af0dc;text-decoration:none;font-weight:600;">Global Federated Hub</a>
+          <a href="/global/australia/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Australia</a>
+          <a href="/global/singapore/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Singapore</a>
+          <a href="/global/taiwan/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Taiwan</a>
+          <a href="/global/europe/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Europe</a>
+          <a href="/contact.html" style="color:#8899aa;text-decoration:none;">Partner Inquiry</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Company</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/about.html" style="color:#8899aa;text-decoration:none;">About Pocono AI</a>
+          <a href="/team.html" style="color:#8899aa;text-decoration:none;">Team &amp; Leadership</a>
+          <a href="/why-pocono-ai.html" style="color:#8899aa;text-decoration:none;">Why Pocono AI</a>
+          <a href="/founding-commercial-leadership.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Join Us</a>
+          <a href="/careers.html" style="color:#8899aa;text-decoration:none;">Careers</a>
+          <a href="/how-we-hire.html" style="color:#8899aa;text-decoration:none;">How We Hire</a>
+          <a href="/channel-partners.html" style="color:#8899aa;text-decoration:none;">Technical Partners (MSPs)</a>
+          <a href="/partners.html" style="color:#8899aa;text-decoration:none;">Academic Partnerships</a>
+          <a href="/contact.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Contact</a>
+          <a href="https://forms.gle/VQahnkjMfY6QNEMy8" target="_blank" rel="noopener noreferrer" style="color:#d5a94f;text-decoration:none;font-weight:600;">Interest List &#8599;</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Founder Projects</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/rehability/" style="color:#a78bfa;text-decoration:none;font-weight:700;">Rehability &#x2605;</a>
+          <a href="/rehability/marcus-memory-helper/" style="color:#a78bfa;text-decoration:none;font-weight:600;">&#8627; Marcus's Memory Helper</a>
+          <a href="/sentinel-home/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Sentinel Home Edition</a>
+          <a href="/living-memorials/" style="color:#8899aa;text-decoration:none;">Living Echo</a>
+          <a href="/living-memorials/marcus-odell/" style="color:#8899aa;text-decoration:none;">Marcus&rsquo;s Living Echo</a>
+          <a href="/living-memorials/enterprise-estate-continuity.html" style="color:#8899aa;text-decoration:none;">Enterprise Estate Continuity</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Resources &amp; Legal</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/sitemap.html" style="color:#8899aa;text-decoration:none;">All Pages (Sitemap)</a>
+          <a href="/audit.html" style="color:#8899aa;text-decoration:none;">Transparency &amp; Audit Log</a>
+          <a href="/maturity-disclosure.html" style="color:#8899aa;text-decoration:none;">What We Have / Don&rsquo;t Claim</a>
+          <a href="/plain.html" style="color:#8899aa;text-decoration:none;">Plain Language Guide</a>
+          <a href="/privacy.html" style="color:#8899aa;text-decoration:none;">Privacy</a>
+          <a href="/terms.html" style="color:#8899aa;text-decoration:none;">Terms</a>
+          <a href="/sla.html" style="color:#8899aa;text-decoration:none;">SLA</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:18px;margin-bottom:14px;">
+      <p style="margin:0;font-size:0.82em;line-height:1.6;color:#6f8295;max-width:1000px;">Pocono AI does not provide medical, legal, or engineering advice, does not practice medicine, law, or licensed engineering, and does not make clinical, legal, or engineering decisions. Outputs are drafts or support materials that require review by a qualified professional; final professional judgment remains with the licensed physician, attorney, or engineer. Tools and simulations on this site are educational and use synthetic data.</p>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:20px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+      <p style="margin:0;font-size:0.9em;">&copy; 2026 Pocono AI, LLC &nbsp;&#183;&nbsp; East Stroudsburg, PA &nbsp;&#183;&nbsp; <a href="mailto:marcus@poconoai.com" style="color:#8899aa;">marcus@poconoai.com</a> &nbsp;&#183;&nbsp; <a href="tel:+15705340602" style="color:#8899aa;">(570) 534-0602</a></p>
+      <p style="margin:0;font-size:0.88em;"><a href="/audit.html" style="color:#5dade2;text-decoration:none;">Transparency v402</a></p>
+    </div>
+  </div>
+</footer>
+<script src="/search.js?v=402" defer></script>
+<!-- /INCLUDE:FOOTER -->
+<script src="search-index.js?v=402" defer></script><script src="nav.js?v=402" defer></script><script src="pilot-cta.js?v=402" defer></script></body></html>

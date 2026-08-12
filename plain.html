@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="description" content="Pocono AI explained in plain language for investors, doctors, nurses, and lawyers. No jargon. No acronyms. Just what it does, how it works, and what it means...">
+    <meta name="keywords" content="AI explained simply, AI for investors, AI for doctors, AI for lawyers, plain language AI, no jargon AI, AI overview, on-premises AI, local AI, sovereign AI, zero cloud AI, HIPAA-governed AI environments, healthcare AI, legal AI, Sentinel Node, Pocono AI, data sovereignty, air-gapped AI, no cloud, EHR automation, RAG AI, independent medical practice AI, law firm AI">
+  <title>Pocono AI, in plain language | poconoai.com</title>
+      <meta property="og:title" content="Pocono AI, in Plain Language">
+    <meta property="og:description" content="What we sell, who buys it, how we make money, and what changes in your day. No jargon. No acronyms. Straight answers for investors, doctors, and lawyers.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://poconoai.com/plain.html">
+    <meta property="og:image" content="https://poconoai.com/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Pocono AI — Sovereign on-premises AI">
+    <meta property="og:site_name" content="Pocono AI">
+    <meta property="og:locale" content="en_US">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Pocono AI in Plain Language | No Jargon">
+    <meta name="twitter:description" content="What we sell, who buys it, how we make money, and what changes in your day. No jargon. Straight answers.">
+    <meta name="twitter:image" content="https://poconoai.com/og-image.jpg">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="favicon.ico">
+  <link rel="canonical" href="https://poconoai.com/plain.html"><link rel="stylesheet" href="styles.css?v=402">
+  <link rel="stylesheet" href="nav-v2026.css?v=402">
+<link rel="stylesheet" href="brand-v292.css?v=402">
+
+  <style>
+/* ═══════════════════════════════════════════════════════════
+   PLAIN.HTML v130 — INLINE STYLES
+   Fixes from v129 screenshot:
+   1. Two <header> tags → semantic conflict fixed (hero now <div>)
+   2. No solid bg on hero → content bleed-through fixed
+   3. No padding-top on #main-content for sticky 70px nav → fixed
+   4. SVG 740px wide → horizontal scroll on mobile → fixed with
+      dual-mode diagram (SVG desktop / stacked boxes mobile)
+   5. overflow:hidden on sections → stacking context issues → removed
+   6. Missing breakpoints 360/480/600/768 → all added
+   7. Jump nav wraps ugly on small screens → gap + font-size fixed
+   ═══════════════════════════════════════════════════════════ */
+
+:root {
+  --bg:        #051622;
+  --card:      #071d2e;
+  --border:    rgba(255,255,255,0.09);
+  --teal:      #188B96;
+  --blue:      #0A73D2;
+  --white:     #FFFFFF;
+  --lt:        rgba(208,221,230,0.82);
+  --muted:     rgba(208,221,230,0.40);
+  --gold:      #D4A853;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+/* Skip link */
+.skip-link {
+  position:absolute; top:-40px; left:0;
+  background:var(--teal); color:#fff;
+  padding:8px 16px; z-index:99999;
+  font-size:0.9em; text-decoration:none;
+}
+.skip-link:focus { top:0; }
+
+/* ── FIX 1: Push main below sticky 70px nav ─────────────────
+   styles.css gives main { padding:40px 10px }
+   We add padding-top:70px on top of that via !important      */
+#main-content {
+  padding-top: 70px !important;
+  background: var(--bg);
+}
+
+/* ── FIX 2: Override styles.css max-width on main ────────── */
+#main-content { max-width: none !important; }
+
+/* Page wrapper */
+.plain-wrap {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 0 20px 80px;
+}
+
+/* ── HERO (div, NOT header — page already has one header) ── */
+.plain-hero {
+  text-align: center;
+  padding: 52px 8px 40px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 44px;
+  background: var(--bg); /* SOLID: prevents scroll bleed-through */
+}
+
+.plain-eyebrow {
+  display: inline-block;
+  background: rgba(24,139,150,0.14);
+  border: 1px solid rgba(24,139,150,0.35);
+  color: var(--teal);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.70em;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.plain-hero h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(1.85em, 5.5vw, 2.9em);
+  font-weight: 800;
+  color: var(--white);
+  margin: 0 0 16px;
+  line-height: 1.15;
+}
+
+.plain-hero p {
+  font-size: clamp(0.93em, 2.4vw, 1.06em);
+  max-width: 540px;
+  margin: 0 auto 26px;
+  color: var(--lt);
+  line-height: 1.8;
+}
+
+/* Jump nav */
+.plain-jump {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  justify-content: center;
+}
+
+.plain-jump a {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.78em;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1.5px solid;
+  white-space: nowrap;
+  transition: opacity .18s, transform .15s;
+}
+.plain-jump a:hover { opacity:.82; transform:translateY(-1px); }
+
+.jmp-inv  { color:var(--gold);    border-color:var(--gold);    background:rgba(212,168,83,.10); }
+.jmp-doc  { color:var(--teal);    border-color:var(--teal);    background:rgba(24,139,150,.10); }
+.jmp-law  { color:var(--blue);    border-color:var(--blue);    background:rgba(10,115,210,.10); }
+.jmp-faq  { color:var(--muted);   border-color:var(--border);  background:transparent; }
+
+/* ── DIAGRAM ─────────────────────────────────────────────── */
+.diagram-wrap {
+  background: rgba(0,0,0,.26);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px 18px;
+  margin: 0 0 44px;
+  text-align: center;
+  overflow: hidden; /* stops SVG causing h-scroll */
+}
+
+.diagram-title {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.67em;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 22px;
+}
+
+.diag-svg {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Vertical mobile diagram — hidden on desktop */
+.diag-mob { display: none; }
+
+.dmb { background:var(--card); border:1px solid rgba(24,139,150,.35); border-radius:10px; padding:12px 16px; max-width:280px; margin:0 auto; text-align:left; }
+.dmb.del { border-color:rgba(239,68,68,.4); }
+.dmb-lbl { font-family:'DM Mono',monospace; font-size:.70em; font-weight:700; color:var(--teal); letter-spacing:.07em; margin-bottom:3px; }
+.dmb.del .dmb-lbl { color:#EF4444; }
+.dmb p { font-size:.81em; color:var(--lt); margin:0; line-height:1.55; }
+.darr { display:block; text-align:center; color:var(--teal); font-size:1.3em; margin:5px 0; }
+.diag-note { font-family:'DM Mono',monospace; font-size:.64em; color:rgba(239,68,68,.58); margin-top:16px; letter-spacing:.05em; }
+
+/* ── SECTION CARDS ──────────────────────────────────────────
+   SOLID background on every card — FIX for bleed-through.
+   border-top instead of ::before absolute — FIX for stacking.
+   NO overflow:hidden — that creates stacking contexts.        */
+.ps {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 36px 30px;
+  margin-bottom: 28px;
+  position: relative;
+}
+.ps.inv { border-top: 3px solid var(--gold); }
+.ps.doc { border-top: 3px solid var(--teal); }
+.ps.law { border-top: 3px solid var(--blue); }
+
+.ps-lbl {
+  font-family: 'DM Mono', monospace;
+  font-size: .67em;
+  letter-spacing: .17em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 10px;
+}
+.ps.inv .ps-lbl { color: var(--gold); }
+.ps.doc .ps-lbl { color: var(--teal); }
+.ps.law .ps-lbl { color: var(--blue); }
+
+.ps h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(1.2em, 3.5vw, 1.55em);
+  font-weight: 800;
+  color: var(--white);
+  margin: 0 0 20px;
+  border-bottom: none;
+  line-height: 1.25;
+}
+
+/* Q&A */
+.ql { list-style:none; margin:0; padding:0; }
+.ql li { padding:14px 0; border-bottom:1px solid var(--border); }
+.ql li:last-child { border-bottom:none; padding-bottom:0; }
+.qq { font-family:'Syne',sans-serif; font-weight:700; color:var(--white); font-size:.95em; margin-bottom:5px; display:block; }
+.qa { color:var(--lt); font-size:.93em; line-height:1.8; margin:0; }
+
+/* ── FAQ ─────────────────────────────────────────────────── */
+.faq-s { margin:44px 0 0; }
+.faq-s h2 {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  color: var(--white);
+  font-size: clamp(1.15em,3vw,1.4em);
+  margin-bottom: 22px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 13px;
+}
+
+details.fi {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--card); /* SOLID */
+  margin-bottom: 9px;
+}
+details.fi[open] { border-color:rgba(24,139,150,.4); }
+
+summary.fq {
+  cursor: pointer;
+  padding: 16px 17px;
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  color: var(--white);
+  font-size: .93em;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  user-select: none;
+  -webkit-user-select: none;
+  line-height: 1.4;
+  -webkit-tap-highlight-color: transparent;
+}
+summary.fq::-webkit-details-marker { display:none; }
+summary.fq::after {
+  content:'+';
+  font-family:'DM Mono',monospace;
+  font-size:1.15em;
+  color:var(--teal);
+  flex-shrink:0;
+  transition:transform .2s;
+  margin-top:-1px;
+}
+details.fi[open] summary.fq::after { transform:rotate(45deg); }
+
+.fb { padding:0 17px 15px; font-size:.92em; color:var(--lt); line-height:1.8; }
+.fb p { margin:0; }
+
+/* ── BOTTOM CTA ─────────────────────────────────────────── */
+.pcta {
+  margin-top: 44px;
+  text-align: center;
+  padding: 36px 18px;
+  background: rgba(24,139,150,.07);
+  border: 1px solid rgba(24,139,150,.25);
+  border-radius: 14px;
+}
+.pcta h2 {
+  font-family:'Syne',sans-serif; font-weight:800; color:var(--white);
+  font-size:clamp(1.15em,3.5vw,1.35em); margin:0 0 10px; border:none;
+}
+.pcta p { color:var(--lt); max-width:440px; margin:0 auto 20px; font-size:.94em; line-height:1.75; }
+
+.brow { display:flex; flex-wrap:wrap; gap:9px; justify-content:center; }
+
+.bp {
+  display:inline-block; background:var(--teal); color:#fff;
+  font-family:'DM Mono',monospace; font-weight:700; font-size:.84em;
+  padding:12px 22px; border-radius:6px; text-decoration:none;
+  white-space:nowrap; transition:opacity .18s;
+}
+.bp:hover { opacity:.84; }
+
+.bg {
+  display:inline-block;
+  border:1.5px solid rgba(255,255,255,.22); color:var(--lt);
+  font-family:'DM Mono',monospace; font-size:.84em;
+  padding:11px 20px; border-radius:6px; text-decoration:none;
+  white-space:nowrap; transition:border-color .18s,color .18s;
+}
+.bg:hover { border-color:var(--white); color:var(--white); }
+
+/* Back link */
+.back-home {
+  display:block; text-align:center; margin-top:40px;
+  color:var(--muted); font-family:'DM Mono',monospace;
+  font-size:.79em; text-decoration:none; letter-spacing:.08em;
+  transition:color .18s;
+}
+.back-home:hover { color:var(--white); }
+
+/* ═══ RESPONSIVE ═══════════════════════════════════════════ */
+
+@media (max-width:768px) {
+  .plain-wrap { padding:0 15px 60px; }
+  .ps { padding:28px 20px; }
+  .plain-hero { padding:40px 4px 34px; }
+}
+
+@media (max-width:600px) {
+  .diag-svg { display:none; }   /* hide SVG, show stacked boxes */
+  .diag-mob { display:block; }
+
+  .plain-wrap { padding:0 13px 52px; }
+  .ps { padding:22px 15px; border-radius:10px; }
+  .ps h2 { font-size:1.15em; }
+  .plain-hero { padding:34px 2px 28px; margin-bottom:28px; }
+  .plain-hero h1 { font-size:1.7em; }
+  .plain-eyebrow { font-size:.65em; letter-spacing:.10em; }
+  .qa { font-size:.91em; }
+  .fb { font-size:.91em; }
+  .diagram-wrap { padding:22px 12px; }
+}
+
+@media (max-width:380px) {
+  .plain-hero h1 { font-size:1.5em; }
+  .plain-jump { gap:7px; }
+  .plain-jump a { font-size:.72em; padding:7px 11px; }
+  .ps h2 { font-size:1.08em; }
+  .brow { flex-direction:column; align-items:center; }
+  .bp, .bg { width:100%; max-width:260px; text-align:center; }
+}
+  </style>
+<script>
+// Pocono AI v169 — Zero-flash banner dismissal.
+// Strategy: inject <style> tag synchronously BEFORE banner HTML parses,
+// so dismissed banners never render at all (no flash). DOM removal still
+// happens for safety. ?showbanners=1 URL param re-shows everything.
+(function(){
+  var ids=[];
+
+  // Escape hatch: ?showbanners=1 clears all dismiss flags for testing
+  try {
+    if (location.search.indexOf('showbanners=1') !== -1) {
+      ids.forEach(function(id){ localStorage.removeItem('pai_dismissed_'+id); });
+      localStorage.removeItem('poconoPilot');
+      localStorage.removeItem('advisoryBarDismissed');
+    }
+  } catch(e) {}
+
+  // v246 Stage 1 — Legacy migration block removed.
+  // Was dead code containing a JS syntax error (adjacent string literals)
+  // that broke the entire banner-dismiss IIFE on ~46 pages.
+
+  // Build CSS rule list for dismissed banners and inject synchronously.
+  // This runs in <head> BEFORE banner HTML is parsed, so dismissed bars
+  // never paint — eliminating the flash entirely.
+  var hideRules = [];
+  ids.forEach(function(id){
+    try {
+      if (localStorage.getItem('pai_dismissed_'+id) === '1') {
+        hideRules.push('#'+id+'{display:none !important;}');
+      }
+    } catch(e) {}
+  });
+  if (hideRules.length) {
+    var style = document.createElement('style');
+    style.id = 'pai-banner-hide';
+    style.textContent = hideRules.join('');
+    (document.head || document.documentElement).appendChild(style);
+  }
+
+  function dismiss(id){
+    try { localStorage.setItem('pai_dismissed_'+id,'1'); } catch(e) {}
+    var el = document.getElementById(id);
+    if (el) {
+      el.style.setProperty('display','none','important');
+      el.setAttribute('aria-hidden','true');
+      if (el.parentNode) {
+        el.parentNode.removeChild(el);
+      }
+    }
+  }
+
+  // Cleanup pass — remove dismissed banners from DOM after parse,
+  // belt-and-suspenders alongside the CSS hide.
+  function cleanup(){
+    ids.forEach(function(id){
+      try {
+        if (localStorage.getItem('pai_dismissed_'+id) === '1') {
+          var el = document.getElementById(id);
+          if (el && el.parentNode) {
+            el.parentNode.removeChild(el);
+          }
+        }
+      } catch(e) {}
+    });
+  }
+
+  function bind(){
+    ids.forEach(function(id){
+      var btn = document.getElementById(id+'-close');
+      if (btn && !btn.dataset.boundDismiss) {
+        btn.dataset.boundDismiss = '1';
+        btn.addEventListener('click', function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          dismiss(id);
+        });
+        btn.addEventListener('touchend', function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          dismiss(id);
+        }, {passive:false});
+      }
+    });
+    cleanup();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bind);
+  } else {
+    bind();
+  }
+})();
+</script>
+</head>
+<body>
+<div id="hitl-notice" style="background:#0a1929;padding:4px 16px;text-align:center;font-size:12px;color:#4a5568;border-bottom:1px solid rgba(255,255,255,0.06);letter-spacing:0.01em;">Human-in-the-Loop required: licensed professionals verify all outputs before clinical or legal action</div>
+<a href="#main" class="skip-link">Skip to content</a>
+<div id="reading-progress" aria-hidden="true"></div>
+
+<!-- PARTIAL:header START -->
+<header role="banner">
+  <div class="header-inner">
+    <a href="index.html" class="logo" aria-label="Pocono AI Home">
+      <img src="logo.svg?v=402" alt="" width="36" height="36" decoding="async" loading="eager" aria-hidden="true" style="display:inline-block;">
+      Pocono <span>AI</span>
+    </a>
+    <nav id="desktop-nav" aria-label="Main navigation">
+      <div class="nav-item"><a href="/index.html" class="nav-direct">Home</a></div>
+      <div class="nav-item"><a href="/for-physicians.html" class="nav-direct">Physicians</a></div>
+      <div class="nav-item"><a href="/for-attorneys.html" class="nav-direct">Attorneys</a></div>
+      <div class="nav-item"><a href="/sentinel-node.html" class="nav-direct nav-hub" style="color:#d5a94f;border:1px solid rgba(213,169,79,0.45);border-radius:999px;padding:6px 13px;">Sentinel Node</a></div>
+      <div class="nav-item"><a href="/living-memorials/" class="nav-direct">Living Echo</a></div>
+      <div class="nav-item"><a href="/contact.html" class="nav-direct">Contact</a></div>
+      <div class="nav-item" data-dropdown="menu-more">
+        <button type="button" class="nav-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="menu-more">More <span class="nav-chevron" aria-hidden="true">&#9662;</span></button>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <button type="button" class="header-icon-btn" id="search-icon-btn" aria-label="Open search" aria-expanded="false" aria-controls="search-panel">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+      <button type="button" class="header-icon-btn" id="mobile-menu" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav-panel">
+        <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- v399 "More" overflow dropdown (sibling of header) -->
+<div class="nav-dropdown" id="menu-more" aria-label="More navigation">
+  <p class="nav-dd-section">Products</p>
+  <a href="/engineering-drafting/">Drafting &amp; Engineering Edition</a>
+  <a href="/sentinel-home/">Sentinel Home Edition</a>
+  <a href="/living-memorials/enterprise-estate-continuity.html">Enterprise Estate Continuity</a>
+  <p class="nav-dd-section">Capabilities</p>
+  <a href="/evidence-room.html">Evidence Room</a>
+  <a href="/push-button-deliverables.html">Push-Button Deliverables</a>
+  <a href="/pilot-readiness-kit.html">Pilot Kit</a>
+  <a href="/pilot-program.html">Pilot Program</a>
+  <a href="/how-it-works.html">How It Works</a>
+  <p class="nav-dd-section">Hubs &amp; Company</p>
+  <a href="/training.html">Training Hub</a>
+  <a href="/documentation-hub/">Document Hub</a>
+  <a href="/global/">Global Hub</a>
+  <a href="/about.html">About</a>
+  <p class="nav-dd-section">Trust &amp; Legal</p>
+  <a href="/transparency.html">Transparency</a>
+  <a href="/audit.html">Audit Log</a>
+  <a href="/privacy.html">Privacy</a>
+  <a href="/sitemap.html">Sitemap</a>
+</div>
+
+<!-- PARTIAL:header END -->
+
+<!-- PARTIAL:nav-drop-root START -->
+<div id="nav-drop-root">
+<div id="menu-practice" class="nav-dropdown" role="menu" aria-label="For Your Practice">
+  <span class="nav-section-label">Medical Practices</span>
+  <a href="for-physicians.html" class="nav-featured" role="menuitem">For Physicians &amp; Practices</a>
+  <a href="physicians-hub.html" role="menuitem">Physician Knowledge Hub</a>
+  <a href="prior-auth-case-study.html" role="menuitem">Prior Auth Use Case</a>
+  <a href="physicians-denials-appeals.html" role="menuitem">Denials &amp; Appeals</a>
+  <a href="day-in-the-clinic.html" role="menuitem">A Day in the Clinic</a>
+  <a href="nurses-ai-briefing.html" role="menuitem">For Nursing Staff</a>
+  <a href="support-staff-clinic-workflows.html" role="menuitem">For Clinic Support Staff</a>
+  <a href="works-with-your-clinic.html" role="menuitem">Works With Your Clinic Systems</a>
+  <span class="nav-section-label">Law Firms</span>
+  <a href="for-attorneys.html" role="menuitem">For Attorneys</a>
+  <a href="law-firm-pilot.html" role="menuitem">Law Firm Pilot Program</a>
+  <a href="day-in-a-law-firm.html" role="menuitem">A Day Inside a Small Firm</a>
+  <a href="legal-workflows-by-practice.html" role="menuitem">Workflows by Practice</a>
+  <a href="how-pocono-ai-fails-safely.html" role="menuitem">How We Fail Safely</a>
+  <a href="before-after-small-firm.html" role="menuitem">Before vs. After</a>
+  <a href="support-staff-workflows.html" role="menuitem">For Paralegals &amp; Support Staff</a>
+  <a href="works-with-your-stack.html" role="menuitem">Works With Your Stack</a>
+  <span class="nav-section-label">See It On Screen</span>
+  <a href="governance-review.html" class="nav-featured" role="menuitem">Governance Review</a>
+  <a href="governance-dashboard.html" role="menuitem">Governance Dashboard</a>
+  <a href="local-vs-cloud.html" role="menuitem">Local vs. Cloud</a>
+  <a href="day-in-the-clinic.html" role="menuitem">Day in the Clinic</a>
+  <a href="workflow-demonstrations.html" role="menuitem">Workflow Demonstrations</a>
+  <a href="pilot-workflow.html" role="menuitem">Pilot Workflow</a>
+  <a href="deployment-topology.html" role="menuitem">Deployment Topology</a>
+  <span class="nav-section-label">IT &amp; Compliance</span>
+  <a href="sentinel-audit-system.html" role="menuitem">Audit System</a>
+  <a href="sentinel-specs.html" role="menuitem">Sentinel Node Specs</a>
+  <a href="deployment-topology.html" role="menuitem">Deployment Topology</a>
+  <a href="compliance.html" role="menuitem">Compliance Attestation</a>
+  <span class="nav-section-label">Solutions by Use Case</span>
+  <a href="regulated-ai-solutions.html" class="nav-featured" role="menuitem">Regulated AI Solutions</a>
+  <span class="nav-section-label">Engagement</span>
+  <a href="what-happens-after-contact.html" role="menuitem">What Happens After Contact</a>
+  <a href="clinical-collaboration-framework.html" role="menuitem">Clinical Collaboration</a>
+  <a href="pilot-evidence-framework.html" role="menuitem">Pilot Evidence Framework</a>
+  <a href="operational-impact-model.html" role="menuitem">Operational Impact Model</a>
+  <a href="continuity-and-resilience.html" role="menuitem">Continuity &amp; Resilience</a>
+  <a href="pilot-brief.html" role="menuitem">Pilot Brief</a>
+  <a href="pilot-readiness-kit.html" role="menuitem">Pilot Readiness Kit</a>
+  <a href="channel-partners.html" role="menuitem">MSP / Channel Partners</a>
+</div>
+<div id="menu-company" class="nav-dropdown" role="menu" aria-label="Company">
+  <span class="nav-section-label">Company</span>
+  <a href="about.html" class="nav-featured" role="menuitem">About Pocono AI</a>
+  <a href="team.html" role="menuitem">Team &amp; Leadership</a>
+  <a href="investors.html" role="menuitem">Investors</a>
+  <a href="research.html" role="menuitem">Research Hub</a>
+  <a href="ai-near-miss-doctrine.html" role="menuitem">AI Near-Miss Doctrine</a>
+  <span class="nav-section-label">Join &amp; Engage</span>
+  <a href="founding-commercial-leadership.html" role="menuitem">Join Us</a>
+  <a href="careers.html" role="menuitem">Careers</a>
+  <a href="partners.html" role="menuitem">Partners</a>
+  <a href="contact.html" class="nav-featured" role="menuitem">Contact</a>
+</div>
+</div>
+<!-- PARTIAL:nav-drop-root END -->
+
+<!-- PARTIAL:search-panel START -->
+<!-- Search panel: sticky top:70px, outside header flex context -->
+<div id="search-panel" role="search" aria-label="Site search" aria-hidden="true">
+  <div class="search-panel-inner">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="search" id="search-panel-input" placeholder="Search Pocono AI&hellip;" autocomplete="off" spellcheck="false" enterkeyhint="search" aria-label="Search site" aria-autocomplete="list" aria-controls="search-results-drop">
+    <button type="button" class="search-submit-btn" aria-label="Submit search">Search</button>
+    <button type="button" id="search-panel-close" aria-label="Close search">
+      <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="1" y1="1" x2="12" y2="12"/><line x1="12" y1="1" x2="1" y2="12"/></svg>
+    </button>
+    <div id="search-results-drop" role="listbox" aria-label="Search results"></div>
+  </div>
+</div>
+<!-- PARTIAL:search-panel END -->
+
+<!-- PARTIAL:mobile-nav START -->
+<!-- Mobile panel: full-screen slide-in -->
+<nav id="mobile-nav-panel" aria-label="Mobile navigation" aria-hidden="true">
+  <div class="mob-static-links"><a href="index.html">Home</a><a href="start-here.html" style="color:#00c2a8;font-weight:600;">Start Here</a><a href="executive-brief.html">Executive Brief</a><a href="liability-simulator.html">See It Run</a><a href="architecture.html">Architecture</a><a href="pricing.html">Pricing</a><a href="contact.html" style="color:#00c2a8;font-weight:600;">Contact</a></div>
+  <div class="mob-section">
+    <button type="button" class="mob-section-toggle" aria-expanded="false">Medical Practices
+      <svg class="mob-chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><polyline points="2,3 5,7 8,3"/></svg>
+    </button>
+    <div class="mob-section-links">
+      <a href="for-physicians.html" class="mob-featured">For Physicians &amp; Practices</a>
+      <a href="physicians-hub.html">Physician Knowledge Hub</a>
+      <a href="prior-auth-case-study.html">Prior Auth Use Case</a>
+      <a href="physicians-denials-appeals.html">Denials &amp; Appeals</a>
+      <a href="day-in-the-clinic.html">A Day in the Clinic</a>
+      <a href="nurses-ai-briefing.html">For Nursing Staff</a>
+      <a href="support-staff-clinic-workflows.html">For Clinic Support Staff</a>
+      <a href="works-with-your-clinic.html">Works With Your Clinic Systems</a>
+      <a href="patient-advocacy.html">Patient Safety</a>
+      <a href="ehr-burden-research.html">EHR Burden Research</a>
+    </div>
+  </div>
+  <div class="mob-section">
+    <button type="button" class="mob-section-toggle" aria-expanded="false">Law Firms
+      <svg class="mob-chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><polyline points="2,3 5,7 8,3"/></svg>
+    </button>
+    <div class="mob-section-links">
+      <a href="for-attorneys.html" class="mob-featured">For Attorneys</a>
+      <a href="law-firm-pilot.html">Law Firm Pilot Program</a>
+      <a href="day-in-a-law-firm.html">A Day Inside a Small Firm</a>
+      <a href="legal-workflows-by-practice.html">Workflows by Practice</a>
+      <a href="how-pocono-ai-fails-safely.html">How We Fail Safely</a>
+      <a href="before-after-small-firm.html">Before vs. After</a>
+      <a href="support-staff-workflows.html">For Paralegals &amp; Support Staff</a>
+      <a href="works-with-your-stack.html">Works With Your Stack</a>
+      <a href="legal-admin-burden.html">Legal Admin Burden</a>
+      <a href="paradox-automated-abandonment.html">Malpractice Analysis</a>
+    </div>
+  </div>
+  <div class="mob-section">
+    <button type="button" class="mob-section-toggle" aria-expanded="false">See It On Screen
+      <svg class="mob-chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><polyline points="2,3 5,7 8,3"/></svg>
+    </button>
+    <div class="mob-section-links">
+      <a href="governance-review.html" class="mob-featured">Governance Review</a>
+      <a href="governance-dashboard.html">Governance Dashboard</a>
+      <a href="local-vs-cloud.html">Local vs. Cloud</a>
+      <a href="day-in-the-clinic.html">Day in the Clinic</a>
+      <a href="workflow-demonstrations.html">Workflow Demonstrations</a>
+      <a href="pilot-workflow.html">Pilot Workflow</a>
+      <a href="operational-artifacts.html">Operational Artifacts</a>
+      <a href="deployment-topology.html">Deployment Topology</a>
+    </div>
+  </div>
+  <div class="mob-section">
+    <button type="button" class="mob-section-toggle" aria-expanded="false">IT &amp; Compliance
+      <svg class="mob-chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><polyline points="2,3 5,7 8,3"/></svg>
+    </button>
+    <div class="mob-section-links">
+      <a href="sentinel-audit-system.html" class="mob-featured">Audit System</a>
+      <a href="sentinel-specs.html">Sentinel Node Specs</a>
+      <a href="compliance.html">Compliance Attestation</a>
+      <a href="deployment.html">Deployment Timeline</a>
+      <a href="deployment-topology.html">Deployment Topology</a>
+      <a href="security.html">Security</a>
+    </div>
+  </div>
+  <div class="mob-section">
+    <button type="button" class="mob-section-toggle" aria-expanded="false">Engagement
+      <svg class="mob-chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><polyline points="2,3 5,7 8,3"/></svg>
+    </button>
+    <div class="mob-section-links">
+      <a href="what-happens-after-contact.html" class="mob-featured">What Happens After Contact</a>
+      <a href="clinical-collaboration-framework.html">Clinical Collaboration</a>
+      <a href="pilot-evidence-framework.html">Pilot Evidence Framework</a>
+      <a href="operational-impact-model.html">Operational Impact Model</a>
+      <a href="continuity-and-resilience.html">Continuity &amp; Resilience</a>
+      <a href="pilot-brief.html">Pilot Brief</a>
+      <a href="pilot-readiness-kit.html">Pilot Readiness Kit</a>
+      <a href="channel-partners.html">MSP / Channel Partners</a>
+      <a href="pricing.html">Pricing</a>
+    </div>
+  </div>
+  <div class="mob-section">
+    <button type="button" class="mob-section-toggle" aria-expanded="false">Company
+      <svg class="mob-chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><polyline points="2,3 5,7 8,3"/></svg>
+    </button>
+    <div class="mob-section-links">
+      <a href="about.html" class="mob-featured">About Pocono AI</a>
+      <a href="team.html">Team &amp; Leadership</a>
+      <a href="investors.html">Investors</a>
+      <a href="research.html">Research Hub</a>
+      <a href="ai-near-miss-doctrine.html">AI Near-Miss Doctrine</a>
+      <a href="founding-commercial-leadership.html">Join Us</a>
+      <a href="careers.html">Careers</a>
+      <a href="partners.html">Partners</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+  <div class="mob-section">
+    <button type="button" class="mob-section-toggle" aria-expanded="false">More
+      <svg class="mob-chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><polyline points="2,3 5,7 8,3"/></svg>
+    </button>
+    <div class="mob-section-links">
+      <a href="governance.html">AI Governance</a>
+      <a href="trust.html">Trust &amp; Claims</a>
+      <a href="regulated-ai-solutions.html">Regulated AI Solutions</a>
+      <a href="audit.html">Transparency Report</a>
+      <a href="sitemap.html">All Pages</a>
+    </div>
+  </div>
+  <a href="mailto:marcus@poconoai.com" class="mob-cta">Email Marcus: marcus@poconoai.com</a>
+</nav>
+<!-- PARTIAL:mobile-nav END -->
+
+
+<main id="main-content" tabindex="-1" role="main">
+<span id="main" aria-hidden="true"></span>
+<div class="plain-wrap">
+
+  <!-- ── HERO (div, not header) ── -->
+  <div class="plain-hero" aria-labelledby="ph1">
+    <span class="plain-eyebrow" aria-hidden="true">No jargon &middot; No acronyms &middot; Just the facts</span>
+    <div class="sentinel-lockup" aria-label="Sentinel Node — Plain Text Brief" style="margin-bottom:18px;">
+  <svg class="sentinel-lockup-mark" viewBox="0 0 64 64" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
+          <!-- v311b: rotated diamond + C-curve loop + summit dot. Inherits currentColor from CSS context. -->
+          <g transform="rotate(45 32 32)">
+            <rect x="12" y="12" width="40" height="40" rx="8" ry="8"/>
+            <path d="M43 22 L26 22 A6 6 0 0 0 20 28 L20 36 A6 6 0 0 0 26 42 L41 42"/>
+          </g>
+          <circle cx="32" cy="9" r="3" fill="currentColor" stroke="none"/>
+        </svg>
+  <div class="sentinel-lockup-rule"></div>
+  <div class="sentinel-lockup-text">
+    <span class="sentinel-lockup-name">Sentinel Node</span>
+    <span class="sentinel-lockup-tag">Plain Text Brief</span>
+  </div>
+</div>
+<h1 id="ph1">Pocono AI, in plain language</h1>
+    <p>This page explains what we do, who buys it, how it works, and why it matters &mdash; for investors, doctors, nurses, and lawyers who need straight answers, not sales copy.</p>
+    <nav class="plain-jump" aria-label="Jump to your section">
+      <a href="#investors" class="jmp-inv">For Investors</a>
+      <a href="#clinicians" class="jmp-doc">For Doctors &amp; Nurses</a>
+      <a href="#lawyers" class="jmp-law">For Lawyers</a>
+      <a href="#faq" class="jmp-faq">FAQ</a>
+    </nav>
+  </div>
+
+  <!-- ── DIAGRAM ── -->
+  <div class="diagram-wrap" aria-label="How the Sentinel Node processes data without any data leaving your building">
+    <p class="diagram-title">How your data flows &mdash; or rather, how it doesn&rsquo;t leave</p>
+
+    <!-- Desktop SVG (hidden below 600px via CSS) -->
+    <svg class="diag-svg" viewBox="0 0 700 122" xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="Four steps left to right: EHR files go to Watch Folder, Sentinel Node processes locally on-premises, then source file is deleted. No cloud anywhere.">
+      <title>Data flow: EHR to Watch Folder to Sentinel Node to Delete. No cloud, no internet.</title>
+      <rect x="2" y="16" width="148" height="88" rx="9" fill="#071d2e" stroke="rgba(24,139,150,0.5)" stroke-width="1.5"/>
+      <text x="76" y="47" text-anchor="middle" font-family="monospace" font-size="10.5" fill="#188B96" font-weight="700">EHR / Case Mgmt</text>
+      <text x="76" y="64" text-anchor="middle" font-family="serif" font-size="9" fill="rgba(208,221,230,0.65)">Notes, charts, docs</text>
+      <text x="76" y="77" text-anchor="middle" font-family="serif" font-size="9" fill="rgba(208,221,230,0.65)">already in your office</text>
+      <line x1="150" y1="60" x2="178" y2="60" stroke="rgba(24,139,150,0.6)" stroke-width="1.6"/>
+      <polygon points="178,55 190,60 178,65" fill="rgba(24,139,150,0.8)"/>
+      <text x="170" y="53" text-anchor="middle" font-family="monospace" font-size="7.5" fill="rgba(208,221,230,0.35)">local</text>
+      <rect x="190" y="16" width="148" height="88" rx="9" fill="#071d2e" stroke="rgba(24,139,150,0.5)" stroke-width="1.5"/>
+      <text x="264" y="47" text-anchor="middle" font-family="monospace" font-size="10.5" fill="#188B96" font-weight="700">Watch Folder</text>
+      <text x="264" y="64" text-anchor="middle" font-family="serif" font-size="9" fill="rgba(208,221,230,0.65)">Files land here.</text>
+      <text x="264" y="77" text-anchor="middle" font-family="serif" font-size="9" fill="rgba(208,221,230,0.65)">Node picks them up.</text>
+      <line x1="338" y1="60" x2="366" y2="60" stroke="rgba(10,115,210,0.6)" stroke-width="1.6"/>
+      <polygon points="366,55 378,60 366,65" fill="rgba(10,115,210,0.8)"/>
+      <text x="358" y="53" text-anchor="middle" font-family="monospace" font-size="7.5" fill="rgba(208,221,230,0.35)">on-prem</text>
+      <rect x="378" y="8" width="164" height="104" rx="9" fill="rgba(10,115,210,0.08)" stroke="rgba(10,115,210,0.55)" stroke-width="1.8"/>
+      <text x="460" y="38" text-anchor="middle" font-family="monospace" font-size="10.5" fill="#60AEFF" font-weight="700">Sentinel Node&#8482;</text>
+      <text x="460" y="55" text-anchor="middle" font-family="serif" font-size="9" fill="rgba(208,221,230,0.65)">AI runs locally.</text>
+      <text x="460" y="68" text-anchor="middle" font-family="serif" font-size="9" fill="rgba(208,221,230,0.65)">Draft written. Log made.</text>
+      <text x="460" y="81" text-anchor="middle" font-family="serif" font-size="9" fill="rgba(208,221,230,0.65)">No internet needed.</text>
+      <line x1="542" y1="60" x2="570" y2="60" stroke="rgba(239,68,68,0.5)" stroke-width="1.6"/>
+      <polygon points="570,55 582,60 570,65" fill="rgba(239,68,68,0.7)"/>
+      <text x="562" y="53" text-anchor="middle" font-family="monospace" font-size="7.5" fill="rgba(208,221,230,0.35)">wiped</text>
+      <rect x="582" y="16" width="116" height="88" rx="9" fill="#071d2e" stroke="rgba(239,68,68,0.4)" stroke-width="1.5"/>
+      <text x="640" y="46" text-anchor="middle" font-family="monospace" font-size="12" fill="#EF4444" font-weight="700">&#128465; Delete</text>
+      <text x="640" y="63" text-anchor="middle" font-family="serif" font-size="9" fill="rgba(208,221,230,0.65)">Source file wiped.</text>
+      <text x="640" y="76" text-anchor="middle" font-family="serif" font-size="9" fill="rgba(208,221,230,0.65)">No copy. No cloud.</text>
+      <text x="350" y="114" text-anchor="middle" font-family="monospace" font-size="8.5" fill="rgba(239,68,68,0.55)">&#9888; No data leaves your building. There is no outbound path.</text>
+    </svg>
+
+    <!-- Mobile stacked boxes (shown below 600px) -->
+    <div class="diag-mob" aria-hidden="true">
+      <div class="dmb"><div class="dmb-lbl">EHR / Case Management</div><p>Notes, charts, and documents already in your office.</p></div>
+      <span class="darr">&#8595; local copy</span>
+      <div class="dmb"><div class="dmb-lbl">Watch Folder</div><p>Files land here. The Node picks them up automatically.</p></div>
+      <span class="darr">&#8595; on-premises</span>
+      <div class="dmb" style="border-color:rgba(10,115,210,0.5)"><div class="dmb-lbl" style="color:#60AEFF">Sentinel Node&#8482;</div><p>AI runs locally. Draft written. Audit log created. No internet needed.</p></div>
+      <span class="darr" style="color:#EF4444">&#8595; source wiped</span>
+      <div class="dmb del"><div class="dmb-lbl">&#128465; Delete</div><p>Source file is wiped from the watch folder. No copy anywhere.</p></div>
+      <p class="diag-note">&#9888; No data leaves your building. There is no outbound path.</p>
+    </div>
+  </div>
+
+  <!-- ══ FOR INVESTORS ══ -->
+  <section id="investors" class="ps inv" aria-labelledby="inv-h" style="scroll-margin-top:80px">
+    <span class="ps-lbl">&#128200; For Investors</span>
+    <h2 id="inv-h">What this business does, in plain English</h2>
+    <ul class="ql">
+      <li>
+        <span class="qq">What do you sell?</span>
+        <p class="qa">We sell a physical AI computer called the Sentinel Node and a monthly hardware-as-a-service. The computer sits inside a doctor&rsquo;s office or law firm and handles paperwork automatically &mdash; writing notes, drafting letters, summarizing documents &mdash; without ever connecting to the internet or a cloud server.</p>
+      </li>
+      <li>
+        <span class="qq">Who buys it?</span>
+        <p class="qa">Independent medical practices with 2 to 10 physicians, and small law firms. These professionals handle sensitive records every day and face serious legal consequences if those records are exposed. They cannot afford the data-breach risk of cloud AI tools, but they also cannot keep up with the paperwork without help.</p>
+      </li>
+      <li>
+        <span class="qq">How do you make money?</span>
+        <p class="qa">Customers pay a one-time setup fee of $5,000 and a monthly managed service subscription starting at $950. No per-use charges, no surprise invoices. Pocono AI deploys and manages the infrastructure — one monthly subscription covers hardware, software, maintenance, and support.</p>
+      </li>
+      <li>
+        <span class="qq">Why now?</span>
+        <p class="qa">Federal regulators have issued six-figure fines for AI-related privacy violations. The average healthcare data breach now costs $670,000. At the same time, physicians report spending nearly six hours per day on paperwork. The market has a serious problem it cannot solve with cloud tools, and we are the only company offering a hardware-grade, zero-egress solution priced for small practices.</p>
+      </li>
+      <li>
+        <span class="qq">What risk remains?</span>
+        <p class="qa">We are a pre-revenue company with early stage — in discussions with our first design-partner practice; timing TBD. No signed agreement yet. Sales cycles in healthcare can be long, and physician trust is earned slowly. Regulatory requirements may shift. We have one founder and a small team, so execution risk is real. These are honest risks and we believe they are manageable, not fatal.</p>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ══ FOR CLINICIANS ══ -->
+  <section id="clinicians" class="ps doc" aria-labelledby="doc-h" style="scroll-margin-top:80px">
+    <span class="ps-lbl">&#129657; For Doctors &amp; Nurses</span>
+    <h2 id="doc-h">What changes in your day &mdash; and what doesn&rsquo;t</h2>
+    <ul class="ql">
+      <li>
+        <span class="qq">What changes in your day?</span>
+        <p class="qa">After a visit, you speak your notes or drop a recording into a folder on your computer. The Sentinel Node turns it into a finished clinical note, draft prior authorization, or referral letter. You review it, make any changes, and sign off. The step that used to take 30 to 45 minutes often takes under five.</p>
+      </li>
+      <li>
+        <span class="qq">What don&rsquo;t you have to do anymore?</span>
+        <p class="qa">You do not have to type out visit summaries, draft repetitive insurance letters from scratch, or stay late finishing charts. You do not have to trust a cloud service with your patients&rsquo; records. You do not have to sign a contract with a vendor that stores copies of your data on their servers.</p>
+      </li>
+      <li>
+        <span class="qq">What stays in your control?</span>
+        <p class="qa">Everything. You review every draft before it goes anywhere. The system never submits anything automatically. Your patient files never leave your building &mdash; the hardware is in your office and there is no outbound network path. You remain the licensed professional responsible for every clinical decision.</p>
+      </li>
+      <li>
+        <span class="qq">Is this a replacement for your clinical judgment?</span>
+        <p class="qa">No. It is a drafting tool, not a diagnostic tool. It writes paperwork based on what you tell it. You decide what is clinically correct. Think of it as a very fast, very private medical transcriptionist who never sleeps and never leaves the building.</p>
+      </li>
+      <li>
+        <span class="qq">What does it cost compared to a scribe?</span>
+        <p class="qa">A remote medical scribe typically costs $1,500 to $2,500 per month per provider, and that service sends your patient audio to a third-party vendor. Our Phase I rate starts at $950 per month for the practice, and nothing leaves your office. See <a href="/specs.html">specs.html</a> for full tier pricing.</p>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ══ FOR LAWYERS ══ -->
+  <section id="lawyers" class="ps law" aria-labelledby="law-h" style="scroll-margin-top:80px">
+    <span class="ps-lbl">&#9878; For Lawyers</span>
+    <h2 id="law-h">Privilege, data custody, and the audit trail</h2>
+    <ul class="ql">
+      <li>
+        <span class="qq">How is attorney-client privilege protected?</span>
+        <p class="qa">Privilege depends on keeping communications confidential. When you send a client file to a cloud AI service, that data passes through servers owned by a third party &mdash; and most cloud terms allow the vendor to retain your data or use it for model training. The Sentinel Node processes everything locally inside your office, with no outbound connection. Privileged content never leaves the building, so there is no third party to waive privilege.</p>
+      </li>
+      <li>
+        <span class="qq">What data never leaves your office?</span>
+        <p class="qa">All of it. Client names, case facts, document drafts, transcripts, and any file you run through the system stay on the dedicated infrastructure deployed in your office. The machine is not connected to any external server. After the Sentinel Node processes a file, it deletes the source from the watch folder. No copy is retained outside your network.</p>
+      </li>
+      <li>
+        <span class="qq">What audit trail do you get?</span>
+        <p class="qa">Every action is logged locally: which file was processed, at what time, and what output was generated. This log lives on the same hardware under your control. You can produce it for a client, a regulator, or a court. It shows what the AI did, so your review is documentable as a deliberate professional act.</p>
+      </li>
+      <li>
+        <span class="qq">Does this create any new liability?</span>
+        <p class="qa">The AI produces drafts, not final work product. You review and approve everything. The liability structure is the same as working with a paralegal or a junior associate &mdash; the licensed professional is responsible for what goes out the door. The local architecture actually reduces your exposure compared to cloud tools, because there is no vendor data-handling agreement to breach.</p>
+      </li>
+      <li>
+        <span class="qq">What about bar ethics rules?</span>
+        <p class="qa">Most state bars have issued guidance requiring lawyers to take reasonable steps to protect client information when using AI. The Sentinel Node&rsquo;s on-premises architecture is the most defensible position available: no third-party access, no cloud storage, no data transmission. We recommend reviewing your state bar&rsquo;s specific guidance and consulting your malpractice carrier.</p>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ══ FAQ ══ -->
+  <section id="faq" class="faq-s" aria-labelledby="faq-h" style="scroll-margin-top:80px">
+    <h2 id="faq-h">Frequently asked questions</h2>
+
+    <details class="fi">
+      <summary class="fq">Will this slow my computer?</summary>
+      <div class="fb"><p>No. The Sentinel Node is a separate, dedicated machine &mdash; a Dell Precision workstation that sits in your office. It does not run on your laptop or your front-desk computer. You interact with it through a simple folder on your local network, the same way you would use a shared drive. Your existing computers are not affected at all.</p></div>
+    </details>
+
+    <details class="fi">
+      <summary class="fq">What if the internet goes down?</summary>
+      <div class="fb"><p>Nothing changes. The Sentinel Node does not use the internet. It runs entirely on your local network, with the AI models already installed on its hard drive. If your internet goes out, the Node keeps working. Internet access was never part of the architecture &mdash; that is a feature, not a limitation.</p></div>
+    </details>
+
+    <details class="fi">
+      <summary class="fq">Who is liable if the AI makes a mistake?</summary>
+      <div class="fb"><p>You are, in the same way you are liable for any other work that goes out under your license. The AI produces a draft. You review it. You sign off on it. Nothing is submitted automatically. This is the same framework as working with a paralegal, a scribe, or a junior associate &mdash; the licensed professional takes responsibility for the final product. The audit log documents your review, which strengthens your position if your process is ever questioned.</p></div>
+    </details>
+
+    <details class="fi">
+      <summary class="fq">How long does setup take?</summary>
+      <div class="fb"><p>Deployment typically takes one to three business days. We ship a pre-configured machine. Your IT person or our team connects it to your local network. Staff training is usually done in a single session. Most practices are running live work through the system within a week of receiving the hardware.</p></div>
+    </details>
+
+    <details class="fi">
+      <summary class="fq">What happens to my data if I cancel?</summary>
+      <div class="fb"><p>Your data is within your locally deployed infrastructure in your office. Your data belongs to you. If you cancel, you receive a full data export before any infrastructure is retrieved. After the minimum 12-month term, the SSD drives containing your practice-specific indexed data are retained by your practice &mdash; your document repositories stay with you. There is nothing on a vendor server to delete, because nothing was ever sent there. You have full operational control of your data from day one.</p></div>
+    </details>
+
+    <details class="fi">
+      <summary class="fq">Is this appropriate for use with patient data under HIPAA?</summary>
+      <div class="fb"><p>The architecture eliminates the main HIPAA risk pathway: transmission of protected health information to a third party. Because the system never sends data outside your office, there is no Business Associate Agreement required for the AI processing itself. That said, HIPAA compliance is a complete program, not a single vendor decision. We encourage you to involve your compliance officer in any deployment decision.</p></div>
+    </details>
+  </section>
+
+  <!-- ══ BOTTOM CTA ══ -->
+  <section class="pcta" aria-label="Schedule a briefing">
+    <h2>Ready to see it for yourself?</h2>
+    <p>Schedule a 30-minute call with the founder. No sales pitch &mdash; just a direct conversation about whether this is right for your practice.</p>
+    <div class="brow">
+      <a href="mailto:marcus@poconoai.com?subject=Pocono AI Technical Briefing Request" class="bp" target="_blank" rel="noopener noreferrer">&#128197; <a href="mailto:marcus@poconoai.com?subject=Technical Briefing Request" style="color:inherit;">Email Marcus: marcus@poconoai.com</a></a>
+      <a href="for-physicians.html" class="bg">For Physicians &rarr;</a>
+      <a href="for-attorneys.html" class="bg">For Attorneys &rarr;</a>
+    </div>
+  </section>
+
+  <a href="index.html" class="back-home">&#8592; Back to poconoai.com</a>
+
+</div><!-- /.plain-wrap -->
+</main>
+
+<!-- ══ FOOTER ══ -->
+
+<!-- PARTIAL:footer START -->
+<footer role="contentinfo" style="background:#051622;border-top:1px solid rgba(255,255,255,0.08);padding:40px 24px 28px;font-size:0.85em;color:#8899aa;">
+  <div style="max-width:860px;margin:0 auto;">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:24px 32px;margin-bottom:32px;text-align:left;">
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Platform</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="start-here.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Start Here (3 min)</a>
+          <a href="executive-brief.html" style="color:#00c2a8;text-decoration:none;">Executive Brief</a>
+          <a href="sentinel-demo.html" style="color:#8899aa;text-decoration:none;">Live RAG Demo</a>
+          <a href="liability-simulator.html" style="color:#00c2a8;text-decoration:none;">Liability Simulator</a>
+          <a href="simulation.html" style="color:#8899aa;text-decoration:none;">12-Panel Simulation</a>
+          <a href="sentinel-specs.html" style="color:#8899aa;text-decoration:none;">Sentinel Node Specs</a>
+          <a href="architecture.html" style="color:#8899aa;text-decoration:none;">Architecture</a>
+          <a href="sentinel-audit-system.html" style="color:#00c2a8;text-decoration:none;">Audit System</a>
+          <a href="governance.html" style="color:#00c2a8;text-decoration:none;">AI Governance</a>
+          <a href="deployment.html" style="color:#8899aa;text-decoration:none;">Deployment Timeline</a>
+          <a href="compliance.html" style="color:#8899aa;text-decoration:none;">Compliance Attestation</a>
+        </div>
+      </div>
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">For Medical</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="for-physicians.html" style="color:#8899aa;text-decoration:none;">For Physicians</a>
+          <a href="nurses-ai-briefing.html" style="color:#8899aa;text-decoration:none;">For Nursing Staff</a>
+          <a href="support-staff-clinic-workflows.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Clinic Support Staff</a>
+          <a href="works-with-your-clinic.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Works With Your Clinic</a>
+          <a href="day-in-the-clinic.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Day in the Clinic</a>
+          <a href="patient-advocacy.html" style="color:#8899aa;text-decoration:none;">Patient Safety</a>
+          <a href="prior-auth-case-study.html" style="color:#8899aa;text-decoration:none;">Prior Auth Crisis</a>
+          <a href="ehr-burden-research.html" style="color:#8899aa;text-decoration:none;">EHR Burden Research</a>
+        </div>
+      </div>
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">For Legal</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="for-attorneys.html" style="color:#8899aa;text-decoration:none;">For Attorneys</a>
+          <a href="law-firm-pilot.html" style="color:#00c2a8;text-decoration:none;">Law Firm Pilot</a>
+          <a href="day-in-a-law-firm.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Day in a Law Firm</a>
+          <a href="support-staff-workflows.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Paralegals &amp; Staff</a>
+          <a href="works-with-your-stack.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Works With Your Stack</a>
+          <a href="legal-admin-burden.html" style="color:#8899aa;text-decoration:none;">Legal Admin Burden</a>
+          <a href="paradox-automated-abandonment.html" style="color:#8899aa;text-decoration:none;">Malpractice Analysis</a>
+        </div>
+      </div>
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Research</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="research.html" style="color:#8899aa;text-decoration:none;">Research Hub</a>
+          <a href="ai-near-miss-doctrine.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">AI Near-Miss Doctrine</a>
+          <a href="governance-receipt-whitepaper.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Governance Receipt White Paper</a>
+          <a href="PoconoAI_Global_Distribution_Strategy_Whitepaper.pdf" target="_blank" rel="noopener" style="color:#00c2a8;text-decoration:none;font-weight:600;">Global Strategy &#8681;</a>
+          <a href="competitive-analysis.html" style="color:#8899aa;text-decoration:none;">Competitive Analysis</a>
+          <a href="comparison.html" style="color:#8899aa;text-decoration:none;">Head-to-Head Comparison</a>
+          <a href="market-research.html" style="color:#8899aa;text-decoration:none;">Market Validation</a>
+          <a href="vector-databases-rerankers-2026.html" style="color:#8899aa;text-decoration:none;">Vector DB Literature Review</a>
+        </div>
+      </div>
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Company</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="about.html" style="color:#8899aa;text-decoration:none;">About</a>
+          <a href="team.html" style="color:#8899aa;text-decoration:none;">Team &amp; Leadership</a>
+          <a href="investors.html" style="color:#8899aa;text-decoration:none;">Investors</a>
+          <a href="founding-commercial-leadership.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Join Us</a>
+          <a href="careers.html" style="color:#8899aa;text-decoration:none;">Careers</a>
+          <a href="partners.html" style="color:#8899aa;text-decoration:none;">Partners</a>
+          <a href="channel-partners.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Channel Partners</a>
+          <a href="how-we-hire.html" style="color:#8899aa;text-decoration:none;">How We Hire</a>
+          <a href="international.html" style="color:#8899aa;text-decoration:none;">International</a>
+        </div>
+      </div>
+            <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">What You See</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="governance-review.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Governance Review</a>
+          <a href="governance-dashboard.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Governance Dashboard</a>
+          <a href="local-vs-cloud.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Local vs. Cloud</a>
+          <a href="day-in-the-clinic.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Day in the Clinic</a>
+          <a href="workflow-demonstrations.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Workflow Demonstrations</a>
+          <a href="what-happens-after-contact.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">After You Reach Out</a>
+          <a href="clinical-collaboration-framework.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Clinical Collaboration</a>
+          <a href="pilot-evidence-framework.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Pilot Evidence Framework</a>
+          <a href="operational-impact-model.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Operational Impact Model</a>
+          <a href="continuity-and-resilience.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Continuity &amp; Resilience</a>
+          <a href="pilot-workflow.html" style="color:#8899aa;text-decoration:none;">Pilot Workflow</a>
+          <a href="operational-artifacts.html" style="color:#8899aa;text-decoration:none;">Operational Artifacts</a>
+          <a href="deployment-topology.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Deployment Topology</a>
+          <a href="pilot-readiness-kit.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Pilot Readiness Kit</a>
+        </div>
+      </div>
+<div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Tools &amp; Legal</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="breach-calculator.html" style="color:#8899aa;text-decoration:none;">Breach Calculator</a>
+          <a href="roi.html" style="color:#8899aa;text-decoration:none;">ROI Calculator</a>
+          <a href="shadow-audit.html" style="color:#8899aa;text-decoration:none;">Shadow IT Audit</a>
+          <a href="plain.html" style="color:#8899aa;text-decoration:none;">Plain Language Guide</a>
+          <a href="sla.html" style="color:#8899aa;text-decoration:none;">SLA Terms</a>
+          <a href="privacy.html" style="color:#8899aa;text-decoration:none;">Privacy Notice</a>
+          <a href="terms.html" style="color:#8899aa;text-decoration:none;">Terms of Service</a>
+          <a href="sitemap.html" style="color:#8899aa;text-decoration:none;">All Pages</a>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:20px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+      <p style="margin:0;font-size:0.9em;">&copy; 2026 Pocono AI, LLC &nbsp;&#183;&nbsp; East Stroudsburg, PA &nbsp;&#183;&nbsp; <a href="mailto:marcus@poconoai.com" style="color:#8899aa;">marcus@poconoai.com</a> &nbsp;&#183;&nbsp; <a href="tel:+15705340602" style="color:#8899aa;">(570) 534-0602</a></p>
+      <p style="margin:0;font-size:0.88em;"><a href="audit.html" style="color:#5dade2;text-decoration:none;">Transparency v402</a></p>
+    </div>
+  </div>
+</footer>
+
+<!-- PARTIAL:footer END -->
+
+<script src="search-index.js?v=402" defer></script>
+<script src="nav.js?v=402" defer></script>
+<script src="pilot-cta.js?v=402" defer></script>
+</body>
+</html>

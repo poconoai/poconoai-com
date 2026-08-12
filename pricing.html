@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pocono AI Phase 1: $5,000 implementation + $950/month flat. No per-seat fees or tiers. Selective deployment for founding clinical and legal practices.">
+    <meta name="keywords" content="AI pricing, hardware as a service, HaaS AI, medical AI cost, legal AI cost, Sentinel Node pricing, AI subscription, on-premises AI, local AI, sovereign AI, zero cloud AI, HIPAA-governed AI environments, healthcare AI, legal AI, Sentinel Node, Pocono AI, data sovereignty, air-gapped AI, no cloud, EHR automation, RAG AI, independent medical practice AI, law firm AI">
+    <title>Managed Local AI Infrastructure — Pricing | Pocono AI</title>
+
+    <meta property="og:title" content="Managed Local AI Infrastructure — Pricing | Pocono AI">
+    <meta property="og:description" content="Hardware-as-a-Service pricing for the Sentinel Node. One implementation fee. One monthly rate. Less than a part-time scribe. Zero cloud.">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Pocono AI">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://poconoai.com/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Pocono AI — Sovereign on-premises AI">
+    <meta property="og:url" content="https://poconoai.com/pricing.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Pricing | Pocono AI HaaS">
+    <meta name="twitter:description" content="Three deployment tiers. Starts at $950/mo. Your data never leaves your building.">
+    <meta name="twitter:image" content="https://poconoai.com/og-image.jpg"><meta name="theme-color" content="#0B0F13">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="alternate icon" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon-180x180.png">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="alternate icon" href="favicon.ico">
+
+    <link rel="stylesheet" href="styles.css?v=402">
+    <link rel="canonical" href="https://poconoai.com/pricing.html">
+
+    <style>
+        /* Pricing page local overrides */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 32px 0;
+        }
+        .pricing-card {
+            background: var(--card-dark);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 28px 24px;
+            position: relative;
+            overflow: hidden;
+        }
+        .pricing-card.featured {
+            border-color: rgba(24,139,150,0.6);
+            box-shadow: 0 0 24px rgba(24,139,150,0.12);
+        }
+        .pricing-card-accent {
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+        }
+        /* v231: explicit pricing-tier / pricing-label rules for consistent typography */
+        .pricing-tier {
+            color: var(--white);
+            font-family: 'Syne', sans-serif;
+            font-size: 0.92em;
+            font-weight: 700;
+            letter-spacing: 0.01em;
+            margin: 0 0 6px;
+            line-height: 1.3;
+        }
+        .pricing-label {
+            color: var(--muted);
+            font-size: 0.78em;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            margin: 0 0 4px;
+            line-height: 1.4;
+            min-height: 1.4em;
+        }
+        .pricing-eyebrow {
+            color: var(--muted);
+            font-size: 0.72em;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            font-weight: 700;
+            margin: 0 0 8px;
+        }
+        .pricing-name {
+            color: var(--white);
+            font-family: 'Syne', sans-serif;
+            font-size: 1.4em;
+            font-weight: 800;
+            margin: 0 0 4px;
+        }
+        .pricing-price {
+            font-family: 'Syne', sans-serif;
+            font-size: 2.2em;
+            font-weight: 800;
+            color: var(--white);
+            line-height: 1;
+            margin: 16px 0 4px;
+        }
+        .pricing-price span {
+            font-size: 0.45em;
+            font-weight: 400;
+            color: var(--muted);
+        }
+        .pricing-impl {
+            color: var(--muted);
+            font-size: 0.78em;
+            margin: 0 0 20px;
+        }
+        .pricing-divider {
+            border: none;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            margin: 16px 0;
+        }
+        .pricing-feature {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+        .pricing-feature-check {
+            color: var(--teal);
+            font-size: 0.9em;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .pricing-feature-text {
+            color: var(--light-text);
+            font-size: 0.85em;
+            line-height: 1.55;
+        }
+        .pricing-cta {
+            display: block;
+            text-align: center;
+            margin-top: 24px;
+        }
+        .scribe-comparison {
+            background: var(--card-dark);
+            border: 1px solid rgba(255,80,80,0.2);
+            border-radius: 12px;
+            padding: 28px 32px;
+            margin: 40px 0;
+            text-align: center;
+        }
+        .scribe-vs-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            margin: 24px 0;
+        }
+        .scribe-col {
+            flex: 1;
+            min-width: 200px;
+        }
+        .scribe-price-bad {
+            font-family: 'Syne', sans-serif;
+            font-size: 2em;
+            font-weight: 800;
+            color: #ff5050;
+        }
+        .scribe-price-good {
+            font-family: 'Syne', sans-serif;
+            font-size: 2em;
+            font-weight: 800;
+            color: var(--teal);
+        }
+        .vs-badge {
+            background: rgba(255,255,255,0.06);
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            color: var(--muted);
+            font-size: 0.85em;
+            flex-shrink: 0;
+        }
+        .pov-box {
+            background: rgba(0,194,168,0.04);
+            border: 1px solid rgba(0,194,168,0.22);
+            border-radius: 10px;
+            padding: 20px 24px;
+            margin: 32px 0;
+        }
+        .haas-tax-note {
+            background: rgba(24,139,150,0.07);
+            border: 1px solid rgba(24,139,150,0.2);
+            border-radius: 8px;
+            padding: 14px 18px;
+            color: var(--light-text);
+            font-size: 0.84em;
+            line-height: 1.7;
+            margin: 20px 0;
+        }
+    </style>
+<link rel="stylesheet" href="nav-v2026.css?v=402">
+<link rel="stylesheet" href="brand-v292.css?v=402">
+<script>
+// Pocono AI v169 — Zero-flash banner dismissal.
+// Strategy: inject <style> tag synchronously BEFORE banner HTML parses,
+// so dismissed banners never render at all (no flash). DOM removal still
+// happens for safety. ?showbanners=1 URL param re-shows everything.
+(function(){
+  var ids=[];
+
+  // Escape hatch: ?showbanners=1 clears all dismiss flags for testing
+  try {
+    if (location.search.indexOf('showbanners=1') !== -1) {
+      ids.forEach(function(id){ localStorage.removeItem('pai_dismissed_'+id); });
+      localStorage.removeItem('poconoPilot');
+      localStorage.removeItem('advisoryBarDismissed');
+    }
+  } catch(e) {}
+
+  // v246 Stage 1 — Legacy migration block removed.
+  // Was dead code containing a JS syntax error (adjacent string literals)
+  // that broke the entire banner-dismiss IIFE on ~46 pages.
+
+  // Build CSS rule list for dismissed banners and inject synchronously.
+  // This runs in <head> BEFORE banner HTML is parsed, so dismissed bars
+  // never paint — eliminating the flash entirely.
+  var hideRules = [];
+  ids.forEach(function(id){
+    try {
+      if (localStorage.getItem('pai_dismissed_'+id) === '1') {
+        hideRules.push('#'+id+'{display:none !important;}');
+      }
+    } catch(e) {}
+  });
+  if (hideRules.length) {
+    var style = document.createElement('style');
+    style.id = 'pai-banner-hide';
+    style.textContent = hideRules.join('');
+    (document.head || document.documentElement).appendChild(style);
+  }
+
+  function dismiss(id){
+    try { localStorage.setItem('pai_dismissed_'+id,'1'); } catch(e) {}
+    var el = document.getElementById(id);
+    if (el) {
+      el.style.setProperty('display','none','important');
+      el.setAttribute('aria-hidden','true');
+      if (el.parentNode) {
+        el.parentNode.removeChild(el);
+      }
+    }
+  }
+
+  // Cleanup pass — remove dismissed banners from DOM after parse,
+  // belt-and-suspenders alongside the CSS hide.
+  function cleanup(){
+    ids.forEach(function(id){
+      try {
+        if (localStorage.getItem('pai_dismissed_'+id) === '1') {
+          var el = document.getElementById(id);
+          if (el && el.parentNode) {
+            el.parentNode.removeChild(el);
+          }
+        }
+      } catch(e) {}
+    });
+  }
+
+  function bind(){
+    ids.forEach(function(id){
+      var btn = document.getElementById(id+'-close');
+      if (btn && !btn.dataset.boundDismiss) {
+        btn.dataset.boundDismiss = '1';
+        btn.addEventListener('click', function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          dismiss(id);
+        });
+        btn.addEventListener('touchend', function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          dismiss(id);
+        }, {passive:false});
+      }
+    });
+    cleanup();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bind);
+  } else {
+    bind();
+  }
+})();
+</script>
+
+<!-- JSON-LD: Service + WebPage / Pricing — v326 structured-data pass -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://poconoai.com/pricing.html",
+      "url": "https://poconoai.com/pricing.html",
+      "datePublished": "2026-06-01",
+      "dateModified": "2026-06-01"
+      ,
+      "name": "Managed Local AI Infrastructure — Pricing | Pocono AI",
+      "description": "Hardware-as-a-Service pricing for the Sentinel Node. One implementation fee, one monthly rate, zero cloud. Designed for regulated healthcare and legal environments.",
+      "isPartOf": { "@id": "https://poconoai.com/#website" },
+      "publisher": { "@id": "https://poconoai.com/#organization" },
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "Service",
+      "@id": "https://poconoai.com/#sentinel-node",
+      "name": "Sentinel Node — Sovereign On-Premises AI Infrastructure",
+      "serviceType": "Managed AI Infrastructure (Hardware-as-a-Service)",
+      "description": "On-premises AI inference hardware delivered, configured, and managed by Pocono AI. Keeps all data on-site. Produces append-only audit trails. Supports HIPAA-governed workflows and legal privilege requirements. Human review required before any AI-assisted output is acted on.",
+      "provider": { "@id": "https://poconoai.com/#organization" },
+      "areaServed": {
+        "@type": "AdministrativeArea",
+        "name": "United States"
+      },
+      "audience": [
+        {
+          "@type": "Audience",
+          "audienceType": "Independent medical practices"
+        },
+        {
+          "@type": "Audience",
+          "audienceType": "Independent and small law firms"
+        }
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Sentinel Node Deployment Tiers",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "name": "Sentinel Node — Phase I Founding Cohort",
+            "description": "All-inclusive Hardware-as-a-Service: hardware, software, configuration, KYHD SLA, local inference, audit trail. No CapEx.",
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "price": "950",
+              "priceCurrency": "USD",
+              "unitText": "per month"
+            },
+            "eligibleRegion": { "@type": "Country", "name": "US" }
+          },
+          {
+            "@type": "Offer",
+            "name": "Sentinel Node — Phase II Standard",
+            "description": "Full deployment with implementation. Most popular tier.",
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "price": "1495",
+              "priceCurrency": "USD",
+              "unitText": "per month"
+            },
+            "eligibleRegion": { "@type": "Country", "name": "US" }
+          }
+        ]
+      },
+      "url": "https://poconoai.com/pricing.html"
+    }
+  ]
+}
+</script>
+
+
+<!-- JSON-LD: FAQPage — v330 schema-enrichment -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How does infrastructure deployment work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Pocono AI deploys and manages dedicated AI infrastructure within your office environment. Standard deployments are fully managed \u2014 infrastructure is Pocono AI-maintained with exclusive client-side custody throughout the engagement. An ownership track (+$150/month toward title transfer) and capital purchase arrangements are available on request. In all cases, your data stays physically within your building and you retain full data ownership and export rights on exit."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens if I cancel early?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The 24-month contract term is binding. If you cancel before the end of term, you must either return the hardware in good condition within 10 days of termination notice, or pay 50% of the remaining monthly payments owed under the contract. The $5,000 implementation fee is non-refundable in all cases. On exit, you receive a full data export of all indexed documents and audit logs before the hardware is retrieved."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the monthly fee tax-deductible?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Monthly HaaS fees are structured as operating expenses, not capital expenditures \u2014 typically deductible in the year incurred (no depreciation schedule). Consult your tax advisor for your specific situation."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What does the implementation timeline look like?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "From signed POV agreement to first productive inference: 2\u20134 weeks for most independent practices. This includes hardware procurement, VLAN configuration, RAG pipeline setup, and HITL workflow calibration with your team."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you work with our MSP?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Pocono AI has an MSP Partner Program specifically for this. Your existing IT provider can be involved at the referral or installation level."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What AI models run on the Sentinel Node?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Current deployment stack: Ollama as the inference engine, running Gemma and Llama 3/4 variants. Model selection is tuned at deployment for your use case. All models run fully locally \u2014 no API calls to any cloud provider."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<div id="pilot-pointer" style="background:rgba(0,194,168,0.08);padding:7px 16px;text-align:center;font-size:13px;color:#9fe8dc;border-bottom:1px solid rgba(0,194,168,0.2);">The pilot offer in one page: <a href="pilot-program.html" style="color:#00c2a8;font-weight:700;text-decoration:none;">Review the 60-Day Pilot Program &rarr;</a>
+          <a href="pilot-close-kit.html" style="display:inline-block;margin:8px 0 0;padding:10px 20px;background:rgba(0,194,168,0.1);border:1px solid rgba(0,194,168,0.4);color:#00c2a8;font-weight:700;font-size:0.88rem;text-decoration:none;border-radius:6px;">Pilot Close Kit &rarr;</a></div>
+<div id="pricing-clarity" style="max-width:860px;margin:18px auto 0;padding:16px 22px;background:rgba(0,194,168,0.08);border:1px solid rgba(0,194,168,0.3);border-left:4px solid #00c2a8;border-radius:10px;font-size:0.9rem;color:#9fe8dc;line-height:1.6;">
+  <strong style="color:#00c2a8;">To start a founding proof-of-value pilot:</strong> $5,000 implementation. If converted: Phase&nbsp;I managed Sentinel&nbsp;Node service starts at $950/month. No per-seat pricing. No cloud API metering. Final scope depends on workflow, deployment configuration, and support requirements. <a href="pilot-program.html" style="color:#00c2a8;font-weight:700;">Review the full pilot program &rarr;</a>
+</div>
+<a href="#main" class="skip-link">Skip to content</a>
+<div id="reading-progress" aria-hidden="true"></div>
+
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- INCLUDE:HEADER -->
+<div id="hitl-notice" style="background:#0a1929;padding:4px 16px;text-align:center;font-size:12px;color:#4a5568;border-bottom:1px solid rgba(255,255,255,0.06);letter-spacing:0.01em;">Human-in-the-Loop required: licensed professionals verify all outputs before clinical or legal action</div>
+<header role="banner">
+  <div class="header-inner">
+    <a href="/index.html" class="logo" aria-label="Pocono AI Home">
+      <img src="/logo.svg?v=402" alt="" width="36" height="36" decoding="async" loading="eager" aria-hidden="true" style="display:inline-block;">
+      Pocono <span>AI</span>
+    </a>
+    <nav id="desktop-nav" aria-label="Main navigation">
+      <div class="nav-item"><a href="/index.html" class="nav-direct">Home</a></div>
+      <div class="nav-item"><a href="/for-physicians.html" class="nav-direct">Physicians</a></div>
+      <div class="nav-item"><a href="/for-attorneys.html" class="nav-direct">Attorneys</a></div>
+      <div class="nav-item"><a href="/sentinel-node.html" class="nav-direct nav-hub" style="color:#d5a94f;border:1px solid rgba(213,169,79,0.45);border-radius:999px;padding:6px 13px;">Sentinel Node</a></div>
+      <div class="nav-item"><a href="/living-memorials/" class="nav-direct">Living Echo</a></div>
+      <div class="nav-item"><a href="/contact.html" class="nav-direct">Contact</a></div>
+      <div class="nav-item" data-dropdown="menu-more">
+        <button type="button" class="nav-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="menu-more">More <span class="nav-chevron" aria-hidden="true">&#9662;</span></button>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <a href="/contact.html#pilot" class="nav-cta nav-cta-primary">Request a Pilot</a>
+      <button type="button" class="pa-search-trigger" data-search-open aria-label="Search (press / or Ctrl-K)" aria-haspopup="dialog" aria-expanded="false">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span class="pa-st-label">Search</span><kbd data-pa-keyhint>Ctrl K</kbd>
+      </button>
+      <button type="button" class="header-icon-btn" id="mobile-menu" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav-panel">
+        <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- "More" overflow dropdown — sibling of <header> so position:fixed escapes header's stacking context. Wired by nav.js via data-dropdown="menu-more". -->
+<div class="nav-dropdown" id="menu-more" aria-label="More navigation">
+  <p class="nav-dd-section">Products</p>
+  <a href="/engineering-drafting/">Drafting &amp; Engineering Edition</a>
+  <a href="/sentinel-home/">Sentinel Home Edition</a>
+  <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability — Assistive Tools &#x2605;</a>
+  <a href="/living-memorials/enterprise-estate-continuity.html">Enterprise Estate Continuity</a>
+  <p class="nav-dd-section">Capabilities</p>
+  <a href="/evidence-room.html">Evidence Room</a>
+  <a href="/push-button-deliverables.html">Push-Button Deliverables</a>
+  <a href="/pilot-readiness-kit.html">Pilot Kit</a>
+  <a href="/pilot-program.html">Pilot Program</a>
+  <a href="/how-it-works.html">How It Works</a>
+  <p class="nav-dd-section">Hubs &amp; Company</p>
+  <a href="/training.html">Training Hub</a>
+  <a href="/documentation-hub/">Document Hub</a>
+  <a href="/global/">Global Hub</a>
+  <a href="/investors-hub.html">Investor Hub</a>
+  <a href="/valuation-dashboard.html">Valuation Dashboard</a>
+  <a href="/about.html">About</a>
+  <p class="nav-dd-section">Trust &amp; Legal</p>
+  <a href="/transparency.html">Transparency</a>
+  <a href="/audit.html">Audit Log</a>
+  <a href="/privacy.html">Privacy</a>
+  <a href="/sitemap.html">Sitemap</a>
+</div>
+<!-- Site search is provided by the self-contained search.js asset (command palette: / or Ctrl/Cmd-K). -->
+
+<!-- Mobile panel: full-screen slide-in. v396 nav — hub tiles + grouped links + Sentinel Node + Engineering. -->
+<nav id="mobile-nav-panel" aria-label="Mobile navigation" aria-hidden="true" role="dialog" aria-modal="true">
+
+  <!-- Hub tiles: Sentinel Node, Documentation Hub, Training Hub, Global Hub -->
+  <div style="padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,0.07);">
+    <p style="font-size:0.65em;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.28);margin:0 0 10px;padding:0 2px;">Hubs</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <a href="/sentinel-node.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(213,169,79,0.1);border:1px solid rgba(213,169,79,0.35);border-radius:10px;color:#d5a94f;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Sentinel Node</a>
+      <a href="/documentation-hub/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(0,194,168,0.1);border:1px solid rgba(0,194,168,0.35);border-radius:10px;color:#00c2a8;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Docs Hub</a>
+      <a href="/training.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.35);border-radius:10px;color:#a78bfa;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Training Hub</a>
+      <a href="/global/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(122,240,220,0.07);border:1px solid rgba(122,240,220,0.3);border-radius:10px;color:#7af0dc;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Global Hub</a>
+    </div>
+  </div>
+
+  <!-- Core paths -->
+  <div class="mob-static-links">
+    <a href="/index.html">Home</a>
+    <a href="/for-physicians.html">Physicians</a>
+    <a href="/for-attorneys.html">Attorneys</a>
+    <a href="/engineering-drafting/">Engineering &amp; Drafting</a>
+    <a href="/pilot-program.html">Pilot Program</a>
+    <a href="/how-it-works.html">How It Works</a>
+    <a href="/trust.html">Trust &amp; Audit</a>
+    <a href="/pricing.html">Pricing</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/living-memorials/">Living Echo</a>
+    <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability</a>
+    <a href="/about.html">About</a>
+    <a href="/team.html" style="color:rgba(255,255,255,0.6);">Team &amp; Leadership</a>
+    <a href="/valuation-dashboard.html" style="color:rgba(255,255,255,0.6);">Valuation Dashboard</a>
+    <a href="/careers.html" style="color:rgba(255,255,255,0.6);">Careers</a>
+    <a href="/sentinel-demo.html" style="color:rgba(255,255,255,0.6);">Demo</a>
+    <a href="/sitemap.html" style="color:rgba(255,255,255,0.45);">Sitemap</a>
+    <a href="/transparency.html" style="color:rgba(255,255,255,0.45);">Transparency</a>
+    <a href="/privacy.html" style="color:rgba(255,255,255,0.45);">Privacy</a>
+  </div>
+
+  <a href="/contact.html#pilot" class="mob-cta">Request a Pilot</a>
+</nav>
+<!-- /INCLUDE:HEADER -->
+
+
+<main id="main-content" tabindex="-1">
+<span id="main" aria-hidden="true"></span>
+
+    <!-- ═══ FOUNDING PILOT COHORT NOTICE — v273 ═══
+         Calm, restrained replacement for v271 pricing urgency banner.
+         Selective deployment program tone; no countdowns, no "act now". -->
+    <div id="pilot-cohort-bar" style="background:rgba(255,255,255,0.025);border-bottom:1px solid rgba(255,255,255,0.07);padding:11px 20px;text-align:center;" role="region" aria-label="Founding pilot cohort — pricing notice">
+        <p style="margin:0;font-size:0.8em;line-height:1.6;color:var(--light-text);letter-spacing:0.01em;">
+            <span style="color:var(--teal);font-weight:600;text-transform:uppercase;letter-spacing:0.14em;font-size:0.94em;">Founding Pilot Cohort &middot; Phase&nbsp;1</span>
+            <span style="display:inline-block;width:1px;height:10px;background:rgba(255,255,255,0.18);margin:0 10px;vertical-align:middle;"></span>
+            Phase 1 pricing applies to founding-cohort partners. Subsequent tier rates take effect with Phase 2.&nbsp;
+            <a href="#post-pilot-tiers" style="color:var(--teal);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(0,194,168,0.4);">Phase&nbsp;2 tier structure &darr;</a>
+        </p>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero-section">
+        <div class="sentinel-lockup" aria-label="Sentinel Node — Engagement & Pricing">
+              <svg class="sentinel-lockup-mark" viewBox="0 0 64 64" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
+          <!-- v311b: rotated diamond + C-curve loop + summit dot. Inherits currentColor from CSS context. -->
+          <g transform="rotate(45 32 32)">
+            <rect x="12" y="12" width="40" height="40" rx="8" ry="8"/>
+            <path d="M43 22 L26 22 A6 6 0 0 0 20 28 L20 36 A6 6 0 0 0 26 42 L41 42"/>
+          </g>
+          <circle cx="32" cy="9" r="3" fill="currentColor" stroke="none"/>
+        </svg>
+              <div class="sentinel-lockup-rule"></div>
+              <div class="sentinel-lockup-text">
+                <span class="sentinel-lockup-name">Sentinel Node</span>
+                <span class="sentinel-lockup-tag">Founding Pilot Cohort &middot; Phase 1 Deployment Pricing</span>
+              </div>
+            </div>
+        <h1>Phase 1 pricing for founding-cohort clinical and legal workflow partners.</h1>
+        <p class="hero-plain">One implementation fee. One flat monthly rate. All-inclusive office license &mdash; no per-seat fees, no cloud exposure, no billing surprises. Pocono AI is currently scoping a limited regional cohort of founding pilot partners. Deployment capacity is reviewed against operational fit, governance posture, and on-premises infrastructure readiness rather than purchase order velocity.</p>
+        <div class="hero-ctas">
+            <a href="#tiers" class="cta-button">Review Phase 1 Pricing</a>
+            <a href="mailto:marcus@poconoai.com?subject=Pocono%20AI%20%E2%80%94%20Pilot%20Discovery%20Conversation" class="cta-button cta-button-light">Request a Pilot Discovery Conversation</a>
+        </div>
+        <div class="haas-tax-note">
+            &#42; Monthly HaaS fees are <strong>typically deductible as ordinary operating expenses</strong>. No CapEx. No depreciation schedule. Consult your tax advisor.
+        </div>
+    </section>
+
+    <section class="fastpath-panel" aria-label="Pricing fast path">
+      <div class="fastpath-inner">
+        <p class="fastpath-eyebrow">3-minute pricing read</p>
+        <h2 class="fastpath-title">What a serious buyer needs to know before the tables.</h2>
+        <p class="fastpath-sub">Sentinel Node is priced as managed local infrastructure, not per-seat chatbot software. The founding-cohort offer is intentionally simple so a practice owner, attorney, administrator, or CFO can understand the deployment economics before reviewing the deeper tier detail.</p>
+        <div class="fastpath-grid">
+          <div class="fastpath-card"><strong>$5K implementation</strong><span>One-time setup for the appliance, local knowledge configuration, workflow mapping, and governance calibration.</span></div>
+          <div class="fastpath-card"><strong>$950/month starting point</strong><span>Phase 1 managed HaaS rate for the first tier. No per-seat pricing and no cloud API metering surprises.</span></div>
+          <div class="fastpath-card"><strong>60-day proof-of-value</strong><span>The first commercial step is scoped around actual workflow evidence, not a theoretical enterprise contract.</span></div>
+          <div class="fastpath-card"><strong>Rates rise after proof</strong><span>Founding-cohort pricing rewards early partners before Phase 2 tier rates reflect validated deployment economics.</span></div>
+        </div>
+        <div class="fastpath-actions">
+          <a href="#tiers">Review Phase 1 tiers</a>
+          <a href="#post-pilot-tiers">See Phase 2 structure</a>
+          <a href="what-happens-after-contact.html">What happens after contact</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- JUMP-NAV — v290 -->
+    <div style="position:sticky;top:64px;z-index:80;background:rgba(5,12,22,.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(45,212,191,.18);padding:0 20px;overflow-x:auto;white-space:nowrap;scrollbar-width:none;" aria-label="Pricing sections">
+      <div style="max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:0;height:44px;">
+        <span style="font-size:.7rem;font-weight:900;text-transform:uppercase;letter-spacing:.1em;color:#4a6a80;padding-right:14px;flex:0 0 auto;border-right:1px solid rgba(255,255,255,.1);margin-right:14px">Jump to</span>
+        <a href="#tiers" style="display:inline-flex;align-items:center;padding:0 14px;height:100%;font-size:.8rem;font-weight:700;color:#9eb9cc;text-decoration:none;border-right:1px solid rgba(255,255,255,.06);flex:0 0 auto;transition:color .15s" onmouseover="this.style.color='#2dd4bf'" onmouseout="this.style.color='#9eb9cc'">Phase 1 pricing</a>
+        <a href="#post-pilot-tiers" style="display:inline-flex;align-items:center;padding:0 14px;height:100%;font-size:.8rem;font-weight:700;color:#9eb9cc;text-decoration:none;border-right:1px solid rgba(255,255,255,.06);flex:0 0 auto;transition:color .15s" onmouseover="this.style.color='#2dd4bf'" onmouseout="this.style.color='#9eb9cc'">Phase 2 tiers</a>
+        <a href="#after-contact-heading" style="display:inline-flex;align-items:center;padding:0 14px;height:100%;font-size:.8rem;font-weight:700;color:#9eb9cc;text-decoration:none;border-right:1px solid rgba(255,255,255,.06);flex:0 0 auto;transition:color .15s" onmouseover="this.style.color='#2dd4bf'" onmouseout="this.style.color='#9eb9cc'">After contact</a>
+        <a href="#refresh-heading" style="display:inline-flex;align-items:center;padding:0 14px;height:100%;font-size:.8rem;font-weight:700;color:#9eb9cc;text-decoration:none;border-right:1px solid rgba(255,255,255,.06);flex:0 0 auto;transition:color .15s" onmouseover="this.style.color='#2dd4bf'" onmouseout="this.style.color='#9eb9cc'">Lifecycle</a>
+        <a href="#pricing-rationale" style="display:inline-flex;align-items:center;padding:0 14px;height:100%;font-size:.8rem;font-weight:700;color:#9eb9cc;text-decoration:none;border-right:1px solid rgba(255,255,255,.06);flex:0 0 auto;transition:color .15s" onmouseover="this.style.color='#2dd4bf'" onmouseout="this.style.color='#9eb9cc'">Why this structure</a>
+        <a href="#financing-heading" style="display:inline-flex;align-items:center;padding:0 14px;height:100%;font-size:.8rem;font-weight:700;color:#9eb9cc;text-decoration:none;border-right:1px solid rgba(255,255,255,.06);flex:0 0 auto;transition:color .15s" onmouseover="this.style.color='#2dd4bf'" onmouseout="this.style.color='#9eb9cc'">Accessibility</a>
+        <a href="#pilot-heading" style="display:inline-flex;align-items:center;padding:0 14px;height:100%;font-size:.8rem;font-weight:800;color:#2dd4bf;text-decoration:none;flex:0 0 auto">Founding cohort →</a>
+      </div>
+    </div>
+
+
+
+    <!-- BADGES -->
+    <section class="trust-badges-section" aria-label="Built on enterprise infrastructure">
+        <p class="trust-badges-eyebrow">Built on enterprise infrastructure</p>
+        <div class="trust-badges-row">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 32" width="120" height="32" role="img" aria-label="Dell" class="badge-svg"><text x="60" y="24" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif" font-weight="800" font-size="22" letter-spacing="3" fill="currentColor">DELL</text></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 32" width="150" height="32" role="img" aria-label="NVIDIA" class="badge-svg"><text x="75" y="24" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif" font-weight="800" font-size="22" letter-spacing="3" fill="currentColor">NVIDIA</text></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 32" width="150" height="32" role="img" aria-label="Qdrant" class="badge-svg"><text x="75" y="24" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif" font-weight="800" font-size="22" letter-spacing="2" fill="currentColor">Qdrant</text></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 32" width="150" height="32" role="img" aria-label="Ollama" class="badge-svg"><text x="75" y="24" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif" font-weight="800" font-size="22" letter-spacing="2" fill="currentColor">Ollama</text></svg>
+        </div>
+    </section>
+
+    <!-- SCRIBE COMPARISON -->
+    <div class="scribe-comparison">
+        <span class="section-eyebrow">The Scribe Comparison</span>
+        <h2 style="color:var(--white);margin:8px 0 4px;">Less than a part-time remote scribe &mdash; and your data never leaves the building.</h2>
+        <p style="color:var(--light-text);max-width:580px;margin:0 auto 8px;font-size:0.9em;line-height:1.7;">Remote scribes cost $1,500&ndash;$2,500/month, require HIPAA BAAs with a third party, and still transmit your data to a remote operator. The Sentinel Node costs less than the cheapest scribe option, keeps everything inside your building, and runs under a governance-first deployment model rather than a per-seat licensing one.</p>
+        <div class="scribe-vs-row">
+            <div class="scribe-col">
+                <p style="color:var(--muted);font-size:0.72em;text-transform:uppercase;letter-spacing:0.12em;margin:0 0 6px;">Part-Time Remote Scribe</p>
+                <div class="scribe-price-bad">$1,500–$2,500<span style="font-size:0.45em;font-weight:400;">/mo</span></div>
+                <p style="color:var(--muted);font-size:0.78em;margin:6px 0 0;">Data leaves your building. Third-party BAA. Human error risk.</p>
+            </div>
+            <div class="vs-badge">VS</div>
+            <div class="scribe-col">
+                <p style="color:var(--muted);font-size:0.72em;text-transform:uppercase;letter-spacing:0.12em;margin:0 0 6px;">Sentinel Node — Tier 1 HaaS</p>
+                <div class="scribe-price-good">$950<span style="font-size:0.45em;font-weight:400;">/mo</span></div>
+                <p style="color:var(--teal);font-size:0.78em;margin:6px 0 0;">Plus $5K implementation. Zero-egress default. Fully local. Always-on. Cites every source.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SERVICE TIERS — v273 FOUNDING COHORT PRICING -->
+    <section id="tiers">
+        <p style="margin:0 0 6px;font-size:0.72em;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--teal);font-family:var(--font-mono);">Founding Pilot Cohort &middot; Phase 1</p>
+        <h2 style="color:var(--white);font-size:clamp(1.25rem,2.8vw,1.65rem);margin:0 0 10px;border:none;">Flat-rate deployment pricing for founding clinical and legal partners.</h2>
+        <p style="color:var(--light-text);font-size:0.92em;line-height:1.7;max-width:680px;margin:0 0 12px;">The pricing below applies to the <strong style="color:var(--white);">Phase 1 Founding Cohort</strong> &mdash; the limited regional set of clinical and legal practices admitted during initial deployment. All tiers include a single $5,000 implementation fee, local RAG configuration, Human-in-the-Loop workflow calibration, a 24-month managed service agreement, and infrastructure refresh at month 24. Founding-cohort partners retain Phase 1 rates for the first 12 months of their managed service term.</p>
+        <div style="background:rgba(0,194,168,0.05);border:1px solid rgba(0,194,168,0.22);border-radius:8px;padding:12px 18px;max-width:680px;margin:0 0 28px;font-size:0.85em;color:var(--light-text);line-height:1.7;">
+            <strong style="color:var(--teal);">Phase&nbsp;1 rate continuity:</strong> Founding-cohort partners are admitted into the Phase 1 pricing structure for their first 12 months of managed service. Phase 2 tier rates apply to deployments admitted after the founding cohort closes. <a href="#post-pilot-tiers" style="color:var(--teal);font-weight:600;">Phase&nbsp;2 tier structure &darr;</a>
+        </div>
+
+        <!-- WHAT'S INCLUDED IN EVERY TIER -->
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:0 0 32px;padding:20px 24px;background:rgba(0,194,168,0.04);border:1px solid rgba(0,194,168,0.12);border-radius:10px;">
+            <div>
+                <p style="margin:0 0 8px;font-size:0.72em;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:0.12em;">Every Tier Includes</p>
+                <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:5px;">
+                    <li style="font-size:0.83em;color:var(--light-text);display:flex;gap:7px;line-height:1.5;"><span style="color:var(--teal);flex-shrink:0;">&#10003;</span>$5,000 one-time implementation fee</li>
+                    <li style="font-size:0.83em;color:var(--light-text);display:flex;gap:7px;line-height:1.5;"><span style="color:var(--teal);flex-shrink:0;">&#10003;</span>Dedicated infrastructure deployed in your office</li>
+                    <li style="font-size:0.83em;color:var(--light-text);display:flex;gap:7px;line-height:1.5;"><span style="color:var(--teal);flex-shrink:0;">&#10003;</span>Zero outbound telemetry during inference</li>
+                    <li style="font-size:0.83em;color:var(--light-text);display:flex;gap:7px;line-height:1.5;"><span style="color:var(--teal);flex-shrink:0;">&#10003;</span>BAA draft available for attorney review at deployment</li>
+                </ul>
+            </div>
+            <div>
+                <p style="margin:0 0 8px;font-size:0.72em;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:0.12em;">Managed Lifecycle</p>
+                <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:5px;">
+                    <li style="font-size:0.83em;color:var(--light-text);display:flex;gap:7px;line-height:1.5;"><span style="color:var(--teal);flex-shrink:0;">&#10003;</span>Infrastructure refresh at month 24, included</li>
+                    <li style="font-size:0.83em;color:var(--light-text);display:flex;gap:7px;line-height:1.5;"><span style="color:var(--teal);flex-shrink:0;">&#10003;</span>Offline signed model updates, quarterly</li>
+                    <li style="font-size:0.83em;color:var(--light-text);display:flex;gap:7px;line-height:1.5;"><span style="color:var(--teal);flex-shrink:0;">&#10003;</span>SLA-backed hardware support (Dell ProSupport)</li>
+                    <li style="font-size:0.83em;color:var(--light-text);display:flex;gap:7px;line-height:1.5;"><span style="color:var(--teal);flex-shrink:0;">&#10003;</span>SSD data storage retained by practice after term</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="pricing-grid">
+            <!-- TIER 1 — FOUNDING COHORT (v273) -->
+            <div class="pricing-card" style="border-color:rgba(0,194,168,0.35);box-shadow:0 0 28px rgba(0,194,168,0.06);">
+                <div class="pricing-card-accent" style="background:var(--teal);"></div>
+                <div style="position:absolute;top:14px;right:14px;background:rgba(0,194,168,0.12);border:1px solid rgba(0,194,168,0.35);border-radius:4px;padding:3px 8px;font-size:0.65em;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--teal);">Founding Cohort</div>
+                <div class="pricing-tier" style="color:var(--teal);">Phase 1 &middot; Founding Cohort</div>
+                <div class="pricing-label">Independent Practice &middot; 1&ndash;4 providers</div>
+                <div class="pricing-price">$950<span>/mo</span></div>
+                <p class="pricing-impl"><strong style="color:var(--teal);">$5,000 Implementation Fee</strong> &middot; 24-month minimum service term &middot; Infrastructure refresh at month 24 included &middot; Phase 1 rate continuity for the first 12&nbsp;months</p>
+                <div class="pricing-feature"><span class="pricing-feature-check">&#10003;</span><span class="pricing-feature-text">Dedicated Sentinel Node deployed in your office</span></div>
+                <div class="pricing-feature"><span class="pricing-feature-check">&#10003;</span><span class="pricing-feature-text">Local RAG on clinical or legal document sets</span></div>
+                <div class="pricing-feature"><span class="pricing-feature-check">&#10003;</span><span class="pricing-feature-text">Qdrant vector database &mdash; fully local</span></div>
+                <div class="pricing-feature"><span class="pricing-feature-check">&#10003;</span><span class="pricing-feature-text">Ollama + Gemma / Llama inference engine</span></div>
+                <div class="pricing-feature"><span class="pricing-feature-check">&#10003;</span><span class="pricing-feature-text">Citation-backed output with page-level traceability</span></div>
+                <div class="pricing-feature"><span class="pricing-feature-check">&#10003;</span><span class="pricing-feature-text">BAA draft available for attorney review at deployment</span></div>
+                <div class="pricing-feature"><span class="pricing-feature-check">&#10003;</span><span class="pricing-feature-text">Remote SLA support &mdash; 24hr response</span></div>
+                <div class="pricing-feature"><span class="pricing-feature-check">&#10003;</span><span class="pricing-feature-text">All-inclusive office license &mdash; zero per-seat fees</span></div>
+                <div class="pricing-feature"><span class="pricing-feature-check">&#10003;</span><span class="pricing-feature-text">SSD data storage is client property throughout</span></div>
+                <a href="mailto:marcus@poconoai.com?subject=Founding%20Cohort%20%E2%80%94%20Pilot%20Discovery%20Conversation" class="pricing-cta-btn" style="background:rgba(0,194,168,0.12);border:1px solid rgba(0,194,168,0.4);color:var(--teal);">Request Pilot Discovery &rarr;</a>
+            </div>
+
+            <!-- TIER 2 -->
+            <div class="pricing-card featured">
+                <div class="pricing-card-accent" style="background:var(--ai-blue);"></div>
+                <div class="pricing-tier" style="color:var(--ai-blue);">Phase II &middot; Professional</div>
+                <div class="pricing-label">Multi-Provider Practice &middot; 5–10 providers</div>
+                <div class="pricing-price" style="color:var(--ai-blue);">$1,495<span>/mo</span></div>
+                <p class="pricing-impl"><strong style="color:var(--ai-blue);">$5,000 Implementation Fee</strong> &middot; 24-month minimum service term &middot; Infrastructure refresh at month 24 included</p>
+                <div class="pricing-feature"><span class="pricing-feature-check">&#10003;</span><span class="pricing-feature-text">Everything in Phase I</span></div>
+                <div class="pricing-feature"><span class="pricing-feature-check">&#10003;</span><span class="pricing-feature-text">Expanded NVIDIA GPU compute tier (VRAM upgrade)</span></div>
+                <div class="pricing-feature"><span class="pricing-feature-check">&#10003;</span><span class="pricing-feature-text">Multi-provider concurrent query support</span></div>
+                <div class="pricing-feature"><span class="pricing-feature-check">&#10003;</span><span class="pricing-feature-text">Larger Qdrant vector store for higher document volume</span></div>
+                <div class="pricing-feature"><span class="pricing-feature-check">&#10003;</span><span class="pricing-feature-text">VLAN isolation configuration + IT onboarding docs</span></div>
+                <div class="pricing-feature"><span class="pricing-feature-check">&#10003;</span><span class="pricing-feature-text">Priority SLA support &mdash; 8hr response</span></div>
+                <div class="pricing-feature"><span class="pricing-feature-check">&#10003;</span><span class="pricing-feature-text">Quarterly model updates via offline signed packets</span></div>
+                <div class="pricing-feature"><span class="pricing-feature-check">&#10003;</span><span class="pricing-feature-text">SSD data storage is client property throughout</span></div>
+                <a href="mailto:marcus@poconoai.com?subject=Phase%20II%20Inquiry" class="pricing-cta-btn" style="background:var(--ai-blue);">Inquire About Phase II &rarr;</a>
+            </div>
+
+            <!-- TIER 3 -->
+            <div class="pricing-card">
+                <div class="pricing-card-accent" style="background:#A78BFA;"></div>
+                <div class="pricing-tier" style="color:#A78BFA;">Phase III &middot; Enterprise</div>
+                <div class="pricing-label">Group Practice / Clinic &middot; 10+ providers</div>
+                <div class="pricing-price" style="color:#A78BFA;">From $2,995<span>/mo</span></div>
+                <p class="pricing-impl">$5,000 implementation &middot; 24-month minimum service term &middot; Multi-node deployments available &middot; Contact for custom scoping</p>
+                <div class="pricing-feature"><span class="pricing-feature-check">&#10003;</span><span class="pricing-feature-text">Everything in Phase II</span></div>
+                <div class="pricing-feature"><span class="pricing-feature-check">&#10003;</span><span class="pricing-feature-text">Multi-node deployment architecture</span></div>
+                <div class="pricing-feature"><span class="pricing-feature-check">&#10003;</span><span class="pricing-feature-text">Epic / Oracle Health integration scoping (FHIR roadmap)</span></div>
+                <div class="pricing-feature"><span class="pricing-feature-check">&#10003;</span><span class="pricing-feature-text">Custom model fine-tuning on specialty vocabulary</span></div>
+                <div class="pricing-feature"><span class="pricing-feature-check">&#10003;</span><span class="pricing-feature-text">Dedicated MSP partner coordination</span></div>
+                <div class="pricing-feature"><span class="pricing-feature-check">&#10003;</span><span class="pricing-feature-text">4hr SLA response with on-site option</span></div>
+                <div class="pricing-feature"><span class="pricing-feature-check">&#10003;</span><span class="pricing-feature-text">Annual compliance review package</span></div>
+                <a href="mailto:marcus@poconoai.com?subject=Enterprise%20Scoping%20Request" class="pricing-cta-btn" style="background:rgba(167,139,250,0.15);border:1px solid rgba(167,139,250,0.4);color:#A78BFA;">Contact for Enterprise Scoping &rarr;</a>
+            </div>
+        </div>
+
+        <!-- COST SUMMARY BOX -->
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:20px 24px;max-width:680px;margin:28px 0 0;font-size:0.88em;line-height:1.75;color:var(--light-text);">
+            <strong style="color:var(--white);">What the monthly managed infrastructure fee covers:</strong> Hardware lifecycle management, offline update validation, governance infrastructure maintenance, retrieval pipeline optimization, SLA support and monitoring, deployment maintenance, audit log continuity, model update delivery, and the hardware infrastructure refresh at month 24. The monthly rate is an all-inclusive managed service agreement — no usage tiers, no API metering, no storage overage charges, no per-seat licensing escalation.<br>
+            <span style="color:var(--muted);font-size:0.9em;display:inline-block;margin-top:6px;">Phase 1 example &mdash; $5,000 implementation + $950/month &times; 24 months = $27,800 total over the initial term. <a href="roi.html" style="color:var(--teal);">Calculate your ROI &rarr;</a></span>
+        </div>
+    </section>
+
+    <!-- ═══ PHASE 2 TIER ARCHITECTURE — v273 ═══ -->
+    <section id="post-pilot-tiers" aria-labelledby="post-pilot-heading" style="margin:56px 0 48px;padding:36px 32px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.08);border-radius:14px;">
+        <p style="margin:0 0 6px;font-size:0.72em;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);font-family:var(--font-mono);">Phase 2 &middot; Post-Founding-Cohort Enrollments</p>
+        <h2 id="post-pilot-heading" style="font-size:clamp(1.2rem,2.8vw,1.55rem);color:var(--white);margin:0 0 10px;border:none;line-height:1.3;">Phase 2 Tier Structure</h2>
+        <p style="color:var(--light-text);font-size:0.9em;line-height:1.75;max-width:660px;margin:0 0 8px;">Phase 2 tier pricing applies to deployments admitted after the Founding Cohort closes. <strong style="color:var(--white);">Founding-cohort partners retain Phase 1 rates for the first 12 months of their managed service term.</strong> The structure below describes the tier architecture for subsequent deployments. Specific Phase 2 rates are set after founding-cohort deployment outcomes are reviewed.</p>
+        <p style="color:var(--muted);font-size:0.8em;margin:0 0 28px;font-style:italic;">Phase 2 rates are calibrated against founding-cohort deployment outcomes, infrastructure scope, and regional capacity. Founding-cohort partners receive advance notice of Phase 2 changes and right-of-first-renewal at their Phase 1 rate.</p>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;">
+
+            <!-- STANDARD NODE -->
+            <div style="background:var(--card-dark);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:26px 22px;position:relative;overflow:hidden;">
+                <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--teal);"></div>
+                <p style="margin:0 0 4px;font-size:0.68em;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:var(--teal);">Standard Node</p>
+                <h3 style="margin:0 0 6px;color:var(--white);font-size:1.1em;">1–3 Providers</h3>
+                <p style="color:var(--muted);font-size:0.82em;line-height:1.6;margin:0 0 18px;">Suitable for solo practices and small independent clinics. Single Sentinel Node deployment.</p>
+                <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:10px 14px;text-align:center;">
+                    <span style="font-size:0.72em;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:3px;">Monthly Rate</span>
+                    <span style="font-size:1.05em;font-weight:700;color:rgba(255,255,255,0.3);font-family:var(--font-mono);">[Standard Rates Apply Q3 2026]</span>
+                </div>
+                <div style="margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.06);">
+                    <div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;"><span style="color:var(--teal);font-size:0.85em;flex-shrink:0;">&#10003;</span><span style="font-size:0.82em;color:var(--light-text);line-height:1.5;">All-inclusive office license</span></div>
+                    <div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;"><span style="color:var(--teal);font-size:0.85em;flex-shrink:0;">&#10003;</span><span style="font-size:0.82em;color:var(--light-text);line-height:1.5;">Zero per-seat licensing fees</span></div>
+                    <div style="display:flex;gap:8px;align-items:flex-start;"><span style="color:var(--teal);font-size:0.85em;flex-shrink:0;">&#10003;</span><span style="font-size:0.82em;color:var(--light-text);line-height:1.5;">24hr SLA support</span></div>
+                </div>
+            </div>
+
+            <!-- PROFESSIONAL NODE -->
+            <div style="background:var(--card-dark);border:1px solid rgba(10,115,210,0.3);border-radius:12px;padding:26px 22px;position:relative;overflow:hidden;box-shadow:0 0 20px rgba(10,115,210,0.07);">
+                <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--ai-blue);"></div>
+                <div style="position:absolute;top:14px;right:14px;background:rgba(10,115,210,0.15);border:1px solid rgba(10,115,210,0.4);border-radius:4px;padding:2px 7px;font-size:0.63em;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--ai-blue);">Most Common</div>
+                <p style="margin:0 0 4px;font-size:0.68em;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:var(--ai-blue);">Professional Node</p>
+                <h3 style="margin:0 0 6px;color:var(--white);font-size:1.1em;">4–10 Providers</h3>
+                <p style="color:var(--muted);font-size:0.82em;line-height:1.6;margin:0 0 18px;">Multi-provider practices with concurrent workloads. Enhanced GPU tier and expanded vector store.</p>
+                <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:10px 14px;text-align:center;">
+                    <span style="font-size:0.72em;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:3px;">Monthly Rate</span>
+                    <span style="font-size:1.05em;font-weight:700;color:rgba(255,255,255,0.3);font-family:var(--font-mono);">[Standard Rates Apply Q3 2026]</span>
+                </div>
+                <div style="margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.06);">
+                    <div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;"><span style="color:var(--ai-blue);font-size:0.85em;flex-shrink:0;">&#10003;</span><span style="font-size:0.82em;color:var(--light-text);line-height:1.5;">Everything in Standard Node</span></div>
+                    <div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;"><span style="color:var(--ai-blue);font-size:0.85em;flex-shrink:0;">&#10003;</span><span style="font-size:0.82em;color:var(--light-text);line-height:1.5;">Expanded GPU compute &amp; VRAM</span></div>
+                    <div style="display:flex;gap:8px;align-items:flex-start;"><span style="color:var(--ai-blue);font-size:0.85em;flex-shrink:0;">&#10003;</span><span style="font-size:0.82em;color:var(--light-text);line-height:1.5;">8hr priority SLA support</span></div>
+                </div>
+            </div>
+
+            <!-- ENTERPRISE NODE -->
+            <div style="background:var(--card-dark);border:1px solid rgba(167,139,250,0.2);border-radius:12px;padding:26px 22px;position:relative;overflow:hidden;">
+                <div style="position:absolute;top:0;left:0;right:0;height:3px;background:#A78BFA;"></div>
+                <p style="margin:0 0 4px;font-size:0.68em;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:#A78BFA;">Enterprise Node</p>
+                <h3 style="margin:0 0 6px;color:var(--white);font-size:1.1em;">11+ Providers / Multi-Clinic</h3>
+                <p style="color:var(--muted);font-size:0.82em;line-height:1.6;margin:0 0 18px;">Group practices, health systems, and multi-site deployments. Custom architecture and MSP coordination.</p>
+                <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:10px 14px;text-align:center;">
+                    <span style="font-size:0.72em;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:3px;">Pricing Model</span>
+                    <span style="font-size:1.05em;font-weight:700;color:rgba(255,255,255,0.3);font-family:var(--font-mono);">[Custom Contract]</span>
+                </div>
+                <div style="margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.06);">
+                    <div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;"><span style="color:#A78BFA;font-size:0.85em;flex-shrink:0;">&#10003;</span><span style="font-size:0.82em;color:var(--light-text);line-height:1.5;">Multi-node deployment architecture</span></div>
+                    <div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;"><span style="color:#A78BFA;font-size:0.85em;flex-shrink:0;">&#10003;</span><span style="font-size:0.82em;color:var(--light-text);line-height:1.5;">Custom MSP partner coordination</span></div>
+                    <div style="display:flex;gap:8px;align-items:flex-start;"><span style="color:#A78BFA;font-size:0.85em;flex-shrink:0;">&#10003;</span><span style="font-size:0.82em;color:var(--light-text);line-height:1.5;">4hr SLA + on-site option</span></div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Founding Cohort Continuity (v273) -->
+        <div style="margin-top:28px;padding:22px 26px;background:rgba(0,194,168,0.04);border:1px solid rgba(0,194,168,0.22);border-radius:10px;display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between;">
+            <div>
+                <p style="margin:0 0 4px;font-weight:700;color:var(--white);font-size:0.97em;">Founding-cohort partners retain Phase 1 pricing for the first 12 months of their managed service term.</p>
+                <p style="margin:0;font-size:0.82em;color:var(--muted);line-height:1.6;">Phase 2 rates apply to deployments admitted after the founding cohort closes. Founding-cohort capacity is geographically scoped and selectively admitted.</p>
+            </div>
+            <a href="mailto:marcus@poconoai.com?subject=Founding%20Cohort%20%E2%80%94%20Pilot%20Discovery%20Conversation" style="display:inline-block;padding:12px 22px;background:rgba(0,194,168,0.12);border:1px solid rgba(0,194,168,0.4);border-radius:6px;color:var(--teal);font-weight:700;font-size:0.88em;text-decoration:none;white-space:nowrap;">Request Pilot Discovery &rarr;</a>
+        </div>
+    </section>
+        <!-- POV / PROOF OF VALUE -->
+    <div class="pov-box">
+        <p style="color:var(--teal);font-size:0.72em;text-transform:uppercase;letter-spacing:0.14em;font-weight:700;margin:0 0 8px;">Founding Cohort &middot; 60-Day Proof-of-Value Track</p>
+        <h3 style="color:var(--white);margin:0 0 10px;">60-Day Paid Proof-of-Value Engagement</h3>
+        <p style="color:var(--light-text);font-size:0.88em;line-height:1.75;margin:0 0 12px;">We do not run speculative free trials with sensitive compliance data. Every engagement begins with a structured <strong style="color:var(--white);">60-Day Paid Proof-of-Value (POV)</strong> at <strong style="color:var(--white);">$5,000</strong>. The fee covers architecture assessment, local RAG configuration, document sanitization pipeline setup, and HITL workflow calibration. The $5,000 is non-refundable. It funds real deployment work &mdash; not a demo. Upon conversion to a full managed service agreement, the fee applies toward your total implementation cost.</p>
+        <p style="color:var(--light-text);font-size:0.88em;line-height:1.75;margin:0 0 16px;">Pocono AI deploys and manages dedicated AI infrastructure within your practice from day one. The system is operational within 2&ndash;4 weeks of agreement execution.</p>
+        <a href="deployment.html" class="cta-button cta-button-light" style="font-size:0.88em;">Review the 60-Day POV brief</a>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         AFTER CONTACT — OPERATIONAL FRAMEWORK (v273)
+         Restrained, governance-first explanation of what happens
+         once a practice or firm requests a pilot discovery conversation.
+         No SaaS urgency, no sales sequence, no countdowns.
+    ═══════════════════════════════════════════════════════════ -->
+    <section id="after-contact" aria-labelledby="after-contact-heading" style="margin:48px 0;padding:36px 32px;background:var(--card-dark);border:1px solid rgba(255,255,255,0.07);border-radius:14px;">
+        <p style="margin:0 0 6px;font-size:0.72em;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--teal);font-family:var(--font-mono);">After Contact</p>
+        <h2 id="after-contact-heading" style="font-size:clamp(1.25rem,2.8vw,1.6rem);color:var(--white);margin:0 0 12px;border:none;line-height:1.3;">What happens after a pilot discovery request</h2>
+        <p style="color:var(--light-text);font-size:0.92em;line-height:1.75;max-width:700px;margin:0 0 28px;">Pilot admission is treated as an infrastructure engagement rather than a procurement transaction. The discovery sequence is structured around governance fit, workflow realism, and on-premises deployment feasibility. No call cadence, no follow-up automation, no sales sequence &mdash; the steps below are the entire process.</p>
+
+        <ol style="list-style:none;counter-reset:after-step;padding:0;margin:0;display:grid;grid-template-columns:1fr;gap:14px;max-width:820px;">
+            <li style="counter-increment:after-step;display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:flex-start;padding:18px 20px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);border-radius:10px;">
+                <span style="font-family:var(--font-mono);color:var(--teal);font-size:0.95em;font-weight:700;letter-spacing:0.05em;min-width:28px;">01</span>
+                <div>
+                    <p style="margin:0 0 4px;color:var(--white);font-weight:600;font-size:0.97em;">Discovery conversation</p>
+                    <p style="margin:0;color:var(--light-text);font-size:0.87em;line-height:1.7;">A 30&ndash;45 minute working conversation. We discuss the clinical or legal workflows under consideration, the document corpus involved, the current governance posture, and whether the practice's operational environment is a credible fit for an on-premises deployment. No deck. No demo. The call ends with a written summary of fit indicators.</p>
+                </div>
+            </li>
+            <li style="counter-increment:after-step;display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:flex-start;padding:18px 20px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);border-radius:10px;">
+                <span style="font-family:var(--font-mono);color:var(--teal);font-size:0.95em;font-weight:700;letter-spacing:0.05em;min-width:28px;">02</span>
+                <div>
+                    <p style="margin:0 0 4px;color:var(--white);font-weight:600;font-size:0.97em;">Infrastructure assessment</p>
+                    <p style="margin:0;color:var(--light-text);font-size:0.87em;line-height:1.7;">For practices that proceed, a short technical assessment reviews network segmentation, existing IT relationships, MSP coverage, regional service access, physical placement for the appliance, and any pre-existing compliance frameworks. The output is a deployment feasibility memo &mdash; not a quote.</p>
+                </div>
+            </li>
+            <li style="counter-increment:after-step;display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:flex-start;padding:18px 20px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);border-radius:10px;">
+                <span style="font-family:var(--font-mono);color:var(--teal);font-size:0.95em;font-weight:700;letter-spacing:0.05em;min-width:28px;">03</span>
+                <div>
+                    <p style="margin:0 0 4px;color:var(--white);font-weight:600;font-size:0.97em;">Workflow review with clinical or legal leadership</p>
+                    <p style="margin:0;color:var(--light-text);font-size:0.87em;line-height:1.7;">A focused working session with the licensed professionals whose workflows the system will support. We map the human-review chain, the documents that need to be retrievable, the situations where the system must abstain, and the boundary between AI assistance and licensed authorship. This is the conversation that determines whether the deployment will actually be used.</p>
+                </div>
+            </li>
+            <li style="counter-increment:after-step;display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:flex-start;padding:18px 20px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);border-radius:10px;">
+                <span style="font-family:var(--font-mono);color:var(--teal);font-size:0.95em;font-weight:700;letter-spacing:0.05em;min-width:28px;">04</span>
+                <div>
+                    <p style="margin:0 0 4px;color:var(--white);font-weight:600;font-size:0.97em;">Pilot qualification &amp; regional fit</p>
+                    <p style="margin:0;color:var(--light-text);font-size:0.87em;line-height:1.7;">Founding-cohort admission is reviewed against deployment capacity in the practice's region. We confirm we can support the deployment directly &mdash; named contacts, scheduled site visits where appropriate, and a defined escalation path &mdash; before any agreement is offered. Practices we cannot support to that standard are told so plainly.</p>
+                </div>
+            </li>
+            <li style="counter-increment:after-step;display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:flex-start;padding:18px 20px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);border-radius:10px;">
+                <span style="font-family:var(--font-mono);color:var(--teal);font-size:0.95em;font-weight:700;letter-spacing:0.05em;min-width:28px;">05</span>
+                <div>
+                    <p style="margin:0 0 4px;color:var(--white);font-weight:600;font-size:0.97em;">60-Day Paid Proof-of-Value engagement</p>
+                    <p style="margin:0;color:var(--light-text);font-size:0.87em;line-height:1.7;">Qualified practices begin a structured 60-Day POV. This is operational deployment work &mdash; architecture, local RAG configuration, document sanitization pipeline, HITL workflow calibration &mdash; not a sales evaluation. The $5,000 fee applies toward implementation on conversion to a managed service agreement.</p>
+                </div>
+            </li>
+            <li style="counter-increment:after-step;display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:flex-start;padding:18px 20px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);border-radius:10px;">
+                <span style="font-family:var(--font-mono);color:var(--teal);font-size:0.95em;font-weight:700;letter-spacing:0.05em;min-width:28px;">06</span>
+                <div>
+                    <p style="margin:0 0 4px;color:var(--white);font-weight:600;font-size:0.97em;">Collaborative workflow refinement under supervised review</p>
+                    <p style="margin:0;color:var(--light-text);font-size:0.87em;line-height:1.7;">Production use begins under supervised human review. Audit envelopes are inspected weekly. Retrieval is re-tuned as the document corpus and workflow evolve. Founding-cohort partners participate directly in the refinement loop &mdash; their operational feedback shapes the platform that subsequent cohorts inherit.</p>
+                </div>
+            </li>
+        </ol>
+
+        <p style="color:var(--muted);font-size:0.82em;line-height:1.7;margin:24px 0 0;max-width:700px;font-style:italic;">The discovery conversation through workflow review is non-binding. No agreement, no engagement fee, and no obligation arises until both sides choose to proceed to the 60-Day POV.</p>
+    </section>
+
+    <!-- HARDWARE REFRESH / OBSOLESCENCE SECTION -->
+    <section id="hardware-refresh" style="margin:48px 0;" aria-labelledby="refresh-heading">
+        <p style="margin:0 0 6px;font-size:0.72em;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--teal);font-family:var(--font-mono);">Infrastructure Longevity</p>
+        <h2 id="refresh-heading" style="font-size:clamp(1.3rem,3vw,1.7rem);color:var(--white);margin:0 0 14px;border:none;line-height:1.25;">Infrastructure Lifecycle Management</h2>
+        <p style="color:var(--light-text);max-width:680px;line-height:1.8;margin:0 0 24px;">AI inference hardware has a meaningful performance ceiling at roughly two years. GPU VRAM requirements, quantization options, and model size demands evolve faster than standard server refresh cycles. Pocono AI manages this lifecycle proactively &mdash; the infrastructure refresh is built into the managed service agreement, not negotiated as an add-on at renewal.</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;max-width:900px;">
+            <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:16px 18px;font-size:0.87em;line-height:1.65;color:var(--light-text);">
+                <p style="margin:0 0 6px;font-weight:700;color:var(--teal);font-size:0.78em;text-transform:uppercase;letter-spacing:0.1em;">Managed Infrastructure Refresh at Month 24</p>
+                <p style="margin:0;">Every HaaS Standard and Rent-to-Own contract includes a hardware refresh at month 24 at no additional charge. A new Sentinel Node pre-imaged to the current golden image is delivered to your site. Your encrypted data drives are physically transferred to the new chassis during a scheduled overnight maintenance window. Your data never leaves the building.</p>
+            </div>
+            <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:16px 18px;font-size:0.87em;line-height:1.65;color:var(--light-text);">
+                <p style="margin:0 0 6px;font-weight:700;color:var(--ai-blue);font-size:0.78em;text-transform:uppercase;letter-spacing:0.1em;">Overnight Swap Execution</p>
+                <p style="margin:0;">The swap is executed by a Pocono AI-certified MSP partner during a maintenance window. The new unit boots, validates the TPM 2.0 measured boot chain, and comes online. The old chassis is returned with drives removed. Drives are wiped to NIST 800-88 standards after you confirm the new unit is operational. Total on-site time is typically two to four hours.</p>
+            </div>
+            <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:16px 18px;font-size:0.87em;line-height:1.65;color:var(--light-text);">
+                <p style="margin:0 0 6px;font-weight:700;color:#A78BFA;font-size:0.78em;text-transform:uppercase;letter-spacing:0.1em;">&#9881; Outright Purchase Path</p>
+                <p style="margin:0;">For capital purchase arrangements, an infrastructure refresh at month 24 is available. We will notify you at month 18 with current configuration options. No deployment is left running an obsolete configuration without a clear path forward.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section>
+        <h2>Common Questions</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h3>How does infrastructure deployment work?</h3>
+                <p>Pocono AI deploys and manages dedicated AI infrastructure within your office environment. Standard deployments are fully managed — infrastructure is Pocono AI-maintained with exclusive client-side custody throughout the engagement. An ownership track (+$150/month toward title transfer) and capital purchase arrangements are available on request. In all cases, your data stays physically within your building and you retain full data ownership and export rights on exit.</p>
+            </div>
+            <div class="feature-card">
+                <h3>What happens if I cancel early?</h3>
+                <p>The 24-month contract term is binding. If you cancel before the end of term, you must either return the hardware in good condition within 10 days of termination notice, or pay 50% of the remaining monthly payments owed under the contract. The $5,000 implementation fee is non-refundable in all cases. On exit, you receive a full data export of all indexed documents and audit logs before the hardware is retrieved. Encrypted drives are NIST 800-88 purged only after you confirm receipt of your data export.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Is the monthly fee tax-deductible?</h3>
+                <p>Monthly HaaS fees are structured as operating expenses, not capital expenditures — typically deductible in the year incurred (no depreciation schedule). Consult your tax advisor for your specific situation.</p>
+            </div>
+            <div class="feature-card">
+                <h3>What does the implementation timeline look like?</h3>
+                <p>From signed POV agreement to first productive inference: 2–4 weeks for most independent practices. This includes hardware procurement, VLAN configuration, RAG pipeline setup, and HITL workflow calibration with your team.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Do you work with our MSP?</h3>
+                <p>Yes. We've built an MSP Partner Program specifically for this. Your existing IT provider can be involved at the referral or installation level. See the <a href="partners.html" style="color:var(--teal);">Partners page</a> for program details.</p>
+            </div>
+            <div class="feature-card">
+                <h3>What models run on the Sentinel Node?</h3>
+                <p>Current deployment stack: Ollama as the inference engine, running Gemma and Llama 3/4 variants. Model selection is tuned at deployment for your use case. All models run fully locally — no API calls to any cloud provider.</p>
+            </div>
+        </div>
+    </section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SECTION A: WHY WE STRUCTURED PRICING THIS WAY — v197
+     Procurement-facing rationale. Builds institutional credibility.
+═══════════════════════════════════════════════════════════ -->
+<section id="pricing-rationale" aria-labelledby="rationale-heading" style="margin:56px 0 48px;padding:36px 32px;background:var(--card-dark);border:1px solid rgba(255,255,255,0.07);border-radius:14px;">
+    <p style="margin:0 0 6px;font-size:0.72em;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--teal);font-family:var(--font-mono);">Pricing Philosophy</p>
+    <h2 id="rationale-heading" style="font-size:clamp(1.3rem,3vw,1.7rem);color:var(--white);margin:0 0 14px;border:none;line-height:1.25;">Why We Structured Pricing This Way</h2>
+    <!-- v272 Founding Deployment Note -->
+    <div style="background:rgba(0,194,168,0.05);border-left:3px solid rgba(0,194,168,0.4);border-radius:0 8px 8px 0;padding:14px 18px;margin:0 0 28px;font-size:0.88em;color:var(--light-text);line-height:1.75;">
+        <strong style="color:var(--white);">A note on current pricing:</strong> The rates published here represent Phase 1 Founding Deployment pricing — intentionally structured for early pilot partners during the initial infrastructure rollout phase. Pricing is expected to evolve as deployment capacity, infrastructure scope, and enterprise feature sets expand. Early deployment partners who establish a managed service agreement during the founding phase lock in their rate for the full initial term.
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;">
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+            <span style="font-size:1.3em;flex-shrink:0;margin-top:2px;" aria-hidden="true">&#128274;</span>
+            <div>
+                <p style="margin:0 0 4px;font-weight:600;color:var(--white);font-size:0.95em;">Local custody from day one</p>
+                <p style="margin:0;font-size:0.85em;color:var(--light-text);line-height:1.65;">Regardless of deployment structure, the Sentinel Node lives physically in your building under your exclusive operational custody. Pocono AI cannot access the hardware remotely without your consent. Zero telemetry, no cloud, and data sovereignty are architectural properties of the deployment — not contractual promises that depend on who holds the title.</p>
+            </div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+            <span style="font-size:1.3em;flex-shrink:0;margin-top:2px;" aria-hidden="true">&#128200;</span>
+            <div>
+                <p style="margin:0 0 4px;font-weight:600;color:var(--white);font-size:0.95em;">Lower long-term cost than per-seat cloud licensing</p>
+                <p style="margin:0;font-size:0.85em;color:var(--light-text);line-height:1.65;">Per-seat AI licensing from major vendors escalates annually. A five-provider practice paying $150–$300 per seat per month crosses $9,000–$18,000 annually — before add-ons, storage overages, or compliance audits. Our flat monthly managed infrastructure rate does not escalate with headcount or query volume.</p>
+            </div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+            <span style="font-size:1.3em;flex-shrink:0;margin-top:2px;" aria-hidden="true">&#9881;&#65039;</span>
+            <div>
+                <p style="margin:0 0 4px;font-weight:600;color:var(--white);font-size:0.95em;">No recurring licensing escalation</p>
+                <p style="margin:0;font-size:0.85em;color:var(--light-text);line-height:1.65;">Cloud AI vendors renegotiate pricing at renewal. Model API costs fluctuate with provider infrastructure decisions. Because inference runs on locally deployed infrastructure within your office, your operational cost is not subject to upstream cloud vendor pricing changes.</p>
+            </div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+            <span style="font-size:1.3em;flex-shrink:0;margin-top:2px;" aria-hidden="true">&#128203;</span>
+            <div>
+                <p style="margin:0 0 4px;font-weight:600;color:var(--white);font-size:0.95em;">Transparent, predictable costs</p>
+                <p style="margin:0;font-size:0.85em;color:var(--light-text);line-height:1.65;">One implementation fee. One monthly rate. No usage tiers, no API metering, no storage overage charges. The total cost of ownership is calculable from day one. We publish it above, not in a sales call.</p>
+            </div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+            <span style="font-size:1.3em;flex-shrink:0;margin-top:2px;" aria-hidden="true">&#127961;&#65039;</span>
+            <div>
+                <p style="margin:0 0 4px;font-weight:600;color:var(--white);font-size:0.95em;">Local data sovereignty &mdash; by architecture</p>
+                <p style="margin:0;font-size:0.85em;color:var(--light-text);line-height:1.65;">PHI and privileged client records never traverse an external network during inference. This is an architectural property, not a policy commitment. It cannot be reversed by a vendor update, an acquisition, or a terms-of-service change.</p>
+            </div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+            <span style="font-size:1.3em;flex-shrink:0;margin-top:2px;" aria-hidden="true">&#9889;</span>
+            <div>
+                <p style="margin:0 0 4px;font-weight:600;color:var(--white);font-size:0.95em;">Deployment-first, not demo-first</p>
+                <p style="margin:0;font-size:0.85em;color:var(--light-text);line-height:1.65;">The implementation fee funds real deployment work: infrastructure configuration, network architecture, document pipeline setup, and HITL workflow calibration specific to your practice. It is non-refundable because the work is real. The structured POV engagement generates validated results before any long-term commitment is made. The POV is a structured engagement, not a free trial.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SECTION B: FINANCING & ACCESSIBILITY — v197
+     Addresses cash-flow constraints without implying direct lending.
+═══════════════════════════════════════════════════════════ -->
+<section id="financing-accessibility" aria-labelledby="financing-heading" style="margin:48px 0;padding:36px 32px;background:rgba(10,115,210,0.05);border:1px solid rgba(10,115,210,0.18);border-radius:14px;">
+    <p style="margin:0 0 6px;font-size:0.72em;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--ai-blue);font-family:var(--font-mono);">Financing &amp; Accessibility</p>
+    <h2 id="financing-heading" style="font-size:clamp(1.3rem,3vw,1.7rem);color:var(--white);margin:0 0 12px;border:none;line-height:1.25;">Deployment Accessibility for Independent Practices</h2>
+    <p style="color:var(--light-text);line-height:1.8;margin:0 0 24px;font-size:0.97em;">We understand many independent practices operate under tight cash-flow constraints — particularly smaller clinics, smaller law firms, and early-growth firms that have not yet structured capital reserves for technology investment. The upfront implementation cost is the most common barrier we hear about.</p>
+    <p style="color:var(--light-text);line-height:1.8;margin:0 0 28px;font-size:0.97em;"><strong style="color:var(--white);">Pocono AI does not provide financing directly.</strong> We are an infrastructure deployment and managed services company. However, we will work with approved financing vendors and program partners where possible, and we are glad to support your procurement documentation if you are pursuing third-party funding.</p>
+
+    <!-- Financing pathways grid -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-bottom:28px;">
+        <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:20px;">
+            <p style="margin:0 0 6px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--ai-blue);">SBA Resources</p>
+            <p style="margin:0 0 8px;font-weight:600;color:var(--white);font-size:0.93em;">SBA Small Business Lending Programs</p>
+            <p style="margin:0;font-size:0.83em;color:var(--light-text);line-height:1.65;">SBA 7(a) and 504 loan programs have historically been used for technology infrastructure and equipment acquisition by qualified small businesses. Eligibility criteria, terms, and availability vary. Contact your regional SBA office or an SBA-approved lender for current program details.</p>
+        </div>
+        <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:20px;">
+            <p style="margin:0 0 6px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--ai-blue);">Regional Development</p>
+            <p style="margin:0 0 8px;font-weight:600;color:var(--white);font-size:0.93em;">Economic Development Programs</p>
+            <p style="margin:0;font-size:0.83em;color:var(--light-text);line-height:1.65;">Many states and counties operate technology modernization programs, rural healthcare access initiatives, and small business innovation grants through their departments of commerce and economic development. Pennsylvania DCED and similar regional agencies are worth contacting. Availability varies by region and fiscal year.</p>
+        </div>
+        <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:20px;">
+            <p style="margin:0 0 6px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--ai-blue);">Healthcare Technology</p>
+            <p style="margin:0 0 8px;font-weight:600;color:var(--white);font-size:0.93em;">Healthcare Technology Modernization Grants</p>
+            <p style="margin:0;font-size:0.83em;color:var(--light-text);line-height:1.65;">Federal and state healthcare quality improvement programs, HRSA rural health grants, and telehealth infrastructure initiatives have in some cases funded practice technology upgrades. Eligibility depends on practice type, geography, and program cycle. We recommend consulting with your state's primary care association for current opportunities.</p>
+        </div>
+        <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:20px;">
+            <p style="margin:0 0 6px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--ai-blue);">Equipment Financing</p>
+            <p style="margin:0 0 8px;font-weight:600;color:var(--white);font-size:0.93em;">Local Credit Union &amp; Equipment Financing</p>
+            <p style="margin:0;font-size:0.83em;color:var(--light-text);line-height:1.65;">For practices that prefer a capital purchase arrangement, standard equipment financing through local credit unions and community banks may be available. Contact us for current hardware configuration pricing. Our standard managed deployment model eliminates capital planning requirements entirely — the monthly subscription covers hardware, software, maintenance, and support.</p>
+        </div>
+        <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:20px;">
+            <p style="margin:0 0 6px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--ai-blue);">Tax Strategy</p>
+            <p style="margin:0 0 8px;font-weight:600;color:var(--white);font-size:0.93em;">Section 179 &amp; Tax Planning Considerations</p>
+            <p style="margin:0;font-size:0.83em;color:var(--light-text);line-height:1.65;">Business equipment purchases may be eligible for Section 179 expensing or bonus depreciation treatment under current U.S. tax law. Monthly HaaS fees are structured as operating expenses and are deductible in the year incurred. <strong style="color:rgba(208,221,230,0.6);">This is not tax advice. Consult a qualified CPA or tax advisor regarding your specific situation, as tax law is subject to change and eligibility depends on your entity structure and tax position.</strong></p>
+        </div>
+        <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:20px;">
+            <p style="margin:0 0 6px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--ai-blue);">Phased Deployment</p>
+            <p style="margin:0 0 8px;font-weight:600;color:var(--white);font-size:0.93em;">Pilot-First &amp; Phased Deployment Options</p>
+            <p style="margin:0;font-size:0.83em;color:var(--light-text);line-height:1.65;">Our standard POV engagement is designed precisely for practices that cannot commit to full deployment without validated results. The 60-day Proof-of-Value at $5,000 is a structured entry point with defined success criteria. Phased deployment &mdash; beginning with Phase I and expanding to Phase II capacity at a later date &mdash; is available for practices that want to validate results before expanding.</p>
+        </div>
+    </div>
+
+    <!-- Financing support note -->
+    <div style="background:rgba(10,115,210,0.08);border-left:3px solid var(--ai-blue);border-radius:0 8px 8px 0;padding:16px 20px;">
+        <p style="margin:0;font-size:0.88em;color:var(--light-text);line-height:1.75;"><strong style="color:var(--white);">Procurement support:</strong> If you are pursuing grant funding, loan approval, or an institutional procurement process that requires documentation — vendor information, deployment specifications, total cost of ownership analysis, or a formal quote — contact us directly. We will provide what your process requires. We regularly support procurement officers and practice administrators who are navigating institutional purchasing workflows for the first time.</p>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SECTION C: HUMAN OVERSIGHT ARCHITECTURE — v197
+     Reinforces the human-in-the-loop positioning.
+═══════════════════════════════════════════════════════════ -->
+<section id="human-oversight" aria-labelledby="oversight-heading" style="margin:48px 0;padding:36px 32px;background:var(--card-dark);border:1px solid rgba(255,255,255,0.07);border-radius:14px;">
+    <p style="margin:0 0 6px;font-size:0.72em;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--teal);font-family:var(--font-mono);">Architecture &amp; Oversight</p>
+    <h2 id="oversight-heading" style="font-size:clamp(1.3rem,3vw,1.7rem);color:var(--white);margin:0 0 12px;border:none;line-height:1.25;">Human Oversight Is Not Optional</h2>
+    <p style="color:var(--light-text);line-height:1.8;margin:0 0 28px;font-size:0.97em;">The Sentinel Node is an AI-assisted retrieval and drafting tool. It is not an autonomous decision system. Every workflow is designed with a mandatory human review step before any clinical, legal, or compliance-sensitive output is used. This is not a disclaimer — it is the architecture.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-bottom:24px;">
+        <div style="text-align:center;padding:22px 16px;background:rgba(0,194,168,0.05);border:1px solid rgba(0,194,168,0.15);border-radius:10px;">
+            <div style="font-size:1.8em;margin-bottom:10px;" aria-hidden="true">&#129500;</div>
+            <p style="margin:0 0 6px;font-weight:600;color:var(--white);font-size:0.9em;">AI Retrieves &amp; Drafts</p>
+            <p style="margin:0;font-size:0.8em;color:var(--light-text);line-height:1.6;">The system retrieves relevant documents, assembles context, and produces cited draft outputs. Every statement is traceable to a source document and page.</p>
+        </div>
+        <div style="text-align:center;padding:22px 16px;background:rgba(0,194,168,0.05);border:1px solid rgba(0,194,168,0.15);border-radius:10px;">
+            <div style="font-size:1.8em;margin-bottom:10px;" aria-hidden="true">&#128065;&#65039;</div>
+            <p style="margin:0 0 6px;font-weight:600;color:var(--white);font-size:0.9em;">Humans Review &amp; Validate</p>
+            <p style="margin:0;font-size:0.8em;color:var(--light-text);line-height:1.6;">A licensed professional reviews, edits, and approves every output before it enters a clinical note, legal document, or patient communication. The AI does not act unilaterally.</p>
+        </div>
+        <div style="text-align:center;padding:22px 16px;background:rgba(0,194,168,0.05);border:1px solid rgba(0,194,168,0.15);border-radius:10px;">
+            <div style="font-size:1.8em;margin-bottom:10px;" aria-hidden="true">&#128203;</div>
+            <p style="margin:0 0 6px;font-weight:600;color:var(--white);font-size:0.9em;">Every Action Logged Locally</p>
+            <p style="margin:0;font-size:0.8em;color:var(--light-text);line-height:1.6;">A 90-day append-only HMAC audit log captures every retrieval, every output, and every human approval — on-device, under your control. Available for compliance review on demand.</p>
+        </div>
+        <div style="text-align:center;padding:22px 16px;background:rgba(0,194,168,0.05);border:1px solid rgba(0,194,168,0.15);border-radius:10px;">
+            <div style="font-size:1.8em;margin-bottom:10px;" aria-hidden="true">&#128681;</div>
+            <p style="margin:0 0 6px;font-weight:600;color:var(--white);font-size:0.9em;">Calibrated Per Workflow</p>
+            <p style="margin:0;font-size:0.8em;color:var(--light-text);line-height:1.6;">Human-in-the-Loop thresholds are calibrated during deployment to match your specific workflows — prior auth, note drafting, document search, or billing support. Not a one-size template.</p>
+        </div>
+    </div>
+    <p style="margin:0;font-size:0.82em;color:var(--muted);line-height:1.7;padding:14px 18px;background:rgba(255,255,255,0.03);border-radius:8px;border-left:3px solid rgba(255,255,255,0.12);">&#9432;&nbsp; The Sentinel Node does not provide medical advice, legal advice, or compliance certification. All clinical and legal outputs require review and validation by an appropriately licensed professional before use. Technology deployment does not constitute compliance with HIPAA, ABA Rules, or any other regulatory framework — that responsibility remains with your practice and its licensed personnel.</p>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SECTION D: OPERATIONAL METRICS — v197
+     Trust anchors — honest placeholders, updateable post-pilot.
+═══════════════════════════════════════════════════════════ -->
+<section id="operational-metrics" aria-labelledby="metrics-heading" style="margin:48px 0;padding:36px 32px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:14px;">
+    <p style="margin:0 0 6px;font-size:0.72em;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--teal);font-family:var(--font-mono);">Operational Baseline</p>
+    <h2 id="metrics-heading" style="font-size:clamp(1.3rem,3vw,1.7rem);color:var(--white);margin:0 0 6px;border:none;line-height:1.25;">System Performance &amp; Trust Metrics</h2>
+    <p style="color:var(--muted);font-size:0.82em;margin:0 0 28px;font-style:italic;">Values below reflect target specifications and architecture design parameters. Measured pilot data will be published with partner permission once deployments are active.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;">
+        <div style="background:var(--card-dark);border-radius:10px;padding:20px 16px;text-align:center;border-top:2px solid var(--teal);">
+            <div style="font-family:var(--font-mono);font-size:1.5em;font-weight:700;color:var(--teal);margin-bottom:6px;">&lt;2s</div>
+            <div style="font-size:0.78em;color:var(--light-text);line-height:1.4;">Local RAG query<br>response target</div>
+        </div>
+        <div style="background:var(--card-dark);border-radius:10px;padding:20px 16px;text-align:center;border-top:2px solid var(--teal);">
+            <div style="font-family:var(--font-mono);font-size:1.5em;font-weight:700;color:var(--teal);margin-bottom:6px;">0</div>
+            <div style="font-size:0.78em;color:var(--light-text);line-height:1.4;">Bytes transmitted to<br>cloud during inference</div>
+        </div>
+        <div style="background:var(--card-dark);border-radius:10px;padding:20px 16px;text-align:center;border-top:2px solid var(--teal);">
+            <div style="font-family:var(--font-mono);font-size:1.5em;font-weight:700;color:var(--teal);margin-bottom:6px;">99.9%</div>
+            <div style="font-size:0.78em;color:var(--light-text);line-height:1.4;">Uptime SLA target<br>(Dell ProSupport backed)</div>
+        </div>
+        <div style="background:var(--card-dark);border-radius:10px;padding:20px 16px;text-align:center;border-top:2px solid var(--teal);">
+            <div style="font-family:var(--font-mono);font-size:1.5em;font-weight:700;color:var(--teal);margin-bottom:6px;">90d</div>
+            <div style="font-size:0.78em;color:var(--light-text);line-height:1.4;">Append-only HMAC<br>audit log retention</div>
+        </div>
+        <div style="background:var(--card-dark);border-radius:10px;padding:20px 16px;text-align:center;border-top:2px solid var(--ai-blue);">
+            <div style="font-family:var(--font-mono);font-size:1.5em;font-weight:700;color:var(--ai-blue);margin-bottom:6px;">100%</div>
+            <div style="font-size:0.78em;color:var(--light-text);line-height:1.4;">Local-only processing<br>no API calls to cloud</div>
+        </div>
+        <div style="background:var(--card-dark);border-radius:10px;padding:20px 16px;text-align:center;border-top:2px solid var(--ai-blue);">
+            <div style="font-family:var(--font-mono);font-size:1.5em;font-weight:700;color:var(--ai-blue);margin-bottom:6px;">HITL</div>
+            <div style="font-size:0.78em;color:var(--light-text);line-height:1.4;">Human-in-the-loop<br>on every workflow</div>
+        </div>
+        <div style="background:var(--card-dark);border-radius:10px;padding:20px 16px;text-align:center;border-top:2px solid var(--ai-blue);">
+            <div style="font-family:var(--font-mono);font-size:1.5em;font-weight:700;color:var(--ai-blue);margin-bottom:6px;">2–4w</div>
+            <div style="font-size:0.78em;color:var(--light-text);line-height:1.4;">Average deployment<br>timeline, 2–10 provider practice</div>
+        </div>
+        <div style="background:var(--card-dark);border-radius:10px;padding:20px 16px;text-align:center;border-top:2px solid var(--ai-blue);">
+            <div style="font-family:var(--font-mono);font-size:1.5em;font-weight:700;color:var(--ai-blue);margin-bottom:6px;">AES-256</div>
+            <div style="font-size:0.78em;color:var(--light-text);line-height:1.4;">Storage encryption<br>at rest, on-device</div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SECTION E: REGIONAL FOUNDING-COHORT PROGRAM — v273
+     Retheme from amber/urgency → teal/governance.
+     White-glove onboarding, selective regional admission.
+═══════════════════════════════════════════════════════════ -->
+<section id="pilot-program" aria-labelledby="pilot-heading" style="margin:48px 0;padding:36px 32px;background:rgba(0,194,168,0.04);border:1px solid rgba(0,194,168,0.22);border-radius:14px;">
+    <p style="margin:0 0 6px;font-size:0.72em;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--teal);font-family:var(--font-mono);">Selective Regional Admission</p>
+    <h2 id="pilot-heading" style="font-size:clamp(1.3rem,3vw,1.7rem);color:var(--white);margin:0 0 12px;border:none;line-height:1.25;">Regional Founding-Cohort Program</h2>
+    <p style="color:var(--light-text);line-height:1.8;margin:0 0 24px;font-size:0.97em;">Pocono AI admits a small founding cohort of clinical and legal workflow partners in the Pennsylvania, New Jersey, and New York region for structured Proof-of-Value engagements. Cohort capacity is deliberately scoped &mdash; not as a marketing posture, but because meaningful deployment requires direct founder involvement in onboarding and ongoing governance review.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-bottom:24px;">
+        <div style="padding:18px 20px;background:rgba(255,255,255,0.03);border-radius:8px;">
+            <p style="margin:0 0 6px;font-weight:600;color:var(--white);font-size:0.92em;">&#128081; White-Glove Onboarding</p>
+            <p style="margin:0;font-size:0.83em;color:var(--light-text);line-height:1.65;">Every pilot deployment is managed directly with the founder. There is no tier-one support queue for pilot clients. Architecture decisions, workflow calibration, and document pipeline configuration are handled by the person who built the system.</p>
+        </div>
+        <div style="padding:18px 20px;background:rgba(255,255,255,0.03);border-radius:8px;">
+            <p style="margin:0 0 6px;font-weight:600;color:var(--white);font-size:0.92em;">&#129309; Collaborative Deployment</p>
+            <p style="margin:0;font-size:0.83em;color:var(--light-text);line-height:1.65;">Pilot clients participate in a structured workflow mapping session before deployment. We document your current document handling processes, identify where AI retrieval adds measurable value, and design the deployment around your actual clinical or legal workflow — not a generic template.</p>
+        </div>
+        <div style="padding:18px 20px;background:rgba(255,255,255,0.03);border-radius:8px;">
+            <p style="margin:0 0 6px;font-weight:600;color:var(--white);font-size:0.92em;">&#9989; Validation Before Scale</p>
+            <p style="margin:0;font-size:0.83em;color:var(--light-text);line-height:1.65;">The 60-day POV period includes defined success criteria established collaboratively at engagement start. Workflow validation, time-savings measurement, and staff adoption review occur before any recommendation to proceed to a full SLA contract. We do not pressure conversion.</p>
+        </div>
+        <div style="padding:18px 20px;background:rgba(255,255,255,0.03);border-radius:8px;">
+            <p style="margin:0 0 6px;font-weight:600;color:var(--white);font-size:0.92em;">&#128202; Measurable Outcomes</p>
+            <p style="margin:0;font-size:0.83em;color:var(--light-text);line-height:1.65;">Pilot clients have the option to participate in a documented outcome study, with their permission. Measured data — time saved per provider, prior auth processing speed, chart review time — will inform pricing, product development, and public case studies when partners consent to sharing.</p>
+        </div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center;">
+        <a href="deployment.html" style="display:inline-block;padding:11px 22px;background:rgba(0,194,168,0.1);border:1px solid rgba(0,194,168,0.35);border-radius:6px;color:var(--white);font-weight:600;font-size:0.88em;text-decoration:none;transition:background 0.2s;" onmouseover="this.style.background='rgba(0,194,168,0.18)'" onmouseout="this.style.background='rgba(0,194,168,0.1)'">View Deployment Timeline &rarr;</a>
+        <a href="mailto:marcus@poconoai.com?subject=Founding%20Cohort%20%E2%80%94%20Pilot%20Discovery&body=Practice%2FFirm%3A%20%0AProviders%2FAttorneys%3A%20%0APrimary%20use%20case%3A%20%0ARegion%3A%20%0A%0AQuestions%3A%20" style="display:inline-block;padding:11px 22px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.15);border-radius:6px;color:var(--light-text);font-weight:600;font-size:0.88em;text-decoration:none;transition:border-color 0.2s;" onmouseover="this.style.borderColor='rgba(255,255,255,0.35)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.15)'">Request a Pilot Discovery Conversation</a>
+    </div>
+</section>
+
+
+    <!-- FINAL CTA -->
+    <section id="contact" class="cta-container">
+        <h2 style="color:white;border-bottom:none;margin-top:0;">Ready to Explore a Deployment?</h2>
+        <p style="color:var(--light-text);max-width:520px;margin:0 auto 28px;line-height:1.8;">No third-party form processors. Your inquiry goes directly to Marcus — consistent with the product we sell: your data never leaves the building.</p>
+        <a href="mailto:marcus@poconoai.com?subject=Pricing%20Inquiry%20%E2%80%94%20PoconoAI.com&body=Hi%20Marcus%2C%0A%0AI%27m%20interested%20in%20HaaS%20pricing%20for%20the%20Sentinel%20Node.%0A%0APractice%2FFirm%3A%20%0AProviders%3A%20%0AUse%20case%3A%20%0A%0ABest%20time%20to%20connect%3A%20" class="cta-button">&#9993; Email marcus@poconoai.com</a>
+        <p style="color:var(--muted);font-size:0.8em;margin-top:16px;">Or call directly: <a href="tel:+15705340602" style="color:var(--muted);">(570) 534-0602</a></p>
+    </section>
+
+    <!-- v344: contextual link to use-case solutions hub -->
+    <section style="max-width:1100px;margin:36px auto 0;padding:24px;border-top:1px solid rgba(255,255,255,0.07);text-align:center;">
+      <p style="margin:0 0 8px;color:#9eb9cc;font-size:0.95rem;">Not sure which configuration fits your work?</p>
+      <a href="regulated-ai-solutions.html" style="color:#2dd4bf;text-decoration:none;font-weight:600;font-size:0.95rem;">See Pocono AI solutions organized by use case &rarr;</a>
+    </section>
+
+</main>
+
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 root-relative nav fix, Living Echo rebrand, Engineering & Drafting + Enterprise Estate Continuity links added (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- INCLUDE:FOOTER -->
+<footer role="contentinfo" style="background:#051622;border-top:1px solid rgba(255,255,255,0.08);padding:40px 24px 28px;font-size:0.85em;color:#8899aa;">
+  <div style="max-width:1180px;margin:0 auto;">
+
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:0 0 28px;margin-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.07);">
+      <div style="max-width:560px;">
+        <p style="margin:0 0 6px;font-size:1.05em;font-weight:700;color:#fff;">Local AI infrastructure for regulated practices.</p>
+        <p style="margin:0;font-size:0.95em;line-height:1.5;">Drafts with citations. Human review required. Sensitive documents stay under practice control. Simple path, deep proof.</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="/contact.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;background:#00c2a8;color:#04111a;font-weight:700;text-decoration:none;font-size:0.95em;">Request Pilot</a>
+        <a href="/sentinel-demo.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;border:1px solid rgba(0,194,168,0.55);color:#00c2a8;font-weight:700;text-decoration:none;font-size:0.95em;">Watch Demo</a>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px 32px;margin-bottom:32px;text-align:left;">
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">For You</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/start-here.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Start Here (3 min)</a>
+          <a href="/for-physicians.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Physicians</a>
+          <a href="/for-attorneys.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Attorneys</a>
+          <a href="/engineering-drafting/" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Engineering &amp; Drafting Teams</a>
+          <a href="/pilot-program.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Pilot Program</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Installer Training</a>
+          <a href="/how-it-works.html" style="color:#8899aa;text-decoration:none;">How It Works</a>
+          <a href="/trust.html" style="color:#8899aa;text-decoration:none;">Trust &amp; Audit</a>
+          <a href="/pricing.html" style="color:#8899aa;text-decoration:none;">Pricing</a>
+          <a href="/sentinel-demo.html" style="color:#8899aa;text-decoration:none;">See the Demo</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Documentation Hub</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/documentation-hub/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Hub Home &mdash; Deep Proof</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">Installer Training</a>
+          <a href="/sentinel-node/installation-simulator.html" style="color:#8899aa;text-decoration:none;">&#8627; Installation Simulator</a>
+          <a href="/documentation-hub/clinical/" style="color:#8899aa;text-decoration:none;">Clinical Documentation</a>
+          <a href="/documentation-hub/legal/" style="color:#8899aa;text-decoration:none;">Legal Documentation</a>
+          <a href="/documentation-hub/technical/" style="color:#8899aa;text-decoration:none;">Technical Documentation</a>
+          <a href="/documentation-hub/governance/" style="color:#8899aa;text-decoration:none;">Governance &amp; Audit</a>
+          <a href="/documentation-hub/tools/" style="color:#8899aa;text-decoration:none;">Tools &amp; Simulators</a>
+          <a href="/documentation-hub/research/" style="color:#8899aa;text-decoration:none;">Research &amp; Essays</a>
+          <a href="/documentation-hub/transparency/" style="color:#8899aa;text-decoration:none;">Transparency</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Global Federated AI</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/global/" style="color:#7af0dc;text-decoration:none;font-weight:600;">Global Federated Hub</a>
+          <a href="/global/australia/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Australia</a>
+          <a href="/global/singapore/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Singapore</a>
+          <a href="/global/taiwan/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Taiwan</a>
+          <a href="/global/europe/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Europe</a>
+          <a href="/contact.html" style="color:#8899aa;text-decoration:none;">Partner Inquiry</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Company</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/about.html" style="color:#8899aa;text-decoration:none;">About Pocono AI</a>
+          <a href="/team.html" style="color:#8899aa;text-decoration:none;">Team &amp; Leadership</a>
+          <a href="/why-pocono-ai.html" style="color:#8899aa;text-decoration:none;">Why Pocono AI</a>
+          <a href="/founding-commercial-leadership.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Join Us</a>
+          <a href="/careers.html" style="color:#8899aa;text-decoration:none;">Careers</a>
+          <a href="/how-we-hire.html" style="color:#8899aa;text-decoration:none;">How We Hire</a>
+          <a href="/channel-partners.html" style="color:#8899aa;text-decoration:none;">Technical Partners (MSPs)</a>
+          <a href="/partners.html" style="color:#8899aa;text-decoration:none;">Academic Partnerships</a>
+          <a href="/contact.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Contact</a>
+          <a href="https://forms.gle/VQahnkjMfY6QNEMy8" target="_blank" rel="noopener noreferrer" style="color:#d5a94f;text-decoration:none;font-weight:600;">Interest List &#8599;</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Founder Projects</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/rehability/" style="color:#a78bfa;text-decoration:none;font-weight:700;">Rehability &#x2605;</a>
+          <a href="/rehability/marcus-memory-helper/" style="color:#a78bfa;text-decoration:none;font-weight:600;">&#8627; Marcus's Memory Helper</a>
+          <a href="/sentinel-home/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Sentinel Home Edition</a>
+          <a href="/living-memorials/" style="color:#8899aa;text-decoration:none;">Living Echo</a>
+          <a href="/living-memorials/marcus-odell/" style="color:#8899aa;text-decoration:none;">Marcus&rsquo;s Living Echo</a>
+          <a href="/living-memorials/enterprise-estate-continuity.html" style="color:#8899aa;text-decoration:none;">Enterprise Estate Continuity</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Resources &amp; Legal</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/sitemap.html" style="color:#8899aa;text-decoration:none;">All Pages (Sitemap)</a>
+          <a href="/audit.html" style="color:#8899aa;text-decoration:none;">Transparency &amp; Audit Log</a>
+          <a href="/maturity-disclosure.html" style="color:#8899aa;text-decoration:none;">What We Have / Don&rsquo;t Claim</a>
+          <a href="/plain.html" style="color:#8899aa;text-decoration:none;">Plain Language Guide</a>
+          <a href="/privacy.html" style="color:#8899aa;text-decoration:none;">Privacy</a>
+          <a href="/terms.html" style="color:#8899aa;text-decoration:none;">Terms</a>
+          <a href="/sla.html" style="color:#8899aa;text-decoration:none;">SLA</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:18px;margin-bottom:14px;">
+      <p style="margin:0;font-size:0.82em;line-height:1.6;color:#6f8295;max-width:1000px;">Pocono AI does not provide medical, legal, or engineering advice, does not practice medicine, law, or licensed engineering, and does not make clinical, legal, or engineering decisions. Outputs are drafts or support materials that require review by a qualified professional; final professional judgment remains with the licensed physician, attorney, or engineer. Tools and simulations on this site are educational and use synthetic data.</p>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:20px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+      <p style="margin:0;font-size:0.9em;">&copy; 2026 Pocono AI, LLC &nbsp;&#183;&nbsp; East Stroudsburg, PA &nbsp;&#183;&nbsp; <a href="mailto:marcus@poconoai.com" style="color:#8899aa;">marcus@poconoai.com</a> &nbsp;&#183;&nbsp; <a href="tel:+15705340602" style="color:#8899aa;">(570) 534-0602</a></p>
+      <p style="margin:0;font-size:0.88em;"><a href="/audit.html" style="color:#5dade2;text-decoration:none;">Transparency v402</a></p>
+    </div>
+  </div>
+</footer>
+<script src="/search.js?v=402" defer></script>
+<!-- /INCLUDE:FOOTER -->
+
+<script src="search-index.js?v=402" defer></script>
+<script src="nav.js?v=402" defer></script>
+<script src="pilot-cta.js?v=402" defer></script>
+</body>
+</html>

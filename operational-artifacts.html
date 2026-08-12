@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp -->
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Operational Artifacts — What Auditors Actually See | Pocono AI</title>
+<meta name="description" content="Concrete examples of documents, logs, manifests, and reports that a Pocono AI deployment produces — audit trail in practice.">
+<meta name="keywords" content="AI audit log example, ingestion manifest, human review queue, citation verification, egress attestation, governance policy template, HIPAA audit, legal AI audit, on-premises AI compliance, Pocono AI operational artifacts">
+<meta property="og:title" content="Operational Artifacts — What Auditors Actually See | Pocono AI">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Pocono AI">
+<meta property="og:description" content="The documents, logs, and reports your compliance officers and malpractice carriers actually receive — formatted as they appear in real exports.">
+<meta property="og:url" content="https://poconoai.com/operational-artifacts.html">
+<meta property="og:image" content="https://poconoai.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Operational Artifacts — Pocono AI">
+<meta name="twitter:description" content="Concrete examples of audit logs, ingestion manifests, review summaries, and governance templates.">
+<meta name="theme-color" content="#0B0F13">
+
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="favicon-180x180.png">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="alternate icon" href="favicon.ico">
+<link rel="canonical" href="https://poconoai.com/operational-artifacts.html">
+<link rel="stylesheet" href="styles.css?v=402">
+<link rel="stylesheet" href="nav-v2026.css?v=402">
+<link rel="stylesheet" href="brand-v292.css?v=402">
+
+<style>
+/* ───────────────────────────────────────────────────────────────────
+   OPERATIONAL ARTIFACTS — v246 (Stage 2).
+   Same Stage 1 rules: normal-flow stacked sections only, no absolute
+   positioning, mobile-first.
+
+   Critical design constraint: every "example" below is presented as a
+   document, log, or export — never as a fake UI screenshot. This avoids
+   implying we've built UI surfaces that don't exist yet, while still
+   showing concretely what compliance officers receive.
+─────────────────────────────────────────────────────────────────── */
+
+.oa-hero {
+  padding: 4rem 0 1.5rem;
+}
+.oa-hero h1 {
+  font-size: clamp(2rem, 4.4vw, 3rem);
+  line-height: 1.1;
+  color: var(--white, #fff);
+  margin: 0 0 1rem;
+  border-bottom: none;
+}
+.oa-hero .lede {
+  font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+  line-height: 1.55;
+  color: #a8cce8;
+  max-width: 760px;
+  margin: 0 0 1.25rem;
+}
+
+/* Synthetic-data notice — required for honesty */
+.oa-disclaimer {
+  display: flex;
+  gap: 0.85rem;
+  align-items: flex-start;
+  padding: 1rem 1.15rem;
+  margin: 0 0 1.5rem;
+  border-radius: 0.7rem;
+  border: 1px solid rgba(251, 191, 36, 0.32);
+  background: rgba(186, 117, 23, 0.08);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #ddc9a3;
+}
+.oa-disclaimer .oa-disclaimer-icon {
+  flex-shrink: 0;
+  color: #fbbf24;
+  font-weight: 700;
+  font-size: 1.1rem;
+  line-height: 1.4;
+}
+.oa-disclaimer strong { color: #fef3c7; font-weight: 600; }
+
+/* Jump menu */
+.oa-jump {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin: 1.5rem 0 2rem;
+  padding: 1.15rem;
+  border-radius: 0.85rem;
+  background: rgba(15, 23, 42, 0.55);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+}
+.oa-jump-label {
+  width: 100%;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted, #8a9baa);
+  font-weight: 700;
+  margin: 0 0 0.25rem;
+}
+.oa-jump a {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(45, 212, 191, 0.08);
+  color: #9bdcff;
+  font-size: 0.86rem;
+  font-weight: 500;
+  text-decoration: none;
+  border: 1px solid rgba(45, 212, 191, 0.18);
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.oa-jump a:hover,
+.oa-jump a:focus-visible {
+  background: rgba(45, 212, 191, 0.2);
+  color: #fff;
+  border-color: rgba(45, 212, 191, 0.55);
+}
+
+/* Each artifact gets its own block */
+.oa-artifact {
+  margin: 0 0 3rem;
+  padding: 2rem 1.75rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  background: rgba(15, 23, 42, 0.45);
+}
+.oa-artifact-header {
+  display: flex;
+  gap: 1rem;
+  align-items: baseline;
+  margin: 0 0 0.85rem;
+  flex-wrap: wrap;
+}
+.oa-artifact-num {
+  display: inline-flex;
+  width: 2.5rem;
+  height: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(24, 139, 150, 0.2), rgba(10, 115, 210, 0.2));
+  border: 1px solid rgba(45, 212, 191, 0.4);
+  color: var(--teal, #2dd4bf);
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+.oa-artifact h2 {
+  margin: 0;
+  font-size: 1.4rem;
+  line-height: 1.25;
+  color: var(--white, #fff);
+  border-bottom: none;
+}
+.oa-artifact .oa-format-tag {
+  display: inline-flex;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid rgba(155, 220, 255, 0.3);
+  background: rgba(10, 115, 210, 0.12);
+  color: #9bdcff;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.oa-artifact-intro {
+  color: var(--light-text, #d0dde6);
+  font-size: 0.98rem;
+  line-height: 1.55;
+  margin: 0 0 1.25rem;
+  max-width: 70ch;
+}
+
+/* The "export document" — looks like a real file readout */
+.oa-export {
+  margin: 1.25rem 0 0.85rem;
+  padding: 1.15rem 1.3rem;
+  border-radius: 0.65rem;
+  background: #02101a;
+  border: 1px solid rgba(45, 212, 191, 0.22);
+  font-family: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  font-size: 0.84rem;
+  line-height: 1.6;
+  color: #c8e6f5;
+  overflow-x: auto;
+  white-space: pre;
+}
+.oa-export-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding-bottom: 0.65rem;
+  margin-bottom: 0.85rem;
+  border-bottom: 1px dashed rgba(45, 212, 191, 0.2);
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: var(--teal, #2dd4bf);
+  font-weight: 600;
+}
+.oa-export-meta .oa-filename { color: #fff; }
+.oa-export-meta .oa-meta-right { color: var(--muted, #8a9baa); font-weight: 500; }
+
+.oa-export .e-ok    { color: #5eead4; }
+.oa-export .e-warn  { color: #fbbf24; }
+.oa-export .e-bad   { color: #f87171; }
+.oa-export .e-em    { color: #fff; font-weight: 600; }
+.oa-export .e-meta  { color: #6b8aa0; }
+.oa-export .e-key   { color: #9bdcff; }
+.oa-export .e-hash  { color: #a78bfa; letter-spacing: 0.02em; }
+
+/* Notes below each export */
+.oa-readers {
+  margin-top: 0.85rem;
+  padding: 0.85rem 1rem;
+  border-radius: 0.55rem;
+  background: rgba(24, 139, 150, 0.06);
+  border-left: 3px solid var(--teal, #2dd4bf);
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--light-text, #d0dde6);
+}
+.oa-readers strong {
+  color: var(--white, #fff);
+  font-weight: 600;
+}
+
+/* SVG inline diagrams */
+.oa-figure {
+  margin: 1.25rem 0;
+  padding: 1.25rem;
+  border-radius: 0.85rem;
+  background: rgba(2, 16, 26, 0.55);
+  border: 1px solid rgba(45, 212, 191, 0.15);
+}
+.oa-figure svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}
+.oa-figure-caption {
+  margin: 0.65rem auto 0;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--muted, #8a9baa);
+  font-style: italic;
+}
+
+@media (max-width: 640px) {
+  .oa-artifact { padding: 1.5rem 1.15rem; }
+  .oa-artifact-header { gap: 0.65rem; }
+  .oa-export { font-size: 0.78rem; padding: 0.95rem 1rem; }
+}
+</style>
+
+<!-- JSON-LD: v329 final structured-data pass -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://poconoai.com/operational-artifacts.html",
+      "url": "https://poconoai.com/operational-artifacts.html",
+      "datePublished": "2026-06-01",
+      "dateModified": "2026-06-01"
+      ,
+      "name": "Operational Artifacts | Pocono AI",
+      "description": "Examples of the governance artifacts produced by the Sentinel Node during daily clinical and legal operation \u2014 audit receipts, source citation logs, human-review checkpoints, and session records.",
+      "isPartOf": {
+        "@id": "https://poconoai.com/#website"
+      },
+      "publisher": {
+        "@id": "https://poconoai.com/#organization"
+      },
+      "inLanguage": "en-US"
+    }
+  ]
+}
+</script>
+</head>
+
+<body>
+
+<a href="#main" class="skip-link">Skip to content</a>
+<div id="reading-progress" aria-hidden="true"></div>
+
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- INCLUDE:HEADER -->
+<div id="hitl-notice" style="background:#0a1929;padding:4px 16px;text-align:center;font-size:12px;color:#4a5568;border-bottom:1px solid rgba(255,255,255,0.06);letter-spacing:0.01em;">Human-in-the-Loop required: licensed professionals verify all outputs before clinical or legal action</div>
+<header role="banner">
+  <div class="header-inner">
+    <a href="/index.html" class="logo" aria-label="Pocono AI Home">
+      <img src="/logo.svg?v=402" alt="" width="36" height="36" decoding="async" loading="eager" aria-hidden="true" style="display:inline-block;">
+      Pocono <span>AI</span>
+    </a>
+    <nav id="desktop-nav" aria-label="Main navigation">
+      <div class="nav-item"><a href="/index.html" class="nav-direct">Home</a></div>
+      <div class="nav-item"><a href="/for-physicians.html" class="nav-direct">Physicians</a></div>
+      <div class="nav-item"><a href="/for-attorneys.html" class="nav-direct">Attorneys</a></div>
+      <div class="nav-item"><a href="/sentinel-node.html" class="nav-direct nav-hub" style="color:#d5a94f;border:1px solid rgba(213,169,79,0.45);border-radius:999px;padding:6px 13px;">Sentinel Node</a></div>
+      <div class="nav-item"><a href="/living-memorials/" class="nav-direct">Living Echo</a></div>
+      <div class="nav-item"><a href="/contact.html" class="nav-direct">Contact</a></div>
+      <div class="nav-item" data-dropdown="menu-more">
+        <button type="button" class="nav-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="menu-more">More <span class="nav-chevron" aria-hidden="true">&#9662;</span></button>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <a href="/contact.html#pilot" class="nav-cta nav-cta-primary">Request a Pilot</a>
+      <button type="button" class="pa-search-trigger" data-search-open aria-label="Search (press / or Ctrl-K)" aria-haspopup="dialog" aria-expanded="false">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span class="pa-st-label">Search</span><kbd data-pa-keyhint>Ctrl K</kbd>
+      </button>
+      <button type="button" class="header-icon-btn" id="mobile-menu" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav-panel">
+        <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- "More" overflow dropdown — sibling of <header> so position:fixed escapes header's stacking context. Wired by nav.js via data-dropdown="menu-more". -->
+<div class="nav-dropdown" id="menu-more" aria-label="More navigation">
+  <p class="nav-dd-section">Products</p>
+  <a href="/engineering-drafting/">Drafting &amp; Engineering Edition</a>
+  <a href="/sentinel-home/">Sentinel Home Edition</a>
+  <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability — Assistive Tools &#x2605;</a>
+  <a href="/living-memorials/enterprise-estate-continuity.html">Enterprise Estate Continuity</a>
+  <p class="nav-dd-section">Capabilities</p>
+  <a href="/evidence-room.html">Evidence Room</a>
+  <a href="/push-button-deliverables.html">Push-Button Deliverables</a>
+  <a href="/pilot-readiness-kit.html">Pilot Kit</a>
+  <a href="/pilot-program.html">Pilot Program</a>
+  <a href="/how-it-works.html">How It Works</a>
+  <p class="nav-dd-section">Hubs &amp; Company</p>
+  <a href="/training.html">Training Hub</a>
+  <a href="/documentation-hub/">Document Hub</a>
+  <a href="/global/">Global Hub</a>
+  <a href="/investors-hub.html">Investor Hub</a>
+  <a href="/valuation-dashboard.html">Valuation Dashboard</a>
+  <a href="/about.html">About</a>
+  <p class="nav-dd-section">Trust &amp; Legal</p>
+  <a href="/transparency.html">Transparency</a>
+  <a href="/audit.html">Audit Log</a>
+  <a href="/privacy.html">Privacy</a>
+  <a href="/sitemap.html">Sitemap</a>
+</div>
+<!-- Site search is provided by the self-contained search.js asset (command palette: / or Ctrl/Cmd-K). -->
+
+<!-- Mobile panel: full-screen slide-in. v396 nav — hub tiles + grouped links + Sentinel Node + Engineering. -->
+<nav id="mobile-nav-panel" aria-label="Mobile navigation" aria-hidden="true" role="dialog" aria-modal="true">
+
+  <!-- Hub tiles: Sentinel Node, Documentation Hub, Training Hub, Global Hub -->
+  <div style="padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,0.07);">
+    <p style="font-size:0.65em;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.28);margin:0 0 10px;padding:0 2px;">Hubs</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <a href="/sentinel-node.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(213,169,79,0.1);border:1px solid rgba(213,169,79,0.35);border-radius:10px;color:#d5a94f;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Sentinel Node</a>
+      <a href="/documentation-hub/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(0,194,168,0.1);border:1px solid rgba(0,194,168,0.35);border-radius:10px;color:#00c2a8;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Docs Hub</a>
+      <a href="/training.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.35);border-radius:10px;color:#a78bfa;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Training Hub</a>
+      <a href="/global/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(122,240,220,0.07);border:1px solid rgba(122,240,220,0.3);border-radius:10px;color:#7af0dc;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Global Hub</a>
+    </div>
+  </div>
+
+  <!-- Core paths -->
+  <div class="mob-static-links">
+    <a href="/index.html">Home</a>
+    <a href="/for-physicians.html">Physicians</a>
+    <a href="/for-attorneys.html">Attorneys</a>
+    <a href="/engineering-drafting/">Engineering &amp; Drafting</a>
+    <a href="/pilot-program.html">Pilot Program</a>
+    <a href="/how-it-works.html">How It Works</a>
+    <a href="/trust.html">Trust &amp; Audit</a>
+    <a href="/pricing.html">Pricing</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/living-memorials/">Living Echo</a>
+    <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability</a>
+    <a href="/about.html">About</a>
+    <a href="/team.html" style="color:rgba(255,255,255,0.6);">Team &amp; Leadership</a>
+    <a href="/valuation-dashboard.html" style="color:rgba(255,255,255,0.6);">Valuation Dashboard</a>
+    <a href="/careers.html" style="color:rgba(255,255,255,0.6);">Careers</a>
+    <a href="/sentinel-demo.html" style="color:rgba(255,255,255,0.6);">Demo</a>
+    <a href="/sitemap.html" style="color:rgba(255,255,255,0.45);">Sitemap</a>
+    <a href="/transparency.html" style="color:rgba(255,255,255,0.45);">Transparency</a>
+    <a href="/privacy.html" style="color:rgba(255,255,255,0.45);">Privacy</a>
+  </div>
+
+  <a href="/contact.html#pilot" class="mob-cta">Request a Pilot</a>
+</nav>
+<!-- /INCLUDE:HEADER -->
+
+
+<main id="main-content" tabindex="-1">
+<span id="main" aria-hidden="true"></span>
+
+  <section class="section-tight oa-hero">
+    <div class="container">
+
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="sep">›</span>
+        <a href="pilot-workflow.html">Pilot Workflow</a>
+        <span class="sep">›</span>
+        <span class="current">Operational Artifacts</span>
+      </nav>
+
+      <div class="sentinel-lockup" aria-label="Sentinel Node — Operational Artifacts">
+              <svg class="sentinel-lockup-mark" viewBox="0 0 64 64" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
+          <!-- v311b: rotated diamond + C-curve loop + summit dot. Inherits currentColor from CSS context. -->
+          <g transform="rotate(45 32 32)">
+            <rect x="12" y="12" width="40" height="40" rx="8" ry="8"/>
+            <path d="M43 22 L26 22 A6 6 0 0 0 20 28 L20 36 A6 6 0 0 0 26 42 L41 42"/>
+          </g>
+          <circle cx="32" cy="9" r="3" fill="currentColor" stroke="none"/>
+        </svg>
+              <div class="sentinel-lockup-rule"></div>
+              <div class="sentinel-lockup-text">
+                <span class="sentinel-lockup-name">Sentinel Node</span>
+                <span class="sentinel-lockup-tag">Operational Realism</span>
+              </div>
+            </div>
+      <h1>What auditors actually see.</h1>
+      <p class="lede">
+        Every pilot produces the same six artifacts as a byproduct of normal
+        operation. Each one is the format your compliance officers, malpractice
+        carriers, IT directors, and external auditors actually receive — not a
+        marketing summary <em>about</em> the format, but a worked example of
+        the document itself.
+      </p>
+
+      <div class="oa-disclaimer" role="note">
+        <span class="oa-disclaimer-icon" aria-hidden="true">●</span>
+        <div>
+          <strong>Synthetic data notice.</strong> All identifiers, hashes,
+          query strings, document references, and patient/case names below are
+          fabricated for illustration. Field structure, log format, and policy
+          language match what real deployments produce; the values do not.
+        </div>
+      </div>
+
+      <div class="oa-jump" role="navigation" aria-label="Jump to artifact">
+        <span class="oa-jump-label">Jump to artifact</span>
+        <a href="#audit-log">1 · Audit log</a>
+        <a href="#ingestion">2 · Ingestion manifest</a>
+        <a href="#review-queue">3 · Review queue summary</a>
+        <a href="#citation">4 · Citation verification</a>
+        <a href="#egress">5 · Egress attestation</a>
+        <a href="#governance">6 · Governance policy</a>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section-tight" style="padding-top:0;">
+    <div class="container">
+
+      <!-- ─────────────────── 1. AUDIT LOG ─────────────────── -->
+      <article class="oa-artifact" id="audit-log">
+        <header class="oa-artifact-header">
+          <span class="oa-artifact-num">1</span>
+          <h2>Reviewable audit log <span style="font-weight:400;opacity:.7;">(hash-chained: Stage 2)</span></h2>
+          <span class="oa-format-tag">JSONL export</span>
+        </header>
+        <p class="oa-artifact-intro">
+          Every prompt, retrieval, response, and review decision is appended
+          to a reviewable audit log. Each entry references the previous
+          entry's hash, so any retroactive edit breaks the chain and is
+          immediately detectable. Logs export as line-delimited JSON for
+          ingestion into your SIEM or compliance system.
+        </p>
+        <div class="oa-export" role="region" aria-label="Audit log export sample">
+<div class="oa-export-meta"><span class="oa-filename">audit-log-2026-W19.jsonl</span><span class="oa-meta-right">218 lines · 312 KB · SHA-256 chained</span></div>
+<span class="e-meta">{ </span><span class="e-key">"seq"</span>: 8412, <span class="e-key">"ts"</span>: <span class="e-em">"2026-05-12T14:22:01.487Z"</span>, <span class="e-key">"event"</span>: <span class="e-em">"query"</span>,
+  <span class="e-key">"user"</span>: <span class="e-em">"dr_patel@suite204.local"</span>, <span class="e-key">"role"</span>: <span class="e-em">"clinician"</span>,
+  <span class="e-key">"prompt_hash"</span>: <span class="e-hash">"sha256:7c3a…d2f8"</span>,
+  <span class="e-key">"retrieved"</span>: [<span class="e-em">"doc_4172"</span>, <span class="e-em">"doc_4198"</span>, <span class="e-em">"doc_4203"</span>],
+  <span class="e-key">"prev_hash"</span>: <span class="e-hash">"sha256:b91e…04ac"</span>,
+  <span class="e-key">"chain_hash"</span>: <span class="e-hash">"sha256:f04d…7611"</span> <span class="e-meta">}</span>
+<span class="e-meta">{ </span><span class="e-key">"seq"</span>: 8413, <span class="e-key">"ts"</span>: <span class="e-em">"2026-05-12T14:22:01.892Z"</span>, <span class="e-key">"event"</span>: <span class="e-em">"response"</span>,
+  <span class="e-key">"response_hash"</span>: <span class="e-hash">"sha256:1f88…9be0"</span>, <span class="e-key">"citations"</span>: 3, <span class="e-key">"tokens"</span>: 412,
+  <span class="e-key">"prev_hash"</span>: <span class="e-hash">"sha256:f04d…7611"</span>,
+  <span class="e-key">"chain_hash"</span>: <span class="e-hash">"sha256:33b1…ae72"</span> <span class="e-meta">}</span>
+<span class="e-meta">{ </span><span class="e-key">"seq"</span>: 8414, <span class="e-key">"ts"</span>: <span class="e-em">"2026-05-12T14:24:11.114Z"</span>, <span class="e-key">"event"</span>: <span class="e-em">"review"</span>,
+  <span class="e-key">"reviewer"</span>: <span class="e-em">"dr_patel@suite204.local"</span>,
+  <span class="e-key">"decision"</span>: <span class="e-ok">"accept_with_edit"</span>, <span class="e-key">"edit_distance"</span>: 18,
+  <span class="e-key">"prev_hash"</span>: <span class="e-hash">"sha256:33b1…ae72"</span>,
+  <span class="e-key">"chain_hash"</span>: <span class="e-hash">"sha256:9a04…1cd3"</span> <span class="e-meta">}</span>
+<span class="e-meta">{ </span><span class="e-key">"seq"</span>: 8415, <span class="e-key">"ts"</span>: <span class="e-em">"2026-05-12T14:31:48.022Z"</span>, <span class="e-key">"event"</span>: <span class="e-em">"review"</span>,
+  <span class="e-key">"reviewer"</span>: <span class="e-em">"dr_chen@suite204.local"</span>,
+  <span class="e-key">"decision"</span>: <span class="e-warn">"reject"</span>, <span class="e-key">"reason"</span>: <span class="e-em">"citation_mismatch"</span>,
+  <span class="e-key">"reason_note"</span>: <span class="e-em">"Cited doc_4198 p.14 does not contain the claim about 5-day intervals."</span>,
+  <span class="e-key">"prev_hash"</span>: <span class="e-hash">"sha256:9a04…1cd3"</span>,
+  <span class="e-key">"chain_hash"</span>: <span class="e-hash">"sha256:c772…06e1"</span> <span class="e-meta">}</span>
+        </div>
+        <div class="oa-readers">
+          <strong>Who reads this:</strong> compliance officers, internal IT
+          audit, HIPAA / state-bar audit responses, post-incident forensics.
+          <strong>What they verify:</strong> chain integrity (no missing
+          sequence numbers, every <code>prev_hash</code> matches the prior
+          entry's <code>chain_hash</code>), reviewer attribution on every
+          AI-produced output, and rejection reasons aligned with policy.
+        </div>
+      </article>
+
+      <!-- ─────────────────── 2. INGESTION MANIFEST ─────────────────── -->
+      <article class="oa-artifact" id="ingestion">
+        <header class="oa-artifact-header">
+          <span class="oa-artifact-num">2</span>
+          <h2>Document ingestion manifest</h2>
+          <span class="oa-format-tag">CSV export</span>
+        </header>
+        <p class="oa-artifact-intro">
+          For every document the system ingests, the manifest records source,
+          role-based access controls applied, OCR confidence (for scans),
+          citation pointer depth, and the ingestion timestamp. Exported as CSV
+          for spreadsheet review.
+        </p>
+        <div class="oa-export" role="region" aria-label="Ingestion manifest sample">
+<div class="oa-export-meta"><span class="oa-filename">ingestion-manifest-2026-05.csv</span><span class="oa-meta-right">2,841 rows · 218 KB</span></div>
+<span class="e-key">doc_id,source,filename,pages,ocr_confidence,roles_granted,citations_indexed,ingested_at</span>
+doc_4172,EHR_export,<span class="e-em">progress_notes_2024.pdf</span>,124,1.000,<span class="e-ok">clinician,nurse</span>,124,2026-05-21T11:04:18Z
+doc_4173,EHR_export,<span class="e-em">labs_summary_q1.pdf</span>,18,1.000,<span class="e-ok">clinician,nurse</span>,18,2026-05-21T11:04:21Z
+doc_4198,policy_lib,<span class="e-em">prescribing_guidelines_v7.docx</span>,42,1.000,<span class="e-ok">clinician</span>,42,2026-05-21T11:09:55Z
+doc_4203,scanned,<span class="e-em">consult_letter_2023-09.pdf</span>,3,<span class="e-warn">0.872</span>,<span class="e-ok">clinician</span>,3,2026-05-21T11:11:02Z
+doc_4204,scanned,<span class="e-em">faxed_lab_result_2022.pdf</span>,1,<span class="e-bad">0.612</span>,<span class="e-ok">clinician</span>,1,2026-05-21T11:11:04Z
+doc_4205,EHR_export,<span class="e-em">vitals_export_q1.pdf</span>,8,1.000,<span class="e-ok">clinician,nurse,admin</span>,8,2026-05-21T11:11:18Z
+<span class="e-meta">... 2,835 more rows ...</span>
+        </div>
+        <div class="oa-readers">
+          <strong>Who reads this:</strong> practice administrators verifying
+          role assignments, IT confirming source provenance, and the
+          deployment lead reviewing low-OCR-confidence scans flagged for
+          re-scan. <strong>What they verify:</strong> every document has an
+          assigned role set (no orphan documents accessible to all roles), and
+          OCR confidence below 0.85 is flagged for human re-review before
+          retrieval uses it.
+        </div>
+      </article>
+
+      <!-- ─────────────────── 3. REVIEW QUEUE SUMMARY ─────────────────── -->
+      <article class="oa-artifact" id="review-queue">
+        <header class="oa-artifact-header">
+          <span class="oa-artifact-num">3</span>
+          <h2>Human review queue summary</h2>
+          <span class="oa-format-tag">Weekly PDF</span>
+        </header>
+        <p class="oa-artifact-intro">
+          Generated weekly by the system. Lists every AI output produced in
+          the period, the reviewing clinician or attorney, the decision, and
+          rejection reasons aggregated by pattern. This is the document that
+          most often goes to a malpractice carrier or state-bar audit.
+        </p>
+        <div class="oa-figure" aria-label="Review queue flow diagram">
+          <svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Flow diagram: AI output enters review queue, professional reviews it, then accepts as-is, accepts with edit, or rejects with reason. All four outcomes flow to the append-only audit log.">
+            <defs>
+              <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M0,0 L10,5 L0,10 z" fill="#2dd4bf"/>
+              </marker>
+            </defs>
+            <!-- AI output node -->
+            <rect x="20" y="80" width="120" height="40" rx="6" fill="#0a2535" stroke="#2dd4bf" stroke-width="1.5"/>
+            <text x="80" y="105" text-anchor="middle" fill="#c8e6f5" font-family="Inter, sans-serif" font-size="12" font-weight="600">AI Output</text>
+            <!-- arrow to queue -->
+            <line x1="142" y1="100" x2="195" y2="100" stroke="#2dd4bf" stroke-width="1.5" marker-end="url(#arrow)"/>
+            <!-- Queue -->
+            <rect x="200" y="75" width="130" height="50" rx="6" fill="#071c2a" stroke="#2dd4bf" stroke-width="1.5"/>
+            <text x="265" y="95" text-anchor="middle" fill="#fff" font-family="Inter, sans-serif" font-size="12" font-weight="600">Review Queue</text>
+            <text x="265" y="112" text-anchor="middle" fill="#8a9baa" font-family="Inter, sans-serif" font-size="10">licensed professional</text>
+            <!-- arrows to 3 outcomes -->
+            <line x1="332" y1="90" x2="395" y2="40" stroke="#2dd4bf" stroke-width="1.5" marker-end="url(#arrow)"/>
+            <line x1="332" y1="100" x2="395" y2="100" stroke="#2dd4bf" stroke-width="1.5" marker-end="url(#arrow)"/>
+            <line x1="332" y1="110" x2="395" y2="160" stroke="#2dd4bf" stroke-width="1.5" marker-end="url(#arrow)"/>
+            <!-- 3 outcome boxes -->
+            <rect x="400" y="20" width="150" height="40" rx="6" fill="#0a2535" stroke="#5eead4" stroke-width="1.5"/>
+            <text x="475" y="45" text-anchor="middle" fill="#5eead4" font-family="Inter, sans-serif" font-size="12" font-weight="600">Accept as-is</text>
+            <rect x="400" y="80" width="150" height="40" rx="6" fill="#0a2535" stroke="#fbbf24" stroke-width="1.5"/>
+            <text x="475" y="105" text-anchor="middle" fill="#fbbf24" font-family="Inter, sans-serif" font-size="12" font-weight="600">Accept with edit</text>
+            <rect x="400" y="140" width="150" height="40" rx="6" fill="#0a2535" stroke="#f87171" stroke-width="1.5"/>
+            <text x="475" y="165" text-anchor="middle" fill="#f87171" font-family="Inter, sans-serif" font-size="12" font-weight="600">Reject + reason</text>
+            <!-- arrows to audit log -->
+            <line x1="552" y1="40" x2="618" y2="100" stroke="#6b8aa0" stroke-width="1" stroke-dasharray="3,3" marker-end="url(#arrow)"/>
+            <line x1="552" y1="100" x2="618" y2="100" stroke="#6b8aa0" stroke-width="1" stroke-dasharray="3,3" marker-end="url(#arrow)"/>
+            <line x1="552" y1="160" x2="618" y2="100" stroke="#6b8aa0" stroke-width="1" stroke-dasharray="3,3" marker-end="url(#arrow)"/>
+            <!-- Audit log -->
+            <rect x="620" y="80" width="70" height="40" rx="6" fill="#02101a" stroke="#a78bfa" stroke-width="1.5"/>
+            <text x="655" y="98" text-anchor="middle" fill="#a78bfa" font-family="Inter, sans-serif" font-size="11" font-weight="600">Audit</text>
+            <text x="655" y="112" text-anchor="middle" fill="#a78bfa" font-family="Inter, sans-serif" font-size="11" font-weight="600">Log</text>
+          </svg>
+          <p class="oa-figure-caption">Every AI output flows through human review; all four outcomes are appended to the reviewable audit log.</p>
+        </div>
+        <div class="oa-export" role="region" aria-label="Review queue weekly summary sample">
+<div class="oa-export-meta"><span class="oa-filename">review-summary-2026-W19.pdf</span><span class="oa-meta-right">page 1 of 3</span></div>
+<span class="e-em">═══════════════════════════════════════════════════════</span>
+<span class="e-em">  REVIEW QUEUE SUMMARY — WEEK 19, 2026</span>
+<span class="e-em">  Suite 204 Family Medicine</span>
+<span class="e-em">  Period: 2026-05-04 — 2026-05-10</span>
+<span class="e-em">═══════════════════════════════════════════════════════</span>
+
+  Outputs produced this week:   <span class="e-em">187</span>
+  Outputs reviewed:             <span class="e-em">187</span>   <span class="e-ok">(100%)</span>
+  Coverage gap:                 <span class="e-em">0</span>
+  Avg review latency:           <span class="e-em">3.4 min</span>
+
+  ── DISPOSITIONS ──────────────────────────────────────
+    Accept as-is:                 <span class="e-ok">142</span>   (76%)
+    Accept with edit:             <span class="e-warn">38</span>    (20%)
+    Reject:                       <span class="e-bad">7</span>     (4%)
+
+  ── TOP REJECTION REASONS ─────────────────────────────
+    1. citation_mismatch          <span class="e-em">4</span>   (cited page lacked claim)
+    2. out_of_scope               <span class="e-em">2</span>   (off-topic retrieval)
+    3. policy_violation           <span class="e-em">1</span>   (formulary contradiction)
+
+  ── REVIEWERS ─────────────────────────────────────────
+    Dr. Patel (clinician):        103 reviews
+    Dr. Chen (clinician):          71 reviews
+    NP Vasquez (mid-level):        13 reviews
+
+  ── ACTION ITEMS ──────────────────────────────────────
+    • Retrieval rerank weight tuned (citation_mismatch ↓)
+    • doc_4198 flagged for re-OCR (cited but malformed)
+    • Review training session scheduled for new staff
+        </div>
+        <div class="oa-readers">
+          <strong>Who reads this:</strong> the practice or firm's principal,
+          malpractice carrier annual review, state bar / state medical board
+          on request. <strong>What they verify:</strong> 100% review coverage
+          (no AI output bypassed a human), rejection reasons match policy,
+          and action items get followed up week-over-week.
+        </div>
+      </article>
+
+      <!-- ─────────────────── 4. CITATION VERIFICATION ─────────────────── -->
+      <article class="oa-artifact" id="citation">
+        <header class="oa-artifact-header">
+          <span class="oa-artifact-num">4</span>
+          <h2>Citation verification report</h2>
+          <span class="oa-format-tag">Per-response</span>
+        </header>
+        <p class="oa-artifact-intro">
+          Attached to every AI response. Lists each citation, the exact document
+          and page-range, a verification status (citation actually appears in
+          the referenced location, or it doesn't), and the embedding-similarity
+          score of the retrieved chunk to the query. This is the most-used
+          artifact during human review.
+        </p>
+        <div class="oa-export" role="region" aria-label="Citation verification report sample">
+<div class="oa-export-meta"><span class="oa-filename">citation-verification-q8412.txt</span><span class="oa-meta-right">attached to response seq=8413</span></div>
+<span class="e-em">─────────────────────────────────────────────</span>
+<span class="e-em"> CITATION VERIFICATION — Response seq=8413</span>
+<span class="e-em">─────────────────────────────────────────────</span>
+
+Query: <span class="e-em">"What is the maximum recommended dosing interval
+        for [drug X] in renal-impaired patients?"</span>
+
+Response cites 3 sources:
+
+[1] <span class="e-key">doc_4198</span>  prescribing_guidelines_v7.docx
+    Page range:           pp. 14–15
+    Verification:         <span class="e-ok">✓ Claim located on p. 14, ¶3</span>
+    Embed similarity:     0.847
+    Reviewer note:        accepted
+
+[2] <span class="e-key">doc_4172</span>  progress_notes_2024.pdf
+    Page range:           p. 41
+    Verification:         <span class="e-ok">✓ Patient history confirms renal status</span>
+    Embed similarity:     0.792
+    Reviewer note:        accepted
+
+[3] <span class="e-key">doc_4205</span>  vitals_export_q1.pdf
+    Page range:           p. 3
+    Verification:         <span class="e-warn">⚠ Page contains creatinine value</span>
+                        <span class="e-warn">but does NOT mention dosing interval</span>
+    Embed similarity:     0.681
+    Reviewer note:        <span class="e-bad">cited in error — removed from final</span>
+
+──────────────────────────────────────────────
+Reviewer decision: <span class="e-warn">accept_with_edit</span>
+Edit: removed citation [3]; retained [1] and [2] as basis.
+Edit distance: 18 chars
+──────────────────────────────────────────────
+        </div>
+        <div class="oa-readers">
+          <strong>Who reads this:</strong> the reviewing clinician or attorney,
+          during the review step. Also stored alongside the response in the
+          audit log for downstream audit. <strong>What they verify:</strong>
+          every cited claim actually appears in the cited location. Citations
+          marked ⚠ are the most common rejection trigger and the single
+          biggest argument for mandatory human review.
+        </div>
+      </article>
+
+      <!-- ─────────────────── 5. EGRESS ATTESTATION ─────────────────── -->
+      <article class="oa-artifact" id="egress">
+        <header class="oa-artifact-header">
+          <span class="oa-artifact-num">5</span>
+          <h2>Network egress attestation</h2>
+          <span class="oa-format-tag">Daily report</span>
+        </header>
+        <p class="oa-artifact-intro">
+          The Sentinel Node logs every byte of outbound network traffic and
+          attests daily to its external footprint. For a well-configured
+          deployment (no WAN egress allowed), this is zero bytes outbound
+          for the lifetime of the device.
+        </p>
+        <div class="oa-export" role="region" aria-label="Daily egress attestation sample">
+<div class="oa-export-meta"><span class="oa-filename">egress-attestation-2026-05-12.txt</span><span class="oa-meta-right">SN-N-04217 · daily</span></div>
+<span class="e-em">═══════════════════════════════════════════════════════</span>
+<span class="e-em">  DAILY EGRESS ATTESTATION</span>
+<span class="e-em">  Device: SN-N-04217 (Suite 204)</span>
+<span class="e-em">  Period: 2026-05-12 00:00:00Z — 2026-05-12 23:59:59Z</span>
+<span class="e-em">═══════════════════════════════════════════════════════</span>
+
+  Total outbound bytes (WAN):            <span class="e-ok">0</span>
+  Total inbound bytes (WAN):             <span class="e-ok">0</span>
+  Distinct external destinations:        <span class="e-ok">0</span>
+  Pocono AI remote-access sessions:      <span class="e-ok">0</span>
+
+  LAN traffic (intra-premises only):
+    Total bytes:                         412.8 MB
+    Distinct internal hosts contacted:   7
+    Listed LAN hosts:
+      • workstation-204a.local
+      • workstation-204b.local
+      • workstation-204c.local
+      • print-server.local
+      • backup-nas.local
+      • domain-controller.local
+      • mobile-tablet-rt07.local
+
+  Signed by:        sentinel-attestation-key (SHA-256: 41f0…ce28)
+  Verified by:      site admin · Dr. K. Patel
+  Attestation hash: <span class="e-hash">sha256:8e2b…4a91</span>
+        </div>
+        <div class="oa-readers">
+          <strong>Who reads this:</strong> IT, security officers, HIPAA
+          compliance, defense counsel responding to data-breach allegations.
+          <strong>What they verify:</strong> the zero in row 1. Any nonzero
+          WAN outbound is grounds for immediate investigation. The signed
+          attestation entries into the daily reviewable audit log (hash chaining is the Stage 2 audit-layer) so the
+          zero-egress claim is itself reviewable.
+        </div>
+      </article>
+
+      <!-- ─────────────────── 6. GOVERNANCE POLICY ─────────────────── -->
+      <article class="oa-artifact" id="governance">
+        <header class="oa-artifact-header">
+          <span class="oa-artifact-num">6</span>
+          <h2>Governance policy (adopted)</h2>
+          <span class="oa-format-tag">Template + adopted</span>
+        </header>
+        <p class="oa-artifact-intro">
+          Pocono AI provides a one-page governance policy template at
+          deployment. The practice or firm adopts it, edits where appropriate,
+          signs it, and stores it as the binding policy document. This is the
+          artifact that defines which decisions the AI may inform and which
+          remain unconditionally human.
+        </p>
+        <div class="oa-export" role="region" aria-label="Governance policy adopted sample">
+<div class="oa-export-meta"><span class="oa-filename">ai-governance-policy-v1.0.pdf</span><span class="oa-meta-right">adopted 2026-05-20</span></div>
+<span class="e-em">═══════════════════════════════════════════════════════</span>
+<span class="e-em">  AI GOVERNANCE POLICY — Suite 204 Family Medicine</span>
+<span class="e-em">  Version 1.0  ·  Effective 2026-05-20</span>
+<span class="e-em">═══════════════════════════════════════════════════════</span>
+
+<span class="e-em">SECTION 1. SCOPE</span>
+The Sentinel Node deployed at this practice is a retrieval-augmented
+drafting tool. It produces drafts of progress notes, prior-auth
+language, and patient-instruction text. <span class="e-em">It does not place orders,
+prescribe medications, or generate clinical decisions.</span>
+
+<span class="e-em">SECTION 2. HUMAN-IN-THE-LOOP</span>
+Every AI-generated output is reviewed by a licensed clinician
+before any clinical action is taken. Review coverage is 100% and
+this constraint is structurally enforced — review cannot be
+disabled by configuration.
+
+<span class="e-em">SECTION 3. PROHIBITED USES</span>
+The AI system MUST NOT be used to:
+  (a) issue medication orders without clinician review
+  (b) generate billing codes without clinician review
+  (c) communicate clinical guidance directly to patients
+  (d) make eligibility, scheduling, or triage decisions
+      that affect access to care
+
+<span class="e-em">SECTION 4. AUDIT</span>
+Every prompt, retrieval, response, and review decision is logged
+in a reviewable audit log retained 90 days minimum.
+Logs are exportable to the practice's compliance system.
+
+<span class="e-em">SECTION 5. DATA</span>
+No patient data leaves the premises. The Sentinel Node operates
+local-only. WAN egress is structurally blocked and verified
+daily via signed attestation.
+
+<span class="e-em">SECTION 6. REVIEW AND AMENDMENT</span>
+This policy is reviewed quarterly by the practice principal and
+amended as needed. Amendments require signature and are appended
+with version history.
+
+──────────────────────────────────────────────
+Signed:
+   <span class="e-em">Dr. K. Patel, Principal           2026-05-20</span>
+   <span class="e-em">J. Reyes, IT/Compliance Officer    2026-05-20</span>
+──────────────────────────────────────────────
+        </div>
+        <div class="oa-readers">
+          <strong>Who reads this:</strong> the practice principal during
+          adoption, board of directors at quarterly review, state medical
+          board / state bar in any inquiry, malpractice carrier annually.
+          <strong>What they verify:</strong> the prohibited-uses list (sec. 3)
+          is enforced — any audit-log entry showing AI involvement in a
+          prohibited category is a governance breach and triggers internal
+          review.
+        </div>
+      </article>
+
+      <div class="next-step">
+        <div>
+          <span class="next-step-label">Recommended next step</span>
+          <span class="next-step-title">See how these artifacts get produced over a six-phase pilot</span>
+        </div>
+        <a href="pilot-workflow.html" class="next-step-cta">Pilot workflow →</a>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 root-relative nav fix, Living Echo rebrand, Engineering & Drafting + Enterprise Estate Continuity links added (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- INCLUDE:FOOTER -->
+<footer role="contentinfo" style="background:#051622;border-top:1px solid rgba(255,255,255,0.08);padding:40px 24px 28px;font-size:0.85em;color:#8899aa;">
+  <div style="max-width:1180px;margin:0 auto;">
+
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:0 0 28px;margin-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.07);">
+      <div style="max-width:560px;">
+        <p style="margin:0 0 6px;font-size:1.05em;font-weight:700;color:#fff;">Local AI infrastructure for regulated practices.</p>
+        <p style="margin:0;font-size:0.95em;line-height:1.5;">Drafts with citations. Human review required. Sensitive documents stay under practice control. Simple path, deep proof.</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="/contact.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;background:#00c2a8;color:#04111a;font-weight:700;text-decoration:none;font-size:0.95em;">Request Pilot</a>
+        <a href="/sentinel-demo.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;border:1px solid rgba(0,194,168,0.55);color:#00c2a8;font-weight:700;text-decoration:none;font-size:0.95em;">Watch Demo</a>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px 32px;margin-bottom:32px;text-align:left;">
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">For You</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/start-here.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Start Here (3 min)</a>
+          <a href="/for-physicians.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Physicians</a>
+          <a href="/for-attorneys.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Attorneys</a>
+          <a href="/engineering-drafting/" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Engineering &amp; Drafting Teams</a>
+          <a href="/pilot-program.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Pilot Program</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Installer Training</a>
+          <a href="/how-it-works.html" style="color:#8899aa;text-decoration:none;">How It Works</a>
+          <a href="/trust.html" style="color:#8899aa;text-decoration:none;">Trust &amp; Audit</a>
+          <a href="/pricing.html" style="color:#8899aa;text-decoration:none;">Pricing</a>
+          <a href="/sentinel-demo.html" style="color:#8899aa;text-decoration:none;">See the Demo</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Documentation Hub</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/documentation-hub/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Hub Home &mdash; Deep Proof</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">Installer Training</a>
+          <a href="/sentinel-node/installation-simulator.html" style="color:#8899aa;text-decoration:none;">&#8627; Installation Simulator</a>
+          <a href="/documentation-hub/clinical/" style="color:#8899aa;text-decoration:none;">Clinical Documentation</a>
+          <a href="/documentation-hub/legal/" style="color:#8899aa;text-decoration:none;">Legal Documentation</a>
+          <a href="/documentation-hub/technical/" style="color:#8899aa;text-decoration:none;">Technical Documentation</a>
+          <a href="/documentation-hub/governance/" style="color:#8899aa;text-decoration:none;">Governance &amp; Audit</a>
+          <a href="/documentation-hub/tools/" style="color:#8899aa;text-decoration:none;">Tools &amp; Simulators</a>
+          <a href="/documentation-hub/research/" style="color:#8899aa;text-decoration:none;">Research &amp; Essays</a>
+          <a href="/documentation-hub/transparency/" style="color:#8899aa;text-decoration:none;">Transparency</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Global Federated AI</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/global/" style="color:#7af0dc;text-decoration:none;font-weight:600;">Global Federated Hub</a>
+          <a href="/global/australia/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Australia</a>
+          <a href="/global/singapore/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Singapore</a>
+          <a href="/global/taiwan/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Taiwan</a>
+          <a href="/global/europe/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Europe</a>
+          <a href="/contact.html" style="color:#8899aa;text-decoration:none;">Partner Inquiry</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Company</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/about.html" style="color:#8899aa;text-decoration:none;">About Pocono AI</a>
+          <a href="/team.html" style="color:#8899aa;text-decoration:none;">Team &amp; Leadership</a>
+          <a href="/why-pocono-ai.html" style="color:#8899aa;text-decoration:none;">Why Pocono AI</a>
+          <a href="/founding-commercial-leadership.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Join Us</a>
+          <a href="/careers.html" style="color:#8899aa;text-decoration:none;">Careers</a>
+          <a href="/how-we-hire.html" style="color:#8899aa;text-decoration:none;">How We Hire</a>
+          <a href="/channel-partners.html" style="color:#8899aa;text-decoration:none;">Technical Partners (MSPs)</a>
+          <a href="/partners.html" style="color:#8899aa;text-decoration:none;">Academic Partnerships</a>
+          <a href="/contact.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Contact</a>
+          <a href="https://forms.gle/VQahnkjMfY6QNEMy8" target="_blank" rel="noopener noreferrer" style="color:#d5a94f;text-decoration:none;font-weight:600;">Interest List &#8599;</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Founder Projects</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/rehability/" style="color:#a78bfa;text-decoration:none;font-weight:700;">Rehability &#x2605;</a>
+          <a href="/rehability/marcus-memory-helper/" style="color:#a78bfa;text-decoration:none;font-weight:600;">&#8627; Marcus's Memory Helper</a>
+          <a href="/sentinel-home/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Sentinel Home Edition</a>
+          <a href="/living-memorials/" style="color:#8899aa;text-decoration:none;">Living Echo</a>
+          <a href="/living-memorials/marcus-odell/" style="color:#8899aa;text-decoration:none;">Marcus&rsquo;s Living Echo</a>
+          <a href="/living-memorials/enterprise-estate-continuity.html" style="color:#8899aa;text-decoration:none;">Enterprise Estate Continuity</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Resources &amp; Legal</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/sitemap.html" style="color:#8899aa;text-decoration:none;">All Pages (Sitemap)</a>
+          <a href="/audit.html" style="color:#8899aa;text-decoration:none;">Transparency &amp; Audit Log</a>
+          <a href="/maturity-disclosure.html" style="color:#8899aa;text-decoration:none;">What We Have / Don&rsquo;t Claim</a>
+          <a href="/plain.html" style="color:#8899aa;text-decoration:none;">Plain Language Guide</a>
+          <a href="/privacy.html" style="color:#8899aa;text-decoration:none;">Privacy</a>
+          <a href="/terms.html" style="color:#8899aa;text-decoration:none;">Terms</a>
+          <a href="/sla.html" style="color:#8899aa;text-decoration:none;">SLA</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:18px;margin-bottom:14px;">
+      <p style="margin:0;font-size:0.82em;line-height:1.6;color:#6f8295;max-width:1000px;">Pocono AI does not provide medical, legal, or engineering advice, does not practice medicine, law, or licensed engineering, and does not make clinical, legal, or engineering decisions. Outputs are drafts or support materials that require review by a qualified professional; final professional judgment remains with the licensed physician, attorney, or engineer. Tools and simulations on this site are educational and use synthetic data.</p>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:20px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+      <p style="margin:0;font-size:0.9em;">&copy; 2026 Pocono AI, LLC &nbsp;&#183;&nbsp; East Stroudsburg, PA &nbsp;&#183;&nbsp; <a href="mailto:marcus@poconoai.com" style="color:#8899aa;">marcus@poconoai.com</a> &nbsp;&#183;&nbsp; <a href="tel:+15705340602" style="color:#8899aa;">(570) 534-0602</a></p>
+      <p style="margin:0;font-size:0.88em;"><a href="/audit.html" style="color:#5dade2;text-decoration:none;">Transparency v402</a></p>
+    </div>
+  </div>
+</footer>
+<script src="/search.js?v=402" defer></script>
+<!-- /INCLUDE:FOOTER -->
+
+
+<script src="search-index.js?v=402" defer></script>
+<script src="nav.js?v=402" defer></script>
+<script src="pilot-cta.js?v=402" defer></script>
+
+</body>
+</html>

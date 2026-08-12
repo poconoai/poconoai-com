@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Full sitemap for Pocono AI — all pages, research briefs, whitepapers, and resources for sovereign on-premises AI infrastructure.">
+    <meta name="keywords" content="Pocono AI sitemap, all pages, AI site index, site navigation, all resources, on-premises AI, local AI, sovereign AI, zero cloud AI, HIPAA-governed AI environments, healthcare AI, legal AI, Sentinel Node, Pocono AI, data sovereignty, air-gapped AI, no cloud, EHR automation, RAG AI, independent medical practice AI, law firm AI">
+    <title>Sitemap | Pocono AI, LLC</title>
+    
+    <meta property="og:title" content="Sitemap | Pocono AI, LLC">
+    <meta property="og:description" content="Full site map for Pocono AI — all pages, research briefs, and resources.">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Pocono AI">
+    <meta property="og:locale" content="en_US">
+    
+    <meta property="og:image" content="https://poconoai.com/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Pocono AI — Sovereign on-premises AI">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Sitemap | All Pages | Pocono AI">
+    <meta name="twitter:description" content="Full site index for Pocono AI—all pages, research briefs, whitepapers, and tools.">
+    <meta name="twitter:image" content="https://poconoai.com/hero.jpg"><meta name="theme-color" content="#0B0F13">
+    
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+    <link rel="stylesheet" href="styles.css?v=402">
+    <!-- SEO: Canonical URL + XML Sitemap reference -->
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+    <link rel="canonical" href="https://poconoai.com/sitemap.html">
+    <!-- Open Graph: ensures social sharing pulls correct page -->
+    <meta property="og:url" content="https://poconoai.com/sitemap.html">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Pocono AI, LLC",
+      "url": "https://poconoai.com",
+      "logo": "https://poconoai.com/logo.svg",
+      "description": "Sovereign, on-premises local AI infrastructure for healthcare and legal professionals. Zero-egress by default. Hardware-custody deployment.",
+      "foundingDate": "2024",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "East Stroudsburg",
+        "addressRegion": "PA",
+        "addressCountry": "US"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+1-570-534-0602",
+        "contactType": "sales",
+        "email": "marcus@poconoai.com"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/company/pocono-ai"
+      ],
+      "datePublished": "2026-06-01",
+      "dateModified": "2026-06-01"
+    }</script>
+<link rel="stylesheet" href="nav-v2026.css?v=402">
+<link rel="stylesheet" href="brand-v292.css?v=402">
+<script>
+// Pocono AI v169 — Zero-flash banner dismissal.
+// Strategy: inject <style> tag synchronously BEFORE banner HTML parses,
+// so dismissed banners never render at all (no flash). DOM removal still
+// happens for safety. ?showbanners=1 URL param re-shows everything.
+(function(){
+  var ids=[];
+
+  // Escape hatch: ?showbanners=1 clears all dismiss flags for testing
+  try {
+    if (location.search.indexOf('showbanners=1') !== -1) {
+      ids.forEach(function(id){ localStorage.removeItem('pai_dismissed_'+id); });
+      localStorage.removeItem('poconoPilot');
+      localStorage.removeItem('advisoryBarDismissed');
+    }
+  } catch(e) {}
+
+  // v246 Stage 1 — Legacy migration block removed.
+  // Was dead code containing a JS syntax error (adjacent string literals)
+  // that broke the entire banner-dismiss IIFE on ~46 pages.
+
+  // Build CSS rule list for dismissed banners and inject synchronously.
+  // This runs in <head> BEFORE banner HTML is parsed, so dismissed bars
+  // never paint — eliminating the flash entirely.
+  var hideRules = [];
+  ids.forEach(function(id){
+    try {
+      if (localStorage.getItem('pai_dismissed_'+id) === '1') {
+        hideRules.push('#'+id+'{display:none !important;}');
+      }
+    } catch(e) {}
+  });
+  if (hideRules.length) {
+    var style = document.createElement('style');
+    style.id = 'pai-banner-hide';
+    style.textContent = hideRules.join('');
+    (document.head || document.documentElement).appendChild(style);
+  }
+
+  function dismiss(id){
+    try { localStorage.setItem('pai_dismissed_'+id,'1'); } catch(e) {}
+    var el = document.getElementById(id);
+    if (el) {
+      el.style.setProperty('display','none','important');
+      el.setAttribute('aria-hidden','true');
+      if (el.parentNode) {
+        el.parentNode.removeChild(el);
+      }
+    }
+  }
+
+  // Cleanup pass — remove dismissed banners from DOM after parse,
+  // belt-and-suspenders alongside the CSS hide.
+  function cleanup(){
+    ids.forEach(function(id){
+      try {
+        if (localStorage.getItem('pai_dismissed_'+id) === '1') {
+          var el = document.getElementById(id);
+          if (el && el.parentNode) {
+            el.parentNode.removeChild(el);
+          }
+        }
+      } catch(e) {}
+    });
+  }
+
+  function bind(){
+    ids.forEach(function(id){
+      var btn = document.getElementById(id+'-close');
+      if (btn && !btn.dataset.boundDismiss) {
+        btn.dataset.boundDismiss = '1';
+        btn.addEventListener('click', function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          dismiss(id);
+        });
+        btn.addEventListener('touchend', function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          dismiss(id);
+        }, {passive:false});
+      }
+    });
+    cleanup();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bind);
+  } else {
+    bind();
+  }
+})();
+</script>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+<div id="reading-progress" aria-hidden="true"></div>
+
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- INCLUDE:HEADER -->
+<div id="hitl-notice" style="background:#0a1929;padding:4px 16px;text-align:center;font-size:12px;color:#4a5568;border-bottom:1px solid rgba(255,255,255,0.06);letter-spacing:0.01em;">Human-in-the-Loop required: licensed professionals verify all outputs before clinical or legal action</div>
+<header role="banner">
+  <div class="header-inner">
+    <a href="/index.html" class="logo" aria-label="Pocono AI Home">
+      <img src="/logo.svg?v=402" alt="" width="36" height="36" decoding="async" loading="eager" aria-hidden="true" style="display:inline-block;">
+      Pocono <span>AI</span>
+    </a>
+    <nav id="desktop-nav" aria-label="Main navigation">
+      <div class="nav-item"><a href="/index.html" class="nav-direct">Home</a></div>
+      <div class="nav-item"><a href="/for-physicians.html" class="nav-direct">Physicians</a></div>
+      <div class="nav-item"><a href="/for-attorneys.html" class="nav-direct">Attorneys</a></div>
+      <div class="nav-item"><a href="/sentinel-node.html" class="nav-direct nav-hub" style="color:#d5a94f;border:1px solid rgba(213,169,79,0.45);border-radius:999px;padding:6px 13px;">Sentinel Node</a></div>
+      <div class="nav-item"><a href="/living-memorials/" class="nav-direct">Living Echo</a></div>
+      <div class="nav-item"><a href="/contact.html" class="nav-direct">Contact</a></div>
+      <div class="nav-item" data-dropdown="menu-more">
+        <button type="button" class="nav-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="menu-more">More <span class="nav-chevron" aria-hidden="true">&#9662;</span></button>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <a href="/contact.html#pilot" class="nav-cta nav-cta-primary">Request a Pilot</a>
+      <button type="button" class="pa-search-trigger" data-search-open aria-label="Search (press / or Ctrl-K)" aria-haspopup="dialog" aria-expanded="false">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span class="pa-st-label">Search</span><kbd data-pa-keyhint>Ctrl K</kbd>
+      </button>
+      <button type="button" class="header-icon-btn" id="mobile-menu" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav-panel">
+        <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- "More" overflow dropdown — sibling of <header> so position:fixed escapes header's stacking context. Wired by nav.js via data-dropdown="menu-more". -->
+<div class="nav-dropdown" id="menu-more" aria-label="More navigation">
+  <p class="nav-dd-section">Products</p>
+  <a href="/engineering-drafting/">Drafting &amp; Engineering Edition</a>
+  <a href="/sentinel-home/">Sentinel Home Edition</a>
+  <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability — Assistive Tools &#x2605;</a>
+  <a href="/living-memorials/enterprise-estate-continuity.html">Enterprise Estate Continuity</a>
+  <p class="nav-dd-section">Capabilities</p>
+  <a href="/evidence-room.html">Evidence Room</a>
+  <a href="/push-button-deliverables.html">Push-Button Deliverables</a>
+  <a href="/pilot-readiness-kit.html">Pilot Kit</a>
+  <a href="/pilot-program.html">Pilot Program</a>
+  <a href="/how-it-works.html">How It Works</a>
+  <p class="nav-dd-section">Hubs &amp; Company</p>
+  <a href="/training.html">Training Hub</a>
+  <a href="/documentation-hub/">Document Hub</a>
+  <a href="/global/">Global Hub</a>
+  <a href="/investors-hub.html">Investor Hub</a>
+  <a href="/valuation-dashboard.html">Valuation Dashboard</a>
+  <a href="/about.html">About</a>
+  <p class="nav-dd-section">Trust &amp; Legal</p>
+  <a href="/transparency.html">Transparency</a>
+  <a href="/audit.html">Audit Log</a>
+  <a href="/privacy.html">Privacy</a>
+  <a href="/sitemap.html">Sitemap</a>
+</div>
+<!-- Site search is provided by the self-contained search.js asset (command palette: / or Ctrl/Cmd-K). -->
+
+<!-- Mobile panel: full-screen slide-in. v396 nav — hub tiles + grouped links + Sentinel Node + Engineering. -->
+<nav id="mobile-nav-panel" aria-label="Mobile navigation" aria-hidden="true" role="dialog" aria-modal="true">
+
+  <!-- Hub tiles: Sentinel Node, Documentation Hub, Training Hub, Global Hub -->
+  <div style="padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,0.07);">
+    <p style="font-size:0.65em;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.28);margin:0 0 10px;padding:0 2px;">Hubs</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <a href="/sentinel-node.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(213,169,79,0.1);border:1px solid rgba(213,169,79,0.35);border-radius:10px;color:#d5a94f;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Sentinel Node</a>
+      <a href="/documentation-hub/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(0,194,168,0.1);border:1px solid rgba(0,194,168,0.35);border-radius:10px;color:#00c2a8;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Docs Hub</a>
+      <a href="/training.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.35);border-radius:10px;color:#a78bfa;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Training Hub</a>
+      <a href="/global/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(122,240,220,0.07);border:1px solid rgba(122,240,220,0.3);border-radius:10px;color:#7af0dc;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Global Hub</a>
+    </div>
+  </div>
+
+  <!-- Core paths -->
+  <div class="mob-static-links">
+    <a href="/index.html">Home</a>
+    <a href="/for-physicians.html">Physicians</a>
+    <a href="/for-attorneys.html">Attorneys</a>
+    <a href="/engineering-drafting/">Engineering &amp; Drafting</a>
+    <a href="/pilot-program.html">Pilot Program</a>
+    <a href="/how-it-works.html">How It Works</a>
+    <a href="/trust.html">Trust &amp; Audit</a>
+    <a href="/pricing.html">Pricing</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/living-memorials/">Living Echo</a>
+    <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability</a>
+    <a href="/about.html">About</a>
+    <a href="/team.html" style="color:rgba(255,255,255,0.6);">Team &amp; Leadership</a>
+    <a href="/valuation-dashboard.html" style="color:rgba(255,255,255,0.6);">Valuation Dashboard</a>
+    <a href="/careers.html" style="color:rgba(255,255,255,0.6);">Careers</a>
+    <a href="/sentinel-demo.html" style="color:rgba(255,255,255,0.6);">Demo</a>
+    <a href="/sitemap.html" style="color:rgba(255,255,255,0.45);">Sitemap</a>
+    <a href="/transparency.html" style="color:rgba(255,255,255,0.45);">Transparency</a>
+    <a href="/privacy.html" style="color:rgba(255,255,255,0.45);">Privacy</a>
+  </div>
+
+  <a href="/contact.html#pilot" class="mob-cta">Request a Pilot</a>
+</nav>
+<!-- /INCLUDE:HEADER -->
+
+
+<main id="main-content" tabindex="-1">
+<span id="main" aria-hidden="true"></span>
+<div class="container" style="max-width:1100px;margin:0 auto;padding:40px 24px;">
+<div class="sentinel-lockup" aria-label="Sentinel Node — Site Directory" style="margin-bottom:18px;">
+  <svg class="sentinel-lockup-mark" viewBox="0 0 64 64" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
+          <!-- v311b: rotated diamond + C-curve loop + summit dot. Inherits currentColor from CSS context. -->
+          <g transform="rotate(45 32 32)">
+            <rect x="12" y="12" width="40" height="40" rx="8" ry="8"/>
+            <path d="M43 22 L26 22 A6 6 0 0 0 20 28 L20 36 A6 6 0 0 0 26 42 L41 42"/>
+          </g>
+          <circle cx="32" cy="9" r="3" fill="currentColor" stroke="none"/>
+        </svg>
+  <div class="sentinel-lockup-rule"></div>
+  <div class="sentinel-lockup-text">
+    <span class="sentinel-lockup-name">Sentinel Node</span>
+    <span class="sentinel-lockup-tag">Site Directory</span>
+  </div>
+</div>
+<h1 style="font-size:2rem;font-weight:800;margin-bottom:8px;">Site Directory</h1>
+<p style="color:var(--light-text);font-size:0.95em;margin-bottom:40px;">Every page on poconoai.com — 168 entries, grouped by navigation category. YouTube embeds disclosed; all other functions are local. Last updated 2026-07-06 (v402 — added Valuation Dashboard).</p>
+
+<style>
+.sm-group { margin-bottom:36px; }
+.sm-group h2 { font-size:1rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--teal); border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:8px; margin:0 0 16px; }
+.sm-list { list-style:none; padding:0; margin:0; }
+.sm-list li { padding:10px 0; border-bottom:1px solid rgba(255,255,255,0.04); }
+.sm-list li:last-child { border-bottom:none; }
+.sm-list a { color:var(--white); font-weight:600; text-decoration:none; font-size:0.97em; }
+.sm-list a:hover, .sm-list a:focus-visible { color:var(--teal); text-decoration:underline; }
+.sm-list .sm-desc { display:block; font-size:0.84em; color:var(--muted); margin-top:2px; line-height:1.5; }
+.sm-cols { display:grid; grid-template-columns:repeat(auto-fit,minmax(360px,1fr)); gap:0 40px; }
+</style>
+
+<!-- SITEMAP:GENERATED START -->
+<div class="sm-cols">
+    <section class="sm-group" data-category="home">
+      <h2>Home</h2>
+      <ul class="sm-list">
+      <li><a href="index.html">Pocono AI — Governance-Native AI Infrastructure for Medical Practices</a><span class="sm-desc">Governance-native local AI infrastructure for independent medical practices. Zero cloud routing, full audit trail, human review gating. The Sentinel Node from Pocono AI.</span></li>
+      <li><a href="global/">Global Federated AI Rollout</a><span class="sm-desc">Pocono AI's federated international strategy: local leadership, local law, local trust, and shared governance-native infrastructure. We are not exporting AI; we are federating it. Seeking qualified regional partners.</span></li>
+      </ul>
+    </section>
+    <section class="sm-group" data-category="start">
+      <h2>Start Here</h2>
+      <ul class="sm-list">
+      <li><a href="start-here.html">Start Here — A 3-Minute Tour for Each Audience</a><span class="sm-desc">Fastest orientation to Sentinel Node — separate 3-minute paths for medical practices, law firms, IT leaders, and investors. No deck. No demo. Just the right page.</span></li>
+      <li><a href="how-it-works.html">How It Works — The Workflow in Plain Language</a><span class="sm-desc">How Sentinel Node works, step by step: documents enter a controlled local environment, the AI drafts with citations, and a qualified human reviews every output before use. Understandable to an office manager.</span></li>
+      <li><a href="plain.html">Pocono AI, in plain language</a><span class="sm-desc">Pocono AI explained in plain language for investors, doctors, nurses, and lawyers. No jargon. No acronyms. Just what it does, how it works, and what it means for you.</span></li>
+      <li><a href="executive-brief.html">Executive Brief &mdash; Pocono AI</a><span class="sm-desc">Pocono AI Executive Brief — sovereign on-premises AI infrastructure for medical practices and law firms. The 5-minute summary for executive decision-makers.</span></li>
+      <li><a href="sentinel-demo.html">Live Demo — Sentinel Node RAG Workflow</a><span class="sm-desc">Live Sentinel Node RAG workflow demonstration. Ask any question about a clinical note, legal memo, or compliance report. Watch cited answers appear in real time.</span></li>
+      <li><a href="why-pocono-ai.html">Why Pocono AI</a><span class="sm-desc">The definitive case for hardware-custody AI. Why physical network isolation beats every cloud BAA compliance claim — and why competitors cannot replicate it.</span></li>
+      <li><a href="contact.html">Contact — Start a Serious Conversation</a><span class="sm-desc">Request a pilot conversation for your medical practice or law firm. Four inquiry pathways: medical pilot, law firm pilot, technical/governance discussion, investor/strategic partner.</span></li>
+      <li><a href="what-happens-after-contact.html">What Happens After You Reach Out</a><span class="sm-desc">The Pocono AI engagement sequence — workflow assessment, infrastructure review, workflow refinement, pilot deployment preparation, and collaborative operational refinement.</span></li>
+      </ul>
+    </section>
+    <section class="sm-group" data-category="documentation-hub">
+      <h2>Documentation Hub</h2>
+      <ul class="sm-list">
+      <li><a href="documentation-hub/">Documentation Hub — Deep Proof Library</a><span class="sm-desc">The deep proof library for buyers, technical reviewers, investors, and compliance reviewers. Clinical, legal, technical, governance, tools, investors, research, and transparency.</span></li>
+      <li><a href="documentation-hub/clinical/">Hub — Clinical Documentation</a><span class="sm-desc">Physician workflows: prior authorization, denials, pre-visit packets, documentation support, staff burden, and clinical safety boundaries.</span></li>
+      <li><a href="documentation-hub/legal/">Hub — Legal Documentation</a><span class="sm-desc">Attorney workflows: privileged review, discovery, deposition prep, matter chronologies, privilege and ethics, with mandatory attorney review.</span></li>
+      <li><a href="documentation-hub/technical/">Hub — Technical Documentation</a><span class="sm-desc">Architecture, local inference, RAG, vector database, hardware, deployment topology, and security posture.</span></li>
+      <li><a href="documentation-hub/governance/">Hub — Governance &amp; Audit</a><span class="sm-desc">Audit lifecycle, trust receipts, human review, fail-safe behavior, the near-miss doctrine, and claims and citations.</span></li>
+      <li><a href="documentation-hub/tools/">Hub — Tools &amp; Simulators</a><span class="sm-desc">ROI and liability models, breach calculator, the what-if engine, and live demonstrations. Educational and synthetic.</span></li>
+      <li><a href="documentation-hub/investors/">Hub — Investors</a><span class="sm-desc">Investor brief, market validation, pricing model, pilot evidence, team, and differentiation. Pre-seed; modeled figures.</span></li>
+      <li><a href="documentation-hub/research/">Hub — Research &amp; Essays</a><span class="sm-desc">White papers, founder essays, market notes, and external citations.</span></li>
+      <li><a href="documentation-hub/transparency/">Hub — Transparency</a><span class="sm-desc">Release audit log, claims and citations, change history, and known limitations.</span></li>
+      <li><a href="training.html">Sentinel Node Training Overview</a><span class="sm-desc">Training hub: Customer Training and Installer Training as two distinct tracks. Pilot training structure, role-based sign-off, and the Training Acknowledgment Form framework.</span></li>
+      <li><a href="customer-training.html">Customer Training: Safe Use, Human Review, and Packet Workflows</a><span class="sm-desc">For pilot users, clinicians, reviewers, and support staff. Patient packet, prior authorization support, denial response, H&amp;P document chaos, bad-output drill, and pilot metrics. Outputs are drafts requiring human review.</span></li>
+      <li><a href="installer-training.html">Installer Training: Deployment, Local Controls, and Handoff Readiness</a><span class="sm-desc">For Pocono AI staff, technical partners, and MSPs acting as installers. Pre-install readiness, hardware custody, network configuration, egress verification, audit log, Day Zero/Day One, and installer go/no-go checklist.</span></li>
+      </ul>
+    </section>
+    <section class="sm-group" data-category="solutions-overview">
+      <h2>Solutions — Overview</h2>
+      <ul class="sm-list">
+      <li><a href="solutions.html">Solutions Overview</a><span class="sm-desc">Sovereign local AI for independent medical practices, law firms, and MSP partners. Zero-egress by default. Locally deployed, practice-hosted AI infrastructure.</span></li>
+      <li><a href="regulated-ai-infrastructure.html">Regulated AI Infrastructure for Medical and Legal Workflows</a><span class="sm-desc">Regulated AI infrastructure is built for environments where data handling, accountability, and human oversight are non-negotiable. How Pocono AI fits.</span></li>
+      <li><a href="regulated-ai-solutions.html">Regulated AI Solutions by Use Case</a><span class="sm-desc">A directory of Pocono AI's local AI solutions organized by use case — for independent medical practices, small law firms, governance leaders, and technical evaluators.</span></li>
+      <li><a href="use-cases.html">Use Cases</a><span class="sm-desc">Real use cases for the Sentinel Node — what physicians and attorneys actually query, how the system responds, and what time is reclaimed. No demos. No stock photos. Real workflows.</span></li>
+      <li><a href="workflows.html">Regulated Workflows. Local AI Assistance. Human Oversight.</a><span class="sm-desc">Local AI workflow infrastructure for regulated medical and legal environments — prior authorization, clinical documentation, legal research, and human-gated governance.</span></li>
+      </ul>
+    </section>
+    <section class="sm-group" data-category="solutions-medical">
+      <h2>Solutions — Medical Practices</h2>
+      <ul class="sm-list">
+      <li><a href="for-physicians.html">For Physicians</a><span class="sm-desc">Pocono AI for physicians: eliminate 1.5–3 hours of daily EHR burden with on-premises, zero-egress AI. Built for independent practices of 2–10 providers.</span></li>
+      <li><a href="physicians-hub.html">Physician Knowledge Hub — Workflows, Governance, Deployment</a><span class="sm-desc">The physician-centered navigator for Pocono AI — prior authorization, documentation burden, patient trust, deployment, training, and clinical workflow resources.</span></li>
+      <li><a href="ai-prior-authorization-without-cloud-exposure.html">AI Prior Authorization Without Cloud Exposure</a><span class="sm-desc">Local AI support for prior authorization that never routes patient data to the cloud. Drafts cited justifications, flags uncertainty, logs every step.</span></li>
+      <li><a href="ai-documentation-support-independent-clinics.html">AI Documentation Support for Independent Clinics</a><span class="sm-desc">AI documentation support for independent clinics, running locally. Draft notes and summaries from your own records — no cloud routing, human review.</span></li>
+      <li><a href="hipaa-local-ai-independent-medical-practices.html">HIPAA-Aware Local AI for Medical Practices</a><span class="sm-desc">On-premises AI for independent medical practices. No cloud routing of patient data, a full audit trail, and human review on every output.</span></li>
+      <li><a href="clinical-collaboration-framework.html">Clinical Collaboration Framework — Sentinel Node</a><span class="sm-desc">A restrained clinical collaboration framework for Pocono AI pilots: physician workflow advisory, governance feedback loops, operational refinement, and explicit anti-claims.</span></li>
+      <li><a href="pilot-close-kit.html">Pilot Close Kit</a><span class="sm-desc">A practical 60-day Sentinel Node pilot package: scope, reviewer responsibilities, IT checklist, evidence report, pricing, and next steps. The single link to send after a warm conversation.</span></li>
+      <li><a href="sample-60-day-evidence-report.html">Sample 60-Day Evidence Report</a><span class="sm-desc">A synthetic example of the evidence a practice receives after a 60-day Sentinel Node pilot. Clearly marked illustrative only; not a completed client result. Measurement table, draft outcomes, reviewer trust findings, audit completeness, and decision options.</span></li>
+      <li><a href="pilot-program.html">The 60-Day Pilot Program</a><span class="sm-desc">The canonical pilot offer: one Sentinel Node appliance, one workflow, sixty days &mdash; who it&rsquo;s for, the timeline, success metrics, founding-cohort pricing, and what it does not do.</span></li>
+      <li><a href="pilot-brief.html">60-Day Paid Proof-of-Value Brief</a><span class="sm-desc">The Pocono AI 60-Day Paid Proof-of-Value deployment framework for independent medical practices and law firms. Zero integration overhead, no FHIR approvals, no routine PHI egress.</span></li>
+      <li><a href="ai-scribe-alternative.html">AI Scribe Alternative for Independent Practices</a><span class="sm-desc">Private AI scribe alternative for independent medical practices. Local AI for clinical documentation, prior authorization, and HIPAA-sensitive workflows. No PHI leaves your building.</span></li>
+      <li><a href="physicians-denials-appeals.html">Denials &amp; Appeals — AI-Assisted Letter Drafting</a><span class="sm-desc">How Pocono AI assists with prior authorization denials and clinical appeals — citation-grounded language, clinical record retrieval, attestation workflow, physician sign-off.</span></li>
+      <li><a href="physicians-training.html">Clinical Staff Training for AI Workflows</a><span class="sm-desc">Sentinel Node clinician onboarding: two-session curriculum (60 min physician, 45 min administrative). Verification habits, citation review, and escalation protocols.</span></li>
+      <li><a href="nurses-ai-briefing.html">What Nurses Need to Know About AI in the Chart</a><span class="sm-desc">What Nurses Need to Know About AI in the Chart — A plain-language summary of The Paradox of Automated Abandonment. For RNs: your license, AI notes, and what to ask at work.</span></li>
+      <li><a href="support-staff-clinic-workflows.html">For Clinic Support Staff — Nurses, MAs, Front Desk, Prior Auth</a><span class="sm-desc">How Sentinel Node helps clinic nurses, MAs, and front-desk staff handle prior auth, referrals, and documentation without cloud AI data exposure.</span></li>
+      <li><a href="works-with-your-clinic.html">Works With Your Clinic Systems — Epic, Athenahealth, eClinicalWorks</a><span class="sm-desc">How Sentinel Node coexists with Epic, Athenahealth, Cerner, and eClinicalWorks — local AI that fits the clinic systems you already run.</span></li>
+      <li><a href="day-in-the-clinic.html">Day in the Clinic — Sentinel Node Workflow</a><span class="sm-desc">A guided clinic-day workflow showing how Sentinel Node supports intake, retrieval, drafting, human review, approval, and audit logging.</span></li>
+      <li><a href="cardiology-inbox-workflow.html">A Day Inside the Cardiology Inbox</a><span class="sm-desc">Workflow proof page for small cardiology practices. Walks one day through abnormal labs, echo and stress test results, Holter/Zio rhythm reports, incidental findings, portal symptom messages, and clearance requests — comparing without and with Sentinel Node. Derived from the Cardiology Inbox Safety Gap white paper.</span></li>
+      </ul>
+    </section>
+    <section class="sm-group" data-category="solutions-legal">
+      <h2>Solutions — Law Firms</h2>
+      <ul class="sm-list">
+      <li><a href="for-attorneys.html">For Attorneys</a><span class="sm-desc">Pocono AI for attorneys: local AI for discovery review, case research, and document analysis. Zero cloud. Designed to support ABA Rule 1.6 confidentiality obligations by architecture.</span></li>
+      <li><a href="attorneys-hub.html">Attorney Knowledge Hub — Privilege, Governance, Deployment</a><span class="sm-desc">The attorney-centered navigator for Pocono AI — privilege, document review, governance, hallucination risk, deployment, training, and ethics resources.</span></li>
+      <li><a href="private-ai-for-law-firms.html">Private AI for Law Firms</a><span class="sm-desc">Secure private AI for law firms. On-premises legal AI with zero cloud routing of client documents. Supports confidential legal workflows and attorney-client privilege architecture.</span></li>
+      <li><a href="on-prem-ai-small-law-firms.html">On-Premises AI for Small Law Firms</a><span class="sm-desc">On-premises AI for small law firms. Privileged matter data stays on your hardware — no cloud routing, a full audit trail, and attorney review.</span></li>
+      <li><a href="law-firm-pilot.html">AI Diligence That Law Firms Can Trust — Pocono AI Pilot</a><span class="sm-desc">Pocono AI for law firms — local AI appliance for confidentiality-sensitive practice. Pilot deployment. Zero cloud telemetry. Attorney-client privilege protected by architecture.</span></li>
+      <li><a href="attorneys-privilege.html">Attorney-Client Privilege &amp; AI — How Sentinel Node Preserves Privilege</a><span class="sm-desc">How Pocono AI handles attorney-client privilege — on-premises retrieval, zero cloud egress, role-based document access, reviewable audit. The technical and ethical case.</span></li>
+      <li><a href="attorneys-e-discovery.html">E-Discovery &amp; Document Review — Local AI Retrieval</a><span class="sm-desc">How Pocono AI handles e-discovery and large document review locally — retrieval over privileged production, no cloud egress, role-based access, reviewable audit log.</span></li>
+      <li><a href="attorneys-ethics.html">Professional Ethics &amp; AI — ABA Model Rules 1.1, 1.6, 5.3</a><span class="sm-desc">How Pocono AI maps to ABA Model Rules 1.1 (competence), 1.6 (confidentiality), and supervision of non-lawyers — the governance architecture for legal AI use.</span></li>
+      <li><a href="local-ai-document-review-attorneys.html">Local AI Document Review for Attorneys</a><span class="sm-desc">Local AI document review for attorneys. First-pass review on your hardware — cited sources, uncertainty flagged, attorney review, full audit trail.</span></li>
+      <li><a href="legal-workflows-by-practice.html">Legal Workflows by Practice Area</a><span class="sm-desc">How Sentinel Node supports estate planning, personal injury, family law, and civil litigation at small law firms — local AI, governed workflows.</span></li>
+      <li><a href="support-staff-workflows.html">For Paralegals &amp; Support Staff</a><span class="sm-desc">How Sentinel Node helps paralegals, legal assistants, and intake coordinators handle documentation and research without cloud AI data exposure.</span></li>
+      <li><a href="day-in-a-law-firm.html">A Day Inside a Small Law Firm Using Local AI</a><span class="sm-desc">How a small general-practice law firm uses Sentinel Node across one workday — research, document review, drafts, and attorney sign-off.</span></li>
+      <li><a href="before-after-small-firm.html">Before vs. After: A Small Law Firm With Governed Local AI</a><span class="sm-desc">Nine operational dimensions of a small law firm before and after Sentinel Node — time savings, privilege protection, and governance receipts.</span></li>
+      </ul>
+    </section>
+    <section class="sm-group" data-category="solutions-engineering">
+      <h2>Solutions — Engineering &amp; Drafting</h2>
+      <ul class="sm-list">
+      <li><a href="engineering-drafting/">Sentinel Node — Drafting &amp; Engineering Edition</a><span class="sm-desc">Governed AI for drawings, specifications, redlines, RFIs, submittals, change orders, and project knowledge. Local-first custody, human review, zero telemetry, audit trails. Documentation and workflow support — not a licensed engineering service.</span></li>
+      </ul>
+    </section>
+    <section class="sm-group" data-category="solutions-admin">
+      <h2>Solutions — Administrators & Pilot</h2>
+      <ul class="sm-list">
+      <li><a href="administrators-hub.html">Administrator Hub — Deployment, Onboarding, Workflow Adoption</a><span class="sm-desc">Deployment planning, staff onboarding, workflow configuration, and operational support resources for practice administrators managing Sentinel Node.</span></li>
+      <li><a href="pilot-workflow.html">Pilot Deployment Workflow — Operational Walkthrough</a><span class="sm-desc">What a Pocono AI pilot looks like on the ground: preparation, deployment, ingestion, training, governance, validation, and steady-state operations — with concrete checklists.</span></li>
+      <li><a href="pilot-readiness-kit.html">Pilot Readiness Kit — Sentinel Node</a><span class="sm-desc">A practical checklist for evaluating whether a clinic, law firm, or regulated organization is ready for a Sentinel Node proof-of-value deployment.</span></li>
+      <li><a href="sentinel-pilot-scaffold.html">Sentinel Node Pilot-Scaffold Update</a><span class="sm-desc">Sentinel Node has moved from architecture to pilot-candidate control plane. Internal release-candidate build sequence (Z1&ndash;Z21) added regulated-mode auth, OCR confidence gating, evidence-train checks, local retrieval scaffolding, Audit Proxy LLM routing, signed update custody, professional packet export, compliance evidence mapping, and first-pilot configuration templates. Pilot-candidate scaffold, not production certification.</span></li>
+      <li><a href="pricing.html">Managed Local AI Infrastructure — Pricing</a><span class="sm-desc">Managed local AI infrastructure pricing: Phase I $950/mo, Phase II $1,495/mo, Phase III $2,995/mo. Three hardware tiers for medical practices and law firms.</span></li>
+      </ul>
+    </section>
+    <section class="sm-group" data-category="solutions-it">
+      <h2>Solutions — IT / MSP / Security</h2>
+      <ul class="sm-list">
+      <li><a href="it-leaders-hub.html">IT Leaders Hub — Architecture, Deployment, Audit</a><span class="sm-desc">The IT-leader navigator for Pocono AI — infrastructure fit, network topology, deployment requirements, integration architecture, and MSP partnership resources.</span></li>
+      <li><a href="specs.html">Technical Specifications</a><span class="sm-desc">Sentinel Node technical specs: secure on-premises AI with local RAG, document sanitization pipeline, and Human-in-the-Loop verification architecture.</span></li>
+      <li><a href="deployment-topology.html">Enterprise Deployment Topology — Sentinel Node</a><span class="sm-desc">Enterprise deployment topology for Sentinel Node: where the appliance sits, how data stays local, how signed updates work, what fails safely, and how support escalation operates.</span></li>
+      <li><a href="security.html">Physical &amp; Internal Security</a><span class="sm-desc">Sentinel Node physical port security, encrypted at-rest storage, and Role-Based Access Control. Perimeter security from the inside out.</span></li>
+      <li><a href="channel-partners.html">MSP & Channel Partner Pathway — Sentinel Node</a><span class="sm-desc">How MSPs, healthcare IT firms, and regional deployment partners can participate in Sentinel Node deployment, support, and local AI governance.</span></li>
+      <li><a href="works-with-your-stack.html">Works With Your Current Systems</a><span class="sm-desc">How Sentinel Node coexists with Outlook, Clio, NetDocuments, and other law firm systems — local AI that fits the stack you already run.</span></li>
+      </ul>
+    </section>
+    <section class="sm-group" data-category="platform">
+      <h2>Platform</h2>
+      <ul class="sm-list">
+      <li><a href="platform.html">Sentinel Node Platform — Overview</a><span class="sm-desc">The platform overview hub: local inference, private RAG retrieval, zero-egress architecture, data sovereignty, and hybrid orchestration — how the Sentinel Node runs inside your walls.</span></li>
+      <li><a href="sentinel-node.html">Sentinel Node: Local AI Infrastructure for Regulated Practices</a><span class="sm-desc">Sentinel Node is a locally deployed AI appliance for medical practices and law firms. Zero cloud routing, full audit trail, human review gating.</span></li>
+      <li><a href="sentinel-specs.html">Sentinel Node Specifications</a><span class="sm-desc">Sentinel Node hardware specs — three on-premises AI tiers for independent practices. Dell Precision base, enterprise SSD, offline-first LLM. Zero cloud routing.</span></li>
+      <li><a href="architecture.html">For IT &amp; MSPs</a><span class="sm-desc">Sentinel Node technical architecture: zero-egress data flow, local RAG pipeline, no cloud routing. For IT teams and MSPs evaluating sovereign AI.</span></li>
+      <li><a href="local-ai-inference.html">Local AI Inference for Healthcare and Law</a><span class="sm-desc">Local AI inference keeps language model processing on hardware you control — no cloud API calls, no external routing. For regulated environments.</span></li>
+      <li><a href="private-rag-appliance-regulated-workflows.html">Private RAG Appliance for Regulated Workflows</a><span class="sm-desc">A private RAG appliance for regulated workflows. Retrieval-grounded AI on hardware you control — no cloud routing, cited sources, human review.</span></li>
+      <li><a href="local-vs-cloud.html">Local AI vs. Cloud AI — Why Sovereignty Matters</a><span class="sm-desc">Why local AI infrastructure outperforms cloud AI for healthcare and legal practices — data sovereignty, audit trail, and resilience.</span></li>
+      <li><a href="comparison.html">Comparison</a><span class="sm-desc">How the Sentinel Node compares to cloud AI, EHR-native AI, and other sovereign AI solutions. Honest side-by-side analysis.</span></li>
+      <li><a href="zero-exfiltration-ai.html">Zero-Exfiltration AI Infrastructure</a><span class="sm-desc">AI infrastructure that prevents sensitive data from leaving your network — no cloud routing, no external model calls. For regulated environments.</span></li>
+      <li><a href="data-sovereignty-ai.html">Data Sovereignty AI for Healthcare and Law</a><span class="sm-desc">Data sovereignty in AI: sensitive workflow data stays under your physical control. How Sentinel Node delivers this for medical and legal practices.</span></li>
+      <li><a href="zero-telemetry-ai.html">Zero-Telemetry AI for Healthcare and Law</a><span class="sm-desc">Zero-telemetry AI keeps sensitive workflow data local — no usage telemetry routed to cloud vendors. Designed for medical practices and law firms.</span></li>
+      <li><a href="zero-telemetry-ai-healthcare.html">Zero-Telemetry AI Infrastructure for Healthcare</a><span class="sm-desc">Zero-telemetry AI infrastructure for healthcare. No query content or usage data routed to vendors — inference runs locally, with human review.</span></li>
+      <li><a href="hybrid-ai-orchestration.html">Hybrid AI Orchestration — Local-First Inference with Governed Handoff</a><span class="sm-desc">Why regulated practices need hybrid AI orchestration: local-first inference for privileged and PHI-bearing work, with explicit policy-governed handoff for the work that doesn</span></li>
+      <li><a href="deployment-guide.html">Day One Deployment Guide — Sentinel Node</a><span class="sm-desc">What deployment looks like in a clinic or law firm after Sentinel Node arrives — plain-language guide to hardware, document ingestion, staff training, and governance.</span></li>
+      <li><a href="deployment.html">60-Day Deployment Timeline</a><span class="sm-desc">From signed contract to first productive AI query in 60 days. See exactly what happens, who does what, and what your practice needs to do — day by day. No surprises.</span></li>
+      <li><a href="clinical-deployment.html">Clinical Deployment Framework</a><span class="sm-desc">Clinical deployment framework for Sentinel Node: role-aware AI access for providers, clinical support, and administrative staff, with human-in-the-loop verification.</span></li>
+      <li><a href="continuity-and-resilience.html">Continuity & Resilience</a><span class="sm-desc">How Sentinel Node handles support, signed updates, offline operation, hardware replacement, audit continuity, and failure-safe behavior for regulated environments.</span></li>
+      <li><a href="vector-databases-rerankers-2026.html">Vector Databases &amp; Rerankers in 2026</a><span class="sm-desc">Vector databases and rerankers in 2026: citation-grounded literature review for local AI retrieval in regulated environments. What works, what trades off.</span></li>
+      <li><a href="local-llm-practical-hardware.html">Engineering Field Note: Running Local LLMs on Practical Hardware</a><span class="sm-desc">Founder field notes on running local LLMs with practical hardware, Linux, Docker, and retrieval pipelines — lessons from the Pocono AI build.</span></li>
+      </ul>
+    </section>
+    <section class="sm-group" data-category="governance">
+      <h2>Governance</h2>
+      <ul class="sm-list">
+      <li><a href="governance.html">AI Verification &amp; Governance for Regulated Workflows</a><span class="sm-desc">Why human review, provenance, traceability, and local control matter for AI in medical practices, law firms, and compliance-sensitive organizations. Pocono AI</span></li>
+      <li><a href="compliance-hub.html">Compliance Officer Hub — Governance, Audit, Attestation</a><span class="sm-desc">The compliance-officer-centered navigator for Pocono AI — AI governance model, audit lifecycle, regulatory attestation, breach risk, and transparency resources.</span></li>
+      <li><a href="audit-lifecycle.html">The Audit Lifecycle — From Prompt to 90-Day Retention</a><span class="sm-desc">A complete visualization of the Sentinel Node audit lifecycle — every prompt, retrieval, response, and review decision logged in a append-only, reviewable local record.</span></li>
+      <li><a href="sentinel-audit-system.html">How Sentinel Node™ Audits AI Workflows</a><span class="sm-desc">How the Sentinel Node™ audits every AI workflow: append-only, reviewable audit logs, human-in-the-loop review, local-only data flow, and 90-day reviewable retention.</span></li>
+      <li><a href="operational-artifacts.html">Operational Artifacts — What Auditors Actually See</a><span class="sm-desc">Concrete examples of documents, logs, and reports a Pocono AI deployment produces — audit log exports, ingestion manifests, review queue summaries, and citation verification.</span></li>
+      <li><a href="how-pocono-ai-fails-safely.html">How Pocono AI Fails Safely</a><span class="sm-desc">How Sentinel Node handles uncertainty, refuses out-of-scope requests, and enforces human review — safe failure design for regulated environments.</span></li>
+      <li><a href="ai-governance-layer.html">AI Governance Layer for Regulated Environments</a><span class="sm-desc">An AI governance layer creates accountability between AI output and human decisions — audit trails, human review gates, and scope controls.</span></li>
+      <li><a href="ai-governance-audit-trail.html">AI Governance Audit Trail</a><span class="sm-desc">Every AI query, source, and human review recorded in a reviewable local audit log. An audit trail for medical and legal work, built into the infrastructure.</span></li>
+      <li><a href="governance-review.html">Governance Review &mdash; What It Looks Like On Screen</a><span class="sm-desc">How AI governance works as a sequence of visible review states inside Sentinel Node — evidence retrieval, draft with citation gate, human review, and audit chain.</span></li>
+      </ul>
+    </section>
+    <section class="sm-group" data-category="tools">
+      <h2>Tools & Demos</h2>
+      <ul class="sm-list">
+      <li><a href="tools-demos.html">Tools &amp; Demos — Interactive Proof</a><span class="sm-desc">Proof, not toys. The live Sentinel Node RAG demo, the Trial Room, and interactive risk, ROI, and compliance tools you can run against your own environment.</span></li>
+      <li><a href="sentinel-node/installation-simulator.html">Sentinel Node Installation Simulator</a><span class="sm-desc">Interactive deployment walkthrough for Sentinel Node covering DHCP/network discovery, isolated subnet/VLAN planning, router/firewall trust boundaries, appliance bootstrap, approved-source ingestion, draft-only workflows, human review, audit verification, and go-live reporting. Beta training artifact.</span></li>
+      <li><a href="push-button-deliverables.html">Push-Button Deliverables — See Sentinel Node Work Product</a><span class="sm-desc">See governed draft work product from Sentinel Node: prior authorization packets, denial appeal briefs, patient summaries, referral packets, billing documentation review, medical chronologies, legal research memos, demand support packets, privilege review, deposition prep, client updates, and audit-ready governance receipts. Synthetic data only.</span></li>
+      <li><a href="sentinel-trial-room.html">Sentinel Trial Room — Interactive Governance Demonstration</a><span class="sm-desc">A fictional interactive demonstration: watch a risky AI draft get stopped, audited, and resolved by a human reviewer. Evidence gaps surfaced, export blocked until review, decisions recorded to a local audit chain. Synthetic demonstration data only.</span></li>
+      <li><a href="evidence-room.html">The Evidence Room &mdash; Attack a Live Audit Chain</a><span class="sm-desc">A working, tamper-evident hash chain records your visit &mdash; sealed locally with SHA-256. Alter a record, re-seal it, forge the chain; content seals, link integrity, and witness anchors each catch a layer. Reviewer attestation exercise and locally generated evidence packet included. Synthetic data; nothing leaves your device.</span></li>
+      <li><a href="workflow-demonstrations.html">Workflow Demonstrations &mdash; Six Operational Sequences</a><span class="sm-desc">Concrete operational workflows for the Pocono AI Sentinel Node: prior auth appeals, policy retrieval, legal drafting, governance review, audit trail export, and physician sign-off.</span></li>
+      <li><a href="governance-dashboard.html">Governance Dashboard Mockups — Sentinel Node</a><span class="sm-desc">Operational screen concepts for Sentinel Node: evidence review, draft status, human approval, audit envelope, and chain-of-custody views.</span></li>
+      <li><a href="liability-simulator.html">AI Liability Exposure Simulator</a><span class="sm-desc">Interactive simulation showing how AI liability propagates through cloud systems versus Sentinel Node's governance-first architecture — for physicians, attorneys, and investors.</span></li>
+      <li><a href="operational-impact-model.html">Operational Impact Model</a><span class="sm-desc">A CFO and practice-manager model for measuring Sentinel Node impact: staff time savings, prior authorization burden, retrieval quality, audit readiness, and risk reduction.</span></li>
+      <li><a href="shadow-audit.html">Shadow IT Audit — Where Is Your PHI Going?</a><span class="sm-desc">Is your staff sending patient records to ChatGPT without you knowing? Discover every place PHI is leaking from your practice right now. Free Shadow IT Audit — runs in your browser.</span></li>
+      <li><a href="breach-calculator.html">Breach Cost Calculator</a><span class="sm-desc">Calculate your practice's financial exposure from a cloud AI data breach. HIPAA penalty estimator for independent medical practices.</span></li>
+      <li><a href="strategic-ai-what-if.html">Strategic AI What-If Scenario Engine</a><span class="sm-desc">Interactive governance scenario analysis for regulated-industry AI deployment decisions. Explore infrastructure tradeoffs across healthcare, legal, fintech, and education. (Try the konami code.)</span></li>
+      <li><a href="compliance.html">AI Sovereignty Attestation Generator</a><span class="sm-desc">Generate an AI Sovereignty Attestation Letter showing regulators and insurers exactly how your practice</span></li>
+      <li><a href="trust-receipts.html">Trust Receipts</a><span class="sm-desc">Trust Receipts: every security claim Pocono AI makes, backed by the actual mechanism, code, and citation. Show, don</span></li>
+      <li><a href="simulation.html">12-Panel Simulation</a><span class="sm-desc">Watch 12 expert panelists — investors, physicians, attorneys, patient advocates — deliberate sovereign AI deployment. Fully offline. Research-grounded.</span></li>
+      <li><a href="roi.html">ROI Calculator</a><span class="sm-desc">Sentinel Node ROI calculator. Compare 3-year cost of Phase I ($950/mo) or Phase II ($1,495/mo) against cloud AI spend. Includes staff time and breach-risk factors.</span></li>
+      </ul>
+    </section>
+    <section class="sm-group" data-category="evidence">
+      <h2>Global Federated AI</h2>
+      <p style="font-family:system-ui,sans-serif;font-size:0.82em;color:#6f8295;margin:8px 0 12px;">Market theses and partner-invitation pages. Not launch announcements or claims of active operations.</p>
+      <ul class="sm-list">
+        <li><a href="global/">Global Federated AI Hub</a><span class="sm-desc">Pocono AI&rsquo;s federated international model: local leadership, local law, local data custody, shared governance-native infrastructure. Hub for all country market theses.</span></li>
+        <li><a href="global/australia/">Australia — Repairing the Referral Bottleneck</a><span class="sm-desc">Market thesis: governed local AI for GP-to-specialist referral and specialist-intake packet preparation. Privacy Act, TGA SaMD, ACSQHC guidance. Partner invitation.</span></li>
+        <li><a href="global/singapore/">Singapore — Helping Healthier SG Work at the Front Line</a><span class="sm-desc">Market thesis: governed local AI for Healthier SG care-plan preparation and chronic-care visit support. PDPA, HSA AIHGle 2.0, NEHR context. Partner invitation.</span></li>
+        <li><a href="global/taiwan/">Taiwan — Governed Local AI for Care Coordination</a><span class="sm-desc">Market thesis: post-discharge and chronic-care coordination packets in a super-aged society. PDPA, TFDA SaMD, MOHW Long-Term Care 3.0. Partner invitation.</span></li>
+        <li><a href="global/europe/">Europe — Local AI for Data Sovereignty and Regulated Trust</a><span class="sm-desc">Market thesis: GDPR-aligned local-first regulated workflow support for medical and legal practices. EU AI Act, Schrems II, EDPB guidelines. Partner invitation.</span></li>
+      </ul>
+      <h2>Evidence & Research</h2>
+      <ul class="sm-list">
+      <li><a href="research.html">Research Hub</a><span class="sm-desc">Pocono AI Research Hub — peer-reviewed data on EHR burden, prior authorization crisis, legal admin overhead, and the clinical case for sovereign local AI infrastructure.</span></li>
+      <li><a href="global/australia/">Pocono AI Australia — Repairing the Referral Bottleneck</a><span class="sm-desc">Market thesis: governed local AI for GP-to-specialist referral packet preparation. Privacy Act, TGA SaMD, ACSQHC guidance. Partner invitation.</span></li>
+      <li><a href="global/singapore/">Pocono AI Singapore — Helping Healthier SG Work at the Front Line</a><span class="sm-desc">Market thesis: governed local AI for Healthier SG care-plan preparation and chronic-care visit support. PDPA, HSA AIHGle 2.0, NEHR context.</span></li>
+      <li><a href="global/taiwan/">Pocono AI Taiwan — Governed Local AI for Care Coordination</a><span class="sm-desc">Market thesis: post-discharge and chronic-care coordination packets. Super-aged society, PDPA, TFDA SaMD, MOHW Long-Term Care 3.0.</span></li>
+      <li><a href="global/europe/">Pocono AI Europe — Local AI for Data Sovereignty and Regulated Trust</a><span class="sm-desc">Market thesis: GDPR-aligned local-first regulated workflow support. EU AI Act, Schrems II, EDPB guidelines. Medical and legal practices.</span></li>
+      <li><a href="applied-ai-prior-authorization.html">Applied AI for Prior Authorization</a><span class="sm-desc">White paper: how Sentinel Node applies local AI, evidence retrieval, audit logging, and physician review to prior authorization workflows. Audit Proxy, RAG, reranking, citation verification, hash chain. One node, one workflow, sixty days.</span></li>
+      <li><a href="governance-receipt-whitepaper.html">The Governance Receipt: Chain-of-Custody AI for Healthcare and Law</a><span class="sm-desc">The Governance Receipt: a chain-of-custody framework for accountable AI in healthcare and law. White paper on audit-native AI workflows.</span></li>
+      <li><a href="ai-near-miss-doctrine.html">AI Near-Miss Doctrine</a><span class="sm-desc">Pocono AI research on AI incident response and root-cause review in regulated healthcare and legal environments — the AI Near-Miss Doctrine.</span></li>
+      <li><a href="ehr-burden-research.html">EHR Documentation Burden — Research Brief</a><span class="sm-desc">Sinsky et al. documented 5.9 hours of daily EHR burden per physician. Full citation, research context, and how local AI changes the equation.</span></li>
+      <li><a href="fragmented-legal-information.html">The Hidden Cost of Fragmented Legal Information — Research Brief</a><span class="sm-desc">Why governed retrieval, not autonomous lawyering, is the future of legal AI — research on fragmented legal information problems at small general-practice law firms.</span></li>
+      <li><a href="market-research.html">Market Validation</a><span class="sm-desc">Market Validation — Pocono AI. Real traction data, published research, and LinkedIn content documenting organic growth in sovereign AI infrastructure for healthcare and law.</span></li>
+      <li><a href="pilot-evidence-framework.html">Pilot Evidence Framework</a><span class="sm-desc">What Pocono AI measures in a paid Proof-of-Value: workflow baseline, retrieval quality, review gates, audit completeness, operator burden, and expansion readiness.</span></li>
+      <li><a href="trust.html">Trust & Security</a><span class="sm-desc">Local deployment architecture: how the Sentinel Node is designed to make data exfiltration extremely difficult through hardware isolation rather than contractual promises alone. HIPAA-aligned design, human review, and reviewable audit.</span></li>
+      <li><a href="transparency.html">Transparency Declaration</a><span class="sm-desc">Pocono AI transparency declaration: zero telemetry, no analytics scripts, no tracking pixels, no advertising cookies. YouTube video embeds disclosed separately. Audited each release.</span></li>
+      <li><a href="maturity-disclosure.html">Maturity Disclosure — What We Have / What We Don't Yet Claim</a><span class="sm-desc">A candid statement of Pocono AI's stage: pre-seed, founder-led, no completed production pilot. What the architecture and demos actually do, the claims boundary, and how we talk about compliance and liability.</span></li>
+      <li><a href="prior-auth-case-study.html">The Prior Authorization Crisis</a><span class="sm-desc">The prior authorization crisis: 14 hours per week, $68,000 per physician per year, 25% of requests ultimately approved. How Sentinel Node addresses the documentation burden.</span></li>
+      <li><a href="patient-advocacy.html">AI & Prior Auth Cost Patients</a><span class="sm-desc">29% of physicians report a serious adverse event from prior auth delays. 8% report a patient death. What AI and administrative burden actually cost patients.</span></li>
+      <li><a href="legal-admin-burden.html">Legal Administrative Burden — Research Brief</a><span class="sm-desc">Legal professionals spend up to 48% of their time on admin tasks. Peer-reviewed data on discovery burden and how local AI reduces it without creating privilege risk.</span></li>
+      <li><a href="constitutional-question-of-ai.html">The Constitutional Question of Artificial Intelligence</a><span class="sm-desc">A governance analysis of AI embedded in military, intelligence, financial, and legal systems — where accountability breaks down and what restores it.</span></li>
+      <li><a href="paradox-automated-abandonment.html">The Paradox of Automated Abandonment</a><span class="sm-desc">The Paradox of Automated Abandonment: analysis of AI-driven healthcare prior authorization delays and their patient safety consequences. 27-page verified analysis.</span></li>
+      </ul>
+    </section>
+    <section class="sm-group" data-category="investors">
+      <h2>Investors</h2>
+      <ul class="sm-list">
+      <li><a href="investors-hub.html">Investor Hub — Governance Infrastructure for Regulated Industries</a><span class="sm-desc">Investor navigator for Pocono AI — governance infrastructure, retrieval architecture, auditability, local inference strategy, and regulated-industry market positioning.</span></li>
+      <li><a href="investors.html">Investor Relations</a><span class="sm-desc">Investor Relations — Pocono AI, LLC. Pre-seed angel round open. Local-first AI infrastructure designed to reduce liability exposure for clinics and law firms. Founder-led, pilot-seeking.</span></li>
+      <li><a href="valuation-dashboard.html">Valuation Dashboard</a><span class="sm-desc">Five-year valuation path built on recurring monthly revenue, setup fees, retention, margins, and repeatable deployment.</span></li>
+      <li><a href="competitive-analysis.html">Competitive Analysis</a><span class="sm-desc">Honest comparison of Pocono AI Sentinel Node vs. AirgapAI, Nuance DAX, Hathr.AI, Abridge, and cloud legal AI across 12 criteria and 12 expert perspectives.</span></li>
+      </ul>
+    </section>
+    <section class="sm-group" data-category="company">
+      <h2>Company</h2>
+      <ul class="sm-list">
+      <li><a href="about.html">About Pocono AI</a><span class="sm-desc">About the company, the founder, and the mission behind sovereign on-premises AI infrastructure for healthcare and legal professionals.</span></li>
+      <li><a href="team.html">Team &amp; Leadership</a><span class="sm-desc">Pocono AI is founder-led and supported by a focused network across technology leadership, patient advocacy, business strategy, strategic communication, and clinical workflow review. Marcus O'Dell, Micah Yoder, Kaylynn Weikel, Brian Wirth, Micky Dupree, Dr. Kesarwani.</span></li>
+      <li><a href="partners.html">Academic Partnerships</a><span class="sm-desc">Pocono AI Academic Partnerships — East Stroudsburg University and Northampton Community College. Internships, capstones, and neurodiversity-first hiring.</span></li>
+      <li><a href="international.html">International Design Partners</a><span class="sm-desc">Pocono AI is designed for regionally sovereign AI infrastructure from day one — international deployment, data residency, and jurisdiction-specific considerations.</span></li>
+      <li><a href="careers.html">Careers</a><span class="sm-desc">Careers at Pocono AI. All roles open once pre-seed angel round closes. Actively in discussions with angel investors. No positions filled yet.</span></li>
+      <li><a href="how-we-hire.html">How We Hire</a><span class="sm-desc">How hiring works at Pocono AI: effort over appearance, capacity over conformity. Neurodiversity-first process. All roles open after the pre-seed angel round closes.</span></li>
+      <li><a href="operating-philosophy.html">Operating Philosophy</a><span class="sm-desc">Pocono AI hires for sustained cognitive performance, high accountability, protected innovation time, and shared upside for meaningful IP contributions.</span></li>
+      <li><a href="founding-commercial-leadership.html">Join Us — Founding Team Opportunities</a><span class="sm-desc">Pocono AI is seeking founding commercial leadership and technical apprenticeship — roles, equity structure, and what early-stage work at a regulated AI company looks like.</span></li>
+      <li><a href="sla.html">Service Level Agreement</a><span class="sm-desc">Service Level Agreement for Pocono AI, LLC Sentinel Node deployments — hardware uptime, support response times, and KYHD coverage.</span></li>
+      <li><a href="privacy.html">Privacy Policy</a><span class="sm-desc">Privacy Policy for Pocono AI, LLC — what data we collect, how we use it, and our zero-telemetry commitment for the Sentinel Node.</span></li>
+      <li><a href="terms.html">Terms of Service</a><span class="sm-desc">Terms of Service for Pocono AI, LLC — on-premises AI hardware deployments, data sovereignty, HIPAA compliance obligations, and mandatory Human-in-the-Loop requirements.</span></li>
+      <li><a href="cleverness-auditability-ghost-pepper-sauce.html">Cleverness, Auditability, and Ghost Pepper Sauce</a><span class="sm-desc">A humorous founder note from Pocono AI on ghost pepper sauce, personal governance, auditability, and why powerful tools need human review.</span></li>
+      </ul>
+    </section>
+    <section class="sm-group" data-category="founder-projects">
+      <h2>Founder Projects &amp; Rehability</h2>
+      <ul class="sm-list">
+      <li><a href="rehability/">Rehability — Local Assistive AI, One Tool at a Time</a><span class="sm-desc">Rehability is Pocono AI's accessibility-focused plugin path: practical local AI tools for people living with disability, chronic illness, pain, cognitive overload, or caregiver burden. Built from lived experience. Local-first, user-controlled, draft-only. First plugin available: Marcus's Memory Helper.</span></li>
+      <li><a href="rehability/marcus-memory-helper/">Marcus's Memory Helper — First Rehability Plugin</a><span class="sm-desc">Six local-first assistive tools: Pain Episode Capture, Medical Appointment Prep, Doctor/Advocate Letter Builder, Medication/Treatment Trial Tracker, Daily Memory Log, and Conversation/Call Summary. Available now. No cloud required. Human review required on all exports. Non-medical boundary.</span></li>
+      <li><a href="rehability/whos-who/">Who's Who — Planned People-Context Helper</a><span class="sm-desc">A planned Rehability plugin for people who have difficulty recognizing faces, names, roles, or relationships. Local-first, user-controlled, consent-aware. Not surveillance, not law enforcement, not background checks. Design intent described; tool not yet built.</span></li>
+      <li><a href="sentinel-home/">Sentinel Home Edition</a><span class="sm-desc">The full Sentinel Home vision: private local AI home infrastructure for independence, communication, executive function, and home control. First layer available through Rehability (Marcus's Memory Helper). Full platform still in development. Built from lived experience, not market research.</span></li>
+      <li><a href="living-memorials/pricing.html">Living Echo — Pricing &amp; Founder Echo Program</a><span class="sm-desc">Founder Echo program pricing for Living Echo. Three tiers: Personal Echo ($99+$9.95/mo), Family Echo ($199+$19.95/mo), Concierge Echo ($995+$49.95/mo). Now accepting Founder Echo applications.</span></li>
+      <li><a href="living-memorials/estate-professionals.html">Living Echo for Estate and Fiduciary Professionals</a><span class="sm-desc">Estate plans transfer assets. Living Echo helps estate attorneys, trust counsel, and fiduciary professionals support clients preserving knowledge, intent, values, and family guidance. Attorney review required; not legal advice.</span></li>
+      <li><a href="living-memorials/enterprise-estate-continuity.html">Enterprise Estate Continuity</a><span class="sm-desc">The enterprise continuity edition of Living Echo: founder intent, institutional memory, succession context, and continuity instructions for businesses, estates, fiduciaries, advisors, and family enterprises facing key-person risk. Does not replace estate documents, executors, trustees, or fiduciaries.</span></li>
+      <li><a href="living-memorials/celebration-of-life.html">The Origin Story: Why Living Echo Exists</a><span class="sm-desc">The personal origin story behind Living Echo — the human question, preservation before simulation, and why the platform exists.</span></li>
+      <li><a href="living-memorials/">Living Echo — The Continuity Platform</a><span class="sm-desc">Living Echo is a governed continuity platform preserving human knowledge, intent, wisdom, stories, values, and institutional memory. Consent-first capture, secure preservation, controlled access, governed retrieval. Separate from the core Sentinel Node product.</span></li>
+      <li><a href="living-memorials/marcus-odell/">Marcus&rsquo;s Living Echo — Prototype</a><span class="sm-desc">An interactive static prototype demonstration of Marcus O&rsquo;Dell&rsquo;s Living Echo. No live AI model. A concept demo with honest disclosures.</span></li>
+      </ul>
+    </section>
+    <section class="sm-group" data-category="system">
+      <h2>System & Utility</h2>
+      <p style="font-family:system-ui,sans-serif;font-size:0.82em;color:#6f8295;margin:8px 0 12px;">Game Lab (off-funnel experiments)</p>
+      <ul class="sm-list" style="margin-bottom:14px;">
+        <li><a href="games/">Pocono AI Game Lab</a><span class="sm-desc">Browser games and playful experiments. Not products. Not regulated. Just play. Wired Different, Sentinel Node: Breach Protocol, Homestead Survival, and Blue&rsquo;s Worry Walk.</span></li>
+        <li><a href="games/loopit-pop-your-fun.html">Blue&rsquo;s Worry Walk &mdash; Pop Your Fun</a><span class="sm-desc">Loopit playable by game developer Tanya R W. An emotional speedrun. Off-path experiment, not a Pocono AI product.</span></li>
+      </ul>
+      <ul class="sm-list">
+      <li><a href="sitemap.html">Sitemap</a><span class="sm-desc">Full sitemap for Pocono AI — all pages, research briefs, whitepapers, and resources for sovereign on-premises AI infrastructure.</span></li>
+      <li><a href="audit.html">Release Audit Log &amp; Transparency Report — Pocono AI</a><span class="sm-desc">Release audit log for poconoai.com. Zero third-party runtime dependencies. Structured data changelog, link integrity, and version history.</span></li>
+      <li><a href="search-console-checklist.html">Search Console Submission Checklist</a><span class="sm-desc">Internal deployment checklist for Google Search Console URL submission, keyword tracking, and crawl monitoring for poconoai.com.</span></li>
+      <li><a href="portal.html">Client Portal</a><span class="sm-desc">Pocono AI Client Portal — Sentinel Node deployment management, firmware updates, and direct support access for active HaaS subscribers.</span></li>
+      </ul>
+    </section>
+  </div>
+<!-- SITEMAP:GENERATED END -->
+
+</div><!-- .container -->
+</main>
+
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 root-relative nav fix, Living Echo rebrand, Engineering & Drafting + Enterprise Estate Continuity links added (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- INCLUDE:FOOTER -->
+<footer role="contentinfo" style="background:#051622;border-top:1px solid rgba(255,255,255,0.08);padding:40px 24px 28px;font-size:0.85em;color:#8899aa;">
+  <div style="max-width:1180px;margin:0 auto;">
+
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:0 0 28px;margin-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.07);">
+      <div style="max-width:560px;">
+        <p style="margin:0 0 6px;font-size:1.05em;font-weight:700;color:#fff;">Local AI infrastructure for regulated practices.</p>
+        <p style="margin:0;font-size:0.95em;line-height:1.5;">Drafts with citations. Human review required. Sensitive documents stay under practice control. Simple path, deep proof.</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="/contact.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;background:#00c2a8;color:#04111a;font-weight:700;text-decoration:none;font-size:0.95em;">Request Pilot</a>
+        <a href="/sentinel-demo.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;border:1px solid rgba(0,194,168,0.55);color:#00c2a8;font-weight:700;text-decoration:none;font-size:0.95em;">Watch Demo</a>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px 32px;margin-bottom:32px;text-align:left;">
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">For You</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/start-here.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Start Here (3 min)</a>
+          <a href="/for-physicians.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Physicians</a>
+          <a href="/for-attorneys.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Attorneys</a>
+          <a href="/engineering-drafting/" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Engineering &amp; Drafting Teams</a>
+          <a href="/pilot-program.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Pilot Program</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Installer Training</a>
+          <a href="/how-it-works.html" style="color:#8899aa;text-decoration:none;">How It Works</a>
+          <a href="/trust.html" style="color:#8899aa;text-decoration:none;">Trust &amp; Audit</a>
+          <a href="/pricing.html" style="color:#8899aa;text-decoration:none;">Pricing</a>
+          <a href="/sentinel-demo.html" style="color:#8899aa;text-decoration:none;">See the Demo</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Documentation Hub</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/documentation-hub/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Hub Home &mdash; Deep Proof</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">Installer Training</a>
+          <a href="/sentinel-node/installation-simulator.html" style="color:#8899aa;text-decoration:none;">&#8627; Installation Simulator</a>
+          <a href="/documentation-hub/clinical/" style="color:#8899aa;text-decoration:none;">Clinical Documentation</a>
+          <a href="/documentation-hub/legal/" style="color:#8899aa;text-decoration:none;">Legal Documentation</a>
+          <a href="/documentation-hub/technical/" style="color:#8899aa;text-decoration:none;">Technical Documentation</a>
+          <a href="/documentation-hub/governance/" style="color:#8899aa;text-decoration:none;">Governance &amp; Audit</a>
+          <a href="/documentation-hub/tools/" style="color:#8899aa;text-decoration:none;">Tools &amp; Simulators</a>
+          <a href="/documentation-hub/research/" style="color:#8899aa;text-decoration:none;">Research &amp; Essays</a>
+          <a href="/documentation-hub/transparency/" style="color:#8899aa;text-decoration:none;">Transparency</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Global Federated AI</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/global/" style="color:#7af0dc;text-decoration:none;font-weight:600;">Global Federated Hub</a>
+          <a href="/global/australia/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Australia</a>
+          <a href="/global/singapore/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Singapore</a>
+          <a href="/global/taiwan/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Taiwan</a>
+          <a href="/global/europe/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Europe</a>
+          <a href="/contact.html" style="color:#8899aa;text-decoration:none;">Partner Inquiry</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Company</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/about.html" style="color:#8899aa;text-decoration:none;">About Pocono AI</a>
+          <a href="/team.html" style="color:#8899aa;text-decoration:none;">Team &amp; Leadership</a>
+          <a href="/why-pocono-ai.html" style="color:#8899aa;text-decoration:none;">Why Pocono AI</a>
+          <a href="/founding-commercial-leadership.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Join Us</a>
+          <a href="/careers.html" style="color:#8899aa;text-decoration:none;">Careers</a>
+          <a href="/how-we-hire.html" style="color:#8899aa;text-decoration:none;">How We Hire</a>
+          <a href="/channel-partners.html" style="color:#8899aa;text-decoration:none;">Technical Partners (MSPs)</a>
+          <a href="/partners.html" style="color:#8899aa;text-decoration:none;">Academic Partnerships</a>
+          <a href="/contact.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Contact</a>
+          <a href="https://forms.gle/VQahnkjMfY6QNEMy8" target="_blank" rel="noopener noreferrer" style="color:#d5a94f;text-decoration:none;font-weight:600;">Interest List &#8599;</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Founder Projects</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/rehability/" style="color:#a78bfa;text-decoration:none;font-weight:700;">Rehability &#x2605;</a>
+          <a href="/rehability/marcus-memory-helper/" style="color:#a78bfa;text-decoration:none;font-weight:600;">&#8627; Marcus's Memory Helper</a>
+          <a href="/sentinel-home/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Sentinel Home Edition</a>
+          <a href="/living-memorials/" style="color:#8899aa;text-decoration:none;">Living Echo</a>
+          <a href="/living-memorials/marcus-odell/" style="color:#8899aa;text-decoration:none;">Marcus&rsquo;s Living Echo</a>
+          <a href="/living-memorials/enterprise-estate-continuity.html" style="color:#8899aa;text-decoration:none;">Enterprise Estate Continuity</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Resources &amp; Legal</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/sitemap.html" style="color:#8899aa;text-decoration:none;">All Pages (Sitemap)</a>
+          <a href="/audit.html" style="color:#8899aa;text-decoration:none;">Transparency &amp; Audit Log</a>
+          <a href="/maturity-disclosure.html" style="color:#8899aa;text-decoration:none;">What We Have / Don&rsquo;t Claim</a>
+          <a href="/plain.html" style="color:#8899aa;text-decoration:none;">Plain Language Guide</a>
+          <a href="/privacy.html" style="color:#8899aa;text-decoration:none;">Privacy</a>
+          <a href="/terms.html" style="color:#8899aa;text-decoration:none;">Terms</a>
+          <a href="/sla.html" style="color:#8899aa;text-decoration:none;">SLA</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:18px;margin-bottom:14px;">
+      <p style="margin:0;font-size:0.82em;line-height:1.6;color:#6f8295;max-width:1000px;">Pocono AI does not provide medical, legal, or engineering advice, does not practice medicine, law, or licensed engineering, and does not make clinical, legal, or engineering decisions. Outputs are drafts or support materials that require review by a qualified professional; final professional judgment remains with the licensed physician, attorney, or engineer. Tools and simulations on this site are educational and use synthetic data.</p>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:20px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+      <p style="margin:0;font-size:0.9em;">&copy; 2026 Pocono AI, LLC &nbsp;&#183;&nbsp; East Stroudsburg, PA &nbsp;&#183;&nbsp; <a href="mailto:marcus@poconoai.com" style="color:#8899aa;">marcus@poconoai.com</a> &nbsp;&#183;&nbsp; <a href="tel:+15705340602" style="color:#8899aa;">(570) 534-0602</a></p>
+      <p style="margin:0;font-size:0.88em;"><a href="/audit.html" style="color:#5dade2;text-decoration:none;">Transparency v402</a></p>
+    </div>
+  </div>
+</footer>
+<script src="/search.js?v=402" defer></script>
+<!-- /INCLUDE:FOOTER -->
+
+<!-- Shared navigation script -->
+
+<script src="search-index.js?v=402" defer></script>
+<script src="nav.js?v=402" defer></script>
+<script src="pilot-cta.js?v=402" defer></script>
+</body>
+</html>
+<<<END: sitemap.html>>>
+

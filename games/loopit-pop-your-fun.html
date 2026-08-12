@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="index, follow">
+<meta name="description" content="Blue's Worry Walk — an emotional speedrun. Help your friends heal from toxic energy. A Loopit playable game in the Pocono AI Game Lab. Not a product. Just play.">
+<title>Pop Your Fun — Pocono AI Game Lab</title>
+
+<meta property="og:title" content="Pop Your Fun — Pocono AI Game Lab">
+<meta property="og:description" content="Blue's Worry Walk — help your friends heal from toxic energy. An off-path experiment in the Pocono AI Game Lab.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://poconoai.com/games/loopit-pop-your-fun.html">
+<link rel="canonical" href="https://poconoai.com/games/loopit-pop-your-fun.html">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --pai-navy: #051622;
+  --pai-teal: #188B96;
+  --pai-blue: #0A73D2;
+  --pai-light: #D0DDE6;
+  --pai-muted: #8a9baa;
+  --bg: #0c0d14;
+  --bg-grad-1: #0e0d1f;
+  --bg-grad-2: #09090f;
+  --surface: #13111e;
+  --surface-2: #1a172a;
+  --border: rgba(255,255,255,0.08);
+  --text: #eef3f7;
+  --muted: #8a8aaa;
+  --mint: #7df0c4;
+  --sky: #7dc4f0;
+  --pink: #f07dd8;
+  --gold: #f0d47d;
+  --purple: #a259ff;
+  --purple-dim: rgba(162,89,255,0.15);
+  --radius: 18px;
+  --radius-sm: 11px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: 'Space Mono', ui-monospace, monospace;
+  background: var(--bg);
+  background-image:
+    radial-gradient(ellipse 70% 55% at 25% 0%, rgba(162,89,255,0.14), transparent 65%),
+    radial-gradient(ellipse 60% 45% at 85% 15%, rgba(240,125,216,0.09), transparent 60%),
+    linear-gradient(170deg, var(--bg-grad-1), var(--bg-grad-2));
+  background-attachment: fixed;
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+body::before {
+  content: "";
+  position: fixed; inset: 0; pointer-events: none; opacity: 0.025; z-index: 1;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.wrap {
+  position: relative; z-index: 2;
+  max-width: 860px; margin: 0 auto; padding: 0 20px 80px;
+}
+
+/* topbar */
+.topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 22px 0 0; gap: 16px; flex-wrap: wrap;
+}
+.brand-link {
+  display: inline-flex; align-items: center; gap: 9px;
+  text-decoration: none; color: var(--pai-light);
+  font-size: 0.78rem; letter-spacing: 0.04em; transition: color 0.2s;
+}
+.brand-link:hover { color: #fff; }
+.brand-dot {
+  width: 26px; height: 26px; border-radius: 7px;
+  background: linear-gradient(135deg, var(--pai-teal), var(--pai-blue));
+  display: grid; place-items: center;
+  font-weight: 700; font-size: 0.8rem; color: #fff;
+  box-shadow: 0 2px 10px rgba(10,115,210,0.4);
+}
+.nav-links { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.back-link {
+  font-size: 0.74rem; color: var(--muted); text-decoration: none;
+  border: 1px solid var(--border); padding: 7px 14px; border-radius: 999px;
+  transition: all 0.2s;
+}
+.back-link:hover { color: #fff; border-color: var(--purple); }
+
+/* hero */
+.hero { padding: 52px 0 10px; }
+.eyebrow {
+  font-size: 0.7rem; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--purple); margin-bottom: 16px;
+}
+.hero h1 {
+  font-family: 'Fraunces', Georgia, serif; font-weight: 600;
+  font-size: clamp(2rem, 7vw, 3.4rem); line-height: 1.05;
+  letter-spacing: -0.02em; color: #fff; margin-bottom: 14px;
+}
+.hero h1 .accent {
+  background: linear-gradient(100deg, var(--purple), var(--pink), var(--sky));
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.hero-meta {
+  display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+  margin-bottom: 20px;
+}
+.tag {
+  font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; padding: 4px 11px; border-radius: 999px;
+  border: 1px solid var(--border); color: var(--muted);
+  background: rgba(255,255,255,0.03);
+}
+.tag.tag-purple { color: var(--purple); border-color: rgba(162,89,255,0.4); }
+.tag.tag-pink   { color: var(--pink);   border-color: rgba(240,125,216,0.4); }
+.hero p { color: var(--pai-light); font-size: 0.91rem; max-width: 58ch; line-height: 1.7; margin-bottom: 10px; }
+
+/* disclaimer */
+.disclaimer {
+  margin: 22px 0 28px; background: rgba(7,29,46,0.7);
+  border: 1px solid var(--border); border-left: 3px solid var(--gold);
+  border-radius: var(--radius-sm); padding: 14px 18px;
+  font-size: 0.78rem; line-height: 1.65; color: var(--pai-light);
+}
+.disclaimer strong { color: var(--gold); }
+
+/* game frame area */
+.game-frame-wrap {
+  position: relative; width: 100%;
+  background: #000; border-radius: var(--radius);
+  border: 1px solid rgba(162,89,255,0.25);
+  overflow: hidden; min-height: 600px;
+  box-shadow: 0 0 60px rgba(162,89,255,0.1), 0 20px 60px rgba(0,0,0,0.6);
+  margin-bottom: 28px;
+}
+.game-loading {
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 14px;
+  background: linear-gradient(170deg,#120921,#07050e);
+  color: var(--muted); font-size: 0.82rem; z-index: 1;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+.game-loading .spinner {
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 2px solid rgba(162,89,255,0.2);
+  border-top-color: var(--purple);
+  animation: spin 0.9s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.game-frame-wrap iframe {
+  display: block; width: 100%; height: 100%;
+  min-height: 600px; border: none;
+  position: relative; z-index: 2; background: #000;
+}
+.game-frame-wrap.loaded .game-loading { opacity: 0; }
+
+/* fallback */
+.fallback-card {
+  background: var(--surface); border: 1px solid rgba(162,89,255,0.25);
+  border-radius: var(--radius); padding: 32px 28px; text-align: center;
+  margin-bottom: 28px; display: none;
+}
+.fallback-card.visible { display: block; }
+.fallback-card h3 {
+  font-family: 'Fraunces', Georgia, serif; font-size: 1.3rem;
+  color: #fff; margin-bottom: 10px;
+}
+.fallback-card p { color: var(--muted); font-size: 0.85rem; margin-bottom: 22px; }
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 9px;
+  background: linear-gradient(100deg, var(--purple), var(--pink));
+  color: #fff; font-family: 'Space Mono', monospace;
+  font-size: 0.88rem; font-weight: 700;
+  padding: 13px 26px; border-radius: 999px;
+  text-decoration: none; transition: filter 0.2s, gap 0.2s;
+  box-shadow: 0 6px 24px rgba(162,89,255,0.3);
+}
+.btn-primary:hover { filter: brightness(1.1); gap: 13px; }
+
+/* always-visible open link */
+.open-row {
+  display: flex; flex-wrap: wrap; gap: 14px; align-items: center;
+  justify-content: space-between; margin-bottom: 36px;
+  padding: 16px 20px; background: var(--surface);
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+}
+.open-row p { font-size: 0.8rem; color: var(--muted); flex: 1; min-width: 160px; }
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 8px;
+  border: 1px solid rgba(162,89,255,0.5); color: var(--purple);
+  font-size: 0.82rem; font-weight: 700; padding: 10px 20px;
+  border-radius: 999px; text-decoration: none; transition: all 0.2s;
+  white-space: nowrap;
+}
+.btn-ghost:hover { background: var(--purple-dim); }
+
+/* about section */
+.about { margin-bottom: 40px; }
+.about h2 {
+  font-family: 'Fraunces', Georgia, serif; font-weight: 600;
+  font-size: 1.15rem; color: #fff; margin-bottom: 12px;
+}
+.about p { font-size: 0.84rem; color: var(--muted); line-height: 1.7; margin-bottom: 8px; }
+.credit {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 0.75rem; color: var(--muted); margin-top: 10px;
+  padding: 6px 14px; border: 1px solid var(--border);
+  border-radius: 999px;
+}
+.credit strong { color: var(--pai-light); }
+
+/* footer */
+.foot {
+  margin-top: 40px; padding-top: 24px;
+  border-top: 1px solid var(--border);
+  text-align: center; color: var(--muted);
+  font-size: 0.74rem; line-height: 1.9;
+}
+.foot a { color: var(--pai-light); text-decoration: none; border-bottom: 1px dotted var(--muted); }
+.foot a:hover { color: #fff; }
+
+@media (max-width: 600px) {
+  .hero { padding: 36px 0 8px; }
+  .game-frame-wrap, .game-frame-wrap iframe { min-height: 480px; }
+  .open-row { flex-direction: column; gap: 10px; }
+  .btn-primary, .btn-ghost { width: 100%; justify-content: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+  html { scroll-behavior: auto; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <a class="brand-link" href="../index.html">
+      <span class="brand-dot">P</span>
+      <span>Pocono&nbsp;AI</span>
+    </a>
+    <div class="nav-links">
+      <a class="back-link" href="index.html">&larr; Game Lab</a>
+      <a class="back-link" href="../index.html">&larr; Main site</a>
+    </div>
+  </div>
+
+  <header class="hero">
+    <div class="eyebrow">Pocono AI Game Lab &middot; External Playable</div>
+    <h1>This is not the product.<br><span class="accent">This is the playground.</span></h1>
+    <div class="hero-meta">
+      <span class="tag tag-purple">Emotional Wellness</span>
+      <span class="tag tag-pink">Loopit Playable</span>
+      <span class="tag">By Tanya R W</span>
+    </div>
+    <p>Pocono AI builds serious local AI infrastructure for medical and legal workflows. But serious builders still need play. The Game Lab is where we keep small experiments, playful interfaces, and prototypes that explore interaction, attention, stress relief, and human-centered design.</p>
+    <p>This Loopit game is included as an off-path experiment. It is not part of Sentinel Node, not a regulated workflow, and not a clinical or legal tool.</p>
+  </header>
+
+  <div class="disclaimer" role="note">
+    <strong>Not a product:</strong> This is a game. These pages are not Pocono AI products, services, or Sentinel Node features. No data is collected, no accounts are required. Just play.
+  </div>
+
+  <!-- Game embed -->
+  <div class="game-frame-wrap" id="gameWrap">
+    <div class="game-loading" id="gameLoading" aria-live="polite">
+      <div class="spinner" aria-hidden="true"></div>
+      <span>Loading Blue&rsquo;s Worry Walk&hellip;</span>
+    </div>
+    <iframe
+      id="gameFrame"
+      src="https://share.loopit.me/game/20e52a21-fbbf-4313-9882-94ec1212131b"
+      title="Blue's Worry Walk — help your friends heal from toxic energy (Loopit game by Tanya R W)"
+      loading="lazy"
+      referrerpolicy="no-referrer"
+      allow="autoplay; fullscreen"
+      style="width:100%;min-height:600px;border:none;display:block;background:#000;"
+      aria-label="Blue's Worry Walk Loopit game"
+    ></iframe>
+  </div>
+
+  <!-- Fallback card (shown by JS if iframe fails) -->
+  <div class="fallback-card" id="fallbackCard" role="region" aria-label="Embed unavailable">
+    <h3>Play on Loopit directly</h3>
+    <p>The embedded view couldn&rsquo;t load in this browser. Open the game directly on Loopit to play.</p>
+    <a class="btn-primary"
+       href="https://share.loopit.me/game/20e52a21-fbbf-4313-9882-94ec1212131b"
+       target="_blank"
+       rel="noopener noreferrer">
+      Open Blue&rsquo;s Worry Walk &rarr;
+    </a>
+  </div>
+
+  <!-- Always-visible open link -->
+  <div class="open-row">
+    <p>Prefer to play full-screen, or having trouble with the embed?</p>
+    <a class="btn-ghost"
+       href="https://share.loopit.me/game/20e52a21-fbbf-4313-9882-94ec1212131b"
+       target="_blank"
+       rel="noopener noreferrer">
+      Open on Loopit &rarr;
+    </a>
+  </div>
+
+  <!-- About section -->
+  <section class="about" aria-labelledby="about-h">
+    <h2 id="about-h">About this game</h2>
+    <p><strong style="color:#eef3f7;">Blue&rsquo;s Worry Walk</strong> is an emotional speedrun — a short, playful Loopit experience about helping your friends heal from toxic energy. One step at a time.</p>
+    <p>It lives in the Pocono AI Game Lab because we believe sustainable builders need play. The Game Lab is a side lane — completely separate from our regulated clinical and legal workflow infrastructure.</p>
+    <div>
+      <span class="credit">
+        Created by <strong>Tanya R W</strong> on Loopit &middot; Hosted on <a href="https://loopit.me" target="_blank" rel="noopener noreferrer" style="color:var(--purple);border:none;">Loopit.me</a>
+      </span>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <p><a href="index.html">&larr; All games in the Lab</a> &middot; <a href="../index.html">Back to Pocono&nbsp;AI</a></p>
+    <p style="margin-top:6px;">No tracking &middot; No accounts &middot; No data collected</p>
+    <p style="margin-top:4px;font-size:0.68rem;opacity:0.6;">Game content by Tanya R W via Loopit. Pocono AI is not the game developer or publisher.</p>
+  </footer>
+
+</div>
+
+<script>
+(function() {
+  var frame = document.getElementById('gameFrame');
+  var wrap  = document.getElementById('gameWrap');
+  var loading = document.getElementById('gameLoading');
+  var fallback = document.getElementById('fallbackCard');
+
+  // Mark loaded on successful iframe load
+  frame.addEventListener('load', function() {
+    wrap.classList.add('loaded');
+    loading.setAttribute('aria-hidden', 'true');
+  });
+
+  // If iframe fails to load within 8s, show fallback
+  var timeout = setTimeout(function() {
+    try {
+      // Try to access contentDocument — if blocked, it throws
+      var doc = frame.contentDocument || frame.contentWindow.document;
+      if (!doc || !doc.body || doc.body.innerHTML === '') {
+        showFallback();
+      } else {
+        wrap.classList.add('loaded');
+      }
+    } catch(e) {
+      // Cross-origin block or load failure
+      showFallback();
+    }
+  }, 8000);
+
+  function showFallback() {
+    clearTimeout(timeout);
+    fallback.classList.add('visible');
+    wrap.style.display = 'none';
+    loading.setAttribute('aria-hidden', 'true');
+  }
+
+  // Also detect immediate X-Frame-Options block via error
+  frame.addEventListener('error', function() {
+    clearTimeout(timeout);
+    showFallback();
+  });
+})();
+</script>
+</body>
+</html>

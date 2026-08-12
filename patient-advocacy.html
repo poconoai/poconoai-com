@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI & Prior Auth Cost Patients | Pocono AI Research</title>
+    <meta name="description" content="29% of physicians report serious adverse events from prior auth delays. How Sentinel Node supports patient advocacy with governed AI.">
+    <meta name="keywords" content="AI patient safety, prior auth patient harm, AI healthcare patient advocacy, physician burnout patient impact, patient AI risk, on-premises AI, local AI, sovereign AI, zero cloud AI, HIPAA-governed AI environments, healthcare AI, legal AI, Sentinel Node, Pocono AI, data sovereignty, air-gapped AI, no cloud, EHR automation, RAG AI, independent medical practice AI, law firm AI">
+    <meta property="og:title" content="AI & Prior Auth Cost Patients | Pocono AI Research">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Pocono AI">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:description" content="The human cost of prior authorization delays and AI hallucinations in healthcare — written for patients, families, and patient advocacy organizations. All statistics peer-reviewed."><meta name="theme-color" content="#0B0F13">
+    
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="alternate icon" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon-180x180.png">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="alternate icon" href="favicon.ico">
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+    <link rel="canonical" href="https://poconoai.com/patient-advocacy.html">
+    <meta property="og:url" content="https://poconoai.com/patient-advocacy.html">
+    <meta property="og:image" content="https://poconoai.com/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Pocono AI — Sovereign on-premises AI">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI & Patient Safety | Prior Auth Harm Data | Pocono AI">
+    <meta name="twitter:description" content="29% of physicians report serious adverse events from prior auth delays. 8% report a patient death. The data.">
+    <meta name="twitter:image" content="https://poconoai.com/hero.jpg">
+    <link rel="stylesheet" href="styles.css?v=402">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Pocono AI, LLC",
+      "url": "https://poconoai.com",
+      "logo": "https://poconoai.com/logo.svg",
+      "description": "Sovereign, on-premises local AI infrastructure for healthcare and legal professionals. Zero-egress by default. Hardware-custody deployment.",
+      "foundingDate": "2024",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "East Stroudsburg",
+        "addressRegion": "PA",
+        "addressCountry": "US"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+1-570-534-0602",
+        "contactType": "sales",
+        "email": "marcus@poconoai.com"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/company/pocono-ai"
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+  "@context": "https://schema.org",
+  "@type": "MedicalWebPage",
+  "name": "What AI and Prior Authorization Cost Patients | Pocono AI",
+  "description": "29% of physicians report a serious adverse event from prior auth delays. 8% report a patient death. Peer-reviewed patient safety data.",
+  "url": "https://poconoai.com/patient-advocacy.html",
+  "isPartOf": {
+    "@type": "WebSite",
+    "url": "https://poconoai.com",
+    "name": "Pocono AI, LLC"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Pocono AI, LLC",
+    "url": "https://poconoai.com"
+  },
+  "datePublished": "2026-06-01",
+  "dateModified": "2026-06-01"
+}
+    </script>
+<link rel="stylesheet" href="nav-v2026.css?v=402">
+<link rel="stylesheet" href="brand-v292.css?v=402">
+<script>
+// Pocono AI v169 — Zero-flash banner dismissal.
+// Strategy: inject <style> tag synchronously BEFORE banner HTML parses,
+// so dismissed banners never render at all (no flash). DOM removal still
+// happens for safety. ?showbanners=1 URL param re-shows everything.
+(function(){
+  var ids=[];
+
+  // Escape hatch: ?showbanners=1 clears all dismiss flags for testing
+  try {
+    if (location.search.indexOf('showbanners=1') !== -1) {
+      ids.forEach(function(id){ localStorage.removeItem('pai_dismissed_'+id); });
+      localStorage.removeItem('poconoPilot');
+      localStorage.removeItem('advisoryBarDismissed');
+    }
+  } catch(e) {}
+
+  // v246 Stage 1 — Legacy migration block removed.
+  // Was dead code containing a JS syntax error (adjacent string literals)
+  // that broke the entire banner-dismiss IIFE on ~46 pages.
+
+  // Build CSS rule list for dismissed banners and inject synchronously.
+  // This runs in <head> BEFORE banner HTML is parsed, so dismissed bars
+  // never paint — eliminating the flash entirely.
+  var hideRules = [];
+  ids.forEach(function(id){
+    try {
+      if (localStorage.getItem('pai_dismissed_'+id) === '1') {
+        hideRules.push('#'+id+'{display:none !important;}');
+      }
+    } catch(e) {}
+  });
+  if (hideRules.length) {
+    var style = document.createElement('style');
+    style.id = 'pai-banner-hide';
+    style.textContent = hideRules.join('');
+    (document.head || document.documentElement).appendChild(style);
+  }
+
+  function dismiss(id){
+    try { localStorage.setItem('pai_dismissed_'+id,'1'); } catch(e) {}
+    var el = document.getElementById(id);
+    if (el) {
+      el.style.setProperty('display','none','important');
+      el.setAttribute('aria-hidden','true');
+      if (el.parentNode) {
+        el.parentNode.removeChild(el);
+      }
+    }
+  }
+
+  // Cleanup pass — remove dismissed banners from DOM after parse,
+  // belt-and-suspenders alongside the CSS hide.
+  function cleanup(){
+    ids.forEach(function(id){
+      try {
+        if (localStorage.getItem('pai_dismissed_'+id) === '1') {
+          var el = document.getElementById(id);
+          if (el && el.parentNode) {
+            el.parentNode.removeChild(el);
+          }
+        }
+      } catch(e) {}
+    });
+  }
+
+  function bind(){
+    ids.forEach(function(id){
+      var btn = document.getElementById(id+'-close');
+      if (btn && !btn.dataset.boundDismiss) {
+        btn.dataset.boundDismiss = '1';
+        btn.addEventListener('click', function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          dismiss(id);
+        });
+        btn.addEventListener('touchend', function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          dismiss(id);
+        }, {passive:false});
+      }
+    });
+    cleanup();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bind);
+  } else {
+    bind();
+  }
+})();
+</script>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+<div id="reading-progress" aria-hidden="true"></div>
+
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- INCLUDE:HEADER -->
+<div id="hitl-notice" style="background:#0a1929;padding:4px 16px;text-align:center;font-size:12px;color:#4a5568;border-bottom:1px solid rgba(255,255,255,0.06);letter-spacing:0.01em;">Human-in-the-Loop required: licensed professionals verify all outputs before clinical or legal action</div>
+<header role="banner">
+  <div class="header-inner">
+    <a href="/index.html" class="logo" aria-label="Pocono AI Home">
+      <img src="/logo.svg?v=402" alt="" width="36" height="36" decoding="async" loading="eager" aria-hidden="true" style="display:inline-block;">
+      Pocono <span>AI</span>
+    </a>
+    <nav id="desktop-nav" aria-label="Main navigation">
+      <div class="nav-item"><a href="/index.html" class="nav-direct">Home</a></div>
+      <div class="nav-item"><a href="/for-physicians.html" class="nav-direct">Physicians</a></div>
+      <div class="nav-item"><a href="/for-attorneys.html" class="nav-direct">Attorneys</a></div>
+      <div class="nav-item"><a href="/sentinel-node.html" class="nav-direct nav-hub" style="color:#d5a94f;border:1px solid rgba(213,169,79,0.45);border-radius:999px;padding:6px 13px;">Sentinel Node</a></div>
+      <div class="nav-item"><a href="/living-memorials/" class="nav-direct">Living Echo</a></div>
+      <div class="nav-item"><a href="/contact.html" class="nav-direct">Contact</a></div>
+      <div class="nav-item" data-dropdown="menu-more">
+        <button type="button" class="nav-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="menu-more">More <span class="nav-chevron" aria-hidden="true">&#9662;</span></button>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <a href="/contact.html#pilot" class="nav-cta nav-cta-primary">Request a Pilot</a>
+      <button type="button" class="pa-search-trigger" data-search-open aria-label="Search (press / or Ctrl-K)" aria-haspopup="dialog" aria-expanded="false">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span class="pa-st-label">Search</span><kbd data-pa-keyhint>Ctrl K</kbd>
+      </button>
+      <button type="button" class="header-icon-btn" id="mobile-menu" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav-panel">
+        <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- "More" overflow dropdown — sibling of <header> so position:fixed escapes header's stacking context. Wired by nav.js via data-dropdown="menu-more". -->
+<div class="nav-dropdown" id="menu-more" aria-label="More navigation">
+  <p class="nav-dd-section">Products</p>
+  <a href="/engineering-drafting/">Drafting &amp; Engineering Edition</a>
+  <a href="/sentinel-home/">Sentinel Home Edition</a>
+  <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability — Assistive Tools &#x2605;</a>
+  <a href="/living-memorials/enterprise-estate-continuity.html">Enterprise Estate Continuity</a>
+  <p class="nav-dd-section">Capabilities</p>
+  <a href="/evidence-room.html">Evidence Room</a>
+  <a href="/push-button-deliverables.html">Push-Button Deliverables</a>
+  <a href="/pilot-readiness-kit.html">Pilot Kit</a>
+  <a href="/pilot-program.html">Pilot Program</a>
+  <a href="/how-it-works.html">How It Works</a>
+  <p class="nav-dd-section">Hubs &amp; Company</p>
+  <a href="/training.html">Training Hub</a>
+  <a href="/documentation-hub/">Document Hub</a>
+  <a href="/global/">Global Hub</a>
+  <a href="/investors-hub.html">Investor Hub</a>
+  <a href="/valuation-dashboard.html">Valuation Dashboard</a>
+  <a href="/about.html">About</a>
+  <p class="nav-dd-section">Trust &amp; Legal</p>
+  <a href="/transparency.html">Transparency</a>
+  <a href="/audit.html">Audit Log</a>
+  <a href="/privacy.html">Privacy</a>
+  <a href="/sitemap.html">Sitemap</a>
+</div>
+<!-- Site search is provided by the self-contained search.js asset (command palette: / or Ctrl/Cmd-K). -->
+
+<!-- Mobile panel: full-screen slide-in. v396 nav — hub tiles + grouped links + Sentinel Node + Engineering. -->
+<nav id="mobile-nav-panel" aria-label="Mobile navigation" aria-hidden="true" role="dialog" aria-modal="true">
+
+  <!-- Hub tiles: Sentinel Node, Documentation Hub, Training Hub, Global Hub -->
+  <div style="padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,0.07);">
+    <p style="font-size:0.65em;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.28);margin:0 0 10px;padding:0 2px;">Hubs</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <a href="/sentinel-node.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(213,169,79,0.1);border:1px solid rgba(213,169,79,0.35);border-radius:10px;color:#d5a94f;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Sentinel Node</a>
+      <a href="/documentation-hub/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(0,194,168,0.1);border:1px solid rgba(0,194,168,0.35);border-radius:10px;color:#00c2a8;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Docs Hub</a>
+      <a href="/training.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.35);border-radius:10px;color:#a78bfa;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Training Hub</a>
+      <a href="/global/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(122,240,220,0.07);border:1px solid rgba(122,240,220,0.3);border-radius:10px;color:#7af0dc;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Global Hub</a>
+    </div>
+  </div>
+
+  <!-- Core paths -->
+  <div class="mob-static-links">
+    <a href="/index.html">Home</a>
+    <a href="/for-physicians.html">Physicians</a>
+    <a href="/for-attorneys.html">Attorneys</a>
+    <a href="/engineering-drafting/">Engineering &amp; Drafting</a>
+    <a href="/pilot-program.html">Pilot Program</a>
+    <a href="/how-it-works.html">How It Works</a>
+    <a href="/trust.html">Trust &amp; Audit</a>
+    <a href="/pricing.html">Pricing</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/living-memorials/">Living Echo</a>
+    <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability</a>
+    <a href="/about.html">About</a>
+    <a href="/team.html" style="color:rgba(255,255,255,0.6);">Team &amp; Leadership</a>
+    <a href="/valuation-dashboard.html" style="color:rgba(255,255,255,0.6);">Valuation Dashboard</a>
+    <a href="/careers.html" style="color:rgba(255,255,255,0.6);">Careers</a>
+    <a href="/sentinel-demo.html" style="color:rgba(255,255,255,0.6);">Demo</a>
+    <a href="/sitemap.html" style="color:rgba(255,255,255,0.45);">Sitemap</a>
+    <a href="/transparency.html" style="color:rgba(255,255,255,0.45);">Transparency</a>
+    <a href="/privacy.html" style="color:rgba(255,255,255,0.45);">Privacy</a>
+  </div>
+
+  <a href="/contact.html#pilot" class="mob-cta">Request a Pilot</a>
+</nav>
+<!-- /INCLUDE:HEADER -->
+
+
+<main class="container" id="main-content" tabindex="-1">
+<span id="main" aria-hidden="true"></span>
+<div class="page-back-link"><a href="for-physicians.html" class="back-link-anchor">&#8592; For Physicians</a></div>
+
+
+        <section class="pa-hero">
+            <div class="sentinel-lockup" aria-label="Sentinel Node — Patient Advocacy">
+              <svg class="sentinel-lockup-mark" viewBox="0 0 64 64" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
+          <!-- v311b: rotated diamond + C-curve loop + summit dot. Inherits currentColor from CSS context. -->
+          <g transform="rotate(45 32 32)">
+            <rect x="12" y="12" width="40" height="40" rx="8" ry="8"/>
+            <path d="M43 22 L26 22 A6 6 0 0 0 20 28 L20 36 A6 6 0 0 0 26 42 L41 42"/>
+          </g>
+          <circle cx="32" cy="9" r="3" fill="currentColor" stroke="none"/>
+        </svg>
+              <div class="sentinel-lockup-rule"></div>
+              <div class="sentinel-lockup-text">
+                <span class="sentinel-lockup-name">Sentinel Node</span>
+                <span class="sentinel-lockup-tag">Patient Safety — The Data in Plain Language</span>
+              </div>
+            </div>
+            <h1>What AI Hallucinations and Prior Authorization Delays Actually Cost Patients</h1>
+            <p class="pa-deck">This page is not written for physicians or attorneys. It is written for patients, families, and the advocates who fight for them. The data is real. The sources are linked. And the problem is fixable.</p>
+            <span class="plain-badge">Written in plain language &mdash; no medical jargon, no vendor pitch</span>
+        </section>
+
+        <section class="trust-badges-section" aria-label="Built on enterprise infrastructure">
+            <p class="trust-badges-eyebrow">Built on enterprise infrastructure</p>
+            <div class="trust-badges-row">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 32" width="120" height="32" role="img" aria-label="Dell" class="badge-svg"><text x="60" y="24" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif" font-weight="800" font-size="22" letter-spacing="3" fill="currentColor">DELL</text></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 32" width="150" height="32" role="img" aria-label="NVIDIA" class="badge-svg"><text x="75" y="24" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif" font-weight="800" font-size="22" letter-spacing="3" fill="currentColor">NVIDIA</text></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 32" width="150" height="32" role="img" aria-label="Qdrant" class="badge-svg"><text x="75" y="24" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif" font-weight="800" font-size="22" letter-spacing="2" fill="currentColor">Qdrant</text></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 32" width="150" height="32" role="img" aria-label="Ollama" class="badge-svg"><text x="75" y="24" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif" font-weight="800" font-size="22" letter-spacing="2" fill="currentColor">Ollama</text></svg>
+            </div>
+        </section>
+
+        <!-- HUMAN COST STATS -->
+        <div class="human-grid">
+            <div class="hcard">
+                <span class="hnum">29%</span>
+                <span class="hlabel">Of physicians report a serious adverse event for a patient caused by prior authorization delays — including hospitalization, permanent impairment, or death</span>
+                <span class="hsource">AMA 2024 Annual Prior Auth Survey, n=1,000 [1]</span>
+            </div>
+            <div class="hcard amber">
+                <span class="hnum">93%</span>
+                <span class="hlabel">Of physicians say prior authorization causes care delays for their patients</span>
+                <span class="hsource">AMA 2024 Annual Prior Auth Survey [1]</span>
+            </div>
+            <div class="hcard amber">
+                <span class="hnum">82%</span>
+                <span class="hlabel">Of patients abandon recommended treatments because prior authorization takes too long</span>
+                <span class="hsource">AMA 2024 Annual Prior Auth Survey [1]</span>
+            </div>
+            <div class="hcard blue">
+                <span class="hnum">82%</span>
+                <span class="hlabel">Of prior authorization denials that are appealed are ultimately overturned — meaning most denials were wrong</span>
+                <span class="hsource">Health Affairs / Stanford, January 2026 [2]</span>
+            </div>
+            <div class="hcard">
+                <span class="hnum">0.2%</span>
+                <span class="hlabel">Of denied patients ever appeal — most people give up and abandon the treatment</span>
+                <span class="hsource">Health Affairs / Stanford, January 2026 [2]</span>
+            </div>
+            <div class="hcard blue">
+                <span class="hnum">44%</span>
+                <span class="hlabel">Of organizations report negative consequences from generative AI use in healthcare, with average losses of $4.4 million per incident</span>
+                <span class="hsource">Pharmaphorum cross-industry survey, 2025 [3]</span>
+            </div>
+        </div>
+
+        <div class="pa-prose">
+
+            <!-- ═══ DATA GAP INFOGRAPHIC — hotfix v303: PNG+WebP now present in repo ═══ -->
+            <div style="margin:0 0 40px;" aria-label="The data gap is costing lives">
+                <div style="border:1px solid rgba(220,50,50,0.22);border-radius:14px;overflow:hidden;background:#040f1a;">
+                    <a href="data-gap-costing-lives.png" target="_blank" rel="noopener"
+                       title="Click to view full size — The Data Gap Is Costing Lives"
+                       style="display:block;cursor:zoom-in;"
+                       aria-label="Infographic: The Data Gap Is Costing Lives — click to view full size">
+                        <picture>
+                            <source srcset="data-gap-costing-lives.webp" type="image/webp">
+                            <img src="data-gap-costing-lives.png"
+                                 alt="Infographic: The Data Gap Is Costing Lives. We Can Change That. 250,000 preventable deaths each year in the U.S. due to medical errors, diagnostic failures, and fragmented information. 135,000 small practices with 1 to 10 physicians on the front lines of patient care. 58 percent of U.S. physician practices are small practices. 87,500 lives impacted each year by preventable harm in small practice environments. The problem — critical information is scattered, buried, and missed: Fragmented Patient Records, Missed History and Imaging, Medication Errors, Communication Breakdowns, Delayed Recognition, Cognitive Overload. These failures lead to preventable harm. The solution — AI that brings the right information to the right clinician at the right time: Unified Patient Context, Complete History and Imaging, Safer Medication Management, Seamless Communication, Earlier Recognition, Reduced Cognitive Load. Better information. Better decisions. Better outcomes. If every small practice had the right tools: a 5 to 10 percent reduction in preventable harm equals 4,400 to 8,700 lives saved every year. With full implementation: 43,750 lives saved annually. We don't need more data. We need the right data, in the right hands. Local AI. Human-in-the-Loop. On-Premises. Privacy First. Clinician Controlled."
+                                 width="1218" height="1292"
+                                 loading="lazy" decoding="async"
+                                 style="width:100%;height:auto;display:block;max-width:660px;margin:0 auto;background:#040f1a;min-height:200px;"
+                                 onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div style=\'width:100%;max-width:660px;margin:0 auto;min-height:320px;background:#09192a;border-radius:10px;display:flex;align-items:center;justify-content:center;padding:32px;box-sizing:border-box;\'><p style=\'color:#ef4444;font-size:.9rem;text-align:center;margin:0;line-height:1.6;\'>Infographic temporarily unavailable&mdash;statistics are cited in the section below.</p></div>')">
+                        </picture>
+                    </a>
+                    <div style="padding:18px 24px 20px;border-top:1px solid rgba(220,50,50,0.15);background:rgba(4,15,26,0.97);">
+                        <p style="margin:0 0 8px;font-size:0.97em;font-weight:700;color:var(--white);line-height:1.35;">The data gap is not a technology problem. It is a patient harm problem.</p>
+                        <p style="margin:0 0 10px;font-size:0.86em;color:var(--light-text);line-height:1.7;">250,000 preventable deaths annually. 87,500 linked to small practice environments where critical information is fragmented, buried, or simply not available at the moment it is needed. The numbers below document what that costs patients — in delayed care, treatment abandonment, and outcomes that should never have happened.</p>
+                        <p style="margin:0 0 6px;font-size:0.81em;"><a href="data-gap-costing-lives.png" target="_blank" rel="noopener" style="color:rgba(0,194,168,0.8);font-weight:600;">View full size →</a></p>
+                        <p style="margin:8px 0 0;font-size:0.75em;color:var(--muted);line-height:1.6;border-top:1px solid rgba(255,255,255,0.08);padding-top:8px;"><strong style="color:rgba(200,210,220,0.5);">Illustrative context only.</strong> Statistics reflect published research on medical errors. Projected impact figures are illustrative estimates, not clinical outcome guarantees. Pocono AI does not practice medicine and does not guarantee clinical outcomes.</p>
+                    </div>
+                </div>
+            </div>
+
+                        <h2>The Prior Authorization Problem — What It Means for You</h2>
+
+            <p>Prior authorization is the process where your insurance company requires your doctor to get approval before they can prescribe a medication, order a test, or recommend a procedure. In theory it controls costs. In practice it delays or blocks care that your doctor has already decided you need.</p>
+
+            <p>The 2024 American Medical Association survey of 1,000 practicing physicians found that <strong>93% say prior authorization causes care delays for their patients. 82% say it leads patients to abandon recommended treatments entirely.</strong> These are not billing inconveniences. They are clinical outcomes. The treatment your doctor prescribed doesn't happen because an insurance company's system said no — and because fighting that denial takes time that neither you nor your doctor has.<sup class="ref">[1]</sup></p>
+
+            <p>The most devastating finding: <strong>29% of physicians — nearly 1 in 3 — reported that prior authorization caused a serious adverse event for a patient in their care.</strong> 23% reported a patient hospitalization. 8% reported a patient's disability, permanent damage, or death.<sup class="ref">[1]</sup></p>
+
+            <div class="human-quote">
+                <p>"Prior authorization requires physicians and their staff to spend an average of 13 hours per week completing prior authorization requests — time taken directly away from patient care."</p>
+                <span class="attr">— American Medical Association, 2024 Annual Prior Authorization Physician Survey. Survey of 1,000 practicing US physicians.</span>
+            </div>
+
+            <p>Here is what makes this worse: <strong>82% of prior authorization denials that patients actually appeal are overturned.</strong> The insurance company was wrong. But only 0.2% of denied patients ever appeal — because most people don't know they can, don't have the energy, or can't wait for the process to play out while they're already sick.<sup class="ref">[2]</sup></p>
+
+            <h2>The AI Hallucination Problem — What It Means for Your Safety</h2>
+
+            <p>Artificial intelligence is being adopted rapidly across healthcare. Most AI tools used in medical settings today are cloud-based — they send your information to a remote server, generate a response, and return it to your doctor. The problem is that these systems hallucinate.</p>
+
+            <p>An AI hallucination in healthcare is not a minor glitch. It is a system confidently generating false medical information — an invented drug allergy, a fabricated prior treatment, a nonexistent test result — that your doctor may not catch if they are reviewing dozens of patients under time pressure.</p>
+
+            <p>The legal system has already begun responding. In April 2026, a federal judge in Oregon fined two attorneys $110,000 for submitting court documents filled with AI-generated fake cases and fabricated citations. That same month, the elite law firm Sullivan &amp; Cromwell formally apologized to a US Bankruptcy Court after an AI tool fabricated legal sources in a court filing.</p>
+
+            <p>These are attorneys — trained professionals — failing to catch AI hallucinations under the pressure of their workload. <strong>If this is happening in law, where citations can be verified in seconds, what happens when a cloud AI invents a detail in your patient chart?</strong></p>
+
+            <p>When a cloud AI vendor's system produces a hallucination that leads to patient harm, the vendor invokes their Terms of Service and claims safe harbor. <strong>The physician carries the liability. The patient carries the harm.</strong></p>
+
+            <h2>Why This Is Happening</h2>
+
+            <p>Your doctor spends an average of 5.9 hours per day in the electronic health record — nearly 60% of their workday. They spend another 2.7 hours on documentation after clinic hours, at home, after the children are asleep. They process 39 prior authorization requests per week on top of their patient load.<sup class="ref">[4]</sup></p>
+
+            <p>This is not a failure of your doctor's commitment. It is a failure of the systems surrounding them. The documentation burden, the prior authorization fights, the administrative overhead — these are system design problems, not physician performance problems. And they have direct consequences for the quality of attention your doctor can give you during your appointment.</p>
+
+            <p>A physician who spends 5.9 hours in an EHR and then rubber-stamps an AI-generated summary at the end of a 12-hour day is not being careless. They are being human under an unsustainable workload. The solution is not to blame the physician. The solution is to give them better, safer tools.</p>
+
+            <h2>What a Safer Architecture Looks Like</h2>
+
+            <p>The safest AI for healthcare is AI that cannot reach the internet. Not because internet-connected AI is always wrong — but because an AI that can only retrieve information from your actual, verified medical records cannot invent information that isn't there.</p>
+
+            <p>When an AI system runs locally on hardware inside your doctor's practice — with no connection to external servers — every answer it generates is grounded in documents that actually exist in your file. It cannot fabricate a drug allergy that isn't documented. It cannot invent a prior authorization approval that was never granted. And if it makes an error, the audit log shows exactly what document it retrieved and why — so the error can be found and corrected.</p>
+
+            <p>This is not a theoretical architecture. It is what the Sentinel Node™ does — and it is why the prior authorization documentation a practice produces with local AI is more complete, more accurate, and more defensible than what cloud AI generates from a partial picture of your records.</p>
+
+            <div class="means-box">
+                <h2>What This Means for Your Care</h2>
+                <p>A medical practice using the Sentinel Node™ can produce a complete, accurate prior authorization case in seconds rather than hours — drawing from your full, verified medical history, on hardware that never leaves their building.</p>
+                <p><strong>More complete documentation means fewer initial denials.</strong> Fewer denials means less treatment abandonment. Less treatment abandonment means better patient outcomes. And because the AI runs locally — with a full audit trail of every document it retrieved — your physician can verify every output before it goes anywhere.</p>
+                <p>Your protected health information never leaves your doctor's building. Not to the AI vendor. Not to a cloud server. Not to anyone. The AI infrastructure is deployed in the office. The data stays in the office.</p>
+                <p>That is not a marketing claim. It is a physical fact enforced by the architecture of the system.</p>
+                <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap;">
+                    <a href="prior-auth-case-study.html" class="cta-button">Read the Prior Auth Research</a>
+                    <a href="research.html" class="cta-button cta-button-light">View All Research</a>
+                </div>
+            </div>
+
+            <div class="advocacy-box" style="border-left-color:var(--success);background:linear-gradient(135deg,rgba(34,197,94,0.05),rgba(5,22,34,0.95));">
+                <h2 style="color:var(--white);margin-top:0;">Patient Consent &amp; The True Privacy Argument</h2>
+                <p>The healthcare industry frames zero-egress AI as a <strong style="color:var(--white);">HIPAA compliance tool for practice protection</strong>. That framing is true — but it misses the more fundamental argument: <strong style="color:var(--white);">it's about what you actually consented to.</strong></p>
+
+                <div style="background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.25);border-radius:10px;padding:20px 24px;margin:20px 0;">
+                    <p style="color:var(--white);font-size:1.05em;font-weight:600;margin:0 0 10px;line-height:1.5;">When you became a patient at your doctor's practice, you consented to your physician using your records to care for you.</p>
+                    <p style="color:var(--light-text);margin:0;line-height:1.8;">You did not consent to your protected health information traversing a cloud AI vendor's servers in a data center you've never heard of, operated by employees you've never vetted, governed by a Business Associate Agreement you've never read. That transmission happens every time a provider uses cloud AI — and it happens without your knowledge or explicit agreement.</p>
+                </div>
+
+                <h3 style="color:var(--white);font-size:1em;margin:20px 0 10px;">The Consent Gap in Cloud Healthcare AI</h3>
+                <p style="color:var(--light-text);line-height:1.8;">HIPAA's Privacy Rule allows covered entities to use PHI for treatment, payment, and healthcare operations without obtaining individual authorization. Cloud AI vendors argue their services fall under these categories. But this legal permission was designed for <em>treatment-related uses</em> — not for routing sensitive health data through commercial AI infrastructure that internalizes it, processes it, and operates on it in ways that are extremely difficult for patients to audit or verify.</p>
+                <p style="color:var(--light-text);line-height:1.8;">As Dr. Freed's research documents: once PHI enters cloud infrastructure, its provenance becomes extremely difficult to audit in any meaningful way. Patients cannot readily verify where their data went, who processed it, whether it influenced a model's outputs, or whether it was accessed by a vendor employee. The BAA says it wasn't. But the patient has little practical mechanism to confirm that claim.</p>
+
+                <h3 style="color:var(--white);font-size:1em;margin:20px 0 10px;">Hardware Custody Is the Only Architecture Consistent With Consent</h3>
+                <p style="color:var(--light-text);line-height:1.8;">The Sentinel Node's Enterprise Autonomy Architecture is the only AI deployment model where a patient's consent boundary is fully respected by the technology itself — not just by contractual promise. When inference runs on hardware inside the physician's facility, your records never leave the building. The entity that processes your data is the same entity you consented to when you became a patient.</p>
+
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin:20px 0;">
+                    <div style="background:rgba(0,0,0,0.3);border-radius:8px;padding:16px;border:1px solid rgba(255,255,255,0.06);">
+                        <div style="color:var(--danger);font-weight:700;font-size:0.75em;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">Cloud AI · What Actually Happens</div>
+                        <ul style="color:var(--muted);font-size:0.82em;line-height:1.85;padding-left:16px;margin:0;">
+                            <li>Your PHI leaves your doctor's building</li>
+                            <li>It traverses vendor infrastructure</li>
+                            <li>Processed by staff you cannot vet</li>
+                            <li>Covered by a contract you never saw</li>
+                            <li>Audit is vendor-side; you see nothing</li>
+                        </ul>
+                    </div>
+                    <div style="background:rgba(34,197,94,0.06);border-radius:8px;padding:16px;border:1px solid rgba(34,197,94,0.2);">
+                        <div style="color:var(--success);font-weight:700;font-size:0.75em;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">Sentinel Node · What Actually Happens</div>
+                        <ul style="color:var(--muted);font-size:0.82em;line-height:1.85;padding-left:16px;margin:0;">
+                            <li>Your PHI stays in the practice's building</li>
+                            <li>Processed on hardware the practice owns</li>
+                            <li>No vendor employee accesses your records</li>
+                            <li>Audit log under the practice's custody</li>
+                            <li>Physically verifiable — no vendor attestation needed</li>
+                        </ul>
+                    </div>
+                </div>
+                <p style="color:var(--light-text);font-size:0.88em;line-height:1.75;margin:0;">The consent argument matters because it reframes the conversation: zero-egress AI isn't just a compliance tool for practices. It's the technology choice that actually honors what patients agreed to when they became patients. <strong style="color:var(--white);">Your doctor's obligation is to your care. The AI they use should stay within the scope of that relationship — not extend it to an infrastructure you never consented to.</strong></p>
+            </div>
+                <p>If you represent patients living with chronic illness, rare disease, or conditions that require frequent prior authorization battles — we want to hear from you.</p>
+                <p>The prior authorization crisis disproportionately harms patients with complex, ongoing conditions who require frequent specialist referrals, specialty medications, and repeat authorization cycles. These are your members. The data on this page documents their experience in peer-reviewed terms.</p>
+                <p>We are open to research partnerships, data sharing agreements, and conversations about how local sovereign AI can reduce the prior authorization burden on the practices that serve your community — without compromising the privacy of a single patient record.</p>
+                <p>If you are a patient advocacy organization interested in this work, please reach out directly: <a href="mailto:marcus@poconoai.com?subject=Patient%20Advocacy%20Partnership%20%E2%80%94%20Pocono%20AI">marcus@poconoai.com</a> or text <strong style="color:var(--white);">(570) 534-0602</strong>.</p>
+            </div>
+
+            <div class="references">
+                <h3>Sources &amp; Primary References</h3>
+                <ol>
+                    <li>American Medical Association. <em>2024 AMA Prior Authorization Physician Survey.</em> 1,000 practicing US physicians. December 2024. <a href="https://www.ama-assn.org/system/files/prior-authorization-survey.pdf" target="_blank" rel="noopener">ama-assn.org</a></li>
+                    <li>Health Affairs. The AI Arms Race In Health Insurance Utilization Review. Stanford Health Care. January 2026. doi:10.1377/hlthaff.2025.00897. <a href="https://www.healthaffairs.org/doi/10.1377/hlthaff.2025.00897" target="_blank" rel="noopener">healthaffairs.org</a></li>
+                    <li>Pharmaphorum. Cross-industry survey on generative AI consequences. 2025. Reported in Pocono AI Prior Authorization Research Brief.</li>
+                    <li>Sinsky C, Colligan L, Li L, et al. Allocation of physician time in ambulatory practice. <em>Annals of Family Medicine.</em> 2016. PMC5593724. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5593724/" target="_blank" rel="noopener">pmc.ncbi.nlm.nih.gov</a></li>
+                </ol>
+                <p style="font-size:0.78em;color:var(--muted);margin-top:12px;margin-bottom:0;">Last verified April 25, 2026. All statistics sourced directly from primary documents. Pocono AI, LLC does not extrapolate or embellish any figure presented here.</p>
+            </div>
+
+        </div>
+
+        <div class="pa-cta">
+            <h2>If Your Practice Serves Patients Who Deserve Better</h2>
+            <p>We are actively recruiting medical practices for a 60-Day Paid Proof-of-Value deployment. We measure prior authorization approval rates, documentation time, and patient outcome indicators — with your data, in your practice.</p>
+            <a href="partners.html" class="cta-button">Begin a Proof-of-Value Engagement</a>
+            <a href="trust.html" class="cta-button cta-button-light" style="margin-left:12px;">Malpractice Trap Analysis</a>
+        </div>
+
+        <div class="transparency-note">
+            <p><strong>Plain Language Commitment:</strong> This page is written for patients and advocates, not for compliance officers or procurement teams. Every statistic links to its primary source. If anything on this page is unclear, inaccurate, or needs a plain-language explanation, contact <a href="mailto:marcus@poconoai.com">marcus@poconoai.com</a> and we will respond within 24 hours.</p>
+        </div>
+
+    </main>
+
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 root-relative nav fix, Living Echo rebrand, Engineering & Drafting + Enterprise Estate Continuity links added (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- INCLUDE:FOOTER -->
+<footer role="contentinfo" style="background:#051622;border-top:1px solid rgba(255,255,255,0.08);padding:40px 24px 28px;font-size:0.85em;color:#8899aa;">
+  <div style="max-width:1180px;margin:0 auto;">
+
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:0 0 28px;margin-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.07);">
+      <div style="max-width:560px;">
+        <p style="margin:0 0 6px;font-size:1.05em;font-weight:700;color:#fff;">Local AI infrastructure for regulated practices.</p>
+        <p style="margin:0;font-size:0.95em;line-height:1.5;">Drafts with citations. Human review required. Sensitive documents stay under practice control. Simple path, deep proof.</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="/contact.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;background:#00c2a8;color:#04111a;font-weight:700;text-decoration:none;font-size:0.95em;">Request Pilot</a>
+        <a href="/sentinel-demo.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;border:1px solid rgba(0,194,168,0.55);color:#00c2a8;font-weight:700;text-decoration:none;font-size:0.95em;">Watch Demo</a>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px 32px;margin-bottom:32px;text-align:left;">
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">For You</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/start-here.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Start Here (3 min)</a>
+          <a href="/for-physicians.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Physicians</a>
+          <a href="/for-attorneys.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Attorneys</a>
+          <a href="/engineering-drafting/" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Engineering &amp; Drafting Teams</a>
+          <a href="/pilot-program.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Pilot Program</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Installer Training</a>
+          <a href="/how-it-works.html" style="color:#8899aa;text-decoration:none;">How It Works</a>
+          <a href="/trust.html" style="color:#8899aa;text-decoration:none;">Trust &amp; Audit</a>
+          <a href="/pricing.html" style="color:#8899aa;text-decoration:none;">Pricing</a>
+          <a href="/sentinel-demo.html" style="color:#8899aa;text-decoration:none;">See the Demo</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Documentation Hub</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/documentation-hub/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Hub Home &mdash; Deep Proof</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">Installer Training</a>
+          <a href="/sentinel-node/installation-simulator.html" style="color:#8899aa;text-decoration:none;">&#8627; Installation Simulator</a>
+          <a href="/documentation-hub/clinical/" style="color:#8899aa;text-decoration:none;">Clinical Documentation</a>
+          <a href="/documentation-hub/legal/" style="color:#8899aa;text-decoration:none;">Legal Documentation</a>
+          <a href="/documentation-hub/technical/" style="color:#8899aa;text-decoration:none;">Technical Documentation</a>
+          <a href="/documentation-hub/governance/" style="color:#8899aa;text-decoration:none;">Governance &amp; Audit</a>
+          <a href="/documentation-hub/tools/" style="color:#8899aa;text-decoration:none;">Tools &amp; Simulators</a>
+          <a href="/documentation-hub/research/" style="color:#8899aa;text-decoration:none;">Research &amp; Essays</a>
+          <a href="/documentation-hub/transparency/" style="color:#8899aa;text-decoration:none;">Transparency</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Global Federated AI</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/global/" style="color:#7af0dc;text-decoration:none;font-weight:600;">Global Federated Hub</a>
+          <a href="/global/australia/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Australia</a>
+          <a href="/global/singapore/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Singapore</a>
+          <a href="/global/taiwan/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Taiwan</a>
+          <a href="/global/europe/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Europe</a>
+          <a href="/contact.html" style="color:#8899aa;text-decoration:none;">Partner Inquiry</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Company</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/about.html" style="color:#8899aa;text-decoration:none;">About Pocono AI</a>
+          <a href="/team.html" style="color:#8899aa;text-decoration:none;">Team &amp; Leadership</a>
+          <a href="/why-pocono-ai.html" style="color:#8899aa;text-decoration:none;">Why Pocono AI</a>
+          <a href="/founding-commercial-leadership.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Join Us</a>
+          <a href="/careers.html" style="color:#8899aa;text-decoration:none;">Careers</a>
+          <a href="/how-we-hire.html" style="color:#8899aa;text-decoration:none;">How We Hire</a>
+          <a href="/channel-partners.html" style="color:#8899aa;text-decoration:none;">Technical Partners (MSPs)</a>
+          <a href="/partners.html" style="color:#8899aa;text-decoration:none;">Academic Partnerships</a>
+          <a href="/contact.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Contact</a>
+          <a href="https://forms.gle/VQahnkjMfY6QNEMy8" target="_blank" rel="noopener noreferrer" style="color:#d5a94f;text-decoration:none;font-weight:600;">Interest List &#8599;</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Founder Projects</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/rehability/" style="color:#a78bfa;text-decoration:none;font-weight:700;">Rehability &#x2605;</a>
+          <a href="/rehability/marcus-memory-helper/" style="color:#a78bfa;text-decoration:none;font-weight:600;">&#8627; Marcus's Memory Helper</a>
+          <a href="/sentinel-home/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Sentinel Home Edition</a>
+          <a href="/living-memorials/" style="color:#8899aa;text-decoration:none;">Living Echo</a>
+          <a href="/living-memorials/marcus-odell/" style="color:#8899aa;text-decoration:none;">Marcus&rsquo;s Living Echo</a>
+          <a href="/living-memorials/enterprise-estate-continuity.html" style="color:#8899aa;text-decoration:none;">Enterprise Estate Continuity</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Resources &amp; Legal</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/sitemap.html" style="color:#8899aa;text-decoration:none;">All Pages (Sitemap)</a>
+          <a href="/audit.html" style="color:#8899aa;text-decoration:none;">Transparency &amp; Audit Log</a>
+          <a href="/maturity-disclosure.html" style="color:#8899aa;text-decoration:none;">What We Have / Don&rsquo;t Claim</a>
+          <a href="/plain.html" style="color:#8899aa;text-decoration:none;">Plain Language Guide</a>
+          <a href="/privacy.html" style="color:#8899aa;text-decoration:none;">Privacy</a>
+          <a href="/terms.html" style="color:#8899aa;text-decoration:none;">Terms</a>
+          <a href="/sla.html" style="color:#8899aa;text-decoration:none;">SLA</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:18px;margin-bottom:14px;">
+      <p style="margin:0;font-size:0.82em;line-height:1.6;color:#6f8295;max-width:1000px;">Pocono AI does not provide medical, legal, or engineering advice, does not practice medicine, law, or licensed engineering, and does not make clinical, legal, or engineering decisions. Outputs are drafts or support materials that require review by a qualified professional; final professional judgment remains with the licensed physician, attorney, or engineer. Tools and simulations on this site are educational and use synthetic data.</p>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:20px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+      <p style="margin:0;font-size:0.9em;">&copy; 2026 Pocono AI, LLC &nbsp;&#183;&nbsp; East Stroudsburg, PA &nbsp;&#183;&nbsp; <a href="mailto:marcus@poconoai.com" style="color:#8899aa;">marcus@poconoai.com</a> &nbsp;&#183;&nbsp; <a href="tel:+15705340602" style="color:#8899aa;">(570) 534-0602</a></p>
+      <p style="margin:0;font-size:0.88em;"><a href="/audit.html" style="color:#5dade2;text-decoration:none;">Transparency v402</a></p>
+    </div>
+  </div>
+</footer>
+<script src="/search.js?v=402" defer></script>
+<!-- /INCLUDE:FOOTER -->
+
+<script src="search-index.js?v=402" defer></script>
+<script src="nav.js?v=402" defer></script>
+<script src="pilot-cta.js?v=402" defer></script>
+</body>
+</html>

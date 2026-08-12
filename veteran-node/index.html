@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v403 2026-06-27 Veteran-Node-Z2.01-ecosystem-intelligence-launch -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="description" content="Veteran Node by Pocono AI helps veterans, families, advocates, nonprofits, employers, and trusted partners coordinate next steps through Action Cards, Governance Receipts, human review, and consent-gated handoffs.">
+<meta name="keywords" content="veteran coordination AI, veteran support technology, VSO software, veteran services coordination, consent-first veteran AI, local AI veteran support, nonprofit veteran coordination, veteran ecosystem, Pocono AI Veteran Node">
+<title>Veteran Node | Consent-First Coordination for the Veteran Ecosystem | Pocono AI</title>
+
+<meta property="og:title" content="Veteran Node — Consent-First Coordination for the Veteran Ecosystem | Pocono AI">
+<meta property="og:description" content="Veteran Node helps veterans, families, VSOs, nonprofits, employers, and trusted partners coordinate next steps with consent, transparency, and human review always in the loop.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Pocono AI">
+<meta property="og:url" content="https://poconoai.com/veteran-node/">
+<meta property="og:image" content="https://poconoai.com/assets/veteran-node-infographic.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#07111c">
+
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="stylesheet" href="/styles.css?v=403">
+<link rel="stylesheet" href="/nav-v2026.css?v=403">
+<link rel="stylesheet" href="/brand-v292.css?v=403">
+<link rel="canonical" href="https://poconoai.com/veteran-node/">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Veteran Node — Consent-First Coordination for the Veteran Ecosystem",
+  "description": "Veteran Node helps veterans, families, VSOs, nonprofits, employers, and trusted partners coordinate next steps with consent, transparency, and human review always in the loop.",
+  "url": "https://poconoai.com/veteran-node/",
+  "isPartOf": { "@type": "WebSite", "url": "https://poconoai.com", "name": "Pocono AI, LLC" },
+  "publisher": { "@type": "Organization", "name": "Pocono AI, LLC", "url": "https://poconoai.com" },
+  "datePublished": "2026-06-27",
+  "dateModified": "2026-06-27"
+}
+</script>
+
+<style>
+/* ── Veteran Node — scoped .vn- design system ── */
+/* Palette: deep navy base, sunrise gold accent, steel text, consent-lock white */
+:root {
+  --vn-bg:          #07111c;
+  --vn-surface:     #0d1a28;
+  --vn-card:        rgba(255,255,255,0.04);
+  --vn-card-hover:  rgba(255,255,255,0.07);
+  --vn-border:      rgba(255,255,255,0.09);
+  --vn-border-gold: rgba(201,151,63,0.30);
+  --vn-gold:        #c9973f;
+  --vn-gold-bright: #d5a94f;
+  --vn-gold-dim:    rgba(201,151,63,0.12);
+  --vn-gold-glow:   rgba(201,151,63,0.06);
+  --vn-star:        #e8c96a;
+  --vn-teal:        #00c2a8;
+  --vn-teal-dim:    rgba(0,194,168,0.12);
+  --vn-text:        #c8d8e4;
+  --vn-text-soft:   #7a8fa0;
+  --vn-text-bright: #e8f0f7;
+  --vn-red-warn:    rgba(239,68,68,0.12);
+  --vn-red-border:  rgba(239,68,68,0.28);
+  --vn-red-text:    #f87171;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body.vn-body{
+  margin:0;
+  background:var(--vn-bg);
+  color:var(--vn-text);
+  font-family:system-ui,-apple-system,'Segoe UI',sans-serif;
+  font-size:1.05rem;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ── Skip link ── */
+.vn-skip{position:absolute;left:-999px;top:0;background:var(--vn-gold);color:#07111c;
+  padding:10px 18px;border-radius:0 0 10px 0;z-index:100;font-weight:700}
+.vn-skip:focus{left:0}
+
+/* ── Back bar ── */
+.vn-topbar{
+  position:sticky;top:0;z-index:40;
+  display:flex;justify-content:space-between;align-items:center;gap:14px;
+  padding:11px clamp(16px,4vw,34px);
+  background:rgba(7,17,28,0.92);backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(201,151,63,0.18);
+  font-size:.9rem;
+}
+.vn-topbar-left{display:flex;align-items:center;gap:16px}
+.vn-topbar a{color:var(--vn-text-soft);text-decoration:none}
+.vn-topbar a:hover{color:var(--vn-gold-bright)}
+.vn-topbar-badge{
+  font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;
+  color:var(--vn-gold);border:1px solid var(--vn-border-gold);
+  border-radius:999px;padding:3px 10px;
+}
+.vn-topbar-cta{
+  display:inline-flex;align-items:center;
+  padding:7px 16px;border-radius:999px;
+  background:var(--vn-gold);color:#07111c;
+  font-weight:700;text-decoration:none;font-size:.84rem;
+  transition:background .15s;
+}
+.vn-topbar-cta:hover{background:var(--vn-gold-bright)}
+
+/* ── Layout primitives ── */
+.vn-section{padding:clamp(56px,8vw,96px) clamp(20px,5vw,40px)}
+.vn-wrap{max-width:780px;margin:0 auto}
+.vn-wrap--wide{max-width:1080px;margin:0 auto}
+.vn-center{text-align:center}
+
+.vn-eyebrow{
+  display:inline-block;font-size:.72rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.16em;
+  color:var(--vn-gold);margin-bottom:12px;
+}
+.vn-h1{
+  font-size:clamp(2.2rem,5.8vw,3.6rem);
+  font-weight:800;line-height:1.07;letter-spacing:-.025em;
+  color:var(--vn-text-bright);margin:0 0 16px;
+}
+.vn-h2{
+  font-size:clamp(1.5rem,3.4vw,2.1rem);
+  font-weight:700;line-height:1.2;
+  color:var(--vn-text-bright);margin:0 0 14px;
+}
+.vn-h3{
+  font-size:1.05rem;font-weight:700;
+  color:var(--vn-text-bright);margin:0 0 6px;
+}
+.vn-lede{
+  font-size:clamp(1rem,2.2vw,1.18rem);
+  color:var(--vn-text);line-height:1.72;
+  max-width:64ch;margin:0 auto 30px;
+}
+
+/* ── Hero ── */
+.vn-hero{
+  position:relative;overflow:hidden;
+  padding:clamp(72px,10vw,120px) clamp(20px,5vw,40px) clamp(64px,9vw,100px);
+  text-align:center;
+  background:linear-gradient(160deg,#07111c 0%,#0d1e30 45%,#071722 100%);
+}
+.vn-hero::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 60% 40% at 50% 0%, rgba(201,151,63,.08), transparent 65%),
+    radial-gradient(ellipse 40% 30% at 20% 80%, rgba(0,194,168,.05), transparent 60%);
+}
+/* Subtle star accent */
+.vn-hero-star{
+  display:block;font-size:1.4rem;color:var(--vn-star);
+  margin:0 auto 16px;line-height:1;
+}
+.vn-hero-subtitle{
+  font-size:clamp(.95rem,2.2vw,1.2rem);
+  color:var(--vn-gold);font-weight:700;letter-spacing:.03em;
+  text-transform:uppercase;margin:0 0 22px;
+}
+.vn-hero-lede{
+  max-width:66ch;margin:0 auto 36px;
+  font-size:clamp(1rem,2.1vw,1.13rem);
+  color:var(--vn-text);line-height:1.72;
+}
+.vn-btn-row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.vn-btn{
+  display:inline-flex;align-items:center;
+  padding:13px 28px;border-radius:999px;
+  font-weight:700;text-decoration:none;font-size:.97rem;
+  transition:all .15s;
+}
+.vn-btn--gold{background:var(--vn-gold);color:#07111c}
+.vn-btn--gold:hover{background:var(--vn-gold-bright)}
+.vn-btn--outline{
+  background:transparent;
+  border:1px solid rgba(201,151,63,.5);
+  color:var(--vn-gold);
+}
+.vn-btn--outline:hover{background:var(--vn-gold-dim)}
+.vn-btn--teal-outline{
+  background:transparent;
+  border:1px solid rgba(0,194,168,.4);
+  color:var(--vn-teal);
+}
+.vn-btn--teal-outline:hover{background:var(--vn-teal-dim)}
+
+/* ── Consent lock banner ── */
+.vn-consent-banner{
+  background:var(--vn-gold-dim);
+  border:1px solid var(--vn-border-gold);
+  border-radius:12px;
+  padding:16px 22px;
+  margin:0 auto 40px;
+  max-width:660px;
+  font-size:.92rem;
+  color:var(--vn-text-bright);
+  display:flex;align-items:center;gap:12px;
+  text-align:left;
+}
+.vn-consent-banner .vn-lock{font-size:1.5rem;flex-shrink:0}
+
+/* ── Infographic block ── */
+.vn-infographic{
+  margin:44px auto 0;max-width:920px;
+  border-radius:18px;overflow:hidden;
+  border:1px solid var(--vn-border-gold);
+  box-shadow:0 24px 64px rgba(0,0,0,.45);
+}
+.vn-infographic img{display:block;width:100%;height:auto}
+
+/* ── Feature cards ── */
+.vn-cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:16px;margin-top:36px;
+}
+.vn-card{
+  background:var(--vn-card);
+  border:1px solid var(--vn-border);
+  border-radius:14px;
+  padding:24px 22px;
+  transition:border-color .15s,background .15s;
+}
+.vn-card:hover{background:var(--vn-card-hover);border-color:var(--vn-border-gold)}
+.vn-card-icon{font-size:1.6rem;margin-bottom:10px}
+.vn-card-tag{
+  font-size:.68rem;font-weight:700;text-transform:uppercase;
+  letter-spacing:.1em;color:var(--vn-gold);margin-bottom:6px;
+}
+.vn-card p{font-size:.88rem;color:var(--vn-text-soft);margin:0;line-height:1.55}
+
+/* ── Section band (dark variant) ── */
+.vn-band{background:var(--vn-surface);border-top:1px solid var(--vn-border);border-bottom:1px solid var(--vn-border)}
+.vn-band--gold{background:var(--vn-gold-glow);border-top:1px solid var(--vn-border-gold);border-bottom:1px solid var(--vn-border-gold)}
+
+/* ── Consent principles list ── */
+.vn-principles{list-style:none;padding:0;margin:24px 0 0;display:flex;flex-direction:column;gap:14px}
+.vn-principles li{
+  display:flex;align-items:flex-start;gap:14px;
+  background:var(--vn-card);border:1px solid var(--vn-border);
+  border-radius:12px;padding:16px 18px;
+}
+.vn-principles li .vn-bullet{
+  flex-shrink:0;width:28px;height:28px;border-radius:50%;
+  background:var(--vn-gold-dim);border:1px solid var(--vn-border-gold);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.85rem;color:var(--vn-gold);font-weight:700;
+  margin-top:1px;
+}
+.vn-principles li p{margin:0;font-size:.93rem;color:var(--vn-text);line-height:1.55}
+.vn-principles li strong{color:var(--vn-text-bright)}
+
+/* ── "What this is not" — red boundary cards ── */
+.vn-notlist{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:10px;margin-top:28px;
+}
+.vn-notcard{
+  background:var(--vn-red-warn);
+  border:1px solid var(--vn-red-border);
+  border-radius:10px;
+  padding:14px 16px;
+  display:flex;align-items:flex-start;gap:10px;
+}
+.vn-notcard .vn-x{
+  flex-shrink:0;width:22px;height:22px;border-radius:50%;
+  background:rgba(239,68,68,0.25);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--vn-red-text);font-size:.8rem;font-weight:700;margin-top:1px;
+}
+.vn-notcard p{margin:0;font-size:.88rem;color:var(--vn-text);line-height:1.5}
+
+/* ── "Who it's for" pills grid ── */
+.vn-audience{
+  display:flex;flex-wrap:wrap;gap:10px;margin-top:28px;
+}
+.vn-aud-pill{
+  display:inline-flex;align-items:center;gap:7px;
+  background:var(--vn-card);border:1px solid var(--vn-border);
+  border-radius:999px;padding:9px 16px;
+  font-size:.88rem;color:var(--vn-text);
+  transition:border-color .15s;
+}
+.vn-aud-pill:hover{border-color:var(--vn-border-gold);color:var(--vn-gold)}
+
+/* ── Status block ── */
+.vn-status-box{
+  background:var(--vn-card);border:1px solid var(--vn-border-gold);
+  border-radius:14px;padding:28px 26px;margin-top:32px;
+}
+.vn-status-box h3{color:var(--vn-gold);margin:0 0 10px;font-size:1.05rem}
+.vn-status-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
+.vn-status-list li{
+  display:flex;align-items:flex-start;gap:10px;
+  font-size:.9rem;color:var(--vn-text);line-height:1.5;
+}
+.vn-status-list li::before{
+  content:"▸";color:var(--vn-gold);flex-shrink:0;margin-top:1px;
+}
+
+/* ── CTA band ── */
+.vn-cta-band{
+  padding:clamp(56px,8vw,96px) clamp(20px,5vw,40px);
+  background:linear-gradient(160deg,#0a1c2e 0%,#071420 100%);
+  border-top:1px solid var(--vn-border-gold);
+  text-align:center;
+}
+.vn-cta-band .vn-h2{margin-bottom:10px}
+.vn-cta-band .vn-lede{margin-bottom:32px}
+.vn-cta-proof{
+  display:flex;flex-wrap:wrap;gap:14px;justify-content:center;
+  margin-top:28px;
+}
+.vn-proof-item{
+  display:flex;align-items:center;gap:8px;
+  font-size:.83rem;color:var(--vn-text-soft);
+}
+.vn-proof-item::before{content:"✓";color:var(--vn-gold);font-weight:700}
+
+/* ── Tech note ── */
+.vn-tech-note{
+  background:var(--vn-gold-glow);
+  border:1px solid var(--vn-border-gold);
+  border-radius:10px;padding:18px 22px;
+  font-size:.87rem;color:var(--vn-text);
+  margin-top:40px;line-height:1.6;
+  max-width:760px;margin-left:auto;margin-right:auto;
+}
+.vn-tech-note strong{color:var(--vn-gold-bright)}
+
+/* ── Footer ── */
+.vn-footer{
+  background:#051622;border-top:1px solid rgba(255,255,255,0.08);
+  padding:28px clamp(20px,5vw,40px);
+  font-size:.87rem;color:#8899aa;
+  display:flex;flex-wrap:wrap;gap:12px;align-items:center;
+  justify-content:space-between;
+}
+.vn-footer a{color:#8899aa;text-decoration:none}
+.vn-footer a:hover{color:var(--vn-gold)}
+
+/* ── Disclosure bar ── */
+.vn-disclosure{
+  background:rgba(0,0,0,.22);border-top:1px solid rgba(255,255,255,.06);
+  padding:14px clamp(20px,5vw,40px);
+  font-size:.82rem;color:#6f8295;line-height:1.6;
+  text-align:center;max-width:980px;margin:0 auto;
+}
+
+/* ── Mobile tweaks ── */
+@media(max-width:640px){
+  .vn-consent-banner{flex-direction:column;text-align:center}
+  .vn-cards{grid-template-columns:1fr}
+  .vn-notlist{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body class="vn-body">
+<a class="vn-skip" href="#main">Skip to main content</a>
+
+<!-- Back bar -->
+<div class="vn-topbar" role="banner">
+  <div class="vn-topbar-left">
+    <a href="/" style="display:flex;align-items:center;gap:7px;">
+      <img src="/logo.svg?v=403" alt="" width="28" height="28" aria-hidden="true" style="display:block;flex-shrink:0;">
+      &larr; Pocono AI
+    </a>
+    <span class="vn-topbar-badge">Veteran Node &mdash; Z2.01</span>
+  </div>
+  <a href="/contact.html?ref=veteran-node" class="vn-topbar-cta">Connect With Us</a>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     MAIN
+═══════════════════════════════════════════ -->
+<main id="main">
+
+  <!-- ── HERO ── -->
+  <section class="vn-hero" aria-labelledby="vn-hero-title">
+    <span class="vn-hero-star" aria-hidden="true">★</span>
+    <p class="vn-eyebrow">Pocono AI &mdash; Sentinel Node</p>
+    <h1 class="vn-h1" id="vn-hero-title">Veteran Node</h1>
+    <p class="vn-hero-subtitle">Consent-first coordination infrastructure for the veteran ecosystem</p>
+    <p class="vn-hero-lede">
+      The veteran ecosystem is full of people and organizations trying to help —
+      VSOs, nonprofits, employers, churches, housing partners, funders, and more.
+      But the ecosystem is fragmented. Handoffs break. Referrals go stale. Opportunities
+      are missed. Veterans are often left carrying the whole map alone.
+      Veteran Node helps organize the situation, surface next steps, and coordinate
+      trusted handoffs — with consent, transparency, and human review at every step.
+    </p>
+    <div class="vn-consent-banner" role="note" aria-label="Core commitment">
+      <span class="vn-lock" aria-hidden="true">🔒</span>
+      <span>
+        <strong>The right help. The right connection. Only with consent.</strong><br>
+        We are not building AI that acts on veterans.
+        We are building consent-first infrastructure that helps trusted people coordinate <em>with</em> veterans.
+      </span>
+    </div>
+    <div class="vn-btn-row">
+      <a href="#what-it-does" class="vn-btn vn-btn--gold">See What It Does</a>
+      <a href="#for-who" class="vn-btn vn-btn--outline">Who It Serves</a>
+      <a href="/contact.html?ref=veteran-node" class="vn-btn vn-btn--teal-outline">Connect With Us</a>
+    </div>
+
+    <!-- Infographic -->
+    <div class="vn-infographic">
+      <a href="/assets/veteran-node-infographic.png" target="_blank" rel="noopener"
+         aria-label="Open full-size Veteran Node infographic in a new tab">
+        <img src="/assets/veteran-node-infographic.png"
+             alt="Veteran Node infographic: A veteran stands at center, surrounded by a trusted support network — VSOs and nonprofits, employers, training and education, churches and community groups, housing and support, funders and grants, and local businesses — connected through a consent-first, human-review-always lock. Features listed: Action Cards, Governance Receipts, Trusted Handoffs, Veteran Situation Picture, and Ecosystem Intelligence. Bottom band: Not surveillance, not automated, not autonomous. Human review, human decisions, human oversight. Privacy by default, data with purpose, access with consent. Built for veterans, built with integrity, built to make a difference."
+             loading="eager" decoding="async" width="1400" height="933"
+             style="display:block;width:100%;height:auto;">
+      </a>
+    </div>
+  </section>
+
+  <!-- ── LIVE DEMO VIDEO (v403) ── -->
+  <section class="vn-section" aria-labelledby="vn-demo-video-h" style="padding-top:clamp(40px,6vw,72px);padding-bottom:clamp(40px,6vw,72px);text-align:center;">
+    <div class="vn-wrap" style="max-width:840px;">
+      <p class="vn-eyebrow">See it in action</p>
+      <h2 id="vn-demo-video-h" class="vn-h2" style="margin-bottom:12px;">Veteran Node — Live Workflow Demo</h2>
+      <p style="color:var(--vn-smoke,#c9d4e0);font-size:1rem;line-height:1.7;margin-bottom:24px;max-width:640px;margin-left:auto;margin-right:auto;">
+        Narrated screen-share demonstration of the Veteran Node running on local Pocono AI hardware.
+        Consent-first coordination, Action Cards, Trusted Handoffs, and the Veteran Situation Picture
+        — shown live, no cloud, no telemetry.
+      </p>
+      <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.12);border-left:3px solid rgba(250,200,80,0.6);border-radius:0 8px 8px 0;padding:9px 14px;margin-bottom:12px;font-size:0.82em;color:#a0a8b0;line-height:1.5;text-align:left;">
+        <strong style="color:#f0d47d;">&#9658; Third-party content.</strong>
+        This post is hosted on LinkedIn (Microsoft). Loading this area requests content from LinkedIn&rsquo;s servers.
+        LinkedIn and YouTube are the only third-party dependencies on this site &mdash; no analytics, trackers, or ad scripts.
+        <a href="/audit.html" style="color:#5dade2;">See transparency disclosure.</a>
+      </div>
+      <div style="border-radius:14px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.09);background:#1a1f27;">
+        <iframe
+          src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7476876079815864320"
+          width="100%"
+          height="590"
+          frameborder="0"
+          allowfullscreen
+          loading="lazy"
+          referrerpolicy="strict-origin-when-cross-origin"
+          title="Pocono AI Veteran Node — live workflow demo (LinkedIn)">
+        </iframe>
+      </div>
+      <p style="margin-top:14px;color:var(--vn-smoke,#aab4c0);font-size:.8rem;line-height:1.6;">
+        Recorded on local Pocono AI hardware. Synthetic demo data only. No public cloud AI API calls.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── WHY THIS MATTERS ── -->
+  <section class="vn-section vn-band" id="why-it-matters" aria-labelledby="vn-why-h">
+    <div class="vn-wrap">
+      <p class="vn-eyebrow">Why this matters</p>
+      <h2 class="vn-h2" id="vn-why-h">A fragmented ecosystem leaving too much on the veteran.</h2>
+      <p>
+        Transition from service is complex. So is navigating VA processes, disability claims, 
+        employment, housing, education benefits, community support, and the financial and 
+        health decisions that come with all of it. The organizations that want to help — 
+        VSOs, nonprofits, churches, employers, training programs, local businesses, and 
+        community groups — often don't know each other and can't coordinate.
+      </p>
+      <p>
+        Referrals happen on paper or over the phone, then disappear. Deadlines get missed 
+        because no one had a clear picture of what was due. Volunteers don't know where 
+        they're needed. Veterans who deserve introductions never get them because the 
+        right person didn't know to ask.
+      </p>
+      <p>
+        Veteran Node's job is not to solve this with automation.
+        Its job is to help the <em>humans</em> in the ecosystem — veterans, advocates, 
+        VSO staff, coaches, and partners — see the situation clearly, identify next steps, 
+        and make introductions they've agreed to make, with full transparency about why.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── WHAT IT DOES ── -->
+  <section class="vn-section" id="what-it-does" aria-labelledby="vn-what-h">
+    <div class="vn-wrap--wide">
+      <div class="vn-center">
+        <p class="vn-eyebrow">What it does</p>
+        <h2 class="vn-h2" id="vn-what-h">Eight capabilities. One working slice. All governed.</h2>
+        <p class="vn-lede">
+          Release Z2.01 ships the first working ecosystem-intelligence layer.
+          Every capability below is live in the current build, using synthetic demo data.
+          All recommendations are drafts. All introductions require consent. Human review is required on every Action Card.
+        </p>
+      </div>
+
+      <div class="vn-cards" role="list">
+
+        <div class="vn-card" role="listitem">
+          <div class="vn-card-icon" aria-hidden="true">🎯</div>
+          <div class="vn-card-tag">Action Cards</div>
+          <h3 class="vn-h3">One clear next step at a time</h3>
+          <p>The system reviews available information — notes, open needs, funding deadlines, stale referrals — and surfaces one proposed next step. Every card shows why it matters, how urgent it is, how confident the system is, and exactly which records it's based on. Every card is a draft. Every card asks for human review before anything happens.</p>
+        </div>
+
+        <div class="vn-card" role="listitem">
+          <div class="vn-card-icon" aria-hidden="true">📋</div>
+          <div class="vn-card-tag">Governance Receipts</div>
+          <h3 class="vn-h3">Transparency in every match and decision</h3>
+          <p>Every Action Card comes with a receipt: what was matched and why, what boundaries apply, whether consent is required and whether it's been confirmed, and whether human review is still pending. Nothing is hidden behind the recommendation. What you see is what the system did.</p>
+        </div>
+
+        <div class="vn-card" role="listitem">
+          <div class="vn-card-icon" aria-hidden="true">🤝</div>
+          <div class="vn-card-tag">Trusted Handoffs</div>
+          <h3 class="vn-h3">Eight-state auditable introduction workflow</h3>
+          <p>When an Action Card involves introducing a veteran to an organization, it becomes a Trusted Handoff — an auditable workflow with eight states: draft &rarr; consent needed &rarr; ready for review &rarr; introduced &rarr; in progress &rarr; follow-up needed &rarr; complete / closed. <strong>An introduction cannot happen without confirmed consent. This is enforced in code, not just policy.</strong></p>
+        </div>
+
+        <div class="vn-card" role="listitem">
+          <div class="vn-card-icon" aria-hidden="true">🗺️</div>
+          <div class="vn-card-tag">Veteran Situation Picture</div>
+          <h3 class="vn-h3">Goals, needs, and next actions in one view</h3>
+          <p>A single view covering goals, open needs, upcoming deadlines, trusted contacts, active handoffs, and gaps in the profile — plus an Opportunity Radar surfacing relevant funding, employment and training opportunities, local organizations, trusted businesses, and accessibility programs.</p>
+        </div>
+
+        <div class="vn-card" role="listitem">
+          <div class="vn-card-icon" aria-hidden="true">📡</div>
+          <div class="vn-card-tag">Opportunity Radar</div>
+          <h3 class="vn-h3">Ranked next-best-action feed</h3>
+          <p>Part of the Situation Picture: a ranked feed of Action Cards, each with its Governance Receipt one click away. The radar covers funding opportunities, employment and training paths, local organizations, trusted businesses, and accessibility programs — all flagged as "worth human review," never as determined or approved.</p>
+        </div>
+
+        <div class="vn-card" role="listitem">
+          <div class="vn-card-icon" aria-hidden="true">🏢</div>
+          <div class="vn-card-tag">Organization Ecosystem View</div>
+          <h3 class="vn-h3">The same intelligence from the other side</h3>
+          <p>VSOs, nonprofits, employers, and partners see open needs by category, stuck and consent-blocked handoffs, suggested partnerships between organizations that don't yet know each other, volunteer shortages, and synthetic outcome metrics. <strong>Individual veteran detail is hidden by default everywhere in this view</strong> — shown only where consent has been explicitly confirmed.</p>
+        </div>
+
+        <div class="vn-card" role="listitem">
+          <div class="vn-card-icon" aria-hidden="true">🔬</div>
+          <div class="vn-card-tag">Synthetic Demo Ecosystem</div>
+          <h3 class="vn-h3">Fully fictional, clearly marked, testable end-to-end</h3>
+          <p>The current build includes a complete synthetic ecosystem: Jordan Hale's demo profile plus two additional veteran personas, six organizations (VSO, transition-support nonprofit, employment partner, housing partner, a church volunteer group, a veteran-business network), four trusted businesses, four funding opportunities, four volunteer needs, and six referral handoffs in different states. All fictional. All clearly marked. No real veteran data.</p>
+        </div>
+
+        <div class="vn-card" role="listitem">
+          <div class="vn-card-icon" aria-hidden="true">⚡</div>
+          <div class="vn-card-tag">Next Best Actions</div>
+          <h3 class="vn-h3">Deterministic, explainable, conservative by design</h3>
+          <p>Matching is rule-based — region, category, keyword, and eligibility-tag overlap — deliberately deterministic and explainable rather than a semantic or LLM match. Thin or oddly-phrased data produces a low-confidence card, not a confident one. The system says "worth human review," never "determined" or "endorsed."</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONSENT-FIRST BY DESIGN ── -->
+  <section class="vn-section vn-band--gold" id="consent-first" aria-labelledby="vn-consent-h">
+    <div class="vn-wrap">
+      <p class="vn-eyebrow">Consent-first by design</p>
+      <h2 class="vn-h2" id="vn-consent-h">Five principles that are not policy — they are enforcement.</h2>
+      <p>
+        "Consent-first" is easy to write on a website. These are the specific, 
+        technical, verifiable ways Veteran Node implements it.
+      </p>
+      <ul class="vn-principles" role="list">
+
+        <li>
+          <span class="vn-bullet" aria-hidden="true">1</span>
+          <p><strong>Every recommendation is a draft.</strong> No Action Card, match, or referral takes effect on its own. The system surfaces options; a human decides what happens next.</p>
+        </li>
+
+        <li>
+          <span class="vn-bullet" aria-hidden="true">2</span>
+          <p><strong>Every Action Card has a Governance Receipt.</strong> The receipt shows exactly what the system matched, why, what boundaries apply, whether consent has been confirmed, and whether human review is pending. Nothing is hidden.</p>
+        </li>
+
+        <li>
+          <span class="vn-bullet" aria-hidden="true">3</span>
+          <p><strong>Every introduction requires human review.</strong> A Trusted Handoff cannot advance from "ready for review" to "introduced" without a human making that call. The workflow enforces it.</p>
+        </li>
+
+        <li>
+          <span class="vn-bullet" aria-hidden="true">4</span>
+          <p><strong>An introduction cannot happen without confirmed consent.</strong> This is enforced in code. The system will reject the attempt to introduce without consent being recorded. It is not a guideline — it is a gate.</p>
+        </li>
+
+        <li>
+          <span class="vn-bullet" aria-hidden="true">5</span>
+          <p><strong>Organization views hide individual veteran detail by default.</strong> In the Organization Ecosystem View, a veteran's personal details are not shown unless consent has been explicitly confirmed for that specific relationship. Organizations see patterns and needs — not exposed profiles.</p>
+        </li>
+
+      </ul>
+    </div>
+  </section>
+
+  <!-- ── WHAT THIS IS NOT ── -->
+  <section class="vn-section" id="what-it-is-not" aria-labelledby="vn-not-h">
+    <div class="vn-wrap--wide">
+      <div class="vn-center">
+        <p class="vn-eyebrow">Explicit boundaries</p>
+        <h2 class="vn-h2" id="vn-not-h">What Veteran Node is not.</h2>
+        <p class="vn-lede" style="max-width:58ch;">
+          The framing of this product invites the question directly.
+          Here are the boundaries, stated plainly and without hedging.
+        </p>
+      </div>
+
+      <div class="vn-notlist" role="list">
+
+        <div class="vn-notcard" role="listitem">
+          <span class="vn-x" aria-hidden="true">✕</span>
+          <p><strong>Not surveillance.</strong> Veteran Node does not monitor, track, or observe veterans without their knowledge or involvement.</p>
+        </div>
+
+        <div class="vn-notcard" role="listitem">
+          <span class="vn-x" aria-hidden="true">✕</span>
+          <p><strong>Not background checking.</strong> It does not access, query, or report on criminal, financial, employment, or government records.</p>
+        </div>
+
+        <div class="vn-notcard" role="listitem">
+          <span class="vn-x" aria-hidden="true">✕</span>
+          <p><strong>Not covert collection.</strong> It reasons over local and imported data only. No scraping, no covert aggregation, no third-party data brokers.</p>
+        </div>
+
+        <div class="vn-notcard" role="listitem">
+          <span class="vn-x" aria-hidden="true">✕</span>
+          <p><strong>Not a VA benefits determination.</strong> Veteran Node has no affiliation with the Department of Veterans Affairs and makes no determination about benefit eligibility, claims status, or entitlement.</p>
+        </div>
+
+        <div class="vn-notcard" role="listitem">
+          <span class="vn-x" aria-hidden="true">✕</span>
+          <p><strong>Not legal, medical, or financial advice.</strong> Nothing produced by Veteran Node constitutes legal counsel, medical guidance, financial planning, or professional advice of any kind.</p>
+        </div>
+
+        <div class="vn-notcard" role="listitem">
+          <span class="vn-x" aria-hidden="true">✕</span>
+          <p><strong>Not a crisis or emergency response system.</strong> If you or someone you know is in crisis, please contact the Veterans Crisis Line: call or text 988, then press 1.</p>
+        </div>
+
+        <div class="vn-notcard" role="listitem">
+          <span class="vn-x" aria-hidden="true">✕</span>
+          <p><strong>Not a live web crawler.</strong> It does not browse the internet, pull live data feeds, or query external services autonomously.</p>
+        </div>
+
+        <div class="vn-notcard" role="listitem">
+          <span class="vn-x" aria-hidden="true">✕</span>
+          <p><strong>Not an autonomous agent.</strong> It never contacts a veteran, organization, employer, or anyone else on its own. Every recommendation is a draft. Every introduction requires a human and confirmed consent.</p>
+        </div>
+
+        <div class="vn-notcard" role="listitem">
+          <span class="vn-x" aria-hidden="true">✕</span>
+          <p><strong>Not an endorsement engine.</strong> Organization and business matches are surfaced as "worth human review" — never as guaranteed, approved, recommended, or endorsed partners.</p>
+        </div>
+
+      </div>
+
+      <p style="margin-top:22px;font-size:.88rem;color:var(--vn-text-soft);text-align:center;">
+        <strong style="color:var(--vn-text);">Veterans Crisis Line:</strong>
+        Call or text <a href="tel:988" style="color:var(--vn-gold);">988</a>, then press 1. 
+        Chat at <a href="https://www.veteranscrisisline.net" target="_blank" rel="noopener noreferrer" style="color:var(--vn-gold);">veteranscrisisline.net</a>. Free, confidential, 24/7.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── WHO IT IS FOR ── -->
+  <section class="vn-section vn-band" id="for-who" aria-labelledby="vn-for-h">
+    <div class="vn-wrap--wide">
+      <div class="vn-center">
+        <p class="vn-eyebrow">Who it serves</p>
+        <h2 class="vn-h2" id="vn-for-h">The veteran ecosystem is a network. This serves all of it.</h2>
+        <p class="vn-lede">
+          Veteran Node is designed for everyone in the coordination chain —
+          not just veterans themselves, but the full network of people 
+          and organizations trying to help.
+        </p>
+      </div>
+
+      <div class="vn-audience" role="list" aria-label="Intended audiences">
+        <span class="vn-aud-pill" role="listitem">🎖️ Veterans</span>
+        <span class="vn-aud-pill" role="listitem">♿ Disabled veterans</span>
+        <span class="vn-aud-pill" role="listitem">👨‍👩‍👧 Families and caregivers</span>
+        <span class="vn-aud-pill" role="listitem">🏛️ VSOs and veteran service organizations</span>
+        <span class="vn-aud-pill" role="listitem">💼 Nonprofits</span>
+        <span class="vn-aud-pill" role="listitem">🧭 Transition coaches</span>
+        <span class="vn-aud-pill" role="listitem">⛪ Churches and community groups</span>
+        <span class="vn-aud-pill" role="listitem">🏢 Employers</span>
+        <span class="vn-aud-pill" role="listitem">🏠 Housing and support partners</span>
+        <span class="vn-aud-pill" role="listitem">🎓 Training and education programs</span>
+        <span class="vn-aud-pill" role="listitem">🏪 Local businesses</span>
+        <span class="vn-aud-pill" role="listitem">🤝 Veteran-business networks</span>
+        <span class="vn-aud-pill" role="listitem">💰 Funders and grant programs</span>
+        <span class="vn-aud-pill" role="listitem">♿ Accessibility programs</span>
+        <span class="vn-aud-pill" role="listitem">🛠️ Advisors and implementation partners</span>
+        <span class="vn-aud-pill" role="listitem">📈 Investors</span>
+      </div>
+
+      <div style="margin-top:40px;background:var(--vn-card);border:1px solid var(--vn-border-gold);border-radius:14px;padding:24px 26px;">
+        <h3 class="vn-h3" style="color:var(--vn-gold);margin-bottom:10px;">For VSOs and nonprofit operators specifically</h3>
+        <p style="margin:0;font-size:.93rem;color:var(--vn-text);line-height:1.6;">
+          Veteran Node's Organization Ecosystem View gives VSO staff and nonprofit coordinators 
+          visibility into open needs by category, volunteer shortages, and partnership opportunities 
+          with peer organizations — without exposing individual veteran profiles. It surfaces stuck 
+          handoffs and consent-blocked introductions so your team knows where attention is needed. 
+          It is a coordination tool for your existing team, not a replacement for human relationships.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CURRENT RELEASE STATUS ── -->
+  <section class="vn-section" id="release-status" aria-labelledby="vn-status-h">
+    <div class="vn-wrap">
+      <p class="vn-eyebrow">Current release — Z2.01</p>
+      <h2 class="vn-h2" id="vn-status-h">What exists now. Stated plainly.</h2>
+      <p>
+        Pocono AI publishes what it has and what it doesn't claim.
+        Here is the honest state of Veteran Node as of release Z2.01.
+      </p>
+
+      <div class="vn-status-box">
+        <h3>What is working now (Z2.01)</h3>
+        <ul class="vn-status-list">
+          <li>Action Cards, Governance Receipts, and Trusted Handoffs are built and running end-to-end.</li>
+          <li>Veteran Situation Picture, Opportunity Radar, and Next Best Actions feed are functional.</li>
+          <li>Organization Ecosystem View is active with default-hidden veteran detail and consent gating.</li>
+          <li>Synthetic demo ecosystem: Jordan Hale + 2 veteran personas, 6 organizations, 4 trusted businesses, 4 funding opportunities, 4 volunteer needs, 6 referral handoffs in various states.</li>
+          <li>All data in the current build is synthetic and fictional. No real veteran data is present.</li>
+          <li>1,844 regression tests. Zero new failures against this release.</li>
+          <li>Compatibility confirmed: Medical, Law, Engineering, Home, Living Echo, and Enterprise Continuity modes are unaffected.</li>
+        </ul>
+      </div>
+
+      <div class="vn-status-box" style="margin-top:16px;border-color:rgba(255,255,255,0.14);">
+        <h3 style="color:var(--vn-text-soft);">Known limitations (honest disclosures)</h3>
+        <ul class="vn-status-list">
+          <li>Trusted Handoffs currently live in memory for the running session. A restart resets any handoff created during the session back to its synthetic starting state. Persistent storage is the recommended next step.</li>
+          <li>Matching is rule-based (region, category, keyword, eligibility-tag overlap) — deliberately deterministic and explainable. Thin or ambiguous data produces a low-confidence card, not a confident one. No LLM-based semantic matching yet.</li>
+          <li>Consent is currently a single flag plus a handoff's state history — not yet a dedicated, append-only consent ledger. A formal ledger is the recommended next step.</li>
+        </ul>
+      </div>
+
+      <div class="vn-status-box" style="margin-top:16px;border-color:rgba(0,194,168,0.25);">
+        <h3 style="color:var(--vn-teal);">Recommended next steps (engineering roadmap)</h3>
+        <ul class="vn-status-list">
+          <li>Persistent handoff and receipt storage (database-backed, not session memory).</li>
+          <li>Dedicated append-only consent ledger.</li>
+          <li>Authorized connectors for calendar, email, and documents — only behind the same explicit-approval pattern already used throughout Sentinel Node.</li>
+          <li>Real veteran and ecosystem data import (behind onboarding consent flows, not synthetic defaults).</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TECHNICAL / GOVERNANCE NOTE ── -->
+  <section style="padding:0 clamp(20px,5vw,40px) 56px;" aria-label="Technical and governance note">
+    <div class="vn-tech-note" role="note">
+      <strong>Technical and governance pattern:</strong>
+      Veteran Node follows Pocono AI's broader Sentinel Node pattern — local and imported data, role-specific situation picture, next-best-action draft, Governance Receipt, human review, consent-gated handoff, and auditable outcome. The product language throughout is deliberate: <em>opportunity radar</em>, <em>trusted handoff</em>, <em>possible match</em>, <em>worth human review</em> — never <em>determined</em>, <em>approved</em>, or <em>endorsed</em>.
+      See the full engineering report: <code style="background:rgba(0,0,0,.3);padding:2px 6px;border-radius:4px;font-size:.87em;">Z2.01_VETERAN_NODE_ECOSYSTEM_INTELLIGENCE_REPORT.md</code>
+    </div>
+  </section>
+
+  <!-- ── CALL TO ACTION ── -->
+  <section class="vn-cta-band" id="connect" aria-labelledby="vn-cta-h">
+    <div class="vn-wrap">
+      <span class="vn-hero-star" aria-hidden="true">★</span>
+      <h2 class="vn-h2" id="vn-cta-h">Building this carefully.<br>Interested in being part of it?</h2>
+      <p class="vn-lede" style="margin-bottom:28px;">
+        If you are a veteran, VSO leader, nonprofit operator, employer, 
+        local business owner, church leader, funder, accessibility advocate,
+        technologist, or advisor who cares about this mission —
+        Pocono AI would be grateful to connect.
+      </p>
+      <p style="font-size:1.05rem;font-weight:700;color:var(--vn-gold);margin:0 0 28px;letter-spacing:.02em;">
+        Consent first. Human review always. Built to serve.
+      </p>
+      <div class="vn-btn-row">
+        <a href="/contact.html?ref=veteran-node" class="vn-btn vn-btn--gold">
+          Connect With Pocono AI
+        </a>
+        <a href="https://forms.gle/VQahnkjMfY6QNEMy8" target="_blank" rel="noopener noreferrer"
+           class="vn-btn vn-btn--outline">
+          Join the Interest List &#8599;
+        </a>
+        <a href="/" class="vn-btn vn-btn--teal-outline">
+          &larr; Back to Pocono AI
+        </a>
+      </div>
+
+      <div class="vn-cta-proof" role="list" aria-label="Core commitments">
+        <span class="vn-proof-item" role="listitem">No VA affiliation or implication</span>
+        <span class="vn-proof-item" role="listitem">Consent enforced in code</span>
+        <span class="vn-proof-item" role="listitem">Human review on every action</span>
+        <span class="vn-proof-item" role="listitem">Synthetic demo data, clearly marked</span>
+        <span class="vn-proof-item" role="listitem">Local-first infrastructure</span>
+        <span class="vn-proof-item" role="listitem">No autonomous outreach</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ── FOOTER ── -->
+<!-- v403 2026-06-27 Veteran-Node-Z2.01-ecosystem-intelligence-launch -->
+<!-- v403 2026-06-27 Veteran-Node-Z2.01-ecosystem-intelligence-launch -->
+<!-- INCLUDE:FOOTER -->
+<footer role="contentinfo" style="background:#051622;border-top:1px solid rgba(255,255,255,0.08);padding:40px 24px 28px;font-size:0.85em;color:#8899aa;">
+  <div style="max-width:1180px;margin:0 auto;">
+
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:0 0 28px;margin-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.07);">
+      <div style="max-width:560px;">
+        <p style="margin:0 0 6px;font-size:1.05em;font-weight:700;color:#fff;">Local AI infrastructure for regulated practices.</p>
+        <p style="margin:0;font-size:0.95em;line-height:1.5;">Drafts with citations. Human review required. Sensitive documents stay under practice control. Simple path, deep proof.</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="/contact.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;background:#00c2a8;color:#04111a;font-weight:700;text-decoration:none;font-size:0.95em;">Request Pilot</a>
+        <a href="/sentinel-demo.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;border:1px solid rgba(0,194,168,0.55);color:#00c2a8;font-weight:700;text-decoration:none;font-size:0.95em;">Watch Demo</a>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px 32px;margin-bottom:32px;text-align:left;">
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">For You</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/start-here.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Start Here (3 min)</a>
+          <a href="/for-physicians.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Physicians</a>
+          <a href="/for-attorneys.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Attorneys</a>
+          <a href="/engineering-drafting/" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Engineering &amp; Drafting Teams</a>
+          <a href="/pilot-program.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Pilot Program</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Installer Training</a>
+          <a href="/how-it-works.html" style="color:#8899aa;text-decoration:none;">How It Works</a>
+          <a href="/trust.html" style="color:#8899aa;text-decoration:none;">Trust &amp; Audit</a>
+          <a href="/pricing.html" style="color:#8899aa;text-decoration:none;">Pricing</a>
+          <a href="/sentinel-demo.html" style="color:#8899aa;text-decoration:none;">See the Demo</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Documentation Hub</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/documentation-hub/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Hub Home &mdash; Deep Proof</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">Installer Training</a>
+          <a href="/sentinel-node/installation-simulator.html" style="color:#8899aa;text-decoration:none;">&#8627; Installation Simulator</a>
+          <a href="/documentation-hub/clinical/" style="color:#8899aa;text-decoration:none;">Clinical Documentation</a>
+          <a href="/documentation-hub/legal/" style="color:#8899aa;text-decoration:none;">Legal Documentation</a>
+          <a href="/documentation-hub/technical/" style="color:#8899aa;text-decoration:none;">Technical Documentation</a>
+          <a href="/documentation-hub/governance/" style="color:#8899aa;text-decoration:none;">Governance &amp; Audit</a>
+          <a href="/documentation-hub/tools/" style="color:#8899aa;text-decoration:none;">Tools &amp; Simulators</a>
+          <a href="/documentation-hub/research/" style="color:#8899aa;text-decoration:none;">Research &amp; Essays</a>
+          <a href="/documentation-hub/transparency/" style="color:#8899aa;text-decoration:none;">Transparency</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Global Federated AI</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/global/" style="color:#7af0dc;text-decoration:none;font-weight:600;">Global Federated Hub</a>
+          <a href="/global/australia/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Australia</a>
+          <a href="/global/singapore/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Singapore</a>
+          <a href="/global/taiwan/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Taiwan</a>
+          <a href="/global/europe/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Europe</a>
+          <a href="/contact.html" style="color:#8899aa;text-decoration:none;">Partner Inquiry</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Company</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/about.html" style="color:#8899aa;text-decoration:none;">About Pocono AI</a>
+          <a href="/team.html" style="color:#8899aa;text-decoration:none;">Team &amp; Leadership</a>
+          <a href="/why-pocono-ai.html" style="color:#8899aa;text-decoration:none;">Why Pocono AI</a>
+          <a href="/founding-commercial-leadership.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Join Us</a>
+          <a href="/careers.html" style="color:#8899aa;text-decoration:none;">Careers</a>
+          <a href="/how-we-hire.html" style="color:#8899aa;text-decoration:none;">How We Hire</a>
+          <a href="/channel-partners.html" style="color:#8899aa;text-decoration:none;">Technical Partners (MSPs)</a>
+          <a href="/partners.html" style="color:#8899aa;text-decoration:none;">Academic Partnerships</a>
+          <a href="/contact.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Contact</a>
+          <a href="https://forms.gle/VQahnkjMfY6QNEMy8" target="_blank" rel="noopener noreferrer" style="color:#d5a94f;text-decoration:none;font-weight:600;">Interest List &#8599;</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Founder Projects</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/veteran-node/" style="color:#c9973f;text-decoration:none;font-weight:700;">Veteran Node &#x2605;</a>
+          <a href="/rehability/" style="color:#a78bfa;text-decoration:none;font-weight:700;">Rehability &#x2605;</a>
+          <a href="/rehability/marcus-memory-helper/" style="color:#a78bfa;text-decoration:none;font-weight:600;">&#8627; Marcus's Memory Helper</a>
+          <a href="/sentinel-home/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Sentinel Home Edition</a>
+          <a href="/living-memorials/" style="color:#8899aa;text-decoration:none;">Living Echo</a>
+          <a href="/living-memorials/marcus-odell/" style="color:#8899aa;text-decoration:none;">Marcus&rsquo;s Living Echo</a>
+          <a href="/living-memorials/enterprise-estate-continuity.html" style="color:#8899aa;text-decoration:none;">Enterprise Estate Continuity</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Resources &amp; Legal</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/sitemap.html" style="color:#8899aa;text-decoration:none;">All Pages (Sitemap)</a>
+          <a href="/audit.html" style="color:#8899aa;text-decoration:none;">Transparency &amp; Audit Log</a>
+          <a href="/maturity-disclosure.html" style="color:#8899aa;text-decoration:none;">What We Have / Don&rsquo;t Claim</a>
+          <a href="/plain.html" style="color:#8899aa;text-decoration:none;">Plain Language Guide</a>
+          <a href="/privacy.html" style="color:#8899aa;text-decoration:none;">Privacy</a>
+          <a href="/terms.html" style="color:#8899aa;text-decoration:none;">Terms</a>
+          <a href="/sla.html" style="color:#8899aa;text-decoration:none;">SLA</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:18px;margin-bottom:14px;">
+      <p style="margin:0;font-size:0.82em;line-height:1.6;color:#6f8295;max-width:1000px;">Pocono AI does not provide medical, legal, or engineering advice, does not practice medicine, law, or licensed engineering, and does not make clinical, legal, or engineering decisions. Outputs are drafts or support materials that require review by a qualified professional; final professional judgment remains with the licensed physician, attorney, or engineer. Tools and simulations on this site are educational and use synthetic data.</p>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:20px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+      <p style="margin:0;font-size:0.9em;">&copy; 2026 Pocono AI, LLC &nbsp;&#183;&nbsp; East Stroudsburg, PA &nbsp;&#183;&nbsp; <a href="mailto:marcus@poconoai.com" style="color:#8899aa;">marcus@poconoai.com</a> &nbsp;&#183;&nbsp; <a href="tel:+15705340602" style="color:#8899aa;">(570) 534-0602</a></p>
+      <p style="margin:0;font-size:0.88em;"><a href="/audit.html" style="color:#5dade2;text-decoration:none;">Transparency v403</a></p>
+    </div>
+  </div>
+</footer>
+<script src="/search.js?v=403" defer></script>
+<!-- /INCLUDE:FOOTER -->
+
+<div class="vn-disclosure" role="note">
+  Veteran Node is not affiliated with, endorsed by, or connected to the U.S. Department of Veterans Affairs or any government agency.
+  It does not make VA benefits determinations, provide legal representation, offer medical advice, or constitute financial guidance.
+  All recommendations are drafts requiring human review. Introductions require confirmed consent.
+  Current build uses synthetic demo data. No real veteran data is stored or processed.
+  If you are in crisis, contact the Veterans Crisis Line: call or text 988, press 1.
+</div>
+
+</body>
+</html>

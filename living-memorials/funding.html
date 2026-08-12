@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp --><!-- Living Echo — Funding & Support page, v396 2026-06-19. Added noindex,nofollow. Removed from public product funnel. Self-contained; intentionally outside the main-site build (no partial markers). -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Funding &amp; Support | Living Echo — Voices Live On</title>
+<meta name="description" content="Living Echo is in a private friends-and-family funding phase. See our funding goal, progress, and how to request the full data room business plan.">
+<link rel="canonical" href="https://poconoai.com/living-memorials/funding.html">
+<meta property="og:title" content="Funding &amp; Support | Living Echo">
+<meta property="og:description" content="A transparent look at Living Echo's friends-and-family funding goal and progress toward our 90-day launch plan.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://poconoai.com/living-memorials/funding.html">
+<meta property="og:site_name" content="Living Echo">
+<link rel="icon" href="living-echo-logo.svg" type="image/svg+xml">
+
+<style>
+/* ── Living Echo · scoped .lm- design system ─────────────
+   Off-brand by intent: sunrise, garden, letters, light through glass.
+   Palette: leaf · gold · rose · lavender · sky on warm cream.          */
+:root{
+  --lm-paper:#FDF8EF; --lm-paper-2:#FFFDF7; --lm-ink:#433F38; --lm-ink-soft:#6E6659;
+  --lm-leaf:#5E8062; --lm-leaf-deep:#44613F; --lm-leaf-tint:rgba(94,128,98,.12);
+  --lm-gold:#C9973F; --lm-gold-deep:#8A6620; --lm-gold-tint:rgba(201,151,63,.13);
+  --lm-rose:#C77F93; --lm-rose-deep:#9A546D; --lm-rose-tint:rgba(199,127,147,.12);
+  --lm-lav:#9D8FBE;  --lm-lav-deep:#6C5C95;  --lm-lav-tint:rgba(157,143,190,.13);
+  --lm-sky:#8FB8CC;  --lm-sky-deep:#46748A;  --lm-sky-tint:rgba(143,184,204,.14);
+  --lm-spectrum:linear-gradient(90deg,var(--lm-leaf),var(--lm-gold),var(--lm-rose),var(--lm-lav),var(--lm-sky));
+  --lm-shadow:0 12px 36px rgba(99,76,43,.10);
+  /* Brand accents pulled from the Living Echo mark */
+  --le-navy:#12324a; --le-gold:#d5a94f; --le-teal:#517d83;
+}
+*{box-sizing:border-box}
+html{background:var(--lm-paper)}
+body.lm-body{margin:0;background:var(--lm-paper);color:var(--lm-ink);font-family:Georgia,'Times New Roman',serif;line-height:1.7;overflow-x:hidden}
+.lm-skip{position:absolute;left:-9999px;top:0;background:var(--lm-ink);color:#fff;padding:10px 16px;border-radius:6px;z-index:999}
+.lm-skip:focus{left:12px;top:12px}
+a{color:var(--lm-leaf-deep)}
+a:hover{color:var(--lm-leaf)}
+
+.lm-topbar{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 22px;
+  font-family:system-ui,-apple-system,sans-serif;font-size:.86rem;background:var(--lm-paper-2);
+  border-bottom:1px solid rgba(138,102,32,.14);flex-wrap:wrap}
+.lm-topbar a{text-decoration:none;font-weight:600;color:var(--lm-ink-soft)}
+.lm-topbar a:hover{color:var(--lm-leaf-deep)}
+.lm-wordmark{font-family:Georgia,serif;font-weight:700;font-size:1.05rem;color:var(--le-navy);letter-spacing:.01em}
+
+.lm-ribbon{background:var(--lm-gold-tint);color:var(--lm-gold-deep);text-align:center;font-family:system-ui,sans-serif;
+  font-size:.82rem;font-weight:600;padding:8px 16px;letter-spacing:.01em}
+.lm-ribbon a{color:var(--lm-gold-deep)}
+
+main{max-width:760px;margin:0 auto;padding:0 22px}
+
+.lm-hero{padding:54px 0 18px;text-align:center}
+.lm-hero img.lm-logo{width:min(220px,60vw);height:auto;margin:0 auto 18px;display:block}
+.lm-eyebrow{font-family:system-ui,sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--lm-leaf-deep);margin:0 0 10px}
+.lm-h1{font-size:clamp(1.9rem,4.4vw,2.6rem);font-weight:700;color:var(--le-navy);margin:0 0 14px;line-height:1.18}
+.lm-lede{font-size:1.08rem;color:var(--lm-ink-soft);max-width:58ch;margin:0 auto 8px}
+
+.lm-section{padding:36px 0}
+.lm-h2{font-size:1.5rem;font-weight:700;color:var(--le-navy);margin:0 0 14px}
+.lm-divider{width:min(380px,62%);height:3px;border:0;border-radius:999px;background:var(--lm-spectrum);opacity:.6;margin:0 auto}
+
+/* Private review notice */
+.lm-notice{background:var(--lm-paper-2);border:1px solid rgba(138,102,32,.25);border-left:4px solid var(--le-gold);
+  border-radius:10px;padding:18px 20px;font-family:system-ui,sans-serif;font-size:.92rem;color:var(--lm-ink);
+  line-height:1.6}
+.lm-notice strong{color:var(--lm-gold-deep)}
+
+/* Funding progress tracker */
+.lm-progress-card{background:var(--lm-paper-2);border:1px solid rgba(94,128,98,.22);border-radius:18px;
+  padding:30px 28px;box-shadow:var(--lm-shadow)}
+.lm-progress-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:0 0 22px;text-align:center}
+@media(max-width:560px){.lm-progress-stats{grid-template-columns:1fr}}
+.lm-pstat{font-family:system-ui,sans-serif}
+.lm-pstat-label{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--lm-ink-soft);margin:0 0 6px}
+.lm-pstat-val{font-family:Georgia,serif;font-size:1.7rem;font-weight:700;color:var(--lm-leaf-deep);line-height:1}
+.lm-pstat-val.lm-pstat-goal{color:var(--le-navy)}
+.lm-pstat-val.lm-pstat-remaining{color:var(--lm-rose-deep)}
+
+.lm-bar-track{width:100%;height:18px;background:rgba(94,128,98,.12);border-radius:999px;overflow:hidden;
+  border:1px solid rgba(94,128,98,.2)}
+.lm-bar-fill{height:100%;background:linear-gradient(90deg,var(--lm-leaf),var(--le-teal));border-radius:999px 0 0 999px;
+  width:0%;transition:width .6s ease;display:flex;align-items:center;justify-content:flex-end;}
+.lm-bar-caption{font-family:system-ui,sans-serif;font-size:.78rem;color:var(--lm-ink-soft);margin:10px 0 0;text-align:center}
+
+.lm-update-note{font-family:system-ui,sans-serif;font-size:.84rem;color:var(--lm-ink-soft);text-align:center;
+  margin:18px 0 0;font-style:italic}
+
+/* Use of funds mini-table */
+.lm-uof{display:grid;grid-template-columns:1fr auto;gap:8px 18px;font-family:system-ui,sans-serif;font-size:.88rem;
+  max-width:420px;margin:18px auto 0}
+.lm-uof dt{color:var(--lm-ink-soft)}
+.lm-uof dd{margin:0;font-weight:700;color:var(--lm-leaf-deep);text-align:right}
+
+/* CTA card */
+.lm-cta-card{background:var(--lm-leaf-tint);border:1px solid rgba(94,128,98,.3);border-radius:18px;
+  padding:30px 28px;text-align:center}
+.lm-btn{display:inline-block;background:var(--lm-leaf-deep);color:#FFF9EC;font-family:system-ui,sans-serif;
+  font-weight:700;font-size:.92rem;padding:13px 26px;border-radius:999px;text-decoration:none;
+  transition:background .18s,transform .18s}
+.lm-btn:hover{background:var(--lm-leaf);transform:translateY(-1px);color:#FFF9EC}
+.lm-btn--soft{background:transparent;border:1.5px solid var(--lm-gold-deep);color:var(--lm-gold-deep)}
+.lm-btn--soft:hover{background:var(--lm-gold-tint);color:var(--lm-gold-deep)}
+
+.lm-foot{padding:44px 22px 40px;text-align:center;font-family:system-ui,sans-serif;font-size:.86rem;color:var(--lm-ink-soft)}
+.lm-foot .lm-divider{margin-bottom:26px}
+.lm-foot p{max-width:62ch;margin:0 auto 10px}
+.lm-foot a{font-weight:600}
+
+@media(max-width:480px){
+  .lm-hero{padding:38px 0 14px}
+  .lm-progress-card,.lm-cta-card{padding:22px 18px}
+}
+</style>
+</head>
+<body class="lm-body">
+<a class="lm-skip" href="#main-content">Skip to content</a>
+
+<div class="lm-topbar" role="banner">
+  <a href="/living-memorials/">&larr; Living Echo Home</a>
+  <span class="lm-wordmark">Living Echo</span>
+  <a href="/">Pocono AI &rarr;</a>
+</div>
+
+<div class="lm-ribbon">Private Friends &amp; Family Review &nbsp;&middot;&nbsp; Not a Public Securities Solicitation</div>
+
+<main id="main-content">
+
+  <!-- HERO -->
+  <section class="lm-hero" aria-labelledby="lm-title">
+    <img class="lm-logo" src="living-echo-logo.svg" alt="Living Echo — Voices Live On">
+    <p class="lm-eyebrow">Funding &amp; Support</p>
+    <h1 class="lm-h1" id="lm-title">Helping Living Echo Take Its First Steps</h1>
+    <p class="lm-lede">We are building Living Echo &mdash; a private, source-grounded memory archive with optional AI chat and synthetic voice response &mdash; for the people who want their voice, and the voices of those they love, to live on. This page is a transparent, friends-and-family look at where we are and what we still need.</p>
+  </section>
+
+  <!-- PRIVATE REVIEW NOTICE -->
+  <section class="lm-section" aria-labelledby="lm-notice-h">
+    <div class="lm-notice">
+      <p style="margin:0 0 8px;"><strong>Private Review Notice.</strong> This page is for private family and planning review. It is not a public securities solicitation and is not an offer to sell any security. Any loan, revenue participation, equity, or note structure described here should be reviewed by counsel before any funds are accepted.</p>
+      <p style="margin:0;">This is an early-stage, high-risk venture. Nothing on this page is a guarantee of repayment, return, or outcome.</p>
+    </div>
+  </section>
+
+  <!-- FUNDING PROGRESS -->
+  <section class="lm-section" aria-labelledby="lm-progress-h">
+    <h2 class="lm-h2" id="lm-progress-h">Our Funding Goal &amp; Progress</h2>
+    <div class="lm-progress-card">
+      <div class="lm-progress-stats">
+        <div class="lm-pstat">
+          <p class="lm-pstat-label">Current Goal Amount</p>
+          <p class="lm-pstat-val lm-pstat-goal">$1,500</p>
+        </div>
+        <div class="lm-pstat">
+          <p class="lm-pstat-label">Amount Raised to Date</p>
+          <p class="lm-pstat-val" id="lm-raised-val">$0</p>
+        </div>
+        <div class="lm-pstat">
+          <p class="lm-pstat-label">Remaining to Reach Goal</p>
+          <p class="lm-pstat-val lm-pstat-remaining" id="lm-remaining-val">$1,500</p>
+        </div>
+      </div>
+
+      <div class="lm-bar-track" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="1500" aria-label="Funding progress toward $1,500 goal">
+        <div class="lm-bar-fill" id="lm-bar-fill" style="width:0%;"></div>
+      </div>
+      <p class="lm-bar-caption">$0 raised of $1,500 goal &mdash; <em>placeholder, updated manually as commitments come in</em></p>
+
+      <dl class="lm-uof">
+        <dt>Workstation, drives, cables, domain</dt><dd>~$610</dd>
+        <dt>Backup drive &amp; power protection</dt><dd>~$200</dd>
+        <dt>Connectivity buffer (3 months)</dt><dd>~$250&ndash;$350</dd>
+        <dt>Launch &amp; misc. buffer</dt><dd>~$195&ndash;$345</dd>
+      </dl>
+    </div>
+    <p class="lm-update-note">This tracker is updated manually and frequently as we move toward our launch milestones &mdash; it is not a live, automated payment system.</p>
+  </section>
+
+  <!-- WHAT THIS FUNDS -->
+  <section class="lm-section" aria-labelledby="lm-what-h">
+    <h2 class="lm-h2" id="lm-what-h">What This Raise Funds</h2>
+    <p>The $1,500 friends-and-family goal funds a focused 90-day proof cycle: a working server, local AI processing, secure remote access, and the first handful of real Living Echoes built with real families. It is not a full enterprise build &mdash; the founder is also contributing the GPU, technical labor, and launch execution at no cost to the raise.</p>
+    <p>The preferred structure is a Revenue Participation Loan, not permanent equity: supporters receive a small share of net recurring monthly revenue for a limited time, capped at a modest multiple of what they contributed. No permanent ownership dilution, no forever revenue claim. Full terms are documented in the data room business plan and will be reviewed by counsel before any funds are accepted.</p>
+  </section>
+
+  <!-- CTA -->
+  <section class="lm-section" aria-labelledby="lm-cta-h">
+    <div class="lm-cta-card">
+      <h2 class="lm-h2" id="lm-cta-h" style="margin-bottom:10px;">Want the Full Picture?</h2>
+      <p style="margin:0 0 20px;color:var(--lm-ink-soft);">If you are a friend or family member considering supporting Living Echo, we are happy to share the complete Data Room Business Plan Draft &mdash; funding structure, market detail, technical architecture, revenue scenarios, and what is still missing &mdash; for your own review and your own counsel's review.</p>
+      <a class="lm-btn" href="mailto:marcus@poconoai.com?subject=Living%20Echo%20%E2%80%94%20Request%20Data%20Room%20Business%20Plan">Request the Data Room Business Plan</a>
+      <a class="lm-btn lm-btn--soft" href="pricing.html" style="margin-left:10px;">See Living Echo Pricing</a>
+    </div>
+  </section>
+
+</main>
+
+<div class="lm-foot" role="contentinfo">
+  <hr class="lm-divider">
+  <p>Living Echo &mdash; Voices Live On. A private venture built by Pocono AI. Separate from Pocono AI&rsquo;s regulated medical and legal AI infrastructure work.</p>
+  <p><a href="/living-memorials/">Living Echo Home</a> &nbsp;&middot;&nbsp; <a href="pricing.html">Pricing</a> &nbsp;&middot;&nbsp; <a href="/">Pocono AI &rarr;</a></p>
+  <p style="margin-top:14px;font-size:.82rem;opacity:.8">This is not a public securities solicitation. Not legal or investment advice. © 2026 Marcus O&rsquo;Dell</p>
+</div>
+
+<script>
+/* Funding progress — manual placeholder values. Update lmRaised by hand as
+   commitments come in. No backend, no live payment integration. */
+(function(){
+  var lmGoal = 1500;
+  var lmRaised = 0; // ← update this number manually as funds/commitments come in
+  var pct = Math.max(0, Math.min(100, (lmRaised / lmGoal) * 100));
+  var fmt = function(n){ return '$' + n.toLocaleString('en-US'); };
+
+  document.getElementById('lm-raised-val').textContent = fmt(lmRaised);
+  document.getElementById('lm-remaining-val').textContent = fmt(Math.max(0, lmGoal - lmRaised));
+  var fill = document.getElementById('lm-bar-fill');
+  fill.style.width = pct + '%';
+  fill.parentElement.setAttribute('aria-valuenow', String(lmRaised));
+  document.querySelector('.lm-bar-caption').innerHTML =
+    fmt(lmRaised) + ' raised of ' + fmt(lmGoal) + ' goal &mdash; <em>placeholder, updated manually as commitments come in</em>';
+}());
+</script>
+
+</body>
+</html>

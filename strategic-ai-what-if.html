@@ -1,0 +1,1698 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp -->
+<head>
+<meta charset="UTF-8">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Strategic AI What-If Scenario Engine | Regulated Infrastructure Analysis | Pocono AI</title>
+<meta name="description" content="Interactive AI infrastructure scenario analysis for regulated industries. Explore governance tradeoffs across healthcare, legal, fintech, and education deployment models.">
+<meta name="theme-color" content="#0B0F13">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="favicon.ico">
+<link rel="canonical" href="https://poconoai.com/strategic-ai-what-if.html">
+<link rel="stylesheet" href="styles.css?v=402">
+<link rel="stylesheet" href="nav-v2026.css?v=402">
+<link rel="stylesheet" href="brand-v292.css?v=402">
+<meta property="og:title" content="Strategic AI What-If Scenario Engine | Pocono AI">
+<meta property="og:type" content="website">
+<meta property="og:description" content="Interactive governance scenario analysis for regulated-industry AI deployment decisions. Explore infrastructure tradeoffs across healthcare, legal, fintech, and education.">
+<meta property="og:url" content="https://poconoai.com/strategic-ai-what-if.html">
+<meta property="og:image" content="https://poconoai.com/og-image.jpg">
+<meta property="og:site_name" content="Pocono AI">
+<style>
+/* ─── TERMINAL AESTHETIC ─── */
+:root {
+  --term-bg: #020912;
+  --term-panel: #040f1c;
+  --term-border: #0d3a5c;
+  --term-green: #00ff9f;
+  --term-green-dim: #00c27a;
+  --term-amber: #ffb700;
+  --term-red: #ff4444;
+  --term-cyan: #00d4ff;
+  --term-blue: #0a73d2;
+  --term-white: #d0e8f0;
+  --term-muted: #4a7090;
+  --term-font: 'Courier New', 'Courier', monospace;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  background: var(--term-bg);
+  color: var(--term-white);
+  font-family: var(--term-font);
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Scanline overlay */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 255, 159, 0.015) 2px,
+    rgba(0, 255, 159, 0.015) 4px
+  );
+  pointer-events: none;
+  z-index: 9000;
+}
+
+/* Vignette */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse 90% 90% at 50% 50%, transparent 60%, rgba(2,9,18,0.7) 100%);
+  pointer-events: none;
+  z-index: 9001;
+}
+
+/* ─── NAV (adapted to terminal) ─── */
+header[role="banner"] {
+  background: rgba(4,15,28,0.97) !important;
+  border-bottom: 1px solid var(--term-border) !important;
+}
+header[role="banner"] .logo { color: var(--term-green) !important; }
+header[role="banner"] .logo span { color: var(--term-green-dim) !important; }
+header[role="banner"] a { color: var(--term-muted) !important; }
+header[role="banner"] a:hover { color: var(--term-cyan) !important; }
+header[role="banner"] .nav-cta-link { 
+  border: 1px solid var(--term-green) !important;
+  color: var(--term-green) !important;
+}
+
+/* ─── MAIN LAYOUT ─── */
+.wif-wrap {
+  max-width: 1060px;
+  margin: 0 auto;
+  padding: 0 20px 80px;
+}
+
+/* ─── HEADER BANNER ─── */
+.wif-classified {
+  text-align: center;
+  padding: 32px 20px 20px;
+  border-bottom: 2px solid var(--term-amber);
+  margin-bottom: 0;
+  position: relative;
+}
+
+.wif-classified::before,
+.wif-classified::after {
+  content: '⬛ ⬛ ⬛ ⬛ ⬛ ⬛ ⬛ ⬛ ⬛ ⬛ ⬛ ⬛';
+  display: block;
+  font-size: 0.6rem;
+  color: var(--term-amber);
+  letter-spacing: 4px;
+  opacity: 0.4;
+}
+
+.wif-stamp {
+  display: inline-block;
+  border: 3px solid var(--term-amber);
+  color: var(--term-amber);
+  font-size: 1.4rem;
+  font-weight: 900;
+  letter-spacing: 0.25em;
+  padding: 8px 32px;
+  transform: rotate(-2deg);
+  margin: 16px 0 8px;
+  text-shadow: 0 0 20px rgba(255,183,0,0.4);
+  animation: stamp-flicker 4s ease-in-out infinite;
+}
+
+@keyframes stamp-flicker {
+  0%, 95%, 100% { opacity: 1; }
+  96% { opacity: 0.7; }
+  97% { opacity: 1; }
+  98% { opacity: 0.85; }
+}
+
+.wif-doc-id {
+  font-size: 0.7rem;
+  color: var(--term-muted);
+  letter-spacing: 0.15em;
+  margin-top: 8px;
+}
+
+.wif-doc-id span { color: var(--term-green); }
+
+/* ─── TERMINAL BOOT SEQUENCE ─── */
+.wif-boot {
+  background: var(--term-panel);
+  border: 1px solid var(--term-border);
+  border-radius: 4px;
+  padding: 24px;
+  margin: 24px 0;
+  font-size: 0.8rem;
+  line-height: 1.9;
+  color: var(--term-green-dim);
+  min-height: 160px;
+}
+
+.wif-boot .prompt { color: var(--term-green); }
+.wif-boot .ok { color: var(--term-green); }
+.wif-boot .warn { color: var(--term-amber); }
+.wif-boot .err { color: var(--term-red); }
+.wif-boot .info { color: var(--term-cyan); }
+
+.cursor {
+  display: inline-block;
+  width: 8px;
+  height: 14px;
+  background: var(--term-green);
+  vertical-align: middle;
+  animation: blink 1s step-end infinite;
+  margin-left: 2px;
+}
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+/* ─── H1 ─── */
+.wif-title {
+  font-size: clamp(1.2rem, 3vw, 1.9rem);
+  color: var(--term-green);
+  text-shadow: 0 0 30px rgba(0,255,159,0.3);
+  letter-spacing: 0.05em;
+  margin: 0 0 6px;
+  line-height: 1.2;
+}
+.wif-subtitle {
+  color: var(--term-cyan);
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  margin: 0 0 32px;
+}
+
+/* ─── SECTOR SELECTOR ─── */
+.wif-sector-label {
+  font-size: 0.7rem;
+  color: var(--term-muted);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.wif-sector-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.sector-btn {
+  background: rgba(13,58,92,0.2);
+  border: 1px solid var(--term-border);
+  color: var(--term-muted);
+  padding: 14px 18px;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--term-font);
+  font-size: 0.82rem;
+  transition: all 0.15s;
+  line-height: 1.4;
+}
+
+.sector-btn:hover, .sector-btn.active {
+  border-color: var(--term-green);
+  color: var(--term-green);
+  background: rgba(0,255,159,0.05);
+  text-shadow: 0 0 12px rgba(0,255,159,0.3);
+}
+
+.sector-btn .sec-code {
+  font-size: 0.65rem;
+  color: var(--term-amber);
+  display: block;
+  margin-bottom: 4px;
+  letter-spacing: 0.1em;
+}
+
+.sector-btn.active .sec-code { color: var(--term-green-dim); }
+
+/* ─── SCENARIO MATRIX ─── */
+.wif-matrix {
+  display: none;
+}
+.wif-matrix.visible { display: block; }
+
+.matrix-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--term-border);
+}
+
+.matrix-header .sec-badge {
+  background: var(--term-amber);
+  color: #020912;
+  font-size: 0.65rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  padding: 3px 10px;
+  border-radius: 2px;
+}
+
+.matrix-header h2 {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--term-white);
+  letter-spacing: 0.05em;
+}
+
+/* Scenario cards */
+.scenario-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.scenario-card {
+  background: var(--term-panel);
+  border: 1px solid var(--term-border);
+  border-radius: 4px;
+  padding: 18px;
+  cursor: pointer;
+  transition: all 0.15s;
+  position: relative;
+}
+
+.scenario-card:hover, .scenario-card.selected {
+  border-color: var(--term-cyan);
+  background: rgba(0,212,255,0.04);
+}
+
+.scenario-card.selected { border-color: var(--term-green); background: rgba(0,255,159,0.04); }
+
+.sc-type {
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.sc-type.cloud { color: var(--term-red); }
+.sc-type.hybrid { color: var(--term-amber); }
+.sc-type.local { color: var(--term-green); }
+
+.sc-name {
+  font-size: 0.92rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--term-white);
+}
+
+.sc-desc {
+  font-size: 0.78rem;
+  color: var(--term-muted);
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.sc-risks {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.risk-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  padding: 3px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.risk-label { color: var(--term-muted); }
+
+.risk-val {
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+.risk-val.low { color: var(--term-green); }
+.risk-val.med { color: var(--term-amber); }
+.risk-val.high { color: var(--term-red); }
+
+/* ─── ANALYSIS OUTPUT ─── */
+.wif-analysis {
+  display: none;
+  background: var(--term-panel);
+  border: 1px solid var(--term-green);
+  border-radius: 4px;
+  padding: 24px;
+  margin-top: 14px;
+  font-size: 0.82rem;
+  line-height: 1.8;
+}
+.wif-analysis.visible { display: block; }
+
+.analysis-header {
+  color: var(--term-green);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--term-border);
+  padding-bottom: 10px;
+  margin-bottom: 14px;
+}
+
+.analysis-body { color: var(--term-white); }
+.analysis-body strong { color: var(--term-green-dim); }
+.analysis-body .highlight { color: var(--term-cyan); }
+.analysis-body .warn-text { color: var(--term-amber); }
+.analysis-body .crit { color: var(--term-red); }
+
+.gauge-row {
+  display: flex;
+  gap: 16px;
+  margin: 14px 0;
+  flex-wrap: wrap;
+}
+
+.gauge {
+  flex: 1 1 160px;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid var(--term-border);
+  border-radius: 4px;
+  padding: 10px 14px;
+}
+
+.gauge-name {
+  font-size: 0.65rem;
+  color: var(--term-muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.gauge-bar-wrap {
+  height: 6px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+
+.gauge-bar {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.6s ease;
+}
+
+.gauge-val {
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+/* ─── WHAT-IF SLIDERS ─── */
+.wif-sliders {
+  margin: 20px 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+  gap: 14px;
+}
+
+.slider-group {
+  background: rgba(0,0,0,0.2);
+  border: 1px solid var(--term-border);
+  border-radius: 4px;
+  padding: 14px;
+}
+
+.slider-label {
+  font-size: 0.72rem;
+  color: var(--term-muted);
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.slider-label span { color: var(--term-green); font-weight: 700; }
+
+input[type=range] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  background: var(--term-border);
+  border-radius: 2px;
+  outline: none;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--term-green);
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0,255,159,0.4);
+}
+
+/* ─── GOVERNANCE MATRIX TABLE ─── */
+.gov-matrix {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.78rem;
+  margin: 16px 0;
+}
+.gov-matrix th {
+  border: 1px solid var(--term-border);
+  padding: 8px 12px;
+  text-align: left;
+  background: rgba(0,0,0,0.3);
+  color: var(--term-amber);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.gov-matrix td {
+  border: 1px solid var(--term-border);
+  padding: 8px 12px;
+  color: var(--term-muted);
+  vertical-align: top;
+  line-height: 1.5;
+}
+.gov-matrix td.cell-low { color: var(--term-green); }
+.gov-matrix td.cell-med { color: var(--term-amber); }
+.gov-matrix td.cell-high { color: var(--term-red); }
+.gov-matrix tr:hover td { background: rgba(0,255,159,0.02); }
+
+/* ─── VERDICT BOX ─── */
+.verdict-box {
+  border: 2px solid var(--term-green);
+  border-radius: 4px;
+  padding: 18px 22px;
+  margin: 20px 0;
+  background: rgba(0,255,159,0.04);
+  position: relative;
+}
+.verdict-box::before {
+  content: '▶ ANALYSIS COMPLETE';
+  position: absolute;
+  top: -10px;
+  left: 16px;
+  background: var(--term-bg);
+  padding: 0 8px;
+  font-size: 0.65rem;
+  color: var(--term-green);
+  letter-spacing: 0.12em;
+}
+
+.verdict-box p { margin: 0 0 10px; font-size: 0.82rem; line-height: 1.7; }
+.verdict-box p:last-child { margin: 0; }
+
+/* ─── DISCLAIMER BOX ─── */
+.wif-disclaimer {
+  border: 1px solid rgba(255,183,0,0.25);
+  border-radius: 4px;
+  padding: 14px 18px;
+  background: rgba(255,183,0,0.04);
+  font-size: 0.76rem;
+  color: var(--term-muted);
+  line-height: 1.7;
+  margin: 28px 0;
+}
+.wif-disclaimer strong { color: var(--term-amber); }
+
+/* ─── SECTOR SEPARATOR ─── */
+.wif-sep {
+  border: none;
+  border-top: 1px solid var(--term-border);
+  margin: 32px 0;
+}
+
+/* ─── CTA ─── */
+.wif-cta {
+  text-align: center;
+  border: 1px solid var(--term-cyan);
+  border-radius: 4px;
+  padding: 28px;
+  margin: 36px 0 0;
+  background: rgba(0,212,255,0.04);
+}
+.wif-cta p { color: var(--term-muted); font-size: 0.82rem; margin: 0 0 16px; }
+.wif-cta a {
+  display: inline-block;
+  border: 1px solid var(--term-green);
+  color: var(--term-green);
+  padding: 11px 28px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 0.82rem;
+  letter-spacing: 0.1em;
+  transition: all 0.15s;
+}
+.wif-cta a:hover {
+  background: var(--term-green);
+  color: #020912;
+}
+
+/* ─── KONAMI / EASTER EGG ─── */
+.declassified-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(2,9,18,0.95);
+  z-index: 9500;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 40px;
+}
+.declassified-overlay.show { display: flex; }
+.declassified-overlay .dstamp {
+  font-size: clamp(2rem,8vw,5rem);
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  color: var(--term-red);
+  border: 6px solid var(--term-red);
+  padding: 16px 48px;
+  transform: rotate(-8deg);
+  text-shadow: 0 0 40px rgba(255,68,68,0.6);
+  animation: red-pulse 2s ease-in-out infinite;
+  margin-bottom: 32px;
+}
+@keyframes red-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(255,68,68,0.3); }
+  50% { box-shadow: 0 0 60px rgba(255,68,68,0.7); }
+}
+.declassified-overlay .msg {
+  max-width: 600px;
+  font-size: 0.88rem;
+  line-height: 2;
+  color: var(--term-white);
+}
+.declassified-overlay .msg strong { color: var(--term-amber); }
+.declassified-overlay .msg em { color: var(--term-green); font-style: normal; }
+.declassified-overlay .close-btn {
+  margin-top: 32px;
+  border: 1px solid var(--term-muted);
+  color: var(--term-muted);
+  background: none;
+  padding: 10px 28px;
+  font-family: var(--term-font);
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.15s;
+}
+.declassified-overlay .close-btn:hover { border-color: var(--term-green); color: var(--term-green); }
+
+.hint-bar {
+  font-size: 0.68rem;
+  color: rgba(74,112,144,0.5);
+  letter-spacing: 0.08em;
+  text-align: center;
+  margin-top: 24px;
+  padding: 8px;
+  border-top: 1px solid rgba(13,58,92,0.4);
+}
+</style>
+</head>
+<body>
+
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- INCLUDE:HEADER -->
+<div id="hitl-notice" style="background:#0a1929;padding:4px 16px;text-align:center;font-size:12px;color:#4a5568;border-bottom:1px solid rgba(255,255,255,0.06);letter-spacing:0.01em;">Human-in-the-Loop required: licensed professionals verify all outputs before clinical or legal action</div>
+<header role="banner">
+  <div class="header-inner">
+    <a href="/index.html" class="logo" aria-label="Pocono AI Home">
+      <img src="/logo.svg?v=402" alt="" width="36" height="36" decoding="async" loading="eager" aria-hidden="true" style="display:inline-block;">
+      Pocono <span>AI</span>
+    </a>
+    <nav id="desktop-nav" aria-label="Main navigation">
+      <div class="nav-item"><a href="/index.html" class="nav-direct">Home</a></div>
+      <div class="nav-item"><a href="/for-physicians.html" class="nav-direct">Physicians</a></div>
+      <div class="nav-item"><a href="/for-attorneys.html" class="nav-direct">Attorneys</a></div>
+      <div class="nav-item"><a href="/sentinel-node.html" class="nav-direct nav-hub" style="color:#d5a94f;border:1px solid rgba(213,169,79,0.45);border-radius:999px;padding:6px 13px;">Sentinel Node</a></div>
+      <div class="nav-item"><a href="/living-memorials/" class="nav-direct">Living Echo</a></div>
+      <div class="nav-item"><a href="/contact.html" class="nav-direct">Contact</a></div>
+      <div class="nav-item" data-dropdown="menu-more">
+        <button type="button" class="nav-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="menu-more">More <span class="nav-chevron" aria-hidden="true">&#9662;</span></button>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <a href="/contact.html#pilot" class="nav-cta nav-cta-primary">Request a Pilot</a>
+      <button type="button" class="pa-search-trigger" data-search-open aria-label="Search (press / or Ctrl-K)" aria-haspopup="dialog" aria-expanded="false">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span class="pa-st-label">Search</span><kbd data-pa-keyhint>Ctrl K</kbd>
+      </button>
+      <button type="button" class="header-icon-btn" id="mobile-menu" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav-panel">
+        <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- "More" overflow dropdown — sibling of <header> so position:fixed escapes header's stacking context. Wired by nav.js via data-dropdown="menu-more". -->
+<div class="nav-dropdown" id="menu-more" aria-label="More navigation">
+  <p class="nav-dd-section">Products</p>
+  <a href="/engineering-drafting/">Drafting &amp; Engineering Edition</a>
+  <a href="/sentinel-home/">Sentinel Home Edition</a>
+  <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability — Assistive Tools &#x2605;</a>
+  <a href="/living-memorials/enterprise-estate-continuity.html">Enterprise Estate Continuity</a>
+  <p class="nav-dd-section">Capabilities</p>
+  <a href="/evidence-room.html">Evidence Room</a>
+  <a href="/push-button-deliverables.html">Push-Button Deliverables</a>
+  <a href="/pilot-readiness-kit.html">Pilot Kit</a>
+  <a href="/pilot-program.html">Pilot Program</a>
+  <a href="/how-it-works.html">How It Works</a>
+  <p class="nav-dd-section">Hubs &amp; Company</p>
+  <a href="/training.html">Training Hub</a>
+  <a href="/documentation-hub/">Document Hub</a>
+  <a href="/global/">Global Hub</a>
+  <a href="/investors-hub.html">Investor Hub</a>
+  <a href="/valuation-dashboard.html">Valuation Dashboard</a>
+  <a href="/about.html">About</a>
+  <p class="nav-dd-section">Trust &amp; Legal</p>
+  <a href="/transparency.html">Transparency</a>
+  <a href="/audit.html">Audit Log</a>
+  <a href="/privacy.html">Privacy</a>
+  <a href="/sitemap.html">Sitemap</a>
+</div>
+<!-- Site search is provided by the self-contained search.js asset (command palette: / or Ctrl/Cmd-K). -->
+
+<!-- Mobile panel: full-screen slide-in. v396 nav — hub tiles + grouped links + Sentinel Node + Engineering. -->
+<nav id="mobile-nav-panel" aria-label="Mobile navigation" aria-hidden="true" role="dialog" aria-modal="true">
+
+  <!-- Hub tiles: Sentinel Node, Documentation Hub, Training Hub, Global Hub -->
+  <div style="padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,0.07);">
+    <p style="font-size:0.65em;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.28);margin:0 0 10px;padding:0 2px;">Hubs</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <a href="/sentinel-node.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(213,169,79,0.1);border:1px solid rgba(213,169,79,0.35);border-radius:10px;color:#d5a94f;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Sentinel Node</a>
+      <a href="/documentation-hub/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(0,194,168,0.1);border:1px solid rgba(0,194,168,0.35);border-radius:10px;color:#00c2a8;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Docs Hub</a>
+      <a href="/training.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.35);border-radius:10px;color:#a78bfa;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Training Hub</a>
+      <a href="/global/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(122,240,220,0.07);border:1px solid rgba(122,240,220,0.3);border-radius:10px;color:#7af0dc;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Global Hub</a>
+    </div>
+  </div>
+
+  <!-- Core paths -->
+  <div class="mob-static-links">
+    <a href="/index.html">Home</a>
+    <a href="/for-physicians.html">Physicians</a>
+    <a href="/for-attorneys.html">Attorneys</a>
+    <a href="/engineering-drafting/">Engineering &amp; Drafting</a>
+    <a href="/pilot-program.html">Pilot Program</a>
+    <a href="/how-it-works.html">How It Works</a>
+    <a href="/trust.html">Trust &amp; Audit</a>
+    <a href="/pricing.html">Pricing</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/living-memorials/">Living Echo</a>
+    <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability</a>
+    <a href="/about.html">About</a>
+    <a href="/team.html" style="color:rgba(255,255,255,0.6);">Team &amp; Leadership</a>
+    <a href="/valuation-dashboard.html" style="color:rgba(255,255,255,0.6);">Valuation Dashboard</a>
+    <a href="/careers.html" style="color:rgba(255,255,255,0.6);">Careers</a>
+    <a href="/sentinel-demo.html" style="color:rgba(255,255,255,0.6);">Demo</a>
+    <a href="/sitemap.html" style="color:rgba(255,255,255,0.45);">Sitemap</a>
+    <a href="/transparency.html" style="color:rgba(255,255,255,0.45);">Transparency</a>
+    <a href="/privacy.html" style="color:rgba(255,255,255,0.45);">Privacy</a>
+  </div>
+
+  <a href="/contact.html#pilot" class="mob-cta">Request a Pilot</a>
+</nav>
+<!-- /INCLUDE:HEADER -->
+
+<main class="wif-wrap">
+
+  <div class="wif-classified">
+    <div class="wif-stamp" id="classifiedStamp">SCENARIO RESTRICTED</div>
+    <div class="wif-doc-id">DOC-ID: <span id="docId">LOADING...</span> &nbsp;|&nbsp; OPERATOR CLEARANCE: LEVEL-2 &nbsp;|&nbsp; <span id="accessTime">--:--:-- UTC</span></div>
+  </div>
+
+  <div class="wif-boot" id="bootLog" aria-live="polite">
+    <div id="bootContent"></div>
+  </div>
+
+  <h1 class="wif-title" id="mainTitle" style="display:none;">STRATEGIC AI INFRASTRUCTURE<br>WHAT-IF SCENARIO ENGINE</h1>
+  <div class="wif-subtitle" id="mainSub" style="display:none;">// REGULATED-INDUSTRY GOVERNANCE TRADEOFF ANALYSIS // v347 BUILD //</div>
+
+  <div id="sectorPanel" style="display:none;">
+    <div class="wif-sector-label">▶ SELECT DEPLOYMENT SECTOR &mdash; CHOOSE REGULATORY CONTEXT</div>
+    <div class="wif-sector-grid">
+      <button class="sector-btn" data-sector="healthcare" onclick="selectSector('healthcare', this)">
+        <span class="sec-code">SECTOR-HC &nbsp;█ HIPAA</span>
+        Healthcare<br><small style="color:inherit;opacity:0.7;">Independent medical practices</small>
+      </button>
+      <button class="sector-btn" data-sector="legal" onclick="selectSector('legal', this)">
+        <span class="sec-code">SECTOR-LG &nbsp;█ ABA-1.6</span>
+        Legal<br><small style="color:inherit;opacity:0.7;">Law firms &amp; solo practitioners</small>
+      </button>
+      <button class="sector-btn" data-sector="fintech" onclick="selectSector('fintech', this)">
+        <span class="sec-code">SECTOR-FT &nbsp;█ SOX/GLBA</span>
+        Financial Services<br><small style="color:inherit;opacity:0.7;">RIAs, community banks, fintechs</small>
+      </button>
+      <button class="sector-btn" data-sector="education" onclick="selectSector('education', this)">
+        <span class="sec-code">SECTOR-ED &nbsp;█ FERPA</span>
+        Education<br><small style="color:inherit;opacity:0.7;">Universities, K-12 districts</small>
+      </button>
+    </div>
+
+    <!-- Scenario Matrices by Sector -->
+    <div id="matrix-healthcare" class="wif-matrix">
+      <div class="matrix-header">
+        <span class="sec-badge">HIPAA-SENSITIVE</span>
+        <h2>Healthcare AI Deployment Scenarios</h2>
+      </div>
+      <div class="scenario-grid">
+        <div class="scenario-card" onclick="showAnalysis('hc-cloud')">
+          <div class="sc-type cloud">▲ HIGH RISK &mdash; CLOUD AI</div>
+          <div class="sc-name">Public Cloud AI Scribe</div>
+          <div class="sc-desc">PHI transmitted to external AI provider. Model training data retention policies unclear. No enforced physician review gate. No reviewable audit trail.</div>
+          <div class="sc-risks">
+            <div class="risk-row"><span class="risk-label">PHI Exposure Risk</span><span class="risk-val high">CRITICAL</span></div>
+            <div class="risk-row"><span class="risk-label">Audit Trail</span><span class="risk-val high">NONE</span></div>
+            <div class="risk-row"><span class="risk-label">Human Review Gate</span><span class="risk-val high">ABSENT</span></div>
+            <div class="risk-row"><span class="risk-label">Data Custody</span><span class="risk-val high">EXTERNAL</span></div>
+          </div>
+        </div>
+        <div class="scenario-card" onclick="showAnalysis('hc-hybrid')">
+          <div class="sc-type hybrid">● MEDIUM RISK &mdash; HYBRID</div>
+          <div class="sc-name">Hybrid Cloud + On-Prem Gateway</div>
+          <div class="sc-desc">Anonymized queries routed to cloud. PHI supposedly stripped before transmission. Some on-prem logging. Complex trust boundary. De-identification can fail.</div>
+          <div class="sc-risks">
+            <div class="risk-row"><span class="risk-label">PHI Exposure Risk</span><span class="risk-val med">ELEVATED</span></div>
+            <div class="risk-row"><span class="risk-label">Audit Trail</span><span class="risk-val med">PARTIAL</span></div>
+            <div class="risk-row"><span class="risk-label">Human Review Gate</span><span class="risk-val med">OPTIONAL</span></div>
+            <div class="risk-row"><span class="risk-label">Data Custody</span><span class="risk-val med">SPLIT</span></div>
+          </div>
+        </div>
+        <div class="scenario-card" onclick="showAnalysis('hc-local')">
+          <div class="sc-type local">▼ CONTROLLED &mdash; LOCAL AI</div>
+          <div class="sc-name">On-Premises Local AI Appliance</div>
+          <div class="sc-desc">PHI stays in building by default. No cloud routing. Reviewable audit trail. Named physician review before any output proceeds. Source-cited drafts only.</div>
+          <div class="sc-risks">
+            <div class="risk-row"><span class="risk-label">PHI Exposure Risk</span><span class="risk-val low">MINIMAL</span></div>
+            <div class="risk-row"><span class="risk-label">Audit Trail</span><span class="risk-val low">COMPLETE</span></div>
+            <div class="risk-row"><span class="risk-label">Human Review Gate</span><span class="risk-val low">ENFORCED</span></div>
+            <div class="risk-row"><span class="risk-label">Data Custody</span><span class="risk-val low">LOCAL</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="analysis-hc-cloud" class="wif-analysis" data-sector="hc">
+        <div class="analysis-header">▶ SCENARIO ANALYSIS: PUBLIC CLOUD AI SCRIBE (HEALTHCARE)</div>
+        <div class="analysis-body">
+          <p><strong>Transmission vector:</strong> PHI exits the practice on every query. The AI provider receives patient-identifiable context. Business Associate Agreement obligations apply — but BAA coverage does not prevent the transmission, it only governs liability after the fact.</p>
+          <p><span class="highlight">What-if scenario:</span> Your cloud AI provider experiences a breach. Patient records processed through the AI endpoint are potentially exposed. Your practice is a covered entity. Notification obligations under 45 CFR §164.400–414 apply. The AI provider's BAA governs remediation, not prevention.</p>
+          <div class="gauge-row">
+            <div class="gauge">
+              <div class="gauge-name">Data Sovereignty</div>
+              <div class="gauge-bar-wrap"><div class="gauge-bar" style="width:8%;background:var(--term-red);"></div></div>
+              <div class="gauge-val" style="color:var(--term-red);">8 / 100</div>
+            </div>
+            <div class="gauge">
+              <div class="gauge-name">Auditability</div>
+              <div class="gauge-bar-wrap"><div class="gauge-bar" style="width:15%;background:var(--term-red);"></div></div>
+              <div class="gauge-val" style="color:var(--term-red);">15 / 100</div>
+            </div>
+            <div class="gauge">
+              <div class="gauge-name">Human Oversight</div>
+              <div class="gauge-bar-wrap"><div class="gauge-bar" style="width:20%;background:var(--term-amber);"></div></div>
+              <div class="gauge-val" style="color:var(--term-amber);">20 / 100</div>
+            </div>
+            <div class="gauge">
+              <div class="gauge-name">Governance Posture</div>
+              <div class="gauge-bar-wrap"><div class="gauge-bar" style="width:12%;background:var(--term-red);"></div></div>
+              <div class="gauge-val" style="color:var(--term-red);">12 / 100</div>
+            </div>
+          </div>
+          <div class="verdict-box">
+            <p><strong>Scenario verdict:</strong> Cloud AI scribes solve documentation speed at the cost of data custody. For a HIPAA-governed independent practice, this is the highest-risk posture. The governance question is not whether the product is convenient — it is <span class="warn-text">who has custody of your patients' protected health information when the model processes it.</span></p>
+            <p>Each practice must make its own risk determination. No vendor can make that determination for you.</p>
+          </div>
+        </div>
+      </div>
+      <div id="analysis-hc-hybrid" class="wif-analysis" data-sector="hc">
+        <div class="analysis-header">▶ SCENARIO ANALYSIS: HYBRID CLOUD + ON-PREM GATEWAY (HEALTHCARE)</div>
+        <div class="analysis-body">
+          <p><strong>The de-identification assumption:</strong> Hybrid architectures typically claim PHI is stripped before cloud transmission. This is a technical process that can fail — re-identification attacks, incomplete stripping of indirect identifiers (age + zip + diagnosis), or model inference from anonymized context.</p>
+          <p><span class="highlight">What-if scenario:</span> A de-identification failure means your "anonymized" query contains enough context to identify a patient. The query has already left the building. The audit trail showing the failure may not exist. You are in a complex liability position.</p>
+          <div class="gauge-row">
+            <div class="gauge">
+              <div class="gauge-name">Data Sovereignty</div>
+              <div class="gauge-bar-wrap"><div class="gauge-bar" style="width:40%;background:var(--term-amber);"></div></div>
+              <div class="gauge-val" style="color:var(--term-amber);">40 / 100</div>
+            </div>
+            <div class="gauge">
+              <div class="gauge-name">Auditability</div>
+              <div class="gauge-bar-wrap"><div class="gauge-bar" style="width:45%;background:var(--term-amber);"></div></div>
+              <div class="gauge-val" style="color:var(--term-amber);">45 / 100</div>
+            </div>
+            <div class="gauge">
+              <div class="gauge-name">Human Oversight</div>
+              <div class="gauge-bar-wrap"><div class="gauge-bar" style="width:50%;background:var(--term-amber);"></div></div>
+              <div class="gauge-val" style="color:var(--term-amber);">50 / 100</div>
+            </div>
+            <div class="gauge">
+              <div class="gauge-name">Governance Posture</div>
+              <div class="gauge-bar-wrap"><div class="gauge-bar" style="width:38%;background:var(--term-amber);"></div></div>
+              <div class="gauge-val" style="color:var(--term-amber);">38 / 100</div>
+            </div>
+          </div>
+          <div class="verdict-box">
+            <p><strong>Scenario verdict:</strong> Hybrid is better than pure cloud but introduces a new attack surface: the trust boundary between local gateway and cloud. The complexity of managing de-identification adds operational risk. <span class="warn-text">The question to ask any hybrid vendor: show me the de-identification failure rate and the audit trail for every boundary crossing.</span></p>
+          </div>
+        </div>
+      </div>
+      <div id="analysis-hc-local" class="wif-analysis" data-sector="hc">
+        <div class="analysis-header">▶ SCENARIO ANALYSIS: ON-PREMISES LOCAL AI APPLIANCE (HEALTHCARE)</div>
+        <div class="analysis-body">
+          <p><strong>Architecture posture:</strong> The AI model runs on hardware inside your practice. Patient data processed by the model does not transit external networks by default. The transmission vector that creates cloud AI risk is absent.</p>
+          <p><span class="highlight">What-if scenario:</span> A breach attempt targets your practice. The AI model data (queries, logs, outputs) is contained on the local appliance. If the appliance is physically secured and network-isolated, the AI processing trail is not exposed through cloud infrastructure.</p>
+          <div class="gauge-row">
+            <div class="gauge">
+              <div class="gauge-name">Data Sovereignty</div>
+              <div class="gauge-bar-wrap"><div class="gauge-bar" style="width:91%;background:var(--term-green);"></div></div>
+              <div class="gauge-val" style="color:var(--term-green);">91 / 100</div>
+            </div>
+            <div class="gauge">
+              <div class="gauge-name">Auditability</div>
+              <div class="gauge-bar-wrap"><div class="gauge-bar" style="width:88%;background:var(--term-green);"></div></div>
+              <div class="gauge-val" style="color:var(--term-green);">88 / 100</div>
+            </div>
+            <div class="gauge">
+              <div class="gauge-name">Human Oversight</div>
+              <div class="gauge-bar-wrap"><div class="gauge-bar" style="width:95%;background:var(--term-green);"></div></div>
+              <div class="gauge-val" style="color:var(--term-green);">95 / 100</div>
+            </div>
+            <div class="gauge">
+              <div class="gauge-name">Governance Posture</div>
+              <div class="gauge-bar-wrap"><div class="gauge-bar" style="width:89%;background:var(--term-green);"></div></div>
+              <div class="gauge-val" style="color:var(--term-green);">89 / 100</div>
+            </div>
+          </div>
+          <div class="verdict-box">
+            <p><strong>Scenario verdict:</strong> Local AI infrastructure is the highest-governance posture for HIPAA-sensitive clinical workflows. The tradeoffs are real — upfront deployment cost, hardware management, model updates require on-site coordination. <em>But the governance question answers itself when your patients' data does not leave your building by default.</em></p>
+            <p>This is the architecture Sentinel Node implements. It is not a compliance certification — it is a design choice that each practice must evaluate against its own risk tolerance and regulatory obligations.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="matrix-legal" class="wif-matrix">
+      <div class="matrix-header">
+        <span class="sec-badge">PRIVILEGE-SENSITIVE</span>
+        <h2>Legal AI Deployment Scenarios</h2>
+      </div>
+      <div class="scenario-grid">
+        <div class="scenario-card" onclick="showAnalysis('lg-cloud')">
+          <div class="sc-type cloud">▲ HIGH RISK &mdash; CLOUD AI</div>
+          <div class="sc-name">Cloud AI Legal Assistant</div>
+          <div class="sc-desc">Client documents transmitted to AI provider. Privilege waiver risk. Data retention by provider outside attorney control. No enforced review gate before output proceeds.</div>
+          <div class="sc-risks">
+            <div class="risk-row"><span class="risk-label">Privilege Exposure</span><span class="risk-val high">CRITICAL</span></div>
+            <div class="risk-row"><span class="risk-label">Client Confidentiality</span><span class="risk-val high">BREACHED</span></div>
+            <div class="risk-row"><span class="risk-label">Attorney Review Gate</span><span class="risk-val high">ABSENT</span></div>
+            <div class="risk-row"><span class="risk-label">Data Custody</span><span class="risk-val high">EXTERNAL</span></div>
+          </div>
+        </div>
+        <div class="scenario-card" onclick="showAnalysis('lg-hybrid')">
+          <div class="sc-type hybrid">● MEDIUM RISK &mdash; HYBRID</div>
+          <div class="sc-name">Cloud AI + Local Document Index</div>
+          <div class="sc-desc">Documents indexed locally, query sent to cloud. Metadata transmitted. Model sees document context. Complex privilege boundary. Opposing counsel may argue waiver.</div>
+          <div class="sc-risks">
+            <div class="risk-row"><span class="risk-label">Privilege Exposure</span><span class="risk-val med">ELEVATED</span></div>
+            <div class="risk-row"><span class="risk-label">Client Confidentiality</span><span class="risk-val med">PARTIAL</span></div>
+            <div class="risk-row"><span class="risk-label">Attorney Review Gate</span><span class="risk-val med">OPTIONAL</span></div>
+            <div class="risk-row"><span class="risk-label">Data Custody</span><span class="risk-val med">SPLIT</span></div>
+          </div>
+        </div>
+        <div class="scenario-card" onclick="showAnalysis('lg-local')">
+          <div class="sc-type local">▼ CONTROLLED &mdash; LOCAL AI</div>
+          <div class="sc-name">On-Premises Legal AI</div>
+          <div class="sc-desc">Client documents processed locally. Zero cloud routing by default. Attorney review enforced before outputs proceed. Full AI audit trail on every query.</div>
+          <div class="sc-risks">
+            <div class="risk-row"><span class="risk-label">Privilege Exposure</span><span class="risk-val low">MINIMAL</span></div>
+            <div class="risk-row"><span class="risk-label">Client Confidentiality</span><span class="risk-val low">LOCAL</span></div>
+            <div class="risk-row"><span class="risk-label">Attorney Review Gate</span><span class="risk-val low">ENFORCED</span></div>
+            <div class="risk-row"><span class="risk-label">Data Custody</span><span class="risk-val low">LOCAL</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="analysis-lg-cloud" class="wif-analysis" data-sector="lg">
+        <div class="analysis-header">▶ SCENARIO ANALYSIS: CLOUD AI LEGAL ASSISTANT</div>
+        <div class="analysis-body">
+          <p><strong>Privilege waiver risk:</strong> ABA Model Rule 1.6 and state analogs require attorneys to take reasonable precautions to prevent inadvertent disclosure of client information. Transmitting client documents to an external AI provider is voluntary disclosure. Depending on jurisdiction and facts, opposing counsel may argue this constitutes waiver.</p>
+          <p><span class="highlight">What-if scenario:</span> Discovery motion argues that privileged documents were waived by transmission to an AI provider's servers. Your firm must now litigate the waiver question, produce logs of what was transmitted, and explain the data retention policies of a third-party AI provider — which you may not have access to.</p>
+          <div class="verdict-box">
+            <p><strong>Scenario verdict:</strong> Cloud AI legal tools solve workflow speed at the cost of data custody. The privilege question is unresolved in most jurisdictions. <span class="warn-text">Each attorney must evaluate this risk under applicable state bar rules and consult qualified counsel.</span> This analysis is illustrative, not legal advice.</p>
+          </div>
+        </div>
+      </div>
+      <div id="analysis-lg-hybrid" class="wif-analysis" data-sector="lg">
+        <div class="analysis-header">▶ SCENARIO ANALYSIS: CLOUD AI + LOCAL DOCUMENT INDEX</div>
+        <div class="analysis-body">
+          <p><strong>The metadata problem:</strong> Even when documents are indexed locally and only queries go to the cloud, the query itself can contain privileged information — case names, party names, legal theories, document excerpts embedded in the prompt. The cloud provider sees this context.</p>
+          <div class="verdict-box">
+            <p><strong>Scenario verdict:</strong> Better than pure cloud, but privilege exposure through query content is a real risk that most hybrid vendors do not address directly. <span class="warn-text">Ask any hybrid vendor: what does the query payload contain, and where is it retained?</span></p>
+          </div>
+        </div>
+      </div>
+      <div id="analysis-lg-local" class="wif-analysis" data-sector="lg">
+        <div class="analysis-header">▶ SCENARIO ANALYSIS: ON-PREMISES LEGAL AI</div>
+        <div class="analysis-body">
+          <p><strong>Architecture posture:</strong> Client documents are processed on hardware inside your office. The AI provider never receives the query payload, document content, or output. The transmission vector that creates cloud privilege risk is absent by design.</p>
+          <div class="verdict-box">
+            <p><strong>Scenario verdict:</strong> Local legal AI removes the cloud exposure vector. The tradeoffs — deployment cost, hardware, model management — are real. <em>But when a client asks whether their confidential documents were transmitted to a third-party AI service, your answer is no.</em> That answer has value that is difficult to quantify but easy to understand.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="matrix-fintech" class="wif-matrix">
+      <div class="matrix-header">
+        <span class="sec-badge">SOX / GLBA</span>
+        <h2>Financial Services AI Deployment Scenarios</h2>
+      </div>
+      <p style="color:var(--term-muted);font-size:0.82rem;margin-bottom:20px;">Financial services AI deployment involves GLBA data safeguards, SOX audit requirements, SEC examination risk, and NPI (non-public personal information) obligations. The governance architecture question mirrors healthcare and legal: where does customer financial data go when an AI model processes it?</p>
+      <table class="gov-matrix">
+        <thead>
+          <tr><th>Dimension</th><th>Cloud AI</th><th>Hybrid</th><th>On-Premises AI</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>NPI transmission risk</td>
+            <td class="cell-high">High — NPI exits to external AI</td>
+            <td class="cell-med">Medium — metadata and queries may contain NPI</td>
+            <td class="cell-low">Low — NPI stays local by default</td>
+          </tr>
+          <tr>
+            <td>SOX audit trail</td>
+            <td class="cell-high">Provider-controlled — limited accessibility</td>
+            <td class="cell-med">Split — partial log access</td>
+            <td class="cell-low">Reviewable local audit log</td>
+          </tr>
+          <tr>
+            <td>GLBA Safeguards Rule posture</td>
+            <td class="cell-high">Third-party risk management complexity</td>
+            <td class="cell-med">Vendor relationship risk at boundary</td>
+            <td class="cell-low">Infrastructure under direct institutional control</td>
+          </tr>
+          <tr>
+            <td>Examination readiness</td>
+            <td class="cell-high">Dependent on provider's documentation</td>
+            <td class="cell-med">Partial — cannot produce all boundary logs</td>
+            <td class="cell-low">Full — all logs locally available on demand</td>
+          </tr>
+          <tr>
+            <td>Human review in workflow</td>
+            <td class="cell-high">Typically absent or optional</td>
+            <td class="cell-med">Varies by implementation</td>
+            <td class="cell-low">Enforced by design on every output</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="verdict-box">
+        <p><strong>Sector note:</strong> Sentinel Node is not marketed specifically to financial services. This analysis is illustrative of how local AI governance applies across regulated sectors. <span class="warn-text">Financial institutions should evaluate AI infrastructure with qualified compliance and legal counsel under applicable GLBA, SOX, and examination requirements.</span></p>
+      </div>
+    </div>
+
+    <div id="matrix-education" class="wif-matrix">
+      <div class="matrix-header">
+        <span class="sec-badge">FERPA</span>
+        <h2>Education AI Deployment Scenarios</h2>
+      </div>
+      <p style="color:var(--term-muted);font-size:0.82rem;margin-bottom:20px;">Education AI intersects with FERPA student records obligations. AI tools processing student data — grades, disciplinary records, IEP data, behavioral patterns — create FERPA governance questions that most cloud AI vendors do not resolve cleanly.</p>
+      <table class="gov-matrix">
+        <thead>
+          <tr><th>Dimension</th><th>Cloud AI Platforms</th><th>On-Premises Local AI</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Student PII transmission</td>
+            <td class="cell-high">Student data exits institution to AI provider</td>
+            <td class="cell-low">Student data processed locally, does not transmit</td>
+          </tr>
+          <tr>
+            <td>FERPA "school official" exception</td>
+            <td class="cell-med">Provider may qualify — requires vendor contract review</td>
+            <td class="cell-low">Infrastructure under institutional control — cleaner posture</td>
+          </tr>
+          <tr>
+            <td>Parental consent requirements</td>
+            <td class="cell-high">Complex — cloud transmission may trigger consent needs</td>
+            <td class="cell-low">Lower risk — data stays within institution</td>
+          </tr>
+          <tr>
+            <td>Audit trail for record access</td>
+            <td class="cell-med">Provider-controlled — may be inaccessible for FERPA audits</td>
+            <td class="cell-low">Full local audit trail accessible to institution</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="verdict-box">
+        <p><strong>Sector note:</strong> Sentinel Node is designed for medical practices and law firms. This education analysis is illustrative of how the local AI governance model extends to FERPA-sensitive environments. <span class="warn-text">Educational institutions should consult their legal counsel and FERPA compliance officers before deploying any AI that processes student records.</span></p>
+      </div>
+    </div>
+
+    <hr class="wif-sep">
+
+    <hr class="wif-sep">
+
+    <!-- ─── INCIDENT SIMULATION PANEL ─── -->
+    <div id="incidentPanel">
+      <div class="wif-sector-label">▶ INCIDENT SIMULATION — SELECT EVENT TYPE TO ANALYZE GOVERNANCE RESPONSE</div>
+      <div class="wif-sector-grid">
+        <button class="sector-btn" onclick="showIncident('subpoena', this)">
+          <span class="sec-code">INCIDENT-01 &nbsp;█ LEGAL</span>
+          Subpoena / Legal Hold<br><small style="color:inherit;opacity:0.7;">Opposing counsel demands AI query logs</small>
+        </button>
+        <button class="sector-btn" onclick="showIncident('breach', this)">
+          <span class="sec-code">INCIDENT-02 &nbsp;█ SECURITY</span>
+          Suspected Data Breach<br><small style="color:inherit;opacity:0.7;">Potential PHI exposure event</small>
+        </button>
+        <button class="sector-btn" onclick="showIncident('ocr', this)">
+          <span class="sec-code">INCIDENT-03 &nbsp;█ REGULATORY</span>
+          OCR Audit Request<br><small style="color:inherit;opacity:0.7;">HHS Office for Civil Rights investigation</small>
+        </button>
+        <button class="sector-btn" onclick="showIncident('vendor', this)">
+          <span class="sec-code">INCIDENT-04 &nbsp;█ OPERATIONAL</span>
+          AI Vendor Model Change<br><small style="color:inherit;opacity:0.7;">Provider updates model without notice</small>
+        </button>
+        <button class="sector-btn" onclick="showIncident('outage', this)">
+          <span class="sec-code">INCIDENT-05 &nbsp;█ CONTINUITY</span>
+          Internet Outage<br><small style="color:inherit;opacity:0.7;">Practice loses cloud connectivity</small>
+        </button>
+        <button class="sector-btn" onclick="showIncident('complaint', this)">
+          <span class="sec-code">INCIDENT-06 &nbsp;█ PATIENT</span>
+          Patient Complaint / Audit<br><small style="color:inherit;opacity:0.7;">Patient requests record of AI involvement</small>
+        </button>
+      </div>
+
+      <div id="incident-subpoena" class="wif-matrix" style="display:none;">
+        <div class="matrix-header">
+          <span class="sec-badge" style="background:var(--term-red);color:#fff;">INCIDENT-01</span>
+          <h2>Subpoena: Opposing Counsel Demands AI Query Logs</h2>
+        </div>
+        <p style="color:var(--term-muted);font-size:0.82rem;margin-bottom:18px;">A litigation matter turns adversarial. Opposing counsel serves a subpoena or discovery request specifically targeting AI query logs, model outputs, and any AI-assisted work product used in the matter.</p>
+        <table class="gov-matrix">
+          <thead><tr><th>Response Dimension</th><th>Cloud AI (no audit trail)</th><th>Local AI (Sentinel Node)</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Can you produce a complete log?</td>
+              <td class="cell-high">Depends on vendor retention policies. Logs may be partial, unavailable, or subject to vendor's own legal process.</td>
+              <td class="cell-low">Full reviewable audit log is locally retained for 90 days. Every query, source citation, output, and review action is recorded and producible.</td>
+            </tr>
+            <tr>
+              <td>Privilege over AI outputs</td>
+              <td class="cell-high">Privilege analysis is complicated by voluntary third-party transmission. Cloud provider may be compelled separately.</td>
+              <td class="cell-low">Documents were processed locally. No third-party holds copies. Privilege analysis focuses on attorney-supervised use — cleaner posture.</td>
+            </tr>
+            <tr>
+              <td>Chain of custody</td>
+              <td class="cell-med">Incomplete. Cloud provider holds parts of the record. Coordinating production requires vendor cooperation.</td>
+              <td class="cell-low">Reviewable today; the Stage 2 tamper-evident hash chain lets opposing counsel (and court) verify log integrity without trusting your attestation alone.</td>
+            </tr>
+            <tr>
+              <td>Exposure of other client matters</td>
+              <td class="cell-high">Shared cloud infrastructure may implicate query patterns across matters if improperly scoped.</td>
+              <td class="cell-low">Queries are scoped to local matter files. Log production can be matter-specific without exposing other clients.</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="verdict-box">
+          <p><strong>Incident verdict:</strong> A reviewable local audit trail is a legal asset in discovery, not just a compliance checkbox. <span class="warn-text">Every AI-assisted work product without an audit trail is a liability in adversarial proceedings.</span></p>
+          <p>Disclaimer: This analysis is illustrative. Consult qualified legal counsel for any actual subpoena response.</p>
+        </div>
+      </div>
+
+      <div id="incident-breach" class="wif-matrix" style="display:none;">
+        <div class="matrix-header">
+          <span class="sec-badge" style="background:var(--term-red);color:#fff;">INCIDENT-02</span>
+          <h2>Suspected Data Breach: Potential PHI Exposure</h2>
+        </div>
+        <p style="color:var(--term-muted);font-size:0.82rem;margin-bottom:18px;">A security incident is suspected. You need to determine: what data was exposed? Was AI-processed patient data involved? What is the scope of notification obligation under HIPAA Breach Notification Rule (45 CFR §164.400)?</p>
+        <table class="gov-matrix">
+          <thead><tr><th>Response Dimension</th><th>Cloud AI</th><th>Local AI (Sentinel Node)</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Was AI-processed PHI exposed?</td>
+              <td class="cell-high">PHI was transmitted to external AI. If cloud provider is breached, AI-processed PHI is in scope. You may not know scope without vendor disclosure.</td>
+              <td class="cell-low">AI-processed PHI never left the building by default. Breach of local appliance is a separate and smaller attack surface. Scope is deterministic.</td>
+            </tr>
+            <tr>
+              <td>Forensic investigation scope</td>
+              <td class="cell-high">Must coordinate with cloud provider. Their forensics timeline and disclosure may not align with your HIPAA clock (60 days for breach notification).</td>
+              <td class="cell-low">All AI query logs are on local hardware. Forensic investigation is under your control. You can determine scope independently.</td>
+            </tr>
+            <tr>
+              <td>Notification obligation determination</td>
+              <td class="cell-med">Complex. Cloud provider's involvement muddies the "unsecured PHI" determination. HIPAA safe harbor for encryption may not apply if cloud provider holds keys.</td>
+              <td class="cell-low">Cleaner. PHI stayed local. If appliance was physically secured and not compromised, AI queries may not be in scope for breach notification at all.</td>
+            </tr>
+            <tr>
+              <td>Business Associate liability</td>
+              <td class="cell-high">Cloud AI vendor is a Business Associate. Their breach is attributed to you as covered entity under HIPAA unless BAA provisions are met.</td>
+              <td class="cell-low">Hardware vendor and Pocono AI are Business Associates for the appliance. Scope is narrower. BAA v3.0 governs the relationship.</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="verdict-box">
+          <p><strong>Incident verdict:</strong> Cloud AI multiplies your breach surface. <span class="warn-text">Every PHI transmission to an external AI server is a potential breach event you cannot fully control.</span> Local AI does not eliminate breach risk — but it keeps the AI processing vector inside your perimeter where you control the forensics.</p>
+        </div>
+      </div>
+
+      <div id="incident-ocr" class="wif-matrix" style="display:none;">
+        <div class="matrix-header">
+          <span class="sec-badge" style="background:var(--term-amber);color:#000;">INCIDENT-03</span>
+          <h2>OCR Audit: HHS Office for Civil Rights Investigation</h2>
+        </div>
+        <p style="color:var(--term-muted);font-size:0.82rem;margin-bottom:18px;">OCR opens an investigation into your practice following a complaint. They request documentation of your risk analysis, security measures, and specifically ask about AI tools used in clinical workflows.</p>
+        <div class="scenario-grid">
+          <div class="scenario-card">
+            <div class="sc-type cloud">CLOUD AI POSTURE</div>
+            <div class="sc-name">What OCR sees</div>
+            <div class="sc-desc">PHI transmitted to third-party AI provider. Risk analysis may not document AI as a transmission vector. No audit trail of AI-assisted clinical decisions. BAA may or may not be in place. Corrective Action Plan risk: HIGH.</div>
+          </div>
+          <div class="scenario-card selected">
+            <div class="sc-type local">LOCAL AI POSTURE</div>
+            <div class="sc-name">What OCR sees</div>
+            <div class="sc-desc">PHI processed locally. Risk analysis documents local AI as an infrastructure component, not a transmission vector. Reviewable audit trail demonstrating human review on all AI outputs (tamper-evident hash chaining is the Stage 2 audit-layer). BAA v3.0 in place with hardware vendor. Corrective Action Plan risk: LOWER.</div>
+          </div>
+        </div>
+        <div class="verdict-box">
+          <p><strong>Incident verdict:</strong> OCR investigations reward documented risk analysis and demonstrable controls. <em>A reviewable audit trail showing physician review on every AI output is the kind of evidence that moves an investigation toward resolution rather than escalation.</em></p>
+          <p>Disclaimer: No AI infrastructure guarantees a favorable OCR outcome. This analysis is illustrative. Consult HIPAA counsel for actual investigation response.</p>
+        </div>
+      </div>
+
+      <div id="incident-vendor" class="wif-matrix" style="display:none;">
+        <div class="matrix-header">
+          <span class="sec-badge" style="background:var(--term-amber);color:#000;">INCIDENT-04</span>
+          <h2>Vendor Model Change: AI Provider Updates Without Notice</h2>
+        </div>
+        <p style="color:var(--term-muted);font-size:0.82rem;margin-bottom:18px;">Your cloud AI vendor silently deploys a new model version. Outputs change. Clinical documentation drafts that passed review last week now have different characteristics. You discover this when a physician notices unexpected phrasing in an AI-drafted prior auth packet.</p>
+        <div class="gauge-row">
+          <div class="gauge">
+            <div class="gauge-name">Detectability (Cloud AI)</div>
+            <div class="gauge-bar-wrap"><div class="gauge-bar" style="width:15%;background:var(--term-red);"></div></div>
+            <div class="gauge-val" style="color:var(--term-red);">15 / 100</div>
+          </div>
+          <div class="gauge">
+            <div class="gauge-name">Detectability (Local AI)</div>
+            <div class="gauge-bar-wrap"><div class="gauge-bar" style="width:92%;background:var(--term-green);"></div></div>
+            <div class="gauge-val" style="color:var(--term-green);">92 / 100</div>
+          </div>
+          <div class="gauge">
+            <div class="gauge-name">Rollback Capability (Cloud)</div>
+            <div class="gauge-bar-wrap"><div class="gauge-bar" style="width:5%;background:var(--term-red);"></div></div>
+            <div class="gauge-val" style="color:var(--term-red);">5 / 100</div>
+          </div>
+          <div class="gauge">
+            <div class="gauge-name">Rollback Capability (Local)</div>
+            <div class="gauge-bar-wrap"><div class="gauge-bar" style="width:88%;background:var(--term-green);"></div></div>
+            <div class="gauge-val" style="color:var(--term-green);">88 / 100</div>
+          </div>
+        </div>
+        <div class="verdict-box">
+          <p><strong>Incident verdict:</strong> Cloud AI vendors update models on their schedule, not yours. <span class="warn-text">In a regulated clinical workflow, an unannounced model change is a governance event — not just a software update.</span> Local AI lets you control model version, validate before deployment, and roll back if outputs change in unexpected ways.</p>
+        </div>
+      </div>
+
+      <div id="incident-outage" class="wif-matrix" style="display:none;">
+        <div class="matrix-header">
+          <span class="sec-badge" style="background:var(--term-amber);color:#000;">INCIDENT-05</span>
+          <h2>Internet Outage: Practice Loses Cloud Connectivity</h2>
+        </div>
+        <p style="color:var(--term-muted);font-size:0.82rem;margin-bottom:18px;">An ISP outage takes your practice's internet connection down for 4 hours on a busy clinic day. You have 40 patients scheduled. Prior auth packets are due by 5 PM.</p>
+        <table class="gov-matrix">
+          <thead><tr><th>Capability</th><th>Cloud AI (dead)</th><th>Local AI (Sentinel Node)</th></tr></thead>
+          <tbody>
+            <tr><td>AI documentation assistance</td><td class="cell-high">UNAVAILABLE — all inference is remote</td><td class="cell-low">AVAILABLE — inference runs on local hardware</td></tr>
+            <tr><td>Prior auth drafting</td><td class="cell-high">BLOCKED — cloud endpoint unreachable</td><td class="cell-low">OPERATIONAL — retrieval from local records</td></tr>
+            <tr><td>Audit trail logging</td><td class="cell-high">BROKEN or queued — cloud log endpoint down</td><td class="cell-low">CONTINUOUS — all logs written locally</td></tr>
+            <tr><td>Patient data at risk</td><td class="cell-med">Queue of failed cloud requests may create retry vulnerabilities</td><td class="cell-low">No external transmission attempted — nothing to lose</td></tr>
+            <tr><td>Recovery on reconnection</td><td class="cell-med">Session state may be lost. Model context dropped.</td><td class="cell-low">Seamless — nothing was waiting on the internet</td></tr>
+          </tbody>
+        </table>
+        <div class="verdict-box">
+          <p><strong>Incident verdict:</strong> <em>Local AI is continuity infrastructure, not just governance infrastructure.</em> Independent practices cannot afford 4-hour AI outages on busy clinical days. The internet is the attack surface — removing the cloud dependency removes the outage risk.</p>
+        </div>
+      </div>
+
+      <div id="incident-complaint" class="wif-matrix" style="display:none;">
+        <div class="matrix-header">
+          <span class="sec-badge" style="background:var(--term-green);color:#020912;">INCIDENT-06</span>
+          <h2>Patient Complaint: Patient Requests Record of AI Involvement</h2>
+        </div>
+        <p style="color:var(--term-muted);font-size:0.82rem;margin-bottom:18px;">A patient requests to know: "Was AI involved in my care documentation? What did the AI say? Who reviewed it? Can I see the record?" Under emerging AI transparency expectations (and increasingly state regulations), this is a governance question you need to answer.</p>
+        <div class="scenario-grid">
+          <div class="scenario-card">
+            <div class="sc-type cloud">CLOUD AI — RESPONSE CAPABILITY</div>
+            <div class="sc-name">What you can produce</div>
+            <div class="sc-desc">Probably nothing comprehensive. Cloud AI logs (if they exist) are held by the vendor. You cannot produce a complete, verifiable record of what the AI generated and who reviewed it without vendor cooperation.</div>
+          </div>
+          <div class="scenario-card selected">
+            <div class="sc-type local">LOCAL AI — RESPONSE CAPABILITY</div>
+            <div class="sc-name">What you can produce</div>
+            <div class="sc-desc">Complete. The reviewable local audit log shows: the exact query, the sources retrieved, the draft generated, which physician reviewed it, and when. You can answer every question the patient asks with documented evidence.</div>
+          </div>
+        </div>
+        <div class="verdict-box">
+          <p><strong>Incident verdict:</strong> AI transparency is becoming a patient right, not just a best practice. <em>The ability to show a patient exactly how AI was involved in their care — and that a named physician reviewed every output — is both a clinical and risk management asset.</em> A reviewable audit trail makes this answerable. No audit trail makes it unanswerable.</p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="wif-sep">
+
+    <!-- ─── BOARDROOM BRIEFING MODE ─── -->
+    <div id="boardroomPanel">
+      <div class="wif-sector-label">▶ BOARDROOM BRIEFING MODE — GOVERNANCE TALKING POINTS BY AUDIENCE</div>
+      <p style="color:var(--term-muted);font-size:0.8rem;margin-bottom:16px;">Select your audience. This generates structured talking points for presenting AI governance infrastructure decisions.</p>
+      <div class="wif-sector-grid">
+        <button class="sector-btn" onclick="showBriefing('physician-leader', this)">
+          <span class="sec-code">AUDIENCE-01 &nbsp;█ CLINICAL</span>
+          Physician Leaders<br><small style="color:inherit;opacity:0.7;">Partners, department heads, CMOs</small>
+        </button>
+        <button class="sector-btn" onclick="showBriefing('practice-admin', this)">
+          <span class="sec-code">AUDIENCE-02 &nbsp;█ ADMIN</span>
+          Practice Administrators<br><small style="color:inherit;opacity:0.7;">Operations, billing, IT staff</small>
+        </button>
+        <button class="sector-btn" onclick="showBriefing('investor', this)">
+          <span class="sec-code">AUDIENCE-03 &nbsp;█ FINANCE</span>
+          Investors / Board<br><small style="color:inherit;opacity:0.7;">ROI, risk, market positioning</small>
+        </button>
+        <button class="sector-btn" onclick="showBriefing('attorney', this)">
+          <span class="sec-code">AUDIENCE-04 &nbsp;█ LEGAL</span>
+          General Counsel / Ethics<br><small style="color:inherit;opacity:0.7;">Privilege, liability, professional rules</small>
+        </button>
+      </div>
+
+      <div id="briefing-physician-leader" class="wif-analysis" data-sector="br">
+        <div class="analysis-header">▶ PHYSICIAN LEADER BRIEFING — KEY TALKING POINTS</div>
+        <div class="analysis-body">
+          <p><strong>Lead with time:</strong> The average physician loses 5.9 hours daily to EHR documentation. Prior authorization consumes 13 hours per practice per week. Sentinel Node is an infrastructure decision to reclaim that time — with AI assistance that runs locally, requires your review on every output, and never sends patient data outside your building.</p>
+          <p><strong>Clinical judgment stays central:</strong> <em>Sentinel Node does not replace clinical judgment.</em> Every AI-generated draft — prior auth packets, clinical summaries, referral letters — requires named physician sign-off before it moves forward. The AI assists; the physician decides.</p>
+          <p><strong>Zero cloud routing of patient data:</strong> Patient records processed by the AI never leave your building by default. This is an architecture choice, not a policy — the model runs on hardware in your office. The transmission vector that creates HIPAA exposure for cloud AI tools is absent.</p>
+          <p><strong>Audit trail for your protection:</strong> Every AI interaction is logged in a reviewable audit trail. If you ever need to demonstrate to a payer, a regulator, or a patient exactly how AI was used in their care — and who reviewed it — that record exists locally.</p>
+          <p><strong>What to ask any AI tool you evaluate:</strong> Where is PHI processed? Who reviews the output? What is the audit trail? If you can't answer those three questions, the tool doesn't belong in a clinical workflow.</p>
+        </div>
+      </div>
+
+      <div id="briefing-practice-admin" class="wif-analysis" data-sector="br">
+        <div class="analysis-header">▶ PRACTICE ADMINISTRATOR BRIEFING — KEY TALKING POINTS</div>
+        <div class="analysis-body">
+          <p><strong>Infrastructure, not software:</strong> Sentinel Node is a physical appliance deployed in your building — not a SaaS subscription that can be turned off, repriced, or updated without your knowledge. You own the infrastructure relationship.</p>
+          <p><strong>Pricing structure:</strong> Phase I Founding Deployment: $5,000 implementation + starting at $1,495/month managed infrastructure. This includes hardware, deployment, managed service, and a BAA draft for attorney review at signing. Compare this to per-seat cloud subscriptions that scale with usage and create ongoing PHI transmission risk.</p>
+          <p><strong>Integration:</strong> Sentinel Node connects to your local file storage and approved document sources. It does not require EHR integration to function. Ingestion can be as simple as a watched folder. Zero changes to your EHR workflow required to start.</p>
+          <p><strong>Uptime &amp; resilience:</strong> Because inference runs locally, AI assistance is available even during internet outages. There is no cloud dependency for the AI workflow itself. This is a continuity feature, not just a governance feature.</p>
+          <p><strong>60-day Proof of Value:</strong> We scope the pilot to one workflow — typically prior authorization or clinical documentation. You see documented time savings, reviewed outputs, and an audit trail within the first 30 days.</p>
+        </div>
+      </div>
+
+      <div id="briefing-investor" class="wif-analysis" data-sector="br">
+        <div class="analysis-header">▶ INVESTOR / BOARD BRIEFING — KEY TALKING POINTS</div>
+        <div class="analysis-body">
+          <p><strong>Market position:</strong> Every major cloud AI vendor — Microsoft, Google, OpenAI — is selling into regulated markets with cloud-first architectures that create transmission risk. Pocono AI is the only player building governance-native, on-premises AI infrastructure specifically for the independent practice and small law firm market. The $750K pre-seed, $6M post-money valuation reflects an early position in a market that is about to face regulatory forcing functions on AI governance.</p>
+          <p><strong>The regulatory tailwind:</strong> HIPAA enforcement on cloud AI tools is an emerging priority for HHS OCR. State-level AI transparency regulations are proliferating. ABA guidance on attorney AI use is tightening. Pocono AI's architecture is positioned ahead of the regulatory curve — local custody, human review, reviewable audit — which means customer risk goes down as regulation increases, not up.</p>
+          <p><strong>Revenue model:</strong> Hardware-as-a-Service (HaaS). $5,000 implementation fee + starting at $1,495/month recurring managed service. 36-month commitment on Phase II. Gross margins improve with scale as deployment costs decrease. No per-seat pricing volatility.</p>
+          <p><strong>Target customer:</strong> Independent medical practices of 2-10 providers and solo/small law firms — historically underserved by enterprise AI vendors and acutely exposed to regulatory risk from shadow AI adoption.</p>
+        </div>
+      </div>
+
+      <div id="briefing-attorney" class="wif-analysis" data-sector="br">
+        <div class="analysis-header">▶ GENERAL COUNSEL / ETHICS BRIEFING — KEY TALKING POINTS</div>
+        <div class="analysis-body">
+          <p><strong>The privilege question:</strong> ABA Model Rule 1.6 requires attorneys to take reasonable precautions to prevent inadvertent disclosure of client information. Transmitting client documents to a cloud AI provider is voluntary disclosure to a third party. Sentinel Node is designed to keep client documents local — the AI processes them on hardware inside your office. The transmission vector that creates cloud privilege risk is absent by architecture.</p>
+          <p><strong>What "privilege-aware architecture" means and doesn't mean:</strong> The architecture removes the cloud exposure vector. It does not guarantee privilege. Privilege determinations depend on jurisdiction, facts, and attorney judgment. Each attorney must evaluate their own professional responsibility obligations.</p>
+          <p><strong>ABA Formal Opinion 512 (2024) context:</strong> ABA guidance on generative AI in legal practice emphasizes competence (understanding what the tool does), confidentiality (where data goes), and supervision (reviewing AI outputs). Sentinel Node is designed to address all three: the tool is fully auditable, client data stays local, and attorney review is required on every output.</p>
+          <p><strong>The audit trail in litigation:</strong> A reviewable log of every AI query, source, and attorney review action is a defensible record in discovery and professional discipline proceedings — with tamper-evident hash chaining as the next audit-layer release (Stage 2). The absence of any such log is not neutral — it is a gap that opposing counsel will exploit.</p>
+          <p><strong>Your firm's obligations remain yours:</strong> Pocono AI provides infrastructure. Professional responsibility analysis, privilege determinations, and compliance obligations are the attorney's and firm's responsibility. This briefing is not legal advice.</p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="wif-sep">
+
+    <!-- ─── GOVERNANCE SCORING CALCULATOR ─── -->
+    <div id="scoringPanel">
+      <div class="wif-sector-label">▶ GOVERNANCE READINESS SELF-ASSESSMENT — RATE YOUR CURRENT AI POSTURE</div>
+      <p style="color:var(--term-muted);font-size:0.8rem;margin-bottom:16px;">Rate your current AI deployment on each dimension. Score updates in real time. <span style="color:var(--term-amber);">This is a self-assessment tool — not a compliance audit.</span></p>
+      
+      <div class="wif-sliders">
+        <div class="slider-group">
+          <div class="slider-label">Data Custody — PHI/Client data stays local? <span id="val-custody">5</span>/10</div>
+          <input type="range" min="1" max="10" value="5" id="sl-custody" oninput="updateScore()">
+        </div>
+        <div class="slider-group">
+          <div class="slider-label">Audit Trail — Complete, tamper-evident log? <span id="val-audit">5</span>/10</div>
+          <input type="range" min="1" max="10" value="5" id="sl-audit" oninput="updateScore()">
+        </div>
+        <div class="slider-group">
+          <div class="slider-label">Human Review — Enforced before outputs proceed? <span id="val-review">5</span>/10</div>
+          <input type="range" min="1" max="10" value="5" id="sl-review" oninput="updateScore()">
+        </div>
+        <div class="slider-group">
+          <div class="slider-label">Citation Grounding — Sources cited on every output? <span id="val-citation">5</span>/10</div>
+          <input type="range" min="1" max="10" value="5" id="sl-citation" oninput="updateScore()">
+        </div>
+        <div class="slider-group">
+          <div class="slider-label">Vendor Control — Can you freeze model version? <span id="val-vendor">5</span>/10</div>
+          <input type="range" min="1" max="10" value="5" id="sl-vendor" oninput="updateScore()">
+        </div>
+        <div class="slider-group">
+          <div class="slider-label">Continuity — Works during internet outage? <span id="val-continuity">5</span>/10</div>
+          <input type="range" min="1" max="10" value="5" id="sl-continuity" oninput="updateScore()">
+        </div>
+      </div>
+
+      <div class="verdict-box" id="scoreVerdict">
+        <p><strong>Governance Readiness Score: <span id="totalScore" style="color:var(--term-amber);">30</span> / 60</strong></p>
+        <p id="scoreMessage" style="color:var(--term-muted);">Adjust sliders above to rate your current AI posture.</p>
+      </div>
+      
+      <p style="font-size:0.75rem;color:var(--term-muted);margin:8px 0 0;">This self-assessment is illustrative. It is not a compliance audit, legal opinion, or regulatory determination. Consult qualified compliance and legal counsel for actual risk analysis.</p>
+    </div>
+
+    <hr class="wif-sep">
+
+    <div class="wif-disclaimer">
+      <strong>Important &mdash; Illustrative Analysis Only:</strong> This tool presents simplified governance scenarios for educational purposes. It is not legal advice, compliance advice, or a regulatory determination. Every organization has different regulatory obligations, risk tolerance, and operational constraints. Scenario outputs are illustrative, not guarantees. Consult qualified legal counsel and compliance professionals before making AI infrastructure decisions. Pocono AI does not guarantee any regulatory outcome for any customer.
+    </div>
+
+    <div class="wif-cta">
+      <p>Interested in how Sentinel Node handles your specific sector and workflow?<br>We scope each pilot to the actual governance requirements of your practice.</p>
+      <a href="contact.html">Start a Serious Conversation →</a>
+    </div>
+
+    <div class="hint-bar" id="hintBar">// TRY: ↑ ↑ ↓ ↓ ← → ← → B A &nbsp;// CLEARANCE REQUIRED //</div>
+  </div>
+
+</main>
+
+<!-- DECLASSIFIED EASTER EGG OVERLAY -->
+<div class="declassified-overlay" id="declassifiedOverlay" aria-hidden="true" role="dialog" aria-label="Declassified message">
+  <div class="dstamp">DECLASSIFIED</div>
+  <div class="msg">
+    <p><strong>ACCESS LEVEL: FOUNDER</strong></p>
+    <p>Congratulations. You found the konami code easter egg on a B2B governance AI website. That's either impressive dedication or a very productive procrastination session.</p>
+    <p>Here's what's actually classified:</p>
+    <p><em>Marcus built Sentinel Node because he got tired of watching independent practitioners get sold surveillance capitalism dressed up as productivity software.</em></p>
+    <p>The "zero telemetry" positioning isn't a marketing angle. It's the point. The whole point. When your patients' data or your clients' files are the product, something has gone profoundly wrong.</p>
+    <p style="color:var(--term-amber);">LOCAL AI ISN'T JUST A FEATURE. IT'S A DIFFERENT THEORY OF WHAT TECHNOLOGY SHOULD DO.</p>
+    <p>Now go contact us if you're serious. Or go play the Doom-style game in the /games/ directory. Your call.</p>
+  </div>
+  <button class="close-btn" onclick="document.getElementById('declassifiedOverlay').classList.remove('show');" aria-label="Close">[ CLOSE TRANSMISSION ]</button>
+</div>
+
+<script src="search-index.js?v=402" defer></script>
+<script src="nav.js?v=402" defer></script>
+<script>
+// ─── BOOT SEQUENCE ───
+const bootLines = [
+  { text: '> SENTINEL NODE GOVERNANCE ANALYSIS SYSTEM v347', cls: 'prompt', delay: 0 },
+  { text: '> Initializing threat model database...', cls: '', delay: 300 },
+  { text: '[OK] Regulatory framework loaded: HIPAA 45 CFR §164, ABA Model Rule 1.6, GLBA, FERPA, SOX', cls: 'ok', delay: 700 },
+  { text: '[OK] Governance scenario matrix: 4 sectors × 3 deployment models loaded', cls: 'ok', delay: 1100 },
+  { text: '[WARN] Cloud AI vendors have not provided custody documentation for analysis', cls: 'warn', delay: 1500 },
+  { text: '[OK] Audit trail simulator: SHA-256 hash-chain model active', cls: 'ok', delay: 1900 },
+  { text: '> Generating operator credentials...', cls: '', delay: 2300 },
+  { text: '[INFO] This tool is illustrative only. Not legal or compliance advice. See disclaimer.', cls: 'info', delay: 2700 },
+  { text: '> SYSTEM READY. Select deployment sector below.', cls: 'prompt', delay: 3100 },
+];
+
+const bootEl = document.getElementById('bootContent');
+let bootIndex = 0;
+
+function runBoot() {
+  if (bootIndex >= bootLines.length) {
+    document.getElementById('mainTitle').style.display = 'block';
+    document.getElementById('mainSub').style.display = 'block';
+    document.getElementById('sectorPanel').style.display = 'block';
+    return;
+  }
+  const line = bootLines[bootIndex];
+  setTimeout(() => {
+    const p = document.createElement('div');
+    p.className = line.cls;
+    p.textContent = line.text;
+    bootEl.appendChild(p);
+    bootIndex++;
+    runBoot();
+  }, bootIndex === 0 ? 0 : 350);
+}
+
+// ─── DOC ID + TIMESTAMP ───
+function genDocId() {
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ0123456789';
+  let id = 'PAI-';
+  for (let i = 0; i < 4; i++) id += chars[Math.floor(Math.random() * chars.length)];
+  id += '-';
+  for (let i = 0; i < 4; i++) id += chars[Math.floor(Math.random() * chars.length)];
+  return id;
+}
+
+document.getElementById('docId').textContent = genDocId();
+
+function updateTime() {
+  const now = new Date();
+  const h = String(now.getUTCHours()).padStart(2,'0');
+  const m = String(now.getUTCMinutes()).padStart(2,'0');
+  const s = String(now.getUTCSeconds()).padStart(2,'0');
+  document.getElementById('accessTime').textContent = h + ':' + m + ':' + s + ' UTC';
+}
+updateTime();
+setInterval(updateTime, 1000);
+
+// ─── SECTOR SELECTION ───
+function selectSector(sector, btn) {
+  document.querySelectorAll('.sector-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.wif-matrix').forEach(m => m.classList.remove('visible'));
+  document.querySelectorAll('.wif-analysis').forEach(a => a.classList.remove('visible'));
+  const matrix = document.getElementById('matrix-' + sector);
+  if (matrix) matrix.classList.add('visible');
+  matrix && matrix.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+// ─── SCENARIO ANALYSIS ───
+function showAnalysis(id) {
+  const el = document.getElementById('analysis-' + id);
+  if (!el) return;
+  const sectorCode = el.dataset.sector;
+  document.querySelectorAll('.wif-analysis[data-sector="' + sectorCode + '"]').forEach(a => a.classList.remove('visible'));
+  document.querySelectorAll('.scenario-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('visible');
+  const clickedCard = event && event.currentTarget;
+  if (clickedCard) clickedCard.classList.add('selected');
+  el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+// ─── INCIDENT SIMULATION ───
+function showIncident(id, btn) {
+  document.querySelectorAll('#incidentPanel .sector-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('#incidentPanel .wif-matrix').forEach(m => { m.style.display = 'none'; });
+  const el = document.getElementById('incident-' + id);
+  if (el) { el.style.display = 'block'; el.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }
+}
+
+// ─── BOARDROOM BRIEFING ───
+function showBriefing(id, btn) {
+  document.querySelectorAll('#boardroomPanel .sector-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('#boardroomPanel .wif-analysis').forEach(a => a.classList.remove('visible'));
+  const el = document.getElementById('briefing-' + id);
+  if (el) { el.classList.add('visible'); el.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }
+}
+
+// ─── GOVERNANCE SCORE ───
+function updateScore() {
+  const vals = ['custody','audit','review','citation','vendor','continuity'];
+  let total = 0;
+  vals.forEach(v => {
+    const slider = document.getElementById('sl-' + v);
+    const display = document.getElementById('val-' + v);
+    const val = parseInt(slider.value);
+    display.textContent = val;
+    total += val;
+  });
+  document.getElementById('totalScore').textContent = total;
+  const pct = (total / 60) * 100;
+  const msgEl = document.getElementById('scoreMessage');
+  const scoreEl = document.getElementById('totalScore');
+  if (pct >= 80) {
+    scoreEl.style.color = 'var(--term-green)';
+    msgEl.textContent = 'Strong governance posture. You have data custody, audit trails, and human review in place. Verify these are by architecture, not just by policy.';
+  } else if (pct >= 60) {
+    scoreEl.style.color = 'var(--term-green-dim)';
+    msgEl.textContent = 'Moderate posture. Some governance controls are in place. Identify which dimensions are weakest and evaluate the risk of gaps under incident conditions.';
+  } else if (pct >= 40) {
+    scoreEl.style.color = 'var(--term-amber)';
+    msgEl.textContent = 'Developing posture. Significant governance gaps. Consider which dimensions would be hardest to explain to a regulator, patient, or opposing counsel.';
+  } else {
+    scoreEl.style.color = 'var(--term-red)';
+    msgEl.textContent = 'High exposure posture. Multiple critical governance gaps. Evaluate immediately — especially data custody and audit trail dimensions.';
+  }
+}
+
+// ─── KONAMI CODE ───
+const konami = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+let konamiIdx = 0;
+document.addEventListener('keydown', function(e) {
+  const key = e.key;
+  if (key === konami[konamiIdx]) {
+    konamiIdx++;
+    if (konamiIdx === konami.length) {
+      document.getElementById('declassifiedOverlay').classList.add('show');
+      document.getElementById('declassifiedOverlay').removeAttribute('aria-hidden');
+      konamiIdx = 0;
+    }
+  } else {
+    konamiIdx = key === konami[0] ? 1 : 0;
+  }
+});
+
+// ─── START ───
+runBoot();
+</script>
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 root-relative nav fix, Living Echo rebrand, Engineering & Drafting + Enterprise Estate Continuity links added (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- INCLUDE:FOOTER -->
+<footer role="contentinfo" style="background:#051622;border-top:1px solid rgba(255,255,255,0.08);padding:40px 24px 28px;font-size:0.85em;color:#8899aa;">
+  <div style="max-width:1180px;margin:0 auto;">
+
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:0 0 28px;margin-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.07);">
+      <div style="max-width:560px;">
+        <p style="margin:0 0 6px;font-size:1.05em;font-weight:700;color:#fff;">Local AI infrastructure for regulated practices.</p>
+        <p style="margin:0;font-size:0.95em;line-height:1.5;">Drafts with citations. Human review required. Sensitive documents stay under practice control. Simple path, deep proof.</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="/contact.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;background:#00c2a8;color:#04111a;font-weight:700;text-decoration:none;font-size:0.95em;">Request Pilot</a>
+        <a href="/sentinel-demo.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;border:1px solid rgba(0,194,168,0.55);color:#00c2a8;font-weight:700;text-decoration:none;font-size:0.95em;">Watch Demo</a>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px 32px;margin-bottom:32px;text-align:left;">
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">For You</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/start-here.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Start Here (3 min)</a>
+          <a href="/for-physicians.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Physicians</a>
+          <a href="/for-attorneys.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Attorneys</a>
+          <a href="/engineering-drafting/" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Engineering &amp; Drafting Teams</a>
+          <a href="/pilot-program.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Pilot Program</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Installer Training</a>
+          <a href="/how-it-works.html" style="color:#8899aa;text-decoration:none;">How It Works</a>
+          <a href="/trust.html" style="color:#8899aa;text-decoration:none;">Trust &amp; Audit</a>
+          <a href="/pricing.html" style="color:#8899aa;text-decoration:none;">Pricing</a>
+          <a href="/sentinel-demo.html" style="color:#8899aa;text-decoration:none;">See the Demo</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Documentation Hub</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/documentation-hub/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Hub Home &mdash; Deep Proof</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">Installer Training</a>
+          <a href="/sentinel-node/installation-simulator.html" style="color:#8899aa;text-decoration:none;">&#8627; Installation Simulator</a>
+          <a href="/documentation-hub/clinical/" style="color:#8899aa;text-decoration:none;">Clinical Documentation</a>
+          <a href="/documentation-hub/legal/" style="color:#8899aa;text-decoration:none;">Legal Documentation</a>
+          <a href="/documentation-hub/technical/" style="color:#8899aa;text-decoration:none;">Technical Documentation</a>
+          <a href="/documentation-hub/governance/" style="color:#8899aa;text-decoration:none;">Governance &amp; Audit</a>
+          <a href="/documentation-hub/tools/" style="color:#8899aa;text-decoration:none;">Tools &amp; Simulators</a>
+          <a href="/documentation-hub/research/" style="color:#8899aa;text-decoration:none;">Research &amp; Essays</a>
+          <a href="/documentation-hub/transparency/" style="color:#8899aa;text-decoration:none;">Transparency</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Global Federated AI</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/global/" style="color:#7af0dc;text-decoration:none;font-weight:600;">Global Federated Hub</a>
+          <a href="/global/australia/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Australia</a>
+          <a href="/global/singapore/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Singapore</a>
+          <a href="/global/taiwan/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Taiwan</a>
+          <a href="/global/europe/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Europe</a>
+          <a href="/contact.html" style="color:#8899aa;text-decoration:none;">Partner Inquiry</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Company</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/about.html" style="color:#8899aa;text-decoration:none;">About Pocono AI</a>
+          <a href="/team.html" style="color:#8899aa;text-decoration:none;">Team &amp; Leadership</a>
+          <a href="/why-pocono-ai.html" style="color:#8899aa;text-decoration:none;">Why Pocono AI</a>
+          <a href="/founding-commercial-leadership.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Join Us</a>
+          <a href="/careers.html" style="color:#8899aa;text-decoration:none;">Careers</a>
+          <a href="/how-we-hire.html" style="color:#8899aa;text-decoration:none;">How We Hire</a>
+          <a href="/channel-partners.html" style="color:#8899aa;text-decoration:none;">Technical Partners (MSPs)</a>
+          <a href="/partners.html" style="color:#8899aa;text-decoration:none;">Academic Partnerships</a>
+          <a href="/contact.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Contact</a>
+          <a href="https://forms.gle/VQahnkjMfY6QNEMy8" target="_blank" rel="noopener noreferrer" style="color:#d5a94f;text-decoration:none;font-weight:600;">Interest List &#8599;</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Founder Projects</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/rehability/" style="color:#a78bfa;text-decoration:none;font-weight:700;">Rehability &#x2605;</a>
+          <a href="/rehability/marcus-memory-helper/" style="color:#a78bfa;text-decoration:none;font-weight:600;">&#8627; Marcus's Memory Helper</a>
+          <a href="/sentinel-home/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Sentinel Home Edition</a>
+          <a href="/living-memorials/" style="color:#8899aa;text-decoration:none;">Living Echo</a>
+          <a href="/living-memorials/marcus-odell/" style="color:#8899aa;text-decoration:none;">Marcus&rsquo;s Living Echo</a>
+          <a href="/living-memorials/enterprise-estate-continuity.html" style="color:#8899aa;text-decoration:none;">Enterprise Estate Continuity</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Resources &amp; Legal</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/sitemap.html" style="color:#8899aa;text-decoration:none;">All Pages (Sitemap)</a>
+          <a href="/audit.html" style="color:#8899aa;text-decoration:none;">Transparency &amp; Audit Log</a>
+          <a href="/maturity-disclosure.html" style="color:#8899aa;text-decoration:none;">What We Have / Don&rsquo;t Claim</a>
+          <a href="/plain.html" style="color:#8899aa;text-decoration:none;">Plain Language Guide</a>
+          <a href="/privacy.html" style="color:#8899aa;text-decoration:none;">Privacy</a>
+          <a href="/terms.html" style="color:#8899aa;text-decoration:none;">Terms</a>
+          <a href="/sla.html" style="color:#8899aa;text-decoration:none;">SLA</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:18px;margin-bottom:14px;">
+      <p style="margin:0;font-size:0.82em;line-height:1.6;color:#6f8295;max-width:1000px;">Pocono AI does not provide medical, legal, or engineering advice, does not practice medicine, law, or licensed engineering, and does not make clinical, legal, or engineering decisions. Outputs are drafts or support materials that require review by a qualified professional; final professional judgment remains with the licensed physician, attorney, or engineer. Tools and simulations on this site are educational and use synthetic data.</p>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:20px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+      <p style="margin:0;font-size:0.9em;">&copy; 2026 Pocono AI, LLC &nbsp;&#183;&nbsp; East Stroudsburg, PA &nbsp;&#183;&nbsp; <a href="mailto:marcus@poconoai.com" style="color:#8899aa;">marcus@poconoai.com</a> &nbsp;&#183;&nbsp; <a href="tel:+15705340602" style="color:#8899aa;">(570) 534-0602</a></p>
+      <p style="margin:0;font-size:0.88em;"><a href="/audit.html" style="color:#5dade2;text-decoration:none;">Transparency v402</a></p>
+    </div>
+  </div>
+</footer>
+<script src="/search.js?v=402" defer></script>
+<!-- /INCLUDE:FOOTER -->
+
+</body>
+</html>

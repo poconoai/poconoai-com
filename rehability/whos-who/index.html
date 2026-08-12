@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="description" content="Who's Who is a planned Rehability plugin: a private, user-controlled people-context helper for people who have difficulty recognizing faces, names, or relationships. Local-first, consent-aware, not surveillance.">
+<meta name="keywords" content="face recognition difficulty, prosopagnosia tool, people recognition helper, assistive memory AI, disability AI tools, local AI accessibility, relationship context tool, Rehability Pocono AI">
+<title>Who's Who — Planned People-Context Helper | Pocono AI Rehability</title>
+
+<meta property="og:title" content="Who's Who — Planned People-Context Helper | Pocono AI Rehability">
+<meta property="og:description" content="A planned local-first people-context helper for people who have difficulty recognizing faces, names, or relationships. Private. User-controlled. Not surveillance.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Pocono AI">
+<meta property="og:url" content="https://poconoai.com/rehability/whos-who/">
+<meta property="og:image" content="https://poconoai.com/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#04111a">
+
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="stylesheet" href="/styles.css?v=402">
+<link rel="stylesheet" href="/nav-v2026.css?v=402">
+<link rel="stylesheet" href="/brand-v292.css?v=402">
+<link rel="canonical" href="https://poconoai.com/rehability/whos-who/">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Who's Who — Planned People-Context Helper",
+  "description": "A planned Rehability plugin: a private, user-controlled context helper for people who have difficulty recognizing faces, names, roles, or relationships. Local-first, consent-aware, not surveillance.",
+  "url": "https://poconoai.com/rehability/whos-who/",
+  "isPartOf": { "@type": "WebSite", "url": "https://poconoai.com", "name": "Pocono AI, LLC" },
+  "publisher": { "@type": "Organization", "name": "Pocono AI, LLC", "url": "https://poconoai.com" },
+  "datePublished": "2026-06-25",
+  "dateModified": "2026-06-25"
+}
+</script>
+
+<style>
+/* ── Who's Who — scoped .ww- design system ── */
+:root {
+  --ww-bg:         #04111a;
+  --ww-surface:    #060e1a;
+  --ww-card:       rgba(255,255,255,0.038);
+  --ww-border:     rgba(255,255,255,0.09);
+  --ww-sky:        #60a5fa;
+  --ww-sky-dim:    rgba(96,165,250,0.14);
+  --ww-purple:     #a78bfa;
+  --ww-purple-dim: rgba(167,139,250,0.14);
+  --ww-amber:      #f0a500;
+  --ww-amber-dim:  rgba(240,165,0,0.12);
+  --ww-red:        #f87171;
+  --ww-red-dim:    rgba(248,113,113,0.10);
+  --ww-green:      #4ade80;
+  --ww-text:       #c8d8e4;
+  --ww-muted:      #7a8fa0;
+  --ww-max:        1040px;
+}
+body { background: var(--ww-bg); color: var(--ww-text); }
+.ww-wrap { max-width: var(--ww-max); margin: 0 auto; padding: 0 22px; }
+
+/* breadcrumb */
+.ww-breadcrumb {
+  padding: 16px 22px; font-size: 0.82em; color: var(--ww-muted);
+  border-bottom: 1px solid var(--ww-border);
+}
+.ww-breadcrumb a { color: var(--ww-purple); text-decoration: none; }
+.ww-breadcrumb a:hover { text-decoration: underline; }
+
+/* status banner */
+.ww-status-bar {
+  background: var(--ww-amber-dim); border-bottom: 1px solid rgba(240,165,0,0.25);
+  padding: 10px 22px; text-align: center;
+  font-size: 0.82em; color: var(--ww-amber); font-weight: 700; letter-spacing: 0.04em;
+}
+
+/* hero */
+.ww-hero {
+  padding: 68px 22px 56px; text-align: center; border-bottom: 1px solid var(--ww-border);
+  background: radial-gradient(ellipse 700px 350px at 50% -60px, rgba(96,165,250,0.06), transparent);
+}
+.ww-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--ww-amber-dim); border: 1px solid rgba(240,165,0,0.35);
+  border-radius: 999px; padding: 5px 14px; font-size: 0.78em;
+  font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--ww-amber); margin-bottom: 20px;
+}
+.ww-badge::before { content: ''; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--ww-amber); animation: pulse 2s ease-in-out infinite; }
+@keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:.4; } }
+@media (prefers-reduced-motion: reduce) { .ww-badge::before { animation: none; } }
+
+.ww-hero h1 {
+  font-size: clamp(2rem, 4.5vw, 3.1rem); font-weight: 800; line-height: 1.15;
+  color: #fff; margin: 0 0 16px; letter-spacing: -0.02em;
+}
+.ww-hero h1 em { font-style: normal; color: var(--ww-sky); }
+.ww-hero .ww-sub {
+  font-size: clamp(1rem, 2vw, 1.2rem); color: var(--ww-muted);
+  max-width: 620px; margin: 0 auto 28px; line-height: 1.65;
+}
+.ww-ctas { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+.ww-btn-primary {
+  display: inline-flex; align-items: center; padding: 12px 26px;
+  border-radius: 999px; background: var(--ww-sky); color: #04111a;
+  font-weight: 700; text-decoration: none; font-size: 0.97em; transition: opacity .15s;
+}
+.ww-btn-primary:hover { opacity: .88; }
+.ww-btn-ghost {
+  display: inline-flex; align-items: center; padding: 11px 26px;
+  border-radius: 999px; border: 1px solid rgba(96,165,250,0.4);
+  color: var(--ww-sky); font-weight: 600; text-decoration: none; font-size: 0.97em;
+}
+.ww-btn-ghost:hover { border-color: var(--ww-sky); }
+.ww-btn-purple {
+  display: inline-flex; align-items: center; padding: 12px 26px;
+  border-radius: 999px; background: var(--ww-purple); color: #04111a;
+  font-weight: 700; text-decoration: none; font-size: 0.97em; transition: opacity .15s;
+}
+.ww-btn-purple:hover { opacity: .88; }
+
+/* sections */
+.ww-section { padding: 60px 22px; }
+.ww-section--alt { background: var(--ww-surface); }
+.ww-section-label {
+  display: block; font-size: 0.72em; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.15em; color: var(--ww-sky); margin-bottom: 10px;
+}
+.ww-section h2 {
+  font-size: clamp(1.45rem, 3vw, 2rem); font-weight: 800; color: #fff;
+  margin: 0 0 14px; letter-spacing: -0.015em;
+}
+.ww-lead {
+  font-size: clamp(0.97rem, 1.7vw, 1.1rem); color: var(--ww-muted);
+  line-height: 1.7; max-width: 740px; margin: 0 0 28px;
+}
+
+/* cards */
+.ww-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.ww-card {
+  background: var(--ww-card); border: 1px solid var(--ww-border);
+  border-radius: 14px; padding: 20px;
+}
+.ww-card h3 { font-size: 0.97em; font-weight: 700; color: #fff; margin: 0 0 7px; }
+.ww-card p  { margin: 0; font-size: 0.9em; color: var(--ww-muted); line-height: 1.6; }
+
+/* scenario cards — the "what it feels like" examples */
+.ww-scenarios { display: flex; flex-direction: column; gap: 12px; }
+.ww-scenario {
+  display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: start;
+  background: var(--ww-card); border: 1px solid var(--ww-border);
+  border-radius: 14px; padding: 18px 20px;
+}
+.ww-scenario-icon { font-size: 1.4rem; line-height: 1; padding-top: 2px; }
+.ww-scenario-body .who  { font-size: 0.83em; font-weight: 700; color: var(--ww-sky); margin-bottom: 3px; text-transform: uppercase; letter-spacing: 0.06em; }
+.ww-scenario-body .what { font-size: 0.93em; font-style: italic; color: var(--ww-text); margin-bottom: 6px; }
+.ww-scenario-body .how  { font-size: 0.87em; color: var(--ww-muted); line-height: 1.55; }
+
+/* boundary box — the important one */
+.ww-boundary-box {
+  background: var(--ww-red-dim); border: 1px solid rgba(248,113,113,0.3);
+  border-radius: 16px; padding: 28px; margin: 24px 0;
+}
+.ww-boundary-box h3 {
+  font-size: 1em; font-weight: 800; color: var(--ww-red);
+  margin: 0 0 14px; letter-spacing: -0.01em;
+}
+.ww-boundary-list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 9px; }
+.ww-boundary-list li {
+  font-size: 0.9em; color: var(--ww-muted); padding-left: 22px;
+  position: relative; line-height: 1.55;
+}
+.ww-boundary-list li::before {
+  content: '✗'; position: absolute; left: 0; color: var(--ww-red);
+  font-weight: 700; font-size: 0.85em;
+}
+
+/* the "what it is" boundary — green */
+.ww-is-box {
+  background: rgba(96,165,250,0.07); border: 1px solid rgba(96,165,250,0.25);
+  border-radius: 16px; padding: 28px; margin: 24px 0;
+}
+.ww-is-box h3 { font-size: 1em; font-weight: 800; color: var(--ww-sky); margin: 0 0 14px; }
+.ww-is-list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 9px; }
+.ww-is-list li {
+  font-size: 0.9em; color: var(--ww-muted); padding-left: 22px;
+  position: relative; line-height: 1.55;
+}
+.ww-is-list li::before {
+  content: '✓'; position: absolute; left: 0; color: var(--ww-sky); font-weight: 700;
+}
+
+/* design principles */
+.ww-principles { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-top: 24px; }
+.ww-principle {
+  background: var(--ww-card); border: 1px solid var(--ww-border);
+  border-radius: 14px; padding: 20px;
+}
+.ww-principle .label {
+  font-size: 0.68em; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--ww-sky); margin-bottom: 8px; display: block;
+}
+.ww-principle h3 { font-size: 0.95em; font-weight: 700; color: #fff; margin: 0 0 6px; }
+.ww-principle p  { margin: 0; font-size: 0.87em; color: var(--ww-muted); line-height: 1.55; }
+
+/* status callout */
+.ww-status-callout {
+  background: var(--ww-amber-dim); border: 1px solid rgba(240,165,0,0.3);
+  border-radius: 16px; padding: 24px;
+}
+.ww-status-callout h3 { font-size: 1.05em; font-weight: 800; color: var(--ww-amber); margin: 0 0 10px; }
+.ww-status-callout p  { margin: 0 0 8px; font-size: 0.93em; color: var(--ww-muted); line-height: 1.6; }
+
+/* chips */
+.ww-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.ww-chip {
+  display: inline-flex; padding: 5px 12px;
+  background: rgba(96,165,250,0.08); border: 1px solid rgba(96,165,250,0.2);
+  border-radius: 999px; font-size: 0.8em; color: var(--ww-sky); font-weight: 600;
+}
+
+/* quote pull */
+.ww-pull {
+  border-left: 3px solid var(--ww-sky); padding: 14px 20px;
+  margin: 24px 0; background: rgba(96,165,250,0.05); border-radius: 0 10px 10px 0;
+  font-style: italic; color: var(--ww-text); font-size: 1.05em; line-height: 1.65;
+}
+
+@media (max-width: 600px) {
+  .ww-hero { padding: 48px 18px 38px; }
+  .ww-section { padding: 40px 18px; }
+  .ww-scenario { grid-template-columns: 1fr; }
+  .ww-scenario-icon { display: none; }
+}
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link" style="position:absolute;left:-999px;top:0;background:var(--ww-sky);color:#04111a;padding:10px 18px;border-radius:0 0 12px 0;z-index:60;font-weight:700;">Skip to main content</a>
+
+<!-- Status bar -->
+<div class="ww-status-bar">
+  &#9888; Who's Who is a planned plugin — it does not yet exist as a working product. This page describes the design intent.
+</div>
+
+<!-- HITL notice -->
+<div id="hitl-notice" style="background:#0a1929;padding:4px 16px;text-align:center;font-size:12px;color:#4a5568;border-bottom:1px solid rgba(255,255,255,0.06);letter-spacing:0.01em;">Human-in-the-Loop required: all Rehability outputs are personal support drafts — not clinical, diagnostic, legal, or professional decisions</div>
+
+<!-- Header -->
+<header role="banner">
+  <div class="header-inner">
+    <a href="/index.html" class="logo" aria-label="Pocono AI Home">
+      <img src="/logo.svg?v=402" alt="" width="36" height="36" decoding="async" loading="eager" aria-hidden="true" style="display:inline-block;">
+      Pocono <span>AI</span>
+    </a>
+    <nav id="desktop-nav" aria-label="Main navigation">
+      <div class="nav-item"><a href="/index.html" class="nav-direct">Home</a></div>
+      <div class="nav-item"><a href="/for-physicians.html" class="nav-direct">Physicians</a></div>
+      <div class="nav-item"><a href="/for-attorneys.html" class="nav-direct">Attorneys</a></div>
+      <div class="nav-item"><a href="/sentinel-node.html" class="nav-direct nav-hub" style="color:#d5a94f;border:1px solid rgba(213,169,79,0.45);border-radius:999px;padding:6px 13px;">Sentinel Node</a></div>
+      <div class="nav-item"><a href="/living-memorials/" class="nav-direct">Living Echo</a></div>
+      <div class="nav-item"><a href="/contact.html" class="nav-direct">Contact</a></div>
+      <div class="nav-item" data-dropdown="menu-more">
+        <button type="button" class="nav-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="menu-more">More <span class="nav-chevron" aria-hidden="true">&#9662;</span></button>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <a href="/contact.html" class="nav-cta nav-cta-primary">Get in Touch</a>
+      <button type="button" class="pa-search-trigger" data-search-open aria-label="Search (press / or Ctrl-K)" aria-haspopup="dialog" aria-expanded="false">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span class="pa-st-label">Search</span><kbd data-pa-keyhint>Ctrl K</kbd>
+      </button>
+      <button type="button" class="header-icon-btn" id="mobile-menu" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav-panel">
+        <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="nav-dropdown" id="menu-more" aria-label="More navigation">
+  <p class="nav-dd-section">Products</p>
+  <a href="/engineering-drafting/">Drafting &amp; Engineering Edition</a>
+  <a href="/sentinel-home/">Sentinel Home Edition</a>
+  <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability — Assistive Tools &#x2605;</a>
+  <a href="/living-memorials/enterprise-estate-continuity.html">Enterprise Estate Continuity</a>
+  <p class="nav-dd-section">Capabilities</p>
+  <a href="/evidence-room.html">Evidence Room</a>
+  <a href="/push-button-deliverables.html">Push-Button Deliverables</a>
+  <a href="/pilot-readiness-kit.html">Pilot Kit</a>
+  <a href="/pilot-program.html">Pilot Program</a>
+  <a href="/how-it-works.html">How It Works</a>
+  <p class="nav-dd-section">Hubs &amp; Company</p>
+  <a href="/training.html">Training Hub</a>
+  <a href="/documentation-hub/">Document Hub</a>
+  <a href="/global/">Global Hub</a>
+  <a href="/about.html">About</a>
+  <p class="nav-dd-section">Trust &amp; Legal</p>
+  <a href="/transparency.html">Transparency</a>
+  <a href="/audit.html">Audit Log</a>
+  <a href="/privacy.html">Privacy</a>
+  <a href="/sitemap.html">Sitemap</a>
+</div>
+
+<nav id="mobile-nav-panel" aria-label="Mobile navigation" aria-hidden="true" role="dialog" aria-modal="true">
+  <div style="padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,0.07);">
+    <p style="font-size:0.65em;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.28);margin:0 0 10px;padding:0 2px;">Hubs</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <a href="/sentinel-node.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(213,169,79,0.1);border:1px solid rgba(213,169,79,0.35);border-radius:10px;color:#d5a94f;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Sentinel Node</a>
+      <a href="/documentation-hub/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(0,194,168,0.1);border:1px solid rgba(0,194,168,0.35);border-radius:10px;color:#00c2a8;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Docs Hub</a>
+      <a href="/rehability/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.35);border-radius:10px;color:#a78bfa;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Rehability</a>
+      <a href="/global/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(122,240,220,0.07);border:1px solid rgba(122,240,220,0.3);border-radius:10px;color:#7af0dc;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Global Hub</a>
+    </div>
+  </div>
+  <div class="mob-static-links">
+    <a href="/index.html">Home</a>
+    <a href="/for-physicians.html">Physicians</a>
+    <a href="/for-attorneys.html">Attorneys</a>
+    <a href="/engineering-drafting/">Engineering &amp; Drafting</a>
+    <a href="/pilot-program.html">Pilot Program</a>
+    <a href="/how-it-works.html">How It Works</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/living-memorials/">Living Echo</a>
+    <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability</a>
+    <a href="/about.html">About</a>
+    <a href="/sitemap.html" style="color:rgba(255,255,255,0.45);">Sitemap</a>
+    <a href="/privacy.html" style="color:rgba(255,255,255,0.45);">Privacy</a>
+  </div>
+  <a href="/contact.html" class="mob-cta">Get in Touch</a>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════════════ MAIN -->
+<main id="main-content">
+
+<!-- Breadcrumb -->
+<div class="ww-breadcrumb">
+  <a href="/rehability/">Rehability</a> &nbsp;/&nbsp; Who's Who
+</div>
+
+<!-- Hero -->
+<section class="ww-hero">
+  <div class="ww-wrap">
+    <div class="ww-badge">Plugin 2 — Planned / In Design</div>
+    <h1>👤 Who's <em>Who</em></h1>
+    <p class="ww-sub">A planned personal context helper for people who have difficulty recognizing people or faces. The goal is not surveillance. The goal is <strong style="color:#fff;">dignity</strong> — helping a user privately remember who someone is, how they know them, and what context matters before a conversation.</p>
+    <div class="ww-ctas">
+      <a href="mailto:marcus@poconoai.com?subject=Who%27s%20Who%20Plugin%20%E2%80%94%20Interest%20%2F%20Input&body=Hi%20Marcus%2C%0A%0AI%27m%20interested%20in%20the%20Who%27s%20Who%20plugin.%0A%0A(Tell%20us%20about%20your%20situation%20and%20what%20this%20tool%20would%20help%20you%20do.)" class="ww-btn-primary">Share your input &rarr;</a>
+      <a href="/rehability/" class="ww-btn-ghost">All Rehability tools</a>
+    </div>
+  </div>
+</section>
+
+<!-- Why this exists -->
+<section class="ww-section">
+  <div class="ww-wrap">
+    <span class="ww-section-label">Why This Tool Exists</span>
+    <h2>When faces don't stick, context does.</h2>
+    <p class="ww-lead">Some people have difficulty recognizing faces or reliably linking a face to a name, role, or relationship. This is sometimes called <strong style="color:var(--ww-text);">prosopagnosia</strong> (face blindness) but it describes a broader range of experiences — people who struggle to place faces in context, who lose the connection between a face and a name under stress or fatigue, or who simply have more difficulty with recognition than most people assume is normal.</p>
+
+    <div class="ww-pull">
+      "When someone walks toward me and expects me to remember them, my mind goes blank. Not because I don't know them — I may know them well. But I can't connect the face I'm seeing to the person I know. I need a moment of context to get there."
+    </div>
+
+    <p class="ww-lead">This is not a trivial social awkwardness. It affects professional relationships, family interactions, medical appointments, and everyday dignity. Calling someone by the wrong name, failing to recognize a colleague, or appearing indifferent to someone who matters to you — these carry real social cost.</p>
+
+    <p class="ww-lead">Who's Who is designed to help with that moment before the conversation. Privately. Locally. Under your control.</p>
+  </div>
+</section>
+
+<!-- What it would help with -->
+<section class="ww-section ww-section--alt" id="scenarios">
+  <div class="ww-wrap">
+    <span class="ww-section-label">What It Would Help With</span>
+    <h2>That moment before you have to speak.</h2>
+    <p class="ww-lead">These are the kinds of situations Who's Who is designed to support. None of these scenarios involve surveillance. All of them are about the user accessing their own notes about their own relationships.</p>
+
+    <div class="ww-scenarios">
+      <div class="ww-scenario">
+        <div class="ww-scenario-icon">🏘️</div>
+        <div class="ww-scenario-body">
+          <div class="who">Neighborhood</div>
+          <div class="what">"The person walking toward me on the block — who are they?"</div>
+          <div class="how">Tool surfaces: your note from a year ago — "Neighbor from the HOA meeting. Lives at the corner. Their name is Carol. Friendly — we talked about the sidewalk repair." Context restored before you reach them.</div>
+        </div>
+      </div>
+      <div class="ww-scenario">
+        <div class="ww-scenario-icon">👨‍👩‍👧</div>
+        <div class="ww-scenario-body">
+          <div class="who">Family / Social</div>
+          <div class="what">"That's my cousin's spouse, but I can never remember their name or how we know each other."</div>
+          <div class="how">Tool surfaces: "David. Married your cousin Emma in 2021 at the Poconos venue. Works in construction. You talked about the Eagles game at the reunion last summer."</div>
+        </div>
+      </div>
+      <div class="ww-scenario">
+        <div class="ww-scenario-icon">🏥</div>
+        <div class="ww-scenario-body">
+          <div class="who">Healthcare</div>
+          <div class="what">"The nurse who just walked in — I've met her before but I can't remember her name or what we discussed."</div>
+          <div class="how">Tool surfaces: "Nurse practitioner. You saw her last Tuesday for the blood draw. She was the one who mentioned the follow-up timing. Friendly tone."</div>
+        </div>
+      </div>
+      <div class="ww-scenario">
+        <div class="ww-scenario-icon">💼</div>
+        <div class="ww-scenario-body">
+          <div class="who">Professional</div>
+          <div class="what">"I know this person is a business contact but I can't place them before they reach me."</div>
+          <div class="how">Tool surfaces: "James — investor call in April. COO background. Interested in the medical side of the product. Last note: he wanted to reconnect after the pilot."</div>
+        </div>
+      </div>
+      <div class="ww-scenario">
+        <div class="ww-scenario-icon">🗓️</div>
+        <div class="ww-scenario-body">
+          <div class="who">Before any conversation</div>
+          <div class="what">"Before I speak, remind me what we last discussed."</div>
+          <div class="how">Tool surfaces the last notes you made about this person — topics, context, what you promised, what they mentioned — so you can enter the conversation prepared rather than improvising.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- What it IS and IS NOT — the most important section -->
+<section class="ww-section" id="boundaries">
+  <div class="ww-wrap">
+    <span class="ww-section-label">Design Boundaries — Please Read</span>
+    <h2>What this tool is. What it is not.</h2>
+    <p class="ww-lead">These boundaries are not fine print. They are design requirements. Who's Who will not be built without them, and they will be enforced technically — not just stated as policy.</p>
+
+    <div class="ww-is-box">
+      <h3>✓ What Who's Who is</h3>
+      <ul class="ww-is-list">
+        <li><strong style="color:var(--ww-text);">A personal memory tool.</strong> You add people to your own library. You write the context. You control who is included and what is recorded. It is your notebook, structured and searchable.</li>
+        <li><strong style="color:var(--ww-text);">Local-first.</strong> Your people library stays on your device. It does not sync to a cloud server. It does not share your relationship notes with anyone.</li>
+        <li><strong style="color:var(--ww-text);">User-controlled.</strong> You decide who is in the library. You decide what context to record. You can delete any entry at any time. Nothing is added without your explicit action.</li>
+        <li><strong style="color:var(--ww-text);">Consent-aware.</strong> The design assumes the people in your library are people you already know — people you've chosen to remember context about. There is no mechanism for adding strangers or people who have not been introduced to you.</li>
+        <li><strong style="color:var(--ww-text);">Private by default.</strong> Your notes about your relationships are private to you. Caregiver access, if ever added, is a separate opt-in with explicit controls — not a default.</li>
+        <li><strong style="color:var(--ww-text);">An assistive tool for disability support.</strong> Designed for people with face recognition difficulty, cognitive load challenges, memory conditions, or social anxiety around not recognizing people they know.</li>
+      </ul>
+    </div>
+
+    <div class="ww-boundary-box">
+      <h3>✗ What Who's Who is not — and will never be</h3>
+      <ul class="ww-boundary-list">
+        <li><strong style="color:var(--ww-text);">Not surveillance.</strong> This tool is not designed to identify, monitor, or track people without their knowledge. It is a personal memory aid, not a monitoring system.</li>
+        <li><strong style="color:var(--ww-text);">Not a law enforcement tool.</strong> Who's Who has no function in law enforcement, security, intelligence, or public safety applications. It will not be marketed or licensed for those purposes.</li>
+        <li><strong style="color:var(--ww-text);">Not a background check or identity verification tool.</strong> It does not pull public records, social media data, or third-party databases. It only works with information you have personally entered.</li>
+        <li><strong style="color:var(--ww-text);">Not for covert identification.</strong> You cannot point a camera at a stranger and have this tool identify them. It is not designed for that use case and any such feature would violate the design contract.</li>
+        <li><strong style="color:var(--ww-text);">Not a replacement for clinical evaluation.</strong> If you believe you have a condition that affects face recognition or memory, professional evaluation is important. This tool does not diagnose conditions, describe medical status, or substitute for clinical care.</li>
+        <li><strong style="color:var(--ww-text);">Not automatic.</strong> Nothing happens without your action. The tool does not passively observe, passively identify, or alert on its own. It is reactive to your explicit request.</li>
+        <li><strong style="color:var(--ww-text);">Not an account of other people's private information.</strong> Your notes about a person are your notes — your impressions, your context. The tool does not pull or store other people's private data.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Design principles -->
+<section class="ww-section ww-section--alt" id="design">
+  <div class="ww-wrap">
+    <span class="ww-section-label">How It Would Be Built</span>
+    <h2>Privacy-first design, technically enforced.</h2>
+    <p class="ww-lead">The intent is for each design principle below to be enforced in the code — not just described in the documentation. If it can't be enforced, it's not a feature.</p>
+
+    <div class="ww-principles">
+      <div class="ww-principle">
+        <span class="label">Principle 1</span>
+        <h3>Explicit entry only</h3>
+        <p>People enter your library because you added them, manually, one at a time. No automatic population from contacts, social media, or any external source.</p>
+      </div>
+      <div class="ww-principle">
+        <span class="label">Principle 2</span>
+        <h3>Local storage only</h3>
+        <p>Your people library is stored locally. It does not leave your device in a network call unless you explicitly export it. No background sync to any server.</p>
+      </div>
+      <div class="ww-principle">
+        <span class="label">Principle 3</span>
+        <h3>Context only, not identity claims</h3>
+        <p>The tool stores your notes about someone. It does not claim to verify who someone is, confirm their identity, or produce legally binding identification statements.</p>
+      </div>
+      <div class="ww-principle">
+        <span class="label">Principle 4</span>
+        <h3>Delete is real</h3>
+        <p>When you delete an entry, it is gone. No soft deletion, no retention, no "we keep it for safety." Deletion is deletion.</p>
+      </div>
+      <div class="ww-principle">
+        <span class="label">Principle 5</span>
+        <h3>User audit trail</h3>
+        <p>You can see a log of what was added to your library, when, and from what action. You are in control and can verify what the system has stored.</p>
+      </div>
+      <div class="ww-principle">
+        <span class="label">Principle 6</span>
+        <h3>No external lookups</h3>
+        <p>The tool does not reach out to public databases, image recognition APIs, social media platforms, or any network resource during a lookup. All data is what you put in.</p>
+      </div>
+    </div>
+
+    <div class="ww-chips">
+      <span class="ww-chip">Local SQLite storage</span>
+      <span class="ww-chip">No cloud API calls</span>
+      <span class="ww-chip">User-written context only</span>
+      <span class="ww-chip">Explicit add / delete</span>
+      <span class="ww-chip">Local audit trail</span>
+      <span class="ww-chip">No passive observation</span>
+      <span class="ww-chip">Plugin-isolated runtime</span>
+    </div>
+  </div>
+</section>
+
+<!-- Who it's for -->
+<section class="ww-section" id="who-its-for">
+  <div class="ww-wrap">
+    <span class="ww-section-label">Who This Is For</span>
+    <h2>Designed for people who need it, not everyone.</h2>
+    <p class="ww-lead">Who's Who is an assistive tool. It is specifically designed for people who have a genuine need for context support in recognizing or recalling the people in their lives.</p>
+
+    <div class="ww-grid">
+      <div class="ww-card">
+        <h3>People with face recognition difficulty</h3>
+        <p>Including people who experience what is often called prosopagnosia — difficulty connecting a face to a name, role, or relationship — even with people they know well.</p>
+      </div>
+      <div class="ww-card">
+        <h3>People with memory conditions</h3>
+        <p>People living with conditions that affect recall of social context — including some forms of cognitive impairment, acquired brain injury, or neurological conditions that affect social memory specifically.</p>
+      </div>
+      <div class="ww-card">
+        <h3>People with high cognitive load</h3>
+        <p>People whose cognitive capacity is reduced by chronic pain, fatigue, medication effects, or other conditions — where social context recall competes with everything else the brain is managing.</p>
+      </div>
+      <div class="ww-card">
+        <h3>People with social anxiety around recognition</h3>
+        <p>People who experience significant distress at the possibility of not recognizing someone and the social consequences that follow — and who would benefit from private, low-pressure context access.</p>
+      </div>
+      <div class="ww-card">
+        <h3>Caregivers supporting someone with these needs</h3>
+        <p>A caregiver or family member who helps someone build and maintain their context library — with the person's explicit participation and ongoing consent.</p>
+      </div>
+      <div class="ww-card">
+        <h3>Anyone who finds social context genuinely hard</h3>
+        <p>The difficulty doesn't need a formal diagnosis to be real. If maintaining social context across relationships is a significant challenge for you, this tool is designed with you in mind.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Current status -->
+<section class="ww-section ww-section--alt" id="status">
+  <div class="ww-wrap">
+    <span class="ww-section-label">Current Status</span>
+    <h2>Where this is right now.</h2>
+
+    <div class="ww-status-callout">
+      <h3>&#9888; Planned — not yet built</h3>
+      <p>Who's Who does not yet exist as a working tool. This page describes the design intent and the constraints that will guide its development.</p>
+      <p>The first working Rehability plugin — <a href="/rehability/marcus-memory-helper/" style="color:var(--ww-amber);text-decoration:none;font-weight:600;">Marcus's Memory Helper</a> — is available now. Who's Who is the next planned plugin after the Memory Helper stabilizes and the plugin runtime matures.</p>
+      <p>Development will not begin until the design is reviewed with people who actually live with face recognition difficulty or related conditions. Input from the community is part of the process, not an afterthought.</p>
+    </div>
+
+    <div style="margin-top:24px;background:var(--ww-card);border:1px solid var(--ww-border);border-radius:14px;padding:20px;">
+      <h3 style="font-size:0.97em;font-weight:700;color:#fff;margin:0 0 8px;">What "planned" means here</h3>
+      <p style="font-size:0.9em;color:var(--ww-muted);line-height:1.6;margin:0;">Planned means the design intent is committed and the boundary constraints are established. It does not mean a build date is set, a feature list is locked, or a release is promised. It means this tool is next in the Rehability plugin roadmap, and the design work — including the privacy constraints on this page — is the foundation for what gets built.</p>
+    </div>
+
+    <div style="margin-top:14px;background:var(--ww-card);border:1px solid var(--ww-border);border-radius:14px;padding:20px;">
+      <h3 style="font-size:0.97em;font-weight:700;color:#fff;margin:0 0 8px;">No production-grade facial recognition today</h3>
+      <p style="font-size:0.9em;color:var(--ww-muted);line-height:1.6;margin:0;">The current Sentinel Node / Rehability runtime does not include production-grade facial recognition. Any image-based feature in Who's Who would require careful design review, community input, and explicit user control before implementation. We are not starting from a facial recognition assumption. We are starting from the question: <em style="color:var(--ww-text);">what does someone with face recognition difficulty actually need in that moment?</em></p>
+    </div>
+  </div>
+</section>
+
+<!-- Input request -->
+<section class="ww-section" id="input">
+  <div class="ww-wrap">
+    <span class="ww-section-label">Help Shape This Tool</span>
+    <h2>We need to hear from you before we build it.</h2>
+    <p class="ww-lead">Who's Who will be better — and safer — if the people who would use it are involved in defining what it should and shouldn't do. We're specifically looking for input from:</p>
+
+    <div class="ww-grid" style="margin-bottom:28px;">
+      <div class="ww-card">
+        <h3>People with face recognition difficulty</h3>
+        <p>What does the hard moment actually feel like? What context would help most? What would you never want this tool to do?</p>
+      </div>
+      <div class="ww-card">
+        <h3>Disability advocates and researchers</h3>
+        <p>Are there design patterns we should follow or avoid? Are there existing tools or research we should be aware of?</p>
+      </div>
+      <div class="ww-card">
+        <h3>Clinicians working with relevant populations</h3>
+        <p>What would make this tool clinically safe to recommend? What boundaries would give you confidence recommending it to a patient?</p>
+      </div>
+      <div class="ww-card">
+        <h3>Privacy and ethics researchers</h3>
+        <p>Are there constraints we've missed? Are there design choices we should reconsider before building begins?</p>
+      </div>
+    </div>
+
+    <div style="text-align:center;padding:32px;background:rgba(96,165,250,0.07);border:1px solid rgba(96,165,250,0.22);border-radius:18px;">
+      <h3 style="font-size:1.2em;font-weight:800;color:#fff;margin:0 0 12px;">Tell us what you'd need from this tool.</h3>
+      <p style="color:var(--ww-muted);line-height:1.65;max-width:540px;margin:0 auto 22px;">No sales pitch. No commitment required. Just honest input from people who know what this kind of difficulty actually costs.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
+        <a href="mailto:marcus@poconoai.com?subject=Who%27s%20Who%20Plugin%20%E2%80%94%20Design%20Input&body=Hi%20Marcus%2C%0A%0AHere%20is%20my%20input%20on%20the%20Who%27s%20Who%20planned%20plugin%3A%0A%0A(Describe%20your%20experience%2C%20what%20you%27d%20need%2C%20or%20what%20concerns%20you%20about%20the%20design.)" class="ww-btn-primary">Share design input &rarr;</a>
+        <a href="/rehability/" class="ww-btn-ghost">Back to Rehability</a>
+      </div>
+    </div>
+
+    <div style="margin-top:24px;padding:16px 20px;border:1px solid rgba(255,255,255,0.07);border-radius:12px;font-size:0.83em;color:var(--ww-muted);line-height:1.6;">
+      <strong style="color:var(--ww-text);">Non-clinical boundary:</strong> Who's Who is a planned personal memory and context support tool. It does not diagnose conditions, describe medical status, verify identities, or make clinical determinations of any kind. If you are experiencing difficulty recognizing faces or people that is affecting your daily life, please speak with a healthcare professional. This tool is not a substitute for clinical evaluation or professional care.
+    </div>
+  </div>
+</section>
+
+<!-- Related -->
+<section class="ww-section ww-section--alt">
+  <div class="ww-wrap">
+    <span class="ww-section-label">Related</span>
+    <h2>More from Rehability.</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;">
+      <a href="/rehability/marcus-memory-helper/" style="display:block;text-decoration:none;">
+        <div class="ww-card" style="transition:border-color .15s;" onmouseover="this.style.borderColor='rgba(167,139,250,0.45)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.09)'">
+          <div style="font-size:0.7em;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#4ade80;margin-bottom:6px;">Available now</div>
+          <h3 style="color:#a78bfa;">Marcus's Memory Helper &rarr;</h3>
+          <p>Six built tools: pain capture, appointment prep, medication tracker, letter builder, daily log, call summary. The first Rehability plugin, available today.</p>
+        </div>
+      </a>
+      <a href="/rehability/" style="display:block;text-decoration:none;">
+        <div class="ww-card" style="transition:border-color .15s;" onmouseover="this.style.borderColor='rgba(96,165,250,0.45)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.09)'">
+          <div style="font-size:0.7em;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--ww-sky);margin-bottom:6px;">Plugin hub</div>
+          <h3 style="color:var(--ww-sky);">Rehability — All tools &rarr;</h3>
+          <p>The full Rehability plugin roadmap: what's built, what's planned, how the plugin architecture works, and the community call for new tool ideas.</p>
+        </div>
+      </a>
+      <a href="/sentinel-home/" style="display:block;text-decoration:none;">
+        <div class="ww-card" style="transition:border-color .15s;" onmouseover="this.style.borderColor='rgba(0,194,168,0.45)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.09)'">
+          <div style="font-size:0.7em;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#00c2a8;margin-bottom:6px;">Platform</div>
+          <h3 style="color:#00c2a8;">Sentinel Home Edition &rarr;</h3>
+          <p>The broader Sentinel Home platform vision: local AI for independence, communication, executive function, and home control. Rehability is its first implemented layer.</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- Footer -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- INCLUDE:FOOTER -->
+<footer role="contentinfo" style="background:#051622;border-top:1px solid rgba(255,255,255,0.08);padding:40px 24px 28px;font-size:0.85em;color:#8899aa;">
+  <div style="max-width:1180px;margin:0 auto;">
+
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:0 0 28px;margin-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.07);">
+      <div style="max-width:560px;">
+        <p style="margin:0 0 6px;font-size:1.05em;font-weight:700;color:#fff;">Local AI infrastructure for regulated practices.</p>
+        <p style="margin:0;font-size:0.95em;line-height:1.5;">Drafts with citations. Human review required. Sensitive documents stay under practice control. Simple path, deep proof.</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="/contact.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;background:#00c2a8;color:#04111a;font-weight:700;text-decoration:none;font-size:0.95em;">Request Pilot</a>
+        <a href="/sentinel-demo.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;border:1px solid rgba(0,194,168,0.55);color:#00c2a8;font-weight:700;text-decoration:none;font-size:0.95em;">Watch Demo</a>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px 32px;margin-bottom:32px;text-align:left;">
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">For You</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/start-here.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Start Here (3 min)</a>
+          <a href="/for-physicians.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Physicians</a>
+          <a href="/for-attorneys.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Attorneys</a>
+          <a href="/engineering-drafting/" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Engineering &amp; Drafting Teams</a>
+          <a href="/pilot-program.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Pilot Program</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Installer Training</a>
+          <a href="/how-it-works.html" style="color:#8899aa;text-decoration:none;">How It Works</a>
+          <a href="/trust.html" style="color:#8899aa;text-decoration:none;">Trust &amp; Audit</a>
+          <a href="/pricing.html" style="color:#8899aa;text-decoration:none;">Pricing</a>
+          <a href="/sentinel-demo.html" style="color:#8899aa;text-decoration:none;">See the Demo</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Documentation Hub</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/documentation-hub/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Hub Home &mdash; Deep Proof</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">Installer Training</a>
+          <a href="/sentinel-node/installation-simulator.html" style="color:#8899aa;text-decoration:none;">&#8627; Installation Simulator</a>
+          <a href="/documentation-hub/clinical/" style="color:#8899aa;text-decoration:none;">Clinical Documentation</a>
+          <a href="/documentation-hub/legal/" style="color:#8899aa;text-decoration:none;">Legal Documentation</a>
+          <a href="/documentation-hub/technical/" style="color:#8899aa;text-decoration:none;">Technical Documentation</a>
+          <a href="/documentation-hub/governance/" style="color:#8899aa;text-decoration:none;">Governance &amp; Audit</a>
+          <a href="/documentation-hub/tools/" style="color:#8899aa;text-decoration:none;">Tools &amp; Simulators</a>
+          <a href="/documentation-hub/research/" style="color:#8899aa;text-decoration:none;">Research &amp; Essays</a>
+          <a href="/documentation-hub/transparency/" style="color:#8899aa;text-decoration:none;">Transparency</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Global Federated AI</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/global/" style="color:#7af0dc;text-decoration:none;font-weight:600;">Global Federated Hub</a>
+          <a href="/global/australia/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Australia</a>
+          <a href="/global/singapore/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Singapore</a>
+          <a href="/global/taiwan/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Taiwan</a>
+          <a href="/global/europe/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Europe</a>
+          <a href="/contact.html" style="color:#8899aa;text-decoration:none;">Partner Inquiry</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Company</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/about.html" style="color:#8899aa;text-decoration:none;">About Pocono AI</a>
+          <a href="/team.html" style="color:#8899aa;text-decoration:none;">Team &amp; Leadership</a>
+          <a href="/why-pocono-ai.html" style="color:#8899aa;text-decoration:none;">Why Pocono AI</a>
+          <a href="/founding-commercial-leadership.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Join Us</a>
+          <a href="/careers.html" style="color:#8899aa;text-decoration:none;">Careers</a>
+          <a href="/how-we-hire.html" style="color:#8899aa;text-decoration:none;">How We Hire</a>
+          <a href="/channel-partners.html" style="color:#8899aa;text-decoration:none;">Technical Partners (MSPs)</a>
+          <a href="/partners.html" style="color:#8899aa;text-decoration:none;">Academic Partnerships</a>
+          <a href="/contact.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Contact</a>
+          <a href="https://forms.gle/VQahnkjMfY6QNEMy8" target="_blank" rel="noopener noreferrer" style="color:#d5a94f;text-decoration:none;font-weight:600;">Interest List &#8599;</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Founder Projects</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/rehability/" style="color:#a78bfa;text-decoration:none;font-weight:700;">Rehability &#x2605;</a>
+          <a href="/rehability/marcus-memory-helper/" style="color:#a78bfa;text-decoration:none;font-weight:600;">&#8627; Marcus's Memory Helper</a>
+          <a href="/sentinel-home/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Sentinel Home Edition</a>
+          <a href="/living-memorials/" style="color:#8899aa;text-decoration:none;">Living Echo</a>
+          <a href="/living-memorials/marcus-odell/" style="color:#8899aa;text-decoration:none;">Marcus&rsquo;s Living Echo</a>
+          <a href="/living-memorials/enterprise-estate-continuity.html" style="color:#8899aa;text-decoration:none;">Enterprise Estate Continuity</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Resources &amp; Legal</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/sitemap.html" style="color:#8899aa;text-decoration:none;">All Pages (Sitemap)</a>
+          <a href="/audit.html" style="color:#8899aa;text-decoration:none;">Transparency &amp; Audit Log</a>
+          <a href="/maturity-disclosure.html" style="color:#8899aa;text-decoration:none;">What We Have / Don&rsquo;t Claim</a>
+          <a href="/plain.html" style="color:#8899aa;text-decoration:none;">Plain Language Guide</a>
+          <a href="/privacy.html" style="color:#8899aa;text-decoration:none;">Privacy</a>
+          <a href="/terms.html" style="color:#8899aa;text-decoration:none;">Terms</a>
+          <a href="/sla.html" style="color:#8899aa;text-decoration:none;">SLA</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:18px;margin-bottom:14px;">
+      <p style="margin:0;font-size:0.82em;line-height:1.6;color:#6f8295;max-width:1000px;">Pocono AI does not provide medical, legal, or engineering advice, does not practice medicine, law, or licensed engineering, and does not make clinical, legal, or engineering decisions. Outputs are drafts or support materials that require review by a qualified professional; final professional judgment remains with the licensed physician, attorney, or engineer. Tools and simulations on this site are educational and use synthetic data.</p>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:20px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+      <p style="margin:0;font-size:0.9em;">&copy; 2026 Pocono AI, LLC &nbsp;&#183;&nbsp; East Stroudsburg, PA &nbsp;&#183;&nbsp; <a href="mailto:marcus@poconoai.com" style="color:#8899aa;">marcus@poconoai.com</a> &nbsp;&#183;&nbsp; <a href="tel:+15705340602" style="color:#8899aa;">(570) 534-0602</a></p>
+      <p style="margin:0;font-size:0.88em;"><a href="/audit.html" style="color:#5dade2;text-decoration:none;">Transparency v402</a></p>
+    </div>
+  </div>
+</footer>
+<script src="/search.js?v=402" defer></script>
+<!-- /INCLUDE:FOOTER -->
+
+<script src="/nav.js?v=402" defer></script>
+<script src="/search.js?v=402" defer></script>
+</body>
+</html>

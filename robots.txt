@@ -1,0 +1,19 @@
+# robots.txt — Pocono AI (poconoai.com)
+# v343 2026-06-01 mobile-contrast-repair
+
+User-agent: *
+Allow: /
+
+# Disallow internal/utility pages not intended for public indexing
+Disallow: /404.html
+Disallow: /header.html
+Disallow: /plain.html
+Disallow: /playground.html
+Disallow: /resonance-mandala.html
+Disallow: /empire-v2.html
+Disallow: /portal.html
+Disallow: /search-console-checklist.html
+
+# Sitemaps
+Sitemap: https://poconoai.com/sitemap.xml
+Sitemap: https://poconoai.com/sitemap.html

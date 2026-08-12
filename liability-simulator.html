@@ -1,0 +1,3404 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp -->
+<head>
+<meta charset="UTF-8">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Interactive simulation showing how AI liability propagates through a healthcare or legal organization — and where governance helps.">
+<meta name="keywords" content="AI liability simulator, AI governance, HIPAA AI, healthcare AI risk, legal AI risk, AI hallucination liability, sovereign AI, Sentinel Node, Pocono AI, on-premises AI, AI audit trail, chain of custody, human in the loop">
+<title>AI Liability Exposure Simulator | Pocono AI, LLC</title>
+<meta property="og:title" content="AI Liability Exposure Simulator | Pocono AI">
+<meta property="og:description" content="See exactly how AI liability propagates — and where governance must live to contain it. An interactive simulation for regulated professionals.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Pocono AI">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://poconoai.com/liability-simulator.html">
+<meta property="og:image" content="https://poconoai.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Pocono AI — AI Liability Exposure Simulator">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI Liability Exposure Simulator | Pocono AI">
+<meta name="twitter:description" content="Interactive visualization of AI liability propagation. Cloud vs. governance-first local inference.">
+<meta name="twitter:image" content="https://poconoai.com/og-image.jpg">
+<meta name="theme-color" content="#0B0F13">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="favicon-180x180.png">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="alternate icon" href="favicon.ico">
+<link rel="stylesheet" href="styles.css?v=402">
+<link rel="stylesheet" href="nav-v2026.css?v=402">
+<link rel="stylesheet" href="brand-v292.css?v=402">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+<link rel="canonical" href="https://poconoai.com/liability-simulator.html">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "AI Liability Exposure Simulator | Pocono AI",
+  "description": "Interactive governance simulation contrasting cloud AI liability propagation with Sentinel Node containment.",
+  "url": "https://poconoai.com/liability-simulator.html",
+  "isPartOf": { "@type": "WebSite", "url": "https://poconoai.com", "name": "Pocono AI, LLC" },
+  "publisher": { "@type": "Organization", "name": "Pocono AI, LLC", "url": "https://poconoai.com" },
+  "datePublished": "2026-06-01",
+  "dateModified": "2026-06-01"
+}
+</script>
+
+<style>
+/* =====================================================
+   liability-simulator.html — page styles
+   Design language: dark enterprise, restrained, instrumental.
+   Reference targets: Palantir, Bloomberg, observability platforms.
+   ===================================================== */
+
+html, body { overflow-x: clip; }
+.lsim-shell *, .lsim-shell *::before, .lsim-shell *::after { box-sizing: border-box; }
+
+/* ── HERO ────────────────────────────────────────────────── */
+.lsim-hero {
+  background:
+    radial-gradient(ellipse 70% 50% at 20% 30%, rgba(0,163,255,0.07) 0%, transparent 65%),
+    radial-gradient(ellipse 55% 40% at 80% 70%, rgba(0,194,168,0.05) 0%, transparent 70%),
+    linear-gradient(170deg, #040e18 0%, #051622 50%, #06192a 100%);
+  border-bottom: 1px solid rgba(0,194,168,0.1);
+  padding: clamp(56px,8vw,104px) 24px clamp(48px,6vw,80px);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.lsim-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,194,168,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,194,168,0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  background-position: -1px -1px;
+  mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.4) 0%, transparent 70%);
+  pointer-events: none;
+}
+.lsim-hero-inner { position: relative; z-index: 1; }
+.lsim-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 0.72em;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #00c2a8;
+  margin-bottom: 22px;
+  padding: 6px 14px;
+  background: rgba(0,194,168,0.07);
+  border: 1px solid rgba(0,194,168,0.18);
+  border-radius: 100px;
+}
+.lsim-eyebrow-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #00c2a8;
+  box-shadow: 0 0 8px rgba(0,194,168,0.7);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+@keyframes pulse-dot {
+  0%,100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(0.7); }
+}
+.lsim-hero h1 {
+  font-size: clamp(1.55rem, 6vw, 3.3rem);
+  line-height: 1.1;
+  font-weight: 800;
+  max-width: 880px;
+  margin: 0 auto 22px;
+  letter-spacing: -0.02em;
+  color: #f0f4f8;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+}
+.lsim-hero h1 em {
+  font-style: normal;
+  color: #E05A5A;
+  position: relative;
+  white-space: nowrap;
+}
+.lsim-hero-sub {
+  font-size: clamp(1rem, 1.6vw, 1.13em);
+  color: #8899aa;
+  max-width: 640px;
+  margin: 0 auto 36px;
+  line-height: 1.65;
+}
+.lsim-hero-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 22px;
+  font-size: 0.78em;
+  color: #4d6070;
+  letter-spacing: 0.06em;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.lsim-hero-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.lsim-hero-meta strong { color: #8899aa; font-weight: 600; }
+.lsim-hero-meta .dot-sep {
+  width: 3px; height: 3px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+}
+
+/* ── MAIN SHELL ──────────────────────────────────────────── */
+.lsim-shell {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 20px 96px;
+}
+
+/* ── CONFIGURATOR ────────────────────────────────────────── */
+.lsim-config {
+  margin: clamp(40px,6vw,72px) 0 0;
+}
+.lsim-step {
+  margin-bottom: 44px;
+}
+.lsim-step-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.lsim-step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  background: rgba(0,194,168,0.12);
+  border: 1px solid rgba(0,194,168,0.32);
+  font-size: 0.78em;
+  color: #00c2a8;
+  font-weight: 700;
+  flex-shrink: 0;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+}
+.lsim-step-label {
+  font-size: 0.7em;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(0,194,168,0.75);
+}
+.lsim-step h2 {
+  font-size: clamp(1.2rem, 2.3vw, 1.6rem);
+  font-weight: 700;
+  margin: 0 0 22px;
+  color: #d8e8f0;
+  letter-spacing: -0.01em;
+}
+
+.lsim-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+.lsim-card {
+  background: rgba(255,255,255,0.025);
+  border: 1.5px solid rgba(255,255,255,0.075);
+  border-radius: 10px;
+  padding: 22px 20px;
+  cursor: pointer;
+  transition: border-color 0.18s, background 0.18s, transform 0.18s;
+  position: relative;
+  -webkit-user-select: none;
+  user-select: none;
+  text-align: left;
+  font-family: inherit;
+  color: inherit;
+  width: 100%;
+}
+.lsim-card:hover {
+  border-color: rgba(0,163,255,0.32);
+  background: rgba(0,163,255,0.04);
+  transform: translateY(-1px);
+}
+.lsim-card:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #0A73D2;
+}
+.lsim-card.selected {
+  border-color: #00c2a8;
+  background: rgba(0,194,168,0.07);
+}
+.lsim-card.selected::after {
+  content: '';
+  position: absolute;
+  top: 12px; right: 12px;
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: #00c2a8;
+  box-shadow: 0 0 8px rgba(0,194,168,0.65);
+}
+.lsim-card.arch-cloud.selected {
+  border-color: #E05A5A;
+  background: rgba(224,90,90,0.07);
+}
+.lsim-card.arch-cloud.selected::after {
+  background: #E05A5A;
+  box-shadow: 0 0 8px rgba(224,90,90,0.6);
+}
+.lsim-card-icon {
+  width: 32px; height: 32px;
+  border-radius: 7px;
+  background: rgba(255,255,255,0.04);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 12px;
+}
+.lsim-card-title {
+  font-size: 0.97em;
+  font-weight: 700;
+  color: #d0dde8;
+  margin-bottom: 5px;
+  line-height: 1.3;
+}
+.lsim-card-desc {
+  font-size: 0.8em;
+  color: #6a7d8e;
+  line-height: 1.5;
+}
+.lsim-risk-tag {
+  display: inline-block;
+  margin-top: 12px;
+  font-size: 0.66em;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: 4px;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+}
+.tag-critical { background: rgba(224,90,90,0.14); color: #e07070; border: 1px solid rgba(224,90,90,0.25); }
+.tag-high     { background: rgba(186,117,23,0.14); color: #c89040; border: 1px solid rgba(186,117,23,0.25); }
+.tag-medium   { background: rgba(186,117,23,0.10); color: #b08530; border: 1px solid rgba(186,117,23,0.2); }
+.tag-contained { background: rgba(0,194,168,0.12); color: #00c2a8; border: 1px solid rgba(0,194,168,0.25); }
+
+/* Launch row */
+.lsim-launch-row {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  margin: 40px 0 0;
+  padding: 24px 0 0;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  flex-wrap: wrap;
+}
+.lsim-launch-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #0A73D2 0%, #0860b3 100%);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1em;
+  padding: 15px 32px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.2s, opacity 0.15s;
+  box-shadow: 0 4px 20px rgba(10,115,210,0.32);
+  letter-spacing: 0.01em;
+  font-family: inherit;
+}
+.lsim-launch-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 32px rgba(10,115,210,0.5);
+}
+.lsim-launch-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  background: rgba(255,255,255,0.08);
+  box-shadow: none;
+}
+.lsim-launch-btn svg { transition: transform 0.2s; }
+.lsim-launch-btn:hover:not(:disabled) svg { transform: translateX(3px); }
+.lsim-launch-hint {
+  font-size: 0.82em;
+  color: #4d6070;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+}
+
+/* ── SIMULATION STAGE ────────────────────────────────────── */
+.lsim-stage {
+  margin-top: clamp(48px,7vw,72px);
+  display: none;
+}
+.lsim-stage.active {
+  display: block;
+  animation: stage-rise 0.6s cubic-bezier(0.2,0.7,0.2,1);
+}
+@keyframes stage-rise {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.lsim-scenario-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.lsim-scenario-meta { flex: 1; min-width: 0; }
+.lsim-scenario-eyebrow {
+  font-size: 0.68em;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #00c2a8;
+  margin-bottom: 8px;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+}
+.lsim-scenario-title {
+  font-size: clamp(1.25rem, 2.6vw, 1.8rem);
+  font-weight: 800;
+  color: #d8e8f0;
+  margin: 0 0 10px;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+}
+.lsim-scenario-desc {
+  font-size: 0.93em;
+  color: #6a7d8e;
+  line-height: 1.6;
+  max-width: 680px;
+}
+.lsim-controls {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+.lsim-ctrl-btn {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: #8899aa;
+  font-size: 0.8em;
+  font-weight: 600;
+  padding: 9px 16px;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  letter-spacing: 0.03em;
+  font-family: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+.lsim-ctrl-btn:hover {
+  background: rgba(255,255,255,0.07);
+  border-color: rgba(255,255,255,0.18);
+  color: #c0d0dc;
+}
+.lsim-ctrl-btn.primary {
+  background: rgba(0,194,168,0.12);
+  border-color: rgba(0,194,168,0.3);
+  color: #00c2a8;
+}
+.lsim-ctrl-btn.primary:hover {
+  background: rgba(0,194,168,0.2);
+  border-color: rgba(0,194,168,0.45);
+}
+
+/* ── DUAL PANE ───────────────────────────────────────────── */
+.lsim-compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 28px;
+}
+@media (max-width: 780px) {
+  .lsim-compare { grid-template-columns: 1fr; }
+}
+.lsim-pane {
+  border-radius: 14px;
+  padding: 26px 22px 22px;
+  position: relative;
+  overflow: hidden;
+  min-height: 580px;
+  display: flex;
+  flex-direction: column;
+}
+.lsim-pane-cloud {
+  background:
+    radial-gradient(ellipse 80% 60% at 30% 0%, rgba(224,90,90,0.06) 0%, transparent 70%),
+    linear-gradient(165deg, #170a0a 0%, #100608 100%);
+  border: 1.5px solid rgba(224,90,90,0.22);
+}
+.lsim-pane-sentinel {
+  background:
+    radial-gradient(ellipse 80% 60% at 30% 0%, rgba(0,194,168,0.06) 0%, transparent 70%),
+    linear-gradient(165deg, #051f2c 0%, #051622 100%);
+  border: 1.5px solid rgba(0,194,168,0.22);
+}
+
+.lsim-pane-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 22px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.lsim-pane-icon {
+  width: 34px; height: 34px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.pane-icon-cloud { background: rgba(224,90,90,0.15); }
+.pane-icon-sentinel { background: rgba(0,194,168,0.15); }
+.lsim-pane-titles { flex: 1; min-width: 0; }
+.lsim-pane-name {
+  font-size: 0.84em;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+.pane-name-cloud { color: #d08080; }
+.pane-name-sentinel { color: #00c2a8; }
+.lsim-pane-sub {
+  font-size: 0.72em;
+  color: #4d6070;
+  margin-top: 2px;
+  letter-spacing: 0.02em;
+}
+.lsim-pane-status {
+  font-size: 0.66em;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  flex-shrink: 0;
+}
+.status-running { background: rgba(186,117,23,0.16); color: #c89040; border: 1px solid rgba(186,117,23,0.3); }
+.status-exposed { background: rgba(224,90,90,0.16); color: #e07070; border: 1px solid rgba(224,90,90,0.32); }
+.status-secured { background: rgba(0,194,168,0.14); color: #00c2a8; border: 1px solid rgba(0,194,168,0.3); }
+
+/* Flow tree */
+.lsim-flow {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.flow-node {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 0;
+  position: relative;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.flow-node.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.flow-node-track {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  width: 14px;
+  margin-top: 4px;
+}
+.flow-node-dot {
+  width: 11px; height: 11px;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+  background: var(--dot-bg, #100608);
+  transition: background 0.25s, box-shadow 0.25s;
+}
+.lsim-pane-sentinel .flow-node-dot { --dot-bg: #051622; }
+.flow-node.visible .flow-node-dot { background: currentColor; box-shadow: 0 0 10px currentColor; }
+.flow-node-line {
+  width: 1px;
+  flex: 1;
+  min-height: 24px;
+  background: currentColor;
+  opacity: 0.22;
+  margin: 3px 0;
+}
+.flow-node:last-child .flow-node-line { display: none; }
+.flow-node-body { flex: 1; min-width: 0; padding-bottom: 18px; }
+.flow-node-title {
+  font-size: 0.86em;
+  font-weight: 700;
+  color: #d2dfe8;
+  margin-bottom: 3px;
+  line-height: 1.3;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.flow-node-tag {
+  display: inline-block;
+  font-size: 0.62em;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 3px;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  background: rgba(255,255,255,0.05);
+  color: #6a7d8e;
+}
+.flow-node-tag.tag-exfil { background: rgba(224,90,90,0.14); color: #d08080; }
+.flow-node-tag.tag-block { background: rgba(0,194,168,0.14); color: #00c2a8; }
+.flow-node-tag.tag-hil { background: rgba(10,115,210,0.18); color: #4a9dde; }
+.flow-node-tag.tag-cite { background: rgba(0,163,255,0.14); color: #5ab3e0; }
+.flow-node-detail {
+  font-size: 0.78em;
+  color: #6a7d8e;
+  line-height: 1.5;
+}
+
+.flow-neutral { color: #4a6c7e; }
+.flow-warning { color: #c89040; }
+.flow-danger  { color: #E05A5A; }
+.flow-safe    { color: #00c2a8; }
+.flow-audit   { color: #5ab3e0; }
+.flow-blocked { color: #00c2a8; opacity: 0.55; }
+
+/* Incident & blocked banners */
+.lsim-banner {
+  display: none;
+  margin: 4px 0 18px;
+  padding: 14px 16px;
+  border-radius: 8px;
+  font-size: 0.84em;
+  line-height: 1.55;
+  animation: flash-in 0.4s ease;
+}
+.lsim-banner.show { display: block; }
+.lsim-banner.incident {
+  background: rgba(224,90,90,0.08);
+  border: 1px solid rgba(224,90,90,0.28);
+  color: #d08585;
+}
+.lsim-banner.incident strong { color: #e88080; }
+.lsim-banner.contained {
+  background: rgba(0,194,168,0.07);
+  border: 1px solid rgba(0,194,168,0.25);
+  color: #6abfab;
+}
+.lsim-banner.contained strong { color: #00c2a8; }
+@keyframes flash-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Pane footer summary */
+.lsim-pane-summary {
+  margin-top: auto;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.lsim-pane-metric {
+  background: rgba(255,255,255,0.025);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 6px;
+  padding: 10px 12px;
+}
+.lsim-pane-metric .m-label {
+  font-size: 0.62em;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #4d6070;
+  margin-bottom: 4px;
+  display: block;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+}
+.lsim-pane-metric .m-value {
+  font-size: 1.05em;
+  font-weight: 700;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+}
+.m-bad { color: #e07070; }
+.m-good { color: #00c2a8; }
+.m-neutral { color: #c0d0dc; }
+
+/* ── TELEMETRY ───────────────────────────────────────────── */
+.lsim-telemetry-section {
+  margin: 32px 0 0;
+}
+.lsim-tel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.lsim-tel-title {
+  font-size: 0.68em;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #5ab3e0;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+}
+.tel-blink {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #5ab3e0;
+  box-shadow: 0 0 6px rgba(90,179,224,0.7);
+  animation: tel-pulse 1.2s ease-in-out infinite;
+}
+@keyframes tel-pulse {
+  0%,100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+.lsim-tel-meta {
+  font-size: 0.7em;
+  color: #4d6070;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+}
+
+.lsim-tel-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  background: rgba(5,12,22,0.6);
+  border: 1px solid rgba(10,115,210,0.15);
+  border-radius: 10px;
+  overflow: hidden;
+}
+@media (max-width: 780px) {
+  .lsim-tel-grid { grid-template-columns: 1fr; }
+}
+.lsim-tel-column {
+  padding: 16px 18px;
+  min-height: 260px;
+}
+.lsim-tel-column + .lsim-tel-column {
+  border-left: 1px solid rgba(255,255,255,0.05);
+}
+@media (max-width: 780px) {
+  .lsim-tel-column + .lsim-tel-column {
+    border-left: 0;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+}
+.lsim-tel-col-label {
+  font-size: 0.62em;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+}
+.tel-col-cloud { color: #d08080; }
+.tel-col-sentinel { color: #00c2a8; }
+.tel-entries {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.74em;
+}
+.tel-entry {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 4px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.035);
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity 0.3s, transform 0.3s;
+}
+.tel-entry.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+.tel-ts {
+  color: #2a4a5e;
+  flex-shrink: 0;
+  font-size: 0.9em;
+}
+.tel-status-dot {
+  flex-shrink: 0;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+}
+.tel-ok   { background: #00c2a8; box-shadow: 0 0 4px rgba(0,194,168,0.6); }
+.tel-warn { background: #c89040; box-shadow: 0 0 4px rgba(200,144,64,0.6); }
+.tel-err  { background: #e07070; box-shadow: 0 0 4px rgba(224,112,112,0.6); }
+.tel-info { background: #5ab3e0; box-shadow: 0 0 4px rgba(90,179,224,0.6); }
+.tel-msg { color: #6a8a9a; flex: 1; min-width: 0; word-break: break-word; }
+.tel-msg .tel-highlight { color: #8abfcc; }
+.tel-msg .tel-danger    { color: #d08080; }
+.tel-msg .tel-good      { color: #6abfab; }
+.tel-empty {
+  font-size: 0.78em;
+  color: #2a4a5e;
+  font-style: italic;
+  padding: 8px 0;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+}
+
+/* ── LIABILITY PROPAGATION ───────────────────────────────── */
+.lsim-liability {
+  margin: 48px 0 0;
+}
+.lsim-section-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  flex-wrap: wrap;
+}
+.lsim-section-eyebrow {
+  font-size: 0.68em;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #00c2a8;
+  margin-bottom: 6px;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+}
+.lsim-section-title {
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  font-weight: 700;
+  color: #d8e8f0;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+.lsim-section-sub {
+  font-size: 0.85em;
+  color: #6a7d8e;
+  margin: 6px 0 0;
+  line-height: 1.55;
+  max-width: 600px;
+}
+
+.lsim-liability-map {
+  background: rgba(4,10,18,0.7);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  padding: 28px 24px;
+  position: relative;
+  overflow: hidden;
+}
+.liab-svg-wrap {
+  width: 100%;
+  overflow: hidden;
+}
+.liab-svg-wrap svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Animated flow paths in liability SVG */
+.flow-path {
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+  transition: stroke-dashoffset 1.5s cubic-bezier(0.4,0,0.2,1);
+}
+.flow-path.drawn { stroke-dashoffset: 0; }
+
+.svg-label {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+  fill: rgba(255,255,255,0.4);
+}
+.svg-label-name {
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  fill: #c0d0dc;
+}
+.svg-node-fade { opacity: 0; transition: opacity 0.5s ease; }
+.svg-node-fade.shown { opacity: 1; }
+
+/* ── RISK DIFFERENTIAL ───────────────────────────────────── */
+.lsim-risk-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin: 24px 0 0;
+}
+@media (max-width: 680px) {
+  .lsim-risk-grid { grid-template-columns: 1fr; }
+}
+.risk-card {
+  border-radius: 10px;
+  padding: 22px 20px;
+}
+.risk-card-cloud {
+  background: rgba(22,8,8,0.55);
+  border: 1px solid rgba(224,90,90,0.18);
+}
+.risk-card-sentinel {
+  background: rgba(5,22,34,0.7);
+  border: 1px solid rgba(0,194,168,0.18);
+}
+.risk-card-label {
+  font-size: 0.66em;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+}
+.risk-card-cloud .risk-card-label { color: #d08080; }
+.risk-card-sentinel .risk-card-label { color: #00c2a8; }
+.risk-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+.risk-bar-row {
+  display: grid;
+  grid-template-columns: 130px 1fr 32px;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.78em;
+}
+.risk-bar-name { color: #8899aa; }
+.risk-bar-track {
+  height: 6px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.risk-bar-fill {
+  height: 100%;
+  width: 0;
+  transition: width 1.1s cubic-bezier(0.3,0.7,0.2,1);
+  border-radius: 3px;
+}
+.fill-cloud { background: linear-gradient(90deg, #e07070, #c95555); }
+.fill-sentinel { background: linear-gradient(90deg, #00c2a8, #008873); }
+.risk-bar-val {
+  font-size: 0.85em;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-weight: 700;
+  text-align: right;
+}
+.risk-card-cloud .risk-bar-val { color: #d08080; }
+.risk-card-sentinel .risk-bar-val { color: #00c2a8; }
+
+.risk-card-summary {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  font-size: 0.82em;
+  line-height: 1.55;
+}
+.risk-card-cloud .risk-card-summary { color: #b08585; }
+.risk-card-sentinel .risk-card-summary { color: #88b8ab; }
+.risk-card-summary strong { color: inherit; font-weight: 700; }
+
+/* ── INSIGHT BLOCK ───────────────────────────────────────── */
+.lsim-insight {
+  margin: 48px 0 0;
+  background: linear-gradient(135deg, rgba(10,115,210,0.06), rgba(0,194,168,0.04));
+  border: 1px solid rgba(0,194,168,0.18);
+  border-radius: 14px;
+  padding: clamp(28px,5vw,44px) clamp(24px,4vw,40px);
+  position: relative;
+  overflow: hidden;
+}
+.lsim-insight::before {
+  content: '"';
+  position: absolute;
+  top: -20px;
+  left: 18px;
+  font-size: 9rem;
+  color: rgba(0,194,168,0.06);
+  font-family: Georgia, serif;
+  line-height: 1;
+  pointer-events: none;
+}
+.lsim-insight-label {
+  font-size: 0.68em;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #00c2a8;
+  margin-bottom: 14px;
+  position: relative;
+  z-index: 1;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+}
+.lsim-insight-text {
+  font-size: clamp(1.05rem, 1.9vw, 1.3rem);
+  line-height: 1.55;
+  color: #d8e8f0;
+  margin: 0 0 18px;
+  font-weight: 500;
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+}
+.lsim-insight-text strong { color: #00c2a8; font-weight: 700; }
+
+/* ── DEBRIEF BLOCK (post-game) ───────────────────────────── */
+.lsim-debrief {
+  margin: 48px 0 0;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  pointer-events: none;
+}
+.lsim-debrief.revealed {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.lsim-debrief-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 4px;
+}
+@media (max-width: 880px) { .lsim-debrief-grid { grid-template-columns: 1fr; gap: 14px; } }
+
+.lsim-debrief-card {
+  background: rgba(255,255,255,0.025);
+  border: 1px solid rgba(0,194,168,0.18);
+  border-radius: 12px;
+  padding: 22px 22px 20px;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.55s ease, transform 0.55s ease, border-color 0.2s ease;
+}
+.lsim-debrief.revealed .lsim-debrief-card:nth-child(1) { transition-delay: 0.05s; opacity: 1; transform: translateY(0); }
+.lsim-debrief.revealed .lsim-debrief-card:nth-child(2) { transition-delay: 0.22s; opacity: 1; transform: translateY(0); }
+.lsim-debrief.revealed .lsim-debrief-card:nth-child(3) { transition-delay: 0.39s; opacity: 1; transform: translateY(0); }
+.lsim-debrief-card:hover { border-color: rgba(0,194,168,0.35); }
+
+.lsim-deb-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.lsim-deb-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  background: rgba(0,194,168,0.10);
+  color: #00c2a8;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.78em;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+.lsim-deb-tag {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.7em;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: #00c2a8;
+}
+.lsim-deb-title {
+  color: #e0eef5;
+  font-size: 1.02rem;
+  font-weight: 650;
+  line-height: 1.32;
+  margin: 0 0 10px;
+  letter-spacing: -0.005em;
+}
+.lsim-deb-body {
+  color: #b0c0cc;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0 0 14px;
+}
+.lsim-deb-artifact {
+  margin-top: 12px;
+  padding: 10px 12px;
+  background: rgba(0,18,28,0.5);
+  border: 1px solid rgba(0,194,168,0.14);
+  border-radius: 7px;
+}
+.lsim-deb-artifact-label {
+  display: block;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.62em;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(0,194,168,0.65);
+  margin-bottom: 4px;
+}
+.lsim-deb-artifact-text {
+  display: block;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.78em;
+  color: #88c8b8;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+.lsim-debrief-footer {
+  margin-top: 26px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(0,194,168,0.14);
+  text-align: center;
+}
+.lsim-debrief-takeaway {
+  color: #d8e8f0;
+  font-size: clamp(0.98rem, 1.6vw, 1.1rem);
+  line-height: 1.55;
+  margin: 0 auto 22px;
+  max-width: 620px;
+}
+.lsim-debrief-takeaway strong { color: #00c2a8; font-weight: 700; }
+.lsim-debrief-cta-row {
+  display: inline-flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.lsim-debrief-btn {
+  display: inline-block;
+  background: #00c2a8;
+  color: #051622;
+  font-weight: 650;
+  font-size: 0.9em;
+  padding: 11px 20px;
+  border-radius: 7px;
+  text-decoration: none;
+  border: 1px solid #00c2a8;
+  cursor: pointer;
+  transition: background-color 0.15s, transform 0.15s;
+  font-family: inherit;
+}
+.lsim-debrief-btn:hover { background: #1ad1b8; transform: translateY(-1px); }
+.lsim-debrief-btn-ghost {
+  background: transparent;
+  color: #00c2a8;
+  border: 1px solid rgba(0,194,168,0.4);
+}
+.lsim-debrief-btn-ghost:hover {
+  background: rgba(0,194,168,0.08);
+  border-color: rgba(0,194,168,0.6);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lsim-debrief, .lsim-debrief-card {
+    transition: opacity 0.15s ease;
+    transform: none !important;
+  }
+  .lsim-debrief.revealed .lsim-debrief-card { transition-delay: 0s !important; }
+}
+
+/* ── CTA ─────────────────────────────────────────────────── */
+.lsim-cta {
+  margin: 56px 0 0;
+  text-align: center;
+  padding: clamp(40px,6vw,64px) clamp(20px,4vw,40px);
+  background: linear-gradient(135deg, rgba(10,115,210,0.07), rgba(5,22,34,0.5));
+  border: 1px solid rgba(10,115,210,0.22);
+  border-radius: 14px;
+}
+.lsim-cta h2 {
+  font-size: clamp(1.25rem, 2.6vw, 1.75rem);
+  font-weight: 700;
+  color: #e0eef5;
+  margin: 0 0 14px;
+  letter-spacing: -0.01em;
+}
+.lsim-cta p {
+  font-size: 0.97em;
+  color: #8899aa;
+  margin: 0 auto 28px;
+  max-width: 560px;
+  line-height: 1.6;
+}
+.lsim-cta-row {
+  display: inline-flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.lsim-btn-primary {
+  display: inline-block;
+  background: #00c2a8;
+  color: #051622;
+  font-weight: 700;
+  font-size: 0.95em;
+  padding: 14px 28px;
+  border-radius: 7px;
+  text-decoration: none;
+  transition: opacity 0.15s, transform 0.15s;
+}
+.lsim-btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+.lsim-btn-ghost {
+  display: inline-block;
+  border: 1px solid rgba(0,194,168,0.4);
+  color: #00c2a8;
+  font-weight: 600;
+  font-size: 0.95em;
+  padding: 13px 26px;
+  border-radius: 7px;
+  text-decoration: none;
+  transition: background 0.15s, border-color 0.15s;
+}
+.lsim-btn-ghost:hover {
+  background: rgba(0,194,168,0.08);
+  border-color: rgba(0,194,168,0.6);
+}
+
+/* ── CINEMATIC PRE-ROLL ─────────────────────────────────── */
+.lsim-preroll {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #020610;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+}
+.lsim-preroll.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+.lsim-preroll.closing {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.lsim-preroll::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 50%, rgba(0,194,168,0.05) 0%, transparent 70%),
+    linear-gradient(180deg, #010407 0%, #020610 50%, #030914 100%);
+  pointer-events: none;
+}
+.lsim-preroll::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,194,168,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,194,168,0.025) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.4) 0%, transparent 80%);
+  pointer-events: none;
+  opacity: 0.7;
+}
+.lsim-preroll-stage {
+  position: relative;
+  z-index: 1;
+  max-width: 880px;
+  width: 92%;
+  text-align: center;
+  padding: 32px 24px;
+}
+
+/* Frame chrome - tiny status line at the top */
+.lsim-preroll-statusbar {
+  position: absolute;
+  top: 24px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 32px;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.66em;
+  color: rgba(255,255,255,0.28);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  z-index: 2;
+  opacity: 0;
+  animation: preroll-fade-in 0.5s ease 0.2s forwards;
+}
+.lsim-preroll-statusbar .pr-status-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.lsim-preroll-statusbar .pr-status-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: #c89040;
+  box-shadow: 0 0 6px rgba(200,144,64,0.6);
+  animation: preroll-blink 1.4s ease-in-out infinite;
+}
+@keyframes preroll-blink {
+  0%,100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* The prompt line being "typed" */
+.lsim-preroll-prompt-wrap {
+  position: relative;
+  margin-bottom: 36px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.lsim-preroll-prompt-wrap.shown {
+  opacity: 1;
+  transform: translateY(0);
+}
+.lsim-preroll-prompt-label {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.66em;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #4d6070;
+  margin-bottom: 14px;
+}
+.lsim-preroll-prompt {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: clamp(0.92rem, 1.7vw, 1.18rem);
+  line-height: 1.7;
+  color: #c0d0dc;
+  padding: 22px 24px;
+  background: rgba(5,12,22,0.65);
+  border: 1px solid rgba(0,194,168,0.15);
+  border-radius: 10px;
+  text-align: left;
+  min-height: 90px;
+  position: relative;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.45);
+}
+.lsim-preroll-prompt-text {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.lsim-preroll-cursor {
+  display: inline-block;
+  width: 8px;
+  height: 1.15em;
+  background: #00c2a8;
+  vertical-align: text-bottom;
+  margin-left: 2px;
+  animation: preroll-cursor 0.8s steps(2) infinite;
+  box-shadow: 0 0 6px rgba(0,194,168,0.5);
+}
+@keyframes preroll-cursor {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+.lsim-preroll-prompt.dimmed .lsim-preroll-prompt-text {
+  color: #4d6070;
+  transition: color 0.5s ease;
+}
+.lsim-preroll-prompt.dimmed .lsim-preroll-cursor {
+  display: none;
+}
+
+/* The question that rises beneath the prompt */
+.lsim-preroll-question {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  font-size: clamp(1.4rem, 3.2vw, 2.1rem);
+  line-height: 1.2;
+  font-weight: 700;
+  color: #e0eef5;
+  margin: 0;
+  letter-spacing: -0.015em;
+}
+.lsim-preroll-question em {
+  font-style: normal;
+  color: #00c2a8;
+}
+.lsim-preroll-question.shown {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Sub-question and skip control */
+.lsim-preroll-sub {
+  margin-top: 18px;
+  font-size: 0.9em;
+  color: #6a7d8e;
+  line-height: 1.55;
+  max-width: 540px;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0;
+  transition: opacity 0.5s ease 0.3s;
+}
+.lsim-preroll-sub.shown { opacity: 1; }
+
+.lsim-preroll-skip {
+  position: absolute;
+  top: 22px;
+  right: 28px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.5);
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.74em;
+  letter-spacing: 0.1em;
+  padding: 7px 13px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+  z-index: 3;
+  opacity: 0;
+  animation: preroll-fade-in 0.5s ease 0.6s forwards;
+}
+.lsim-preroll-skip:hover {
+  color: rgba(255,255,255,0.85);
+  border-color: rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.04);
+}
+.lsim-preroll-skip svg {
+  width: 10px; height: 10px;
+  vertical-align: -1px;
+  margin-left: 4px;
+}
+@keyframes preroll-fade-in {
+  to { opacity: 1; }
+}
+
+@media (max-width: 600px) {
+  .lsim-preroll-statusbar { padding: 0 18px; font-size: 0.6em; }
+  .lsim-preroll-skip { top: 16px; right: 18px; }
+  .lsim-preroll-prompt { padding: 18px 16px; min-height: 80px; }
+}
+
+/* ── REDUCED MOTION ──────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .pulse-dot, .tel-blink, .svg-node-pulse { animation: none !important; }
+  .flow-node, .tel-entry, .lsim-stage.active, .lsim-banner,
+  .risk-bar-fill, .flow-path, .svg-node-fade {
+    transition-duration: 0.01ms !important;
+    animation: none !important;
+  }
+  .lsim-preroll { display: none !important; }
+}
+
+/* ── SMALL SCREENS ───────────────────────────────────────── */
+@media (max-width: 540px) {
+  .lsim-pane { min-height: 0; padding: 22px 18px 18px; }
+  .lsim-pane-summary { grid-template-columns: 1fr; }
+  .risk-bar-row { grid-template-columns: 100px 1fr 30px; gap: 10px; }
+}
+
+/* ── WALK MODE — sales-companion screen-share layout ─────
+   Activate with ?walk=1. Strips nav chrome, bumps fonts,
+   hides configurator (autorun fires automatically).
+   Designed for desktop screen-share. Mobile falls back to
+   regular layout so prospects can still tap-explore.
+   ─────────────────────────────────────────────────────── */
+body.lsim-walk header,
+body.lsim-walk #nav-drop-root,
+body.lsim-walk #search-panel,
+body.lsim-walk #mobile-nav-panel,
+body.lsim-walk #hitl-notice,
+body.lsim-walk #reading-progress,
+body.lsim-walk #pai-pilot-cta,
+body.lsim-walk .skip-link,
+body.lsim-walk .lsim-hero,
+body.lsim-walk .lsim-config,
+body.lsim-walk .lsim-cta,
+body.lsim-walk .lsim-insight,
+body.lsim-walk footer { display: none !important; }
+
+body.lsim-walk { background: #02080f !important; }
+
+body.lsim-walk .lsim-shell {
+  max-width: 1480px !important;
+  padding: 32px 32px 64px !important;
+}
+
+body.lsim-walk .lsim-stage {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Add a presentation header strip */
+body.lsim-walk .lsim-stage::before {
+  content: '▌ POCONO AI · LIABILITY SIMULATOR · LIVE WALKTHROUGH';
+  display: block;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.78em;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: #00c2a8;
+  padding: 14px 18px;
+  margin-bottom: 24px;
+  background: rgba(0,194,168,0.07);
+  border: 1px solid rgba(0,194,168,0.22);
+  border-radius: 8px;
+}
+
+body.lsim-walk .lsim-scenario-title {
+  font-size: clamp(1.6rem, 3vw, 2.4rem) !important;
+}
+body.lsim-walk .lsim-scenario-desc {
+  font-size: 1.05rem !important;
+  max-width: 900px !important;
+}
+body.lsim-walk .lsim-pane {
+  min-height: 660px !important;
+}
+body.lsim-walk .flow-node-title {
+  font-size: 0.95em !important;
+}
+body.lsim-walk .flow-node-detail {
+  font-size: 0.86em !important;
+  line-height: 1.6 !important;
+}
+body.lsim-walk .lsim-debrief-card h3,
+body.lsim-walk .lsim-debrief-card h4 {
+  font-size: 1.1em !important;
+}
+body.lsim-walk .lsim-debrief-card p,
+body.lsim-walk .lsim-debrief-card .lsim-deb-body {
+  font-size: 0.96em !important;
+}
+body.lsim-walk .lsim-debrief-takeaway {
+  font-size: 1.15rem !important;
+}
+
+/* Hide the controls (replay/reset) — presenter drives via reload */
+body.lsim-walk .lsim-controls { display: none !important; }
+
+/* Persistent "exit walk mode" pill in corner */
+body.lsim-walk::after {
+  content: 'Exit walk mode';
+  position: fixed;
+  bottom: 18px;
+  right: 18px;
+  padding: 8px 14px;
+  background: rgba(0,194,168,0.1);
+  border: 1px solid rgba(0,194,168,0.32);
+  border-radius: 20px;
+  color: #00c2a8;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.72em;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0.7;
+}
+/* The actual exit anchor — full-area click target */
+body.lsim-walk .lsim-walk-exit {
+  position: fixed;
+  bottom: 12px;
+  right: 12px;
+  width: 140px;
+  height: 36px;
+  z-index: 101;
+  cursor: pointer;
+  opacity: 0;
+}
+
+/* ── PRINT EXPORT ─────────────────────────────────────────
+   Activated when user clicks "Save as PDF" in the debrief.
+   The print dialog opens; the system print/PDF flow takes over.
+   Goal: a clean, branded one-pager showing the scenario,
+   the dual-pane comparison, and the three mechanism cards.
+   ─────────────────────────────────────────────────────── */
+@media print {
+  @page {
+    size: letter;
+    margin: 0.6in 0.65in 0.6in 0.65in;
+  }
+
+  /* Hide everything except the simulation stage + debrief */
+  header,
+  #nav-drop-root,
+  #search-panel,
+  #mobile-nav-panel,
+  #hitl-notice,
+  #reading-progress,
+  #pai-pilot-cta,
+  .skip-link,
+  .lsim-hero,
+  .lsim-config,
+  .lsim-preroll,
+  .lsim-controls,
+  .lsim-debrief-cta-row,
+  .lsim-insight,
+  .lsim-cta,
+  .lsim-liability-section,
+  .lsim-section-header,
+  footer { display: none !important; }
+
+  body, html {
+    background: #fff !important;
+    color: #000 !important;
+    font-size: 9.5pt !important;
+    line-height: 1.4 !important;
+  }
+
+  .lsim-shell { padding: 0 !important; max-width: 100% !important; }
+  .lsim-stage { padding: 0 !important; margin: 0 !important; }
+
+  /* Print header — branded document title */
+  .lsim-stage::before {
+    content: 'Pocono AI · Liability Simulator · Comparative Brief';
+    display: block;
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+    font-size: 8pt;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #000;
+    border-bottom: 1pt solid #000;
+    padding-bottom: 6pt;
+    margin-bottom: 14pt;
+  }
+
+  /* Scenario block — title + description */
+  .lsim-scenario {
+    background: #fff !important;
+    border: none !important;
+    padding: 0 0 12pt !important;
+    margin: 0 0 14pt !important;
+    border-bottom: 0.5pt solid #888 !important;
+    page-break-inside: avoid;
+  }
+  .lsim-scenario-title {
+    color: #000 !important;
+    font-size: 14pt !important;
+    margin: 0 0 6pt !important;
+    font-weight: 700 !important;
+  }
+  .lsim-scenario-meta {
+    color: #555 !important;
+    font-size: 8pt !important;
+    margin: 0 0 8pt !important;
+  }
+  .lsim-scenario-desc {
+    color: #000 !important;
+    font-size: 9.5pt !important;
+    margin: 0 !important;
+  }
+
+  /* Dual-pane comparison */
+  .lsim-stage-grid,
+  .lsim-comparison {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10pt !important;
+    page-break-inside: avoid;
+  }
+  .lsim-pane {
+    background: #fff !important;
+    border: 0.5pt solid #000 !important;
+    padding: 10pt !important;
+    margin: 0 !important;
+    min-height: 0 !important;
+    page-break-inside: avoid;
+  }
+  .lsim-pane.cloud { border-color: #000 !important; }
+  .lsim-pane.sentinel { border-color: #000 !important; }
+  .lsim-pane-header { margin: 0 0 8pt !important; padding-bottom: 6pt !important; border-bottom: 0.5pt solid #888 !important; }
+  .lsim-pane-name { color: #000 !important; font-size: 9pt !important; font-weight: 700 !important; }
+  .lsim-pane-sub { color: #555 !important; font-size: 7.5pt !important; }
+  .lsim-pane-status {
+    background: #fff !important;
+    border: 0.5pt solid #000 !important;
+    color: #000 !important;
+    font-size: 7pt !important;
+    padding: 1pt 6pt !important;
+  }
+
+  /* Flow nodes in panes */
+  .flow-node {
+    opacity: 1 !important;
+    transform: none !important;
+    margin-bottom: 4pt !important;
+  }
+  .flow-node-title { color: #000 !important; font-size: 8pt !important; font-weight: 700 !important; }
+  .flow-node-detail { color: #333 !important; font-size: 7.5pt !important; }
+  .flow-node-dot,
+  .flow-node-line { display: none !important; }
+  .flow-node-tag {
+    background: #fff !important;
+    border: 0.5pt solid #000 !important;
+    color: #000 !important;
+    font-size: 6pt !important;
+    padding: 1pt 4pt !important;
+  }
+
+  /* Pane metric strip */
+  .lsim-pane-metrics {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 4pt !important;
+    margin-top: 8pt !important;
+    padding-top: 6pt !important;
+    border-top: 0.5pt solid #888 !important;
+  }
+  .lsim-pane-metric {
+    background: #fff !important;
+    border: 0.5pt solid #888 !important;
+    color: #000 !important;
+    padding: 4pt !important;
+    font-size: 7pt !important;
+  }
+  .lsim-pane-metric strong { color: #000 !important; }
+
+  /* Risk differential */
+  .lsim-risk-differential {
+    margin-top: 14pt !important;
+    page-break-inside: avoid;
+  }
+  .risk-differential-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10pt !important;
+  }
+  .risk-differential-card {
+    background: #fff !important;
+    border: 0.5pt solid #000 !important;
+    padding: 8pt !important;
+  }
+  .risk-bar-row { color: #000 !important; font-size: 8pt !important; }
+  .risk-bar-track { background: #ddd !important; height: 6pt !important; }
+  .risk-bar-fill {
+    background: #000 !important;
+    transition: none !important;
+  }
+
+  /* Debrief — the real takeaway */
+  .lsim-debrief {
+    margin-top: 16pt !important;
+    page-break-before: auto;
+    page-break-inside: auto;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .lsim-debrief::before {
+    content: 'What You Just Watched · The Three Mechanisms';
+    display: block;
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+    font-size: 9pt !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.1em !important;
+    text-transform: uppercase !important;
+    color: #000 !important;
+    border-bottom: 1pt solid #000 !important;
+    padding-bottom: 4pt !important;
+    margin-bottom: 10pt !important;
+  }
+  .lsim-debrief-grid {
+    grid-template-columns: 1fr 1fr 1fr !important;
+    gap: 8pt !important;
+    page-break-inside: avoid;
+  }
+  .lsim-debrief-card {
+    background: #fff !important;
+    border: 0.5pt solid #000 !important;
+    padding: 8pt !important;
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    page-break-inside: avoid;
+  }
+  .lsim-debrief-card h3,
+  .lsim-debrief-card h4 {
+    color: #000 !important;
+    font-size: 9pt !important;
+    margin: 0 0 5pt !important;
+  }
+  .lsim-debrief-card p,
+  .lsim-debrief-card .lsim-deb-body {
+    color: #000 !important;
+    font-size: 8pt !important;
+    line-height: 1.45 !important;
+    margin: 0 0 6pt !important;
+  }
+  .lsim-deb-mech-tag,
+  .lsim-debrief-mech-tag {
+    color: #000 !important;
+    font-size: 6.5pt !important;
+    border: 0.5pt solid #000 !important;
+    padding: 1pt 4pt !important;
+    background: #fff !important;
+    border-radius: 0 !important;
+  }
+  .lsim-deb-artifact,
+  .lsim-debrief-artifact {
+    background: #f4f4f4 !important;
+    border: 0.5pt solid #888 !important;
+    border-radius: 2pt !important;
+    color: #000 !important;
+    padding: 5pt !important;
+    font-size: 6.8pt !important;
+    line-height: 1.4 !important;
+    word-break: break-all;
+  }
+  .lsim-deb-artifact-label { color: #555 !important; font-size: 6pt !important; }
+  .lsim-deb-artifact-text,
+  .lsim-debrief-artifact code,
+  .lsim-debrief-artifact .da-prefix,
+  .lsim-debrief-artifact .da-key,
+  .lsim-debrief-artifact .da-val-good,
+  .lsim-debrief-artifact .da-val-neutral,
+  .lsim-debrief-artifact .da-hash {
+    color: #000 !important;
+  }
+
+  /* Takeaway line */
+  .lsim-debrief-footer {
+    margin-top: 12pt !important;
+    padding: 8pt 10pt !important;
+    background: #f4f4f4 !important;
+    border-left: 2pt solid #000 !important;
+    page-break-inside: avoid;
+  }
+  .lsim-debrief-takeaway {
+    color: #000 !important;
+    font-size: 9pt !important;
+    margin: 0 !important;
+  }
+  .lsim-debrief-takeaway strong { color: #000 !important; }
+
+  /* Page footer */
+  body::after {
+    display: block;
+    content: 'Pocono AI, LLC · poconoai.com · Liability Simulator export · Confidential';
+    position: fixed;
+    bottom: 0;
+    left: 0; right: 0;
+    text-align: center;
+    font-size: 7pt;
+    color: #888;
+    letter-spacing: 0.06em;
+  }
+
+  a { color: #000 !important; text-decoration: none !important; }
+}
+</style>
+
+<script>
+(function(){
+  var ids=[];
+  try {
+    if (location.search.indexOf('showbanners=1') !== -1) {
+      ids.forEach(function(id){ localStorage.removeItem('pai_dismissed_'+id); });
+    }
+  } catch(e) {}
+  var hideRules = [];
+  ids.forEach(function(id){
+    try {
+      if (localStorage.getItem('pai_dismissed_'+id) === '1') {
+        hideRules.push('#'+id+'{display:none !important;}');
+      }
+    } catch(e) {}
+  });
+  if (hideRules.length) {
+    var style = document.createElement('style');
+    style.textContent = hideRules.join('');
+    (document.head || document.documentElement).appendChild(style);
+  }
+})();
+</script>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to content</a>
+<div id="reading-progress" aria-hidden="true"></div>
+
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- INCLUDE:HEADER -->
+<div id="hitl-notice" style="background:#0a1929;padding:4px 16px;text-align:center;font-size:12px;color:#4a5568;border-bottom:1px solid rgba(255,255,255,0.06);letter-spacing:0.01em;">Human-in-the-Loop required: licensed professionals verify all outputs before clinical or legal action</div>
+<header role="banner">
+  <div class="header-inner">
+    <a href="/index.html" class="logo" aria-label="Pocono AI Home">
+      <img src="/logo.svg?v=402" alt="" width="36" height="36" decoding="async" loading="eager" aria-hidden="true" style="display:inline-block;">
+      Pocono <span>AI</span>
+    </a>
+    <nav id="desktop-nav" aria-label="Main navigation">
+      <div class="nav-item"><a href="/index.html" class="nav-direct">Home</a></div>
+      <div class="nav-item"><a href="/for-physicians.html" class="nav-direct">Physicians</a></div>
+      <div class="nav-item"><a href="/for-attorneys.html" class="nav-direct">Attorneys</a></div>
+      <div class="nav-item"><a href="/sentinel-node.html" class="nav-direct nav-hub" style="color:#d5a94f;border:1px solid rgba(213,169,79,0.45);border-radius:999px;padding:6px 13px;">Sentinel Node</a></div>
+      <div class="nav-item"><a href="/living-memorials/" class="nav-direct">Living Echo</a></div>
+      <div class="nav-item"><a href="/contact.html" class="nav-direct">Contact</a></div>
+      <div class="nav-item" data-dropdown="menu-more">
+        <button type="button" class="nav-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="menu-more">More <span class="nav-chevron" aria-hidden="true">&#9662;</span></button>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <a href="/contact.html#pilot" class="nav-cta nav-cta-primary">Request a Pilot</a>
+      <button type="button" class="pa-search-trigger" data-search-open aria-label="Search (press / or Ctrl-K)" aria-haspopup="dialog" aria-expanded="false">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span class="pa-st-label">Search</span><kbd data-pa-keyhint>Ctrl K</kbd>
+      </button>
+      <button type="button" class="header-icon-btn" id="mobile-menu" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav-panel">
+        <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- "More" overflow dropdown — sibling of <header> so position:fixed escapes header's stacking context. Wired by nav.js via data-dropdown="menu-more". -->
+<div class="nav-dropdown" id="menu-more" aria-label="More navigation">
+  <p class="nav-dd-section">Products</p>
+  <a href="/engineering-drafting/">Drafting &amp; Engineering Edition</a>
+  <a href="/sentinel-home/">Sentinel Home Edition</a>
+  <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability — Assistive Tools &#x2605;</a>
+  <a href="/living-memorials/enterprise-estate-continuity.html">Enterprise Estate Continuity</a>
+  <p class="nav-dd-section">Capabilities</p>
+  <a href="/evidence-room.html">Evidence Room</a>
+  <a href="/push-button-deliverables.html">Push-Button Deliverables</a>
+  <a href="/pilot-readiness-kit.html">Pilot Kit</a>
+  <a href="/pilot-program.html">Pilot Program</a>
+  <a href="/how-it-works.html">How It Works</a>
+  <p class="nav-dd-section">Hubs &amp; Company</p>
+  <a href="/training.html">Training Hub</a>
+  <a href="/documentation-hub/">Document Hub</a>
+  <a href="/global/">Global Hub</a>
+  <a href="/investors-hub.html">Investor Hub</a>
+  <a href="/valuation-dashboard.html">Valuation Dashboard</a>
+  <a href="/about.html">About</a>
+  <p class="nav-dd-section">Trust &amp; Legal</p>
+  <a href="/transparency.html">Transparency</a>
+  <a href="/audit.html">Audit Log</a>
+  <a href="/privacy.html">Privacy</a>
+  <a href="/sitemap.html">Sitemap</a>
+</div>
+<!-- Site search is provided by the self-contained search.js asset (command palette: / or Ctrl/Cmd-K). -->
+
+<!-- Mobile panel: full-screen slide-in. v396 nav — hub tiles + grouped links + Sentinel Node + Engineering. -->
+<nav id="mobile-nav-panel" aria-label="Mobile navigation" aria-hidden="true" role="dialog" aria-modal="true">
+
+  <!-- Hub tiles: Sentinel Node, Documentation Hub, Training Hub, Global Hub -->
+  <div style="padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,0.07);">
+    <p style="font-size:0.65em;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.28);margin:0 0 10px;padding:0 2px;">Hubs</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <a href="/sentinel-node.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(213,169,79,0.1);border:1px solid rgba(213,169,79,0.35);border-radius:10px;color:#d5a94f;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Sentinel Node</a>
+      <a href="/documentation-hub/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(0,194,168,0.1);border:1px solid rgba(0,194,168,0.35);border-radius:10px;color:#00c2a8;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Docs Hub</a>
+      <a href="/training.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.35);border-radius:10px;color:#a78bfa;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Training Hub</a>
+      <a href="/global/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(122,240,220,0.07);border:1px solid rgba(122,240,220,0.3);border-radius:10px;color:#7af0dc;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Global Hub</a>
+    </div>
+  </div>
+
+  <!-- Core paths -->
+  <div class="mob-static-links">
+    <a href="/index.html">Home</a>
+    <a href="/for-physicians.html">Physicians</a>
+    <a href="/for-attorneys.html">Attorneys</a>
+    <a href="/engineering-drafting/">Engineering &amp; Drafting</a>
+    <a href="/pilot-program.html">Pilot Program</a>
+    <a href="/how-it-works.html">How It Works</a>
+    <a href="/trust.html">Trust &amp; Audit</a>
+    <a href="/pricing.html">Pricing</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/living-memorials/">Living Echo</a>
+    <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability</a>
+    <a href="/about.html">About</a>
+    <a href="/team.html" style="color:rgba(255,255,255,0.6);">Team &amp; Leadership</a>
+    <a href="/valuation-dashboard.html" style="color:rgba(255,255,255,0.6);">Valuation Dashboard</a>
+    <a href="/careers.html" style="color:rgba(255,255,255,0.6);">Careers</a>
+    <a href="/sentinel-demo.html" style="color:rgba(255,255,255,0.6);">Demo</a>
+    <a href="/sitemap.html" style="color:rgba(255,255,255,0.45);">Sitemap</a>
+    <a href="/transparency.html" style="color:rgba(255,255,255,0.45);">Transparency</a>
+    <a href="/privacy.html" style="color:rgba(255,255,255,0.45);">Privacy</a>
+  </div>
+
+  <a href="/contact.html#pilot" class="mob-cta">Request a Pilot</a>
+</nav>
+<!-- /INCLUDE:HEADER -->
+
+
+<main id="main">
+
+  <!-- ─── CINEMATIC INTRO (pre-roll, shown once per session) ─── -->
+  <div class="lsim-preroll" id="preroll" role="dialog" aria-modal="true" aria-label="Introduction" aria-hidden="true">
+    <div class="lsim-preroll-statusbar" aria-hidden="true">
+      <span class="pr-status-left"><span class="pr-status-dot"></span>SCENARIO &middot; INITIALIZING</span>
+      <span>POCONO AI &middot; LIABILITY SIMULATOR</span>
+    </div>
+    <button type="button" class="lsim-preroll-skip" id="preroll-skip" aria-label="Skip introduction">
+      SKIP
+      <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><polyline points="2,3 5,7 8,3" transform="rotate(-90 5 5)"/></svg>
+    </button>
+    <div class="lsim-preroll-stage">
+      <div class="lsim-preroll-prompt-wrap" id="preroll-prompt-wrap">
+        <div class="lsim-preroll-prompt-label">▌ USER PROMPT &middot; 14:23:07</div>
+        <div class="lsim-preroll-prompt" id="preroll-prompt">
+          <span class="lsim-preroll-prompt-text" id="preroll-text"></span><span class="lsim-preroll-cursor" id="preroll-cursor"></span>
+        </div>
+      </div>
+      <h2 class="lsim-preroll-question" id="preroll-question">Where does this prompt go <em>after she hits send?</em></h2>
+      <p class="lsim-preroll-sub" id="preroll-sub">Pick an environment and an architecture to find out.</p>
+    </div>
+  </div>
+
+  <!-- ─── HERO ─── -->
+  <section class="lsim-hero">
+    <div class="lsim-hero-inner">
+      <div class="sentinel-lockup" aria-label="Sentinel Node — Liability Simulator">
+              <svg class="sentinel-lockup-mark" viewBox="0 0 64 64" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
+          <!-- v311b: rotated diamond + C-curve loop + summit dot. Inherits currentColor from CSS context. -->
+          <g transform="rotate(45 32 32)">
+            <rect x="12" y="12" width="40" height="40" rx="8" ry="8"/>
+            <path d="M43 22 L26 22 A6 6 0 0 0 20 28 L20 36 A6 6 0 0 0 26 42 L41 42"/>
+          </g>
+          <circle cx="32" cy="9" r="3" fill="currentColor" stroke="none"/>
+        </svg>
+              <div class="sentinel-lockup-rule"></div>
+              <div class="sentinel-lockup-text">
+                <span class="sentinel-lockup-name">Sentinel Node</span>
+                <span class="sentinel-lockup-tag">Liability Simulator</span>
+              </div>
+            </div>
+        Interactive Governance Simulation
+      </span>
+      <h1>Watch AI liability propagate <em>in real time</em> — then see where governance must live to contain it.</h1>
+      <p class="lsim-hero-sub">An enterprise-grade visualization of how identical AI requests flow through cloud architectures versus Pocono AI's Sentinel Node. Built for physicians, attorneys, and executives evaluating regulated AI deployments.</p>
+      <div class="lsim-hero-meta">
+        <span><strong>~3 min</strong> walkthrough</span>
+        <span class="dot-sep"></span>
+        <span><strong>4</strong> industries</span>
+        <span class="dot-sep"></span>
+        <span><strong>4</strong> architectures</span>
+        <span class="dot-sep"></span>
+        <span><strong>No</strong> data leaves your browser</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="lsim-shell">
+
+    <!-- ─── CONFIGURATOR ─── -->
+    <section class="lsim-config" aria-label="Simulation configuration">
+
+      <!-- STEP 1: Industry -->
+      <div class="lsim-step">
+        <div class="lsim-step-meta">
+          <span class="lsim-step-num">01</span>
+          <span class="lsim-step-label">Select Operating Environment</span>
+        </div>
+        <h2>Where is the AI being asked to operate?</h2>
+        <div class="lsim-card-grid" id="industry-grid" role="radiogroup" aria-label="Industry">
+          <button type="button" class="lsim-card" data-industry="medical" role="radio" aria-checked="false">
+            <span class="lsim-card-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00c2a8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v6M12 22v-6M4.93 4.93l4.24 4.24M14.83 14.83l4.24 4.24M2 12h6M22 12h-6M4.93 19.07l4.24-4.24M14.83 9.17l4.24-4.24"/></svg>
+            </span>
+            <div class="lsim-card-title">Independent Medical Practice</div>
+            <div class="lsim-card-desc">PHI, prior auth, clinical documentation, EHR-adjacent workflows.</div>
+          </button>
+
+          <button type="button" class="lsim-card" data-industry="law" role="radio" aria-checked="false">
+            <span class="lsim-card-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00c2a8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V10l7-7 7 7v11M9 21v-6h6v6"/></svg>
+            </span>
+            <div class="lsim-card-title">Law Firm</div>
+            <div class="lsim-card-desc">Privileged communication, discovery, research, drafting.</div>
+          </button>
+
+          <button type="button" class="lsim-card" data-industry="behavioral" role="radio" aria-checked="false">
+            <span class="lsim-card-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00c2a8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </span>
+            <div class="lsim-card-title">Behavioral Health</div>
+            <div class="lsim-card-desc">Therapy notes, 42 CFR Part 2 protected substance use disorder records.</div>
+          </button>
+
+          <button type="button" class="lsim-card" data-industry="clinic" role="radio" aria-checked="false">
+            <span class="lsim-card-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00c2a8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2h-4v-7H10v7H6a2 2 0 0 1-2-2z"/></svg>
+            </span>
+            <div class="lsim-card-title">Multi-Provider Clinic</div>
+            <div class="lsim-card-desc">Multiple specialties, shared intake, complex auth chains.</div>
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 2: Architecture -->
+      <div class="lsim-step">
+        <div class="lsim-step-meta">
+          <span class="lsim-step-num">02</span>
+          <span class="lsim-step-label">Select AI Architecture</span>
+        </div>
+        <h2>Which approach is being evaluated?</h2>
+        <div class="lsim-card-grid" id="arch-grid" role="radiogroup" aria-label="Architecture">
+          <button type="button" class="lsim-card arch-cloud" data-arch="public-chatbot" data-risk="critical" role="radio" aria-checked="false">
+            <span class="lsim-card-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E05A5A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19a4.5 4.5 0 1 0-2.5-8.3A6 6 0 0 0 3 13a3 3 0 0 0 3 3h11.5z"/></svg>
+            </span>
+            <div class="lsim-card-title">Public AI Chatbot</div>
+            <div class="lsim-card-desc">Consumer-grade LLM via vendor web interface. Conversation history retained.</div>
+            <span class="lsim-risk-tag tag-critical">Critical Exposure</span>
+          </button>
+
+          <button type="button" class="lsim-card arch-cloud" data-arch="saas-assistant" data-risk="high" role="radio" aria-checked="false">
+            <span class="lsim-card-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E05A5A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>
+            </span>
+            <div class="lsim-card-title">SaaS AI Assistant</div>
+            <div class="lsim-card-desc">Vendor-hosted with BAA. Sub-processors, region-flexible storage, vendor-defined retention.</div>
+            <span class="lsim-risk-tag tag-high">High Exposure</span>
+          </button>
+
+          <button type="button" class="lsim-card arch-cloud" data-arch="agent-platform" data-risk="high" role="radio" aria-checked="false">
+            <span class="lsim-card-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E05A5A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v6M12 17v6M4.22 4.22l4.24 4.24M15.54 15.54l4.24 4.24M1 12h6M17 12h6M4.22 19.78l4.24-4.24M15.54 8.46l4.24-4.24"/></svg>
+            </span>
+            <div class="lsim-card-title">AI Agent Platform</div>
+            <div class="lsim-card-desc">Cloud agent with tool-calling. Autonomous reads, writes, and external API chains.</div>
+            <span class="lsim-risk-tag tag-high">High Exposure</span>
+          </button>
+
+          <button type="button" class="lsim-card" data-arch="sentinel" data-risk="contained" role="radio" aria-checked="false">
+            <span class="lsim-card-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00c2a8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+            </span>
+            <div class="lsim-card-title">Pocono AI Sentinel Node</div>
+            <div class="lsim-card-desc">On-premises inference. Air-gapped retrieval. Human-in-the-loop. Append-only audit.</div>
+            <span class="lsim-risk-tag tag-contained">Contained</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="lsim-launch-row">
+        <button type="button" class="lsim-launch-btn" id="launch-btn" disabled>
+          <span>Run Simulation</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        <span class="lsim-launch-hint" id="launch-hint">// select an environment and architecture to begin</span>
+      </div>
+    </section>
+
+    <!-- ─── SIMULATION STAGE ─── -->
+    <section class="lsim-stage" id="stage" aria-live="polite" aria-label="Simulation results">
+
+      <div class="lsim-scenario-header">
+        <div class="lsim-scenario-meta">
+          <div class="lsim-scenario-eyebrow" id="sc-eyebrow">SCENARIO LOADING&hellip;</div>
+          <h2 class="lsim-scenario-title" id="sc-title">&mdash;</h2>
+          <p class="lsim-scenario-desc" id="sc-desc">&mdash;</p>
+        </div>
+        <div class="lsim-controls">
+          <button type="button" class="lsim-ctrl-btn primary" id="replay-btn" aria-label="Replay simulation">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+            Replay
+          </button>
+          <button type="button" class="lsim-ctrl-btn" id="reset-btn" aria-label="Reset configuration">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            Reset
+          </button>
+        </div>
+      </div>
+
+      <!-- DUAL PANE COMPARISON -->
+      <div class="lsim-compare">
+
+        <!-- CLOUD PANE -->
+        <div class="lsim-pane lsim-pane-cloud" id="pane-cloud">
+          <div class="lsim-pane-header">
+            <div class="lsim-pane-icon pane-icon-cloud">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E05A5A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.5 19a4.5 4.5 0 1 0-2.5-8.3A6 6 0 0 0 3 13a3 3 0 0 0 3 3h11.5z"/></svg>
+            </div>
+            <div class="lsim-pane-titles">
+              <div class="lsim-pane-name pane-name-cloud" id="cloud-name">Cloud AI Architecture</div>
+              <div class="lsim-pane-sub" id="cloud-sub">Vendor-hosted inference</div>
+            </div>
+            <span class="lsim-pane-status status-running" id="cloud-status">IDLE</span>
+          </div>
+
+          <div class="lsim-banner incident" id="cloud-incident">
+            <strong>Hallucination detected at inference time.</strong> Unsupported clinical recommendation already returned to user. Liability surface now extends through every system the data has touched.
+          </div>
+
+          <div class="lsim-flow" id="cloud-flow"></div>
+
+          <div class="lsim-pane-summary">
+            <div class="lsim-pane-metric">
+              <span class="m-label">External Egress</span>
+              <span class="m-value m-bad" id="cloud-egress">&mdash;</span>
+            </div>
+            <div class="lsim-pane-metric">
+              <span class="m-label">Audit Trail</span>
+              <span class="m-value m-bad" id="cloud-audit">&mdash;</span>
+            </div>
+            <div class="lsim-pane-metric">
+              <span class="m-label">Human Review</span>
+              <span class="m-value m-bad" id="cloud-hil">&mdash;</span>
+            </div>
+            <div class="lsim-pane-metric">
+              <span class="m-label">Retention</span>
+              <span class="m-value m-bad" id="cloud-retention">&mdash;</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- SENTINEL PANE -->
+        <div class="lsim-pane lsim-pane-sentinel" id="pane-sentinel">
+          <div class="lsim-pane-header">
+            <div class="lsim-pane-icon pane-icon-sentinel">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00c2a8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div class="lsim-pane-titles">
+              <div class="lsim-pane-name pane-name-sentinel">Sentinel Node Architecture</div>
+              <div class="lsim-pane-sub">Local inference. Human-gated. Audit-bound.</div>
+            </div>
+            <span class="lsim-pane-status status-secured" id="sentinel-status">IDLE</span>
+          </div>
+
+          <div class="lsim-banner contained" id="sentinel-contained">
+            <strong>Hallucination intercepted at the citation layer.</strong> Output blocked before human reviewer ever saw it. No data left the node. Audit hash recorded the attempt.
+          </div>
+
+          <div class="lsim-flow" id="sentinel-flow"></div>
+
+          <div class="lsim-pane-summary">
+            <div class="lsim-pane-metric">
+              <span class="m-label">External Egress</span>
+              <span class="m-value m-good" id="sentinel-egress">&mdash;</span>
+            </div>
+            <div class="lsim-pane-metric">
+              <span class="m-label">Audit Trail</span>
+              <span class="m-value m-good" id="sentinel-audit">&mdash;</span>
+            </div>
+            <div class="lsim-pane-metric">
+              <span class="m-label">Human Review</span>
+              <span class="m-value m-good" id="sentinel-hil">&mdash;</span>
+            </div>
+            <div class="lsim-pane-metric">
+              <span class="m-label">Retention</span>
+              <span class="m-value m-good" id="sentinel-retention">&mdash;</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TELEMETRY OVERLAY -->
+      <div class="lsim-telemetry-section">
+        <div class="lsim-tel-header">
+          <div class="lsim-tel-title">
+            <span class="tel-blink"></span>
+            Governance Telemetry &nbsp;&middot;&nbsp; Live Stream
+          </div>
+          <div class="lsim-tel-meta" id="tel-meta">// session ephemeral &middot; nothing transmitted</div>
+        </div>
+        <div class="lsim-tel-grid">
+          <div class="lsim-tel-column">
+            <div class="lsim-tel-col-label tel-col-cloud">▌ CLOUD TELEMETRY</div>
+            <div class="tel-entries" id="cloud-telemetry">
+              <div class="tel-empty">awaiting events&hellip;</div>
+            </div>
+          </div>
+          <div class="lsim-tel-column">
+            <div class="lsim-tel-col-label tel-col-sentinel">▌ SENTINEL TELEMETRY</div>
+            <div class="tel-entries" id="sentinel-telemetry">
+              <div class="tel-empty">awaiting events&hellip;</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LIABILITY PROPAGATION MAP -->
+      <div class="lsim-liability">
+        <div class="lsim-section-header">
+          <div>
+            <div class="lsim-section-eyebrow">▌ LIABILITY PROPAGATION</div>
+            <h3 class="lsim-section-title">Where does the exposure go when something goes wrong?</h3>
+            <p class="lsim-section-sub">When an AI issue occurs &mdash; a hallucination, unsupported claim, or uncited recommendation &mdash; liability follows the data. Below: every system that holds, processes, or could subpoena the affected record.</p>
+          </div>
+        </div>
+
+        <div class="lsim-liability-map">
+          <div class="liab-svg-wrap">
+            <svg viewBox="0 0 800 360" preserveAspectRatio="xMidYMid meet" aria-label="Liability propagation diagram" role="img">
+              <defs>
+                <linearGradient id="grad-danger" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="#E05A5A" stop-opacity="0.9"/>
+                  <stop offset="100%" stop-color="#8a3535" stop-opacity="0.4"/>
+                </linearGradient>
+                <linearGradient id="grad-safe" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="#00c2a8" stop-opacity="0.9"/>
+                  <stop offset="100%" stop-color="#005f52" stop-opacity="0.4"/>
+                </linearGradient>
+                <filter id="glow-danger"><feGaussianBlur stdDeviation="3" /></filter>
+                <filter id="glow-safe"><feGaussianBlur stdDeviation="3" /></filter>
+              </defs>
+
+              <!-- CLOUD HALF (top) -->
+              <g class="liab-half liab-cloud">
+                <text x="20" y="22" class="svg-label" fill="#d08080">CLOUD AI &mdash; LIABILITY SURFACE</text>
+
+                <!-- origin node: practice -->
+                <g class="svg-node-fade" data-half="cloud" data-step="0">
+                  <rect x="20" y="50" width="120" height="46" rx="8" fill="rgba(224,90,90,0.08)" stroke="rgba(224,90,90,0.35)" stroke-width="1"/>
+                  <text x="80" y="71" text-anchor="middle" class="svg-label-name">Your Practice</text>
+                  <text x="80" y="85" text-anchor="middle" class="svg-label" fill="#7a5050">ORIGIN</text>
+                </g>
+
+                <!-- LLM vendor -->
+                <g class="svg-node-fade" data-half="cloud" data-step="1">
+                  <rect x="180" y="50" width="120" height="46" rx="8" fill="rgba(224,90,90,0.08)" stroke="rgba(224,90,90,0.35)" stroke-width="1"/>
+                  <text x="240" y="71" text-anchor="middle" class="svg-label-name">LLM Vendor</text>
+                  <text x="240" y="85" text-anchor="middle" class="svg-label" fill="#7a5050">PROCESSOR</text>
+                </g>
+
+                <!-- Sub-processors -->
+                <g class="svg-node-fade" data-half="cloud" data-step="2">
+                  <rect x="340" y="20" width="120" height="46" rx="8" fill="rgba(224,90,90,0.08)" stroke="rgba(224,90,90,0.35)" stroke-width="1"/>
+                  <text x="400" y="41" text-anchor="middle" class="svg-label-name">Cloud Compute</text>
+                  <text x="400" y="55" text-anchor="middle" class="svg-label" fill="#7a5050">SUB-PROCESSOR</text>
+                </g>
+
+                <g class="svg-node-fade" data-half="cloud" data-step="2">
+                  <rect x="340" y="80" width="120" height="46" rx="8" fill="rgba(224,90,90,0.08)" stroke="rgba(224,90,90,0.35)" stroke-width="1"/>
+                  <text x="400" y="101" text-anchor="middle" class="svg-label-name">Logging Pipeline</text>
+                  <text x="400" y="115" text-anchor="middle" class="svg-label" fill="#7a5050">UNKNOWN RETENTION</text>
+                </g>
+
+                <!-- Downstream -->
+                <g class="svg-node-fade" data-half="cloud" data-step="3">
+                  <rect x="500" y="20" width="130" height="46" rx="8" fill="rgba(224,90,90,0.08)" stroke="rgba(224,90,90,0.35)" stroke-width="1"/>
+                  <text x="565" y="41" text-anchor="middle" class="svg-label-name">Training Eligible</text>
+                  <text x="565" y="55" text-anchor="middle" class="svg-label" fill="#7a5050">CONTRACTUAL GREY</text>
+                </g>
+
+                <g class="svg-node-fade" data-half="cloud" data-step="3">
+                  <rect x="500" y="80" width="130" height="46" rx="8" fill="rgba(224,90,90,0.08)" stroke="rgba(224,90,90,0.35)" stroke-width="1"/>
+                  <text x="565" y="101" text-anchor="middle" class="svg-label-name">External APIs</text>
+                  <text x="565" y="115" text-anchor="middle" class="svg-label" fill="#7a5050">TOOL-CALL CHAIN</text>
+                </g>
+
+                <!-- Far right: legal exposure -->
+                <g class="svg-node-fade" data-half="cloud" data-step="4">
+                  <rect x="660" y="50" width="130" height="46" rx="8" fill="rgba(224,90,90,0.12)" stroke="rgba(224,90,90,0.5)" stroke-width="1.5"/>
+                  <text x="725" y="71" text-anchor="middle" class="svg-label-name" fill="#e07070">Subpoena Surface</text>
+                  <text x="725" y="85" text-anchor="middle" class="svg-label" fill="#a05050">DISCOVERY EXPOSURE</text>
+                </g>
+
+                <!-- Flow paths (cloud) -->
+                <path class="flow-path" data-half="cloud" data-step="1" d="M 140 73 L 180 73" stroke="url(#grad-danger)" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <path class="flow-path" data-half="cloud" data-step="2" d="M 300 73 Q 320 73 320 43 L 340 43" stroke="url(#grad-danger)" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <path class="flow-path" data-half="cloud" data-step="2" d="M 300 73 Q 320 73 320 103 L 340 103" stroke="url(#grad-danger)" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <path class="flow-path" data-half="cloud" data-step="3" d="M 460 43 L 500 43" stroke="url(#grad-danger)" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <path class="flow-path" data-half="cloud" data-step="3" d="M 460 103 L 500 103" stroke="url(#grad-danger)" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <path class="flow-path" data-half="cloud" data-step="4" d="M 630 43 Q 650 43 650 73 L 660 73" stroke="url(#grad-danger)" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <path class="flow-path" data-half="cloud" data-step="4" d="M 630 103 Q 650 103 650 73 L 660 73" stroke="url(#grad-danger)" stroke-width="2" fill="none" stroke-linecap="round"/>
+              </g>
+
+              <!-- DIVIDER -->
+              <line x1="20" y1="180" x2="780" y2="180" stroke="rgba(255,255,255,0.06)" stroke-width="1" stroke-dasharray="3 4"/>
+
+              <!-- SENTINEL HALF (bottom) -->
+              <g class="liab-half liab-sentinel">
+                <text x="20" y="202" class="svg-label" fill="#00c2a8">SENTINEL NODE &mdash; LIABILITY CONTAINMENT</text>
+
+                <!-- origin -->
+                <g class="svg-node-fade" data-half="sentinel" data-step="0">
+                  <rect x="20" y="230" width="120" height="46" rx="8" fill="rgba(0,194,168,0.08)" stroke="rgba(0,194,168,0.35)" stroke-width="1"/>
+                  <text x="80" y="251" text-anchor="middle" class="svg-label-name">Your Practice</text>
+                  <text x="80" y="265" text-anchor="middle" class="svg-label" fill="#508a7a">ORIGIN</text>
+                </g>
+
+                <!-- Local inference -->
+                <g class="svg-node-fade" data-half="sentinel" data-step="1">
+                  <rect x="180" y="230" width="120" height="46" rx="8" fill="rgba(0,194,168,0.08)" stroke="rgba(0,194,168,0.35)" stroke-width="1"/>
+                  <text x="240" y="251" text-anchor="middle" class="svg-label-name">Sentinel Node</text>
+                  <text x="240" y="265" text-anchor="middle" class="svg-label" fill="#508a7a">LOCAL INFERENCE</text>
+                </g>
+
+                <!-- Citation check -->
+                <g class="svg-node-fade" data-half="sentinel" data-step="2">
+                  <rect x="340" y="230" width="120" height="46" rx="8" fill="rgba(0,194,168,0.08)" stroke="rgba(0,194,168,0.35)" stroke-width="1"/>
+                  <text x="400" y="251" text-anchor="middle" class="svg-label-name">Citation Gate</text>
+                  <text x="400" y="265" text-anchor="middle" class="svg-label" fill="#508a7a">EVIDENCE-BOUND</text>
+                </g>
+
+                <!-- Human review -->
+                <g class="svg-node-fade" data-half="sentinel" data-step="3">
+                  <rect x="500" y="230" width="120" height="46" rx="8" fill="rgba(0,194,168,0.08)" stroke="rgba(0,194,168,0.35)" stroke-width="1"/>
+                  <text x="560" y="251" text-anchor="middle" class="svg-label-name">Human Review</text>
+                  <text x="560" y="265" text-anchor="middle" class="svg-label" fill="#508a7a">HIL CHECKPOINT</text>
+                </g>
+
+                <!-- Audit hash -->
+                <g class="svg-node-fade" data-half="sentinel" data-step="4">
+                  <rect x="660" y="230" width="130" height="46" rx="8" fill="rgba(0,194,168,0.12)" stroke="rgba(0,194,168,0.5)" stroke-width="1.5"/>
+                  <text x="725" y="251" text-anchor="middle" class="svg-label-name" fill="#00c2a8">Audit Hash</text>
+                  <text x="725" y="265" text-anchor="middle" class="svg-label" fill="#508a7a">APPEND-ONLY RECORD</text>
+                </g>
+
+                <!-- Sentinel paths -->
+                <path class="flow-path" data-half="sentinel" data-step="1" d="M 140 253 L 180 253" stroke="url(#grad-safe)" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <path class="flow-path" data-half="sentinel" data-step="2" d="M 300 253 L 340 253" stroke="url(#grad-safe)" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <path class="flow-path" data-half="sentinel" data-step="3" d="M 460 253 L 500 253" stroke="url(#grad-safe)" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <path class="flow-path" data-half="sentinel" data-step="4" d="M 620 253 L 660 253" stroke="url(#grad-safe)" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+                <!-- Closed loop indicator -->
+                <path class="flow-path" data-half="sentinel" data-step="5" d="M 725 276 Q 725 320 400 320 Q 80 320 80 276" stroke="rgba(0,194,168,0.4)" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-dasharray="3 3"/>
+                <text x="400" y="340" text-anchor="middle" class="svg-label svg-node-fade" data-half="sentinel" data-step="5" fill="#508a7a">CLOSED LOOP &mdash; NO EXTERNAL EGRESS</text>
+              </g>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- RISK DIFFERENTIAL -->
+      <div class="lsim-liability">
+        <div class="lsim-section-header">
+          <div>
+            <div class="lsim-section-eyebrow">▌ RISK DIFFERENTIAL</div>
+            <h3 class="lsim-section-title">Same scenario. Quantified exposure surface.</h3>
+            <p class="lsim-section-sub">Six dimensions of governance risk, normalized 0&ndash;100. Bars fill after the simulation completes.</p>
+          </div>
+        </div>
+
+        <div class="lsim-risk-grid">
+          <div class="risk-card risk-card-cloud">
+            <div class="risk-card-label">▌ CLOUD AI &mdash; EXPOSURE PROFILE</div>
+            <div class="risk-bars" id="risk-bars-cloud">
+              <div class="risk-bar-row"><span class="risk-bar-name">External Egress</span><div class="risk-bar-track"><div class="risk-bar-fill fill-cloud" data-val="95"></div></div><span class="risk-bar-val">95</span></div>
+              <div class="risk-bar-row"><span class="risk-bar-name">Governance Gaps</span><div class="risk-bar-track"><div class="risk-bar-fill fill-cloud" data-val="88"></div></div><span class="risk-bar-val">88</span></div>
+              <div class="risk-bar-row"><span class="risk-bar-name">Retention Unknown</span><div class="risk-bar-track"><div class="risk-bar-fill fill-cloud" data-val="92"></div></div><span class="risk-bar-val">92</span></div>
+              <div class="risk-bar-row"><span class="risk-bar-name">Output Unverifiable</span><div class="risk-bar-track"><div class="risk-bar-fill fill-cloud" data-val="78"></div></div><span class="risk-bar-val">78</span></div>
+              <div class="risk-bar-row"><span class="risk-bar-name">Vendor Dependency</span><div class="risk-bar-track"><div class="risk-bar-fill fill-cloud" data-val="85"></div></div><span class="risk-bar-val">85</span></div>
+              <div class="risk-bar-row"><span class="risk-bar-name">Discovery Surface</span><div class="risk-bar-track"><div class="risk-bar-fill fill-cloud" data-val="90"></div></div><span class="risk-bar-val">90</span></div>
+            </div>
+            <div class="risk-card-summary">
+              <strong>Aggregate exposure</strong> &mdash; data has moved through at least three independent processors. Liability now propagates with the data, not the prompt.
+            </div>
+          </div>
+
+          <div class="risk-card risk-card-sentinel">
+            <div class="risk-card-label">▌ SENTINEL NODE &mdash; COVERAGE PROFILE</div>
+            <div class="risk-bars" id="risk-bars-sentinel">
+              <div class="risk-bar-row"><span class="risk-bar-name">Governance Coverage</span><div class="risk-bar-track"><div class="risk-bar-fill fill-sentinel" data-val="96"></div></div><span class="risk-bar-val">96</span></div>
+              <div class="risk-bar-row"><span class="risk-bar-name">Audit Integrity</span><div class="risk-bar-track"><div class="risk-bar-fill fill-sentinel" data-val="98"></div></div><span class="risk-bar-val">98</span></div>
+              <div class="risk-bar-row"><span class="risk-bar-name">Local Inference</span><div class="risk-bar-track"><div class="risk-bar-fill fill-sentinel" data-val="100"></div></div><span class="risk-bar-val">100</span></div>
+              <div class="risk-bar-row"><span class="risk-bar-name">Citation Traceability</span><div class="risk-bar-track"><div class="risk-bar-fill fill-sentinel" data-val="94"></div></div><span class="risk-bar-val">94</span></div>
+              <div class="risk-bar-row"><span class="risk-bar-name">Human Oversight</span><div class="risk-bar-track"><div class="risk-bar-fill fill-sentinel" data-val="100"></div></div><span class="risk-bar-val">100</span></div>
+              <div class="risk-bar-row"><span class="risk-bar-name">Provenance Chain</span><div class="risk-bar-track"><div class="risk-bar-fill fill-sentinel" data-val="97"></div></div><span class="risk-bar-val">97</span></div>
+            </div>
+            <div class="risk-card-summary">
+              <strong>Governance enclosure</strong> &mdash; the inference, the citation check, the human gate, and the audit hash all live inside one physical perimeter. Liability stays where the data is.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DEBRIEF (post-game) — revealed after risk bars settle -->
+      <div class="lsim-debrief" id="lsim-debrief" aria-hidden="true">
+        <div class="lsim-section-header">
+          <div>
+            <div class="lsim-section-eyebrow">▌ WHAT YOU JUST WATCHED</div>
+            <h3 class="lsim-section-title">Three mechanisms intercepted the failure.</h3>
+            <p class="lsim-section-sub">The simulation above is not a metaphor. Each card below names the moment a specific governance mechanism fired, and the artifact it produced.</p>
+          </div>
+        </div>
+
+        <div class="lsim-debrief-grid">
+          <div class="lsim-debrief-card" data-mech="citation">
+            <div class="lsim-deb-head">
+              <span class="lsim-deb-num">01</span>
+              <span class="lsim-deb-tag">CITATION GATE</span>
+            </div>
+            <h4 class="lsim-deb-title">The model was not allowed to invent.</h4>
+            <p class="lsim-deb-body" id="deb-citation-body">Where cloud AI produced an unverifiable claim, the Sentinel Node's retrieval layer refused to pass any output the local corpus could not cite.</p>
+            <div class="lsim-deb-artifact" id="deb-citation-artifact">
+              <span class="lsim-deb-artifact-label">Artifact</span>
+              <code class="lsim-deb-artifact-text">citation_gate.decision = ALLOW &middot; source: corpus/internal &middot; confidence: 0.94</code>
+            </div>
+          </div>
+
+          <div class="lsim-debrief-card" data-mech="human">
+            <div class="lsim-deb-head">
+              <span class="lsim-deb-num">02</span>
+              <span class="lsim-deb-tag">HUMAN REVIEW</span>
+            </div>
+            <h4 class="lsim-deb-title">A licensed professional had to sign.</h4>
+            <p class="lsim-deb-body" id="deb-human-body">Cloud architectures released the output to action with no required reviewer. Sentinel Node enforced human sign-off at the gate &mdash; the reviewer's identity is bound into the audit envelope.</p>
+            <div class="lsim-deb-artifact" id="deb-human-artifact">
+              <span class="lsim-deb-artifact-label">Artifact</span>
+              <code class="lsim-deb-artifact-text">reviewer = signed &middot; identity bound &middot; timestamp recorded</code>
+            </div>
+          </div>
+
+          <div class="lsim-debrief-card" data-mech="audit">
+            <div class="lsim-deb-head">
+              <span class="lsim-deb-num">03</span>
+              <span class="lsim-deb-tag">AUDIT HASH</span>
+            </div>
+            <h4 class="lsim-deb-title">One hash reconstructs the entire chain.</h4>
+            <p class="lsim-deb-body" id="deb-audit-body">Prompt, retrieval, output, and reviewer were sealed into a single SHA-256-anchored envelope. The full chain is reconstructable from one sealing hash &mdash; for regulatory, evidentiary, or board review.</p>
+            <div class="lsim-deb-artifact" id="deb-audit-artifact">
+              <span class="lsim-deb-artifact-label">Artifact</span>
+              <code class="lsim-deb-artifact-text">sha256: 7f3a&hellip;b29c &middot; chain: sealed &middot; retention: 30d local</code>
+            </div>
+          </div>
+        </div>
+
+        <div class="lsim-debrief-footer">
+          <p class="lsim-debrief-takeaway">This is what governance enforced by architecture looks like in motion. Not policy. Not promise. <strong>Mechanism.</strong></p>
+          <div class="lsim-debrief-cta-row">
+            <button type="button" class="lsim-debrief-btn" id="lsim-debrief-print">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-2px;margin-right:6px;"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+              Save as PDF
+            </button>
+            <a href="executive-brief.html" class="lsim-debrief-btn lsim-debrief-btn-ghost">Read the 5-min executive brief</a>
+            <a href="pilot-brief.html" class="lsim-debrief-btn lsim-debrief-btn-ghost">See the pilot structure</a>
+            <button type="button" class="lsim-debrief-btn lsim-debrief-btn-ghost" id="lsim-debrief-rerun">Run a different scenario</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- INSIGHT -->
+      <div class="lsim-insight">
+        <div class="lsim-insight-label">▌ THE GOVERNANCE PRINCIPLE</div>
+        <p class="lsim-insight-text">Governance bolted on outside the inference loop cannot constrain liability. <strong>The check has to happen where the data and the model meet</strong> &mdash; before the output is returned, before the human acts on it, before any system downstream has reason to retain it.</p>
+        <p class="lsim-insight-text" style="font-size: 0.95em; color: #8899aa; margin-bottom: 0;">That is what makes a Sentinel Node different from a cloud assistant with a privacy policy: the governance and the model are <em>the same artifact</em>.</p>
+      </div>
+
+      <!-- CTA -->
+      <div class="lsim-cta">
+        <h2>This is what a Pocono AI pilot looks like in production.</h2>
+        <p>Sentinel Node is a real, deployable hardware appliance for medical practices and law firms. The simulation above is the architectural intent &mdash; the pilot is the working system.</p>
+        <div class="lsim-cta-row">
+          <a href="pilot-brief.html" class="lsim-btn-primary">Read the Pilot Brief</a>
+          <a href="sentinel-demo.html" class="lsim-btn-ghost">See the Live Demo</a>
+          <a href="architecture.html" class="lsim-btn-ghost">Architecture Detail</a>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+</main>
+
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 root-relative nav fix, Living Echo rebrand, Engineering & Drafting + Enterprise Estate Continuity links added (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- INCLUDE:FOOTER -->
+<footer role="contentinfo" style="background:#051622;border-top:1px solid rgba(255,255,255,0.08);padding:40px 24px 28px;font-size:0.85em;color:#8899aa;">
+  <div style="max-width:1180px;margin:0 auto;">
+
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:0 0 28px;margin-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.07);">
+      <div style="max-width:560px;">
+        <p style="margin:0 0 6px;font-size:1.05em;font-weight:700;color:#fff;">Local AI infrastructure for regulated practices.</p>
+        <p style="margin:0;font-size:0.95em;line-height:1.5;">Drafts with citations. Human review required. Sensitive documents stay under practice control. Simple path, deep proof.</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="/contact.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;background:#00c2a8;color:#04111a;font-weight:700;text-decoration:none;font-size:0.95em;">Request Pilot</a>
+        <a href="/sentinel-demo.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;border:1px solid rgba(0,194,168,0.55);color:#00c2a8;font-weight:700;text-decoration:none;font-size:0.95em;">Watch Demo</a>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px 32px;margin-bottom:32px;text-align:left;">
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">For You</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/start-here.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Start Here (3 min)</a>
+          <a href="/for-physicians.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Physicians</a>
+          <a href="/for-attorneys.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Attorneys</a>
+          <a href="/engineering-drafting/" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Engineering &amp; Drafting Teams</a>
+          <a href="/pilot-program.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Pilot Program</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Installer Training</a>
+          <a href="/how-it-works.html" style="color:#8899aa;text-decoration:none;">How It Works</a>
+          <a href="/trust.html" style="color:#8899aa;text-decoration:none;">Trust &amp; Audit</a>
+          <a href="/pricing.html" style="color:#8899aa;text-decoration:none;">Pricing</a>
+          <a href="/sentinel-demo.html" style="color:#8899aa;text-decoration:none;">See the Demo</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Documentation Hub</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/documentation-hub/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Hub Home &mdash; Deep Proof</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">Installer Training</a>
+          <a href="/sentinel-node/installation-simulator.html" style="color:#8899aa;text-decoration:none;">&#8627; Installation Simulator</a>
+          <a href="/documentation-hub/clinical/" style="color:#8899aa;text-decoration:none;">Clinical Documentation</a>
+          <a href="/documentation-hub/legal/" style="color:#8899aa;text-decoration:none;">Legal Documentation</a>
+          <a href="/documentation-hub/technical/" style="color:#8899aa;text-decoration:none;">Technical Documentation</a>
+          <a href="/documentation-hub/governance/" style="color:#8899aa;text-decoration:none;">Governance &amp; Audit</a>
+          <a href="/documentation-hub/tools/" style="color:#8899aa;text-decoration:none;">Tools &amp; Simulators</a>
+          <a href="/documentation-hub/research/" style="color:#8899aa;text-decoration:none;">Research &amp; Essays</a>
+          <a href="/documentation-hub/transparency/" style="color:#8899aa;text-decoration:none;">Transparency</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Global Federated AI</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/global/" style="color:#7af0dc;text-decoration:none;font-weight:600;">Global Federated Hub</a>
+          <a href="/global/australia/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Australia</a>
+          <a href="/global/singapore/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Singapore</a>
+          <a href="/global/taiwan/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Taiwan</a>
+          <a href="/global/europe/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Europe</a>
+          <a href="/contact.html" style="color:#8899aa;text-decoration:none;">Partner Inquiry</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Company</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/about.html" style="color:#8899aa;text-decoration:none;">About Pocono AI</a>
+          <a href="/team.html" style="color:#8899aa;text-decoration:none;">Team &amp; Leadership</a>
+          <a href="/why-pocono-ai.html" style="color:#8899aa;text-decoration:none;">Why Pocono AI</a>
+          <a href="/founding-commercial-leadership.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Join Us</a>
+          <a href="/careers.html" style="color:#8899aa;text-decoration:none;">Careers</a>
+          <a href="/how-we-hire.html" style="color:#8899aa;text-decoration:none;">How We Hire</a>
+          <a href="/channel-partners.html" style="color:#8899aa;text-decoration:none;">Technical Partners (MSPs)</a>
+          <a href="/partners.html" style="color:#8899aa;text-decoration:none;">Academic Partnerships</a>
+          <a href="/contact.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Contact</a>
+          <a href="https://forms.gle/VQahnkjMfY6QNEMy8" target="_blank" rel="noopener noreferrer" style="color:#d5a94f;text-decoration:none;font-weight:600;">Interest List &#8599;</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Founder Projects</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/rehability/" style="color:#a78bfa;text-decoration:none;font-weight:700;">Rehability &#x2605;</a>
+          <a href="/rehability/marcus-memory-helper/" style="color:#a78bfa;text-decoration:none;font-weight:600;">&#8627; Marcus's Memory Helper</a>
+          <a href="/sentinel-home/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Sentinel Home Edition</a>
+          <a href="/living-memorials/" style="color:#8899aa;text-decoration:none;">Living Echo</a>
+          <a href="/living-memorials/marcus-odell/" style="color:#8899aa;text-decoration:none;">Marcus&rsquo;s Living Echo</a>
+          <a href="/living-memorials/enterprise-estate-continuity.html" style="color:#8899aa;text-decoration:none;">Enterprise Estate Continuity</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Resources &amp; Legal</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/sitemap.html" style="color:#8899aa;text-decoration:none;">All Pages (Sitemap)</a>
+          <a href="/audit.html" style="color:#8899aa;text-decoration:none;">Transparency &amp; Audit Log</a>
+          <a href="/maturity-disclosure.html" style="color:#8899aa;text-decoration:none;">What We Have / Don&rsquo;t Claim</a>
+          <a href="/plain.html" style="color:#8899aa;text-decoration:none;">Plain Language Guide</a>
+          <a href="/privacy.html" style="color:#8899aa;text-decoration:none;">Privacy</a>
+          <a href="/terms.html" style="color:#8899aa;text-decoration:none;">Terms</a>
+          <a href="/sla.html" style="color:#8899aa;text-decoration:none;">SLA</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:18px;margin-bottom:14px;">
+      <p style="margin:0;font-size:0.82em;line-height:1.6;color:#6f8295;max-width:1000px;">Pocono AI does not provide medical, legal, or engineering advice, does not practice medicine, law, or licensed engineering, and does not make clinical, legal, or engineering decisions. Outputs are drafts or support materials that require review by a qualified professional; final professional judgment remains with the licensed physician, attorney, or engineer. Tools and simulations on this site are educational and use synthetic data.</p>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:20px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+      <p style="margin:0;font-size:0.9em;">&copy; 2026 Pocono AI, LLC &nbsp;&#183;&nbsp; East Stroudsburg, PA &nbsp;&#183;&nbsp; <a href="mailto:marcus@poconoai.com" style="color:#8899aa;">marcus@poconoai.com</a> &nbsp;&#183;&nbsp; <a href="tel:+15705340602" style="color:#8899aa;">(570) 534-0602</a></p>
+      <p style="margin:0;font-size:0.88em;"><a href="/audit.html" style="color:#5dade2;text-decoration:none;">Transparency v402</a></p>
+    </div>
+  </div>
+</footer>
+<script src="/search.js?v=402" defer></script>
+<!-- /INCLUDE:FOOTER -->
+
+<script src="search-index.js?v=402" defer></script>
+<script src="nav.js?v=402" defer></script>
+<script src="pilot-cta.js?v=402" defer></script>
+
+<!-- ─── SIMULATOR ENGINE ─── -->
+<script>
+(function(){
+  'use strict';
+
+  /* ============================================================
+     CINEMATIC PRE-ROLL — runs once per session
+     6-second sequence: prompt types in → dims → question rises → fade out
+     Skipped if: prefers-reduced-motion, ?autorun=1, sessionStorage flag,
+     or user clicks SKIP / presses Escape/Enter
+     ============================================================ */
+  var PREROLL_KEY = 'pai_lsim_preroll_seen';
+  var preroll = document.getElementById('preroll');
+  var prerollSkipBtn = document.getElementById('preroll-skip');
+  var prerollPromptWrap = document.getElementById('preroll-prompt-wrap');
+  var prerollPrompt = document.getElementById('preroll-prompt');
+  var prerollText = document.getElementById('preroll-text');
+  var prerollCursor = document.getElementById('preroll-cursor');
+  var prerollQuestion = document.getElementById('preroll-question');
+  var prerollSub = document.getElementById('preroll-sub');
+
+  var PROMPT_LINE = 'Draft a prior auth appeal for patient Sarah M. — stage-2 IDC. Insurance denied genomic assay. Cite ASCO guidelines and oncologist notes from 03/14.';
+
+  var prerollTimers = [];
+  function prerollSchedule(fn, ms) {
+    var t = setTimeout(fn, ms);
+    prerollTimers.push(t);
+    return t;
+  }
+  function prerollClearTimers() {
+    prerollTimers.forEach(function(t){ clearTimeout(t); });
+    prerollTimers = [];
+  }
+
+  function shouldShowPreroll() {
+    // Bypass if already seen this session
+    try { if (sessionStorage.getItem(PREROLL_KEY) === '1') return false; } catch(e) {}
+    // Bypass if URL says autorun (sales-share state — get to the goods immediately)
+    if (location.search.indexOf('autorun=1') !== -1) return false;
+    // Bypass if URL explicitly skips
+    if (location.search.indexOf('preroll=0') !== -1) return false;
+    // Bypass if reduced motion preferred (CSS also hides it; this is the JS guard)
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false;
+    return true;
+  }
+
+  function closePreroll() {
+    if (!preroll) return;
+    prerollClearTimers();
+    preroll.classList.add('closing');
+    preroll.classList.remove('active');
+    preroll.setAttribute('aria-hidden', 'true');
+    try { sessionStorage.setItem(PREROLL_KEY, '1'); } catch(e) {}
+    setTimeout(function(){
+      if (preroll && preroll.parentNode) {
+        preroll.parentNode.removeChild(preroll);
+      }
+    }, 600);
+  }
+
+  function runPreroll() {
+    if (!preroll || !shouldShowPreroll()) {
+      if (preroll && preroll.parentNode) {
+        preroll.parentNode.removeChild(preroll);
+      }
+      return;
+    }
+
+    preroll.classList.add('active');
+    preroll.setAttribute('aria-hidden', 'false');
+
+    // Beat 1: fade in the prompt frame
+    prerollSchedule(function(){
+      prerollPromptWrap.classList.add('shown');
+    }, 300);
+
+    // Beat 2: type the prompt character by character
+    // Total typing duration ~2.6s for a 195-char string => ~13ms/char with slight jitter
+    prerollSchedule(function(){
+      typePrompt(PROMPT_LINE, 0);
+    }, 700);
+
+    // Beat 3: at t ~ 3.5s, dim the prompt and raise the question
+    prerollSchedule(function(){
+      prerollPrompt.classList.add('dimmed');
+      prerollQuestion.classList.add('shown');
+    }, 3700);
+
+    // Beat 4: at t ~ 4.2s, fade in the sub-question
+    prerollSchedule(function(){
+      prerollSub.classList.add('shown');
+    }, 4400);
+
+    // Beat 5: at t ~ 6.4s, close
+    prerollSchedule(closePreroll, 6500);
+
+    // Skip button
+    if (prerollSkipBtn) {
+      prerollSkipBtn.addEventListener('click', closePreroll);
+    }
+    // Esc / Enter / Space all close
+    var keyHandler = function(e) {
+      if (e.key === 'Escape' || e.key === 'Enter' || e.key === ' ') {
+        closePreroll();
+        document.removeEventListener('keydown', keyHandler);
+      }
+    };
+    document.addEventListener('keydown', keyHandler);
+    // Click anywhere on the backdrop also closes
+    preroll.addEventListener('click', function(e){
+      if (e.target === preroll) closePreroll();
+    });
+  }
+
+  function typePrompt(str, i) {
+    if (i >= str.length) {
+      // Pause at end with cursor blinking
+      return;
+    }
+    prerollText.textContent = str.slice(0, i + 1);
+    // Slight variability for human cadence — punctuation pauses, commas, dashes
+    var ch = str.charAt(i);
+    var delay = 11;
+    if (ch === ' ') delay = 16;
+    else if (ch === ',' || ch === '—' || ch === '.') delay = 45;
+    else if (ch === '/') delay = 24;
+    // Tiny random jitter
+    delay += Math.floor(Math.random() * 6);
+    prerollSchedule(function(){ typePrompt(str, i + 1); }, delay);
+  }
+
+  // Boot the pre-roll as soon as DOM is parsed
+  runPreroll();
+
+  /* ============================================================
+     SCENARIO MATRIX
+     Industry × Architecture → scenario + flow steps + telemetry
+     ============================================================ */
+
+  var INDUSTRY_LABELS = {
+    medical:    { name: 'Independent Medical Practice', scenario: 'Prior authorization denial appeal' },
+    law:        { name: 'Law Firm',                     scenario: 'Multi-document discovery research' },
+    behavioral: { name: 'Behavioral Health',            scenario: 'Therapy intake summarization (42 CFR Part 2)' },
+    clinic:     { name: 'Multi-Provider Clinic',        scenario: 'Cross-specialty referral packet generation' }
+  };
+
+  var SCENARIO_DESC = {
+    medical:    'Patient denied prior authorization for a specialty referral. Practice asks the AI to draft an appeal letter citing the patient\'s history, formulary criteria, and relevant clinical guidelines.',
+    law:        'Attorney needs the AI to surface every prior communication referencing a contested clause across 4,200 emails and 380 documents under a tight deposition deadline.',
+    behavioral: 'Intake clinician asks the AI to summarize a 90-minute therapy session into a structured progress note that will live in the patient\'s record.',
+    clinic:     'Front desk asks the AI to compile a referral packet — demographics, problem list, current meds, prior labs — for a cardiology consult.'
+  };
+
+  var ARCH_LABELS = {
+    'public-chatbot':  { name: 'Public AI Chatbot',     sub: 'Consumer LLM via vendor web UI' },
+    'saas-assistant':  { name: 'SaaS AI Assistant',     sub: 'Vendor-hosted with BAA' },
+    'agent-platform':  { name: 'AI Agent Platform',     sub: 'Cloud agent with tool-calling' },
+    'sentinel':        { name: 'Sentinel Node',         sub: 'On-premises local inference' }
+  };
+
+  /* Cloud flow steps — varies slightly per architecture but core arc is shared */
+  function cloudSteps(arch, industry){
+    var base = [
+      { color: 'flow-neutral', tag: '', title: 'User submits request',
+        detail: 'Practice staff opens a browser tab. Sensitive material is pasted into a prompt field.' },
+      { color: 'flow-warning', tag: 'EXFIL', tagClass: 'tag-exfil', title: 'Data leaves your perimeter',
+        detail: 'Request transits the public internet to the vendor\'s inference endpoint. ' + (industry === 'behavioral' ? '42 CFR Part 2 protected content now in transit.' : industry === 'medical' ? 'PHI now in transit.' : industry === 'law' ? 'Privileged material now in transit.' : 'Sensitive material now in transit.') }
+    ];
+
+    if (arch === 'public-chatbot') {
+      base.push(
+        { color: 'flow-danger', tag: 'EXFIL', tagClass: 'tag-exfil', title: 'Logged to vendor history',
+          detail: 'Conversation retained on the vendor\'s account. No BAA. No retention controls. May be reviewed for safety, trust, or training pipelines.' },
+        { color: 'flow-danger', tag: '', title: 'Inference returns unsupported claim',
+          detail: 'Model generates a confident statement without citation. The text reads authoritative. No mechanism flags the hallucination.' },
+        { color: 'flow-danger', tag: '', title: 'User copies output into the record',
+          detail: 'Staff has no provenance trail to evaluate the claim against. Output enters the workflow as if verified.' }
+      );
+    } else if (arch === 'saas-assistant') {
+      base.push(
+        { color: 'flow-warning', tag: 'EXFIL', tagClass: 'tag-exfil', title: 'Vendor sub-processors engage',
+          detail: 'Cloud compute, vector store, logging pipeline — each a separate processor under the BAA. Region of storage may shift.' },
+        { color: 'flow-danger', tag: '', title: 'Output returned without citation lock',
+          detail: 'Model returns an answer. The UI may surface a "sources" panel, but there is no enforcement that the answer is grounded in those sources.' },
+        { color: 'flow-danger', tag: '', title: 'Retention controlled by vendor',
+          detail: 'Vendor-defined retention window. Audit logs you cannot independently verify. Sub-processor list may change with notice.' }
+      );
+    } else if (arch === 'agent-platform') {
+      base.push(
+        { color: 'flow-warning', tag: 'EXFIL', tagClass: 'tag-exfil', title: 'Agent autonomously calls external APIs',
+          detail: 'The agent reads the request, decides which tools to call. Each tool call is a new data egress, each with its own retention policy.' },
+        { color: 'flow-danger', tag: '', title: 'Tool-call chain executes without preview',
+          detail: 'Six API calls fire before any human sees what the agent is doing. Some calls include enough context to identify the matter.' },
+        { color: 'flow-danger', tag: '', title: 'Composite output assembled from external sources',
+          detail: 'Final response stitches together vendor-side reasoning with third-party data. Provenance per-claim is not maintained.' }
+      );
+    }
+
+    base.push(
+      { color: 'flow-danger', tag: '', title: 'Liability now travels with the data',
+        detail: 'Every system that touched the request is a potential subpoena target, a potential breach surface, a potential audit failure.' }
+    );
+
+    return base;
+  }
+
+  function sentinelSteps(arch, industry){
+    var subjectNoun = industry === 'behavioral' ? 'session note material' : industry === 'medical' ? 'PHI' : industry === 'law' ? 'privileged material' : 'sensitive material';
+    return [
+      { color: 'flow-neutral', tag: '', title: 'User submits request on local network',
+        detail: 'Request enters the Sentinel Node over the practice\'s LAN. ' + subjectNoun.charAt(0).toUpperCase() + subjectNoun.slice(1) + ' never crosses the firewall outbound.' },
+      { color: 'flow-audit', tag: 'AUDIT', tagClass: 'tag-cite', title: 'Audit envelope opens',
+        detail: 'Reviewable audit record created. Captures who, what, when, and which corpus segment is in scope. Cryptographic signing of the envelope is the next audit-layer release (Stage 2).' },
+      { color: 'flow-safe', tag: '', title: 'Local inference executes',
+        detail: 'Model runs on the Sentinel Node hardware. No external API call. No vendor sub-processor. No public-internet round trip.' },
+      { color: 'flow-safe', tag: 'CITE', tagClass: 'tag-cite', title: 'Citation gate enforces evidence binding',
+        detail: 'Output may only assert what the retrieval layer can cite. Unsupported claims are flagged before the user ever sees them.' },
+      { color: 'flow-blocked', tag: 'BLOCK', tagClass: 'tag-block', title: 'Hallucination intercepted',
+        detail: 'The same kind of unsupported claim that escaped in the cloud path is held at the citation gate. Output never reaches the user without provenance.' },
+      { color: 'flow-audit', tag: 'HIL', tagClass: 'tag-hil', title: 'Human review checkpoint',
+        detail: 'For regulated outputs, a clinician or attorney must approve before the response is committed. The reviewer\'s identity is bound into the audit record.' },
+      { color: 'flow-safe', tag: 'AUDIT', tagClass: 'tag-cite', title: 'Audit record closed',
+        detail: 'Envelope closes as a reviewable record; the full chain &mdash; prompt, retrieval, output, reviewer &mdash; is reconstructable from one record. Tamper-evident hash sealing arrives with the next audit-layer release (Stage 2).' }
+    ];
+  }
+
+  /* Telemetry events — paced to flow steps */
+  function cloudTelemetry(arch){
+    return [
+      { status: 'warn', msg: 'External request initiated &rsaquo;&rsaquo; <span class="tel-highlight">vendor.example/api/v1</span>' },
+      { status: 'warn', msg: 'Sub-processor engaged &rsaquo;&rsaquo; <span class="tel-highlight">cloud-compute-region-east</span>' },
+      { status: 'warn', msg: 'Logging pipeline writing &rsaquo;&rsaquo; <span class="tel-highlight">retention=unspecified</span>' },
+      { status: 'err',  msg: 'Output emitted <span class="tel-danger">without citation lock</span>' },
+      { status: 'err',  msg: 'Provenance chain &rsaquo;&rsaquo; <span class="tel-danger">incomplete</span>' },
+      { status: 'err',  msg: 'Independent audit verification &rsaquo;&rsaquo; <span class="tel-danger">not available</span>' }
+    ];
+  }
+
+  function sentinelTelemetry(arch){
+    return [
+      { status: 'info', msg: 'Audit envelope opened &rsaquo;&rsaquo; <span class="tel-highlight">env_8f3a&hellip;</span>' },
+      { status: 'ok',   msg: 'External requests &rsaquo;&rsaquo; <span class="tel-good">0</span>' },
+      { status: 'info', msg: 'Retrieval scoped &rsaquo;&rsaquo; <span class="tel-highlight">corpus.local</span>' },
+      { status: 'ok',   msg: 'Citation verification &rsaquo;&rsaquo; <span class="tel-good">passed</span>' },
+      { status: 'ok',   msg: 'Hallucination intercepted at citation gate' },
+      { status: 'info', msg: 'Human review checkpoint &rsaquo;&rsaquo; <span class="tel-highlight">required</span>' },
+      { status: 'ok',   msg: 'Chain-of-custody &rsaquo;&rsaquo; <span class="tel-good">verified</span>' },
+      { status: 'ok',   msg: 'Audit hash sealed &rsaquo;&rsaquo; <span class="tel-highlight">sha256:7d2c&hellip;</span>' }
+    ];
+  }
+
+  /* ============================================================
+     STATE — defaults to medical (primary GTM segment)
+     URL params: ?industry=medical&arch=sentinel for sharable state
+     ============================================================ */
+  function parseQuery() {
+    var out = {};
+    try {
+      var qs = (location.search || '').replace(/^\?/, '');
+      qs.split('&').forEach(function(pair){
+        if (!pair) return;
+        var kv = pair.split('=');
+        out[decodeURIComponent(kv[0])] = decodeURIComponent(kv[1] || '');
+      });
+    } catch(e) {}
+    return out;
+  }
+  var QS = parseQuery();
+  var VALID_INDUSTRIES = ['medical','law','behavioral','clinic'];
+  var VALID_ARCHS = ['public-chatbot','saas-assistant','agent-platform','sentinel'];
+
+  var state = {
+    industry: VALID_INDUSTRIES.indexOf(QS.industry) >= 0 ? QS.industry : 'medical',
+    arch:     VALID_ARCHS.indexOf(QS.arch) >= 0 ? QS.arch : null,
+    running:  false,
+    timers:   [],
+    autorun:  QS.autorun === '1' || QS.walk === '1',
+    walk:     QS.walk === '1'
+  };
+
+  // Walk mode = sales-companion full-screen mode for screen-share calls.
+  // Strips navigation chrome, bumps font sizes, hides configurator. Implies autorun.
+  if (state.walk) {
+    document.body.classList.add('lsim-walk');
+    // Insert an invisible click target over the "Exit walk mode" pill
+    var exitLink = document.createElement('a');
+    exitLink.href = 'liability-simulator.html';
+    exitLink.className = 'lsim-walk-exit';
+    exitLink.setAttribute('aria-label', 'Exit walk mode and return to simulator');
+    document.body.appendChild(exitLink);
+  }
+
+  /* ============================================================
+     DOM HELPERS
+     ============================================================ */
+  function $(sel, ctx){ return (ctx || document).querySelector(sel); }
+  function $$(sel, ctx){ return Array.prototype.slice.call((ctx || document).querySelectorAll(sel)); }
+
+  function clearTimers(){
+    state.timers.forEach(function(t){ clearTimeout(t); });
+    state.timers = [];
+  }
+  function schedule(fn, ms){
+    var t = setTimeout(fn, ms);
+    state.timers.push(t);
+    return t;
+  }
+
+  /* ============================================================
+     CARD SELECTION
+     ============================================================ */
+  $$('#industry-grid .lsim-card').forEach(function(card){
+    card.addEventListener('click', function(){
+      $$('#industry-grid .lsim-card').forEach(function(c){
+        c.classList.remove('selected');
+        c.setAttribute('aria-checked', 'false');
+      });
+      card.classList.add('selected');
+      card.setAttribute('aria-checked', 'true');
+      state.industry = card.getAttribute('data-industry');
+      updateLaunchState();
+    });
+  });
+
+  $$('#arch-grid .lsim-card').forEach(function(card){
+    card.addEventListener('click', function(){
+      $$('#arch-grid .lsim-card').forEach(function(c){
+        c.classList.remove('selected');
+        c.setAttribute('aria-checked', 'false');
+      });
+      card.classList.add('selected');
+      card.setAttribute('aria-checked', 'true');
+      state.arch = card.getAttribute('data-arch');
+      updateLaunchState();
+    });
+  });
+
+  function updateLaunchState(){
+    var btn  = $('#launch-btn');
+    var hint = $('#launch-hint');
+    if (state.industry && state.arch) {
+      btn.disabled = false;
+      hint.textContent = '// ready — ' + INDUSTRY_LABELS[state.industry].name + ' × ' + ARCH_LABELS[state.arch].name;
+    } else if (state.industry) {
+      btn.disabled = true;
+      hint.textContent = '// medical environment pre-selected — choose an architecture to compare';
+    } else {
+      btn.disabled = true;
+      hint.textContent = '// select an environment and architecture to begin';
+    }
+  }
+
+  /* ============================================================
+     INIT — apply medical default + URL pre-selection to UI
+     ============================================================ */
+  function initFromState() {
+    if (state.industry) {
+      $$('#industry-grid .lsim-card').forEach(function(c){
+        if (c.getAttribute('data-industry') === state.industry) {
+          c.classList.add('selected');
+          c.setAttribute('aria-checked', 'true');
+        }
+      });
+    }
+    if (state.arch) {
+      $$('#arch-grid .lsim-card').forEach(function(c){
+        if (c.getAttribute('data-arch') === state.arch) {
+          c.classList.add('selected');
+          c.setAttribute('aria-checked', 'true');
+        }
+      });
+    }
+    updateLaunchState();
+    if (state.autorun && state.industry && state.arch) {
+      schedule(launchSimulation, 400);
+    }
+  }
+
+  /* ============================================================
+     LAUNCH / REPLAY / RESET
+     ============================================================ */
+  $('#launch-btn').addEventListener('click', launchSimulation);
+  $('#replay-btn').addEventListener('click', function(){ if (state.industry && state.arch) launchSimulation(); });
+  $('#reset-btn').addEventListener('click', resetAll);
+
+  function resetAll(){
+    clearTimers();
+    state.running = false;
+    state.industry = null;
+    state.arch = null;
+    $$('#industry-grid .lsim-card, #arch-grid .lsim-card').forEach(function(c){
+      c.classList.remove('selected');
+      c.setAttribute('aria-checked', 'false');
+    });
+    $('#stage').classList.remove('active');
+    var debrief = $('#lsim-debrief');
+    if (debrief) {
+      debrief.classList.remove('revealed');
+      debrief.setAttribute('aria-hidden', 'true');
+    }
+    updateLaunchState();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function launchSimulation(){
+    if (!state.industry || !state.arch) return;
+    clearTimers();
+    state.running = true;
+
+    var stage = $('#stage');
+    stage.classList.add('active');
+
+    // Scenario header
+    $('#sc-eyebrow').textContent = INDUSTRY_LABELS[state.industry].name.toUpperCase() + ' · ' + ARCH_LABELS[state.arch].name.toUpperCase();
+    $('#sc-title').textContent = INDUSTRY_LABELS[state.industry].scenario;
+    $('#sc-desc').textContent  = SCENARIO_DESC[state.industry];
+
+    // Pane labels
+    $('#cloud-name').textContent = state.arch === 'sentinel' ? 'Reference: Public AI Chatbot' : ARCH_LABELS[state.arch].name;
+    $('#cloud-sub').textContent  = state.arch === 'sentinel' ? 'Counterfactual comparison' : ARCH_LABELS[state.arch].sub;
+
+    $('#cloud-status').textContent = 'RUNNING';
+    $('#cloud-status').className = 'lsim-pane-status status-running';
+    $('#sentinel-status').textContent = 'RUNNING';
+    $('#sentinel-status').className = 'lsim-pane-status status-running';
+
+    // Reset flows & banners
+    $('#cloud-flow').innerHTML = '';
+    $('#sentinel-flow').innerHTML = '';
+    $('#cloud-incident').classList.remove('show');
+    $('#sentinel-contained').classList.remove('show');
+    $('#cloud-telemetry').innerHTML = '<div class="tel-empty">streaming&hellip;</div>';
+    $('#sentinel-telemetry').innerHTML = '<div class="tel-empty">streaming&hellip;</div>';
+
+    // Reset metrics
+    setMetrics({});
+
+    // Reset risk bars (animate from 0 → target)
+    $$('.risk-bar-fill').forEach(function(bar){ bar.style.width = '0%'; });
+
+    // Reset debrief (will reveal after risk bars settle)
+    var debrief = $('#lsim-debrief');
+    if (debrief) {
+      debrief.classList.remove('revealed');
+      debrief.setAttribute('aria-hidden', 'true');
+    }
+
+    // Reset SVG state
+    $$('.flow-path').forEach(function(p){ p.classList.remove('drawn'); });
+    $$('.svg-node-fade').forEach(function(n){ n.classList.remove('shown'); });
+
+    // Render flow steps (cloud-side architecture: show selected; if sentinel selected, show public-chatbot for comparison)
+    var displayArch = state.arch === 'sentinel' ? 'public-chatbot' : state.arch;
+    var cSteps = cloudSteps(displayArch, state.industry);
+    var sSteps = sentinelSteps(state.arch, state.industry);
+
+    renderFlow($('#cloud-flow'), cSteps);
+    renderFlow($('#sentinel-flow'), sSteps);
+
+    // Animate reveal
+    animateFlow($('#cloud-flow'), 420);
+    animateFlow($('#sentinel-flow'), 480);
+
+    // Telemetry
+    var cTel = cloudTelemetry(displayArch);
+    var sTel = sentinelTelemetry(state.arch);
+    streamTelemetry($('#cloud-telemetry'), cTel, 420, 700, 'col-cloud');
+    streamTelemetry($('#sentinel-telemetry'), sTel, 480, 480, 'col-sentinel');
+
+    // Incident banner reveal — timed to land mid-flow
+    schedule(function(){ $('#cloud-incident').classList.add('show'); }, 420 * (cSteps.length - 2) + 200);
+    schedule(function(){ $('#sentinel-contained').classList.add('show'); }, 480 * 4 + 200);
+
+    // Status badges flip at end
+    schedule(function(){
+      $('#cloud-status').textContent = 'EXPOSED';
+      $('#cloud-status').className = 'lsim-pane-status status-exposed';
+    }, 420 * cSteps.length + 400);
+    schedule(function(){
+      $('#sentinel-status').textContent = 'SECURED';
+      $('#sentinel-status').className = 'lsim-pane-status status-secured';
+    }, 480 * sSteps.length + 400);
+
+    // Metrics fade in
+    schedule(function(){
+      setMetrics({
+        cloudEgress: '3+ hops',
+        cloudAudit:  'partial',
+        cloudHil:    'none',
+        cloudRet:    'unknown',
+        sEgress:     '0',
+        sAudit:      'sealed',
+        sHil:        'enforced',
+        sRet:        '30d local'
+      });
+    }, Math.max(420 * cSteps.length, 480 * sSteps.length) + 200);
+
+    // SVG propagation map
+    schedule(function(){ animateLiabilityMap(); }, 600);
+
+    // Risk bars (animate after panes settle)
+    schedule(function(){
+      $$('.risk-bar-fill').forEach(function(bar, i){
+        var target = bar.getAttribute('data-val');
+        setTimeout(function(){ bar.style.width = target + '%'; }, i * 70);
+      });
+    }, Math.max(420 * cSteps.length, 480 * sSteps.length) + 400);
+
+    // Debrief reveal — after risk bars stagger completes (~6 bars × 70ms = 420ms)
+    // Total: max-pane-time + 400ms (bar start) + ~500ms (bar settle) = ~900ms after bars start
+    schedule(function(){
+      populateDebrief(state.industry, state.arch);
+      var d = $('#lsim-debrief');
+      if (d) {
+        d.classList.add('revealed');
+        d.setAttribute('aria-hidden', 'false');
+      }
+    }, Math.max(420 * cSteps.length, 480 * sSteps.length) + 900);
+
+    // Scroll into view
+    schedule(function(){
+      stage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+  }
+
+  function setMetrics(v){
+    $('#cloud-egress').textContent     = v.cloudEgress || '—';
+    $('#cloud-audit').textContent      = v.cloudAudit  || '—';
+    $('#cloud-hil').textContent        = v.cloudHil    || '—';
+    $('#cloud-retention').textContent  = v.cloudRet    || '—';
+    $('#sentinel-egress').textContent  = v.sEgress     || '—';
+    $('#sentinel-audit').textContent   = v.sAudit      || '—';
+    $('#sentinel-hil').textContent     = v.sHil        || '—';
+    $('#sentinel-retention').textContent = v.sRet      || '—';
+  }
+
+  /* ============================================================
+     DEBRIEF — scenario-aware "what just happened" recap
+     Fires after risk bars settle. Names the three mechanisms.
+     ============================================================ */
+  var DEBRIEF_CONTENT = {
+    medical: {
+      citation: {
+        body: 'When asked to draft the appeal, the cloud model fabricated a guideline reference the corpus could not back. The Sentinel Node\'s citation gate refused to pass any clinical claim unless it could be traced to the patient\'s chart, the practice\'s formulary, or an indexed clinical guideline.',
+        artifact: 'citation_gate.decision = ALLOW · source: ASCO_Guidelines_2024.pdf p.12 · confidence: 0.94'
+      },
+      human: {
+        body: 'A physician must sign the appeal before it goes out. Cloud architectures release the draft to staff with no enforced reviewer. Sentinel Node blocks the output until a licensed clinician\'s identity is bound into the audit record.',
+        artifact: 'reviewer = MD signed · NPI bound · timestamp 2026-05-19T14:22:08Z'
+      },
+      audit: {
+        body: 'The prompt, the chart excerpts retrieved, the cited guideline pages, the draft output, and the physician\'s signature were sealed into a single SHA-256-anchored envelope. The chart now carries a verifiable record of how the appeal was produced.',
+        artifact: 'sha256: 7f3a8e1c…b29c · chain: sealed · retention: 30d local · chart_linked'
+      }
+    },
+    law: {
+      citation: {
+        body: 'The cloud model fabricated a clause reference that did not appear in any document. The Sentinel Node\'s citation gate refused to surface any contractual claim unless it pointed to a specific exhibit, Bates range, or email in the local matter file.',
+        artifact: 'citation_gate.decision = ALLOW · source: Exhibit_B_Bates_004128 · confidence: 0.96'
+      },
+      human: {
+        body: 'An attorney must verify before the brief or memo moves forward. Cloud platforms produced output ready to copy. Sentinel Node holds the output behind a reviewer gate &mdash; the attorney\'s bar ID is bound into the audit envelope.',
+        artifact: 'reviewer = Esq. signed · bar_id bound · timestamp 2026-05-19T14:22:08Z'
+      },
+      audit: {
+        body: 'The prompt, the documents retrieved, the cited exhibits, the draft output, and the reviewing attorney\'s signature were sealed into a single SHA-256-anchored envelope. The matter file now carries an evidentiary record of how the work product was produced.',
+        artifact: 'sha256: 7f3a8e1c…b29c · chain: sealed · retention: 30d local · matter_linked'
+      }
+    },
+    behavioral: {
+      citation: {
+        body: 'The cloud model paraphrased session content in a way that misrepresented the clinician\'s notes. The Sentinel Node\'s citation gate held every clinical assertion to the actual session transcript &mdash; verbatim attribution or refusal.',
+        artifact: 'citation_gate.decision = ALLOW · source: session_2026-05-19_transcript.txt · 42_CFR_Part_2 = true'
+      },
+      human: {
+        body: 'A licensed behavioral clinician must sign the progress note before it enters the patient record. Cloud architectures wrote the summary into the chart with no enforced review. Sentinel Node enforces the human-in-the-loop gate before any chart write.',
+        artifact: 'reviewer = LCSW signed · license bound · timestamp 2026-05-19T14:22:08Z'
+      },
+      audit: {
+        body: 'Under 42 CFR Part 2, the chain of custody for substance-use disorder content must be reconstructable. The prompt, transcript excerpts, summary, and reviewer signature were sealed into a single SHA-256-anchored envelope.',
+        artifact: 'sha256: 7f3a8e1c…b29c · chain: sealed · retention: 30d local · 42_CFR_Part_2_compliant'
+      }
+    },
+    clinic: {
+      citation: {
+        body: 'The cloud model padded the referral packet with plausible-sounding history the chart did not actually contain. The Sentinel Node\'s citation gate refused to include any clinical fact unless it pointed to a specific record entry.',
+        artifact: 'citation_gate.decision = ALLOW · source: patient_record_2026-04-12 · field: cardiology_consult_history'
+      },
+      human: {
+        body: 'A clinician must sign the packet before it is transmitted to the specialist. Cloud platforms produced output the front desk could send. Sentinel Node holds the packet until a licensed reviewer\'s identity is bound into the audit envelope.',
+        artifact: 'reviewer = MD signed · NPI bound · timestamp 2026-05-19T14:22:08Z'
+      },
+      audit: {
+        body: 'The prompt, the chart fields retrieved, the assembled packet, and the reviewing clinician\'s signature were sealed into a single SHA-256-anchored envelope. The referral now carries a verifiable record of how it was assembled.',
+        artifact: 'sha256: 7f3a8e1c…b29c · chain: sealed · retention: 30d local · referral_linked'
+      }
+    }
+  };
+
+  function populateDebrief(industry, arch) {
+    var c = DEBRIEF_CONTENT[industry];
+    if (!c) return;
+    // Update body text for each mechanism
+    if ($('#deb-citation-body')) $('#deb-citation-body').textContent = c.citation.body;
+    if ($('#deb-human-body'))    $('#deb-human-body').textContent    = c.human.body;
+    if ($('#deb-audit-body'))    $('#deb-audit-body').textContent    = c.audit.body;
+    // Update artifact code text
+    var ca = document.querySelector('#deb-citation-artifact .lsim-deb-artifact-text');
+    var ha = document.querySelector('#deb-human-artifact .lsim-deb-artifact-text');
+    var aa = document.querySelector('#deb-audit-artifact .lsim-deb-artifact-text');
+    if (ca) ca.textContent = c.citation.artifact;
+    if (ha) ha.textContent = c.human.artifact;
+    if (aa) aa.textContent = c.audit.artifact;
+  }
+
+  // Wire the "Run a different scenario" button to scroll back to the configurator
+  var debriefRerun = document.getElementById('lsim-debrief-rerun');
+  if (debriefRerun) {
+    debriefRerun.addEventListener('click', function(){
+      var config = document.querySelector('.lsim-config');
+      if (config) config.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
+
+  // Wire the "Save as PDF" button — adds a body class so print CSS can target the simulator-as-document layout
+  var debriefPrint = document.getElementById('lsim-debrief-print');
+  if (debriefPrint) {
+    debriefPrint.addEventListener('click', function(){
+      document.body.classList.add('lsim-printing');
+      // Tiny delay so browsers commit the class change before print dialog opens
+      setTimeout(function(){
+        window.print();
+        // Clean up after the print dialog dismisses
+        setTimeout(function(){ document.body.classList.remove('lsim-printing'); }, 500);
+      }, 100);
+    });
+  }
+
+  /* ============================================================
+     FLOW RENDERING
+     ============================================================ */
+  function renderFlow(host, steps){
+    host.innerHTML = '';
+    steps.forEach(function(step){
+      var node = document.createElement('div');
+      node.className = 'flow-node ' + step.color;
+      var tagHtml = step.tag ? '<span class="flow-node-tag ' + (step.tagClass || '') + '">' + step.tag + '</span>' : '';
+      node.innerHTML =
+        '<div class="flow-node-track">' +
+          '<div class="flow-node-dot"></div>' +
+          '<div class="flow-node-line"></div>' +
+        '</div>' +
+        '<div class="flow-node-body">' +
+          '<div class="flow-node-title">' + step.title + tagHtml + '</div>' +
+          '<div class="flow-node-detail">' + step.detail + '</div>' +
+        '</div>';
+      host.appendChild(node);
+    });
+  }
+  function animateFlow(host, perStep){
+    var nodes = $$('.flow-node', host);
+    nodes.forEach(function(n, i){
+      schedule(function(){ n.classList.add('visible'); }, i * perStep);
+    });
+  }
+
+  /* ============================================================
+     TELEMETRY STREAM
+     ============================================================ */
+  function streamTelemetry(host, entries, delay, perEntry, colCls){
+    host.innerHTML = '';
+    schedule(function(){
+      entries.forEach(function(e, i){
+        var row = document.createElement('div');
+        row.className = 'tel-entry';
+        var ts = formatTs(i * perEntry);
+        row.innerHTML =
+          '<span class="tel-ts">[' + ts + ']</span>' +
+          '<span class="tel-status-dot tel-' + e.status + '"></span>' +
+          '<span class="tel-msg">' + e.msg + '</span>';
+        host.appendChild(row);
+        schedule(function(){ row.classList.add('show'); }, i * perEntry + 30);
+      });
+    }, delay);
+  }
+
+  function formatTs(ms){
+    var d = new Date(Date.now() + ms);
+    function pad(n){ return n < 10 ? '0' + n : '' + n; }
+    return pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds());
+  }
+
+  /* ============================================================
+     LIABILITY MAP SVG ANIMATION
+     ============================================================ */
+  function animateLiabilityMap(){
+    // cloud half: animate steps 0..4
+    var perStep = 600;
+    [0,1,2,3,4].forEach(function(step){
+      schedule(function(){
+        $$('.svg-node-fade[data-half="cloud"][data-step="' + step + '"]').forEach(function(el){
+          el.classList.add('shown');
+        });
+        $$('.flow-path[data-half="cloud"][data-step="' + step + '"]').forEach(function(el){
+          el.classList.add('drawn');
+        });
+      }, step * perStep);
+    });
+    // sentinel half: animate steps 0..5
+    [0,1,2,3,4,5].forEach(function(step){
+      schedule(function(){
+        $$('.svg-node-fade[data-half="sentinel"][data-step="' + step + '"]').forEach(function(el){
+          el.classList.add('shown');
+        });
+        $$('.flow-path[data-half="sentinel"][data-step="' + step + '"]').forEach(function(el){
+          el.classList.add('drawn');
+        });
+      }, step * perStep + 200);
+    });
+  }
+
+  /* ============================================================
+     KEYBOARD: Esc resets, Enter launches
+     ============================================================ */
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && state.running) {
+      // soft reset of stage only
+      $('#stage').classList.remove('active');
+      clearTimers();
+      state.running = false;
+    }
+  });
+
+  /* ============================================================
+     BOOT — apply defaults + URL pre-selection
+     ============================================================ */
+  initFromState();
+
+})();
+</script>
+
+</body>
+</html>

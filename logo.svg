@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Pocono AI">
+  <title>Pocono AI</title>
+  <!--
+    Pocono AI master mark v311b — monochrome, no bezel/plate.
+    Rotated diamond outline (45°) = sealed local boundary / mountain silhouette.
+    Inner C-curve = local containment loop (preserves the C-from-Pocono identity).
+    Summit dot at top vertex = governance control point.
+    Self-colored (silver) — does NOT rely on currentColor so it renders correctly via <img>.
+  -->
+  <g transform="rotate(45 32 32)"
+     fill="none"
+     stroke="#E6E9ED"
+     stroke-width="3.6"
+     stroke-linecap="round"
+     stroke-linejoin="round">
+    <!-- Outer diamond (rotated rounded square) -->
+    <rect x="12" y="12" width="40" height="40" rx="8" ry="8"/>
+    <!-- C-curve: local containment loop -->
+    <path d="M43 22 L26 22 A6 6 0 0 0 20 28 L20 36 A6 6 0 0 0 26 42 L41 42"/>
+  </g>
+
+  <!-- Summit / governance dot at TOP vertex of the diamond -->
+  <circle cx="32" cy="9" r="3" fill="#E6E9ED"/>
+</svg>

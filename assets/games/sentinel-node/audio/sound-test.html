@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sentinel Audio — Sound Test</title>
+<style>
+  :root { --bg:#0a0f16; --card:#131c26; --teal:#188B96; --mint:#7df0c4; --text:#eef3f7; --muted:#8a9baa; --border:rgba(255,255,255,0.08); }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:ui-monospace,'Space Mono',monospace; min-height:100vh; padding:32px 18px; line-height:1.6;
+         background-image:radial-gradient(ellipse 80% 60% at 50% -10%,rgba(24,139,150,0.12),transparent 60%); }
+  .wrap { max-width:620px; margin:0 auto; }
+  h1 { font-size:1.5rem; margin-bottom:6px; color:#fff; }
+  .sub { color:var(--muted); font-size:0.85rem; margin-bottom:24px; }
+  .note { background:var(--card); border:1px solid var(--border); border-left:3px solid var(--mint); border-radius:10px; padding:14px 16px; font-size:0.82rem; color:var(--muted); margin-bottom:22px; }
+  .grid { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }
+  @media (max-width:520px){ .grid{ grid-template-columns:1fr; } }
+  button.snd { background:var(--card); border:1px solid var(--border); color:var(--text); padding:16px; border-radius:12px; font-family:inherit; font-size:0.92rem; cursor:pointer; text-align:left; transition:border-color .2s,transform .15s,background .2s; min-height:56px; }
+  button.snd:hover { border-color:var(--teal); transform:translateY(-2px); background:#18232f; }
+  button.snd:active { transform:translateY(0); }
+  button.snd small { display:block; color:var(--muted); font-size:0.7rem; margin-top:3px; }
+  .controls { display:flex; gap:12px; align-items:center; margin:22px 0; flex-wrap:wrap; }
+  .controls label { font-size:0.8rem; color:var(--muted); }
+  input[type=range]{ accent-color:var(--teal); }
+  #status { font-size:0.78rem; color:var(--mint); margin-top:18px; min-height:1.2em; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Sentinel Audio &mdash; Sound Test</h1>
+  <div class="sub">Procedural Web Audio engine for Sentinel Node: Breach Protocol</div>
+
+  <div class="note">
+    Tap any button to hear the sound. Audio unlocks on your first tap (browser autoplay policy).
+    All sounds are generated live &mdash; no files loaded, no network calls, no tracking.
+  </div>
+
+  <div class="controls">
+    <label>Volume <input type="range" id="vol" min="0" max="1" step="0.05" value="0.5"></label>
+    <label><input type="checkbox" id="mute"> Mute</label>
+  </div>
+
+  <div class="grid" id="grid"></div>
+  <div id="status"></div>
+</div>
+
+<script src="sentinel-audio.js"></script>
+<script>
+  var sounds = [
+    ['blaster','Audit Chain Blaster','sharp sci-fi pulse / gun pop'],
+    ['enemyHit','Enemy Hit','digital impact glitch'],
+    ['enemyDefeated','Enemy Defeated','corrupted shutdown'],
+    ['playerDamage','Player Damage','warning thud / shield crack'],
+    ['gate','Gate Activation','hydraulic sci-fi seal'],
+    ['coreActivate','Sentinel Core Activation','rising power tone'],
+    ['win','Win','secure-system confirmation'],
+    ['lose','Lose','system compromise alarm'],
+    ['lowHealth','Low Health','subtle warning pulse'],
+    ['uiClick','Button Click','clean UI tick']
+  ];
+  var grid = document.getElementById('grid');
+  var status = document.getElementById('status');
+  sounds.forEach(function(s){
+    var b = document.createElement('button');
+    b.className = 'snd';
+    b.innerHTML = s[1] + '<small>' + s[2] + '</small>';
+    b.addEventListener('click', function(){
+      SentinelAudio.unlock();
+      SentinelAudio.play(s[0]);
+      status.textContent = '\u25B6 played: ' + s[0];
+    });
+    grid.appendChild(b);
+  });
+  document.getElementById('vol').addEventListener('input', function(e){ SentinelAudio.setVolume(parseFloat(e.target.value)); });
+  document.getElementById('mute').addEventListener('change', function(e){ SentinelAudio.setMuted(e.target.checked); });
+  status.textContent = SentinelAudio.isSupported() ? 'Web Audio supported \u2713' : 'Web Audio NOT supported \u2014 sounds will no-op safely';
+</script>
+</body>
+</html>

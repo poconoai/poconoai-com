@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why Pocono AI | Hardware Custody vs. Cloud AI Claims</title>
+    <meta name="description" content="Why physical network isolation and hardware-custody AI beat cloud AI for regulated environments — the definitive case for local AI.">
+    <meta name="keywords" content="why local AI, hardware custody AI, on-premises vs cloud, BAA alternatives, physical AI isolation, zero cloud commitment, on-premises AI, local AI, sovereign AI, zero cloud AI, HIPAA-governed AI environments, healthcare AI, legal AI, Sentinel Node, Pocono AI, data sovereignty, air-gapped AI, no cloud, EHR automation, RAG AI, independent medical practice AI, law firm AI">
+    <meta property="og:title" content="Why Pocono AI | Hardware Custody vs. Cloud AI">
+    <meta property="og:description" content="The definitive case for hardware-custody-first AI. Why physical isolation beats every cloud AI compliance claim.">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Pocono AI">
+    <meta property="og:locale" content="en_US">
+    
+    <meta property="og:image" content="https://poconoai.com/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Pocono AI — Sovereign on-premises AI">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Why Hardware Custody Beats Every Cloud AI Claim | Pocono AI">
+    <meta name="twitter:description" content="Physical network isolation beats every cloud BAA compliance claim. The definitive case for on-premises AI sovereignty.">
+    <meta name="twitter:image" content="https://poconoai.com/hero.jpg"><meta name="theme-color" content="#0B0F13">
+    
+    <link rel="icon" href="logo.svg?v=402" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css?v=402">    <!-- SEO: Canonical URL + XML Sitemap reference -->
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+    <link rel="canonical" href="https://poconoai.com/why-pocono-ai.html">
+    <!-- Open Graph: ensures social sharing pulls correct page -->
+    <meta property="og:url" content="https://poconoai.com/why-pocono-ai.html">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Pocono AI, LLC",
+      "url": "https://poconoai.com",
+      "logo": "https://poconoai.com/logo.svg",
+      "description": "Sovereign, on-premises local AI infrastructure for healthcare and legal professionals. Zero-egress by default. Hardware-custody deployment.",
+      "foundingDate": "2024",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "East Stroudsburg",
+        "addressRegion": "PA",
+        "addressCountry": "US"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+1-570-534-0602",
+        "contactType": "sales",
+        "email": "marcus@poconoai.com"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/company/pocono-ai"
+      ],
+      "datePublished": "2026-06-01",
+      "dateModified": "2026-06-01"
+    }</script>
+<link rel="stylesheet" href="nav-v2026.css?v=402">
+<link rel="stylesheet" href="brand-v292.css?v=402">
+<script>
+// Pocono AI v169 — Zero-flash banner dismissal.
+// Strategy: inject <style> tag synchronously BEFORE banner HTML parses,
+// so dismissed banners never render at all (no flash). DOM removal still
+// happens for safety. ?showbanners=1 URL param re-shows everything.
+(function(){
+  var ids=[];
+
+  // Escape hatch: ?showbanners=1 clears all dismiss flags for testing
+  try {
+    if (location.search.indexOf('showbanners=1') !== -1) {
+      ids.forEach(function(id){ localStorage.removeItem('pai_dismissed_'+id); });
+      localStorage.removeItem('poconoPilot');
+      localStorage.removeItem('advisoryBarDismissed');
+    }
+  } catch(e) {}
+
+  // v246 Stage 1 — Legacy migration block removed.
+  // Was dead code containing a JS syntax error (adjacent string literals)
+  // that broke the entire banner-dismiss IIFE on ~46 pages.
+
+  // Build CSS rule list for dismissed banners and inject synchronously.
+  // This runs in <head> BEFORE banner HTML is parsed, so dismissed bars
+  // never paint — eliminating the flash entirely.
+  var hideRules = [];
+  ids.forEach(function(id){
+    try {
+      if (localStorage.getItem('pai_dismissed_'+id) === '1') {
+        hideRules.push('#'+id+'{display:none !important;}');
+      }
+    } catch(e) {}
+  });
+  if (hideRules.length) {
+    var style = document.createElement('style');
+    style.id = 'pai-banner-hide';
+    style.textContent = hideRules.join('');
+    (document.head || document.documentElement).appendChild(style);
+  }
+
+  function dismiss(id){
+    try { localStorage.setItem('pai_dismissed_'+id,'1'); } catch(e) {}
+    var el = document.getElementById(id);
+    if (el) {
+      el.style.setProperty('display','none','important');
+      el.setAttribute('aria-hidden','true');
+      if (el.parentNode) {
+        el.parentNode.removeChild(el);
+      }
+    }
+  }
+
+  // Cleanup pass — remove dismissed banners from DOM after parse,
+  // belt-and-suspenders alongside the CSS hide.
+  function cleanup(){
+    ids.forEach(function(id){
+      try {
+        if (localStorage.getItem('pai_dismissed_'+id) === '1') {
+          var el = document.getElementById(id);
+          if (el && el.parentNode) {
+            el.parentNode.removeChild(el);
+          }
+        }
+      } catch(e) {}
+    });
+  }
+
+  function bind(){
+    ids.forEach(function(id){
+      var btn = document.getElementById(id+'-close');
+      if (btn && !btn.dataset.boundDismiss) {
+        btn.dataset.boundDismiss = '1';
+        btn.addEventListener('click', function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          dismiss(id);
+        });
+        btn.addEventListener('touchend', function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          dismiss(id);
+        }, {passive:false});
+      }
+    });
+    cleanup();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bind);
+  } else {
+    bind();
+  }
+})();
+</script>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+<div id="reading-progress" aria-hidden="true"></div>
+
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- INCLUDE:HEADER -->
+<div id="hitl-notice" style="background:#0a1929;padding:4px 16px;text-align:center;font-size:12px;color:#4a5568;border-bottom:1px solid rgba(255,255,255,0.06);letter-spacing:0.01em;">Human-in-the-Loop required: licensed professionals verify all outputs before clinical or legal action</div>
+<header role="banner">
+  <div class="header-inner">
+    <a href="/index.html" class="logo" aria-label="Pocono AI Home">
+      <img src="/logo.svg?v=402" alt="" width="36" height="36" decoding="async" loading="eager" aria-hidden="true" style="display:inline-block;">
+      Pocono <span>AI</span>
+    </a>
+    <nav id="desktop-nav" aria-label="Main navigation">
+      <div class="nav-item"><a href="/index.html" class="nav-direct">Home</a></div>
+      <div class="nav-item"><a href="/for-physicians.html" class="nav-direct">Physicians</a></div>
+      <div class="nav-item"><a href="/for-attorneys.html" class="nav-direct">Attorneys</a></div>
+      <div class="nav-item"><a href="/sentinel-node.html" class="nav-direct nav-hub" style="color:#d5a94f;border:1px solid rgba(213,169,79,0.45);border-radius:999px;padding:6px 13px;">Sentinel Node</a></div>
+      <div class="nav-item"><a href="/living-memorials/" class="nav-direct">Living Echo</a></div>
+      <div class="nav-item"><a href="/contact.html" class="nav-direct">Contact</a></div>
+      <div class="nav-item" data-dropdown="menu-more">
+        <button type="button" class="nav-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="menu-more">More <span class="nav-chevron" aria-hidden="true">&#9662;</span></button>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <a href="/contact.html#pilot" class="nav-cta nav-cta-primary">Request a Pilot</a>
+      <button type="button" class="pa-search-trigger" data-search-open aria-label="Search (press / or Ctrl-K)" aria-haspopup="dialog" aria-expanded="false">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span class="pa-st-label">Search</span><kbd data-pa-keyhint>Ctrl K</kbd>
+      </button>
+      <button type="button" class="header-icon-btn" id="mobile-menu" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav-panel">
+        <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- "More" overflow dropdown — sibling of <header> so position:fixed escapes header's stacking context. Wired by nav.js via data-dropdown="menu-more". -->
+<div class="nav-dropdown" id="menu-more" aria-label="More navigation">
+  <p class="nav-dd-section">Products</p>
+  <a href="/engineering-drafting/">Drafting &amp; Engineering Edition</a>
+  <a href="/sentinel-home/">Sentinel Home Edition</a>
+  <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability — Assistive Tools &#x2605;</a>
+  <a href="/living-memorials/enterprise-estate-continuity.html">Enterprise Estate Continuity</a>
+  <p class="nav-dd-section">Capabilities</p>
+  <a href="/evidence-room.html">Evidence Room</a>
+  <a href="/push-button-deliverables.html">Push-Button Deliverables</a>
+  <a href="/pilot-readiness-kit.html">Pilot Kit</a>
+  <a href="/pilot-program.html">Pilot Program</a>
+  <a href="/how-it-works.html">How It Works</a>
+  <p class="nav-dd-section">Hubs &amp; Company</p>
+  <a href="/training.html">Training Hub</a>
+  <a href="/documentation-hub/">Document Hub</a>
+  <a href="/global/">Global Hub</a>
+  <a href="/investors-hub.html">Investor Hub</a>
+  <a href="/valuation-dashboard.html">Valuation Dashboard</a>
+  <a href="/about.html">About</a>
+  <p class="nav-dd-section">Trust &amp; Legal</p>
+  <a href="/transparency.html">Transparency</a>
+  <a href="/audit.html">Audit Log</a>
+  <a href="/privacy.html">Privacy</a>
+  <a href="/sitemap.html">Sitemap</a>
+</div>
+<!-- Site search is provided by the self-contained search.js asset (command palette: / or Ctrl/Cmd-K). -->
+
+<!-- Mobile panel: full-screen slide-in. v396 nav — hub tiles + grouped links + Sentinel Node + Engineering. -->
+<nav id="mobile-nav-panel" aria-label="Mobile navigation" aria-hidden="true" role="dialog" aria-modal="true">
+
+  <!-- Hub tiles: Sentinel Node, Documentation Hub, Training Hub, Global Hub -->
+  <div style="padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,0.07);">
+    <p style="font-size:0.65em;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.28);margin:0 0 10px;padding:0 2px;">Hubs</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <a href="/sentinel-node.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(213,169,79,0.1);border:1px solid rgba(213,169,79,0.35);border-radius:10px;color:#d5a94f;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Sentinel Node</a>
+      <a href="/documentation-hub/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(0,194,168,0.1);border:1px solid rgba(0,194,168,0.35);border-radius:10px;color:#00c2a8;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Docs Hub</a>
+      <a href="/training.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.35);border-radius:10px;color:#a78bfa;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Training Hub</a>
+      <a href="/global/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(122,240,220,0.07);border:1px solid rgba(122,240,220,0.3);border-radius:10px;color:#7af0dc;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Global Hub</a>
+    </div>
+  </div>
+
+  <!-- Core paths -->
+  <div class="mob-static-links">
+    <a href="/index.html">Home</a>
+    <a href="/for-physicians.html">Physicians</a>
+    <a href="/for-attorneys.html">Attorneys</a>
+    <a href="/engineering-drafting/">Engineering &amp; Drafting</a>
+    <a href="/pilot-program.html">Pilot Program</a>
+    <a href="/how-it-works.html">How It Works</a>
+    <a href="/trust.html">Trust &amp; Audit</a>
+    <a href="/pricing.html">Pricing</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/living-memorials/">Living Echo</a>
+    <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability</a>
+    <a href="/about.html">About</a>
+    <a href="/team.html" style="color:rgba(255,255,255,0.6);">Team &amp; Leadership</a>
+    <a href="/valuation-dashboard.html" style="color:rgba(255,255,255,0.6);">Valuation Dashboard</a>
+    <a href="/careers.html" style="color:rgba(255,255,255,0.6);">Careers</a>
+    <a href="/sentinel-demo.html" style="color:rgba(255,255,255,0.6);">Demo</a>
+    <a href="/sitemap.html" style="color:rgba(255,255,255,0.45);">Sitemap</a>
+    <a href="/transparency.html" style="color:rgba(255,255,255,0.45);">Transparency</a>
+    <a href="/privacy.html" style="color:rgba(255,255,255,0.45);">Privacy</a>
+  </div>
+
+  <a href="/contact.html#pilot" class="mob-cta">Request a Pilot</a>
+</nav>
+<!-- /INCLUDE:HEADER -->
+
+
+<main class="container" id="main-content" tabindex="-1">
+<span id="main" aria-hidden="true"></span>
+<div class="page-back-link"><a href="index.html" class="back-link-anchor">&#8592; Home</a></div>
+
+
+        <!-- HERO -->
+        <section class="page-hero">
+            <div class="sentinel-lockup" aria-label="Sentinel Node — Why Pocono AI">
+              <svg class="sentinel-lockup-mark" viewBox="0 0 64 64" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
+          <!-- v311b: rotated diamond + C-curve loop + summit dot. Inherits currentColor from CSS context. -->
+          <g transform="rotate(45 32 32)">
+            <rect x="12" y="12" width="40" height="40" rx="8" ry="8"/>
+            <path d="M43 22 L26 22 A6 6 0 0 0 20 28 L20 36 A6 6 0 0 0 26 42 L41 42"/>
+          </g>
+          <circle cx="32" cy="9" r="3" fill="currentColor" stroke="none"/>
+        </svg>
+              <div class="sentinel-lockup-rule"></div>
+              <div class="sentinel-lockup-text">
+                <span class="sentinel-lockup-name">Sentinel Node</span>
+                <span class="sentinel-lockup-tag">The Definitive Case</span>
+              </div>
+            </div>
+            <h1>Why Hardware Custody Beats Every Cloud AI Claim</h1>
+            <p>Every competitor in this space will tell you their AI is "private," "secure," and "HIPAA-ready." Here is the one question they cannot answer — and why it changes everything.</p>
+        </section>
+
+        <!-- THE CORE ARGUMENT -->
+        <div class="core-argument">
+            <h2>The Argument in Three Sentences</h2>
+            <p>Every cloud AI vendor — no matter how many compliance certifications they display — processes your data on infrastructure they own, operate, and control. When you send Protected Health Information to their system, you are trusting their security, their network, their employees, and their legal exposure. <span class="key-phrase">Pocono AI removes trust from the equation entirely</span> by placing the AI hardware, the model weights, and the inference engine physically inside your facility, on a network you control, where data never traverses a wire that leads outside your walls.</p>
+            <p>This is not a software configuration or a compliance checkbox. It is a physical, architectural fact — and no competitor can replicate it without abandoning their business model entirely.</p>
+        </div>
+
+        <!-- THE ONE QUESTION -->
+        <div class="one-question">
+            <h2>The One Question Every Buyer Should Ask</h2>
+            <div class="big-q">"If I wanted to prevent your system from ever transmitting my patient data outside my building — physically, technically, irrevocably — could you guarantee that?"</div>
+            <p>Cloud vendors cannot answer yes. A BAA is a legal instrument, not a technical one. It assigns liability after a breach — it does not prevent one. Pocono AI's answer is yes by architecture. The hardware is in your building. The model runs in your building. The data never leaves your building. Not because we promise it. Because the network path does not exist.</p>
+        </div>
+
+        <!-- VS AIRGAPAI — THE PRIMARY COMPETITOR -->
+        <h2 class="vs-header">Pocono AI vs. AirgapAI</h2>
+        <p class="vs-subtitle">AirgapAI is the most visible competitor in the on-premise AI space. Here is the critical distinction the marketing does not make clear.</p>
+
+        <div class="prose-section">
+            <p>AirgapAI markets itself as a local, air-gapped AI platform. It is an impressive product with 2,800+ pre-configured workflows and a compelling per-user price point. But read their architecture carefully: <strong>AirgapAI installs on vendor-managed infrastructure.</strong> Their team provisions the environment. Their software stack runs the deployment. Their update mechanism touches your network.</p>
+            <p>This means the "air gap" is a behavioral commitment, not a physical reality enforced by your own infrastructure team. You are trusting AirgapAI's employees, AirgapAI's software supply chain, and AirgapAI's update protocols to maintain the gap. That is a vendor-trust model wearing air-gap clothing.</p>
+            <p>Pocono AI's Sentinel Node™ is a <strong>Dell Precision workstation, physically deployed within your facility, under your IT team's operational control.</strong> The model weights and all client-indexed data live on locally hosted drives within your office environment. After the minimum service term, SSD data repositories are retained by your practice. Updates arrive via cryptographically signed USB media — a human in your organization applies them, manually, after verification. The AI cannot call home because the network route does not exist and you own the network.</p>
+        </div>
+
+        <div class="hth-block">
+            <div class="hth-header">
+                <div class="hth-col-head criteria">Criteria</div>
+                <div class="hth-col-head them">AirgapAI</div>
+                <div class="hth-col-head us">Pocono AI Sentinel Node</div>
+            </div>
+            <div class="hth-row">
+                <div class="hth-cell criteria">Who controls the hardware environment?</div>
+                <div class="hth-cell them">AirgapAI / vendor</div>
+                <div class="hth-cell us">You. On your asset register.</div>
+            </div>
+            <div class="hth-row">
+                <div class="hth-cell criteria">Who controls the network path?</div>
+                <div class="hth-cell them">Vendor-managed install</div>
+                <div class="hth-cell us">Your IT team. Physically isolated LAN.</div>
+            </div>
+            <div class="hth-row">
+                <div class="hth-cell criteria">How do updates reach the model?</div>
+                <div class="hth-cell them">Vendor update mechanism</div>
+                <div class="hth-cell us">Cryptographically signed USB. Human-applied.</div>
+            </div>
+            <div class="hth-row">
+                <div class="hth-cell criteria">BAA structure</div>
+                <div class="hth-cell them">Standard vendor BAA</div>
+                <div class="hth-cell us">EAA™-scoped BAA. Vendor liability limited to hardware provisioning only. You retain 100% PHI custody.</div>
+            </div>
+            <div class="hth-row">
+                <div class="hth-cell criteria">HIPAA exfiltration risk vector</div>
+                <div class="hth-cell them">Vendor software supply chain</div>
+                <div class="hth-cell us">None. No outbound network path during inference.</div>
+            </div>
+            <div class="hth-row">
+                <div class="hth-cell criteria">Pricing model</div>
+                <div class="hth-cell them">$697/user one-time (perpetual)</div>
+                <div class="hth-cell us">$5,000 impl. fee + $950–$2,995/mo HaaS · 100% OpEx</div>
+            </div>
+            <div class="hth-row">
+                <div class="hth-cell criteria">Best for</div>
+                <div class="hth-cell them">Organizations comfortable with vendor-managed local AI</div>
+                <div class="hth-cell us">Organizations requiring absolute physical data custody with zero vendor network access</div>
+            </div>
+        </div>
+
+        <div class="argument-grid">
+            <div class="argument-card">
+                <h3>The moat AirgapAI cannot cross</h3>
+                <p>To match Pocono AI's custody model, AirgapAI would have to ship hardware, manage physical logistics, train local service technicians, and restructure their entire business model. They cannot replicate the EAA deployment model without ceasing to be AirgapAI. This is a structural competitive advantage, not a feature gap.</p>
+            </div>
+            <div class="argument-card teal-top">
+                <h3>When AirgapAI wins</h3>
+                <p>AirgapAI is a strong product for organizations that want workflow automation at low per-seat cost and are comfortable with vendor-managed infrastructure. If your compliance requirement is "reasonable safeguards" and not "zero exfiltration physically enforced," AirgapAI may be sufficient. Pocono AI is built for organizations where that distinction matters legally.</p>
+            </div>
+        </div>
+
+        <!-- VS CLOUD VENDORS -->
+        <h2 class="vs-header">Pocono AI vs. Hathr.AI, OpenAI Healthcare, Microsoft Nuance &amp; Azure</h2>
+        <p class="vs-subtitle">All cloud vendors — regardless of compliance certifications — share a fundamental architectural constraint.</p>
+
+        <div class="prose-section">
+            <p>Hathr.AI runs on AWS GovCloud. Microsoft Nuance DAX runs on Azure. OpenAI for Healthcare runs on OpenAI's infrastructure with BAA coverage. All of these are legitimate, compliance-oriented products. All of them require your data to traverse a network to a server outside your operational environment, in a data center outside your control, operated by employees you cannot vet.</p>
+            <p><strong>A BAA does not prevent exfiltration. It assigns liability after the fact.</strong> Under HIPAA's escalating penalty structure — up to $1.9 million per violation category — a single breach involving PHI sent to a cloud AI vendor will trigger an OCR investigation regardless of what your BAA says. The question your compliance officer should be asking is not "do we have a BAA?" but "can we demonstrate that PHI never left our network?"</p>
+            <p>With Pocono AI, the answer to that question is provable by architecture. Your SIEM logs show zero outbound connections from the Sentinel Node segment. Your network topology shows physical isolation. Your BAA is scoped to hardware provisioning only — there is no PHI transmission because there is no transmission mechanism.</p>
+        </div>
+
+        <div class="hth-block">
+            <div class="hth-header">
+                <div class="hth-col-head criteria">Criteria</div>
+                <div class="hth-col-head them">Cloud AI (Hathr / Nuance / OpenAI)</div>
+                <div class="hth-col-head us">Pocono AI Sentinel Node</div>
+            </div>
+            <div class="hth-row">
+                <div class="hth-cell criteria">Where does inference happen?</div>
+                <div class="hth-cell them">Vendor data center (cloud)</div>
+                <div class="hth-cell us">Your facility. Your hardware.</div>
+            </div>
+            <div class="hth-row">
+                <div class="hth-cell criteria">PHI transmission required?</div>
+                <div class="hth-cell them">Yes — data sent over TLS to cloud</div>
+                <div class="hth-cell us">No. PHI never leaves local network.</div>
+            </div>
+            <div class="hth-row">
+                <div class="hth-cell criteria">HIPAA compliance mechanism</div>
+                <div class="hth-cell them">BAA + vendor security controls</div>
+                <div class="hth-cell us">Physical isolation. BAA scoped to hardware only.</div>
+            </div>
+            <div class="hth-row">
+                <div class="hth-cell criteria">OCR audit evidence</div>
+                <div class="hth-cell them">Vendor compliance documentation</div>
+                <div class="hth-cell us">Your own network logs showing zero outbound PHI.</div>
+            </div>
+            <div class="hth-row">
+                <div class="hth-cell criteria">Model training on your data</div>
+                <div class="hth-cell them">Contractually prohibited — but technically possible</div>
+                <div class="hth-cell us">Technically impossible. Model runs offline.</div>
+            </div>
+            <div class="hth-row">
+                <div class="hth-cell criteria">EHR integration required?</div>
+                <div class="hth-cell them">Often yes — 12–18 month IT queue</div>
+                <div class="hth-cell us">No. Zero-integration pilot via standard PDF export.</div>
+            </div>
+            <div class="hth-row">
+                <div class="hth-cell criteria">Internet dependency</div>
+                <div class="hth-cell them">Required for all inference</div>
+                <div class="hth-cell us">None. Operates as a network-isolated local inference environment.</div>
+            </div>
+        </div>
+
+        <!-- VS EPIC/NUANCE -->
+        <h2 class="vs-header">Pocono AI vs. Epic + Nuance (EHR-Native AI)</h2>
+        <p class="vs-subtitle">For practices already in the Epic ecosystem, native AI is tempting. Here is what it costs and what it cannot do.</p>
+
+        <div class="argument-grid">
+            <div class="argument-card">
+                <h3>The 12–18 month integration queue</h3>
+                <p>Epic's AI app marketplace requires HL7/FHIR integration approval, IT resource allocation, and compliance review before a single workflow can go live. For a solo or small practice, this is effectively a locked door. The Sentinel Node's zero-integration pilot operates on standard PDF exports from any EHR — no FHIR, no API, no IT team dependency.</p>
+            </div>
+            <div class="argument-card teal-top">
+                <h3>You do not own the AI</h3>
+                <p>Epic-native AI is licensed per provider and governed by Epic's contract terms. If Epic changes pricing, changes the model, or discontinues the feature, you have no recourse. The Sentinel Node runs open-weight models under Apache 2.0 and MIT licenses. The weights, once deployed, are yours. No license renewal. No vendor lock-in. No model deprecation.</p>
+            </div>
+            <div class="argument-card">
+                <h3>Cost at practice scale</h3>
+                <p>Enterprise EHR AI bundles are priced for health systems, not solo practices. A family medicine physician paying for Nuance DAX Copilot on top of an Epic license is paying recurring per-provider fees indefinitely. The Sentinel Node HaaS model is a flat monthly subscription — no CapEx, no depreciation, typically deductible operating expense. At $950/month, it undercuts a part-time remote scribe from Day 1. No per-user or per-query charges. The monthly rate is fixed for the contract term.</p>
+            </div>
+        </div>
+
+        <!-- THE CUSTODY CHAIN -->
+        <h2 class="vs-header">The Complete Custody Chain</h2>
+        <p class="vs-subtitle">Every element of the Sentinel Node deployment is under your physical and legal custody. No competitor offers this chain intact.</p>
+
+        <div class="custody-chain">
+            <div class="chain-node">
+                <span class="cn-label">Hardware</span>
+                <span class="cn-val">Your Asset Register</span>
+                <span class="cn-sub">Dell Precision. Delivered. Tagged. Yours.</span>
+            </div>
+            <div class="chain-node">
+                <span class="cn-label">Model Weights</span>
+                <span class="cn-val">Your NVMe Drives</span>
+                <span class="cn-sub">Open-weight. Apache 2.0 / MIT. No licensing call-home.</span>
+            </div>
+            <div class="chain-node">
+                <span class="cn-label">Inference</span>
+                <span class="cn-val">Your Local Network</span>
+                <span class="cn-sub">Ollama / Llama 4. Zero outbound. Air-gapped segment.</span>
+            </div>
+            <div class="chain-node">
+                <span class="cn-label">PHI</span>
+                <span class="cn-val">Never Transmitted</span>
+                <span class="cn-sub">Not contractually restricted. Physically impossible.</span>
+            </div>
+            <div class="chain-node">
+                <span class="cn-label">Updates</span>
+                <span class="cn-val">Signed USB Only</span>
+                <span class="cn-sub">Human-applied. Cryptographically verified. No auto-update.</span>
+            </div>
+        </div>
+
+        <!-- WHY NOW -->
+
+        <!-- ═══════════════════════════════════════════
+             SOVEREIGN AI DIAGRAM — v198
+             Placement: why-pocono-ai.html — after Complete Custody Chain
+        ═══════════════════════════════════════════ -->
+        <div class="fade-in-section" style="margin:48px auto;max-width:620px;" aria-label="Sovereign AI architecture infographic">
+            <p style="text-align:center;margin:0 0 6px;font-size:0.7em;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--teal);font-family:'DM Mono',monospace;">The Three-Layer Custody Model</p>
+            <div style="border:1px solid rgba(0,194,168,0.2);border-radius:12px;overflow:hidden;background:#040f1a;">
+                <a href="arch-local-infrastructure-v271.png" target="_blank" rel="noopener"
+                   style="display:block;cursor:zoom-in;" aria-label="Sovereign AI diagram — click to view full size">
+                    <picture>
+                        <source srcset="arch-local-infrastructure-v271.webp" type="image/webp">
+                        <img src="arch-local-infrastructure-v271.png"
+                             alt="Three-layer sovereign AI custody model: Local Operational Custody (Dell Precision hardware, KYHD SLA, no cloud connection), Local Intelligence (Qdrant vector database, offline LLM, high-accuracy reranker), Source-Grounded Output (verified sources, RAG citations, no cross-tenant data exposure). Founder Marcus Brett O'Dell shown as sovereignty perimeter anchor."
+                             width="768" height="1376"
+                             loading="lazy" decoding="async"
+                             style="width:100%;height:auto;display:block;">
+                    </picture>
+                </a>
+                <div style="padding:9px 16px;border-top:1px solid rgba(0,194,168,0.12);display:flex;justify-content:space-between;align-items:center;background:rgba(4,15,26,0.9);">
+                    <p style="margin:0;font-size:0.72em;color:var(--muted);font-style:italic;">Sovereign AI is local, not cloud &mdash; at every layer</p>
+                    <a href="arch-local-infrastructure-v271.png" target="_blank" rel="noopener" style="font-size:0.74em;color:var(--teal);font-weight:700;text-decoration:none;">&#128269; Full size</a>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="vs-header">Why This Matters More in 2026 Than It Did in 2023</h2>
+        <p class="vs-subtitle">The regulatory and hardware environment has shifted to make Pocono AI's model both necessary and economically viable right now.</p>
+
+        <div class="why-now-grid">
+            <div class="why-now-card">
+                <span class="stat">400%</span>
+                <p>Increase in OCR enforcement of HIPAA since 2020. Healthcare organizations face existential liability for cloud AI missteps. The compliance window for selling cloud AI into healthcare is closing.</p>
+            </div>
+            <div class="why-now-card">
+                <span class="stat">$950/mo</span>
+                <p>The cost of a Sentinel Node II in 2026. The same local inference workload required a $500,000+ server build in 2020. NVIDIA Ada Generation GPUs collapsed the hardware cost barrier entirely.</p>
+            </div>
+            <div class="why-now-card">
+                <span class="stat">63%</span>
+                <p>Of physicians report signs of burnout. EHR documentation is the single most-cited cause. The market is not waiting for a solution — it is actively looking for one and making procurement decisions now.</p>
+            </div>
+            <div class="why-now-card">
+                <span class="stat">Zero</span>
+                <p>Funded direct competitors offering hardware-custody-first deployment at practice scale. Every funded AI healthcare company is cloud-based. This segment is uncontested. First-mover advantage is available today.</p>
+            </div>
+        </div>
+
+        <!-- THE INVESTMENT CASE -->
+        <div class="core-argument" style="border-color: var(--teal);">
+            <h2 style="border-color: var(--teal);">The Investment Case: $750K Pre-Seed Angel Round</h2>
+            <p style="font-size:1.05em; font-style:italic; color:var(--white); line-height:1.75; border-left: 3px solid var(--teal); padding-left: 16px; margin-bottom: 20px;">"I built this out of necessity, and I know exactly what it means to need systems that empower you. Now, my mission is to bring that same uncompromising capability and data sovereignty to medical practices and law offices — allowing professionals to reclaim their time and secure their data, no matter the logistical hurdles."<br><span style="font-size:0.85em; font-style:normal; color:var(--muted); margin-top:6px; display:block;">— Marcus O'Dell, Founder &amp; Chief Technologist</span></p>
+            <p>Pocono AI is raising $750,000 in a two-tranche pre-seed angel round. <strong>Tranche 1: $375,000 on close.</strong> Tranche 2: $375,000 upon deployment of the 5th paying pilot — a concrete, verifiable commercial milestone, not a time-based trigger. This structure aligns investor capital directly with business de-risking events and reflects founder accountability to execution over promises.</p>
+            <p>The hardware custody moat is not replicable by cloud competitors without abandoning their entire business model. The regulatory tailwind (OCR enforcement, physician burnout, Epic integration backlogs) is accelerating. The hardware cost barrier that made this category impossible in 2020 has collapsed. Pocono AI is positioned at the intersection of all three forces, in a segment with no funded direct competition, with a founder who has built and validated the architecture in working sandbox conditions.</p>
+            <p>The question for investors is not whether the market exists. The question is whether the window is open. It is — and it will not remain uncontested indefinitely.</p>
+            <div style="margin-top: 24px; text-align: center;">
+                <a href="investors.html" class="cta-button">View Investor Relations</a>
+                <a href="trust.html" class="cta-button cta-button-light" style="margin-left: 16px;">Review Trust &amp; Security</a>
+            </div>
+        </div>
+
+        <!-- BOTTOM CTA -->
+        <div class="cta-container">
+            <h2>See It for Yourself</h2>
+            <p>The argument is architectural. The proof is in the sandbox. Schedule a technical briefing and we will walk you through the zero-integration pilot workflow, live query retrieval against a 76-page clinical document, and the audit log that proves nothing left the local network.</p>
+            <a href="contact.html#pilot" class="cta-button">Schedule Technical Briefing</a>
+            <a href="specs.html" class="cta-button cta-button-light" style="margin-left: 12px;">View Specifications</a>
+            <p style="margin-top: 24px; color: var(--muted); font-size: 0.9em;">Or text the founder directly: <strong style="color: var(--white);">(570) 534-0602</strong></p>
+        </div>
+
+        <div class="transparency-note">
+            <p><strong>Web Telemetry Transparency Note:</strong> The Sentinel Node hardware operates with absolute zero outbound telemetry. As of v195 (May 2026), this marketing site also has zero third-party telemetry of any kind. See <a href="audit.html">audit.html</a>.</p>
+        </div>
+
+    </main>
+
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 root-relative nav fix, Living Echo rebrand, Engineering & Drafting + Enterprise Estate Continuity links added (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- INCLUDE:FOOTER -->
+<footer role="contentinfo" style="background:#051622;border-top:1px solid rgba(255,255,255,0.08);padding:40px 24px 28px;font-size:0.85em;color:#8899aa;">
+  <div style="max-width:1180px;margin:0 auto;">
+
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:0 0 28px;margin-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.07);">
+      <div style="max-width:560px;">
+        <p style="margin:0 0 6px;font-size:1.05em;font-weight:700;color:#fff;">Local AI infrastructure for regulated practices.</p>
+        <p style="margin:0;font-size:0.95em;line-height:1.5;">Drafts with citations. Human review required. Sensitive documents stay under practice control. Simple path, deep proof.</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="/contact.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;background:#00c2a8;color:#04111a;font-weight:700;text-decoration:none;font-size:0.95em;">Request Pilot</a>
+        <a href="/sentinel-demo.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;border:1px solid rgba(0,194,168,0.55);color:#00c2a8;font-weight:700;text-decoration:none;font-size:0.95em;">Watch Demo</a>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px 32px;margin-bottom:32px;text-align:left;">
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">For You</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/start-here.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Start Here (3 min)</a>
+          <a href="/for-physicians.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Physicians</a>
+          <a href="/for-attorneys.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Attorneys</a>
+          <a href="/engineering-drafting/" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Engineering &amp; Drafting Teams</a>
+          <a href="/pilot-program.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Pilot Program</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Installer Training</a>
+          <a href="/how-it-works.html" style="color:#8899aa;text-decoration:none;">How It Works</a>
+          <a href="/trust.html" style="color:#8899aa;text-decoration:none;">Trust &amp; Audit</a>
+          <a href="/pricing.html" style="color:#8899aa;text-decoration:none;">Pricing</a>
+          <a href="/sentinel-demo.html" style="color:#8899aa;text-decoration:none;">See the Demo</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Documentation Hub</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/documentation-hub/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Hub Home &mdash; Deep Proof</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">Installer Training</a>
+          <a href="/sentinel-node/installation-simulator.html" style="color:#8899aa;text-decoration:none;">&#8627; Installation Simulator</a>
+          <a href="/documentation-hub/clinical/" style="color:#8899aa;text-decoration:none;">Clinical Documentation</a>
+          <a href="/documentation-hub/legal/" style="color:#8899aa;text-decoration:none;">Legal Documentation</a>
+          <a href="/documentation-hub/technical/" style="color:#8899aa;text-decoration:none;">Technical Documentation</a>
+          <a href="/documentation-hub/governance/" style="color:#8899aa;text-decoration:none;">Governance &amp; Audit</a>
+          <a href="/documentation-hub/tools/" style="color:#8899aa;text-decoration:none;">Tools &amp; Simulators</a>
+          <a href="/documentation-hub/research/" style="color:#8899aa;text-decoration:none;">Research &amp; Essays</a>
+          <a href="/documentation-hub/transparency/" style="color:#8899aa;text-decoration:none;">Transparency</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Global Federated AI</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/global/" style="color:#7af0dc;text-decoration:none;font-weight:600;">Global Federated Hub</a>
+          <a href="/global/australia/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Australia</a>
+          <a href="/global/singapore/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Singapore</a>
+          <a href="/global/taiwan/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Taiwan</a>
+          <a href="/global/europe/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Europe</a>
+          <a href="/contact.html" style="color:#8899aa;text-decoration:none;">Partner Inquiry</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Company</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/about.html" style="color:#8899aa;text-decoration:none;">About Pocono AI</a>
+          <a href="/team.html" style="color:#8899aa;text-decoration:none;">Team &amp; Leadership</a>
+          <a href="/why-pocono-ai.html" style="color:#8899aa;text-decoration:none;">Why Pocono AI</a>
+          <a href="/founding-commercial-leadership.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Join Us</a>
+          <a href="/careers.html" style="color:#8899aa;text-decoration:none;">Careers</a>
+          <a href="/how-we-hire.html" style="color:#8899aa;text-decoration:none;">How We Hire</a>
+          <a href="/channel-partners.html" style="color:#8899aa;text-decoration:none;">Technical Partners (MSPs)</a>
+          <a href="/partners.html" style="color:#8899aa;text-decoration:none;">Academic Partnerships</a>
+          <a href="/contact.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Contact</a>
+          <a href="https://forms.gle/VQahnkjMfY6QNEMy8" target="_blank" rel="noopener noreferrer" style="color:#d5a94f;text-decoration:none;font-weight:600;">Interest List &#8599;</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Founder Projects</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/rehability/" style="color:#a78bfa;text-decoration:none;font-weight:700;">Rehability &#x2605;</a>
+          <a href="/rehability/marcus-memory-helper/" style="color:#a78bfa;text-decoration:none;font-weight:600;">&#8627; Marcus's Memory Helper</a>
+          <a href="/sentinel-home/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Sentinel Home Edition</a>
+          <a href="/living-memorials/" style="color:#8899aa;text-decoration:none;">Living Echo</a>
+          <a href="/living-memorials/marcus-odell/" style="color:#8899aa;text-decoration:none;">Marcus&rsquo;s Living Echo</a>
+          <a href="/living-memorials/enterprise-estate-continuity.html" style="color:#8899aa;text-decoration:none;">Enterprise Estate Continuity</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Resources &amp; Legal</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/sitemap.html" style="color:#8899aa;text-decoration:none;">All Pages (Sitemap)</a>
+          <a href="/audit.html" style="color:#8899aa;text-decoration:none;">Transparency &amp; Audit Log</a>
+          <a href="/maturity-disclosure.html" style="color:#8899aa;text-decoration:none;">What We Have / Don&rsquo;t Claim</a>
+          <a href="/plain.html" style="color:#8899aa;text-decoration:none;">Plain Language Guide</a>
+          <a href="/privacy.html" style="color:#8899aa;text-decoration:none;">Privacy</a>
+          <a href="/terms.html" style="color:#8899aa;text-decoration:none;">Terms</a>
+          <a href="/sla.html" style="color:#8899aa;text-decoration:none;">SLA</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:18px;margin-bottom:14px;">
+      <p style="margin:0;font-size:0.82em;line-height:1.6;color:#6f8295;max-width:1000px;">Pocono AI does not provide medical, legal, or engineering advice, does not practice medicine, law, or licensed engineering, and does not make clinical, legal, or engineering decisions. Outputs are drafts or support materials that require review by a qualified professional; final professional judgment remains with the licensed physician, attorney, or engineer. Tools and simulations on this site are educational and use synthetic data.</p>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:20px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+      <p style="margin:0;font-size:0.9em;">&copy; 2026 Pocono AI, LLC &nbsp;&#183;&nbsp; East Stroudsburg, PA &nbsp;&#183;&nbsp; <a href="mailto:marcus@poconoai.com" style="color:#8899aa;">marcus@poconoai.com</a> &nbsp;&#183;&nbsp; <a href="tel:+15705340602" style="color:#8899aa;">(570) 534-0602</a></p>
+      <p style="margin:0;font-size:0.88em;"><a href="/audit.html" style="color:#5dade2;text-decoration:none;">Transparency v402</a></p>
+    </div>
+  </div>
+</footer>
+<script src="/search.js?v=402" defer></script>
+<!-- /INCLUDE:FOOTER -->
+
+<script src="search-index.js?v=402" defer></script>
+<script src="nav.js?v=402" defer></script>
+<script src="pilot-cta.js?v=402" defer></script>
+</body>
+</html>
+<<<END: why-pocono-ai.html>>>

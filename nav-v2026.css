@@ -1,0 +1,847 @@
+/* =====================================================
+ * v399 2026-06-19 desktop-nav normalization (7 primary items + More dropdown; Home and Living Echo restored; overflow consolidated)
+ * v391 2026-06-18 responsive-ux-nav-beautification (raised hamburger breakpoint, search trigger compact, nav overflow protection)
+ * v350 2026-06-07 navigation-information-architecture-restructure — mega-menus, header CTAs, mobile sub-groups
+   POCONO AI — NAV CSS v263
+   Fixes: compound transform bug, header flex conflict,
+   search results panel, iOS focus rings, all variants.
+   ===================================================== */
+
+/* ── FOCUS ARCHITECTURE (Layer 1 — CSS-level iOS fix) ─────── */
+*:focus { outline: none; }
+*:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--ai-blue), 0 0 0 4px rgba(0,163,255,0.18);
+  border-radius: 3px;
+}
+*:focus:not(:focus-visible) { outline: none !important; box-shadow: none !important; }
+
+/* ── CRITICAL: body overflow-x fix ──────────────────────────────────────────
+   styles.css sets body{overflow-x:clip}. In Chrome 90+ and Firefox 92+, 
+   overflow-x:clip on body creates a CONTAINING BLOCK for position:fixed elements.
+   This breaks dropdown positioning — menus render relative to body, not viewport.
+   Fix: set body to overflow-x:visible so fixed elements use correct viewport coords.
+   We compensate by clipping overflow on main and section containers instead. */
+body {
+  overflow-x: visible !important;
+}
+main, .container, .hero-section, .sovereignty-proof, .page-hero,
+.cta-container, .fade-in-section, section {
+  overflow-x: clip;
+}
+
+/* Kill iOS tap flash on all interactive elements */
+a, button, [role="button"], [tabindex] {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+/* ── RESET OLD NAV RULES FROM styles.css ──────────────────── */
+/* These override the old display:none dropdown system */
+.nav-dropdown-menu { display: none !important; }
+#nav-menu { display: none !important; }
+.nav-links { display: none !important; }
+.menu-toggle { display: none !important; }
+
+/* ── HEADER: Fix the isolation + flex conflict ─────────────
+   styles.css sets: header { display:flex; isolation:isolate }
+   We add .header-inner as the real flex row inside.
+   We must override header's own flex to block so .header-inner
+   can be the sole flex container at 100% width.
+   isolation:isolate stays (it's good for stacking contexts)
+   but we change the layout model.
+   ──────────────────────────────────────────────────────────── */
+header[role="banner"] {
+  display: block !important;  /* Override styles.css display:flex */
+  position: sticky !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 1000 !important;
+  padding: 0 !important;      /* .header-inner handles padding */
+  height: 70px !important;
+  /* Keep isolation from styles.css — it's fine, dropdowns are outside header */
+}
+
+.header-inner {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  height: 70px !important;
+  padding: 0 clamp(16px, 3%, 32px) !important;
+  width: 100% !important;
+  max-width: 1400px !important;
+  margin: 0 auto !important;
+  box-sizing: border-box !important;
+  gap: 8px !important;
+}
+
+header[role="banner"].scrolled {
+  background: rgba(0,0,0,0.94) !important;
+  backdrop-filter: blur(14px) saturate(1.4);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  box-shadow: 0 2px 32px rgba(0,0,0,0.5) !important;
+  border-bottom-color: rgba(0,163,255,0.15) !important;
+}
+
+/* ── LOGO ──────────────────────────────────────────────────── */
+.logo {
+  text-decoration: none !important;
+  font-size: 1.3rem !important;
+  font-weight: 800 !important;
+  color: var(--white) !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  flex-shrink: 0 !important;
+  white-space: nowrap !important;
+}
+.logo img { height: 36px !important; width: 36px !important; border-radius: 6px; }
+.logo span { color: var(--ai-blue) !important; }
+
+/* ── DESKTOP NAV ───────────────────────────────────────────── */
+#desktop-nav {
+  display: none;
+  align-items: center;
+  gap: 2px;
+  flex: 1;
+  justify-content: center;
+  margin: 0 8px;
+}
+@media (min-width: 1024px) {
+  #desktop-nav { display: flex !important; }
+  #mobile-menu { display: none !important; }
+}
+
+.nav-item { position: relative; }
+
+/* Plain top-level nav links (Executive Brief, See It Run, Architecture, Pricing).
+   Scoped under #desktop-nav and given !important on layout-critical properties
+   so page-level base <a> styles cannot collapse the spacing or padding. */
+#desktop-nav a.nav-direct,
+.nav-direct {
+  display: inline-flex !important;
+  align-items: center !important;
+  padding: 7px 12px !important;
+  margin: 0 2px !important;
+  border-radius: 6px !important;
+  color: rgba(255,255,255,0.82) !important;
+  font-family: 'Syne', sans-serif !important;
+  font-size: 0.83em !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.01em !important;
+  line-height: 1.2 !important;
+  text-decoration: none !important;
+  white-space: nowrap !important;
+  background: transparent;
+  border: none;
+  transition: color 0.18s, background 0.18s, border-color 0.18s;
+}
+#desktop-nav a.nav-direct:hover,
+.nav-direct:hover {
+  color: #fff !important;
+  background: rgba(255,255,255,0.07) !important;
+}
+#desktop-nav a.nav-direct:focus-visible,
+.nav-direct:focus-visible {
+  outline: 2px solid var(--ai-blue, #00A3FF);
+  outline-offset: 2px;
+}
+/* "Talk to us" — outlined contact CTA, keep its pill look */
+#desktop-nav a.nav-direct.nav-cta-link,
+.nav-direct.nav-cta-link {
+  border: 1px solid rgba(0,194,168,0.55) !important;
+  color: #00c2a8 !important;
+  padding: 6px 14px !important;
+  margin-left: 8px !important;
+}
+#desktop-nav a.nav-direct.nav-cta-link:hover,
+.nav-direct.nav-cta-link:hover {
+  background: rgba(0,194,168,0.10) !important;
+  border-color: rgba(0,194,168,0.85) !important;
+  color: #00c2a8 !important;
+}
+
+.nav-toggle {
+  display: flex !important;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 12px;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 6px;
+  color: rgba(255,255,255,0.82) !important;
+  font-family: 'Syne', sans-serif;
+  font-size: 0.83em;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.18s, background 0.18s;
+}
+.nav-toggle:hover { color: #fff !important; background: rgba(255,255,255,0.07) !important; }
+.nav-item.is-open .nav-toggle { color: var(--ai-blue) !important; background: rgba(0,163,255,0.08) !important; }
+
+.nav-chevron {
+  width: 9px; height: 9px;
+  flex-shrink: 0;
+  opacity: 0.6;
+  transition: transform 0.22s cubic-bezier(.4,0,.2,1), opacity 0.2s;
+}
+.nav-item.is-open .nav-chevron { transform: rotate(180deg); opacity: 1; }
+
+/* ── DROPDOWN MENUS ────────────────────────────────────────────
+   KEY FIX: position:absolute (not fixed) on a positioned ancestor
+   that is a sibling div wrapping the entire header+dropdowns.
+   We use position:absolute + top:70px relative to the sticky header
+   by placing them as direct children of <body> with position:fixed.
+
+   BUT — the problem with fixed is that header { isolation:isolate }
+   in styles.css creates a stacking context. Dropdowns are OUTSIDE
+   header in DOM so they are NOT affected by header's isolation.
+   position:fixed is fine for them — they escape all ancestors.
+
+   The REAL bug was the compound transform on #menu-why-local:
+   "transform: translateX(-50%) translateY(-8px)" then
+   ".is-open { transform: translateX(-50%) translateY(0) }"
+   The is-open rule correctly kept BOTH transforms. Tested now.
+
+   SIMPLIFIED: Use per-menu left/right positioning without translateX
+   centering (which was fragile). Instead use left offsets calculated
+   from approximate toggle positions.
+   ──────────────────────────────────────────────────────────── */
+.nav-dropdown {
+  position: fixed;
+  top: 70px;           /* viewport-relative now that body overflow-x:visible */
+  z-index: 1100;
+  background: rgba(3,14,24,0.98);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-top: 2px solid var(--ai-blue);
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.55), 0 4px 16px rgba(0,163,255,0.07);
+  min-width: 220px;
+  padding: 6px 0 10px;
+
+  /* GPU-accelerated hide — NO display:none */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  pointer-events: none;
+  transition:
+    opacity 0.2s cubic-bezier(.4,0,.2,1),
+    transform 0.2s cubic-bezier(.4,0,.2,1),
+    visibility 0s linear 0.2s;
+  will-change: transform, opacity;
+}
+.nav-dropdown.is-open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+  transition:
+    opacity 0.2s cubic-bezier(.4,0,.2,1),
+    transform 0.2s cubic-bezier(.4,0,.2,1),
+    visibility 0s linear 0s;
+}
+
+/* nav-drop-root: now just a semantic wrapper, position not relied upon.
+   Dropdowns use position:fixed (correct now that body overflow-x:visible). */
+#nav-drop-root {
+  display: contents; /* renders as if not there — children flow to parent */
+}
+
+.nav-dropdown a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 18px;
+  color: rgba(255,255,255,0.8);
+  text-decoration: none !important;
+  font-size: 0.83em;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: color 0.14s, background 0.14s;
+  border: none !important;
+}
+.nav-dropdown a:hover { color: #fff; background: rgba(255,255,255,0.05); }
+.nav-featured { color: var(--teal) !important; font-weight: 700 !important; }
+.nav-featured:hover { color: var(--ai-blue) !important; }
+.nav-hot { color: #FF6B5B !important; font-weight: 600 !important; }
+
+.nav-section-label {
+  display: block;
+  padding: 10px 18px 3px;
+  font-size: 0.65em;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.28);
+  border-top: 1px solid rgba(255,255,255,0.05);
+  margin-top: 4px;
+}
+.nav-section-label:first-child { border-top: none; margin-top: 0; }
+
+/* ── HEADER ACTIONS ────────────────────────────────────────── */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.header-icon-btn {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 40px !important;
+  height: 40px !important;
+  min-width: 40px !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 8px !important;
+  color: rgba(255,255,255,0.78) !important;
+  cursor: pointer !important;
+  transition: color 0.18s, background 0.18s !important;
+  padding: 0 !important;
+}
+.header-icon-btn:hover { color: #fff !important; background: rgba(255,255,255,0.08) !important; }
+.header-icon-btn[aria-expanded="true"] { color: var(--ai-blue) !important; }
+
+/* Hamburger → X animation */
+.hamburger { display: block; position: relative; width: 22px; height: 16px; }
+.hamburger span {
+  display: block; position: absolute; left: 0;
+  width: 100%; height: 2px;
+  background: currentColor; border-radius: 2px;
+  transition: transform 0.28s cubic-bezier(.4,0,.2,1), opacity 0.2s;
+}
+.hamburger span:nth-child(1) { top: 0; }
+.hamburger span:nth-child(2) { top: 7px; }
+.hamburger span:nth-child(3) { top: 14px; }
+#mobile-menu.is-open .hamburger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+#mobile-menu.is-open .hamburger span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+#mobile-menu.is-open .hamburger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ── SEARCH PANEL ──────────────────────────────────────────────
+   Lives in document flow AFTER <header> (not inside it).
+   Slides down via max-height + opacity + translateY.
+   position:sticky top:70px makes it hug under the header
+   while being outside the header's flex/isolation context.
+   Firefox bug: input was in header flex row. Now it's in its
+   own independent container — zero flex collision possible.
+   ──────────────────────────────────────────────────────────── */
+#search-panel {
+  position: sticky;
+  top: 70px;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  width: 100%;
+  background: rgba(1,10,18,0.97);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0,163,255,0.18);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.45);
+  overflow: hidden;
+
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+  transition:
+    max-height 0.3s cubic-bezier(.4,0,.2,1),
+    opacity 0.25s ease,
+    transform 0.25s cubic-bezier(.4,0,.2,1);
+}
+#search-panel.is-open {
+  max-height: 120px;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  overflow: visible; /* allow results dropdown to show below */
+}
+
+.search-panel-inner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 12px clamp(16px,3%,24px);
+  position: relative;
+}
+
+#search-panel-input {
+  flex: 1;
+  min-width: 0;  /* Critical Firefox fix — prevents flex overflow */
+  width: 100%;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+  padding: 9px 14px;
+  color: var(--white);
+  font-family: 'DM Mono', 'Fira Mono', monospace;
+  font-size: max(16px, 0.9em); /* max(16px) prevents iOS zoom-on-focus */
+  outline: none;
+  transition: border-color 0.18s, background 0.18s;
+  box-sizing: border-box;
+}
+#search-panel-input::placeholder { color: rgba(255,255,255,0.3); }
+#search-panel-input::-webkit-search-cancel-button { display: none; }
+#search-panel-input:focus {
+  border-color: var(--ai-blue);
+  background: rgba(255,255,255,0.1);
+  box-shadow: 0 0 0 3px rgba(0,163,255,0.14);
+}
+
+.search-submit-btn {
+  flex-shrink: 0;
+  padding: 8px 16px;
+  background: var(--ai-blue);
+  border: none;
+  border-radius: 7px;
+  color: #000;
+  font-family: 'Syne', sans-serif;
+  font-size: 0.78em;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.18s, transform 0.14s;
+}
+.search-submit-btn:hover { background: #33b8ff; transform: translateY(-1px); }
+
+#search-panel-close {
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 6px;
+  color: rgba(255,255,255,0.5);
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s;
+}
+#search-panel-close:hover { color: #fff; background: rgba(255,255,255,0.1); }
+
+/* ── SEARCH RESULTS DROPDOWN ───────────────────────────────── */
+#search-results-drop {
+  display: none;
+  position: fixed;
+  top: 130px; /* below header(70px) + search panel(~60px) */
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(760px, calc(100vw - 32px));
+  background: rgba(3,14,24,0.99);
+  border: 1px solid rgba(0,163,255,0.2);
+  border-top: none;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+  z-index: 1200;
+  max-height: 400px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.sr-item {
+  display: flex;
+  flex-direction: column;
+  padding: 11px 16px;
+  text-decoration: none !important;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  transition: background 0.14s;
+}
+.sr-item:last-child { border-bottom: none; }
+.sr-item:hover, .sr-item:focus { background: rgba(0,163,255,0.07); outline: none; }
+.sr-title { font-size: 0.85em; font-weight: 600; color: #fff; margin-bottom: 2px; }
+.sr-desc { font-size: 0.75em; color: rgba(255,255,255,0.5); }
+.sr-item mark { background: rgba(0,163,255,0.25); color: var(--ai-blue); border-radius: 2px; }
+.sr-none { padding: 14px 16px; font-size: 0.82em; color: rgba(255,255,255,0.4); }
+
+/* ── MOBILE NAV PANEL ──────────────────────────────────────── */
+#mobile-nav-panel {
+  position: fixed;
+  top: 70px; left: 0; right: 0; bottom: 0;
+  z-index: 1050;
+  background: var(--bg-black, #000);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  transform: translateX(100%);
+  transition: transform 0.3s cubic-bezier(.4,0,.2,1);
+}
+#mobile-nav-panel.is-open { transform: translateX(0); }
+
+@media (min-width: 1024px) { #mobile-nav-panel { display: none !important; } }
+
+.mob-static-links { border-bottom: 1px solid rgba(255,255,255,0.07); }
+.mob-static-links a {
+  display: block;
+  padding: 14px 22px;
+  color: rgba(255,255,255,0.85);
+  text-decoration: none !important;
+  font-size: 0.92em;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.mob-section { border-bottom: 1px solid rgba(255,255,255,0.06); }
+.mob-section-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 15px 22px;
+  background: transparent !important;
+  border: none !important;
+  color: #fff !important;
+  font-family: 'Syne', sans-serif;
+  font-size: 0.95em;
+  font-weight: 700;
+  cursor: pointer;
+}
+.mob-chevron {
+  width: 12px; height: 12px; flex-shrink: 0;
+  transition: transform 0.22s cubic-bezier(.4,0,.2,1);
+  opacity: 0.5;
+}
+.mob-section.is-open .mob-chevron { transform: rotate(180deg); opacity: 1; }
+
+.mob-section-links {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.28s cubic-bezier(.4,0,.2,1);
+}
+.mob-section.is-open .mob-section-links { max-height: 1500px; }
+.mob-section-links a {
+  display: block;
+  padding: 10px 22px 10px 30px;
+  color: rgba(255,255,255,0.72);
+  text-decoration: none !important;
+  font-size: 0.87em;
+  border: none !important;
+  transition: color 0.14s;
+}
+.mob-section-links a:hover, .mob-section-links a:active { color: var(--ai-blue); }
+.mob-featured { color: var(--teal) !important; font-weight: 700 !important; }
+
+.mob-cta {
+  display: block;
+  margin: 20px 22px 30px;
+  padding: 14px;
+  text-align: center;
+  background: var(--teal, #188B96);
+  color: #fff !important;
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 0.83em;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: 8px;
+  text-decoration: none !important;
+}
+
+/* ── MISC ──────────────────────────────────────────────────── */
+header[role="banner"] a, header[role="banner"] button { text-decoration: none !important; }
+
+.skip-link {
+  position: absolute; top: -60px; left: 0;
+  background: var(--ai-blue); color: #000;
+  padding: 10px 20px; font-weight: 700; font-size: 0.9em;
+  text-decoration: none; z-index: 9999;
+  transition: top 0.3s;
+}
+.skip-link:focus { top: 0; }
+
+#reading-progress {
+  position: fixed; top: 70px; left: 0;
+  width: 0%; height: 3px;
+  background: linear-gradient(90deg, var(--teal, #188B96), var(--ai-blue, #00A3FF));
+  z-index: 998;
+  transition: width 0.1s linear;
+  pointer-events: none;
+}
+
+/* =====================================================================
+   v343 DEFENSIVE MOBILE GUARD (mobile-layout-repair)
+   Belt-and-suspenders against the in-page <header>/hero overlap class of
+   bug. The root cause (bare `header` rule) is already fixed by scoping to
+   header[role="banner"]. This guard ensures that EVEN IF a page uses an
+   in-page <header> or hero, it can never be forced into sticky/fixed
+   positioning, fixed height, or negative margins on small screens — it
+   must flow as a normal vertical stack. Scoped to <=640px and to NON-banner
+   headers so the real nav is untouched.
+   ===================================================================== */
+@media (max-width: 640px) {
+  body { overflow-x: hidden; }
+
+  /* Any in-page header that is NOT the site nav banner: force normal flow */
+  main header:not([role="banner"]),
+  header.sh-lede,
+  .sh-lede,
+  .ex-hero,
+  .orientation-hero,
+  .start-hero {
+    position: static !important;
+    height: auto !important;
+    min-height: 0 !important;
+    transform: none !important;
+    margin-top: 0 !important;
+    z-index: auto !important;
+    overflow: visible !important;
+  }
+
+  /* Decorative layers behind hero content must never sit above text */
+  .hero-bg, .decorative-grid, .circuit-lines, .hero-frame,
+  .background-frame, .brand-hero::before, .brand-hero::after {
+    z-index: 0 !important;
+    pointer-events: none !important;
+  }
+
+  /* Hero text + actions: static, full width, never layered */
+  .sh-lede h1, .sh-lede .sh-eyebrow, .sh-lede .sub, .sh-jump,
+  main header:not([role="banner"]) h1,
+  main header:not([role="banner"]) p {
+    position: static !important;
+    transform: none !important;
+    max-width: 100% !important;
+  }
+  .sh-jump { width: 100%; }
+}
+
+/* =====================================================================
+   v350 NAV RESTRUCTURE — mega-menus, header CTAs, mobile sub-groups
+   Additive layer for the 8-section information architecture. Matches the
+   existing dark enterprise aesthetic (Syne / DM Mono, teal + blue).
+   The shared positionDrop() logic already clamps wide menus to the
+   viewport, so no nav.js change is required for the mega-menus.
+   ===================================================================== */
+
+/* ── MEGA DROPDOWNS ─────────────────────────────────────────── */
+.nav-dropdown.nav-mega {
+  min-width: 0;                       /* override single-column 220px min */
+  max-width: calc(100vw - 24px);      /* never exceed viewport width */
+  padding: 14px 16px 16px;
+}
+.nav-mega-inner {
+  display: grid;
+  gap: 4px 26px;
+  align-items: start;
+}
+.nav-mega[data-cols="4"] .nav-mega-inner { grid-template-columns: repeat(4, minmax(176px, 208px)); }
+.nav-mega[data-cols="3"] .nav-mega-inner { grid-template-columns: repeat(3, minmax(186px, 224px)); }
+.nav-mega[data-cols="2"] .nav-mega-inner { grid-template-columns: repeat(2, minmax(206px, 248px)); }
+
+.nav-mega-col { display: flex; flex-direction: column; }
+
+/* Featured full-width strip link (hub / overview) at top of a mega */
+.nav-mega-feature {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 0 10px;
+  padding: 11px 14px !important;
+  border-radius: 8px;
+  background: linear-gradient(90deg, rgba(0,163,255,0.12), rgba(24,139,150,0.10));
+  border: 1px solid rgba(0,163,255,0.22) !important;
+  color: #fff !important;
+  font-family: 'Syne', sans-serif;
+  font-size: 0.82em !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.01em;
+  white-space: normal;
+}
+.nav-mega-feature:hover {
+  background: linear-gradient(90deg, rgba(0,163,255,0.20), rgba(24,139,150,0.16)) !important;
+  border-color: rgba(0,163,255,0.45) !important;
+  color: #fff !important;
+}
+.nav-mega-feature span { color: var(--ai-blue); font-size: 1.1em; }
+
+/* Section labels inside a mega = column group headers (no divider line) */
+.nav-mega .nav-section-label {
+  border-top: none;
+  margin-top: 0;
+  padding: 4px 10px 4px;
+  color: var(--teal, #2dd4bf);
+  opacity: 0.85;
+}
+.nav-mega a {
+  padding: 7px 10px;
+  font-size: 0.82em;
+  border-radius: 6px;
+}
+.nav-mega a:hover { background: rgba(255,255,255,0.06); }
+
+/* ── HEADER CTA PILLS ─────────────────────────────────────────
+   Request Pilot (filled teal) + Watch Demo (outlined). Hidden on mobile
+   (present in the mobile menu); Watch Demo hides below 1200px to protect
+   nav width on mid-size laptops. */
+.nav-cta {
+  display: none;                      /* shown >=1024px via media query */
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  margin-left: 8px;
+  border-radius: 999px;
+  font-family: 'Syne', sans-serif;
+  font-size: 0.8em;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  text-decoration: none !important;
+  cursor: pointer;
+  transition: background 0.18s, border-color 0.18s, color 0.18s, transform 0.18s;
+}
+.nav-cta-primary {
+  background: var(--teal, #188B96);
+  color: #fff !important;
+  border: 1px solid var(--teal, #188B96);
+}
+.nav-cta-primary:hover { background: #1ba0ad; border-color: #1ba0ad; transform: translateY(-1px); }
+.nav-cta-secondary {
+  background: transparent;
+  color: #cfe9ee !important;
+  border: 1px solid rgba(45,212,191,0.45);
+}
+.nav-cta-secondary:hover { background: rgba(45,212,191,0.10); border-color: rgba(45,212,191,0.8); color: #fff !important; }
+.nav-cta:focus-visible { outline: 2px solid var(--ai-blue, #00A3FF); outline-offset: 2px; }
+
+@media (min-width: 1024px) { .nav-cta-primary { display: inline-flex; } }
+@media (min-width: 1200px) { .nav-cta-secondary { display: inline-flex; } }
+
+/* ── MOBILE SUB-GROUP LABELS ──────────────────────────────────
+   Small uppercase dividers inside the mobile Solutions / Tools
+   accordions (Medical Practices, Law Firms, ...). */
+.mob-group-label {
+  display: block;
+  padding: 12px 22px 4px 30px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.66em;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--teal, #2dd4bf);
+  opacity: 0.75;
+}
+.mob-group-label:first-child { padding-top: 6px; }
+
+/* Outlined secondary mobile CTA (Watch Demo) beneath the filled one */
+.mob-cta-secondary {
+  background: transparent !important;
+  color: #cfe9ee !important;
+  border: 1px solid rgba(45,212,191,0.5);
+  margin-top: -8px;
+}
+.mob-cta-secondary:hover { background: rgba(45,212,191,0.10) !important; }
+
+/* =====================================================================
+   v391 — RESPONSIVE NAV + SEARCH TRIGGER BEAUTIFICATION PASS
+   2026-06-18
+   
+   Problem: 10 nav items in #desktop-nav cramp the header at 1024–1280px.
+   The search trigger (.pa-search-trigger) has no shrink behavior at those
+   widths and can push off-screen. Fix strategy:
+   
+   1. Raise hamburger breakpoint to 1160px (desktop-nav hides, mobile menu
+      appears) so there is never a cramped in-between state.
+   2. At 1024–1160px keep the MOBILE hamburger working even though the
+      desktop nav is hidden — this restores the clean two-state model.
+   3. Shrink the search trigger label at medium desktop (1160–1340px).
+   4. Add defensive overflow protection to .header-inner.
+   5. Ensure v390 CTA buttons wrap on narrow mobile.
+   ===================================================================== */
+
+/* ── 1. Raise hamburger / desktop-nav breakpoint to 1160px ─────────────────
+   Previously desktop-nav appeared at 1024px with 10 items — too many.
+   Now: below 1160px → hamburger + mobile panel.
+          above 1160px → desktop nav.
+   We ONLY need to override the two @media rules from lines 109–112 and 473. */
+
+@media (min-width: 1160px) {
+  #desktop-nav { display: flex !important; }
+  #mobile-menu { display: none !important; }
+  #mobile-nav-panel { display: none !important; }
+}
+@media (max-width: 1159px) {
+  #desktop-nav { display: none !important; }
+  #mobile-menu { display: flex !important; }
+}
+
+/* ── 2. Compact desktop-nav gaps at 1160–1320px ──────────────────────────── */
+@media (min-width: 1160px) and (max-width: 1320px) {
+  #desktop-nav {
+    gap: 0 !important;
+    margin: 0 4px !important;
+  }
+  #desktop-nav a.nav-direct,
+  .nav-direct {
+    padding: 7px 8px !important;
+    font-size: 0.79em !important;
+  }
+  #desktop-nav a.nav-direct.nav-hub,
+  .nav-direct.nav-hub {
+    padding: 5px 9px !important;
+  }
+  .nav-cta-primary {
+    padding: 7px 12px !important;
+    font-size: 0.77em !important;
+  }
+}
+
+/* ── 3. Shrink / collapse search trigger label at medium desktop ──────────── */
+/* At 1160–1400px: hide the "Search" text + kbd to save horizontal space.
+   The icon alone is perfectly usable and still keyboard-accessible. */
+@media (min-width: 1160px) and (max-width: 1400px) {
+  .pa-search-trigger .pa-st-label,
+  .pa-search-trigger kbd {
+    display: none !important;
+  }
+  .pa-search-trigger {
+    padding: 9px !important;
+    border-radius: 8px !important;
+  }
+}
+
+/* ── 4. Header-inner overflow protection ─────────────────────────────────── */
+@media (min-width: 1160px) {
+  .header-inner {
+    overflow: hidden;          /* prevent horizontal blowout */
+    flex-wrap: nowrap;
+  }
+  #desktop-nav {
+    min-width: 0;              /* allow shrink */
+    overflow: hidden;
+  }
+  .header-actions {
+    flex-shrink: 0;
+  }
+}
+
+/* ── 5. nav-cta-secondary: hide at narrower desktop too ────────────────────
+   Already hides below 1200px; tighten to 1340px so it never crowds the nav. */
+@media (max-width: 1340px) {
+  .nav-cta-secondary { display: none !important; }
+}
+@media (min-width: 1341px) {
+  .nav-cta-secondary { display: inline-flex !important; }
+}
+
+/* ═══ v399: "More" overflow dropdown — section labels + height safety ═══ */
+.nav-dropdown .nav-dd-section {
+  margin: 9px 16px 3px;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.30);
+}
+.nav-dropdown .nav-dd-section:first-child { margin-top: 5px; }
+#menu-more {
+  min-width: 264px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+/* Tighten link rows slightly inside the longer More menu */
+#menu-more a { padding-top: 7px; padding-bottom: 7px; }

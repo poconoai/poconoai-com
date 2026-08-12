@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp -->
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enterprise Deployment Topology — Sentinel Node | Pocono AI</title>
+<meta name="description" content="Enterprise deployment topology for Sentinel Node: where the appliance sits, network isolation, and integration architecture.">
+<meta name="keywords" content="Sentinel Node deployment topology, on-prem AI appliance, local AI infrastructure, signed updates, fail-safe AI, healthcare AI deployment, law firm AI infrastructure, Pocono AI">
+
+<meta property="og:title" content="Enterprise Deployment Topology — Sentinel Node | Pocono AI">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Pocono AI">
+<meta property="og:locale" content="en_US">
+<meta property="og:description" content="Where Sentinel Node sits in a real regulated environment — network placement, update custody, fail-safe behavior, and support escalation.">
+<meta property="og:url" content="https://poconoai.com/deployment-topology.html">
+<meta property="og:image" content="https://poconoai.com/arch-local-deployment-v271.png">
+<meta property="og:image:width" content="1536">
+<meta property="og:image:height" content="1024">
+<meta property="og:image:alt" content="Sentinel Node enterprise deployment topology diagram">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Enterprise Deployment Topology — Sentinel Node | Pocono AI">
+<meta name="twitter:description" content="Network placement, signed updates, support boundaries, and fail-safe behavior for the Sentinel Node appliance.">
+<meta name="twitter:image" content="https://poconoai.com/arch-local-deployment-v271.png">
+<meta name="theme-color" content="#0B0F13">
+
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="favicon-180x180.png">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="alternate icon" href="favicon.ico">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+<link rel="canonical" href="https://poconoai.com/deployment-topology.html">
+
+<link rel="stylesheet" href="styles.css?v=402">
+<link rel="stylesheet" href="nav-v2026.css?v=402">
+<link rel="stylesheet" href="brand-v292.css?v=402">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Enterprise Deployment Topology — Sentinel Node",
+  "description": "A practical deployment topology for Pocono AI Sentinel Node, including appliance placement, data flow, signed updates, fail-safe behavior, and support escalation.",
+  "author": {"@type": "Organization", "name": "Pocono AI, LLC"},
+  "publisher": {"@type": "Organization", "name": "Pocono AI, LLC", "logo": {"@type":"ImageObject", "url":"https://poconoai.com/logo.svg"}},
+  "datePublished": "2026-05-22",
+  "dateModified": "2026-05-22",
+  "mainEntityOfPage": "https://poconoai.com/deployment-topology.html"
+}
+</script>
+
+<style>
+/* ENTERPRISE DEPLOYMENT TOPOLOGY — v275 */
+.topo-hero {padding: clamp(32px, 5vw, 64px) 0 24px;}
+.topo-kicker {display:inline-flex;align-items:center;gap:8px;color:#2dd4bf;font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:.78rem;margin-bottom:14px;}
+.topo-title {font-size:clamp(2.15rem,5vw,4.25rem);line-height:1.03;margin:0 0 18px;color:#fff;max-width:1050px;letter-spacing:-.04em;}
+.topo-lede {font-size:clamp(1.08rem,1.8vw,1.32rem);line-height:1.62;color:#b9d9ee;max-width:900px;margin:0 0 24px;}
+.topo-cta-row {display:flex;flex-wrap:wrap;gap:12px;margin:26px 0 0;}
+.topo-btn {display:inline-flex;align-items:center;justify-content:center;padding:13px 18px;border-radius:999px;text-decoration:none;font-weight:800;border:1px solid rgba(45,212,191,.38);background:linear-gradient(135deg,rgba(45,212,191,.16),rgba(59,130,246,.12));color:#eaffff;box-shadow:0 10px 30px rgba(0,0,0,.25);} 
+.topo-btn.secondary {background:rgba(15,23,42,.45);color:#9bdcff;border-color:rgba(148,163,184,.25);}
+.topo-proof-strip {display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:30px 0 0;}
+.topo-proof {border:1px solid rgba(255,255,255,.1);background:rgba(3,12,24,.58);border-radius:18px;padding:16px;min-height:116px;}
+.topo-proof strong {display:block;color:#fff;font-size:1.05rem;margin-bottom:6px;}
+.topo-proof span {display:block;color:#91abc0;line-height:1.45;font-size:.94rem;}
+.topo-section {padding:32px 0;}
+.topo-panel {border:1px solid rgba(45,212,191,.18);border-radius:28px;background:linear-gradient(145deg,rgba(5,22,34,.86),rgba(2,8,18,.92));box-shadow:0 24px 80px rgba(0,0,0,.34);padding:clamp(20px,3.5vw,36px);overflow:hidden;position:relative;}
+.topo-panel::before {content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 0%,rgba(45,212,191,.11),transparent 34%),radial-gradient(circle at 85% 20%,rgba(59,130,246,.12),transparent 35%);pointer-events:none;}
+.topo-panel > * {position:relative;z-index:1;}
+.topo-h2 {font-size:clamp(1.55rem,3vw,2.25rem);line-height:1.15;margin:0 0 12px;color:#fff;letter-spacing:-.02em;}
+.topo-sub {color:#a8cce8;font-size:1.02rem;line-height:1.6;max-width:850px;margin:0 0 24px;}
+.topo-map {display:grid;grid-template-columns:1fr 1.05fr 1fr;gap:18px;align-items:stretch;margin-top:24px;}
+.topo-zone {border:1px solid rgba(148,163,184,.18);background:rgba(15,23,42,.5);border-radius:22px;padding:18px;display:flex;flex-direction:column;gap:12px;}
+.topo-zone h3 {margin:0;color:#fff;font-size:1rem;letter-spacing:.08em;text-transform:uppercase;}
+.topo-node {border:1px solid rgba(255,255,255,.12);background:rgba(2,8,18,.72);border-radius:16px;padding:13px;color:#dcefff;line-height:1.35;}
+.topo-node b {color:#fff;display:block;margin-bottom:4px;}
+.topo-node small {color:#8aa4b7;display:block;}
+.topo-appliance {border:1px solid rgba(45,212,191,.46);background:linear-gradient(180deg,rgba(8,29,43,.95),rgba(0,0,0,.82));border-radius:24px;padding:22px;box-shadow:0 0 0 1px rgba(45,212,191,.08),0 28px 80px rgba(0,0,0,.45);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;min-height:390px;}
+.topo-rack {width:min(100%,430px);border:1px solid rgba(255,255,255,.18);background:linear-gradient(180deg,#172231,#050b12);border-radius:16px;padding:20px 18px;box-shadow:inset 0 -16px 32px rgba(0,0,0,.48),0 18px 50px rgba(0,0,0,.35);}
+.topo-rack-top {display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;color:#53e6ff;font-weight:800;letter-spacing:.08em;font-size:.8rem;text-transform:uppercase;}
+.topo-grille {height:92px;border-radius:10px;background:repeating-linear-gradient(90deg,rgba(255,255,255,.09) 0 2px,transparent 2px 7px),linear-gradient(180deg,#0b1520,#020409);border:1px solid rgba(255,255,255,.1);position:relative;}
+.topo-grille::after {content:"SENTINEL NODE";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);color:#dffbff;font-size:.74rem;letter-spacing:.18em;background:rgba(0,0,0,.42);padding:7px 10px;border-radius:8px;}
+.topo-leds {display:flex;gap:6px;justify-content:flex-end;margin-top:13px;}
+.topo-leds span {width:9px;height:9px;border-radius:999px;background:#2dd4bf;box-shadow:0 0 10px #2dd4bf;}
+.topo-appliance h3 {font-size:1.35rem;color:#fff;margin:20px 0 8px;}
+.topo-appliance p {color:#9fc3dc;line-height:1.55;margin:0;}
+.topo-flow {display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-top:24px;}
+.topo-step {border:1px solid rgba(255,255,255,.11);border-radius:20px;background:rgba(15,23,42,.5);padding:18px;position:relative;}
+.topo-step .num {display:inline-flex;width:34px;height:34px;border-radius:999px;align-items:center;justify-content:center;background:rgba(45,212,191,.13);border:1px solid rgba(45,212,191,.32);color:#7ef7e2;font-weight:900;margin-bottom:12px;}
+.topo-step h3 {margin:0 0 8px;color:#fff;font-size:1.02rem;}
+.topo-step p {margin:0;color:#93adc0;line-height:1.5;font-size:.94rem;}
+.topo-grid-2 {display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:22px;}
+.topo-card {border:1px solid rgba(255,255,255,.11);background:rgba(15,23,42,.48);border-radius:22px;padding:20px;}
+.topo-card h3 {margin:0 0 10px;color:#fff;font-size:1.12rem;}
+.topo-card p, .topo-card li {color:#9eb9cc;line-height:1.55;}
+.topo-card ul {margin:0;padding-left:1.2rem;}
+.topo-table {width:100%;border-collapse:collapse;margin-top:18px;border-radius:18px;overflow:hidden;border:1px solid rgba(255,255,255,.11);}
+.topo-table th, .topo-table td {text-align:left;padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);vertical-align:top;}
+.topo-table th {background:rgba(45,212,191,.12);color:#dffcff;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;}
+.topo-table td {color:#a9c3d6;line-height:1.45;background:rgba(2,8,18,.38);}
+.topo-table tr:last-child td {border-bottom:0;}
+.topo-callout {margin-top:24px;border:1px solid rgba(45,212,191,.34);background:rgba(45,212,191,.08);border-radius:22px;padding:20px;color:#c9f7f1;line-height:1.6;}
+.topo-callout strong {color:#fff;}
+.topo-mini {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:22px;}
+.topo-mini div {border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:16px;background:rgba(2,8,18,.42);}
+.topo-mini b {display:block;color:#fff;margin-bottom:6px;}
+.topo-mini span {display:block;color:#94adbf;line-height:1.45;font-size:.94rem;}
+@media (max-width: 980px){.topo-proof-strip,.topo-map,.topo-flow,.topo-grid-2,.topo-mini{grid-template-columns:1fr}.topo-appliance{min-height:auto}.topo-table{display:block;overflow-x:auto}.topo-section{padding:22px 0}}
+
+
+/* Deployment visual additions — v288 */
+.net-diagram{background:#06111d;border:1px solid rgba(45,212,191,.22);border-radius:22px;padding:24px;margin:20px 0;overflow-x:auto}
+.net-layer{display:flex;flex-direction:column;gap:0;min-width:600px}
+.net-row{display:flex;align-items:center;gap:0;position:relative}
+.net-zone-label{writing-mode:vertical-rl;transform:rotate(180deg);font-size:.68rem;font-weight:900;text-transform:uppercase;letter-spacing:.12em;color:#4a6a80;padding:0 6px;min-width:28px;text-align:center;white-space:nowrap}
+.net-nodes{flex:1;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:14px;margin:6px 0}
+.net-nodes.client-zone{border-color:rgba(148,163,184,.2);background:rgba(148,163,184,.03)}
+.net-nodes.appliance-zone{border-color:rgba(45,212,191,.3);background:rgba(45,212,191,.04)}
+.net-nodes.output-zone{border-color:rgba(74,222,128,.2);background:rgba(74,222,128,.03)}
+.net-nodes.cloud-zone{border-color:rgba(248,113,113,.2);background:rgba(248,113,113,.03)}
+.net-zone-title{font-size:.72rem;font-weight:900;text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px}
+.net-nodes.client-zone .net-zone-title{color:#94a3b8}
+.net-nodes.appliance-zone .net-zone-title{color:#2dd4bf}
+.net-nodes.output-zone .net-zone-title{color:#4ade80}
+.net-nodes.cloud-zone .net-zone-title{color:#f87171}
+.net-items{display:flex;flex-wrap:wrap;gap:8px}
+.net-item{border:1px solid rgba(255,255,255,.12);background:rgba(15,23,42,.6);border-radius:10px;padding:8px 12px;font-size:.78rem;color:#c5dff0}
+.net-item.core{border-color:rgba(45,212,191,.35);color:#8ff7e4;background:rgba(45,212,191,.08)}
+.net-item.blocked{border-color:rgba(248,113,113,.3);color:#fca5a5;text-decoration:line-through;opacity:.7}
+.net-arrow-row{display:flex;align-items:center;justify-content:center;gap:4px;padding:4px 0;font-size:.8rem;color:#4a6a80}
+.net-arrow{font-size:1.1rem}
+.net-arrow.allowed{color:#2dd4bf}
+.net-arrow.blocked{color:#f87171}
+.net-fence{border:2px dashed rgba(255,255,255,.15);border-radius:12px;padding:6px 12px;font-size:.72rem;color:#4a6a80;text-align:center;margin:4px 0}
+.lifecycle-row{display:flex;align-items:stretch;gap:0;margin:16px 0;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.08)}
+.lifecycle-phase{flex:1;padding:14px 12px;border-right:1px solid rgba(255,255,255,.07);text-align:center;font-size:.8rem}
+.lifecycle-phase:last-child{border-right:none}
+.lifecycle-icon{font-size:1.3rem;margin-bottom:6px}
+.lifecycle-name{font-weight:900;color:#fff;font-size:.82rem;margin-bottom:4px}
+.lifecycle-desc{color:#8fa9bb;font-size:.74rem;line-height:1.45}
+.lp1{background:rgba(45,212,191,.05)}
+.lp2{background:rgba(59,130,246,.05)}
+.lp3{background:rgba(168,85,247,.05)}
+.lp4{background:rgba(251,191,36,.04)}
+.lp5{background:rgba(74,222,128,.05)}
+.support-matrix{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}
+.support-side{border-radius:18px;padding:18px}
+.support-side.normal{border:1px solid rgba(45,212,191,.22);background:rgba(45,212,191,.04)}
+.support-side.escalation{border:1px solid rgba(168,85,247,.22);background:rgba(168,85,247,.04)}
+.support-side h4{margin:0 0 12px;font-size:.92rem}
+.support-side.normal h4{color:#8ff7e4}
+.support-side.escalation h4{color:#d8b4fe}
+.support-side li{font-size:.82rem;color:#9eb9cc;line-height:1.7}
+@media(max-width:700px){.net-diagram{padding:14px}.support-matrix{grid-template-columns:1fr}.lifecycle-row{flex-direction:column}.lifecycle-phase{border-right:none;border-bottom:1px solid rgba(255,255,255,.07)}.lifecycle-phase:last-child{border-bottom:none}}
+
+</style>
+</head>
+
+<body>
+
+<a href="#main" class="skip-link">Skip to content</a>
+<div id="reading-progress" aria-hidden="true"></div>
+
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- INCLUDE:HEADER -->
+<div id="hitl-notice" style="background:#0a1929;padding:4px 16px;text-align:center;font-size:12px;color:#4a5568;border-bottom:1px solid rgba(255,255,255,0.06);letter-spacing:0.01em;">Human-in-the-Loop required: licensed professionals verify all outputs before clinical or legal action</div>
+<header role="banner">
+  <div class="header-inner">
+    <a href="/index.html" class="logo" aria-label="Pocono AI Home">
+      <img src="/logo.svg?v=402" alt="" width="36" height="36" decoding="async" loading="eager" aria-hidden="true" style="display:inline-block;">
+      Pocono <span>AI</span>
+    </a>
+    <nav id="desktop-nav" aria-label="Main navigation">
+      <div class="nav-item"><a href="/index.html" class="nav-direct">Home</a></div>
+      <div class="nav-item"><a href="/for-physicians.html" class="nav-direct">Physicians</a></div>
+      <div class="nav-item"><a href="/for-attorneys.html" class="nav-direct">Attorneys</a></div>
+      <div class="nav-item"><a href="/sentinel-node.html" class="nav-direct nav-hub" style="color:#d5a94f;border:1px solid rgba(213,169,79,0.45);border-radius:999px;padding:6px 13px;">Sentinel Node</a></div>
+      <div class="nav-item"><a href="/living-memorials/" class="nav-direct">Living Echo</a></div>
+      <div class="nav-item"><a href="/contact.html" class="nav-direct">Contact</a></div>
+      <div class="nav-item" data-dropdown="menu-more">
+        <button type="button" class="nav-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="menu-more">More <span class="nav-chevron" aria-hidden="true">&#9662;</span></button>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <a href="/contact.html#pilot" class="nav-cta nav-cta-primary">Request a Pilot</a>
+      <button type="button" class="pa-search-trigger" data-search-open aria-label="Search (press / or Ctrl-K)" aria-haspopup="dialog" aria-expanded="false">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span class="pa-st-label">Search</span><kbd data-pa-keyhint>Ctrl K</kbd>
+      </button>
+      <button type="button" class="header-icon-btn" id="mobile-menu" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav-panel">
+        <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- "More" overflow dropdown — sibling of <header> so position:fixed escapes header's stacking context. Wired by nav.js via data-dropdown="menu-more". -->
+<div class="nav-dropdown" id="menu-more" aria-label="More navigation">
+  <p class="nav-dd-section">Products</p>
+  <a href="/engineering-drafting/">Drafting &amp; Engineering Edition</a>
+  <a href="/sentinel-home/">Sentinel Home Edition</a>
+  <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability — Assistive Tools &#x2605;</a>
+  <a href="/living-memorials/enterprise-estate-continuity.html">Enterprise Estate Continuity</a>
+  <p class="nav-dd-section">Capabilities</p>
+  <a href="/evidence-room.html">Evidence Room</a>
+  <a href="/push-button-deliverables.html">Push-Button Deliverables</a>
+  <a href="/pilot-readiness-kit.html">Pilot Kit</a>
+  <a href="/pilot-program.html">Pilot Program</a>
+  <a href="/how-it-works.html">How It Works</a>
+  <p class="nav-dd-section">Hubs &amp; Company</p>
+  <a href="/training.html">Training Hub</a>
+  <a href="/documentation-hub/">Document Hub</a>
+  <a href="/global/">Global Hub</a>
+  <a href="/investors-hub.html">Investor Hub</a>
+  <a href="/valuation-dashboard.html">Valuation Dashboard</a>
+  <a href="/about.html">About</a>
+  <p class="nav-dd-section">Trust &amp; Legal</p>
+  <a href="/transparency.html">Transparency</a>
+  <a href="/audit.html">Audit Log</a>
+  <a href="/privacy.html">Privacy</a>
+  <a href="/sitemap.html">Sitemap</a>
+</div>
+<!-- Site search is provided by the self-contained search.js asset (command palette: / or Ctrl/Cmd-K). -->
+
+<!-- Mobile panel: full-screen slide-in. v396 nav — hub tiles + grouped links + Sentinel Node + Engineering. -->
+<nav id="mobile-nav-panel" aria-label="Mobile navigation" aria-hidden="true" role="dialog" aria-modal="true">
+
+  <!-- Hub tiles: Sentinel Node, Documentation Hub, Training Hub, Global Hub -->
+  <div style="padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,0.07);">
+    <p style="font-size:0.65em;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.28);margin:0 0 10px;padding:0 2px;">Hubs</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <a href="/sentinel-node.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(213,169,79,0.1);border:1px solid rgba(213,169,79,0.35);border-radius:10px;color:#d5a94f;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Sentinel Node</a>
+      <a href="/documentation-hub/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(0,194,168,0.1);border:1px solid rgba(0,194,168,0.35);border-radius:10px;color:#00c2a8;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Docs Hub</a>
+      <a href="/training.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.35);border-radius:10px;color:#a78bfa;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Training Hub</a>
+      <a href="/global/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(122,240,220,0.07);border:1px solid rgba(122,240,220,0.3);border-radius:10px;color:#7af0dc;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Global Hub</a>
+    </div>
+  </div>
+
+  <!-- Core paths -->
+  <div class="mob-static-links">
+    <a href="/index.html">Home</a>
+    <a href="/for-physicians.html">Physicians</a>
+    <a href="/for-attorneys.html">Attorneys</a>
+    <a href="/engineering-drafting/">Engineering &amp; Drafting</a>
+    <a href="/pilot-program.html">Pilot Program</a>
+    <a href="/how-it-works.html">How It Works</a>
+    <a href="/trust.html">Trust &amp; Audit</a>
+    <a href="/pricing.html">Pricing</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/living-memorials/">Living Echo</a>
+    <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability</a>
+    <a href="/about.html">About</a>
+    <a href="/team.html" style="color:rgba(255,255,255,0.6);">Team &amp; Leadership</a>
+    <a href="/valuation-dashboard.html" style="color:rgba(255,255,255,0.6);">Valuation Dashboard</a>
+    <a href="/careers.html" style="color:rgba(255,255,255,0.6);">Careers</a>
+    <a href="/sentinel-demo.html" style="color:rgba(255,255,255,0.6);">Demo</a>
+    <a href="/sitemap.html" style="color:rgba(255,255,255,0.45);">Sitemap</a>
+    <a href="/transparency.html" style="color:rgba(255,255,255,0.45);">Transparency</a>
+    <a href="/privacy.html" style="color:rgba(255,255,255,0.45);">Privacy</a>
+  </div>
+
+  <a href="/contact.html#pilot" class="mob-cta">Request a Pilot</a>
+</nav>
+<!-- /INCLUDE:HEADER -->
+
+
+<main id="main-content" tabindex="-1">
+<span id="main" aria-hidden="true"></span>
+
+<section class="topo-hero">
+  <div class="container">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <a href="index.html">Home</a><span class="sep">›</span><a href="architecture.html">Architecture</a><span class="sep">›</span><span class="current">Deployment Topology</span>
+    </nav>
+    <div class="sentinel-lockup" aria-label="Sentinel Node — Deployment Topology">
+              <svg class="sentinel-lockup-mark" viewBox="0 0 64 64" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
+          <!-- v311b: rotated diamond + C-curve loop + summit dot. Inherits currentColor from CSS context. -->
+          <g transform="rotate(45 32 32)">
+            <rect x="12" y="12" width="40" height="40" rx="8" ry="8"/>
+            <path d="M43 22 L26 22 A6 6 0 0 0 20 28 L20 36 A6 6 0 0 0 26 42 L41 42"/>
+          </g>
+          <circle cx="32" cy="9" r="3" fill="currentColor" stroke="none"/>
+        </svg>
+              <div class="sentinel-lockup-rule"></div>
+              <div class="sentinel-lockup-text">
+                <span class="sentinel-lockup-name">Sentinel Node</span>
+                <span class="sentinel-lockup-tag">Enterprise Deployment Practicality</span>
+              </div>
+            </div>
+    <h1 class="topo-title">Where Sentinel Node sits. What it touches. What it never touches.</h1>
+    <p class="topo-lede">This page turns the governance story into an IT deployment story: network placement, local document flow, signed update custody, fail-safe behavior, and support escalation — in language a practice owner, attorney, compliance officer, and IT lead can all review together.</p>
+    <div class="topo-cta-row">
+      <a href="what-happens-after-contact.html" class="topo-btn">See the engagement sequence</a>
+      <a href="sentinel-specs.html" class="topo-btn secondary">Review hardware specs</a>
+      <a href="governance-review.html" class="topo-btn secondary">See governance review</a>
+    </div>
+    <div class="topo-proof-strip" aria-label="Deployment promises">
+      <div class="topo-proof"><strong>Local by default</strong><span>Inference, retrieval, review, and audit stay inside the customer-controlled environment.</span></div>
+      <div class="topo-proof"><strong>No silent cloud path</strong><span>The operating model is not built around external AI APIs, telemetry, or third-party request chains.</span></div>
+      <div class="topo-proof"><strong>Human-bound output</strong><span>Drafts remain drafts until a responsible reviewer approves the artifact.</span></div>
+      <div class="topo-proof"><strong>Support without custody drift</strong><span>Escalation is structured so troubleshooting does not become uncontrolled data access.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="fastpath-panel" aria-label="Deployment fast path">
+  <div class="fastpath-inner">
+    <p class="fastpath-eyebrow">3-minute deployment read</p>
+    <h2 class="fastpath-title">The practical deployment answer in plain language.</h2>
+    <p class="fastpath-sub">Sentinel Node is meant to sit beside existing systems as a governed local service. It does not replace the EHR, document management system, firewall, or professional reviewer. It constrains evidence retrieval, drafting, review, and audit into one local operating path.</p>
+    <div class="fastpath-grid">
+      <div class="fastpath-card"><strong>Beside existing systems</strong><span>Approved exports, policies, files, and workflow artifacts are indexed locally without changing the system of record.</span></div>
+      <div class="fastpath-card"><strong>No silent cloud detour</strong><span>The core deployment posture avoids external model APIs, remote telemetry, and uncontrolled third-party request chains.</span></div>
+      <div class="fastpath-card"><strong>Human-bound output</strong><span>Drafts stay draft until a named reviewer approves, rejects, edits, or escalates the work product.</span></div>
+      <div class="fastpath-card"><strong>Support with custody limits</strong><span>Escalation is structured so troubleshooting does not become uncontrolled access to patient, client, or matter data.</span></div>
+    </div>
+    <div class="fastpath-actions">
+      <a href="#main">Review placement</a>
+      <a href="sentinel-specs.html">Hardware specs</a>
+      <a href="continuity-and-resilience.html">Continuity model</a>
+    </div>
+  </div>
+</section>
+
+<section class="topo-section">
+  <div class="container">
+    <div class="topo-panel">
+      <h2 class="topo-h2">Reference topology: the appliance is a governed local service, not a cloud detour.</h2>
+      <p class="topo-sub">Sentinel Node is intended to sit beside existing systems. It ingests approved local knowledge sources, retrieves evidence, creates governed drafts, requires human review, and records an audit envelope. It does not become the EHR, document management system, firewall, identity provider, or legal system of record.</p>
+      <div class="topo-map" aria-label="Sentinel Node network topology">
+        <div class="topo-zone">
+          <h3>Existing environment</h3>
+          <div class="topo-node"><b>EHR / Practice Systems</b><small>Exported documents, policies, encounter artifacts, denial letters, approved workflow files.</small></div>
+          <div class="topo-node"><b>Document Stores</b><small>File shares, matter folders, policy libraries, SOPs, appeal templates, internal knowledge.</small></div>
+          <div class="topo-node"><b>Identity &amp; Roles</b><small>Local users, reviewer roles, access boundaries, least-privilege workflow permissions.</small></div>
+        </div>
+        <div class="topo-appliance">
+          <div class="topo-rack" role="img" aria-label="Rackmount Sentinel Node appliance illustration">
+            <div class="topo-rack-top"><span>POCONO AI</span><span>ON-PREM</span></div>
+            <div class="topo-grille"></div>
+            <div class="topo-leds"><span></span><span></span><span></span></div>
+          </div>
+          <h3>Sentinel Node</h3>
+          <p>Local retrieval, local inference, citation gates, review queues, and audit receipts operate inside the customer network boundary.</p>
+        </div>
+        <div class="topo-zone">
+          <h3>Governed outputs</h3>
+          <div class="topo-node"><b>Draft Work Product</b><small>Prior-auth appeal, clinical policy summary, legal memo, compliance response, audit packet.</small></div>
+          <div class="topo-node"><b>Human Review Gate</b><small>Named reviewer approves, rejects, edits, or escalates before anything leaves draft state.</small></div>
+          <div class="topo-node"><b>Audit Envelope</b><small>Sources used, policy checks, reviewer action, timestamps, hashes, and exportable record.</small></div>
+        </div>
+      </div>
+      <div class="topo-callout"><strong>Buyer translation:</strong> the deployment is intentionally boring where it should be boring. The interesting part is not a chatbot. The interesting part is that context, drafting, review, and audit are constrained into one visible local operating path.</div>
+
+      <div class="net-diagram" style="margin-top:24px">
+        <div style="font-size:.72rem;font-weight:900;text-transform:uppercase;letter-spacing:.1em;color:#2dd4bf;margin-bottom:16px">Network boundary diagram — what stays inside, what does not</div>
+        <div class="net-layer">
+          <div class="net-row">
+            <div class="net-zone-label">CLIENT NETWORK</div>
+            <div class="net-nodes client-zone">
+              <div class="net-zone-title">Existing practice/firm infrastructure</div>
+              <div class="net-items">
+                <div class="net-item">EHR export files</div>
+                <div class="net-item">Payer policy PDFs</div>
+                <div class="net-item">Practice protocols</div>
+                <div class="net-item">Matter files</div>
+                <div class="net-item">Staff workstations</div>
+                <div class="net-item">Identity &amp; roles</div>
+                <div class="net-item">Local file shares</div>
+              </div>
+            </div>
+          </div>
+          <div class="net-arrow-row">
+            <span class="net-arrow allowed">↕</span>
+            <span style="font-size:.76rem">Local network traffic only — no internet required</span>
+          </div>
+          <div class="net-row">
+            <div class="net-zone-label">SENTINEL NODE</div>
+            <div class="net-nodes appliance-zone">
+              <div class="net-zone-title">On-premises appliance — physical boundary</div>
+              <div class="net-items">
+                <div class="net-item core">Local inference model</div>
+                <div class="net-item core">Vector index (local)</div>
+                <div class="net-item core">Retrieval engine</div>
+                <div class="net-item core">Draft workspace</div>
+                <div class="net-item core">Human review gate</div>
+                <div class="net-item core">Audit log (local)</div>
+                <div class="net-item core">Exception queue</div>
+                <div class="net-item core">Citation engine</div>
+              </div>
+            </div>
+          </div>
+          <div class="net-arrow-row">
+            <span class="net-arrow allowed">↓</span>
+            <span style="font-size:.76rem">Approved, reviewed drafts only</span>
+            <span style="margin:0 12px;color:#4a6a80">|</span>
+            <span class="net-arrow blocked">✕</span>
+            <span style="font-size:.76rem;color:#f87171">No patient data / privileged content / queries to internet</span>
+          </div>
+          <div class="net-row">
+            <div class="net-zone-label">OUTPUTS</div>
+            <div class="net-nodes output-zone">
+              <div class="net-zone-title">Governed work product</div>
+              <div class="net-items">
+                <div class="net-item">Reviewed draft</div>
+                <div class="net-item">Audit envelope</div>
+                <div class="net-item">Reviewer sign-off</div>
+                <div class="net-item">Citation record</div>
+              </div>
+            </div>
+          </div>
+          <div style="height:10px"></div>
+          <div class="net-fence">⬆ Everything above stays inside the client network boundary ⬆</div>
+          <div class="net-fence" style="border-color:rgba(248,113,113,.2);color:#f87171">⬇ Internet / cloud — never reached during normal operation ⬇</div>
+          <div class="net-row">
+            <div class="net-zone-label" style="color:#f87171">CLOUD</div>
+            <div class="net-nodes cloud-zone">
+              <div class="net-zone-title" style="color:#f87171">Not contacted — no data transmission</div>
+              <div class="net-items">
+                <div class="net-item blocked">Cloud AI API</div>
+                <div class="net-item blocked">Vendor telemetry</div>
+                <div class="net-item blocked">Remote model server</div>
+                <div class="net-item blocked">Cloud audit log</div>
+                <div class="net-item blocked">Third-party LLM</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="topo-section">
+  <div class="container">
+    <div class="topo-panel">
+      <h2 class="topo-h2">Five operational flows IT and leadership need to understand.</h2>
+      <p class="topo-sub">The deployment story is strongest when every stakeholder can point to the same operational sequence and see where their responsibility begins and ends.</p>
+      <div class="topo-flow">
+        <div class="topo-step"><span class="num">1</span><h3>Source approval</h3><p>The customer decides which document collections, policies, matter files, exports, or SOPs are eligible for indexing.</p></div>
+        <div class="topo-step"><span class="num">2</span><h3>Local indexing</h3><p>Approved material is embedded and stored locally. Retrieval is performed against customer-controlled evidence sources.</p></div>
+        <div class="topo-step"><span class="num">3</span><h3>Draft generation</h3><p>The system creates a bounded draft from cited context. The output is marked draft, not final.</p></div>
+        <div class="topo-step"><span class="num">4</span><h3>Review gate</h3><p>A professional reviewer validates accuracy, relevance, citations, and workflow policy before release.</p></div>
+        <div class="topo-step"><span class="num">5</span><h3>Audit receipt</h3><p>The final action is recorded with source references, reviewer identity, and decision status in a reviewable audit trail; tamper-evident metadata is added in the Stage 2 audit-layer.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="topo-section">
+  <div class="container">
+    <div class="topo-panel">
+      <h2 class="topo-h2">Deployment lifecycle: from site assessment to steady-state operations.</h2>
+      <p class="topo-sub">Sentinel Node deployment follows a structured lifecycle. Each phase has defined deliverables and handoffs. There is no "plug in and forget" phase — the appliance requires ongoing governance at each stage.</p>
+      <div class="lifecycle-row">
+        <div class="lifecycle-phase lp1">
+          <div class="lifecycle-icon">📋</div>
+          <div class="lifecycle-name">Site Assessment</div>
+          <div class="lifecycle-desc">Network review, corpus inventory, reviewer identification, rack space confirmation, success criteria agreement.</div>
+        </div>
+        <div class="lifecycle-phase lp2">
+          <div class="lifecycle-icon">🔧</div>
+          <div class="lifecycle-name">Installation</div>
+          <div class="lifecycle-desc">Physical rack mounting, network placement, VLAN configuration, access control setup, connectivity verification.</div>
+        </div>
+        <div class="lifecycle-phase lp3">
+          <div class="lifecycle-icon">📄</div>
+          <div class="lifecycle-name">Corpus Ingestion</div>
+          <div class="lifecycle-desc">Approved documents indexed locally. Test queries validate retrieval quality before production use begins.</div>
+        </div>
+        <div class="lifecycle-phase lp4">
+          <div class="lifecycle-icon">🧑‍⚕️</div>
+          <div class="lifecycle-name">Supervised Pilot</div>
+          <div class="lifecycle-desc">Real tasks processed. Weekly review of exception queue, retrieval quality, reviewer adoption, and audit records.</div>
+        </div>
+        <div class="lifecycle-phase lp5">
+          <div class="lifecycle-icon">✓</div>
+          <div class="lifecycle-name">Steady State</div>
+          <div class="lifecycle-desc">Production operation with scheduled updates, corpus maintenance, and quarterly audit envelope review.</div>
+        </div>
+      </div>
+      <div class="topo-callout">Each phase has a defined checkpoint before proceeding. A site that fails the corpus readiness check at ingestion does not move to pilot until gaps are resolved. This prevents the most common pilot failure mode: poor retrieval quality caused by stale or missing documents.</div>
+    </div>
+  </div>
+</section>
+
+<section class="topo-section">
+  <div class="container">
+    <div class="topo-panel">
+      <h2 class="topo-h2">Support escalation model: troubleshoot the system without normalizing content exposure.</h2>
+      <p class="topo-sub">Support is structured to avoid the most common support anti-pattern: remote access to sensitive content during a troubleshooting session.</p>
+      <div class="support-matrix">
+        <div class="support-side normal">
+          <h4>🖥 Normal support path (no content exposure)</h4>
+          <ul>
+            <li>System logs and diagnostic telemetry — no patient or client data</li>
+            <li>Configuration files and network topology review</li>
+            <li>Retrieval quality metrics — chunk counts, confidence distributions, exception rates</li>
+            <li>Performance and availability metrics</li>
+            <li>Update package delivery and installation verification</li>
+          </ul>
+        </div>
+        <div class="support-side escalation">
+          <h4>⚠ Escalation path (requires explicit customer authorization)</h4>
+          <ul>
+            <li>Any access to the audit log — requires customer IT authorization</li>
+            <li>Corpus inspection — requires documented business justification</li>
+            <li>Any session replay — only with written customer consent</li>
+            <li>Physical appliance access — only on-site with customer IT present</li>
+            <li>Model replacement — signed bundle, customer-approved window only</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="topo-section">
+  <div class="container">
+    <div class="topo-panel">
+      <h2 class="topo-h2">Update custody: signed bundles, scheduled windows, no surprise model drift.</h2>
+      <p class="topo-sub">Regulated buyers need more than “we update the software.” They need to know whether updates create new risk, new behavior, or uncontrolled access. Sentinel Node is positioned around deliberate acceptance rather than silent mutation.</p>
+      <div class="topo-grid-2">
+        <div class="topo-card"><h3>Standard update posture</h3><ul><li>Updates are packaged as signed bundles.</li><li>Customer-approved maintenance windows are preferred.</li><li>Release notes identify affected services, models, retrieval behavior, and governance components.</li><li>Rollback planning is part of the deployment conversation.</li></ul></div>
+        <div class="topo-card"><h3>What this avoids</h3><ul><li>No invisible cloud-side model swap presented as the same product.</li><li>No uncontrolled telemetry requirement to receive core service.</li><li>No surprise outbound AI API dependency.</li><li>No support path that requires routine access to sensitive customer content.</li></ul></div>
+      </div>
+      <table class="topo-table" aria-label="Update custody model">
+        <thead><tr><th>Concern</th><th>Enterprise answer</th><th>Why it matters</th></tr></thead>
+        <tbody>
+          <tr><td>Model or retrieval changes</td><td>Documented release bundle and acceptance window.</td><td>Prevents silent behavior drift in regulated workflows.</td></tr>
+          <tr><td>Security patches</td><td>Prioritized patch channel with customer-visible change notes.</td><td>Keeps the appliance maintainable without weakening custody.</td></tr>
+          <tr><td>Audit continuity</td><td>Audit records remain tied to the version, source set, reviewer action, and decision state.</td><td>Preserves defensibility when workflows evolve over time.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="topo-section">
+  <div class="container">
+    <div class="topo-panel">
+      <h2 class="topo-h2">Fail-safe philosophy: when confidence breaks, the system should narrow — not improvise.</h2>
+      <p class="topo-sub">The practical question is not whether every component can fail. It can. The enterprise question is whether failure creates unsafe autonomy or a bounded stop state.</p>
+      <div class="topo-mini">
+        <div><b>Retrieval miss</b><span>Answer generation is blocked or marked insufficient when cited evidence is not available.</span></div>
+        <div><b>Reviewer unavailable</b><span>Output remains draft. The workflow waits, reassigns, or escalates according to local policy.</span></div>
+        <div><b>Appliance outage</b><span>The organization falls back to normal systems and manual workflows rather than cloud fail-open behavior.</span></div>
+      </div>
+      <div class="topo-grid-2">
+        <div class="topo-card"><h3>Cold-standby option</h3><p>For organizations requiring higher uptime, a standby appliance strategy can be discussed during the infrastructure review. The default principle is not “AI must always answer.” The default principle is “AI should only answer inside governed conditions.”</p></div>
+        <div class="topo-card"><h3>Accept-the-outage option</h3><p>For smaller practices and firms, the right answer may be operational simplicity: if the node is down, the team returns to the existing manual workflow until service is restored. That is often safer than a hidden failover to an uncontrolled external system.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="topo-section">
+  <div class="container">
+    <div class="topo-panel">
+      <h2 class="topo-h2">Support escalation: troubleshoot the system without normalizing content exposure.</h2>
+      <p class="topo-sub">Support must be useful, but in a healthcare or legal environment it cannot become a casual backdoor into sensitive records. The support model should be designed around logs, configuration, reproducible cases, redaction, and customer-controlled sessions.</p>
+      <table class="topo-table" aria-label="Support escalation boundaries">
+        <thead><tr><th>Level</th><th>Typical scope</th><th>Data boundary</th></tr></thead>
+        <tbody>
+          <tr><td>Level 1: Operational triage</td><td>Service status, disk space, queue health, failed jobs, update status.</td><td>No sensitive content required.</td></tr>
+          <tr><td>Level 2: Workflow diagnosis</td><td>Review blocked gates, source-set configuration, role mapping, output policy behavior.</td><td>Prefer redacted examples and customer-supervised screen share.</td></tr>
+          <tr><td>Level 3: Engineering escalation</td><td>Bug reproduction, package remediation, model/retrieval tuning, deployment-specific fix.</td><td>Customer-authorized artifact sharing only, with minimum necessary scope.</td></tr>
+        </tbody>
+      </table>
+      <div class="topo-callout"><strong>Enterprise stance:</strong> support is not a reason to dissolve the privacy architecture. Troubleshooting should preserve the same sovereignty and review posture the product is built to provide.</div>
+    </div>
+  </div>
+</section>
+
+<section class="topo-section">
+  <div class="container">
+    <div class="topo-panel">
+      <h2 class="topo-h2">What leadership can decide before a pilot begins.</h2>
+      <p class="topo-sub">This page is meant to make the next conversation concrete. Before a paid Proof-of-Value, the team can align on these practical choices.</p>
+      <div class="topo-flow">
+        <div class="topo-step"><span class="num">A</span><h3>First workflow</h3><p>Prior authorization, denial appeal, policy retrieval, legal drafting, e-discovery support, or audit packet preparation.</p></div>
+        <div class="topo-step"><span class="num">B</span><h3>Source boundary</h3><p>Which folders, exports, policies, or matter files are in scope — and which are excluded.</p></div>
+        <div class="topo-step"><span class="num">C</span><h3>Reviewer roles</h3><p>Who approves drafts, who can escalate, and what remains prohibited without professional sign-off.</p></div>
+        <div class="topo-step"><span class="num">D</span><h3>Success metric</h3><p>Time saved, staff burden reduced, denial response speed, citation quality, audit readiness, or error reduction.</p></div>
+        <div class="topo-step"><span class="num">E</span><h3>Deployment shape</h3><p>Single node, segmented VLAN, standby planning, update cadence, and support expectations.</p></div>
+      </div>
+      <div class="topo-cta-row">
+        <a href="pricing.html" class="topo-btn">Review POV pricing</a>
+        <a href="what-happens-after-contact.html" class="topo-btn secondary">What happens after contact</a>
+        <a href="mailto:marcus@poconoai.com?subject=Sentinel%20Node%20Deployment%20Topology%20Review" class="topo-btn secondary">Start a topology review</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ v320 Chunk 3: SIGNED UPDATE CUSTODY & RESPONSIBILITY — Sentinel Node v1.46 ═══ -->
+<section style="max-width:1000px;margin:0 auto 56px;padding:0 24px;" aria-labelledby="topo-custody-title">
+  <div style="border:1px solid rgba(0,194,168,0.22);border-radius:14px;overflow:hidden;background:linear-gradient(155deg,rgba(8,15,28,0.9),rgba(5,22,34,0.7));">
+    <div style="background:rgba(0,194,168,0.05);border-bottom:1px solid rgba(0,194,168,0.18);padding:12px 26px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+      <span style="display:inline-flex;align-items:center;gap:7px;color:#00c2a8;font-size:0.68em;font-weight:700;text-transform:uppercase;letter-spacing:0.16em;"><span style="width:6px;height:6px;border-radius:50%;background:#00c2a8;box-shadow:0 0 8px rgba(0,194,168,0.6);"></span>Update Custody &amp; Responsibility</span>
+      <span style="color:#8fa9bb;font-size:0.72em;">Sentinel Node v1.46 &middot; release-candidate scaffold</span>
+    </div>
+    <div style="padding:26px 30px;">
+      <h2 id="topo-custody-title" style="font-size:clamp(1.15rem,2.4vw,1.45rem);color:#f0f4f8;margin:0 0 12px;border:none;line-height:1.2;">Who enforces what, and how updates reach the node.</h2>
+      <p style="color:#c6d4e3;font-size:0.93em;line-height:1.7;margin:0 0 18px;max-width:780px;">Updates and model refreshes arrive through a staged, signed workflow: signed USB delivery for isolated deployments, secure portal download to an admin workstation then local transfer, or manual offline transfer under MSP custody. The application verifies the signed manifest, package hash, trusted-key status, signature, and rollback sequence before staging; no package is auto-executed from removable media. The boundary between application and operating system is explicit:</p>
+      <div style="overflow-x:auto;">
+        <table style="width:100%;border-collapse:collapse;font-size:0.86em;color:#c6d4e3;min-width:520px;">
+          <thead>
+            <tr style="border-bottom:1px solid rgba(0,194,168,0.25);">
+              <th style="text-align:left;padding:10px 12px;color:#00c2a8;font-size:0.72em;letter-spacing:0.1em;text-transform:uppercase;">Responsibility</th>
+              <th style="text-align:left;padding:10px 12px;color:#00c2a8;font-size:0.72em;letter-spacing:0.1em;text-transform:uppercase;">Owner</th>
+              <th style="text-align:left;padding:10px 12px;color:#00c2a8;font-size:0.72em;letter-spacing:0.1em;text-transform:uppercase;">Sentinel support</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid rgba(255,255,255,0.06);"><td style="padding:10px 12px;">Local evidence workflow</td><td style="padding:10px 12px;">Sentinel software</td><td style="padding:10px 12px;">Ingest, retrieval, review, export controls</td></tr>
+            <tr style="border-bottom:1px solid rgba(255,255,255,0.06);"><td style="padding:10px 12px;">User authorization &amp; scope correctness</td><td style="padding:10px 12px;">Customer organization</td><td style="padding:10px 12px;">Roles, scopes, identity framework, mapping checks</td></tr>
+            <tr style="border-bottom:1px solid rgba(255,255,255,0.06);"><td style="padding:10px 12px;">Professional decisions</td><td style="padding:10px 12px;">Clinician / Attorney</td><td style="padding:10px 12px;">Drafts, warnings, citations, approval record</td></tr>
+            <tr style="border-bottom:1px solid rgba(255,255,255,0.06);"><td style="padding:10px 12px;">OS hardening, VLAN/firewall, disk encryption, USB policy</td><td style="padding:10px 12px;">MSP / IT</td><td style="padding:10px 12px;">Installer artifacts, check scripts, egress example</td></tr>
+            <tr><td style="padding:10px 12px;">Backups &amp; off-device retention</td><td style="padding:10px 12px;">MSP / IT &amp; customer</td><td style="padding:10px 12px;">Backup creation/verification and restore plans</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="color:#a8cce8;font-size:0.84em;line-height:1.6;margin:16px 0 0;font-style:italic;max-width:780px;">Pilot-candidate scaffold, not a production certification. The application reports posture but does not enforce OS controls. <a href="sentinel-pilot-scaffold.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">See the Pilot-Scaffold Update &rarr;</a></p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 root-relative nav fix, Living Echo rebrand, Engineering & Drafting + Enterprise Estate Continuity links added (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- INCLUDE:FOOTER -->
+<footer role="contentinfo" style="background:#051622;border-top:1px solid rgba(255,255,255,0.08);padding:40px 24px 28px;font-size:0.85em;color:#8899aa;">
+  <div style="max-width:1180px;margin:0 auto;">
+
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:0 0 28px;margin-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.07);">
+      <div style="max-width:560px;">
+        <p style="margin:0 0 6px;font-size:1.05em;font-weight:700;color:#fff;">Local AI infrastructure for regulated practices.</p>
+        <p style="margin:0;font-size:0.95em;line-height:1.5;">Drafts with citations. Human review required. Sensitive documents stay under practice control. Simple path, deep proof.</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="/contact.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;background:#00c2a8;color:#04111a;font-weight:700;text-decoration:none;font-size:0.95em;">Request Pilot</a>
+        <a href="/sentinel-demo.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;border:1px solid rgba(0,194,168,0.55);color:#00c2a8;font-weight:700;text-decoration:none;font-size:0.95em;">Watch Demo</a>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px 32px;margin-bottom:32px;text-align:left;">
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">For You</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/start-here.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Start Here (3 min)</a>
+          <a href="/for-physicians.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Physicians</a>
+          <a href="/for-attorneys.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Attorneys</a>
+          <a href="/engineering-drafting/" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Engineering &amp; Drafting Teams</a>
+          <a href="/pilot-program.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Pilot Program</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Installer Training</a>
+          <a href="/how-it-works.html" style="color:#8899aa;text-decoration:none;">How It Works</a>
+          <a href="/trust.html" style="color:#8899aa;text-decoration:none;">Trust &amp; Audit</a>
+          <a href="/pricing.html" style="color:#8899aa;text-decoration:none;">Pricing</a>
+          <a href="/sentinel-demo.html" style="color:#8899aa;text-decoration:none;">See the Demo</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Documentation Hub</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/documentation-hub/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Hub Home &mdash; Deep Proof</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">Installer Training</a>
+          <a href="/sentinel-node/installation-simulator.html" style="color:#8899aa;text-decoration:none;">&#8627; Installation Simulator</a>
+          <a href="/documentation-hub/clinical/" style="color:#8899aa;text-decoration:none;">Clinical Documentation</a>
+          <a href="/documentation-hub/legal/" style="color:#8899aa;text-decoration:none;">Legal Documentation</a>
+          <a href="/documentation-hub/technical/" style="color:#8899aa;text-decoration:none;">Technical Documentation</a>
+          <a href="/documentation-hub/governance/" style="color:#8899aa;text-decoration:none;">Governance &amp; Audit</a>
+          <a href="/documentation-hub/tools/" style="color:#8899aa;text-decoration:none;">Tools &amp; Simulators</a>
+          <a href="/documentation-hub/research/" style="color:#8899aa;text-decoration:none;">Research &amp; Essays</a>
+          <a href="/documentation-hub/transparency/" style="color:#8899aa;text-decoration:none;">Transparency</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Global Federated AI</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/global/" style="color:#7af0dc;text-decoration:none;font-weight:600;">Global Federated Hub</a>
+          <a href="/global/australia/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Australia</a>
+          <a href="/global/singapore/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Singapore</a>
+          <a href="/global/taiwan/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Taiwan</a>
+          <a href="/global/europe/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Europe</a>
+          <a href="/contact.html" style="color:#8899aa;text-decoration:none;">Partner Inquiry</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Company</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/about.html" style="color:#8899aa;text-decoration:none;">About Pocono AI</a>
+          <a href="/team.html" style="color:#8899aa;text-decoration:none;">Team &amp; Leadership</a>
+          <a href="/why-pocono-ai.html" style="color:#8899aa;text-decoration:none;">Why Pocono AI</a>
+          <a href="/founding-commercial-leadership.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Join Us</a>
+          <a href="/careers.html" style="color:#8899aa;text-decoration:none;">Careers</a>
+          <a href="/how-we-hire.html" style="color:#8899aa;text-decoration:none;">How We Hire</a>
+          <a href="/channel-partners.html" style="color:#8899aa;text-decoration:none;">Technical Partners (MSPs)</a>
+          <a href="/partners.html" style="color:#8899aa;text-decoration:none;">Academic Partnerships</a>
+          <a href="/contact.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Contact</a>
+          <a href="https://forms.gle/VQahnkjMfY6QNEMy8" target="_blank" rel="noopener noreferrer" style="color:#d5a94f;text-decoration:none;font-weight:600;">Interest List &#8599;</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Founder Projects</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/rehability/" style="color:#a78bfa;text-decoration:none;font-weight:700;">Rehability &#x2605;</a>
+          <a href="/rehability/marcus-memory-helper/" style="color:#a78bfa;text-decoration:none;font-weight:600;">&#8627; Marcus's Memory Helper</a>
+          <a href="/sentinel-home/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Sentinel Home Edition</a>
+          <a href="/living-memorials/" style="color:#8899aa;text-decoration:none;">Living Echo</a>
+          <a href="/living-memorials/marcus-odell/" style="color:#8899aa;text-decoration:none;">Marcus&rsquo;s Living Echo</a>
+          <a href="/living-memorials/enterprise-estate-continuity.html" style="color:#8899aa;text-decoration:none;">Enterprise Estate Continuity</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Resources &amp; Legal</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/sitemap.html" style="color:#8899aa;text-decoration:none;">All Pages (Sitemap)</a>
+          <a href="/audit.html" style="color:#8899aa;text-decoration:none;">Transparency &amp; Audit Log</a>
+          <a href="/maturity-disclosure.html" style="color:#8899aa;text-decoration:none;">What We Have / Don&rsquo;t Claim</a>
+          <a href="/plain.html" style="color:#8899aa;text-decoration:none;">Plain Language Guide</a>
+          <a href="/privacy.html" style="color:#8899aa;text-decoration:none;">Privacy</a>
+          <a href="/terms.html" style="color:#8899aa;text-decoration:none;">Terms</a>
+          <a href="/sla.html" style="color:#8899aa;text-decoration:none;">SLA</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:18px;margin-bottom:14px;">
+      <p style="margin:0;font-size:0.82em;line-height:1.6;color:#6f8295;max-width:1000px;">Pocono AI does not provide medical, legal, or engineering advice, does not practice medicine, law, or licensed engineering, and does not make clinical, legal, or engineering decisions. Outputs are drafts or support materials that require review by a qualified professional; final professional judgment remains with the licensed physician, attorney, or engineer. Tools and simulations on this site are educational and use synthetic data.</p>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:20px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+      <p style="margin:0;font-size:0.9em;">&copy; 2026 Pocono AI, LLC &nbsp;&#183;&nbsp; East Stroudsburg, PA &nbsp;&#183;&nbsp; <a href="mailto:marcus@poconoai.com" style="color:#8899aa;">marcus@poconoai.com</a> &nbsp;&#183;&nbsp; <a href="tel:+15705340602" style="color:#8899aa;">(570) 534-0602</a></p>
+      <p style="margin:0;font-size:0.88em;"><a href="/audit.html" style="color:#5dade2;text-decoration:none;">Transparency v402</a></p>
+    </div>
+  </div>
+</footer>
+<script src="/search.js?v=402" defer></script>
+<!-- /INCLUDE:FOOTER -->
+
+
+<script src="search-index.js?v=402" defer></script>
+<script src="nav.js?v=402" defer></script>
+<script src="pilot-cta.js?v=402" defer></script>
+
+</body>
+</html>

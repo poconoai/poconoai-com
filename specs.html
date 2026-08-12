@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sentinel Node technical specs: secure on-premises AI with local RAG, document sanitization pipeline, and Human-in-the-Loop verification architecture.">
+    <meta name="keywords" content="AI technical specs, Sentinel Node specs, local AI server specs, on-premises AI hardware, zero egress AI specs, on-premises AI, local AI, sovereign AI, zero cloud AI, HIPAA-governed AI environments, healthcare AI, legal AI, Sentinel Node, Pocono AI, data sovereignty, air-gapped AI, no cloud, EHR automation, RAG AI, independent medical practice AI, law firm AI">
+    <title>Technical Specifications | Pocono AI, LLC</title>
+    <meta property="og:title" content="Technical Specifications | Sentinel Node | Pocono AI, LLC">
+    <meta property="og:description" content="Full hardware specifications for the Sentinel Node™ — NVIDIA Ada Generation GPU, local RAG, zero-egress AI infrastructure.">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Pocono AI">
+    <meta property="og:locale" content="en_US">
+    
+    <meta property="og:image" content="https://poconoai.com/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Pocono AI — Sovereign on-premises AI">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Technical Specs | Sentinel Node | Pocono AI">
+    <meta name="twitter:description" content="Full hardware specs. NVIDIA Ada Generation GPU. Local RAG. Zero-exfiltration architecture. Audit-ready.">
+    <meta name="twitter:image" content="https://poconoai.com/hero.jpg"><meta name="theme-color" content="#0B0F13">
+    <link rel="icon" href="logo.svg?v=402" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css?v=402">
+        <!-- SEO: Canonical URL + XML Sitemap reference -->
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+    <link rel="canonical" href="https://poconoai.com/specs.html">
+    <!-- Open Graph: ensures social sharing pulls correct page -->
+    <meta property="og:url" content="https://poconoai.com/specs.html">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Pocono AI, LLC",
+      "url": "https://poconoai.com",
+      "logo": "https://poconoai.com/logo.svg",
+      "description": "Sovereign, on-premises local AI infrastructure for healthcare and legal professionals. Zero-egress by default. Hardware-custody deployment.",
+      "foundingDate": "2024",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "East Stroudsburg",
+        "addressRegion": "PA",
+        "addressCountry": "US"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+1-570-534-0602",
+        "contactType": "sales",
+        "email": "marcus@poconoai.com"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/company/pocono-ai"
+      ],
+      "datePublished": "2026-06-01",
+      "dateModified": "2026-06-01"
+    }</script>
+<link rel="stylesheet" href="nav-v2026.css?v=402">
+<link rel="stylesheet" href="brand-v292.css?v=402">
+<script>
+// Pocono AI v169 — Zero-flash banner dismissal.
+// Strategy: inject <style> tag synchronously BEFORE banner HTML parses,
+// so dismissed banners never render at all (no flash). DOM removal still
+// happens for safety. ?showbanners=1 URL param re-shows everything.
+(function(){
+  var ids=[];
+
+  // Escape hatch: ?showbanners=1 clears all dismiss flags for testing
+  try {
+    if (location.search.indexOf('showbanners=1') !== -1) {
+      ids.forEach(function(id){ localStorage.removeItem('pai_dismissed_'+id); });
+      localStorage.removeItem('poconoPilot');
+      localStorage.removeItem('advisoryBarDismissed');
+    }
+  } catch(e) {}
+
+  // v246 Stage 1 — Legacy migration block removed.
+  // Was dead code containing a JS syntax error (adjacent string literals)
+  // that broke the entire banner-dismiss IIFE on ~46 pages.
+
+  // Build CSS rule list for dismissed banners and inject synchronously.
+  // This runs in <head> BEFORE banner HTML is parsed, so dismissed bars
+  // never paint — eliminating the flash entirely.
+  var hideRules = [];
+  ids.forEach(function(id){
+    try {
+      if (localStorage.getItem('pai_dismissed_'+id) === '1') {
+        hideRules.push('#'+id+'{display:none !important;}');
+      }
+    } catch(e) {}
+  });
+  if (hideRules.length) {
+    var style = document.createElement('style');
+    style.id = 'pai-banner-hide';
+    style.textContent = hideRules.join('');
+    (document.head || document.documentElement).appendChild(style);
+  }
+
+  function dismiss(id){
+    try { localStorage.setItem('pai_dismissed_'+id,'1'); } catch(e) {}
+    var el = document.getElementById(id);
+    if (el) {
+      el.style.setProperty('display','none','important');
+      el.setAttribute('aria-hidden','true');
+      if (el.parentNode) {
+        el.parentNode.removeChild(el);
+      }
+    }
+  }
+
+  // Cleanup pass — remove dismissed banners from DOM after parse,
+  // belt-and-suspenders alongside the CSS hide.
+  function cleanup(){
+    ids.forEach(function(id){
+      try {
+        if (localStorage.getItem('pai_dismissed_'+id) === '1') {
+          var el = document.getElementById(id);
+          if (el && el.parentNode) {
+            el.parentNode.removeChild(el);
+          }
+        }
+      } catch(e) {}
+    });
+  }
+
+  function bind(){
+    ids.forEach(function(id){
+      var btn = document.getElementById(id+'-close');
+      if (btn && !btn.dataset.boundDismiss) {
+        btn.dataset.boundDismiss = '1';
+        btn.addEventListener('click', function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          dismiss(id);
+        });
+        btn.addEventListener('touchend', function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          dismiss(id);
+        }, {passive:false});
+      }
+    });
+    cleanup();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bind);
+  } else {
+    bind();
+  }
+})();
+</script>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+<div id="reading-progress" aria-hidden="true"></div>
+
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- INCLUDE:HEADER -->
+<div id="hitl-notice" style="background:#0a1929;padding:4px 16px;text-align:center;font-size:12px;color:#4a5568;border-bottom:1px solid rgba(255,255,255,0.06);letter-spacing:0.01em;">Human-in-the-Loop required: licensed professionals verify all outputs before clinical or legal action</div>
+<header role="banner">
+  <div class="header-inner">
+    <a href="/index.html" class="logo" aria-label="Pocono AI Home">
+      <img src="/logo.svg?v=402" alt="" width="36" height="36" decoding="async" loading="eager" aria-hidden="true" style="display:inline-block;">
+      Pocono <span>AI</span>
+    </a>
+    <nav id="desktop-nav" aria-label="Main navigation">
+      <div class="nav-item"><a href="/index.html" class="nav-direct">Home</a></div>
+      <div class="nav-item"><a href="/for-physicians.html" class="nav-direct">Physicians</a></div>
+      <div class="nav-item"><a href="/for-attorneys.html" class="nav-direct">Attorneys</a></div>
+      <div class="nav-item"><a href="/sentinel-node.html" class="nav-direct nav-hub" style="color:#d5a94f;border:1px solid rgba(213,169,79,0.45);border-radius:999px;padding:6px 13px;">Sentinel Node</a></div>
+      <div class="nav-item"><a href="/living-memorials/" class="nav-direct">Living Echo</a></div>
+      <div class="nav-item"><a href="/contact.html" class="nav-direct">Contact</a></div>
+      <div class="nav-item" data-dropdown="menu-more">
+        <button type="button" class="nav-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="menu-more">More <span class="nav-chevron" aria-hidden="true">&#9662;</span></button>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <a href="/contact.html#pilot" class="nav-cta nav-cta-primary">Request a Pilot</a>
+      <button type="button" class="pa-search-trigger" data-search-open aria-label="Search (press / or Ctrl-K)" aria-haspopup="dialog" aria-expanded="false">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span class="pa-st-label">Search</span><kbd data-pa-keyhint>Ctrl K</kbd>
+      </button>
+      <button type="button" class="header-icon-btn" id="mobile-menu" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav-panel">
+        <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- "More" overflow dropdown — sibling of <header> so position:fixed escapes header's stacking context. Wired by nav.js via data-dropdown="menu-more". -->
+<div class="nav-dropdown" id="menu-more" aria-label="More navigation">
+  <p class="nav-dd-section">Products</p>
+  <a href="/engineering-drafting/">Drafting &amp; Engineering Edition</a>
+  <a href="/sentinel-home/">Sentinel Home Edition</a>
+  <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability — Assistive Tools &#x2605;</a>
+  <a href="/living-memorials/enterprise-estate-continuity.html">Enterprise Estate Continuity</a>
+  <p class="nav-dd-section">Capabilities</p>
+  <a href="/evidence-room.html">Evidence Room</a>
+  <a href="/push-button-deliverables.html">Push-Button Deliverables</a>
+  <a href="/pilot-readiness-kit.html">Pilot Kit</a>
+  <a href="/pilot-program.html">Pilot Program</a>
+  <a href="/how-it-works.html">How It Works</a>
+  <p class="nav-dd-section">Hubs &amp; Company</p>
+  <a href="/training.html">Training Hub</a>
+  <a href="/documentation-hub/">Document Hub</a>
+  <a href="/global/">Global Hub</a>
+  <a href="/investors-hub.html">Investor Hub</a>
+  <a href="/valuation-dashboard.html">Valuation Dashboard</a>
+  <a href="/about.html">About</a>
+  <p class="nav-dd-section">Trust &amp; Legal</p>
+  <a href="/transparency.html">Transparency</a>
+  <a href="/audit.html">Audit Log</a>
+  <a href="/privacy.html">Privacy</a>
+  <a href="/sitemap.html">Sitemap</a>
+</div>
+<!-- Site search is provided by the self-contained search.js asset (command palette: / or Ctrl/Cmd-K). -->
+
+<!-- Mobile panel: full-screen slide-in. v396 nav — hub tiles + grouped links + Sentinel Node + Engineering. -->
+<nav id="mobile-nav-panel" aria-label="Mobile navigation" aria-hidden="true" role="dialog" aria-modal="true">
+
+  <!-- Hub tiles: Sentinel Node, Documentation Hub, Training Hub, Global Hub -->
+  <div style="padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,0.07);">
+    <p style="font-size:0.65em;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.28);margin:0 0 10px;padding:0 2px;">Hubs</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <a href="/sentinel-node.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(213,169,79,0.1);border:1px solid rgba(213,169,79,0.35);border-radius:10px;color:#d5a94f;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Sentinel Node</a>
+      <a href="/documentation-hub/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(0,194,168,0.1);border:1px solid rgba(0,194,168,0.35);border-radius:10px;color:#00c2a8;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Docs Hub</a>
+      <a href="/training.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.35);border-radius:10px;color:#a78bfa;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Training Hub</a>
+      <a href="/global/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(122,240,220,0.07);border:1px solid rgba(122,240,220,0.3);border-radius:10px;color:#7af0dc;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Global Hub</a>
+    </div>
+  </div>
+
+  <!-- Core paths -->
+  <div class="mob-static-links">
+    <a href="/index.html">Home</a>
+    <a href="/for-physicians.html">Physicians</a>
+    <a href="/for-attorneys.html">Attorneys</a>
+    <a href="/engineering-drafting/">Engineering &amp; Drafting</a>
+    <a href="/pilot-program.html">Pilot Program</a>
+    <a href="/how-it-works.html">How It Works</a>
+    <a href="/trust.html">Trust &amp; Audit</a>
+    <a href="/pricing.html">Pricing</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/living-memorials/">Living Echo</a>
+    <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability</a>
+    <a href="/about.html">About</a>
+    <a href="/team.html" style="color:rgba(255,255,255,0.6);">Team &amp; Leadership</a>
+    <a href="/valuation-dashboard.html" style="color:rgba(255,255,255,0.6);">Valuation Dashboard</a>
+    <a href="/careers.html" style="color:rgba(255,255,255,0.6);">Careers</a>
+    <a href="/sentinel-demo.html" style="color:rgba(255,255,255,0.6);">Demo</a>
+    <a href="/sitemap.html" style="color:rgba(255,255,255,0.45);">Sitemap</a>
+    <a href="/transparency.html" style="color:rgba(255,255,255,0.45);">Transparency</a>
+    <a href="/privacy.html" style="color:rgba(255,255,255,0.45);">Privacy</a>
+  </div>
+
+  <a href="/contact.html#pilot" class="mob-cta">Request a Pilot</a>
+</nav>
+<!-- /INCLUDE:HEADER -->
+
+
+<main id="main-content" tabindex="-1">
+<span id="main" aria-hidden="true"></span>
+<div class="page-back-link"><a href="sentinel-specs.html" class="back-link-anchor">&#8592; Sentinel Node Specs</a></div>
+
+<div class="specs-wrap">
+
+    <div class="specs-hero">
+        <div class="sentinel-lockup" aria-label="Sentinel Node — Technical Specifications">
+              <svg class="sentinel-lockup-mark" viewBox="0 0 64 64" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
+          <!-- v311b: rotated diamond + C-curve loop + summit dot. Inherits currentColor from CSS context. -->
+          <g transform="rotate(45 32 32)">
+            <rect x="12" y="12" width="40" height="40" rx="8" ry="8"/>
+            <path d="M43 22 L26 22 A6 6 0 0 0 20 28 L20 36 A6 6 0 0 0 26 42 L41 42"/>
+          </g>
+          <circle cx="32" cy="9" r="3" fill="currentColor" stroke="none"/>
+        </svg>
+              <div class="sentinel-lockup-rule"></div>
+              <div class="sentinel-lockup-text">
+                <span class="sentinel-lockup-name">Sentinel Node</span>
+                <span class="sentinel-lockup-tag">Enterprise Autonomy Architecture</span>
+              </div>
+            </div>
+        <h1>Sentinel Node™
+            <span class="hero-gradient">Master Specifications</span>
+        </h1>
+        <p>Fully localized, zero-telemetry hardware appliance engineered for high-liability medical and legal practices.</p>
+    </div>
+
+    <div class="glass-card overview-wrap">
+        <div class="overview-grid">
+            <div>
+                <h2>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z" stroke="#188B96" stroke-width="1.5" fill="#188B96" fill-opacity="0.2"/></svg>
+                    System Overview
+                </h2>
+                <p>The Sentinel Node utilizes independent Hardware RAID arrays to isolate Operating System processes from Qdrant Vector Database I/O, delivering optimized, sub-second retrieval accuracy for complex RAG workflows &mdash; all within your network-isolated local inference environment.</p>
+                <div class="stat-row">
+                    <div class="stat-box"><div class="stat-val">0</div><div class="stat-label">Telemetry Packets</div></div>
+                    <div class="stat-box"><div class="stat-val">&lt;100ms</div><div class="stat-label">Vector Retrieval</div></div>
+                    <div class="stat-box"><div class="stat-val">100%</div><div class="stat-label">On-Premises</div></div>
+                </div>
+            </div>
+            <div>
+                <div class="status-card">
+                    <div class="sc-header">SENTINEL NODE // STATUS <span class="sc-dot"></span></div>
+                    <div class="sc-row"><span>RAID ARRAY 1</span><span class="sc-ok">OPTIMAL</span></div>
+                    <div class="sc-bar"><div class="sc-bar-fill" style="width:98%"></div></div>
+                    <div class="sc-row"><span>RAID ARRAY 2</span><span class="sc-ok">OPTIMAL</span></div>
+                    <div class="sc-bar"><div class="sc-bar-fill" style="width:96%"></div></div>
+                    <div class="sc-row sc-divider"><span>AIR GAP</span><span class="sc-blue"> ENFORCED</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tier-nav">
+        <div class="tier-nav-title">
+            <h2>Deployment Tiers</h2>
+            <p>Choose the configuration matched to your workload</p>
+        </div>
+        <div class="tier-tabs">
+            <button type="button" class="tier-tab active" data-tier="1">Sentinel Node — Phase I</button>
+            <button type="button" class="tier-tab" data-tier="2">Enterprise Sentinel Node</button>
+            <button type="button" class="tier-tab" data-tier="3">Sentinel Node Plus</button>
+        </div>
+    </div>
+
+    <div class="tier-panel visible" data-panel="1">
+        <div class="glass-card spec-card t1-accent">
+            <div class="spec-grid">
+                <div class="spec-main">
+                    <div class="spec-head">
+                        <h3>Sentinel Node — Phase I</h3>
+                        <span class="spec-badge badge-teal">VALIDATION</span>
+                    </div>
+                    <p class="spec-tagline">Clinical Validation &amp; Small Practice Inference</p>
+                    <div class="spec-price">Phase I Founding: $5,000 impl + $950/mo</div>
+                    <div class="spec-sla">100% OpEx · KYHD SLA Included · 24-mo contract</div>
+                    <div class="spec-lbl">Neural Engine</div>
+                    <div class="spec-val">1x NVIDIA RTX 4500 Ada (24GB GDDR6 VRAM)</div>
+                    <div class="spec-lbl">Compute Core</div>
+                    <div class="spec-val">Intel Xeon W-2400 Series &nbsp;&mdash;&nbsp; 64GB DDR5 ECC RAM</div>
+                    <div class="storage-grid">
+                        <div>
+                            <div class="spec-lbl">Storage Array 1 (OS)</div>
+                            <div class="spec-val">Hardware RAID 1 &nbsp;&mdash;&nbsp; 2x 512GB NVMe Enterprise SSD</div>
+                        </div>
+                        <div>
+                            <div class="spec-lbl">Storage Array 2 (Data)</div>
+                            <div class="spec-val">Hardware RAID 1 &nbsp;&mdash;&nbsp; 2x 2TB NVMe Enterprise SSD</div>
+                        </div>
+                    </div>
+                    <div class="spec-lbl">Network</div>
+                    <div class="spec-val">Isolated VLAN &nbsp;&mdash;&nbsp; Zero outbound egress during inference</div>
+                    <p class="ha-note">Active-passive Twin Node HA available as add-on. Deploy two Phase I nodes for zero-interruption continuity on hardware fault. Dell ProSupport with KYHD scoped during architecture assessment.</p>
+                </div>
+                <div class="spec-ideal">
+                    <div style="width:100%">
+                        <div class="ideal-lbl">Ideal For</div>
+                        <ul class="ideal-list">
+                            <li><span class="chk">&#10003;</span> 1&ndash;3 concurrent users</li>
+                            <li><span class="chk">&#10003;</span> Up to 500K document chunks</li>
+                            <li><span class="chk">&#10003;</span> 7B&ndash;14B parameter models natively</li>
+                            <li><span class="chk">&#10003;</span> Solo practice &amp; Paid POV pilots</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tier-panel" data-panel="2">
+        <div class="glass-card spec-card t2-accent">
+            <div class="spec-grid">
+                <div class="spec-main">
+                    <div class="spec-head">
+                        <h3>Enterprise Sentinel Node™</h3>
+                        <span class="spec-badge badge-blue">MOST POPULAR</span>
+                    </div>
+                    <p class="spec-tagline">Standard Enterprise Deployment &amp; Concurrent RAG</p>
+                    <div class="spec-price">Phase II Founding: $5,000 impl + $1,495/mo</div>
+                    <div class="spec-sla">100% OpEx · KYHD SLA Included · 24-mo contract</div>
+                    <div class="spec-lbl">Neural Engine</div>
+                    <div class="spec-val">1x NVIDIA RTX 5000 Ada (32GB GDDR6 VRAM)</div>
+                    <div class="spec-lbl">Compute Core</div>
+                    <div class="spec-val">Intel Xeon W-2400 Series &nbsp;&mdash;&nbsp; 128GB DDR5 ECC RAM</div>
+                    <div class="storage-grid">
+                        <div>
+                            <div class="spec-lbl">Storage Array 1 (OS)</div>
+                            <div class="spec-val">Hardware RAID 1 &nbsp;&mdash;&nbsp; 2x 1TB NVMe Enterprise SSD</div>
+                        </div>
+                        <div>
+                            <div class="spec-lbl">Storage Array 2 (Data)</div>
+                            <div class="spec-val">Hardware RAID 1 &nbsp;&mdash;&nbsp; 2x 4TB NVMe Enterprise SSD</div>
+                        </div>
+                    </div>
+                    <div class="spec-lbl">Network</div>
+                    <div class="spec-val">Isolated VLAN &nbsp;&mdash;&nbsp; Zero outbound egress during inference</div>
+                    <p class="ha-note">Recommended Twin Node HA: dual Phase II nodes in active-passive cluster &mdash; zero workflow interruption on hardware fault. Dell ProSupport with KYHD scoped during architecture assessment.</p>
+                </div>
+                <div class="spec-ideal">
+                    <div style="width:100%">
+                        <div class="ideal-lbl">Ideal For</div>
+                        <ul class="ideal-list">
+                            <li><span class="chk">&#10003;</span> 5&ndash;15 concurrent users</li>
+                            <li><span class="chk">&#10003;</span> Up to 2M document chunks</li>
+                            <li><span class="chk">&#10003;</span> Robust 32B parameter model serving</li>
+                            <li><span class="chk">&#10003;</span> Multi-provider medical practice</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tier-panel" data-panel="3">
+        <div class="glass-card spec-card t3-accent">
+            <div class="spec-grid">
+                <div class="spec-main">
+                    <div class="spec-head">
+                        <h3>Sentinel Node Plus</h3>
+                        <span class="spec-badge badge-max">MAXIMUM</span>
+                    </div>
+                    <p class="spec-tagline">Maximum Concurrency &amp; Large Parameter Modeling</p>
+                    <div class="spec-price">Phase III Founding: $5,000 impl + $2,995/mo</div>
+                    <div class="spec-sla">100% OpEx · KYHD SLA Included · 24-mo contract</div>
+                    <div class="spec-lbl">Neural Engine</div>
+                    <div class="spec-val">1x&ndash;4x NVIDIA RTX 6000 Ada (up to 192GB total VRAM)</div>
+                    <div class="spec-lbl">Compute Core</div>
+                    <div class="spec-val">Dual Intel Xeon Scalable &nbsp;&mdash;&nbsp; 256GB&ndash;512GB ECC RAM</div>
+                    <div class="storage-grid">
+                        <div>
+                            <div class="spec-lbl">Storage Array 1 (OS)</div>
+                            <div class="spec-val">Hardware RAID 1 &nbsp;&mdash;&nbsp; 2x 1TB NVMe Enterprise SSD</div>
+                        </div>
+                        <div>
+                            <div class="spec-lbl">Storage Array 2 (Data)</div>
+                            <div class="spec-val">Hardware RAID 10 &nbsp;&mdash;&nbsp; 4x 4TB U.2 NVMe</div>
+                        </div>
+                    </div>
+                    <div class="spec-lbl">Network</div>
+                    <div class="spec-val">Mellanox ConnectX-6 Dual Port 25GbE/10GbE &nbsp;&mdash;&nbsp; Absolute Air-Gap Guarantee</div>
+                    <p class="ha-note">Twin Node HA standard at this tier. Active-passive clustering and Dell ProSupport Plus with KYHD standard &mdash; scoped and documented during architecture assessment.</p>
+                </div>
+                <div class="spec-ideal">
+                    <div style="width:100%">
+                        <div class="ideal-lbl">Ideal For</div>
+                        <ul class="ideal-list">
+                            <li><span class="chk">&#10003;</span> 25+ concurrent users</li>
+                            <li><span class="chk">&#10003;</span> 10M+ document chunks</li>
+                            <li><span class="chk">&#10003;</span> 70B+ parameter models natively</li>
+                            <li><span class="chk">&#10003;</span> Multi-clinic network &amp; high-volume boutique firm</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="impact-wrap">
+        <div class="glass-card impact-inner">
+            <h2>Economic Impact, Refresh &amp; Compliance</h2>
+            <div class="impact-grid">
+                <div>
+                    <p class="impact-h3"><span class="i-dot" style="background:var(--ai-blue)"></span> Verified ROI</p>
+                    <p>The Sentinel Node managed deployment model delivers Day-1 positive cash flow when benchmarked against remote scribe costs ($1,500–$2,500/mo). The KYHD SLA and 24-month managed service term ensure cost predictability. Infrastructure refresh at month 24 is included, protecting your subscription against model obsolescence.</p>
+                </div>
+                <div>
+                    <p class="impact-h3"><span class="i-dot" style="background:var(--teal)"></span> Mandatory Verification</p>
+                    <p>This system is strictly an infrastructure asset for professional discovery. The licensed professional operating the Sentinel Node assumes total liability for final work products and must verify all AI-generated outputs against the explicitly cited local data chunks in the audit log.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="glass-card dl-section">
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(24,139,150,0.08) 0%,transparent 100%);border-radius:16px;pointer-events:none;"></div>
+        <div style="position:relative;">
+            <h2>Master Technical Data</h2>
+            <p>Complete specifications, power requirements, RAID topology diagrams, and deployment checklist — available on the web, no download required.</p>
+            <a href="specs.html" class="dl-btn" style="margin-bottom:12px;">
+                &#128203; View Sentinel Node Master Specifications
+            </a>
+            <p class="dl-note">Subject to Pocono AI, LLC <a href="/terms.html" style="color:inherit;">Terms of Service</a></p>
+        </div>
+    </div>
+
+    <!-- NETWORK LOGIC — Fix #1: IT Skeptic Vulnerability -->
+    <div style="background:linear-gradient(135deg,rgba(0,163,255,0.07),rgba(5,22,34,0.97));border:1px solid rgba(0,163,255,0.22);border-radius:14px;padding:32px 36px;margin:40px 0 0;">
+        <span style="color:var(--ai-blue);font-weight:700;text-transform:uppercase;letter-spacing:0.15em;font-size:0.72em;display:block;margin-bottom:10px;">For IT Directors &amp; Technical Auditors</span>
+        <h2 style="color:var(--white);margin:0 0 18px;border-bottom:none;font-size:1.35em;">Network Topology: Inbound vs. Outbound — The Full Picture</h2>
+        <p style="color:var(--light-text);line-height:1.8;margin-bottom:22px;">Zero-egress does not mean zero network connectivity. It means <strong style="color:var(--white);">zero outbound data transmission during inference and operation.</strong> A skeptical IT director deserves a precise answer to the obvious question: if it's isolated, how do model weights and security patches get in?</p>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:22px;">
+            <div style="background:rgba(224,90,90,0.07);border:1px solid rgba(224,90,90,0.25);border-radius:10px;padding:20px 22px;">
+                <div style="color:var(--danger);font-weight:700;font-size:0.72em;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:10px;">&#8856; Permanently Blocked — Outbound</div>
+                <ul style="color:var(--light-text);font-size:0.85em;line-height:1.9;padding-left:18px;margin:0;">
+                    <li>All outbound internet routes blocked at VLAN boundary</li>
+                    <li>No PHI transmission during inference — ever</li>
+                    <li>No telemetry, heartbeat, or phone-home to vendor</li>
+                    <li>No cloud API calls for model inference or retrieval</li>
+                    <li>No outbound logging to external SIEM</li>
+                </ul>
+            </div>
+            <div style="background:rgba(34,197,94,0.07);border:1px solid rgba(34,197,94,0.25);border-radius:10px;padding:20px 22px;">
+                <div style="color:var(--success);font-weight:700;font-size:0.72em;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:10px;">&#10003; Permitted — Controlled Inbound</div>
+                <ul style="color:var(--light-text);font-size:0.85em;line-height:1.9;padding-left:18px;margin:0;">
+                    <li>Authorized clinical workstations on isolated VLAN (inbound only)</li>
+                    <li>EHR PDF export via secure local share — staff-initiated</li>
+                    <li>Model &amp; patch updates: cryptographically signed USB only</li>
+                    <li>LLM weight delivery: signed package, SHA-256 verified before apply</li>
+                    <li>Unsigned or unverified packages are automatically rejected</li>
+                </ul>
+            </div>
+        </div>
+
+        <div style="background:rgba(0,0,0,0.35);border-radius:10px;padding:18px 22px;">
+            <div style="color:var(--teal);font-weight:700;font-size:0.75em;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:10px;">LLM Weight &amp; Patch Update Protocol — How It Actually Works</div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;">
+                <div style="text-align:center;padding:14px 10px;">
+                    <div style="color:var(--ai-blue);font-size:1.4em;font-weight:800;margin-bottom:6px;">&#9312;</div>
+                    <div style="color:var(--white);font-size:0.8em;font-weight:700;margin-bottom:4px;">Package Prepared</div>
+                    <div style="color:var(--muted);font-size:0.72em;line-height:1.5;">Pocono AI signs model weights or patch with Ed25519 private key. SHA-256 hash published in the secure client portal.</div>
+                </div>
+                <div style="text-align:center;padding:14px 10px;border-left:1px solid rgba(255,255,255,0.06);">
+                    <div style="color:var(--ai-blue);font-size:1.4em;font-weight:800;margin-bottom:6px;">&#9313;</div>
+                    <div style="color:var(--white);font-size:0.8em;font-weight:700;margin-bottom:4px;">USB Delivery</div>
+                    <div style="color:var(--muted);font-size:0.72em;line-height:1.5;">Signed package loaded onto encrypted USB. IT administrator or practice manager receives and physically inserts into the Sentinel Node.</div>
+                </div>
+                <div style="text-align:center;padding:14px 10px;border-left:1px solid rgba(255,255,255,0.06);">
+                    <div style="color:var(--ai-blue);font-size:1.4em;font-weight:800;margin-bottom:6px;">&#9314;</div>
+                    <div style="color:var(--white);font-size:0.8em;font-weight:700;margin-bottom:4px;">Signature Verified</div>
+                    <div style="color:var(--muted);font-size:0.72em;line-height:1.5;">Sentinel Node verifies Ed25519 signature and SHA-256 hash before any package touches the filesystem. Mismatch = automatic rejection, no install.</div>
+                </div>
+                <div style="text-align:center;padding:14px 10px;border-left:1px solid rgba(255,255,255,0.06);">
+                    <div style="color:var(--success);font-size:1.4em;font-weight:800;margin-bottom:6px;">&#9315;</div>
+                    <div style="color:var(--white);font-size:0.8em;font-weight:700;margin-bottom:4px;">Applied &amp; Logged</div>
+                    <div style="color:var(--muted);font-size:0.72em;line-height:1.5;">Update applied offline. Every install event is logged to the 90-day append-only local audit trail — timestamp, package hash, and installer identity.</div>
+                </div>
+            </div>
+        </div>
+        <p style="color:var(--muted);font-size:0.78em;margin:14px 0 0;line-height:1.6;">The result: LLM weights, tuning, and security patches enter the system only via cryptographically signed, human-carried USB media. <strong style="color:var(--light-text);">An unsigned USB is physically ignored by the system.</strong> No remote management interface. No vendor back-door. No automatic cloud pull. Network isolation is not a policy — it is enforced by the update architecture itself.</p>
+    </div>
+
+    <!-- ═══ v320 Chunk 3: CONTROL-PLANE SOFTWARE CAPABILITIES — Sentinel Node v1.46 ═══ -->
+    <div style="margin:40px 0 0;border:1px solid rgba(0,194,168,0.22);border-radius:14px;overflow:hidden;background:linear-gradient(155deg,rgba(8,15,28,0.9),rgba(5,22,34,0.7));">
+      <div style="background:rgba(0,194,168,0.05);border-bottom:1px solid rgba(0,194,168,0.18);padding:12px 26px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+        <span style="display:inline-flex;align-items:center;gap:7px;color:#00c2a8;font-size:0.68em;font-weight:700;text-transform:uppercase;letter-spacing:0.16em;"><span style="width:6px;height:6px;border-radius:50%;background:#00c2a8;box-shadow:0 0 8px rgba(0,194,168,0.6);"></span>Control-Plane Software</span>
+        <span style="color:#8fa9bb;font-size:0.72em;">Sentinel Node v1.46 &middot; release-candidate scaffold (Z1&ndash;Z21)</span>
+      </div>
+      <div style="padding:26px 30px;">
+        <h2 style="color:var(--white);margin:0 0 10px;border-bottom:none;font-size:1.2em;">Software / control-plane capability list</h2>
+        <p style="color:var(--light-text);line-height:1.7;margin:0 0 18px;font-size:0.9em;max-width:780px;">An internal release-candidate build sequence implemented the control-plane scaffolding for the architecture documented above. The capabilities below are present in the package. Not every production connector and model is live by default &mdash; production retrieval, enterprise identity bindings, and external connectors remain deployment-configurable.</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;">
+          <div style="background:rgba(0,194,168,0.04);border:1px solid rgba(0,194,168,0.14);border-radius:8px;padding:12px 14px;color:var(--light-text);font-size:0.85em;line-height:1.5;">Regulated local authentication &amp; named-user posture</div>
+          <div style="background:rgba(0,194,168,0.04);border:1px solid rgba(0,194,168,0.14);border-radius:8px;padding:12px 14px;color:var(--light-text);font-size:0.85em;line-height:1.5;">Identity-provider connector framework <span style="color:var(--muted);">(governed; disabled by default)</span></div>
+          <div style="background:rgba(0,194,168,0.04);border:1px solid rgba(0,194,168,0.14);border-radius:8px;padding:12px 14px;color:var(--light-text);font-size:0.85em;line-height:1.5;">Controlled folder ingestion with scope &amp; label metadata</div>
+          <div style="background:rgba(0,194,168,0.04);border:1px solid rgba(0,194,168,0.14);border-radius:8px;padding:12px 14px;color:var(--light-text);font-size:0.85em;line-height:1.5;">External connector framework <span style="color:var(--muted);">(governed; dry-run by default)</span></div>
+          <div style="background:rgba(0,194,168,0.04);border:1px solid rgba(0,194,168,0.14);border-radius:8px;padding:12px 14px;color:var(--light-text);font-size:0.85em;line-height:1.5;">Local deterministic retrieval fallback</div>
+          <div style="background:rgba(0,194,168,0.04);border:1px solid rgba(0,194,168,0.14);border-radius:8px;padding:12px 14px;color:var(--light-text);font-size:0.85em;line-height:1.5;">Optional Qdrant retrieval path <span style="color:var(--muted);">(deployment-configurable)</span></div>
+          <div style="background:rgba(0,194,168,0.04);border:1px solid rgba(0,194,168,0.14);border-radius:8px;padding:12px 14px;color:var(--light-text);font-size:0.85em;line-height:1.5;">Audit Proxy local LLM gateway <span style="color:var(--muted);">(no direct app-to-LLM path)</span></div>
+          <div style="background:rgba(0,194,168,0.04);border:1px solid rgba(0,194,168,0.14);border-radius:8px;padding:12px 14px;color:var(--light-text);font-size:0.85em;line-height:1.5;">OCR confidence gate <span style="color:var(--muted);">(default 95%)</span></div>
+          <div style="background:rgba(0,194,168,0.04);border:1px solid rgba(0,194,168,0.14);border-radius:8px;padding:12px 14px;color:var(--light-text);font-size:0.85em;line-height:1.5;">Professional packet export with evidence appendix &amp; manifest</div>
+          <div style="background:rgba(0,194,168,0.04);border:1px solid rgba(0,194,168,0.14);border-radius:8px;padding:12px 14px;color:var(--light-text);font-size:0.85em;line-height:1.5;">Golden-case regression harness <span style="color:var(--muted);">(regression, not certification)</span></div>
+          <div style="background:rgba(0,194,168,0.04);border:1px solid rgba(0,194,168,0.14);border-radius:8px;padding:12px 14px;color:var(--light-text);font-size:0.85em;line-height:1.5;">Local-only metrics dashboard <span style="color:var(--muted);">(not telemetry by default)</span></div>
+          <div style="background:rgba(0,194,168,0.04);border:1px solid rgba(0,194,168,0.14);border-radius:8px;padding:12px 14px;color:var(--light-text);font-size:0.85em;line-height:1.5;">Backup / restore / redacted support bundle</div>
+          <div style="background:rgba(0,194,168,0.04);border:1px solid rgba(0,194,168,0.14);border-radius:8px;padding:12px 14px;color:var(--light-text);font-size:0.85em;line-height:1.5;">Signed offline update &amp; model-refresh custody <span style="color:var(--muted);">(Ed25519, trusted keys, rollback checks)</span></div>
+          <div style="background:rgba(0,194,168,0.04);border:1px solid rgba(0,194,168,0.14);border-radius:8px;padding:12px 14px;color:var(--light-text);font-size:0.85em;line-height:1.5;">Compliance evidence binder <span style="color:var(--muted);">(internal readiness map, not certification)</span></div>
+        </div>
+        <p style="color:var(--muted);font-size:0.8em;line-height:1.6;margin:16px 0 0;font-style:italic;max-width:780px;">This is a pilot-candidate scaffold, not a production certification. It is not a HIPAA, legal, NIST, or ISO certification, and does not replace physician or attorney judgment. <a href="sentinel-pilot-scaffold.html" style="color:var(--teal,#00c2a8);text-decoration:none;font-weight:600;">See the full Pilot-Scaffold Update &rarr;</a></p>
+      </div>
+    </div>
+
+</div>
+</main>
+
+<div class="transparency-note" style="max-width:1100px;margin:0 auto;padding:0 20px;">
+    <p><strong>Web Telemetry Transparency Note:</strong> The Sentinel Node hardware operates with absolute zero outbound telemetry. As of v195 (May 2026), this marketing site also has zero third-party telemetry of any kind. See <a href="audit.html">audit.html</a>.</p>
+</div>
+
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 root-relative nav fix, Living Echo rebrand, Engineering & Drafting + Enterprise Estate Continuity links added (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- INCLUDE:FOOTER -->
+<footer role="contentinfo" style="background:#051622;border-top:1px solid rgba(255,255,255,0.08);padding:40px 24px 28px;font-size:0.85em;color:#8899aa;">
+  <div style="max-width:1180px;margin:0 auto;">
+
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:0 0 28px;margin-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.07);">
+      <div style="max-width:560px;">
+        <p style="margin:0 0 6px;font-size:1.05em;font-weight:700;color:#fff;">Local AI infrastructure for regulated practices.</p>
+        <p style="margin:0;font-size:0.95em;line-height:1.5;">Drafts with citations. Human review required. Sensitive documents stay under practice control. Simple path, deep proof.</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="/contact.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;background:#00c2a8;color:#04111a;font-weight:700;text-decoration:none;font-size:0.95em;">Request Pilot</a>
+        <a href="/sentinel-demo.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;border:1px solid rgba(0,194,168,0.55);color:#00c2a8;font-weight:700;text-decoration:none;font-size:0.95em;">Watch Demo</a>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px 32px;margin-bottom:32px;text-align:left;">
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">For You</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/start-here.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Start Here (3 min)</a>
+          <a href="/for-physicians.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Physicians</a>
+          <a href="/for-attorneys.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Attorneys</a>
+          <a href="/engineering-drafting/" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Engineering &amp; Drafting Teams</a>
+          <a href="/pilot-program.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Pilot Program</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Installer Training</a>
+          <a href="/how-it-works.html" style="color:#8899aa;text-decoration:none;">How It Works</a>
+          <a href="/trust.html" style="color:#8899aa;text-decoration:none;">Trust &amp; Audit</a>
+          <a href="/pricing.html" style="color:#8899aa;text-decoration:none;">Pricing</a>
+          <a href="/sentinel-demo.html" style="color:#8899aa;text-decoration:none;">See the Demo</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Documentation Hub</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/documentation-hub/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Hub Home &mdash; Deep Proof</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">Installer Training</a>
+          <a href="/sentinel-node/installation-simulator.html" style="color:#8899aa;text-decoration:none;">&#8627; Installation Simulator</a>
+          <a href="/documentation-hub/clinical/" style="color:#8899aa;text-decoration:none;">Clinical Documentation</a>
+          <a href="/documentation-hub/legal/" style="color:#8899aa;text-decoration:none;">Legal Documentation</a>
+          <a href="/documentation-hub/technical/" style="color:#8899aa;text-decoration:none;">Technical Documentation</a>
+          <a href="/documentation-hub/governance/" style="color:#8899aa;text-decoration:none;">Governance &amp; Audit</a>
+          <a href="/documentation-hub/tools/" style="color:#8899aa;text-decoration:none;">Tools &amp; Simulators</a>
+          <a href="/documentation-hub/research/" style="color:#8899aa;text-decoration:none;">Research &amp; Essays</a>
+          <a href="/documentation-hub/transparency/" style="color:#8899aa;text-decoration:none;">Transparency</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Global Federated AI</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/global/" style="color:#7af0dc;text-decoration:none;font-weight:600;">Global Federated Hub</a>
+          <a href="/global/australia/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Australia</a>
+          <a href="/global/singapore/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Singapore</a>
+          <a href="/global/taiwan/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Taiwan</a>
+          <a href="/global/europe/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Europe</a>
+          <a href="/contact.html" style="color:#8899aa;text-decoration:none;">Partner Inquiry</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Company</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/about.html" style="color:#8899aa;text-decoration:none;">About Pocono AI</a>
+          <a href="/team.html" style="color:#8899aa;text-decoration:none;">Team &amp; Leadership</a>
+          <a href="/why-pocono-ai.html" style="color:#8899aa;text-decoration:none;">Why Pocono AI</a>
+          <a href="/founding-commercial-leadership.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Join Us</a>
+          <a href="/careers.html" style="color:#8899aa;text-decoration:none;">Careers</a>
+          <a href="/how-we-hire.html" style="color:#8899aa;text-decoration:none;">How We Hire</a>
+          <a href="/channel-partners.html" style="color:#8899aa;text-decoration:none;">Technical Partners (MSPs)</a>
+          <a href="/partners.html" style="color:#8899aa;text-decoration:none;">Academic Partnerships</a>
+          <a href="/contact.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Contact</a>
+          <a href="https://forms.gle/VQahnkjMfY6QNEMy8" target="_blank" rel="noopener noreferrer" style="color:#d5a94f;text-decoration:none;font-weight:600;">Interest List &#8599;</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Founder Projects</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/rehability/" style="color:#a78bfa;text-decoration:none;font-weight:700;">Rehability &#x2605;</a>
+          <a href="/rehability/marcus-memory-helper/" style="color:#a78bfa;text-decoration:none;font-weight:600;">&#8627; Marcus's Memory Helper</a>
+          <a href="/sentinel-home/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Sentinel Home Edition</a>
+          <a href="/living-memorials/" style="color:#8899aa;text-decoration:none;">Living Echo</a>
+          <a href="/living-memorials/marcus-odell/" style="color:#8899aa;text-decoration:none;">Marcus&rsquo;s Living Echo</a>
+          <a href="/living-memorials/enterprise-estate-continuity.html" style="color:#8899aa;text-decoration:none;">Enterprise Estate Continuity</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Resources &amp; Legal</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/sitemap.html" style="color:#8899aa;text-decoration:none;">All Pages (Sitemap)</a>
+          <a href="/audit.html" style="color:#8899aa;text-decoration:none;">Transparency &amp; Audit Log</a>
+          <a href="/maturity-disclosure.html" style="color:#8899aa;text-decoration:none;">What We Have / Don&rsquo;t Claim</a>
+          <a href="/plain.html" style="color:#8899aa;text-decoration:none;">Plain Language Guide</a>
+          <a href="/privacy.html" style="color:#8899aa;text-decoration:none;">Privacy</a>
+          <a href="/terms.html" style="color:#8899aa;text-decoration:none;">Terms</a>
+          <a href="/sla.html" style="color:#8899aa;text-decoration:none;">SLA</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:18px;margin-bottom:14px;">
+      <p style="margin:0;font-size:0.82em;line-height:1.6;color:#6f8295;max-width:1000px;">Pocono AI does not provide medical, legal, or engineering advice, does not practice medicine, law, or licensed engineering, and does not make clinical, legal, or engineering decisions. Outputs are drafts or support materials that require review by a qualified professional; final professional judgment remains with the licensed physician, attorney, or engineer. Tools and simulations on this site are educational and use synthetic data.</p>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:20px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+      <p style="margin:0;font-size:0.9em;">&copy; 2026 Pocono AI, LLC &nbsp;&#183;&nbsp; East Stroudsburg, PA &nbsp;&#183;&nbsp; <a href="mailto:marcus@poconoai.com" style="color:#8899aa;">marcus@poconoai.com</a> &nbsp;&#183;&nbsp; <a href="tel:+15705340602" style="color:#8899aa;">(570) 534-0602</a></p>
+      <p style="margin:0;font-size:0.88em;"><a href="/audit.html" style="color:#5dade2;text-decoration:none;">Transparency v402</a></p>
+    </div>
+  </div>
+</footer>
+<script src="/search.js?v=402" defer></script>
+<!-- /INCLUDE:FOOTER -->
+
+<script>
+    const tabs = document.querySelectorAll('.tier-tab');
+    const panels = document.querySelectorAll('.tier-panel');
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const tier = tab.dataset.tier;
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            panels.forEach(p => p.classList.toggle('visible', p.dataset.panel === tier));
+        });
+    });
+</script>
+
+<script src="search-index.js?v=402" defer></script>
+<script src="nav.js?v=402" defer></script>
+<script src="pilot-cta.js?v=402" defer></script>
+</body>
+</html>
+<<<END: specs.html>>>
+

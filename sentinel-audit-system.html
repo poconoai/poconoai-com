@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp -->
+<head>
+<meta charset="UTF-8">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="How Sentinel Node audits every AI workflow — append-only, reviewable audit logs, governance receipts, and reviewer accountability.">
+<meta name="keywords" content="AI audit system, append-only audit log, human in the loop AI, SHA-256 audit chain, HIPAA audit trail, legal AI audit, local AI audit, Sentinel Node audit, Pocono AI, RAG audit, Qdrant audit, healthcare AI governance">
+<title>How Sentinel Node™ Audits AI Workflows | Pocono AI</title>
+<meta property="og:title" content="How Sentinel Node™ Audits AI Workflows | Pocono AI">
+<meta property="og:description" content="Every prompt. Every response. Every retrieved document. Sealed in an append-only, reviewable audit log. Local only. Human reviewed.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Pocono AI">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://poconoai.com/sentinel-audit-system.html">
+<meta property="og:image" content="https://poconoai.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How Sentinel Node™ Audits AI Workflows | Pocono AI">
+<meta name="twitter:description" content="Every prompt. Every response. Sealed in a reviewable audit log. Zero cloud. Human reviewed.">
+<meta name="theme-color" content="#0B0F13">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="favicon-180x180.png">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="alternate icon" href="favicon.ico">
+<link rel="stylesheet" href="styles.css?v=402">
+<link rel="stylesheet" href="nav-v2026.css?v=402">
+<link rel="stylesheet" href="brand-v292.css?v=402">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+<link rel="canonical" href="https://poconoai.com/sentinel-audit-system.html">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "How Sentinel Node™ Audits AI Workflows | Pocono AI",
+  "description": "Technical and plain-language explanation of the Sentinel Node™ Audit Proxy: append-only, reviewable logs, human-in-the-loop review, local-only data, Qdrant retrieval logging, 90-day retention.",
+  "url": "https://poconoai.com/sentinel-audit-system.html",
+  "isPartOf": { "@type": "WebSite", "url": "https://poconoai.com", "name": "Pocono AI, LLC" },
+  "publisher": { "@type": "Organization", "name": "Pocono AI, LLC", "url": "https://poconoai.com" },
+  "datePublished": "2026-06-01",
+  "dateModified": "2026-06-01"
+}
+</script>
+
+<style>
+/* === sentinel-audit-system.html page styles === */
+.sas-hero {
+  background: linear-gradient(160deg, #051e2e 0%, #071c2a 60%, #0a2535 100%);
+  border-bottom: 1px solid rgba(0,194,168,0.18);
+  padding: 72px 24px 56px;
+  text-align: center;
+}
+.sas-eyebrow {
+  display: inline-block;
+  font-size: 0.78em;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--teal, #00c2a8);
+  margin-bottom: 16px;
+}
+.sas-hero h1 {
+  font-size: clamp(1.75rem, 4vw, 2.8rem);
+  line-height: 1.15;
+  max-width: 800px;
+  margin: 0 auto 20px;
+  font-weight: 800;
+}
+.sas-hero-sub {
+  font-size: 1.08em;
+  color: var(--light-text, #8899aa);
+  max-width: 640px;
+  margin: 0 auto 28px;
+  line-height: 1.65;
+}
+.sas-disclaimer {
+  display: inline-block;
+  background: rgba(255,200,0,0.07);
+  border: 1px solid rgba(255,200,0,0.22);
+  border-radius: 6px;
+  padding: 10px 18px;
+  font-size: 0.85em;
+  color: #c9aa52;
+  max-width: 700px;
+  line-height: 1.55;
+  margin-top: 8px;
+}
+.sas-wrap {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 24px 96px;
+}
+.sas-section {
+  padding: 52px 0 0;
+}
+.sas-section-label {
+  font-size: 0.72em;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--teal, #00c2a8);
+  margin-bottom: 8px;
+}
+.sas-section h2 {
+  font-size: clamp(1.25rem, 2.5vw, 1.7rem);
+  line-height: 1.2;
+  margin: 0 0 18px;
+  font-weight: 700;
+}
+.sas-section p {
+  line-height: 1.7;
+  color: var(--light-text, #8899aa);
+  margin: 0 0 16px;
+}
+.sas-section p strong {
+  color: #d0dde8;
+}
+.sas-flow {
+  display: grid;
+  gap: 12px;
+  margin: 28px 0;
+}
+.sas-flow-step {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-left: 3px solid var(--teal, #00c2a8);
+  border-radius: 0 8px 8px 0;
+  padding: 16px 20px;
+}
+.sas-step-num {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(0,194,168,0.12);
+  border: 1px solid rgba(0,194,168,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78em;
+  font-weight: 700;
+  color: var(--teal, #00c2a8);
+  margin-top: 2px;
+}
+.sas-step-body strong {
+  display: block;
+  color: #d0dde8;
+  font-size: 0.97em;
+  margin-bottom: 4px;
+}
+.sas-step-body span {
+  font-size: 0.9em;
+  color: var(--light-text, #8899aa);
+  line-height: 1.55;
+}
+.sas-callout {
+  background: rgba(0,194,168,0.06);
+  border-left: 4px solid var(--teal, #00c2a8);
+  border-radius: 0 8px 8px 0;
+  padding: 18px 22px;
+  margin: 24px 0;
+}
+.sas-callout p {
+  margin: 0;
+  font-size: 0.97em;
+  color: #c5d4e0;
+  line-height: 1.65;
+}
+.sas-callout strong {
+  color: var(--teal, #00c2a8);
+}
+.sas-stack-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0 28px;
+  font-size: 0.91em;
+}
+.sas-stack-table th {
+  text-align: left;
+  padding: 9px 12px;
+  border-bottom: 2px solid rgba(0,194,168,0.2);
+  color: var(--teal, #00c2a8);
+  font-weight: 700;
+  font-size: 0.85em;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.sas-stack-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  color: var(--light-text, #8899aa);
+  line-height: 1.5;
+}
+.sas-stack-table td:first-child {
+  color: #d0dde8;
+  font-weight: 600;
+  width: 38%;
+}
+.sas-log-record {
+  background: rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  padding: 18px 22px;
+  font-family: ui-monospace, 'SF Mono', monospace;
+  font-size: 0.82em;
+  line-height: 1.7;
+  color: #8fbc8f;
+  margin: 20px 0;
+  overflow-x: auto;
+}
+.sas-log-record .log-key { color: #7eb8d4; }
+.sas-log-record .log-val { color: #c3e88d; }
+.sas-log-record .log-hash { color: #f78c6c; }
+.sas-log-record .log-comment { color: #546e7a; }
+.sas-principle-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin: 24px 0;
+}
+.sas-principle-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  padding: 20px;
+}
+.sas-principle-card .pc-icon {
+  font-size: 1.6em;
+  margin-bottom: 10px;
+  display: block;
+}
+.sas-principle-card h3 {
+  font-size: 1.0em;
+  font-weight: 700;
+  color: #d0dde8;
+  margin: 0 0 8px;
+}
+.sas-principle-card p {
+  font-size: 0.88em;
+  margin: 0;
+}
+.sas-cta-block {
+  background: linear-gradient(135deg, rgba(0,163,255,0.07), rgba(5,22,34,0.9));
+  border: 1px solid rgba(0,163,255,0.2);
+  border-radius: 14px;
+  padding: 40px 32px;
+  text-align: center;
+  margin: 48px 0 0;
+}
+.sas-cta-block h2 {
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+  margin: 0 0 14px;
+}
+.sas-cta-block p {
+  max-width: 520px;
+  margin: 0 auto 24px;
+}
+.btn-teal {
+  display: inline-block;
+  background: var(--teal, #00c2a8);
+  color: #051622;
+  font-weight: 700;
+  font-size: 0.95em;
+  padding: 14px 28px;
+  border-radius: 7px;
+  text-decoration: none;
+  margin: 0 8px 8px;
+  transition: opacity 0.15s;
+}
+.btn-teal:hover { opacity: 0.88; }
+.btn-ghost {
+  display: inline-block;
+  border: 1px solid rgba(0,194,168,0.4);
+  color: var(--teal, #00c2a8);
+  font-weight: 600;
+  font-size: 0.95em;
+  padding: 13px 26px;
+  border-radius: 7px;
+  text-decoration: none;
+  margin: 0 8px 8px;
+  transition: background 0.15s;
+}
+.btn-ghost:hover { background: rgba(0,194,168,0.08); }
+.sas-divider {
+  border: none;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  margin: 48px 0 0;
+}
+</style>
+
+<script>
+(function(){
+  var ids=[];
+  try {
+    if (location.search.indexOf('showbanners=1') !== -1) {
+      ids.forEach(function(id){ localStorage.removeItem('pai_dismissed_'+id); });
+    }
+  } catch(e) {}
+  var hideRules = [];
+  ids.forEach(function(id){
+    try {
+      if (localStorage.getItem('pai_dismissed_'+id) === '1') {
+        hideRules.push('#'+id+'{display:none !important;}');
+      }
+    } catch(e) {}
+  });
+  if (hideRules.length) {
+    var style = document.createElement('style');
+    style.textContent = hideRules.join('');
+    (document.head || document.documentElement).appendChild(style);
+  }
+})();
+</script>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to content</a>
+<div id="reading-progress" aria-hidden="true"></div>
+
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- INCLUDE:HEADER -->
+<div id="hitl-notice" style="background:#0a1929;padding:4px 16px;text-align:center;font-size:12px;color:#4a5568;border-bottom:1px solid rgba(255,255,255,0.06);letter-spacing:0.01em;">Human-in-the-Loop required: licensed professionals verify all outputs before clinical or legal action</div>
+<header role="banner">
+  <div class="header-inner">
+    <a href="/index.html" class="logo" aria-label="Pocono AI Home">
+      <img src="/logo.svg?v=402" alt="" width="36" height="36" decoding="async" loading="eager" aria-hidden="true" style="display:inline-block;">
+      Pocono <span>AI</span>
+    </a>
+    <nav id="desktop-nav" aria-label="Main navigation">
+      <div class="nav-item"><a href="/index.html" class="nav-direct">Home</a></div>
+      <div class="nav-item"><a href="/for-physicians.html" class="nav-direct">Physicians</a></div>
+      <div class="nav-item"><a href="/for-attorneys.html" class="nav-direct">Attorneys</a></div>
+      <div class="nav-item"><a href="/sentinel-node.html" class="nav-direct nav-hub" style="color:#d5a94f;border:1px solid rgba(213,169,79,0.45);border-radius:999px;padding:6px 13px;">Sentinel Node</a></div>
+      <div class="nav-item"><a href="/living-memorials/" class="nav-direct">Living Echo</a></div>
+      <div class="nav-item"><a href="/contact.html" class="nav-direct">Contact</a></div>
+      <div class="nav-item" data-dropdown="menu-more">
+        <button type="button" class="nav-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="menu-more">More <span class="nav-chevron" aria-hidden="true">&#9662;</span></button>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <a href="/contact.html#pilot" class="nav-cta nav-cta-primary">Request a Pilot</a>
+      <button type="button" class="pa-search-trigger" data-search-open aria-label="Search (press / or Ctrl-K)" aria-haspopup="dialog" aria-expanded="false">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span class="pa-st-label">Search</span><kbd data-pa-keyhint>Ctrl K</kbd>
+      </button>
+      <button type="button" class="header-icon-btn" id="mobile-menu" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav-panel">
+        <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- "More" overflow dropdown — sibling of <header> so position:fixed escapes header's stacking context. Wired by nav.js via data-dropdown="menu-more". -->
+<div class="nav-dropdown" id="menu-more" aria-label="More navigation">
+  <p class="nav-dd-section">Products</p>
+  <a href="/engineering-drafting/">Drafting &amp; Engineering Edition</a>
+  <a href="/sentinel-home/">Sentinel Home Edition</a>
+  <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability — Assistive Tools &#x2605;</a>
+  <a href="/living-memorials/enterprise-estate-continuity.html">Enterprise Estate Continuity</a>
+  <p class="nav-dd-section">Capabilities</p>
+  <a href="/evidence-room.html">Evidence Room</a>
+  <a href="/push-button-deliverables.html">Push-Button Deliverables</a>
+  <a href="/pilot-readiness-kit.html">Pilot Kit</a>
+  <a href="/pilot-program.html">Pilot Program</a>
+  <a href="/how-it-works.html">How It Works</a>
+  <p class="nav-dd-section">Hubs &amp; Company</p>
+  <a href="/training.html">Training Hub</a>
+  <a href="/documentation-hub/">Document Hub</a>
+  <a href="/global/">Global Hub</a>
+  <a href="/investors-hub.html">Investor Hub</a>
+  <a href="/valuation-dashboard.html">Valuation Dashboard</a>
+  <a href="/about.html">About</a>
+  <p class="nav-dd-section">Trust &amp; Legal</p>
+  <a href="/transparency.html">Transparency</a>
+  <a href="/audit.html">Audit Log</a>
+  <a href="/privacy.html">Privacy</a>
+  <a href="/sitemap.html">Sitemap</a>
+</div>
+<!-- Site search is provided by the self-contained search.js asset (command palette: / or Ctrl/Cmd-K). -->
+
+<!-- Mobile panel: full-screen slide-in. v396 nav — hub tiles + grouped links + Sentinel Node + Engineering. -->
+<nav id="mobile-nav-panel" aria-label="Mobile navigation" aria-hidden="true" role="dialog" aria-modal="true">
+
+  <!-- Hub tiles: Sentinel Node, Documentation Hub, Training Hub, Global Hub -->
+  <div style="padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,0.07);">
+    <p style="font-size:0.65em;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.28);margin:0 0 10px;padding:0 2px;">Hubs</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <a href="/sentinel-node.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(213,169,79,0.1);border:1px solid rgba(213,169,79,0.35);border-radius:10px;color:#d5a94f;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Sentinel Node</a>
+      <a href="/documentation-hub/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(0,194,168,0.1);border:1px solid rgba(0,194,168,0.35);border-radius:10px;color:#00c2a8;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Docs Hub</a>
+      <a href="/training.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.35);border-radius:10px;color:#a78bfa;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Training Hub</a>
+      <a href="/global/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(122,240,220,0.07);border:1px solid rgba(122,240,220,0.3);border-radius:10px;color:#7af0dc;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Global Hub</a>
+    </div>
+  </div>
+
+  <!-- Core paths -->
+  <div class="mob-static-links">
+    <a href="/index.html">Home</a>
+    <a href="/for-physicians.html">Physicians</a>
+    <a href="/for-attorneys.html">Attorneys</a>
+    <a href="/engineering-drafting/">Engineering &amp; Drafting</a>
+    <a href="/pilot-program.html">Pilot Program</a>
+    <a href="/how-it-works.html">How It Works</a>
+    <a href="/trust.html">Trust &amp; Audit</a>
+    <a href="/pricing.html">Pricing</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/living-memorials/">Living Echo</a>
+    <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability</a>
+    <a href="/about.html">About</a>
+    <a href="/team.html" style="color:rgba(255,255,255,0.6);">Team &amp; Leadership</a>
+    <a href="/valuation-dashboard.html" style="color:rgba(255,255,255,0.6);">Valuation Dashboard</a>
+    <a href="/careers.html" style="color:rgba(255,255,255,0.6);">Careers</a>
+    <a href="/sentinel-demo.html" style="color:rgba(255,255,255,0.6);">Demo</a>
+    <a href="/sitemap.html" style="color:rgba(255,255,255,0.45);">Sitemap</a>
+    <a href="/transparency.html" style="color:rgba(255,255,255,0.45);">Transparency</a>
+    <a href="/privacy.html" style="color:rgba(255,255,255,0.45);">Privacy</a>
+  </div>
+
+  <a href="/contact.html#pilot" class="mob-cta">Request a Pilot</a>
+</nav>
+<!-- /INCLUDE:HEADER -->
+
+
+<main id="main-content" tabindex="-1">
+<span id="main" aria-hidden="true"></span>
+
+<!-- HERO -->
+<section class="sas-hero">
+  <div class="sentinel-lockup" aria-label="Sentinel Node — Audit System">
+              <svg class="sentinel-lockup-mark" viewBox="0 0 64 64" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
+          <!-- v311b: rotated diamond + C-curve loop + summit dot. Inherits currentColor from CSS context. -->
+          <g transform="rotate(45 32 32)">
+            <rect x="12" y="12" width="40" height="40" rx="8" ry="8"/>
+            <path d="M43 22 L26 22 A6 6 0 0 0 20 28 L20 36 A6 6 0 0 0 26 42 L41 42"/>
+          </g>
+          <circle cx="32" cy="9" r="3" fill="currentColor" stroke="none"/>
+        </svg>
+              <div class="sentinel-lockup-rule"></div>
+              <div class="sentinel-lockup-text">
+                <span class="sentinel-lockup-name">Sentinel Node</span>
+                <span class="sentinel-lockup-tag">Sentinel Node™ Audit System</span>
+              </div>
+            </div>
+  <h1>How Pocono AI Audits Every AI Workflow</h1>
+  <p class="sas-hero-sub">Every prompt. Every retrieved document. Every AI response. Sealed in a reviewable audit log that never leaves your building.</p>
+  <div class="sas-disclaimer">
+    <strong>Important:</strong> The Sentinel Node™ Audit System provides a structured, append-only record of AI activity to support human review and organizational accountability. It is a governance and traceability tool — not a compliance certification, legal guarantee, or substitute for professional review by qualified counsel or licensed clinicians.
+  </div>
+</section>
+
+<div class="sas-wrap">
+
+  <!-- SECTION 1: THE CORE IDEA -->
+  <section class="sas-section">
+    <p class="sas-section-label">The Core Idea</p>
+    <h2>Verification Is the Architecture — Not an Add-On</h2>
+    <p>Most AI systems treat auditing as an afterthought: a log file tacked on after the fact, stored somewhere in the cloud, accessible to the vendor, and rarely reviewed by the organization using the tool.</p>
+    <p>The Sentinel Node™ is built the opposite way. The audit proxy sits between the user and the AI model. <strong>Nothing passes through without being logged first.</strong> Every request is validated, every context chunk recorded, every response captured — and every event is written to the reviewable audit log before the next event begins. The next audit-layer release (Stage 2) cryptographically seals each event.</p>
+    <p>The result is a workflow where accountability is structural, not optional. Regulators, administrators, and clinicians can trace any AI-assisted output back to its exact source documents, the specific model prompt, and the staff member who reviewed it.</p>
+    <div class="sas-callout">
+      <p><strong>"Verification is not an add-on layer. Verification is the architecture."</strong><br>
+      This is the operating principle behind every design decision in the Sentinel Node™ system.</p>
+    </div>
+  </section>
+
+  <!-- SECTION 2: END-TO-END FLOW -->
+  <section class="sas-section">
+    <p class="sas-section-label">End-to-End Workflow</p>
+    <h2>How a Query Moves Through the System</h2>
+    <p>Here is what happens from the moment a staff member submits a question to the moment that answer reaches them — and how each step is captured in the audit record.</p>
+    <div class="sas-flow">
+      <div class="sas-flow-step">
+        <div class="sas-step-num">1</div>
+        <div class="sas-step-body">
+          <strong>User submits prompt via Secure Web UI</strong>
+          <span>A physician, nurse, or legal professional types a question into the local Pocono AI interface. The session ID, user ID, and timestamp are captured at submission.</span>
+        </div>
+      </div>
+      <div class="sas-flow-step">
+        <div class="sas-step-num">2</div>
+        <div class="sas-step-body">
+          <strong>Audit Proxy intercepts and validates the request</strong>
+          <span>The FastAPI audit proxy receives the query before it reaches the AI model. It validates the request, logs the raw prompt, and begins orchestrating the retrieval pipeline.</span>
+        </div>
+      </div>
+      <div class="sas-flow-step">
+        <div class="sas-step-num">3</div>
+        <div class="sas-step-body">
+          <strong>Qdrant retrieves top-K relevant document chunks</strong>
+          <span>The local Qdrant vector database identifies the most semantically relevant chunks from your organization's documents. Each chunk's document ID, source file, page reference, section heading, and SHA-256 chunk hash are recorded.</span>
+        </div>
+      </div>
+      <div class="sas-flow-step">
+        <div class="sas-step-num">4</div>
+        <div class="sas-step-body">
+          <strong>Prompt + context + source metadata sent to local model</strong>
+          <span>The user's prompt, the retrieved chunks, and the source metadata are assembled and sent to Ollama / Meditron running entirely on-premises. No data leaves your building at this step or any other.</span>
+        </div>
+      </div>
+      <div class="sas-flow-step">
+        <div class="sas-step-num">5</div>
+        <div class="sas-step-body">
+          <strong>Model generates a response</strong>
+          <span>The local model produces a response grounded in the retrieved context. The response is returned to the audit proxy — not directly to the user.</span>
+        </div>
+      </div>
+      <div class="sas-flow-step">
+        <div class="sas-step-num">6</div>
+        <div class="sas-step-body">
+          <strong>Full event written to an append-only, reviewable audit log</strong>
+          <span>The complete event — prompt, retrieved chunks, source references, response, session ID, user ID, and timestamp — is written to the local SQLite audit database as an append-only, reviewable record. The next audit-layer release (Stage 2) adds SHA-256 hash chaining and signed records so that altering a past entry breaks the chain and is detectable on verification.</span>
+        </div>
+      </div>
+      <div class="sas-flow-step">
+        <div class="sas-step-num">7</div>
+        <div class="sas-step-body">
+          <strong>Human reviews and approves before operational use</strong>
+          <span>The response is presented to the user as a <em>draft</em>. A qualified human — a licensed clinician or attorney, depending on context — reviews the output before it enters any workflow or clinical record. AI assists. Humans decide. Always.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: WHAT IS LOGGED -->
+  <section class="sas-section">
+    <p class="sas-section-label">Audit Record Detail</p>
+    <h2>What Every Audit Event Records</h2>
+    <p>Each event in the audit log captures a complete picture of the AI interaction, not just the output. This makes it possible to reconstruct exactly what the system was given, what it retrieved, and what it returned — months later.</p>
+    <table class="sas-stack-table">
+      <thead>
+        <tr><th>Field</th><th>What it captures</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>User Prompt</td><td>The exact text submitted by the staff member</td></tr>
+        <tr><td>AI Response</td><td>The exact output returned by the local model</td></tr>
+        <tr><td>Retrieved Chunks</td><td>The top-K document segments used as context</td></tr>
+        <tr><td>Source References</td><td>Document ID, filename, page number, section heading</td></tr>
+        <tr><td>Timestamp</td><td>Date and time of the event, to the second</td></tr>
+        <tr><td>Session / User ID</td><td>Which staff member or session initiated the query</td></tr>
+        <tr><td>Prior Hash (chain)<sup>*</sup></td><td>The SHA-256 hash of the previous event &mdash; added in the Stage 2 hash-chained layer</td></tr>
+        <tr><td>Current Hash<sup>*</sup></td><td>SHA-256 hash of this event, sealing it into the chain &mdash; Stage 2 hash-chained layer</td></tr>
+      </tbody>
+    </table>
+    <p>The following is a simplified representation of a single log record structure:</p>
+    <div class="sas-log-record">
+      <span class="log-comment">// Audit Event — Sentinel Node™ Record</span><br>
+      {<br>
+      &nbsp;&nbsp;<span class="log-key">event_id</span>: <span class="log-val">"evt_20260513_142301_0047"</span>,<br>
+      &nbsp;&nbsp;<span class="log-key">session_id</span>: <span class="log-val">"sess_physician_0012"</span>,<br>
+      &nbsp;&nbsp;<span class="log-key">user_id</span>: <span class="log-val">"staff_id_009"</span>,<br>
+      &nbsp;&nbsp;<span class="log-key">timestamp</span>: <span class="log-val">"2026-05-13T14:23:01Z"</span>,<br>
+      &nbsp;&nbsp;<span class="log-key">prompt</span>: <span class="log-val">"[user query text — logged verbatim]"</span>,<br>
+      &nbsp;&nbsp;<span class="log-key">retrieved_chunks</span>: [<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;{ <span class="log-key">doc_id</span>: <span class="log-val">"doc_47"</span>, <span class="log-key">source</span>: <span class="log-val">"clinical_protocol_v3.pdf"</span>, <span class="log-key">page</span>: <span class="log-val">12</span>, <span class="log-key">chunk_hash</span>: <span class="log-hash">"sha256:a3f..."</span> },<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;{ <span class="log-key">doc_id</span>: <span class="log-val">"doc_22"</span>, <span class="log-key">source</span>: <span class="log-val">"formulary_2026.pdf"</span>, <span class="log-key">page</span>: <span class="log-val">5</span>, <span class="log-key">chunk_hash</span>: <span class="log-hash">"sha256:7bc..."</span> }<br>
+      &nbsp;&nbsp;],<br>
+      &nbsp;&nbsp;<span class="log-key">response</span>: <span class="log-val">"[model output — logged verbatim]"</span>,<br>
+      &nbsp;&nbsp;<span class="log-key">prior_hash</span>: <span class="log-hash">"sha256:f92d4a..."</span>,<br>
+      &nbsp;&nbsp;<span class="log-key">current_hash</span>: <span class="log-hash">"sha256:8e3c71..."</span><br>
+      }
+    </div>
+    <p style="font-size:0.88em;color:var(--light-text,#8899aa);">This is an illustrative representation of the log structure. Actual field names and values will reflect your deployment configuration. <sup>*</sup>Hash-chain fields (prior/current hash) are part of the next audit-layer release (Stage 2); the current pilot keeps an append-only, reviewable log.</p>
+  </section>
+
+  <!-- SECTION 4: HASH CHAINING -->
+  <section class="sas-section">
+    <p class="sas-section-label">Audit Integrity — Roadmap</p>
+    <h2>Reviewable Today, Hash-Chained Next</h2>
+    <p>A standard log file can be edited. Records can be deleted. Timestamps can be changed. That's a problem in any regulated environment where the integrity of documentation matters.</p>
+    <p><strong style="color:#d0dde8;">Today, in the pilot:</strong> the Sentinel Node&trade; audit log is <strong>append-only and reviewable</strong>. Every query, retrieval, draft, source reference, and human-review action is recorded locally and can be exported for review. We do not claim that the current local log is tamper-proof, or that citations prove correctness.</p>
+    <p><strong style="color:#d0dde8;">Next audit-layer release (Stage 2):</strong> the architecture adds <strong>SHA-256 hash chaining</strong> to make every record self-verifying. When an event is written, the system computes a hash of the current event and includes the hash of the previous event in that record. In that layer:</p>
+    <ul style="padding-left:20px;line-height:1.8;color:var(--light-text,#8899aa);">
+      <li><strong style="color:#d0dde8;">Any alteration to any past record breaks the chain.</strong> If someone modifies event #47, the hash of event #48 no longer matches, and the tampering becomes detectable on verification.</li>
+      <li><strong style="color:#d0dde8;">Records are only appended — never altered.</strong> The retention policy enforces append-only writes today; the Stage 2 hash-chained layer makes any in-place change cryptographically detectable.</li>
+      <li><strong style="color:#d0dde8;">The chain is verifiable (Stage 2).</strong> In the next audit-layer release, an administrator can re-compute the hash chain and confirm that every record from deployment to present is intact.</li>
+    </ul>
+    <div class="sas-callout">
+      <p><strong>Tamper-evident by design (Stage 2):</strong> in the hash-chained layer, each event is sealed at write time, so a written record cannot be altered without breaking the cryptographic chain. &ldquo;Tamper-evident&rdquo; means alteration is <em>detectable</em>, not impossible. You can see a working demonstration of this mechanism today in the <a href="evidence-room.html">Evidence Room</a>.</p>
+    </div>
+  </section>
+
+  <!-- SECTION 5: HUMAN IN THE LOOP -->
+  <section class="sas-section">
+    <p class="sas-section-label">Human-in-the-Loop</p>
+    <h2>Every AI Output Is a Draft Until a Human Approves It</h2>
+    <p>The most important design decision in the Sentinel Node™ system is not technical — it's organizational. <strong>No AI output enters a clinical or legal workflow until a qualified human has reviewed it.</strong></p>
+    <p>The system presents every response as a draft. The review and approval step is not optional and not bypassed for efficiency. This reflects a deliberate principle: AI assists with information retrieval and synthesis. It does not replace professional judgment.</p>
+    <p>This means:</p>
+    <ul style="padding-left:20px;line-height:1.8;color:var(--light-text,#8899aa);">
+      <li>Physicians review AI-assisted documentation before it enters a patient record</li>
+      <li>Attorneys review AI-assisted research before it informs legal strategy</li>
+      <li>Nursing staff confirm AI-surfaced protocol references against authoritative sources</li>
+      <li>Administrative staff verify AI-drafted communications before sending</li>
+    </ul>
+    <p>The audit log records the human review step as part of the event chain, creating a complete accountability trail from query to approved use.</p>
+  </section>
+
+  <!-- SECTION 6: LOCAL-ONLY DATA FLOW -->
+  <section class="sas-section">
+    <p class="sas-section-label">Data Sovereignty</p>
+    <h2>Zero Data Leaves Your Building</h2>
+    <p>The Sentinel Node™ runs entirely on hardware deployed inside your facility. The AI model, the vector database, the audit log, and the web interface are all local. There is no cloud component in the inference pipeline.</p>
+    <p>This means:</p>
+    <ul style="padding-left:20px;line-height:1.8;color:var(--light-text,#8899aa);">
+      <li><strong style="color:#d0dde8;">Patient data never touches a vendor's servers.</strong> Not during queries. Not during training. Not during logging.</li>
+      <li><strong style="color:#d0dde8;">The audit log itself is local.</strong> The cryptographic record of every AI interaction is stored in your facility, on your hardware, under your control.</li>
+      <li><strong style="color:#d0dde8;">No vendor access to operational data.</strong> Pocono AI does not have a back-channel to your audit log, your documents, or your queries.</li>
+      <li><strong style="color:#d0dde8;">Air-gapped operation is supported.</strong> The system is designed to function without an internet connection once deployed.</li>
+    </ul>
+    <div class="sas-callout">
+      <p>The audit log is a local asset under your organization's control — not a cloud service, not a vendor-hosted record. You own it. You retain it. You can export it.</p>
+    </div>
+  </section>
+
+  <!-- SECTION 7: 90-DAY RETENTION -->
+  <section class="sas-section">
+    <p class="sas-section-label">Retention Policy</p>
+    <h2>90-Day Reviewable Retention</h2>
+    <p>The Sentinel Node™ enforces a 90-day reviewable retention window. During this period:</p>
+    <ul style="padding-left:20px;line-height:1.8;color:var(--light-text,#8899aa);">
+      <li>Records are <strong style="color:#d0dde8;">append-only</strong> — nothing is modified or deleted</li>
+      <li>The full audit chain is preserved and verifiable</li>
+      <li>After 90 days, records are subject to automatic purge per the retention policy</li>
+      <li><strong style="color:#d0dde8;">No records are altered during the retention window</strong> — only appended or expired</li>
+    </ul>
+    <p>Your organization may configure extended retention periods or archival export procedures depending on your compliance obligations. The system provides the infrastructure; your policies determine how long records are kept beyond the default window.</p>
+    <p style="font-size:0.88em;color:var(--light-text,#8899aa);">Note: Retention periods and archival obligations vary by regulatory framework and jurisdiction. Consult qualified legal counsel to determine appropriate retention policy for your organization.</p>
+  </section>
+
+  <!-- SECTION 8: PRODUCTION STACK -->
+  <section class="sas-section">
+    <p class="sas-section-label">Production Stack</p>
+    <h2>What the System Is Built On</h2>
+    <p>The Sentinel Node™ Audit Proxy uses a production-grade, open-source stack with no proprietary lock-in and no cloud dependencies:</p>
+    <table class="sas-stack-table">
+      <thead>
+        <tr><th>Layer</th><th>Technology</th><th>Role</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>API Enforcement</td><td>FastAPI (Python)</td><td>Audit proxy gateway — validates, logs, orchestrates</td></tr>
+        <tr><td>Vector Database</td><td>Qdrant (local)</td><td>Semantic retrieval — stores and queries document embeddings</td></tr>
+        <tr><td>Inference Runtime</td><td>Ollama</td><td>Local model serving — runs the LLM on-premises hardware</td></tr>
+        <tr><td>Clinical Model</td><td>Meditron (configurable)</td><td>Medical-domain language model; model is configurable per deployment</td></tr>
+        <tr><td>Audit Storage</td><td>SQLite</td><td>Append-only, reviewable log today; SHA-256 hash-chain integrity in Stage 2</td></tr>
+        <tr><td>Operating System</td><td>Ubuntu 24.04 LTS</td><td>Stable, security-patched foundation</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- SECTION 9: CORE PRINCIPLES -->
+  <section class="sas-section">
+    <p class="sas-section-label">Core Principles</p>
+    <h2>What This System Is Designed to Provide</h2>
+    <div class="sas-principle-grid">
+      <div class="sas-principle-card">
+        <span class="pc-icon">🔒</span>
+        <h3>Data Sovereignty</h3>
+        <p>Your data stays local. You own it. The audit log is yours — not a vendor asset.</p>
+      </div>
+      <div class="sas-principle-card">
+        <span class="pc-icon">🔍</span>
+        <h3>Traceability</h3>
+        <p>Every answer can be traced back to its source documents, page, and section — not just a model output.</p>
+      </div>
+      <div class="sas-principle-card">
+        <span class="pc-icon">🔗</span>
+        <h3>Tamper-Evidence</h3>
+        <p>In the Stage 2 hash-chained layer, SHA-256 hash chaining seals each record at write time so alterations break the chain and are detectable on verification. The current pilot keeps an append-only, reviewable log.</p>
+      </div>
+      <div class="sas-principle-card">
+        <span class="pc-icon">👤</span>
+        <h3>Human Oversight</h3>
+        <p>AI assists. Humans decide. Every output is a draft pending qualified review before operational use.</p>
+      </div>
+      <div class="sas-principle-card">
+        <span class="pc-icon">📅</span>
+        <h3>Retention</h3>
+        <p>90-day audit history. Append-only. Reviewable today. Configurable for your compliance needs.</p>
+      </div>
+      <div class="sas-principle-card">
+        <span class="pc-icon">🏥</span>
+        <h3>Built for Regulated Work</h3>
+        <p>Designed specifically for healthcare and legal environments where documentation and accountability matter.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 10: WHAT IT IS NOT -->
+  <section class="sas-section">
+    <p class="sas-section-label">Honest Limitations</p>
+    <h2>What the Audit System Does Not Do</h2>
+    <p>We want to be direct about what this system provides and what it does not.</p>
+    <ul style="padding-left:20px;line-height:1.85;color:var(--light-text,#8899aa);">
+      <li><strong style="color:#d0dde8;">It does not guarantee HIPAA compliance.</strong> The audit log supports compliance infrastructure. HIPAA compliance requires administrative, physical, and technical safeguards across your entire organization. Consult a qualified healthcare attorney or HIPAA compliance officer.</li>
+      <li><strong style="color:#d0dde8;">It does not guarantee legal compliance in any jurisdiction.</strong> What constitutes adequate AI governance in your state or specialty may differ from what this system provides by default.</li>
+      <li><strong style="color:#d0dde8;">It does not eliminate clinical or legal risk.</strong> Human review is required. AI-assisted outputs that bypass professional judgment remain the user's responsibility.</li>
+      <li><strong style="color:#d0dde8;">It does not provide legal or clinical advice.</strong> The system retrieves and synthesizes information from documents you provide. It does not substitute for licensed professional judgment.</li>
+    </ul>
+  </section>
+
+  <hr class="sas-divider">
+
+  <!-- CTA -->
+  <section class="sas-cta-block" id="contact">
+    <h2>Want to See the Audit System in Action?</h2>
+    <p class="sas-hero-sub" style="margin:0 auto 24px;">Schedule a technical walkthrough with Marcus. We'll show you the audit proxy, the hash chain, and what a real retrieval event looks like in the log.</p>
+    <a href="mailto:marcus@poconoai.com?subject=Audit%20System%20Technical%20Walkthrough" class="btn-teal">Request Technical Walkthrough</a>
+    <a href="operational-artifacts.html#audit-log" class="btn-ghost">See Audit Log Example</a>
+    <a href="architecture.html" class="btn-ghost">View Full Architecture</a>
+    <a href="governance.html" class="btn-ghost">AI Governance Overview</a>
+  </section>
+
+</div><!-- /sas-wrap -->
+</main>
+
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 root-relative nav fix, Living Echo rebrand, Engineering & Drafting + Enterprise Estate Continuity links added (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- INCLUDE:FOOTER -->
+<footer role="contentinfo" style="background:#051622;border-top:1px solid rgba(255,255,255,0.08);padding:40px 24px 28px;font-size:0.85em;color:#8899aa;">
+  <div style="max-width:1180px;margin:0 auto;">
+
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:0 0 28px;margin-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.07);">
+      <div style="max-width:560px;">
+        <p style="margin:0 0 6px;font-size:1.05em;font-weight:700;color:#fff;">Local AI infrastructure for regulated practices.</p>
+        <p style="margin:0;font-size:0.95em;line-height:1.5;">Drafts with citations. Human review required. Sensitive documents stay under practice control. Simple path, deep proof.</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="/contact.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;background:#00c2a8;color:#04111a;font-weight:700;text-decoration:none;font-size:0.95em;">Request Pilot</a>
+        <a href="/sentinel-demo.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;border:1px solid rgba(0,194,168,0.55);color:#00c2a8;font-weight:700;text-decoration:none;font-size:0.95em;">Watch Demo</a>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px 32px;margin-bottom:32px;text-align:left;">
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">For You</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/start-here.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Start Here (3 min)</a>
+          <a href="/for-physicians.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Physicians</a>
+          <a href="/for-attorneys.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Attorneys</a>
+          <a href="/engineering-drafting/" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Engineering &amp; Drafting Teams</a>
+          <a href="/pilot-program.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Pilot Program</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Installer Training</a>
+          <a href="/how-it-works.html" style="color:#8899aa;text-decoration:none;">How It Works</a>
+          <a href="/trust.html" style="color:#8899aa;text-decoration:none;">Trust &amp; Audit</a>
+          <a href="/pricing.html" style="color:#8899aa;text-decoration:none;">Pricing</a>
+          <a href="/sentinel-demo.html" style="color:#8899aa;text-decoration:none;">See the Demo</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Documentation Hub</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/documentation-hub/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Hub Home &mdash; Deep Proof</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">Installer Training</a>
+          <a href="/sentinel-node/installation-simulator.html" style="color:#8899aa;text-decoration:none;">&#8627; Installation Simulator</a>
+          <a href="/documentation-hub/clinical/" style="color:#8899aa;text-decoration:none;">Clinical Documentation</a>
+          <a href="/documentation-hub/legal/" style="color:#8899aa;text-decoration:none;">Legal Documentation</a>
+          <a href="/documentation-hub/technical/" style="color:#8899aa;text-decoration:none;">Technical Documentation</a>
+          <a href="/documentation-hub/governance/" style="color:#8899aa;text-decoration:none;">Governance &amp; Audit</a>
+          <a href="/documentation-hub/tools/" style="color:#8899aa;text-decoration:none;">Tools &amp; Simulators</a>
+          <a href="/documentation-hub/research/" style="color:#8899aa;text-decoration:none;">Research &amp; Essays</a>
+          <a href="/documentation-hub/transparency/" style="color:#8899aa;text-decoration:none;">Transparency</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Global Federated AI</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/global/" style="color:#7af0dc;text-decoration:none;font-weight:600;">Global Federated Hub</a>
+          <a href="/global/australia/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Australia</a>
+          <a href="/global/singapore/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Singapore</a>
+          <a href="/global/taiwan/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Taiwan</a>
+          <a href="/global/europe/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Europe</a>
+          <a href="/contact.html" style="color:#8899aa;text-decoration:none;">Partner Inquiry</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Company</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/about.html" style="color:#8899aa;text-decoration:none;">About Pocono AI</a>
+          <a href="/team.html" style="color:#8899aa;text-decoration:none;">Team &amp; Leadership</a>
+          <a href="/why-pocono-ai.html" style="color:#8899aa;text-decoration:none;">Why Pocono AI</a>
+          <a href="/founding-commercial-leadership.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Join Us</a>
+          <a href="/careers.html" style="color:#8899aa;text-decoration:none;">Careers</a>
+          <a href="/how-we-hire.html" style="color:#8899aa;text-decoration:none;">How We Hire</a>
+          <a href="/channel-partners.html" style="color:#8899aa;text-decoration:none;">Technical Partners (MSPs)</a>
+          <a href="/partners.html" style="color:#8899aa;text-decoration:none;">Academic Partnerships</a>
+          <a href="/contact.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Contact</a>
+          <a href="https://forms.gle/VQahnkjMfY6QNEMy8" target="_blank" rel="noopener noreferrer" style="color:#d5a94f;text-decoration:none;font-weight:600;">Interest List &#8599;</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Founder Projects</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/rehability/" style="color:#a78bfa;text-decoration:none;font-weight:700;">Rehability &#x2605;</a>
+          <a href="/rehability/marcus-memory-helper/" style="color:#a78bfa;text-decoration:none;font-weight:600;">&#8627; Marcus's Memory Helper</a>
+          <a href="/sentinel-home/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Sentinel Home Edition</a>
+          <a href="/living-memorials/" style="color:#8899aa;text-decoration:none;">Living Echo</a>
+          <a href="/living-memorials/marcus-odell/" style="color:#8899aa;text-decoration:none;">Marcus&rsquo;s Living Echo</a>
+          <a href="/living-memorials/enterprise-estate-continuity.html" style="color:#8899aa;text-decoration:none;">Enterprise Estate Continuity</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Resources &amp; Legal</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/sitemap.html" style="color:#8899aa;text-decoration:none;">All Pages (Sitemap)</a>
+          <a href="/audit.html" style="color:#8899aa;text-decoration:none;">Transparency &amp; Audit Log</a>
+          <a href="/maturity-disclosure.html" style="color:#8899aa;text-decoration:none;">What We Have / Don&rsquo;t Claim</a>
+          <a href="/plain.html" style="color:#8899aa;text-decoration:none;">Plain Language Guide</a>
+          <a href="/privacy.html" style="color:#8899aa;text-decoration:none;">Privacy</a>
+          <a href="/terms.html" style="color:#8899aa;text-decoration:none;">Terms</a>
+          <a href="/sla.html" style="color:#8899aa;text-decoration:none;">SLA</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:18px;margin-bottom:14px;">
+      <p style="margin:0;font-size:0.82em;line-height:1.6;color:#6f8295;max-width:1000px;">Pocono AI does not provide medical, legal, or engineering advice, does not practice medicine, law, or licensed engineering, and does not make clinical, legal, or engineering decisions. Outputs are drafts or support materials that require review by a qualified professional; final professional judgment remains with the licensed physician, attorney, or engineer. Tools and simulations on this site are educational and use synthetic data.</p>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:20px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+      <p style="margin:0;font-size:0.9em;">&copy; 2026 Pocono AI, LLC &nbsp;&#183;&nbsp; East Stroudsburg, PA &nbsp;&#183;&nbsp; <a href="mailto:marcus@poconoai.com" style="color:#8899aa;">marcus@poconoai.com</a> &nbsp;&#183;&nbsp; <a href="tel:+15705340602" style="color:#8899aa;">(570) 534-0602</a></p>
+      <p style="margin:0;font-size:0.88em;"><a href="/audit.html" style="color:#5dade2;text-decoration:none;">Transparency v402</a></p>
+    </div>
+  </div>
+</footer>
+<script src="/search.js?v=402" defer></script>
+<!-- /INCLUDE:FOOTER -->
+
+<script src="search-index.js?v=402" defer></script>
+<script src="nav.js?v=402" defer></script>
+<script src="pilot-cta.js?v=402" defer></script>
+
+</body>
+</html>

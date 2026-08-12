@@ -1,0 +1,110 @@
+{
+  "title": "Marcus's Penne alla Vodka",
+  "description": "My favorite dish to cook \u2014 a silky tomato-cream sauce with just enough vodka to make it sing. Restaurant-quality, ready in about the time it takes to boil the pasta.",
+  "base_servings": 4,
+  "prep_notes": "The alcohol cooks off \u2014 this won't make anyone tipsy. Use good tomato paste and freshly grated Parmesan for the best result.",
+  "ingredients": [
+    {
+      "amount": 1,
+      "unit": "lb",
+      "name": "penne pasta"
+    },
+    {
+      "amount": 2,
+      "unit": "tbsp",
+      "name": "olive oil"
+    },
+    {
+      "amount": 2,
+      "unit": "tbsp",
+      "name": "butter"
+    },
+    {
+      "amount": 1,
+      "unit": null,
+      "name": "medium yellow onion, finely chopped"
+    },
+    {
+      "amount": 4,
+      "unit": null,
+      "name": "garlic cloves, minced"
+    },
+    {
+      "amount": 0.25,
+      "unit": "tsp",
+      "name": "red pepper flakes"
+    },
+    {
+      "amount": 0.33,
+      "unit": "cup",
+      "name": "tomato paste (double-concentrated is best)"
+    },
+    {
+      "amount": 0.5,
+      "unit": "cup",
+      "name": "vodka"
+    },
+    {
+      "amount": 0.75,
+      "unit": "cup",
+      "name": "heavy cream"
+    },
+    {
+      "amount": 1,
+      "unit": "cup",
+      "name": "Parmesan cheese, freshly grated"
+    },
+    {
+      "amount": 1,
+      "unit": "tsp",
+      "name": "kosher salt (plus more to taste)"
+    },
+    {
+      "amount": 0.5,
+      "unit": "tsp",
+      "name": "black pepper"
+    },
+    {
+      "amount": 0.25,
+      "unit": "cup",
+      "name": "fresh basil, torn (to finish)"
+    }
+  ],
+  "steps": [
+    {
+      "title": "Boil the pasta",
+      "text": "Bring a large pot of well-salted water to a boil. Cook the penne until just shy of al dente \u2014 it'll finish in the sauce. Before draining, scoop out a cup of the pasta water and set it aside.",
+      "timer_seconds": 600
+    },
+    {
+      "title": "Build the aromatic base",
+      "text": "While the pasta cooks, heat the olive oil and butter in a large high-sided skillet over medium heat. Add the onion and cook until soft and translucent, about 4-5 minutes. Add the garlic and red pepper flakes and cook one more minute \u2014 don't let it brown.",
+      "timer_seconds": 300
+    },
+    {
+      "title": "Toast the tomato paste",
+      "text": "Stir in the tomato paste and cook, stirring often, until it deepens in color and smells rich and sweet, about 2-3 minutes. This step is what gives the sauce its depth.",
+      "timer_seconds": 180
+    },
+    {
+      "title": "Add the vodka",
+      "text": "Pour in the vodka and stir. Let it simmer and reduce by about half, 3-4 minutes, so the alcohol cooks off and the flavors concentrate.",
+      "timer_seconds": 240
+    },
+    {
+      "title": "Make it creamy",
+      "text": "Lower the heat and stir in the heavy cream until the sauce turns a beautiful blush color. Season with the salt and black pepper. Let it gently simmer for a couple of minutes.",
+      "timer_seconds": 120
+    },
+    {
+      "title": "Bring it together",
+      "text": "Add the drained penne and the grated Parmesan to the sauce, tossing constantly until every piece is coated. Splash in pasta water a little at a time if it needs loosening.",
+      "timer_seconds": null
+    },
+    {
+      "title": "Finish and serve",
+      "text": "Taste and adjust the salt. Serve right away, topped with torn fresh basil, extra Parmesan, and a few grinds of black pepper.",
+      "timer_seconds": null
+    }
+  ]
+}

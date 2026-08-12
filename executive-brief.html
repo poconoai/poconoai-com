@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp -->
+<head>
+
+<meta charset="UTF-8">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+
+<meta name="description" content="Pocono AI executive brief — sovereign on-premises AI infrastructure for medical and legal practices. ROI, risk, and deployment model.">
+<meta name="keywords" content="executive brief, on-premises AI, sovereign AI, HIPAA AI, legal AI, Sentinel Node, Pocono AI">
+
+<title>Executive Brief &mdash; Pocono AI</title>
+
+<meta property="og:title" content="Pocono AI — Executive Brief">
+<meta property="og:description" content="The 5-minute executive summary of Pocono AI and the Sentinel Node — on-premises AI infrastructure for regulated organizations.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Pocono AI">
+<meta property="og:image" content="https://poconoai.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://poconoai.com/executive-brief.html">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Pocono AI — Executive Brief">
+<meta name="twitter:description" content="The 5-minute executive summary of Pocono AI and the Sentinel Node.">
+<meta name="twitter:image" content="https://poconoai.com/og-image.jpg">
+
+<meta name="theme-color" content="#0B0F13">
+
+<link rel="apple-touch-icon" sizes="180x180" href="favicon-180x180.png">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="alternate icon" href="favicon.ico">
+
+<link rel="stylesheet" href="styles.css?v=402">
+<link rel="stylesheet" href="nav-v2026.css?v=402">
+<link rel="stylesheet" href="brand-v292.css?v=402">
+
+<link rel="canonical" href="https://poconoai.com/executive-brief.html">
+
+<style>
+/* =====================================================
+   Executive Brief — v262 polish pass
+   Aesthetic: numbered prospectus / enterprise dossier
+   ===================================================== */
+
+/* ── DOCUMENT CLASSIFICATION STRIPE ─────────────────────── */
+.ex-classification-bar {
+  background: #04101a;
+  border-bottom: 1px solid rgba(0,194,168,0.18);
+  padding: 7px 24px;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #4d6070;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+.ex-classification-bar .ex-cb-left { display: flex; align-items: center; gap: 10px; }
+.ex-classification-bar .ex-cb-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: #00c2a8;
+  box-shadow: 0 0 5px rgba(0,194,168,0.6);
+}
+.ex-classification-bar strong { color: #00c2a8; font-weight: 700; }
+
+/* ── DOCUMENT SHELL ─────────────────────────────────────── */
+.ex-shell {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 48px;
+  align-items: start;
+}
+@media (max-width: 980px) { .ex-shell { grid-template-columns: 1fr; gap: 0; } }
+
+/* ── HERO ───────────────────────────────────────────────── */
+.ex-hero {
+  grid-column: 1 / -1;
+  padding: 48px 0 32px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  position: relative;
+}
+.ex-hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 56px; height: 3px;
+  background: linear-gradient(90deg, #00c2a8 0%, transparent 100%);
+}
+.ex-doc-meta {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #4d6070;
+  margin-bottom: 26px;
+}
+.ex-doc-meta strong { color: #8899aa; font-weight: 700; }
+.ex-doc-meta .ex-doc-sep { color: rgba(255,255,255,0.18); }
+.ex-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 12px;
+  border: 1px solid rgba(0,194,168,0.30);
+  background: rgba(0,194,168,0.06);
+  color: #00c2a8;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  margin-bottom: 18px;
+}
+.ex-eyebrow-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #00c2a8;
+  box-shadow: 0 0 6px rgba(0,194,168,0.65);
+}
+.ex-hero h1 {
+  font-size: clamp(1.85rem, 4.4vw, 3rem);
+  line-height: 1.1;
+  margin: 0 0 18px;
+  color: var(--white);
+  font-weight: 700;
+  letter-spacing: -0.014em;
+  max-width: 920px;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+.ex-hero h1 em { font-style: normal; color: #00c2a8; }
+.ex-hero-sub {
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--light-text);
+  max-width: 760px;
+  margin: 0 0 26px;
+}
+.ex-hero-meta {
+  display: flex;
+  gap: 14px 22px;
+  flex-wrap: wrap;
+  color: var(--muted);
+  font-size: 0.86rem;
+  margin: 0 0 28px;
+}
+.ex-hero-meta strong { color: var(--white); font-weight: 650; }
+.ex-hero-meta .sep {
+  display: inline-block;
+  width: 1px; height: 12px;
+  background: rgba(255,255,255,0.15);
+  vertical-align: middle;
+  align-self: center;
+}
+
+/* Hero action row — print/PDF button */
+.ex-hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.ex-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 7px;
+  font-size: 0.88rem;
+  font-weight: 650;
+  text-decoration: none;
+  border: 1px solid rgba(0,194,168,0.32);
+  background: rgba(0,194,168,0.06);
+  color: #00c2a8;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 180ms ease, border-color 180ms ease;
+}
+.ex-action-btn:hover {
+  background: rgba(0,194,168,0.14);
+  border-color: rgba(0,194,168,0.5);
+}
+.ex-action-btn svg { width: 14px; height: 14px; }
+
+/* ── STICKY SIDEBAR TOC (desktop) ───────────────────────── */
+.ex-toc {
+  position: sticky;
+  top: 24px;
+  align-self: start;
+  padding: 18px 0 16px;
+  font-size: 0.84rem;
+  color: var(--muted);
+  border-top: none;
+  border-bottom: none;
+}
+.ex-toc-label {
+  display: block;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  color: #00c2a8;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 0.66rem;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(0,194,168,0.18);
+}
+.ex-toc-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.ex-toc-list a {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  padding: 6px 0 6px 10px;
+  color: #6a7d8e;
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  transition: border-color 180ms ease, color 180ms ease;
+  font-size: 0.84rem;
+  line-height: 1.35;
+}
+.ex-toc-list a:hover { color: var(--light-text); border-left-color: rgba(0,194,168,0.4); }
+.ex-toc-list a.active {
+  color: #00c2a8;
+  border-left-color: #00c2a8;
+  font-weight: 600;
+}
+.ex-toc-list .ex-toc-num {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.72rem;
+  color: #4d6070;
+  flex-shrink: 0;
+}
+.ex-toc-list a.active .ex-toc-num { color: #00c2a8; }
+
+@media (max-width: 980px) {
+  .ex-toc {
+    position: static;
+    margin: 16px 0 24px;
+    padding: 14px 16px;
+    background: rgba(5,22,34,0.5);
+    border: 1px solid rgba(0,194,168,0.15);
+    border-radius: 10px;
+  }
+  .ex-toc-list { flex-direction: row; flex-wrap: wrap; gap: 6px 18px; }
+  .ex-toc-list a { padding: 4px 0; border-left: none; }
+  .ex-toc-list a.active { border-left: none; padding-left: 0; }
+}
+
+/* ── SECTION BLOCKS ─────────────────────────────────────── */
+.ex-body { min-width: 0; }
+.ex-section {
+  padding: 40px 0 12px;
+  scroll-margin-top: 80px;
+}
+.ex-section:first-child { padding-top: 28px; }
+.ex-section-head {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 22px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.ex-section-num {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.84rem;
+  color: #00c2a8;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  background: rgba(0,194,168,0.1);
+  padding: 4px 9px;
+  border-radius: 4px;
+  border: 1px solid rgba(0,194,168,0.25);
+}
+.ex-section-head h2 {
+  font-size: clamp(1.42rem, 2.4vw, 1.75rem);
+  margin: 0;
+  color: var(--white);
+  font-weight: 650;
+  letter-spacing: -0.008em;
+  line-height: 1.22;
+  border: none;
+  padding: 0;
+}
+.ex-prose { max-width: 820px; }
+.ex-prose p {
+  color: var(--light-text);
+  font-size: 1rem;
+  line-height: 1.7;
+  margin: 0 0 14px;
+}
+.ex-prose p:last-child { margin-bottom: 0; }
+.ex-prose strong { color: var(--white); font-weight: 650; }
+
+/* Compact definition list */
+.ex-defs {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 14px 28px;
+  margin-top: 6px;
+}
+@media (max-width: 640px) { .ex-defs { grid-template-columns: 1fr; gap: 4px 0; } }
+.ex-defs dt {
+  color: #00c2a8;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding-top: 2px;
+}
+.ex-defs dd {
+  margin: 0;
+  color: var(--light-text);
+  font-size: 0.94rem;
+  line-height: 1.6;
+}
+@media (max-width: 640px) { .ex-defs dd { margin-bottom: 14px; } }
+
+.ex-clarifier {
+  margin: 18px 0;
+  padding: 16px 20px;
+  background: rgba(0,194,168,0.05);
+  border-left: 3px solid #00c2a8;
+  border-radius: 0 8px 8px 0;
+  color: var(--light-text);
+  font-size: 0.94rem;
+  line-height: 1.6;
+}
+.ex-clarifier strong { color: #00c2a8; font-weight: 700; }
+
+.ex-process {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  margin-top: 6px;
+}
+@media (max-width: 980px) { .ex-process { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 560px) { .ex-process { grid-template-columns: repeat(2, 1fr); } }
+.ex-process-step {
+  padding: 12px;
+  background: rgba(255,255,255,0.025);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+}
+.ex-process-step span {
+  display: block;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  color: #00c2a8;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  margin-bottom: 4px;
+}
+.ex-process-step strong {
+  display: block;
+  color: var(--white);
+  font-size: 0.86rem;
+  font-weight: 600;
+  line-height: 1.32;
+}
+
+/* Pricing tiers — slightly more weight on Phase II as the recommended path */
+.ex-pricing {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-top: 8px;
+}
+@media (max-width: 720px) { .ex-pricing { grid-template-columns: 1fr; } }
+.ex-pricing-tier {
+  padding: 22px 18px;
+  background: rgba(255,255,255,0.025);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  position: relative;
+}
+.ex-pricing-tier.recommended {
+  background: linear-gradient(160deg, rgba(0,194,168,0.06), rgba(5,22,34,0.55));
+  border-color: rgba(0,194,168,0.32);
+}
+.ex-pricing-tier.recommended::after {
+  content: 'RECOMMENDED';
+  position: absolute;
+  top: -10px;
+  right: 16px;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: #00c2a8;
+  background: #051622;
+  border: 1px solid rgba(0,194,168,0.32);
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+.ex-pricing-tier .ex-tier-label {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  color: #00c2a8;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  display: block;
+}
+.ex-pricing-tier .ex-tier-price {
+  color: var(--white);
+  font-size: 1.7rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  display: block;
+  margin-bottom: 4px;
+  line-height: 1.1;
+}
+.ex-pricing-tier .ex-tier-unit {
+  color: var(--muted);
+  font-size: 0.78rem;
+  margin-bottom: 14px;
+  display: block;
+}
+.ex-pricing-tier p {
+  color: var(--light-text);
+  font-size: 0.88rem;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.ex-outcomes {
+  list-style: none;
+  padding: 0;
+  margin: 6px 0 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 28px;
+}
+@media (max-width: 640px) { .ex-outcomes { grid-template-columns: 1fr; } }
+.ex-outcomes li {
+  position: relative;
+  padding-left: 22px;
+  color: var(--light-text);
+  font-size: 0.94rem;
+  line-height: 1.55;
+}
+.ex-outcomes li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 10px; height: 10px;
+  border: 1px solid #00c2a8;
+  border-radius: 2px;
+  transform: rotate(45deg);
+}
+.ex-outcomes li strong { color: var(--white); font-weight: 650; }
+
+/* Final CTA */
+.ex-final {
+  margin: 40px 0 24px;
+  padding: 32px 28px;
+  background: linear-gradient(135deg, rgba(10,115,210,0.07), rgba(0,194,168,0.04));
+  border: 1px solid rgba(0,194,168,0.22);
+  border-radius: 14px;
+}
+.ex-final h2 {
+  color: var(--white);
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 0 0 10px;
+  border: none;
+  padding: 0;
+  letter-spacing: -0.01em;
+}
+.ex-final p {
+  color: var(--light-text);
+  font-size: 0.96rem;
+  line-height: 1.6;
+  margin: 0 0 22px;
+  max-width: 720px;
+}
+.ex-final-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.ex-final-row a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
+  background: #00c2a8;
+  color: #051622;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  border-radius: 8px;
+  border: 1px solid #00c2a8;
+  transition: background-color 180ms ease, transform 180ms ease;
+}
+.ex-final-row a:hover { background: #1ad1b8; transform: translateY(-1px); }
+.ex-final-row a.ex-final-ghost {
+  background: transparent;
+  color: #00c2a8;
+}
+.ex-final-row a.ex-final-ghost:hover { background: rgba(0,194,168,0.10); }
+
+/* Document properties block — printed signature */
+.ex-doc-props {
+  margin: 32px 0 24px;
+  padding: 24px;
+  background: rgba(5,22,34,0.55);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+}
+.ex-doc-props-label {
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #00c2a8;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(0,194,168,0.18);
+}
+.ex-doc-props-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px 28px;
+  font-size: 0.78rem;
+}
+.ex-doc-props-grid dt {
+  color: #4d6070;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.66rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.ex-doc-props-grid dd {
+  color: #c0d0dc;
+  margin: 0;
+  font-weight: 600;
+  font-size: 0.84rem;
+}
+
+/* ── PRINT STYLES ────────────────────────────────────────
+   Result must look like a real brief, not a screenshot of a website
+   ─────────────────────────────────────────────────────── */
+@media print {
+  @page {
+    size: letter;
+    margin: 0.75in 0.85in 0.75in 0.85in;
+  }
+
+  /* Hide all chrome — site nav, search, mobile menu, CTA, footer, banner */
+  .ex-classification-bar,
+  header,
+  #nav-drop-root,
+  #search-panel,
+  #mobile-nav-panel,
+  #hitl-notice,
+  #reading-progress,
+  #pai-pilot-cta,
+  .skip-link,
+  .ex-toc,
+  .ex-hero-actions,
+  footer { display: none !important; }
+
+  body {
+    background: #fff !important;
+    color: #000 !important;
+    font-size: 10pt !important;
+    line-height: 1.42 !important;
+  }
+  main { display: block !important; }
+  .ex-shell {
+    display: block !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    grid-template-columns: 1fr !important;
+  }
+  .ex-body { max-width: 100% !important; }
+
+  /* Reconstruct as a paper document */
+  .ex-hero {
+    padding: 0 0 18pt !important;
+    border-bottom: 1pt solid #000 !important;
+    margin-bottom: 14pt !important;
+    page-break-after: avoid;
+  }
+  .ex-hero::before { display: none !important; }
+  .ex-doc-meta {
+    color: #555 !important;
+    margin-bottom: 14pt !important;
+    font-size: 8pt !important;
+  }
+  .ex-doc-meta strong { color: #000 !important; }
+  .ex-eyebrow {
+    border: 1pt solid #000 !important;
+    background: #fff !important;
+    color: #000 !important;
+    padding: 2pt 8pt !important;
+    margin-bottom: 12pt !important;
+  }
+  .ex-eyebrow-dot { background: #000 !important; box-shadow: none !important; }
+
+  .ex-hero h1 {
+    font-size: 20pt !important;
+    color: #000 !important;
+    line-height: 1.15 !important;
+    margin: 0 0 10pt !important;
+  }
+  .ex-hero h1 em { color: #000 !important; font-style: italic !important; }
+  .ex-hero-sub {
+    color: #333 !important;
+    font-size: 10.5pt !important;
+    margin: 0 0 12pt !important;
+  }
+  .ex-hero-meta {
+    color: #555 !important;
+    font-size: 8.5pt !important;
+    margin: 0 !important;
+  }
+  .ex-hero-meta strong { color: #000 !important; }
+
+  .ex-section {
+    padding: 14pt 0 6pt !important;
+    page-break-inside: auto;
+  }
+  .ex-section-head {
+    border-bottom: 0.5pt solid #888 !important;
+    padding-bottom: 6pt !important;
+    margin-bottom: 12pt !important;
+    page-break-after: avoid;
+  }
+  .ex-section-num {
+    background: #fff !important;
+    border: 1pt solid #000 !important;
+    color: #000 !important;
+    padding: 2pt 6pt !important;
+    font-size: 9pt !important;
+  }
+  .ex-section-head h2 {
+    color: #000 !important;
+    font-size: 14pt !important;
+    page-break-after: avoid;
+  }
+  .ex-prose p {
+    color: #000 !important;
+    font-size: 10pt !important;
+    line-height: 1.5 !important;
+    margin: 0 0 8pt !important;
+  }
+  .ex-prose strong { color: #000 !important; font-weight: 700 !important; }
+
+  .ex-defs {
+    grid-template-columns: 130pt 1fr !important;
+    gap: 8pt 18pt !important;
+  }
+  .ex-defs dt {
+    color: #000 !important;
+    font-size: 8.5pt !important;
+  }
+  .ex-defs dd {
+    color: #000 !important;
+    font-size: 9.5pt !important;
+  }
+
+  .ex-clarifier {
+    background: #f4f4f4 !important;
+    border-left: 2pt solid #000 !important;
+    color: #000 !important;
+    padding: 8pt 12pt !important;
+    margin: 10pt 0 !important;
+    page-break-inside: avoid;
+    font-size: 9.5pt !important;
+  }
+  .ex-clarifier strong { color: #000 !important; }
+  .ex-clarifier em { font-style: italic !important; color: #000 !important; }
+
+  .ex-process {
+    grid-template-columns: repeat(7, 1fr) !important;
+    gap: 4pt !important;
+    page-break-inside: avoid;
+  }
+  .ex-process-step {
+    background: #fff !important;
+    border: 0.5pt solid #888 !important;
+    color: #000 !important;
+    padding: 6pt !important;
+  }
+  .ex-process-step span { color: #000 !important; font-size: 7.5pt !important; }
+  .ex-process-step strong { color: #000 !important; font-size: 8.5pt !important; }
+
+  .ex-pricing {
+    grid-template-columns: 1fr 1fr 1fr !important;
+    gap: 8pt !important;
+    page-break-inside: avoid;
+  }
+  .ex-pricing-tier {
+    background: #fff !important;
+    border: 0.5pt solid #888 !important;
+    color: #000 !important;
+    padding: 10pt !important;
+  }
+  .ex-pricing-tier.recommended {
+    background: #f4f4f4 !important;
+    border: 1pt solid #000 !important;
+  }
+  .ex-pricing-tier.recommended::after {
+    background: #fff !important;
+    color: #000 !important;
+    border: 0.5pt solid #000 !important;
+    font-size: 6pt !important;
+  }
+  .ex-pricing-tier .ex-tier-label { color: #000 !important; font-size: 8pt !important; }
+  .ex-pricing-tier .ex-tier-price { color: #000 !important; font-size: 14pt !important; }
+  .ex-pricing-tier .ex-tier-unit { color: #555 !important; font-size: 7pt !important; }
+  .ex-pricing-tier p { color: #000 !important; font-size: 8pt !important; }
+
+  .ex-outcomes { grid-template-columns: 1fr 1fr !important; }
+  .ex-outcomes li { color: #000 !important; font-size: 9.5pt !important; }
+  .ex-outcomes li::before { border-color: #000 !important; }
+  .ex-outcomes li strong { color: #000 !important; }
+
+  .ex-final {
+    background: #f4f4f4 !important;
+    border: 1pt solid #888 !important;
+    color: #000 !important;
+    padding: 14pt !important;
+    margin: 14pt 0 !important;
+    page-break-inside: avoid;
+  }
+  .ex-final h2 { color: #000 !important; font-size: 12pt !important; }
+  .ex-final p { color: #000 !important; font-size: 9.5pt !important; }
+  .ex-final-row { gap: 6pt !important; }
+  .ex-final-row a {
+    background: #fff !important;
+    color: #000 !important;
+    border: 0.5pt solid #000 !important;
+    font-size: 8.5pt !important;
+    padding: 6pt 12pt !important;
+  }
+  .ex-final-row a.ex-final-ghost { background: #fff !important; }
+
+  .ex-doc-props {
+    background: #f4f4f4 !important;
+    border: 0.5pt solid #888 !important;
+    padding: 10pt !important;
+    page-break-inside: avoid;
+  }
+  .ex-doc-props-label { color: #000 !important; }
+  .ex-doc-props-grid dt { color: #000 !important; }
+  .ex-doc-props-grid dd { color: #000 !important; }
+
+  a { color: #000 !important; text-decoration: none !important; }
+
+  /* Page footer with brand line and pagination */
+  body::after {
+    display: block;
+    content: 'Pocono AI, LLC · poconoai.com · Executive Brief · v262 · Confidential';
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 7.5pt;
+    color: #888;
+    letter-spacing: 0.06em;
+  }
+}
+</style>
+
+
+<!-- JSON-LD: v328 structured-data pass -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://poconoai.com/executive-brief.html",
+      "url": "https://poconoai.com/executive-brief.html",
+      "datePublished": "2026-06-01",
+      "dateModified": "2026-06-01"
+      ,
+      "name": "Executive Brief \u2014 Pocono AI",
+      "description": "Executive summary of the Sentinel Node value proposition for practice administrators, investors, and decision-makers. Covers the administrative burden problem, the governance gap in cloud AI, and the Sentinel Node's sovereignty-native architecture.",
+      "isPartOf": {
+        "@id": "https://poconoai.com/#website"
+      },
+      "publisher": {
+        "@id": "https://poconoai.com/#organization"
+      },
+      "audience": [
+        {
+          "@type": "Audience",
+          "audienceType": "Practice administrators and clinical executives"
+        },
+        {
+          "@type": "Audience",
+          "audienceType": "Investors"
+        }
+      ],
+      "inLanguage": "en-US"
+    }
+  ]
+}
+</script>
+</head>
+
+<body>
+
+<div class="ex-classification-bar">
+  <span class="ex-cb-left"><span class="ex-cb-dot"></span><strong>Pocono AI</strong> &middot; Executive Brief</span>
+  <span>Document &middot; PAI-EB-2026-001 &middot; v262</span>
+</div>
+
+<a href="#main" class="skip-link">Skip to content</a>
+<div id="reading-progress" aria-hidden="true"></div>
+
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- INCLUDE:HEADER -->
+<div id="hitl-notice" style="background:#0a1929;padding:4px 16px;text-align:center;font-size:12px;color:#4a5568;border-bottom:1px solid rgba(255,255,255,0.06);letter-spacing:0.01em;">Human-in-the-Loop required: licensed professionals verify all outputs before clinical or legal action</div>
+<header role="banner">
+  <div class="header-inner">
+    <a href="/index.html" class="logo" aria-label="Pocono AI Home">
+      <img src="/logo.svg?v=402" alt="" width="36" height="36" decoding="async" loading="eager" aria-hidden="true" style="display:inline-block;">
+      Pocono <span>AI</span>
+    </a>
+    <nav id="desktop-nav" aria-label="Main navigation">
+      <div class="nav-item"><a href="/index.html" class="nav-direct">Home</a></div>
+      <div class="nav-item"><a href="/for-physicians.html" class="nav-direct">Physicians</a></div>
+      <div class="nav-item"><a href="/for-attorneys.html" class="nav-direct">Attorneys</a></div>
+      <div class="nav-item"><a href="/sentinel-node.html" class="nav-direct nav-hub" style="color:#d5a94f;border:1px solid rgba(213,169,79,0.45);border-radius:999px;padding:6px 13px;">Sentinel Node</a></div>
+      <div class="nav-item"><a href="/living-memorials/" class="nav-direct">Living Echo</a></div>
+      <div class="nav-item"><a href="/contact.html" class="nav-direct">Contact</a></div>
+      <div class="nav-item" data-dropdown="menu-more">
+        <button type="button" class="nav-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="menu-more">More <span class="nav-chevron" aria-hidden="true">&#9662;</span></button>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <a href="/contact.html#pilot" class="nav-cta nav-cta-primary">Request a Pilot</a>
+      <button type="button" class="pa-search-trigger" data-search-open aria-label="Search (press / or Ctrl-K)" aria-haspopup="dialog" aria-expanded="false">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span class="pa-st-label">Search</span><kbd data-pa-keyhint>Ctrl K</kbd>
+      </button>
+      <button type="button" class="header-icon-btn" id="mobile-menu" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav-panel">
+        <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- "More" overflow dropdown — sibling of <header> so position:fixed escapes header's stacking context. Wired by nav.js via data-dropdown="menu-more". -->
+<div class="nav-dropdown" id="menu-more" aria-label="More navigation">
+  <p class="nav-dd-section">Products</p>
+  <a href="/engineering-drafting/">Drafting &amp; Engineering Edition</a>
+  <a href="/sentinel-home/">Sentinel Home Edition</a>
+  <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability — Assistive Tools &#x2605;</a>
+  <a href="/living-memorials/enterprise-estate-continuity.html">Enterprise Estate Continuity</a>
+  <p class="nav-dd-section">Capabilities</p>
+  <a href="/evidence-room.html">Evidence Room</a>
+  <a href="/push-button-deliverables.html">Push-Button Deliverables</a>
+  <a href="/pilot-readiness-kit.html">Pilot Kit</a>
+  <a href="/pilot-program.html">Pilot Program</a>
+  <a href="/how-it-works.html">How It Works</a>
+  <p class="nav-dd-section">Hubs &amp; Company</p>
+  <a href="/training.html">Training Hub</a>
+  <a href="/documentation-hub/">Document Hub</a>
+  <a href="/global/">Global Hub</a>
+  <a href="/investors-hub.html">Investor Hub</a>
+  <a href="/valuation-dashboard.html">Valuation Dashboard</a>
+  <a href="/about.html">About</a>
+  <p class="nav-dd-section">Trust &amp; Legal</p>
+  <a href="/transparency.html">Transparency</a>
+  <a href="/audit.html">Audit Log</a>
+  <a href="/privacy.html">Privacy</a>
+  <a href="/sitemap.html">Sitemap</a>
+</div>
+<!-- Site search is provided by the self-contained search.js asset (command palette: / or Ctrl/Cmd-K). -->
+
+<!-- Mobile panel: full-screen slide-in. v396 nav — hub tiles + grouped links + Sentinel Node + Engineering. -->
+<nav id="mobile-nav-panel" aria-label="Mobile navigation" aria-hidden="true" role="dialog" aria-modal="true">
+
+  <!-- Hub tiles: Sentinel Node, Documentation Hub, Training Hub, Global Hub -->
+  <div style="padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,0.07);">
+    <p style="font-size:0.65em;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.28);margin:0 0 10px;padding:0 2px;">Hubs</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <a href="/sentinel-node.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(213,169,79,0.1);border:1px solid rgba(213,169,79,0.35);border-radius:10px;color:#d5a94f;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Sentinel Node</a>
+      <a href="/documentation-hub/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(0,194,168,0.1);border:1px solid rgba(0,194,168,0.35);border-radius:10px;color:#00c2a8;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Docs Hub</a>
+      <a href="/training.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.35);border-radius:10px;color:#a78bfa;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Training Hub</a>
+      <a href="/global/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(122,240,220,0.07);border:1px solid rgba(122,240,220,0.3);border-radius:10px;color:#7af0dc;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Global Hub</a>
+    </div>
+  </div>
+
+  <!-- Core paths -->
+  <div class="mob-static-links">
+    <a href="/index.html">Home</a>
+    <a href="/for-physicians.html">Physicians</a>
+    <a href="/for-attorneys.html">Attorneys</a>
+    <a href="/engineering-drafting/">Engineering &amp; Drafting</a>
+    <a href="/pilot-program.html">Pilot Program</a>
+    <a href="/how-it-works.html">How It Works</a>
+    <a href="/trust.html">Trust &amp; Audit</a>
+    <a href="/pricing.html">Pricing</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/living-memorials/">Living Echo</a>
+    <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability</a>
+    <a href="/about.html">About</a>
+    <a href="/team.html" style="color:rgba(255,255,255,0.6);">Team &amp; Leadership</a>
+    <a href="/valuation-dashboard.html" style="color:rgba(255,255,255,0.6);">Valuation Dashboard</a>
+    <a href="/careers.html" style="color:rgba(255,255,255,0.6);">Careers</a>
+    <a href="/sentinel-demo.html" style="color:rgba(255,255,255,0.6);">Demo</a>
+    <a href="/sitemap.html" style="color:rgba(255,255,255,0.45);">Sitemap</a>
+    <a href="/transparency.html" style="color:rgba(255,255,255,0.45);">Transparency</a>
+    <a href="/privacy.html" style="color:rgba(255,255,255,0.45);">Privacy</a>
+  </div>
+
+  <a href="/contact.html#pilot" class="mob-cta">Request a Pilot</a>
+</nav>
+<!-- /INCLUDE:HEADER -->
+
+
+<main id="main">
+
+<div class="ex-shell">
+
+<section class="ex-hero">
+  <div class="ex-doc-meta">
+    <span><strong>Document</strong> · Executive Brief</span>
+    <span class="ex-doc-sep">·</span>
+    <span><strong>Version</strong> · v262 · May 2026</span>
+    <span class="ex-doc-sep">·</span>
+    <span><strong>Distribution</strong> · Prospect &amp; Board</span>
+  </div>
+  <div class="sentinel-lockup" aria-label="Sentinel Node — Executive Brief">
+              <svg class="sentinel-lockup-mark" viewBox="0 0 64 64" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
+          <!-- v311b: rotated diamond + C-curve loop + summit dot. Inherits currentColor from CSS context. -->
+          <g transform="rotate(45 32 32)">
+            <rect x="12" y="12" width="40" height="40" rx="8" ry="8"/>
+            <path d="M43 22 L26 22 A6 6 0 0 0 20 28 L20 36 A6 6 0 0 0 26 42 L41 42"/>
+          </g>
+          <circle cx="32" cy="9" r="3" fill="currentColor" stroke="none"/>
+        </svg>
+              <div class="sentinel-lockup-rule"></div>
+              <div class="sentinel-lockup-text">
+                <span class="sentinel-lockup-name">Sentinel Node</span>
+                <span class="sentinel-lockup-tag">Executive Brief &middot; 5-Minute Read</span>
+              </div>
+            </div>
+  <h1>The short version of Pocono AI <em>for the people who don't have time for the long one.</em></h1>
+  <p class="ex-hero-sub">Pocono AI delivers governance-native, on-premises AI infrastructure to medical practices, law firms, and compliance-conscious organizations. This document is the executive summary&mdash;nine sections, calibrated for a board meeting or a buying decision, not a marketing funnel.</p>
+  <div class="ex-hero-meta">
+    <span><strong>Read time:</strong> ~5 minutes</span>
+    <span class="sep"></span>
+    <span><strong>Audience:</strong> CEO &middot; CMO &middot; Managing Partner &middot; CIO &middot; CCO &middot; Board</span>
+    <span class="sep"></span>
+    <span><strong>Last updated:</strong> May 2026 &middot; v262</span>
+  </div>
+  <div class="ex-hero-actions">
+    <button type="button" class="ex-action-btn" id="ex-print-btn" aria-label="Print this executive brief or save as PDF">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+      Print or save as PDF
+    </button>
+    <a href="mailto:marcus@poconoai.com?subject=Pocono%20AI%20%E2%80%94%20Schedule%20a%20Pilot%20Discussion" class="ex-action-btn" style="background:#0A73D2;border-color:#0A73D2;color:#fff;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      Schedule a discussion
+    </a>
+  </div>
+</section>
+
+<nav class="ex-toc" aria-label="Executive brief contents">
+  <span class="ex-toc-label">▌ Contents</span>
+  <ul class="ex-toc-list">
+    <li><a href="#what-pocono-ai-is"><span class="ex-toc-num">01</span><span>What Pocono AI is</span></a></li>
+    <li><a href="#what-sentinel-node-is"><span class="ex-toc-num">02</span><span>What the Sentinel Node is</span></a></li>
+    <li><a href="#problem"><span class="ex-toc-num">03</span><span>The problem it solves</span></a></li>
+    <li><a href="#deployment-model"><span class="ex-toc-num">04</span><span>Deployment model</span></a></li>
+    <li><a href="#governance-model"><span class="ex-toc-num">05</span><span>Governance model</span></a></li>
+    <li><a href="#implementation"><span class="ex-toc-num">06</span><span>Implementation</span></a></li>
+    <li><a href="#pilot"><span class="ex-toc-num">07</span><span>Pilot structure</span></a></li>
+    <li><a href="#pricing"><span class="ex-toc-num">08</span><span>Pricing</span></a></li>
+    <li><a href="#outcomes"><span class="ex-toc-num">09</span><span>Expected outcomes</span></a></li>
+  </ul>
+</nav>
+
+<div class="ex-body">
+
+<!-- ── 01: WHAT POCONO AI IS ── -->
+<section class="ex-section" id="what-pocono-ai-is">
+  <div class="ex-section-head">
+    <span class="ex-section-num">01</span>
+    <h2>What Pocono AI is</h2>
+  </div>
+  <div class="ex-prose">
+    <p>Pocono AI is an early-stage infrastructure company based in East Stroudsburg, Pennsylvania. We design, build, deploy, and govern on-premises AI systems for organizations where the consequences of a wrong answer are clinical, legal, or evidentiary&mdash;not cosmetic.</p>
+    <p>We do not sell access to a model hosted in someone else's data center. We deliver hardware, configure it under your governance, and remain the operating partner for as long as the engagement exists. The company is small by design. Engagements are small in number, large in depth.</p>
+    <dl class="ex-defs">
+      <dt>Founded</dt>
+      <dd>2025 &middot; East Stroudsburg, PA</dd>
+      <dt>Stage</dt>
+      <dd>Early commercial deployments; raise structure documented on the <a href="investors.html" style="color:#5dade2;">investors page</a></dd>
+      <dt>Verticals</dt>
+      <dd>Independent medical practices, specialty clinics, small &amp; mid-sized law firms, compliance-conscious organizations</dd>
+      <dt>Stance</dt>
+      <dd>Governance-first. Hardware-as-a-service. No telemetry. No cloud egress.</dd>
+    </dl>
+  </div>
+</section>
+
+<!-- ── 02: WHAT THE SENTINEL NODE IS ── -->
+<section class="ex-section" id="what-sentinel-node-is">
+  <div class="ex-section-head">
+    <span class="ex-section-num">02</span>
+    <h2>What the Sentinel Node&trade; is</h2>
+  </div>
+  <div class="ex-prose">
+    <p>The Sentinel Node is a physical appliance. It is racked in your facility, sits behind your firewall, and runs the entirety of the AI inference workload locally. It has no outbound network requirement during operation.</p>
+    <p>Functionally, it is four things bound into a single sealed unit:</p>
+    <dl class="ex-defs">
+      <dt>Local inference</dt>
+      <dd>Open-weight models running on the appliance's GPU. No external API calls. No vendor sub-processors.</dd>
+      <dt>Constrained retrieval</dt>
+      <dd>A citation-gate layer indexed only against documents your organization controls. Output may only assert what the retrieval layer can cite.</dd>
+      <dt>Append-only audit envelope</dt>
+      <dd>Every inference produces a reviewable audit record of prompt, retrieval, output, and reviewer identity. The full chain is reconstructable from one hash.</dd>
+      <dt>Human-in-the-loop</dt>
+      <dd>Regulated outputs require a licensed professional's signature before action. The reviewer's identity is bound into the envelope.</dd>
+    </dl>
+    <div class="ex-clarifier">
+      <strong>To be explicit:</strong> the Sentinel Node is not a chatbot, not a copilot, not an agent, and not a SaaS product. It is enterprise infrastructure delivered as hardware-as-a-service, and the governance properties above are <em style="color:#00c2a8;font-style:normal;">architectural</em>&mdash;enforced by the system itself, not by contractual promise.
+    </div>
+  </div>
+</section>
+
+<!-- ── 03: PROBLEM IT SOLVES ── -->
+<section class="ex-section" id="problem">
+  <div class="ex-section-head">
+    <span class="ex-section-num">03</span>
+    <h2>The problem it solves</h2>
+  </div>
+  <div class="ex-prose">
+    <p>Regulated organizations face a structural mismatch. Cloud AI is operationally useful but creates uncontrolled exposure of protected health information, privileged work product, and proprietary documents. The exposure is not theoretical&mdash;it is a chain of sub-processors, retention policies, and training-eligibility ambiguities that the organization cannot independently audit.</p>
+    <p>The conventional responses are inadequate. Banning AI outright surrenders productivity to competitors. Accepting a vendor BAA and a click-through privacy policy is governance by signature, not by architecture. Building in-house is rarely feasible at the practice or firm scale.</p>
+    <p>Pocono AI exists for the gap in the middle: organizations that need the productivity, cannot accept the exposure, and require governance that is provable rather than promised. The structural answer is local inference under enforced human review with an append-only audit trail. That is what the Sentinel Node delivers.</p>
+  </div>
+</section>
+
+<!-- ── 04: DEPLOYMENT MODEL ── -->
+<section class="ex-section" id="deployment-model">
+  <div class="ex-section-head">
+    <span class="ex-section-num">04</span>
+    <h2>Deployment model</h2>
+  </div>
+  <div class="ex-prose">
+    <p>The Sentinel Node is delivered as <strong>hardware-as-a-service</strong>. There is no software-only subscription tier. The hardware, the governance, and the operating relationship are the product.</p>
+    <dl class="ex-defs">
+      <dt>Physical delivery</dt>
+      <dd>Appliance configured at our facility, shipped under tracked custody, racked in your environment, brought online behind your firewall.</dd>
+      <dt>Network posture</dt>
+      <dd>Zero outbound egress required for operation. The appliance does not phone home. Signed updates are delivered under your approval.</dd>
+      <dt>Operating relationship</dt>
+      <dd>Named contacts on both sides. Quarterly governance reviews. Direct line to the engineering team, not a ticketing portal.</dd>
+      <dt>Hardware refresh</dt>
+      <dd>Included in the engagement. You do not buy depreciating capital equipment; you retain a continuously maintained operational capability.</dd>
+    </dl>
+  </div>
+</section>
+
+<!-- ── 05: GOVERNANCE MODEL ── -->
+<section class="ex-section" id="governance-model">
+  <div class="ex-section-head">
+    <span class="ex-section-num">05</span>
+    <h2>Governance model</h2>
+  </div>
+  <div class="ex-prose">
+    <p>Governance is enforced by the architecture, not by policy documents. Three mechanisms are structurally present in every inference:</p>
+    <dl class="ex-defs">
+      <dt>Local inference</dt>
+      <dd>PHI and privileged material do not transit a public network. The appliance is sealed and air-gapped from external AI infrastructure.</dd>
+      <dt>Citation gate</dt>
+      <dd>The retrieval layer is the source of permitted assertions. Unsupported claims are flagged at the gate before a clinician or attorney sees them.</dd>
+      <dt>Audit envelope</dt>
+      <dd>Every output carries a reviewable audit record. Reviewer identity is bound in. The chain is reconstructable from one hash for evidentiary or regulatory review.</dd>
+    </dl>
+    <p>The governance posture satisfies HIPAA, attorney-client privilege, and state confidentiality obligations by architecture rather than by contractual promise. A full technical treatment is on the <a href="architecture.html" style="color:#5dade2;">architecture page</a>; the auditable detail is in the <a href="sentinel-audit-system.html" style="color:#5dade2;">audit system documentation</a>.</p>
+  </div>
+</section>
+
+<!-- ── 06: IMPLEMENTATION ── -->
+<section class="ex-section" id="implementation">
+  <div class="ex-section-head">
+    <span class="ex-section-num">06</span>
+    <h2>Implementation process</h2>
+  </div>
+  <div class="ex-prose">
+    <p>From signed engagement to staff using the appliance under supervised review is approximately four weeks. From there, weeks five through eight complete proof-of-value evaluation. The seven operational steps:</p>
+    <ol class="ex-process" style="padding:0; list-style:none;">
+      <li class="ex-process-step"><span>Step 01</span><strong>Discovery call</strong></li>
+      <li class="ex-process-step"><span>Step 02</span><strong>Workflow mapping</strong></li>
+      <li class="ex-process-step"><span>Step 03</span><strong>Node deployment</strong></li>
+      <li class="ex-process-step"><span>Step 04</span><strong>Data connection</strong></li>
+      <li class="ex-process-step"><span>Step 05</span><strong>Staff training</strong></li>
+      <li class="ex-process-step"><span>Step 06</span><strong>Supervised rollout</strong></li>
+      <li class="ex-process-step"><span>Step 07</span><strong>Ongoing governance</strong></li>
+    </ol>
+    <p style="margin-top:20px;">The full 60-day implementation calendar is documented in the <a href="deployment.html" style="color:#5dade2;">deployment guide</a>, including weekly deliverables and named owners on each side.</p>
+  </div>
+</section>
+
+<!-- ── 07: PILOT STRUCTURE ── -->
+<section class="ex-section" id="pilot">
+  <div class="ex-section-head">
+    <span class="ex-section-num">07</span>
+    <h2>Pilot structure</h2>
+  </div>
+  <div class="ex-prose">
+    <p>Pocono AI offers a <strong>60-day Paid Proof-of-Value</strong> engagement designed to convert architectural conviction into operational confidence under controlled conditions.</p>
+    <dl class="ex-defs">
+      <dt>Duration</dt>
+      <dd>60 days from signed engagement to evaluation review</dd>
+      <dt>Entry point</dt>
+      <dd>$5,000 Paid POV &middot; counts toward Phase II if you proceed</dd>
+      <dt>What Pocono AI handles</dt>
+      <dd>Appliance configuration, deployment, retrieval tuning, governance setup, staff training, weekly audit review</dd>
+      <dt>What customer handles</dt>
+      <dd>Workflow access, named clinical/legal/IT lead, document inventory, reviewer assignment</dd>
+      <dt>Participation level</dt>
+      <dd>~2 hours/week of leadership time during the pilot, plus reviewer participation in supervised production use</dd>
+      <dt>Success criteria</dt>
+      <dd>Defined jointly at workflow mapping: typically retrieval accuracy on a held-out test set, reviewer-corrected output rate, and signed audit envelope integrity</dd>
+      <dt>Outcome</dt>
+      <dd>Either: proceed to Phase II deployment (terms documented); or: end the pilot, retain all generated audit artifacts, and we walk away</dd>
+    </dl>
+    <p>Full pilot terms and engagement scope are in the <a href="pilot-brief.html" style="color:#5dade2;">pilot brief</a>.</p>
+  </div>
+</section>
+
+<!-- ── 08: PRICING ── -->
+<section class="ex-section" id="pricing">
+  <div class="ex-section-head">
+    <span class="ex-section-num">08</span>
+    <h2>Pricing starting point</h2>
+  </div>
+  <div class="ex-prose">
+    <p>Pocono AI is priced as an operational capability, not a per-seat cloud license. Pricing reflects hardware, governance, deployment effort, and ongoing operating relationship. Every engagement begins with a paid proof-of-value.</p>
+    <div class="ex-pricing">
+      <div class="ex-pricing-tier">
+        <span class="ex-tier-label">Entry Point</span>
+        <span class="ex-tier-price">$5,000</span>
+        <span class="ex-tier-unit">60-day Paid Proof-of-Value</span>
+        <p>Architecture assessment, local RAG configuration, document sanitization pipeline, HITL workflow calibration. Non-refundable. Applies toward implementation upon conversion.</p>
+      </div>
+      <div class="ex-pricing-tier">
+        <span class="ex-tier-label">Phase I &mdash; Solo</span>
+        <span class="ex-tier-price">$950<span style="font-size:0.55em;font-weight:500;color:var(--muted);">/mo</span></span>
+        <span class="ex-tier-unit">small practice &middot; 24-month term</span>
+        <p>Hardware-as-a-service. Workstation-class appliance, single-workflow scope, monthly governance review, signed model updates.</p>
+      </div>
+      <div class="ex-pricing-tier recommended">
+        <span class="ex-tier-label">Phase II &mdash; Practice</span>
+        <span class="ex-tier-price">$1,495<span style="font-size:0.55em;font-weight:500;color:var(--muted);">/mo</span></span>
+        <span class="ex-tier-unit">standard tier &middot; 24-month term</span>
+        <p>Full Sentinel Node deployment. Multi-workflow scope, quarterly audit reviews, retrieval re-tuning, named engineering contact.</p>
+      </div>
+    </div>
+    <p style="margin-top:18px;">A third tier (Phase III, from $2,995/mo) covers larger practices, firm-wide deployments, and multi-site configurations. Comprehensive pricing detail is on the <a href="pricing.html" style="color:#5dade2;">pricing page</a>. There is no software-only subscription tier; all engagements include the appliance.</p>
+  </div>
+</section>
+
+<!-- ── 09: EXPECTED OUTCOMES ── -->
+<section class="ex-section" id="outcomes">
+  <div class="ex-section-head">
+    <span class="ex-section-num">09</span>
+    <h2>Expected outcomes</h2>
+  </div>
+  <div class="ex-prose">
+    <p>Outcomes depend on workflow scope and reviewer engagement. The following are typical for a well-scoped engagement at the end of the proof-of-value period:</p>
+    <ul class="ex-outcomes">
+      <li><strong>Demonstrable air gap.</strong> Network logs confirm zero outbound AI-related egress.</li>
+      <li><strong>Signed audit chain.</strong> Every regulated output reconstructable from its hash.</li>
+      <li><strong>Workflow throughput improvement.</strong> Measured against the held-out task set defined at mapping.</li>
+      <li><strong>Reduced legal exposure surface.</strong> No vendor sub-processor chain to audit.</li>
+      <li><strong>Reviewer-bound accountability.</strong> Every regulated output carries a named signer.</li>
+      <li><strong>Documented compliance posture.</strong> Architecture-level evidence for HIPAA, privilege, or board review.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ── FINAL CTA ── -->
+<section class="ex-final" aria-label="Next steps">
+  <h2>If this is the kind of infrastructure your organization needs</h2>
+  <p>A discovery call is a working conversation, not a sales call. We cover governance scope, document inventory, and pilot fit. No deck. No sequence. A real reply from a real person.</p>
+  <div class="ex-final-row">
+    <a href="mailto:marcus@poconoai.com?subject=Pocono%20AI%20%E2%80%94%20Schedule%20a%20Pilot%20Discussion">Schedule a pilot discussion</a>
+    <a href="architecture.html" class="ex-final-ghost">Review deployment architecture</a>
+    <a href="pilot-brief.html" class="ex-final-ghost">Read the pilot brief</a>
+    <a href="PoconoAI_Global_Distribution_Strategy_Whitepaper.pdf" target="_blank" rel="noopener" class="ex-final-ghost">Global distribution strategy &#8681;</a>
+  </div>
+</section>
+
+<!-- ── DOCUMENT PROPERTIES ── -->
+<aside class="ex-doc-props" aria-label="Document properties">
+  <div class="ex-doc-props-label">▌ Document Properties</div>
+  <dl class="ex-doc-props-grid">
+    <div>
+      <dt>Document ID</dt>
+      <dd>PAI-EB-2026-001</dd>
+    </div>
+    <div>
+      <dt>Version</dt>
+      <dd>v262</dd>
+    </div>
+    <div>
+      <dt>Last Revised</dt>
+      <dd>May 2026</dd>
+    </div>
+    <div>
+      <dt>Prepared By</dt>
+      <dd>Pocono AI, LLC</dd>
+    </div>
+    <div>
+      <dt>Classification</dt>
+      <dd>Prospect &amp; Board</dd>
+    </div>
+    <div>
+      <dt>Page Count</dt>
+      <dd>~4 (printed)</dd>
+    </div>
+  </dl>
+</aside>
+
+</div><!-- /ex-body -->
+</div><!-- /ex-shell -->
+
+  <!-- ── GOVERNANCE RECEIPT CALLOUT — v311 ── -->
+  <section style="max-width:980px;margin:32px auto 48px;padding:0 24px;" aria-labelledby="ct-title">
+    <div style="background:linear-gradient(135deg,rgba(160,180,210,.05),rgba(8,15,28,.6));border:1px solid rgba(160,180,210,.22);border-radius:14px;padding:28px 32px;">
+      <span style="display:inline-block;font-size:.68em;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#a8cce8;margin-bottom:10px;">For Investors</span>
+      <h2 id="ct-title" style="margin:0 0 12px;color:#f0f4f8;font-size:clamp(1.25rem,2.4vw,1.6rem);font-weight:800;letter-spacing:-.015em;border:0;">A Category Thesis, Not Just a Product Claim</h2>
+      <p style="color:var(--light-text);font-size:.98rem;line-height:1.75;margin:0 0 18px;">The Governance Receipt white paper explains the market shift Pocono AI is built around: regulated AI adoption is moving from generic productivity tools to evidence-preserving infrastructure. In high-liability markets, auditability, local control, and human review are not optional features. They are buying requirements.</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="executive-brief.html" style="display:inline-block;padding:12px 24px;background:#00c2a8;color:#051622;font-weight:800;font-size:.9rem;text-decoration:none;border-radius:8px;">Read the Executive Brief &rarr;</a>
+        <a href="governance-receipt-whitepaper.html" style="display:inline-block;padding:12px 24px;background:transparent;color:#a8cce8;font-weight:600;font-size:.85rem;text-decoration:none;border:1px solid rgba(160,180,210,.3);border-radius:8px;">Download the White Paper</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 root-relative nav fix, Living Echo rebrand, Engineering & Drafting + Enterprise Estate Continuity links added (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- INCLUDE:FOOTER -->
+<footer role="contentinfo" style="background:#051622;border-top:1px solid rgba(255,255,255,0.08);padding:40px 24px 28px;font-size:0.85em;color:#8899aa;">
+  <div style="max-width:1180px;margin:0 auto;">
+
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:0 0 28px;margin-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.07);">
+      <div style="max-width:560px;">
+        <p style="margin:0 0 6px;font-size:1.05em;font-weight:700;color:#fff;">Local AI infrastructure for regulated practices.</p>
+        <p style="margin:0;font-size:0.95em;line-height:1.5;">Drafts with citations. Human review required. Sensitive documents stay under practice control. Simple path, deep proof.</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="/contact.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;background:#00c2a8;color:#04111a;font-weight:700;text-decoration:none;font-size:0.95em;">Request Pilot</a>
+        <a href="/sentinel-demo.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;border:1px solid rgba(0,194,168,0.55);color:#00c2a8;font-weight:700;text-decoration:none;font-size:0.95em;">Watch Demo</a>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px 32px;margin-bottom:32px;text-align:left;">
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">For You</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/start-here.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Start Here (3 min)</a>
+          <a href="/for-physicians.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Physicians</a>
+          <a href="/for-attorneys.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Attorneys</a>
+          <a href="/engineering-drafting/" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Engineering &amp; Drafting Teams</a>
+          <a href="/pilot-program.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Pilot Program</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Installer Training</a>
+          <a href="/how-it-works.html" style="color:#8899aa;text-decoration:none;">How It Works</a>
+          <a href="/trust.html" style="color:#8899aa;text-decoration:none;">Trust &amp; Audit</a>
+          <a href="/pricing.html" style="color:#8899aa;text-decoration:none;">Pricing</a>
+          <a href="/sentinel-demo.html" style="color:#8899aa;text-decoration:none;">See the Demo</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Documentation Hub</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/documentation-hub/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Hub Home &mdash; Deep Proof</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">Installer Training</a>
+          <a href="/sentinel-node/installation-simulator.html" style="color:#8899aa;text-decoration:none;">&#8627; Installation Simulator</a>
+          <a href="/documentation-hub/clinical/" style="color:#8899aa;text-decoration:none;">Clinical Documentation</a>
+          <a href="/documentation-hub/legal/" style="color:#8899aa;text-decoration:none;">Legal Documentation</a>
+          <a href="/documentation-hub/technical/" style="color:#8899aa;text-decoration:none;">Technical Documentation</a>
+          <a href="/documentation-hub/governance/" style="color:#8899aa;text-decoration:none;">Governance &amp; Audit</a>
+          <a href="/documentation-hub/tools/" style="color:#8899aa;text-decoration:none;">Tools &amp; Simulators</a>
+          <a href="/documentation-hub/research/" style="color:#8899aa;text-decoration:none;">Research &amp; Essays</a>
+          <a href="/documentation-hub/transparency/" style="color:#8899aa;text-decoration:none;">Transparency</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Global Federated AI</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/global/" style="color:#7af0dc;text-decoration:none;font-weight:600;">Global Federated Hub</a>
+          <a href="/global/australia/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Australia</a>
+          <a href="/global/singapore/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Singapore</a>
+          <a href="/global/taiwan/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Taiwan</a>
+          <a href="/global/europe/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Europe</a>
+          <a href="/contact.html" style="color:#8899aa;text-decoration:none;">Partner Inquiry</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Company</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/about.html" style="color:#8899aa;text-decoration:none;">About Pocono AI</a>
+          <a href="/team.html" style="color:#8899aa;text-decoration:none;">Team &amp; Leadership</a>
+          <a href="/why-pocono-ai.html" style="color:#8899aa;text-decoration:none;">Why Pocono AI</a>
+          <a href="/founding-commercial-leadership.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Join Us</a>
+          <a href="/careers.html" style="color:#8899aa;text-decoration:none;">Careers</a>
+          <a href="/how-we-hire.html" style="color:#8899aa;text-decoration:none;">How We Hire</a>
+          <a href="/channel-partners.html" style="color:#8899aa;text-decoration:none;">Technical Partners (MSPs)</a>
+          <a href="/partners.html" style="color:#8899aa;text-decoration:none;">Academic Partnerships</a>
+          <a href="/contact.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Contact</a>
+          <a href="https://forms.gle/VQahnkjMfY6QNEMy8" target="_blank" rel="noopener noreferrer" style="color:#d5a94f;text-decoration:none;font-weight:600;">Interest List &#8599;</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Founder Projects</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/rehability/" style="color:#a78bfa;text-decoration:none;font-weight:700;">Rehability &#x2605;</a>
+          <a href="/rehability/marcus-memory-helper/" style="color:#a78bfa;text-decoration:none;font-weight:600;">&#8627; Marcus's Memory Helper</a>
+          <a href="/sentinel-home/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Sentinel Home Edition</a>
+          <a href="/living-memorials/" style="color:#8899aa;text-decoration:none;">Living Echo</a>
+          <a href="/living-memorials/marcus-odell/" style="color:#8899aa;text-decoration:none;">Marcus&rsquo;s Living Echo</a>
+          <a href="/living-memorials/enterprise-estate-continuity.html" style="color:#8899aa;text-decoration:none;">Enterprise Estate Continuity</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Resources &amp; Legal</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/sitemap.html" style="color:#8899aa;text-decoration:none;">All Pages (Sitemap)</a>
+          <a href="/audit.html" style="color:#8899aa;text-decoration:none;">Transparency &amp; Audit Log</a>
+          <a href="/maturity-disclosure.html" style="color:#8899aa;text-decoration:none;">What We Have / Don&rsquo;t Claim</a>
+          <a href="/plain.html" style="color:#8899aa;text-decoration:none;">Plain Language Guide</a>
+          <a href="/privacy.html" style="color:#8899aa;text-decoration:none;">Privacy</a>
+          <a href="/terms.html" style="color:#8899aa;text-decoration:none;">Terms</a>
+          <a href="/sla.html" style="color:#8899aa;text-decoration:none;">SLA</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:18px;margin-bottom:14px;">
+      <p style="margin:0;font-size:0.82em;line-height:1.6;color:#6f8295;max-width:1000px;">Pocono AI does not provide medical, legal, or engineering advice, does not practice medicine, law, or licensed engineering, and does not make clinical, legal, or engineering decisions. Outputs are drafts or support materials that require review by a qualified professional; final professional judgment remains with the licensed physician, attorney, or engineer. Tools and simulations on this site are educational and use synthetic data.</p>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:20px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+      <p style="margin:0;font-size:0.9em;">&copy; 2026 Pocono AI, LLC &nbsp;&#183;&nbsp; East Stroudsburg, PA &nbsp;&#183;&nbsp; <a href="mailto:marcus@poconoai.com" style="color:#8899aa;">marcus@poconoai.com</a> &nbsp;&#183;&nbsp; <a href="tel:+15705340602" style="color:#8899aa;">(570) 534-0602</a></p>
+      <p style="margin:0;font-size:0.88em;"><a href="/audit.html" style="color:#5dade2;text-decoration:none;">Transparency v402</a></p>
+    </div>
+  </div>
+</footer>
+<script src="/search.js?v=402" defer></script>
+<!-- /INCLUDE:FOOTER -->
+
+<script src="nav.js?v=402" defer></script>
+<script src="search-index.js?v=402" defer></script>
+<script src="pilot-cta.js?v=402" defer></script>
+
+<script>
+(function(){
+  'use strict';
+
+  // Print / Save as PDF button
+  var printBtn = document.getElementById('ex-print-btn');
+  if (printBtn) {
+    printBtn.addEventListener('click', function(){
+      window.print();
+    });
+  }
+
+  // Scroll-spy: highlight the current section in the sidebar TOC
+  var tocLinks = Array.prototype.slice.call(document.querySelectorAll('.ex-toc-list a[href^="#"]'));
+  if (!tocLinks.length) return;
+
+  var sections = tocLinks
+    .map(function(a){
+      var id = a.getAttribute('href').slice(1);
+      var el = document.getElementById(id);
+      return el ? { id: id, el: el, link: a } : null;
+    })
+    .filter(Boolean);
+
+  function updateActive() {
+    var scrollTop = window.scrollY + 120; // offset for sticky chrome
+    var current = sections[0];
+    for (var i = 0; i < sections.length; i++) {
+      if (sections[i].el.offsetTop <= scrollTop) {
+        current = sections[i];
+      } else {
+        break;
+      }
+    }
+    tocLinks.forEach(function(a){ a.classList.remove('active'); });
+    if (current) current.link.classList.add('active');
+  }
+
+  // Throttled scroll handler
+  var ticking = false;
+  window.addEventListener('scroll', function(){
+    if (!ticking) {
+      window.requestAnimationFrame(function(){
+        updateActive();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+
+  updateActive();
+})();
+</script>
+
+</body>
+</html>

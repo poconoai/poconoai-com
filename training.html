@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp -->
+<head>
+<meta charset="UTF-8">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Sentinel Node Training & Deployment Readiness: pilot training structure, installer readiness, end-user safety guidance, human-review reinforcement, bad-output workflow, and Training Acknowledgment Form framework for regulated AI deployment.">
+<meta name="keywords" content="training, deployment readiness, installer quickstart, end user quickstart, pilot training, acknowledgment form, human review, decision-support drafts, go/no-go checklist, bad output, pilot issue reporting, medical appendix, legal appendix, multi-location appendix, MSP, practice IT, audit verification, local operation verification, Sentinel Node, Pocono AI, regulated AI training">
+<title>Sentinel Node Training & Deployment Readiness | Pocono AI</title>
+<meta property="og:title" content="Sentinel Node Training & Deployment Readiness | Pocono AI">
+<meta property="og:description" content="Training is part of the safety architecture. Sentinel Node is introduced through a controlled pilot-readiness process that trains users, defines safe-use boundaries, verifies local operation, and reinforces human review before trust is earned.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Pocono AI">
+<meta property="og:url" content="https://poconoai.com/training.html">
+<meta property="og:image" content="https://poconoai.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Sentinel Node Training & Deployment Readiness | Pocono AI">
+<meta name="twitter:description" content="Training is part of the safety architecture. Pilot training structure, installer readiness, human review, and the bad-output workflow for Sentinel Node regulated AI deployment.">
+<meta name="theme-color" content="#0B0F13">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="alternate icon" href="favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="favicon-180x180.png">
+<link rel="stylesheet" href="styles.css?v=402">
+<link rel="stylesheet" href="nav-v2026.css?v=402">
+<link rel="stylesheet" href="brand-v292.css?v=402">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+<link rel="canonical" href="https://poconoai.com/training.html">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Sentinel Node Training & Deployment Readiness",
+  "description": "Pilot training structure, installer readiness, end-user safety guidance, human-review reinforcement, and the bad-output workflow for Sentinel Node regulated AI deployment.",
+  "author": {"@type": "Organization", "name": "Pocono AI, LLC"},
+  "publisher": {"@type": "Organization", "name": "Pocono AI, LLC", "url": "https://poconoai.com/"},
+  "datePublished": "2026-06-16",
+  "url": "https://poconoai.com/training.html"
+}
+</script>
+
+<style>
+/* Training page local styles */
+.tr-wrap { max-width: 980px; margin: 0 auto; padding: clamp(24px,4vw,52px) 24px clamp(48px,7vw,96px); }
+
+/* Hero */
+.tr-hero {
+  background: linear-gradient(165deg, #061018 0%, #04111a 100%);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  padding: clamp(52px,7vw,88px) 24px clamp(40px,5vw,60px);
+  text-align: center;
+}
+.tr-hero-inner { max-width: 900px; margin: 0 auto; }
+.tr-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 0.73rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+  color: #00c2a8; border: 1px solid rgba(0,194,168,0.4); border-radius: 999px;
+  padding: 5px 14px; margin-bottom: 20px;
+}
+.tr-hero h1 {
+  font-size: clamp(2rem,5vw,3.1rem); line-height: 1.08; color: #fff;
+  margin: 0 0 14px; letter-spacing: -0.02em; font-weight: 800;
+}
+.tr-hero .sub {
+  font-size: clamp(1.05rem,2.4vw,1.3rem); color: #cfe0ea; max-width: 660px;
+  margin: 0 auto 24px; line-height: 1.55; font-weight: 600;
+}
+.tr-hero .lede { font-size: 1.06rem; color: #90a8ba; max-width: 680px; margin: 0 auto 28px; line-height: 1.65; }
+.tr-cta-row { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+.tr-btn {
+  display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px;
+  border-radius: 8px; background: #00c2a8; color: #04111a;
+  font-weight: 700; font-size: 0.96rem; text-decoration: none;
+  border: 1px solid #00c2a8; transition: background 0.2s, transform 0.2s;
+}
+.tr-btn:hover { background: #00d9bb; transform: translateY(-1px); }
+.tr-btn.ghost {
+  background: transparent; color: #00c2a8;
+  border: 1px solid rgba(0,194,168,0.5);
+}
+.tr-btn.ghost:hover { background: rgba(0,194,168,0.1); border-color: rgba(0,194,168,0.85); color: #fff; }
+
+/* Jump nav */
+.tr-jump {
+  display: flex; flex-wrap: wrap; gap: 8px 6px; margin: 24px 0 0;
+  justify-content: center; font-size: 0.8rem;
+}
+.tr-jump a { color: #90a8ba; text-decoration: none; padding: 4px 10px;
+  border: 1px solid rgba(255,255,255,0.08); border-radius: 999px; }
+.tr-jump a:hover { color: #00c2a8; border-color: rgba(0,194,168,0.4); }
+
+/* Section styles */
+.tr-section { margin: clamp(40px,5vw,64px) 0 0; }
+.tr-section h2 {
+  font-size: clamp(1.5rem,3vw,2.05rem); color: #fff; margin: 0 0 8px;
+  letter-spacing: -0.01em; line-height: 1.15; scroll-margin-top: 80px;
+}
+.tr-section .section-label {
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+  color: #00c2a8; margin: 0 0 12px; display: block;
+}
+.tr-section p { font-size: 1rem; line-height: 1.72; color: #90a8ba; margin: 0 0 16px; }
+.tr-section p.em { color: #cfe0ea; }
+.tr-section a:not([class]) { color: #5dade2; text-underline-offset: 2px; }
+
+/* Cards */
+.tr-grid { display: grid; gap: 16px; margin: 20px 0; }
+.tr-g2 { grid-template-columns: repeat(auto-fit, minmax(300px,1fr)); }
+.tr-g3 { grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); }
+.tr-g4 { grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); }
+.tr-card {
+  background: #0a1f2e; border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px; padding: 20px 22px;
+}
+.tr-card.teal { border-color: rgba(0,194,168,0.25); background: linear-gradient(160deg,#0c2433,#0a1f2e); }
+.tr-card h3 { font-size: 1.06rem; color: #fff; margin: 0 0 8px; }
+.tr-card h3.teal { color: #00c2a8; }
+.tr-card p { font-size: 0.92rem; line-height: 1.6; color: #90a8ba; margin: 0; }
+.tr-card ul { margin: 6px 0 0; padding-left: 18px; font-size: 0.92rem; line-height: 1.72; color: #90a8ba; }
+
+/* Callouts */
+.tr-callout {
+  background: rgba(0,194,168,0.06); border: 1px solid rgba(0,194,168,0.22);
+  border-left: 4px solid #00c2a8; border-radius: 0 10px 10px 0;
+  padding: 18px 22px; margin: 20px 0; font-size: 1.01rem; line-height: 1.68; color: #cfe0ea;
+}
+.tr-callout strong { color: #fff; }
+.tr-callout.amber {
+  background: rgba(240,200,80,0.05); border-color: rgba(240,200,80,0.3);
+  border-left-color: #f0d47d; color: #c9b870;
+}
+.tr-callout.amber strong { color: #f0d47d; }
+.tr-callout.red {
+  background: rgba(220,80,80,0.05); border-color: rgba(220,80,80,0.25);
+  border-left-color: #e08a8a; color: #d8c2c2;
+}
+.tr-callout.red strong { color: #e08a8a; }
+
+/* Checklist */
+.tr-check { list-style: none; margin: 16px 0; padding: 0; }
+.tr-check li { padding: 7px 0 7px 26px; position: relative; font-size: 0.97rem; color: #90a8ba; line-height: 1.55; }
+.tr-check li::before { content: "✓"; position: absolute; left: 0; top: 7px; color: #00c2a8; font-weight: 800; }
+.tr-check.x li { color: #d8c2c2; }
+.tr-check.x li::before { content: "✕"; color: #e08a8a; }
+
+/* Steps */
+.tr-steps { counter-reset: step; }
+.tr-step { display: flex; gap: 16px; margin-bottom: 20px; }
+.tr-step-num {
+  flex-shrink: 0; width: 36px; height: 36px; border-radius: 8px;
+  background: #00c2a8; color: #04111a; font-weight: 800; font-size: 1.1rem;
+  display: flex; align-items: center; justify-content: center;
+}
+.tr-step-body h3 { font-size: 1.05rem; color: #fff; margin: 0 0 4px; }
+.tr-step-body p { font-size: 0.92rem; color: #90a8ba; margin: 0; line-height: 1.58; }
+
+/* Divider */
+.tr-divider { border: none; border-top: 1px solid rgba(255,255,255,0.07); margin: clamp(36px,5vw,56px) 0 0; }
+
+/* Closer */
+.tr-closer {
+  text-align: center;
+  background: linear-gradient(160deg, #061018, #04111a);
+  border: 1px solid rgba(0,194,168,0.2); border-radius: 16px;
+  padding: clamp(32px,5vw,56px) 24px; margin: clamp(40px,5vw,60px) 0 0;
+}
+.tr-closer h2 { font-size: clamp(1.6rem,3.8vw,2.4rem); color: #fff; margin: 0 0 12px; letter-spacing: -0.02em; }
+.tr-closer p { max-width: 62ch; margin: 0 auto 20px; color: #90a8ba; font-size: 1.06rem; line-height: 1.68; }
+.tr-closer .trio {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+  gap: 12px; max-width: 720px; margin: 0 auto 24px;
+}
+.tr-closer .trio-item {
+  background: rgba(0,194,168,0.08); border: 1px solid rgba(0,194,168,0.2);
+  border-radius: 10px; padding: 16px 18px;
+  font-size: 1.06rem; font-weight: 700; color: #00c2a8;
+}
+
+/* Also see row */
+.tr-also {
+  font-size: 0.88rem; color: #7d8c9a; margin-top: 20px; text-align: center;
+}
+.tr-also a { color: #90a8ba; text-underline-offset: 2px; }
+.tr-also a:hover { color: #00c2a8; }
+
+@media (max-width: 640px) {
+  .tr-cta-row .tr-btn { width: 100%; justify-content: center; }
+  .tr-jump { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- INCLUDE:HEADER -->
+<div id="hitl-notice" style="background:#0a1929;padding:4px 16px;text-align:center;font-size:12px;color:#4a5568;border-bottom:1px solid rgba(255,255,255,0.06);letter-spacing:0.01em;">Human-in-the-Loop required: licensed professionals verify all outputs before clinical or legal action</div>
+<header role="banner">
+  <div class="header-inner">
+    <a href="/index.html" class="logo" aria-label="Pocono AI Home">
+      <img src="/logo.svg?v=402" alt="" width="36" height="36" decoding="async" loading="eager" aria-hidden="true" style="display:inline-block;">
+      Pocono <span>AI</span>
+    </a>
+    <nav id="desktop-nav" aria-label="Main navigation">
+      <div class="nav-item"><a href="/index.html" class="nav-direct">Home</a></div>
+      <div class="nav-item"><a href="/for-physicians.html" class="nav-direct">Physicians</a></div>
+      <div class="nav-item"><a href="/for-attorneys.html" class="nav-direct">Attorneys</a></div>
+      <div class="nav-item"><a href="/sentinel-node.html" class="nav-direct nav-hub" style="color:#d5a94f;border:1px solid rgba(213,169,79,0.45);border-radius:999px;padding:6px 13px;">Sentinel Node</a></div>
+      <div class="nav-item"><a href="/living-memorials/" class="nav-direct">Living Echo</a></div>
+      <div class="nav-item"><a href="/contact.html" class="nav-direct">Contact</a></div>
+      <div class="nav-item" data-dropdown="menu-more">
+        <button type="button" class="nav-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="menu-more">More <span class="nav-chevron" aria-hidden="true">&#9662;</span></button>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <a href="/contact.html#pilot" class="nav-cta nav-cta-primary">Request a Pilot</a>
+      <button type="button" class="pa-search-trigger" data-search-open aria-label="Search (press / or Ctrl-K)" aria-haspopup="dialog" aria-expanded="false">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span class="pa-st-label">Search</span><kbd data-pa-keyhint>Ctrl K</kbd>
+      </button>
+      <button type="button" class="header-icon-btn" id="mobile-menu" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav-panel">
+        <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- "More" overflow dropdown — sibling of <header> so position:fixed escapes header's stacking context. Wired by nav.js via data-dropdown="menu-more". -->
+<div class="nav-dropdown" id="menu-more" aria-label="More navigation">
+  <p class="nav-dd-section">Products</p>
+  <a href="/engineering-drafting/">Drafting &amp; Engineering Edition</a>
+  <a href="/sentinel-home/">Sentinel Home Edition</a>
+  <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability — Assistive Tools &#x2605;</a>
+  <a href="/living-memorials/enterprise-estate-continuity.html">Enterprise Estate Continuity</a>
+  <p class="nav-dd-section">Capabilities</p>
+  <a href="/evidence-room.html">Evidence Room</a>
+  <a href="/push-button-deliverables.html">Push-Button Deliverables</a>
+  <a href="/pilot-readiness-kit.html">Pilot Kit</a>
+  <a href="/pilot-program.html">Pilot Program</a>
+  <a href="/how-it-works.html">How It Works</a>
+  <p class="nav-dd-section">Hubs &amp; Company</p>
+  <a href="/training.html">Training Hub</a>
+  <a href="/documentation-hub/">Document Hub</a>
+  <a href="/global/">Global Hub</a>
+  <a href="/investors-hub.html">Investor Hub</a>
+  <a href="/valuation-dashboard.html">Valuation Dashboard</a>
+  <a href="/about.html">About</a>
+  <p class="nav-dd-section">Trust &amp; Legal</p>
+  <a href="/transparency.html">Transparency</a>
+  <a href="/audit.html">Audit Log</a>
+  <a href="/privacy.html">Privacy</a>
+  <a href="/sitemap.html">Sitemap</a>
+</div>
+<!-- Site search is provided by the self-contained search.js asset (command palette: / or Ctrl/Cmd-K). -->
+
+<!-- Mobile panel: full-screen slide-in. v396 nav — hub tiles + grouped links + Sentinel Node + Engineering. -->
+<nav id="mobile-nav-panel" aria-label="Mobile navigation" aria-hidden="true" role="dialog" aria-modal="true">
+
+  <!-- Hub tiles: Sentinel Node, Documentation Hub, Training Hub, Global Hub -->
+  <div style="padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,0.07);">
+    <p style="font-size:0.65em;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.28);margin:0 0 10px;padding:0 2px;">Hubs</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <a href="/sentinel-node.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(213,169,79,0.1);border:1px solid rgba(213,169,79,0.35);border-radius:10px;color:#d5a94f;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Sentinel Node</a>
+      <a href="/documentation-hub/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(0,194,168,0.1);border:1px solid rgba(0,194,168,0.35);border-radius:10px;color:#00c2a8;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Docs Hub</a>
+      <a href="/training.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.35);border-radius:10px;color:#a78bfa;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Training Hub</a>
+      <a href="/global/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(122,240,220,0.07);border:1px solid rgba(122,240,220,0.3);border-radius:10px;color:#7af0dc;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Global Hub</a>
+    </div>
+  </div>
+
+  <!-- Core paths -->
+  <div class="mob-static-links">
+    <a href="/index.html">Home</a>
+    <a href="/for-physicians.html">Physicians</a>
+    <a href="/for-attorneys.html">Attorneys</a>
+    <a href="/engineering-drafting/">Engineering &amp; Drafting</a>
+    <a href="/pilot-program.html">Pilot Program</a>
+    <a href="/how-it-works.html">How It Works</a>
+    <a href="/trust.html">Trust &amp; Audit</a>
+    <a href="/pricing.html">Pricing</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/living-memorials/">Living Echo</a>
+    <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability</a>
+    <a href="/about.html">About</a>
+    <a href="/team.html" style="color:rgba(255,255,255,0.6);">Team &amp; Leadership</a>
+    <a href="/valuation-dashboard.html" style="color:rgba(255,255,255,0.6);">Valuation Dashboard</a>
+    <a href="/careers.html" style="color:rgba(255,255,255,0.6);">Careers</a>
+    <a href="/sentinel-demo.html" style="color:rgba(255,255,255,0.6);">Demo</a>
+    <a href="/sitemap.html" style="color:rgba(255,255,255,0.45);">Sitemap</a>
+    <a href="/transparency.html" style="color:rgba(255,255,255,0.45);">Transparency</a>
+    <a href="/privacy.html" style="color:rgba(255,255,255,0.45);">Privacy</a>
+  </div>
+
+  <a href="/contact.html#pilot" class="mob-cta">Request a Pilot</a>
+</nav>
+<!-- /INCLUDE:HEADER -->
+
+<main id="main">
+
+<!-- HERO -->
+<section class="tr-hero">
+  <div class="tr-hero-inner">
+    <span class="tr-eyebrow">Training Overview &mdash; Sentinel Node Pilot</span>
+    <h1>Training is Part of the Safety Architecture</h1>
+    <p class="sub">Sentinel Node is not simply installed. It is introduced through a controlled pilot-readiness process that trains users, defines safe-use boundaries, verifies local operation, and reinforces human review before trust is earned.</p>
+    <p class="lede">Sentinel Node produces decision-support drafts only. No output is final until reviewed, edited, approved, and owned by the responsible professional.</p>
+    <div class="tr-cta-row">
+      <a href="pilot-readiness-kit.html" class="tr-btn">Pilot Readiness Kit &rarr;</a>
+      <a href="contact.html" class="tr-btn ghost">Talk to Pocono AI</a>
+      <a href="documentation-hub/" class="tr-btn ghost">Documentation Hub</a>
+    </div>
+    <nav class="tr-jump" aria-label="Jump to section">
+      <a href="#why-training">Why Training Matters</a>
+      <a href="#who">Who Gets Trained</a>
+      <a href="customer-training.html">Customer Training</a>
+      <a href="installer-training.html">Installer Training</a>
+      <a href="#cx-training">CX Modules</a>
+      <a href="#cx-prior-auth">Prior Auth</a>
+      <a href="#cx-denial">Denial Response</a>
+      <a href="#cx-hap">H&amp;P / Doc Chaos</a>
+      <a href="#installer">Installer Readiness</a>
+      <a href="#end-user">End User Readiness</a>
+      <a href="#human-review">Human Review</a>
+      <a href="#bad-output">Bad Output Workflow</a>
+      <a href="#appendices">Appendices</a>
+      <a href="#acknowledgment">Acknowledgment Form</a>
+      <a href="#investor">Investor &amp; Buyer Confidence</a>
+    </nav>
+  </div>
+</section>
+
+<div class="tr-wrap">
+
+  <!-- TRAINING OVERVIEW CARDS — v375 -->
+  <section style="background:rgba(0,194,168,0.04);border-bottom:1px solid rgba(0,194,168,0.15);padding:clamp(28px,4vw,44px) 0;">
+    <div class="tr-wrap" style="padding-top:0;padding-bottom:0;">
+      <p style="color:#00c2a8;font-size:0.72rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;margin:0 0 10px;">Training Tracks</p>
+      <h2 style="color:#fff;font-size:clamp(1.4rem,2.8vw,1.9rem);margin:0 0 8px;letter-spacing:-0.01em;">Training is split into two distinct tracks</h2>
+      <p style="color:#90a8ba;margin:0 0 22px;font-size:0.97rem;">Customer Training and Installer Training are separate by design. Customer staff are not expected to perform installer responsibilities. Installers are not clinical or legal reviewers.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;">
+        <a href="customer-training.html" style="display:block;text-decoration:none;background:#0a1f2e;border:1px solid rgba(0,194,168,0.35);border-radius:14px;padding:24px 26px;transition:border-color 0.2s;">
+          <p style="color:#00c2a8;font-size:0.72rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;margin:0 0 8px;">Track A</p>
+          <h3 style="color:#fff;font-size:1.18rem;margin:0 0 10px;">Customer Training</h3>
+          <p style="color:#90a8ba;font-size:0.93rem;line-height:1.6;margin:0 0 14px;">For pilot users, clinicians, reviewers, practice administrators, billing staff, MAs, nurses, referral coordinators, and support staff. Covers safe use, human review, citation checking, packet workflows, and the bad-output drill.</p>
+          <span style="color:#00c2a8;font-weight:700;font-size:0.9rem;">Customer Training &rarr;</span>
+        </a>
+        <a href="installer-training.html" style="display:block;text-decoration:none;background:#0a1f2e;border:1px solid rgba(122,240,220,0.25);border-radius:14px;padding:24px 26px;transition:border-color 0.2s;">
+          <p style="color:#7af0dc;font-size:0.72rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;margin:0 0 8px;">Track B</p>
+          <h3 style="color:#fff;font-size:1.18rem;margin:0 0 10px;">Installer Training</h3>
+          <p style="color:#90a8ba;font-size:0.93rem;line-height:1.6;margin:0 0 14px;">For Pocono AI deployment staff, technical partners, implementation partners, and MSPs acting as installers. Covers pre-install readiness, hardware custody, network setup, egress verification, audit log, Day Zero/Day One, and handoff.</p>
+          <span style="color:#7af0dc;font-weight:700;font-size:0.9rem;">Installer Training &rarr;</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 1: WHY TRAINING MATTERS -->
+  <section class="tr-section" id="why-training">
+    <span class="section-label">Section 1</span>
+    <h2>Why Training Matters</h2>
+    <p class="em">AI in regulated environments is not plug-and-play. Training is not an optional add-on — it is part of the governance system.</p>
+    <p>Clinical and legal professionals carry personal liability for their decisions. An AI system that staff use without understanding what it is, what it is not, and what its outputs require of them creates risk — not relief. The goal of training is to prevent unsafe reliance, clarify professional responsibility, and teach every user how to treat Sentinel Node outputs as drafts that require human judgment before they are trusted or used.</p>
+    <div class="tr-grid tr-g3">
+      <div class="tr-card teal">
+        <h3 class="teal">Prevent unsafe reliance</h3>
+        <p>Staff who do not understand what the system can and cannot do may over-trust outputs, skip citation checks, or treat a draft as a final decision. Training closes that gap.</p>
+      </div>
+      <div class="tr-card teal">
+        <h3 class="teal">Clarify professional responsibility</h3>
+        <p>The physician, attorney, or responsible professional owns the output from the moment they approve it. Training ensures they understand that responsibility is not transferred to the AI system.</p>
+      </div>
+      <div class="tr-card teal">
+        <h3 class="teal">Reinforce human review as the default</h3>
+        <p>Every user is trained on a single non-negotiable boundary: AI outputs are drafts. Review, edit, approve, and own them — or do not use them.</p>
+      </div>
+    </div>
+    <div class="tr-callout">
+      <strong>Training available during pilot deployment.</strong> Training is introduced during the pilot engagement, aligned with the specific workflow being piloted and the roles involved. It is not a one-size-fits-all module.
+    </div>
+  </section>
+
+  <hr class="tr-divider">
+
+  <!-- SECTION 2: WHO GETS TRAINED -->
+  <section class="tr-section" id="who">
+    <span class="section-label">Section 2</span>
+    <h2>Who Gets Trained</h2>
+    <p class="em">The pilot training program covers four role categories. These roles are intentionally simple for v1. Future versions may introduce more granular user roles, permissions, and workflow controls as Sentinel Node expands beyond the initial pilot environment.</p>
+    <div class="tr-grid tr-g2">
+      <div class="tr-card">
+        <h3>Pilot Users</h3>
+        <p>Staff who interact with Sentinel Node day-to-day: preparing queries, reviewing outputs, flagging issues, and following the safe-use workflow. May include medical assistants, paralegals, intake staff, prior-authorization staff, and office managers. Trained on what the system is, how to ask safe questions, how to check citations, and when to escalate.</p>
+      </div>
+      <div class="tr-card">
+        <h3>Responsible Reviewer</h3>
+        <p>The licensed professional who reviews, edits, approves, or rejects every AI-drafted output before it is used. The physician, attorney, or senior professional who owns the final output. Trained on output evaluation, citation verification, escalation, and the bad-output workflow.</p>
+      </div>
+      <div class="tr-card">
+        <h3>Practice Administrator / Pilot Lead</h3>
+        <p>The operational owner of the pilot. Responsible for monitoring the pilot, collecting observations, coordinating issue escalation, and completing the pilot reporting process. May sign the Training Acknowledgment Form on behalf of the pilot team for v1.</p>
+      </div>
+      <div class="tr-card">
+        <h3>Installer / IT Support</h3>
+        <p>The person or team responsible for physical placement, network configuration, and ongoing technical support of the Sentinel Node appliance. May be Pocono AI directly, the practice's own IT staff, an MSP partner, or a combination. Trained on installation assumptions, local operation verification, update procedures, and audit-log verification.</p>
+      </div>
+    </div>
+    <p style="font-size:0.88rem;color:#7d8c9a;margin-top:8px;">Note: v1 uses simple role categories. Future versions may introduce more granular user permissions, workflow controls, and audit boundaries as Sentinel Node scales beyond single-office pilots.</p>
+  </section>
+
+  <hr class="tr-divider">
+
+  <!-- SECTION CX: CUSTOMER EXPERIENCE TRAINING — v374 -->
+  <section class="tr-section" id="cx-training">
+    <span class="section-label">Customer Experience Training</span>
+    <h2>What Staff Actually Do During the Pilot</h2>
+    <p class="em">Sentinel Node is not trained as a generic chatbot. It is trained as a governed workflow support system. During pilot onboarding, users learn what the system does on a normal workday: prepare cited packets, surface missing evidence, organize chaotic records, and route drafts to a responsible human reviewer.</p>
+    <p>The training goal is not to make staff &ldquo;trust the AI.&rdquo; The goal is to make staff trust the <em>process</em>: approved sources, bounded retrieval, visible citations, documented uncertainty, reviewer sign-off, and an audit trail that shows how the draft was produced.</p>
+
+    <div class="tr-callout">
+      <strong>Core process principle:</strong> Every packet produced by Sentinel Node is a draft. It is not a final clinical note, a submitted authorization, a signed appeal, or a complete medical record. A licensed professional reviews, edits, approves, and owns the final version before any professional use.
+    </div>
+
+    <!-- MODULE 1 -->
+    <h3 id="cx-patient-packet" style="color:#00c2a8;margin:32px 0 10px;font-size:1.22rem;scroll-margin-top:80px;">Module 1 — Patient Packet / Pre-Visit Packet</h3>
+    <div class="tr-grid tr-g2">
+      <div class="tr-card">
+        <h3>Current pain</h3>
+        <p>Staff often search across EHR exports, scanned PDFs, labs, imaging, outside records, prior notes, medication history, and old messages. The information may exist &mdash; but it is scattered and hard to trust quickly.</p>
+      </div>
+      <div class="tr-card teal">
+        <h3 class="teal">Sentinel Node workflow</h3>
+        <p>The user selects the approved patient record set and asks Sentinel Node to prepare a pre-visit packet. The system retrieves from local approved sources, drafts a structured packet, and cites the source material behind each important claim.</p>
+      </div>
+    </div>
+    <h3 style="color:#fff;margin:18px 0 10px;font-size:1rem;">Packet may include</h3>
+    <div class="tr-grid tr-g3">
+      <div class="tr-card"><p>Reason for visit &middot; Relevant diagnoses &middot; Current medication context</p></div>
+      <div class="tr-card"><p>Recent labs and imaging &middot; Prior treatments &middot; Specialist notes</p></div>
+      <div class="tr-card"><p>Unresolved questions &middot; Missing or stale documents &middot; Source citations for review</p></div>
+    </div>
+    <div class="tr-callout amber" style="margin-top:14px;">
+      <strong>Human review boundary.</strong> The packet is a draft. It is not a clinical note, order, diagnosis, or final medical judgment. The responsible clinician or trained reviewer verifies the sources, edits the packet, and owns the final version.
+    </div>
+    <div class="tr-grid tr-g2" style="margin-top:14px;">
+      <div class="tr-card">
+        <h3>Training exercise</h3>
+        <p>Give staff a synthetic patient chart. Ask them to produce a pre-visit packet, verify citations, identify missing records, and escalate at least one uncertain item before completing the drill.</p>
+      </div>
+      <div class="tr-card">
+        <h3>Pilot measures</h3>
+        <ul>
+          <li>Time to packet</li>
+          <li>Missing-document flags</li>
+          <li>Reviewer corrections</li>
+          <li>Unsupported claims caught</li>
+          <li>Reviewer confidence</li>
+          <li>Staff friction log</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- MODULE 2 -->
+    <h3 id="cx-prior-auth" style="color:#00c2a8;margin:32px 0 10px;font-size:1.22rem;scroll-margin-top:80px;">Module 2 — Prior Authorization Support Packet</h3>
+    <div class="tr-grid tr-g2">
+      <div class="tr-card">
+        <h3>Current pain</h3>
+        <p>Prior authorization work often fails because the supporting evidence is scattered. Staff must find diagnoses, dates, failed therapies, medication trials, conservative treatment history, imaging, labs, specialist notes, and payer-specific criteria &mdash; often under time pressure.</p>
+      </div>
+      <div class="tr-card teal">
+        <h3 class="teal">Sentinel Node workflow</h3>
+        <p>The user asks Sentinel Node to prepare a prior authorization support packet. The system retrieves from local approved documents and drafts a structured packet for human review. The goal is <em>first-submission completeness</em>, not guaranteed approval.</p>
+      </div>
+    </div>
+    <h3 style="color:#fff;margin:18px 0 10px;font-size:1rem;">Packet may include</h3>
+    <div class="tr-grid tr-g3">
+      <div class="tr-card"><p>Requested service, medication, imaging, or procedure &middot; Diagnosis and relevant clinical history</p></div>
+      <div class="tr-card"><p>Prior therapies tried and failed &middot; Dates and source references &middot; Supporting labs, imaging, or specialist notes</p></div>
+      <div class="tr-card"><p>Medical-necessity draft language &middot; Missing-evidence checklist &middot; Reviewer sign-off area</p></div>
+    </div>
+    <div class="tr-callout red" style="margin-top:14px;">
+      <strong>Human review boundary.</strong> Sentinel Node does not submit the prior authorization, communicate with payers, make coverage arguments autonomously, or guarantee approval. It prepares draft support material from local evidence for staff and clinician review only.
+    </div>
+    <div class="tr-grid tr-g2" style="margin-top:14px;">
+      <div class="tr-card">
+        <h3>Training exercise</h3>
+        <p>Use a synthetic prior authorization scenario. Staff must assemble the packet, verify every citation, flag missing evidence, and route the draft to the responsible reviewer before completing the drill.</p>
+      </div>
+      <div class="tr-card">
+        <h3>Pilot measures</h3>
+        <ul>
+          <li>Time per packet</li>
+          <li>First-submission completeness</li>
+          <li>Missing-evidence rate</li>
+          <li>Reviewer edits</li>
+          <li>Denial reason tracking</li>
+          <li>Staff friction log</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- MODULE 3 -->
+    <h3 id="cx-denial" style="color:#00c2a8;margin:32px 0 10px;font-size:1.22rem;scroll-margin-top:80px;">Module 3 — Denial Response / Appeal Support Packet</h3>
+    <div class="tr-grid tr-g2">
+      <div class="tr-card">
+        <h3>Current pain</h3>
+        <p>When a denial arrives, staff often restart the process manually. The denial letter, payer rationale, original submission, chart evidence, and next-step options may be disconnected. Assembling an appeal-ready packet from scratch under time pressure is where evidence gaps become critical.</p>
+      </div>
+      <div class="tr-card teal">
+        <h3 class="teal">Sentinel Node workflow</h3>
+        <p>The user provides the denial reason and approved local source set. Sentinel Node prepares a denial response support packet with cited evidence and a missing-evidence checklist &mdash; an <em>appeal-ready packet</em> for the responsible professional to review and act on.</p>
+      </div>
+    </div>
+    <h3 style="color:#fff;margin:18px 0 10px;font-size:1rem;">Packet may include</h3>
+    <div class="tr-grid tr-g3">
+      <div class="tr-card"><p>Denial reason summary &middot; Payer&rsquo;s stated basis &middot; Evidence already submitted</p></div>
+      <div class="tr-card"><p>Evidence missing from the first submission &middot; Clinical timeline &middot; Draft appeal support language</p></div>
+      <div class="tr-card"><p>Supporting citations &middot; Reviewer checklist &middot; Human decision documented</p></div>
+    </div>
+    <div class="tr-callout red" style="margin-top:14px;">
+      <strong>Human review boundary.</strong> Sentinel Node does not decide whether to appeal, does not practice medicine or law, and does not provide insurance advocacy as an autonomous actor. It organizes evidence so the responsible professional can decide what to do.
+    </div>
+    <div class="tr-grid tr-g2" style="margin-top:14px;">
+      <div class="tr-card">
+        <h3>Training exercise</h3>
+        <p>Give staff a synthetic denial letter. Ask them to build a denial response packet, identify what was missing from the first submission, verify sources, and send the draft to the reviewer.</p>
+      </div>
+      <div class="tr-card">
+        <h3>Pilot measures</h3>
+        <ul>
+          <li>Time to appeal-ready packet</li>
+          <li>Missing-document identification</li>
+          <li>Reviewer edits</li>
+          <li>Appeal readiness score</li>
+          <li>Final human decision documented</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- MODULE 4 -->
+    <h3 id="cx-hap" style="color:#00c2a8;margin:32px 0 10px;font-size:1.22rem;scroll-margin-top:80px;">Module 4 — H&amp;P / Document Chaos Support</h3>
+    <div class="tr-grid tr-g2">
+      <div class="tr-card">
+        <h3>Current pain</h3>
+        <p>Clinical records are often long, duplicated, stale, fragmented, or copied forward. H&amp;Ps, consult notes, hospital records, outside PDFs, medication lists, and test results can hide the facts that matter. Finding and trusting the current, relevant clinical facts takes significant time.</p>
+      </div>
+      <div class="tr-card teal">
+        <h3 class="teal">Sentinel Node workflow</h3>
+        <p>The user asks Sentinel Node to prepare a cited documentation support summary from approved local records. The system retrieves relevant source material and identifies what appears current, stale, missing, or conflicting &mdash; grounded in local evidence, not AI memory.</p>
+      </div>
+    </div>
+    <h3 style="color:#fff;margin:18px 0 10px;font-size:1rem;">Output may include</h3>
+    <div class="tr-grid tr-g3">
+      <div class="tr-card"><p>Key history elements &middot; Relevant past medical history &middot; Medication and allergy context</p></div>
+      <div class="tr-card"><p>Prior procedures &middot; Recent tests and results &middot; Conflicting information flags</p></div>
+      <div class="tr-card"><p>Missing information checklist &middot; Suggested source list for reviewer verification &middot; &ldquo;Do not rely without review&rdquo; warning</p></div>
+    </div>
+    <div class="tr-callout red" style="margin-top:14px;">
+      <strong>Human review boundary.</strong> The output is not an H&amp;P by itself. It is not a signed note. It is a source-grounded draft support tool. The clinician owns the final documentation and must verify accuracy before any clinical or administrative use.
+    </div>
+    <div class="tr-grid tr-g2" style="margin-top:14px;">
+      <div class="tr-card">
+        <h3>Training exercise</h3>
+        <p>Use a synthetic chaotic chart with duplicate notes, stale medication history, and missing outside records. Staff and reviewer must identify what is reliable, what is stale, and what must be escalated before completing the drill.</p>
+      </div>
+      <div class="tr-card">
+        <h3>Pilot measures</h3>
+        <ul>
+          <li>Time to usable summary</li>
+          <li>Unsupported claims caught</li>
+          <li>Stale records identified</li>
+          <li>Reviewer corrections</li>
+          <li>After-hours documentation friction</li>
+          <li>Staff confidence</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- BAD OUTPUT DRILL -->
+    <h3 id="cx-bad-output-drill" style="color:#e08a8a;margin:32px 0 10px;font-size:1.22rem;scroll-margin-top:80px;">Bad Output and Missing Evidence Drill</h3>
+    <p class="em">Every user must practice what happens when Sentinel Node produces an incomplete, uncertain, unsupported, stale, or wrong output. This drill is not optional.</p>
+    <div class="tr-callout red">
+      <strong>Required workflow — no exceptions:</strong> Stop &rarr; Do not use &rarr; Identify the problem &rarr; Check the citation &rarr; Escalate to reviewer &rarr; Correct source set or prompt &rarr; Rerun if appropriate &rarr; Review again before use &rarr; Preserve in pilot friction log.
+    </div>
+    <div class="tr-steps" style="margin-top:20px;">
+      <div class="tr-step"><div class="tr-step-num" style="background:#e08a8a;color:#1a0808;">1</div><div class="tr-step-body"><h3>Stop</h3><p>Do not use the output as final. Do not forward, file, or act on it.</p></div></div>
+      <div class="tr-step"><div class="tr-step-num" style="background:#e08a8a;color:#1a0808;">2</div><div class="tr-step-body"><h3>Identify the problem</h3><p>What is missing, stale, conflicting, unsupported, or uncertain? Be specific.</p></div></div>
+      <div class="tr-step"><div class="tr-step-num" style="background:#e08a8a;color:#1a0808;">3</div><div class="tr-step-body"><h3>Check the cited source</h3><p>Does the citation support the claim? If not, that is the specific finding to escalate.</p></div></div>
+      <div class="tr-step"><div class="tr-step-num" style="background:#e08a8a;color:#1a0808;">4</div><div class="tr-step-body"><h3>Escalate to the responsible reviewer</h3><p>Notify the Responsible Reviewer and Practice Administrator. They determine next steps.</p></div></div>
+      <div class="tr-step"><div class="tr-step-num" style="background:#e08a8a;color:#1a0808;">5</div><div class="tr-step-body"><h3>Correct and rerun fresh</h3><p>Correct the source set or prompt and rerun &mdash; never patch over a bad answer. Full review of the new output before any use.</p></div></div>
+      <div class="tr-step"><div class="tr-step-num" style="background:#e08a8a;color:#1a0808;">6</div><div class="tr-step-body"><h3>Log the issue</h3><p>Record in the pilot friction log. Do not suppress it. Documented pilot observations are how the system improves.</p></div></div>
+    </div>
+    <div class="tr-callout amber" style="margin-top:16px;">
+      <strong>Training principle:</strong> Sentinel Node does not replace professional judgment. It makes evidence easier to find, package, verify, and audit. No user should quietly patch a bad output and treat it as validated.
+    </div>
+  </section>
+
+  <hr class="tr-divider">
+
+  <!-- SECTION 3: INSTALLER READINESS -->
+  <section class="tr-section" id="installer">
+    <span class="section-label">Section 3</span>
+    <h2>Installer Readiness</h2>
+    <p class="em">Version 1 assumes a single physical Sentinel Node appliance in one office. The installer may be Pocono AI directly, the practice's own IT person, an MSP partner, or a combination.</p>
+    <p>Installation training covers local placement, network assumptions, source ingestion, local operation verification, and the handoff checklist that must be completed before pilot use begins. The goal is to verify that the system is operating locally as designed before any professional output is generated.</p>
+    <div class="tr-callout amber">
+      <strong>No pilot use begins before a go/no-go readiness check.</strong> The system is not handed to end users until the installer has verified local operation, confirmed the audit log is functioning, and completed the pre-pilot handoff checklist.
+    </div>
+    <h3 style="color:#fff;margin:24px 0 12px;font-size:1.12rem;">High-Level Installer Readiness Checklist</h3>
+    <div class="tr-grid tr-g2">
+      <ul class="tr-check">
+        <li>Pre-install review: scope, approved sources, and network environment confirmed</li>
+        <li>Physical placement: appliance located in controlled access area</li>
+        <li>Local network assumptions: confirmed local-only operation before pilot</li>
+        <li>VLAN/firewall review: network segmentation appropriate for the deployment</li>
+        <li>Approved-source ingestion process: confirmed and tested with non-sensitive test documents</li>
+      </ul>
+      <ul class="tr-check">
+        <li>Local operation verification: confirmed no routine external data transfer</li>
+        <li>Update verification: system update path verified and understood</li>
+        <li>Audit-log verification: audit chain is functioning and entries are readable</li>
+        <li>Handoff checklist: completed and signed before pilot use begins</li>
+        <li>Go/no-go readiness check: final review before first end-user session</li>
+      </ul>
+    </div>
+    <p style="font-size:0.88rem;color:#7d8c9a;margin-top:8px;">This is a public, buyer-facing summary. Detailed installation guidance is provided to qualified installers and MSP partners directly during the pilot engagement. Sensitive operational security details are not published publicly.</p>
+  </section>
+
+  <hr class="tr-divider">
+
+  <!-- SECTION 4: END USER READINESS -->
+  <section class="tr-section" id="end-user">
+    <span class="section-label">Section 4</span>
+    <h2>End User Readiness</h2>
+    <p class="em">End user training is written for both non-technical staff and professional reviewers. It begins with what Sentinel Node is — and, critically, what it is not.</p>
+
+    <div class="tr-grid tr-g2" style="margin-bottom:20px;">
+      <div class="tr-card">
+        <h3>Non-technical staff</h3>
+        <p>May include office managers, medical assistants, paralegals, intake staff, billing staff, and prior-authorization staff. These users prepare queries, work with approved source material, and flag outputs for professional review. They are trained to treat every output as a draft requiring a professional sign-off before use.</p>
+      </div>
+      <div class="tr-card">
+        <h3>Professional reviewers</h3>
+        <p>May include physicians, attorneys, practice owners, managing partners, and senior clinical or legal reviewers. These users hold the final professional responsibility for every output they approve. They are trained on citation verification, output evaluation, the escalation process, and the bad-output workflow.</p>
+      </div>
+    </div>
+
+    <h3 style="color:#fff;margin:20px 0 14px;font-size:1.12rem;">End User Training Coverage</h3>
+    <div class="tr-grid tr-g2">
+      <div class="tr-card">
+        <h3>What Sentinel Node is</h3>
+        <ul>
+          <li>A local AI appliance that retrieves from approved documents and drafts decision-support materials</li>
+          <li>A system that requires a licensed professional to review and approve every output</li>
+          <li>A tool designed to support specific, bounded, pre-approved workflows</li>
+          <li>A system that maintains a reviewable audit log of every step</li>
+        </ul>
+      </div>
+      <div class="tr-card">
+        <h3>What Sentinel Node is <em>not</em></h3>
+        <ul>
+          <li>A final decision-maker, clinical authority, or legal advisor</li>
+          <li>A substitute for physician judgment, attorney responsibility, or professional expertise</li>
+          <li>A system that can be trusted without checking citations and source references</li>
+          <li>A tool that produces outputs ready to send without professional review</li>
+        </ul>
+      </div>
+      <div class="tr-card">
+        <h3>How to ask safe questions</h3>
+        <ul>
+          <li>Use specific, scoped requests tied to a defined patient or matter</li>
+          <li>Reference only approved, in-scope source documents</li>
+          <li>Specify the output type expected (summary, draft letter, checklist, etc.)</li>
+          <li>Do not ask the system to make decisions — ask it to surface evidence</li>
+        </ul>
+      </div>
+      <div class="tr-card">
+        <h3>How to treat outputs</h3>
+        <ul>
+          <li>Treat every output as a draft requiring human review and professional approval</li>
+          <li>Check every citation against the actual source document before approval</li>
+          <li>Flag any unsupported claim, inconsistency, or missing information</li>
+          <li>Do not forward, send, or file an output without the responsible professional's approval</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <hr class="tr-divider">
+
+  <!-- SECTION 5: HUMAN REVIEW IS REQUIRED -->
+  <section class="tr-section" id="human-review">
+    <span class="section-label">Section 5</span>
+    <h2>Human Review Is Required</h2>
+    <div class="tr-callout">
+      <strong>Sentinel Node does not make autonomous clinical, legal, financial, or operational decisions.</strong> Sentinel Node does not replace physician judgment, attorney judgment, or professional responsibility. No output should be sent to a patient, client, court, payer, opposing counsel, or external party unless reviewed and approved by the responsible professional.
+    </div>
+    <p class="em">Human review is not a formality. It is the system boundary. The professional who approves an output owns it — including responsibility for any action taken on the basis of that output.</p>
+    <div class="tr-grid tr-g3">
+      <div class="tr-card">
+        <h3>Before approval</h3>
+        <ul>
+          <li>Read the full output, not just the summary</li>
+          <li>Check every cited source reference against the actual source document</li>
+          <li>Identify any claim that cannot be verified in the source material</li>
+          <li>Confirm the scope is correct and no out-of-scope records were referenced</li>
+        </ul>
+      </div>
+      <div class="tr-card">
+        <h3>After approval</h3>
+        <ul>
+          <li>The responsible professional has reviewed, edited as needed, and approved the output</li>
+          <li>The output may be used, filed, or transmitted in accordance with professional obligations</li>
+          <li>The audit record reflects the approved state and the reviewer's identity</li>
+          <li>The professional retains full accountability for the content</li>
+        </ul>
+      </div>
+      <div class="tr-card">
+        <h3>When to escalate without approval</h3>
+        <ul>
+          <li>The output contains a fact you cannot verify in the source records</li>
+          <li>The output is inconsistent with your professional knowledge of the case</li>
+          <li>The output is incomplete, uncertain, or does not address the question asked</li>
+          <li>Something about the output feels wrong — trust that judgment and escalate</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <hr class="tr-divider">
+
+  <!-- SECTION 6: BAD OR UNCERTAIN OUTPUT WORKFLOW -->
+  <section class="tr-section" id="bad-output">
+    <span class="section-label">Section 6</span>
+    <h2>Bad or Uncertain Output Workflow</h2>
+    <div class="tr-callout red">
+      <strong>Core safety requirement:</strong> If an output is incomplete, uncertain, unsupported, inconsistent, or inappropriate, the user must document the issue, escalate to the responsible reviewer, and rerun only with corrected context or a fresh prompt. No output is final until reviewed, edited, approved, and owned by the responsible professional.
+    </div>
+
+    <p class="em">The required workflow is exactly: <strong style="color:#fff;">Document first &rarr; escalate to reviewer &rarr; rerun fresh.</strong></p>
+
+    <div class="tr-steps" style="margin-top:20px;">
+      <div class="tr-step">
+        <div class="tr-step-num">1</div>
+        <div class="tr-step-body">
+          <h3>Do not use the questionable output</h3>
+          <p>Set the output aside. Do not forward, file, or act on it. Do not quietly correct a single wrong detail and treat the output as validated. A bad output requires a fresh process, not a patch.</p>
+        </div>
+      </div>
+      <div class="tr-step">
+        <div class="tr-step-num">2</div>
+        <div class="tr-step-body">
+          <h3>Document the issue as a pilot observation</h3>
+          <p>Record what happened: what was asked, what the output said, what was wrong or uncertain, and when it occurred. This is a pilot observation — it is valuable data that improves the system and demonstrates governance discipline. Do not suppress it.</p>
+        </div>
+      </div>
+      <div class="tr-step">
+        <div class="tr-step-num">3</div>
+        <div class="tr-step-body">
+          <h3>Escalate to the responsible reviewer</h3>
+          <p>Notify the designated Responsible Reviewer and Practice Administrator / Pilot Lead. They determine whether the issue warrants a workflow change, a source correction, a scope adjustment, or escalation to Pocono AI.</p>
+        </div>
+      </div>
+      <div class="tr-step">
+        <div class="tr-step-num">4</div>
+        <div class="tr-step-body">
+          <h3>Rerun only with corrected context or a fresh prompt</h3>
+          <p>If a rerun is appropriate, it begins with a fresh prompt, a clarified source set, or a corrected document context — not a patch on the original output. The new run goes through the full review process before any output is used.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tr-callout amber" style="margin-top:20px;">
+      <strong>Never quietly patch over a bad answer and treat it as validated.</strong> If the bad output workflow feels burdensome, that is the governance boundary working correctly. Regulated environments require documented evidence of how decisions were made and corrected, not just evidence of the final outcome.
+    </div>
+  </section>
+
+  <hr class="tr-divider">
+
+  <!-- SECTION 7: MEDICAL AND LEGAL APPENDICES -->
+  <section class="tr-section" id="appendices">
+    <span class="section-label">Section 7</span>
+    <h2>Medical and Legal Appendices</h2>
+    <p class="em">The universal training system is supported by two professional appendices. These are provided during the pilot engagement to the relevant professional team.</p>
+
+    <div class="tr-grid tr-g2">
+      <div class="tr-card teal">
+        <h3 class="teal">Medical Appendix</h3>
+        <ul>
+          <li>PHI awareness and HIPAA-aligned data handling during the pilot</li>
+          <li>Prior authorization and denial workflow support</li>
+          <li>Chart review support: what the system can and cannot surface</li>
+          <li>Care-team drafting boundaries and appropriate use cases</li>
+          <li>Patient communication: what requires direct physician authorship</li>
+          <li>No autonomous diagnosis, treatment, or prescribing decisions — ever</li>
+        </ul>
+      </div>
+      <div class="tr-card teal">
+        <h3 class="teal">Legal Appendix</h3>
+        <ul>
+          <li>Attorney professional responsibility and AI-assisted work product</li>
+          <li>Privilege and confidentiality: what stays in the practice environment</li>
+          <li>Citation verification as a professional responsibility, not a system guarantee</li>
+          <li>Discovery support: output review before any production or use</li>
+          <li>Deposition preparation: what Sentinel Node can assist with and what it cannot</li>
+          <li>No unreviewed filings, legal submissions, or advice to clients without attorney sign-off</li>
+        </ul>
+      </div>
+    </div>
+    <p style="font-size:0.88rem;color:#7d8c9a;margin-top:10px;">These appendices are provided as part of the pilot training materials, not published publicly in full. Contact Pocono AI to discuss specific appendix coverage for your practice type.</p>
+  </section>
+
+  <hr class="tr-divider">
+
+  <!-- SECTION 8: MULTI-LOCATION APPENDIX -->
+  <section class="tr-section" id="multi-location">
+    <span class="section-label">Section 8</span>
+    <h2>Multi-Location Appendix</h2>
+    <p class="em">Version 1 starts with a single office and one physical appliance. Multi-location practices are not excluded — they require additional planning.</p>
+    <p>The multi-location appendix covers the additional governance requirements that arise when a practice has more than one physical location, multiple care teams, or distributed reviewer responsibilities. It is a planning document, not a deployment guide for v1.</p>
+    <div class="tr-grid tr-g3">
+      <div class="tr-card">
+        <h3>Source custody</h3>
+        <p>Which approved documents are accessible from which location. Cross-location data access must be explicitly scoped and governed, not assumed.</p>
+      </div>
+      <div class="tr-card">
+        <h3>Access boundaries</h3>
+        <p>Which users at which locations can access which patient or matter records. Role boundaries must be defined per location before multi-site deployment.</p>
+      </div>
+      <div class="tr-card">
+        <h3>Network segmentation</h3>
+        <p>Each location's Sentinel Node appliance operates on its own local network segment. Cross-location network assumptions require independent review.</p>
+      </div>
+      <div class="tr-card">
+        <h3>Reviewer responsibility</h3>
+        <p>Each location must have a designated Responsible Reviewer. Remote review across locations requires explicit workflow design and approval.</p>
+      </div>
+      <div class="tr-card">
+        <h3>Support escalation</h3>
+        <p>Each location's IT support path must be defined before deployment. Escalation routing differs by location type and IT support model.</p>
+      </div>
+      <div class="tr-card">
+        <h3>v1 starting point</h3>
+        <p>Every multi-location practice begins with a single-office pilot. Expansion to additional locations is planned after the first pilot demonstrates baseline readiness.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="tr-divider">
+
+  <!-- SECTION 9: PILOT TRAINING ACKNOWLEDGMENT FORM -->
+  <section class="tr-section" id="acknowledgment">
+    <span class="section-label">Section 9</span>
+    <h2>Pilot Training Acknowledgment Form</h2>
+    <p class="em">Training documentation and sign-off may be used during pilot engagements. The Pilot Training Acknowledgment Form records the pilot team's awareness of the safe-use boundaries before or during deployment.</p>
+    <p>For v1, the practice owner, managing partner, or designated Practice Administrator / Pilot Lead may sign on behalf of the pilot team. The form is provided as part of the pilot engagement materials and is not required before a pilot conversation begins.</p>
+
+    <h3 style="color:#fff;margin:20px 0 12px;font-size:1.1rem;">Acknowledgment Form Covers</h3>
+    <div class="tr-grid tr-g2">
+      <ul class="tr-check">
+        <li>The pilot team understands Sentinel Node outputs are decision-support drafts only</li>
+        <li>The pilot team understands outputs require human review before use</li>
+        <li>The pilot team understands citations and source material must be verified</li>
+      </ul>
+      <ul class="tr-check">
+        <li>The pilot team understands no output is final until approved by the responsible professional</li>
+        <li>The pilot team understands uncertain or bad outputs must be documented, escalated, and rerun fresh</li>
+        <li>The pilot team understands Sentinel Node is being evaluated in a pilot environment and is not a substitute for clinical, legal, or professional judgment</li>
+      </ul>
+    </div>
+    <div class="tr-callout amber" style="margin-top:12px;">
+      <strong>Important:</strong> The Training Acknowledgment Form is a governance and pilot-management tool. It does not constitute HIPAA compliance, SOC 2 readiness, clinical validation, legal approval, or regulatory clearance of any kind.
+    </div>
+  </section>
+
+  <hr class="tr-divider">
+
+  <!-- SECTION 10: INVESTOR AND BUYER CONFIDENCE -->
+  <section class="tr-section" id="investor">
+    <span class="section-label">Section 10</span>
+    <h2>Investor and Buyer Confidence</h2>
+    <p class="em">Regulated-industry AI adoption fails when systems are deployed without clear human boundaries, without documentation of what the AI is doing, and without training that makes safe use the default. Sentinel Node is designed to avoid all three failure modes.</p>
+  </section>
+
+  <!-- CLOSER -->
+  <section class="tr-closer">
+    <h2>We train before use.<br>We verify before trust.<br>We document before scale.</h2>
+    <p>Sentinel Node is designed to make AI adoption slower where it must be slower, safer where it must be safer, and more useful only after the human review boundary is understood.</p>
+    <div class="trio">
+      <div class="trio-item">Train before use</div>
+      <div class="trio-item">Verify before trust</div>
+      <div class="trio-item">Document before scale</div>
+    </div>
+    <p>Training is not a barrier to adoption. It is how responsible AI adoption works. Every physician, attorney, staff member, and administrator who uses Sentinel Node enters the pilot understanding exactly what the system produces, what it requires of them, and what happens when something goes wrong.</p>
+    <div class="tr-cta-row" style="justify-content:center;">
+      <a href="contact.html" class="tr-btn">Start a Pilot Conversation &rarr;</a>
+      <a href="pilot-readiness-kit.html" class="tr-btn ghost">Pilot Readiness Kit</a>
+    </div>
+    <p class="tr-also" style="margin-top:20px;">
+      Also see:
+      <a href="trust.html">Trust &amp; Audit</a> &middot;
+      <a href="architecture.html">Architecture</a> &middot;
+      <a href="audit-lifecycle.html">Audit Lifecycle</a> &middot;
+      <a href="for-physicians.html">Physician Pathway</a> &middot;
+      <a href="for-attorneys.html">Attorney Pathway</a> &middot;
+      <a href="documentation-hub/">Documentation Hub</a>
+    </p>
+  </section>
+
+  <!-- PRIVATE TRAINING KIT NOTE -->
+  <section class="tr-section" style="margin-top:clamp(32px,4vw,48px);">
+    <div class="tr-callout" style="background:rgba(255,255,255,0.02);border-color:rgba(255,255,255,0.1);border-left-color:rgba(255,255,255,0.25);">
+      <strong style="color:#cfe0ea;">Private Training Kit Materials (Pilot Engagements)</strong><br>
+      <span style="font-size:0.92em;color:#7d8c9a;">The following training-kit materials are prepared for pilot engagements and provided directly to the pilot team. They are not published publicly. Contact Pocono AI to discuss your specific pilot scope: <strong style="color:#90a8ba;">Installer Quickstart (Single-Office Pilot Deployment)</strong> &middot; <strong style="color:#90a8ba;">End User Quickstart (Staff &amp; Professional Reviewer Edition)</strong> &middot; <strong style="color:#90a8ba;">Human Reviewer Safety Guide</strong> &middot; <strong style="color:#90a8ba;">Practice Administrator / Pilot Lead Guide</strong> &middot; <strong style="color:#90a8ba;">Sentinel Node Pilot Training Acknowledgment Form</strong> &middot; <strong style="color:#90a8ba;">Medical Appendix</strong> &middot; <strong style="color:#90a8ba;">Legal Appendix</strong> &middot; <strong style="color:#90a8ba;">Multi-Location Appendix</strong> &middot; <strong style="color:#90a8ba;">Installer Go/No-Go Checklist</strong> &middot; <strong style="color:#90a8ba;">Bad Output / Pilot Issue Reporting Form</strong></span>
+    </div>
+  </section>
+
+  <!-- Installation Simulator CTA — v378 -->
+  <section class="tr-section" aria-label="Installation Simulator Training">
+    <h2>Installation Simulator Training</h2>
+    <p>Use the interactive simulator to walk MSPs, practice administrators, and internal staff through the controlled installation sequence. 26 phases covering network discovery, subnet/VLAN design, firewall boundaries, appliance bootstrap, approved-source ingestion, human review, and audit verification. Includes a <strong style="color:#bcd4e2;">Configuration Practice</strong> mode to rehearse an install and run a go-live readiness check, plus guided and manual walkthroughs with adjustable pacing.</p>
+    <p style="margin:14px 0 0;">
+      <a href="sentinel-node/installation-simulator.html" style="display:inline-block;background:#00c2a8;color:#04111a;font-weight:800;font-size:0.88rem;padding:10px 20px;border-radius:8px;text-decoration:none;">Open Installer Simulation ↗</a>
+      <a href="sentinel-node/installation-simulator.html#practice" style="display:inline-block;margin-left:10px;background:rgba(0,194,168,0.12);border:1px solid rgba(0,194,168,0.45);color:#00c2a8;font-weight:800;font-size:0.88rem;padding:9px 18px;border-radius:8px;text-decoration:none;">Configuration Practice ↗</a>
+      <span style="display:inline-block;margin-left:12px;font-size:0.78rem;color:#7d8c9a;">Beta training artifact — pilot details will evolve. Authorized IT/MSP implementation required for production deployment.</span>
+    </p>
+  </section>
+
+</div>
+</main>
+
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 root-relative nav fix, Living Echo rebrand, Engineering & Drafting + Enterprise Estate Continuity links added (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- INCLUDE:FOOTER -->
+<footer role="contentinfo" style="background:#051622;border-top:1px solid rgba(255,255,255,0.08);padding:40px 24px 28px;font-size:0.85em;color:#8899aa;">
+  <div style="max-width:1180px;margin:0 auto;">
+
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:0 0 28px;margin-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.07);">
+      <div style="max-width:560px;">
+        <p style="margin:0 0 6px;font-size:1.05em;font-weight:700;color:#fff;">Local AI infrastructure for regulated practices.</p>
+        <p style="margin:0;font-size:0.95em;line-height:1.5;">Drafts with citations. Human review required. Sensitive documents stay under practice control. Simple path, deep proof.</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="/contact.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;background:#00c2a8;color:#04111a;font-weight:700;text-decoration:none;font-size:0.95em;">Request Pilot</a>
+        <a href="/sentinel-demo.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;border:1px solid rgba(0,194,168,0.55);color:#00c2a8;font-weight:700;text-decoration:none;font-size:0.95em;">Watch Demo</a>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px 32px;margin-bottom:32px;text-align:left;">
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">For You</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/start-here.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Start Here (3 min)</a>
+          <a href="/for-physicians.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Physicians</a>
+          <a href="/for-attorneys.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Attorneys</a>
+          <a href="/engineering-drafting/" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Engineering &amp; Drafting Teams</a>
+          <a href="/pilot-program.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Pilot Program</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Installer Training</a>
+          <a href="/how-it-works.html" style="color:#8899aa;text-decoration:none;">How It Works</a>
+          <a href="/trust.html" style="color:#8899aa;text-decoration:none;">Trust &amp; Audit</a>
+          <a href="/pricing.html" style="color:#8899aa;text-decoration:none;">Pricing</a>
+          <a href="/sentinel-demo.html" style="color:#8899aa;text-decoration:none;">See the Demo</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Documentation Hub</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/documentation-hub/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Hub Home &mdash; Deep Proof</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">Installer Training</a>
+          <a href="/sentinel-node/installation-simulator.html" style="color:#8899aa;text-decoration:none;">&#8627; Installation Simulator</a>
+          <a href="/documentation-hub/clinical/" style="color:#8899aa;text-decoration:none;">Clinical Documentation</a>
+          <a href="/documentation-hub/legal/" style="color:#8899aa;text-decoration:none;">Legal Documentation</a>
+          <a href="/documentation-hub/technical/" style="color:#8899aa;text-decoration:none;">Technical Documentation</a>
+          <a href="/documentation-hub/governance/" style="color:#8899aa;text-decoration:none;">Governance &amp; Audit</a>
+          <a href="/documentation-hub/tools/" style="color:#8899aa;text-decoration:none;">Tools &amp; Simulators</a>
+          <a href="/documentation-hub/research/" style="color:#8899aa;text-decoration:none;">Research &amp; Essays</a>
+          <a href="/documentation-hub/transparency/" style="color:#8899aa;text-decoration:none;">Transparency</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Global Federated AI</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/global/" style="color:#7af0dc;text-decoration:none;font-weight:600;">Global Federated Hub</a>
+          <a href="/global/australia/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Australia</a>
+          <a href="/global/singapore/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Singapore</a>
+          <a href="/global/taiwan/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Taiwan</a>
+          <a href="/global/europe/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Europe</a>
+          <a href="/contact.html" style="color:#8899aa;text-decoration:none;">Partner Inquiry</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Company</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/about.html" style="color:#8899aa;text-decoration:none;">About Pocono AI</a>
+          <a href="/team.html" style="color:#8899aa;text-decoration:none;">Team &amp; Leadership</a>
+          <a href="/why-pocono-ai.html" style="color:#8899aa;text-decoration:none;">Why Pocono AI</a>
+          <a href="/founding-commercial-leadership.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Join Us</a>
+          <a href="/careers.html" style="color:#8899aa;text-decoration:none;">Careers</a>
+          <a href="/how-we-hire.html" style="color:#8899aa;text-decoration:none;">How We Hire</a>
+          <a href="/channel-partners.html" style="color:#8899aa;text-decoration:none;">Technical Partners (MSPs)</a>
+          <a href="/partners.html" style="color:#8899aa;text-decoration:none;">Academic Partnerships</a>
+          <a href="/contact.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Contact</a>
+          <a href="https://forms.gle/VQahnkjMfY6QNEMy8" target="_blank" rel="noopener noreferrer" style="color:#d5a94f;text-decoration:none;font-weight:600;">Interest List &#8599;</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Founder Projects</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/rehability/" style="color:#a78bfa;text-decoration:none;font-weight:700;">Rehability &#x2605;</a>
+          <a href="/rehability/marcus-memory-helper/" style="color:#a78bfa;text-decoration:none;font-weight:600;">&#8627; Marcus's Memory Helper</a>
+          <a href="/sentinel-home/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Sentinel Home Edition</a>
+          <a href="/living-memorials/" style="color:#8899aa;text-decoration:none;">Living Echo</a>
+          <a href="/living-memorials/marcus-odell/" style="color:#8899aa;text-decoration:none;">Marcus&rsquo;s Living Echo</a>
+          <a href="/living-memorials/enterprise-estate-continuity.html" style="color:#8899aa;text-decoration:none;">Enterprise Estate Continuity</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Resources &amp; Legal</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/sitemap.html" style="color:#8899aa;text-decoration:none;">All Pages (Sitemap)</a>
+          <a href="/audit.html" style="color:#8899aa;text-decoration:none;">Transparency &amp; Audit Log</a>
+          <a href="/maturity-disclosure.html" style="color:#8899aa;text-decoration:none;">What We Have / Don&rsquo;t Claim</a>
+          <a href="/plain.html" style="color:#8899aa;text-decoration:none;">Plain Language Guide</a>
+          <a href="/privacy.html" style="color:#8899aa;text-decoration:none;">Privacy</a>
+          <a href="/terms.html" style="color:#8899aa;text-decoration:none;">Terms</a>
+          <a href="/sla.html" style="color:#8899aa;text-decoration:none;">SLA</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:18px;margin-bottom:14px;">
+      <p style="margin:0;font-size:0.82em;line-height:1.6;color:#6f8295;max-width:1000px;">Pocono AI does not provide medical, legal, or engineering advice, does not practice medicine, law, or licensed engineering, and does not make clinical, legal, or engineering decisions. Outputs are drafts or support materials that require review by a qualified professional; final professional judgment remains with the licensed physician, attorney, or engineer. Tools and simulations on this site are educational and use synthetic data.</p>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:20px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+      <p style="margin:0;font-size:0.9em;">&copy; 2026 Pocono AI, LLC &nbsp;&#183;&nbsp; East Stroudsburg, PA &nbsp;&#183;&nbsp; <a href="mailto:marcus@poconoai.com" style="color:#8899aa;">marcus@poconoai.com</a> &nbsp;&#183;&nbsp; <a href="tel:+15705340602" style="color:#8899aa;">(570) 534-0602</a></p>
+      <p style="margin:0;font-size:0.88em;"><a href="/audit.html" style="color:#5dade2;text-decoration:none;">Transparency v402</a></p>
+    </div>
+  </div>
+</footer>
+<script src="/search.js?v=402" defer></script>
+<!-- /INCLUDE:FOOTER -->
+
+<script src="search-index.js?v=402" defer></script>
+<script src="nav.js?v=402" defer></script>
+<script src="pilot-cta.js?v=402" defer></script>
+</body>
+</html>

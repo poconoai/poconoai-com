@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The Governance Receipt: a chain-of-custody framework for accountable AI in healthcare and law. White paper on audit-native AI workflows.">
+    <meta name="keywords" content="governance receipt, chain of custody AI, accountable AI, AI audit trail, HIPAA AI governance, legal AI privilege, prior authorization AI, NIST AI RMF, ABA AI ethics, local AI, Sentinel Node, Pocono AI, evidence preserving AI, AI compliance, healthcare AI accountability, legal AI accountability">
+    <title>The Governance Receipt: Chain-of-Custody AI for Healthcare and Law | Pocono AI</title>
+    <meta property="og:title" content="The Governance Receipt | Pocono AI White Paper">
+    <meta property="og:description" content="A chain-of-custody framework for accountable AI in healthcare and law. AI governance is moving from policy to proof.">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Pocono AI">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:url" content="https://poconoai.com/governance-receipt-whitepaper.html">
+<meta property="og:image" content="https://poconoai.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="The Governance Receipt | Pocono AI">
+    <meta name="twitter:description" content="No governance receipt, no accountable AI. A chain-of-custody framework for healthcare and law.">
+    <meta name="theme-color" content="#0B0F13">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="alternate icon" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon-180x180.png">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="alternate icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles.css?v=402">
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+    <link rel="canonical" href="https://poconoai.com/governance-receipt-whitepaper.html">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "The Governance Receipt: A Chain-of-Custody Framework for Accountable AI in Healthcare and Law",
+      "description": "A white paper from Pocono AI on evidence-preserving AI workflows for high-liability professional environments.",
+      "author": {
+        "@type": "Organization",
+        "name": "Pocono AI, LLC"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Pocono AI, LLC",
+        "url": "https://poconoai.com"
+      },
+      "datePublished": "2026-05-26",
+      "url": "https://poconoai.com/governance-receipt-whitepaper.html"
+    }
+    </script>
+<link rel="stylesheet" href="nav-v2026.css?v=402">
+<link rel="stylesheet" href="brand-v292.css?v=402">
+
+<style>
+.wp-wrap { max-width: 980px; margin: 0 auto; padding: clamp(28px,4vw,56px) 24px clamp(48px,7vw,96px); }
+
+.wp-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 0.7em; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+  color: #00c2a8; padding: 5px 13px; background: rgba(0,194,168,0.08);
+  border: 1px solid rgba(0,194,168,0.32); border-radius: 100px; margin-bottom: 22px;
+}
+
+.wp-hero-title {
+  font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; letter-spacing: -0.025em; line-height: 1.08;
+  color: #f0f4f8; margin: 0 0 14px; border: 0;
+}
+.wp-hero-sub {
+  font-size: clamp(1.05rem,1.7vw,1.2rem); color: #a8cce8; font-weight: 500;
+  margin: 0 0 28px; line-height: 1.45; max-width: 760px;
+}
+.wp-hero-lead {
+  font-size: 1.05rem; color: #c6d4e3; line-height: 1.78;
+  margin: 0 0 32px; max-width: 760px;
+}
+
+.wp-cta-row { display: flex; gap: 14px; flex-wrap: wrap; margin: 0 0 56px; }
+.wp-btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: #00c2a8; color: #051622 !important; font-weight: 800; font-size: 0.95rem;
+  padding: 14px 26px; border-radius: 8px; text-decoration: none; transition: background 0.15s;
+  border: 1px solid #00c2a8;
+}
+.wp-btn-primary:hover { background: #1ad1b8; }
+.wp-btn-secondary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent; color: #00c2a8 !important; font-weight: 700; font-size: 0.95rem;
+  padding: 14px 26px; border-radius: 8px; text-decoration: none; transition: background 0.15s;
+  border: 1px solid rgba(0,194,168,0.4);
+}
+.wp-btn-secondary:hover { background: rgba(0,194,168,0.08); }
+
+/* Receipt diagram */
+.wp-receipt-card {
+  margin: 0 0 56px;
+  background: linear-gradient(155deg,rgba(8,15,28,.9),rgba(18,28,46,.65));
+  border: 1px solid rgba(0,194,168,0.22);
+  border-radius: 14px;
+  padding: 26px clamp(20px,3vw,32px);
+  box-shadow: 0 24px 64px rgba(0,0,0,.35);
+}
+.wp-receipt-card h3 {
+  margin: 0 0 18px; font-size: 0.74em; letter-spacing: 0.18em; text-transform: uppercase;
+  color: #00c2a8; font-weight: 700; border: 0;
+}
+.wp-receipt-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;
+}
+.wp-receipt-item {
+  padding: 14px 16px;
+  background: rgba(0,194,168,0.04);
+  border: 1px solid rgba(0,194,168,0.18);
+  border-radius: 8px;
+}
+.wp-receipt-item b { display: block; color: #f0f4f8; font-size: 0.92rem; margin-bottom: 4px; }
+.wp-receipt-item span { display: block; color: #a8cce8; font-size: 0.8rem; line-height: 1.5; }
+
+/* Sections */
+.wp-section { margin: 0 0 48px; }
+.wp-section h2 {
+  font-size: clamp(1.4rem,2.6vw,1.85rem); color: #f0f4f8; font-weight: 700;
+  letter-spacing: -0.015em; margin: 0 0 18px; border: 0; line-height: 1.2;
+}
+.wp-section h3 { font-size: 1.1rem; color: #e0eaf4; font-weight: 600; margin: 24px 0 10px; border: 0; }
+.wp-section p { color: #c6d4e3; font-size: 1.02rem; line-height: 1.78; margin: 0 0 18px; }
+.wp-section ul { color: #c6d4e3; line-height: 1.75; margin: 0 0 22px; padding-left: 22px; }
+.wp-section ul li { margin-bottom: 10px; }
+
+/* Callout */
+.wp-pullquote {
+  margin: 48px 0; padding: 28px 32px;
+  background: linear-gradient(135deg, rgba(0,194,168,0.08) 0%, rgba(0,163,255,0.04) 100%);
+  border: 1px solid rgba(0,194,168,0.28); border-left: 4px solid #00c2a8;
+  border-radius: 0 12px 12px 0;
+  font-size: clamp(1.15rem,2vw,1.45rem); font-weight: 700; color: #f0f4f8;
+  line-height: 1.35; letter-spacing: -0.01em;
+  text-align: center;
+}
+
+/* Black-box vs receipt */
+.wp-compare { display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 18px; margin: 28px 0; }
+.wp-compare-col { padding: 22px 24px; border-radius: 12px; }
+.wp-compare-col.bad {
+  background: rgba(180,40,40,0.06); border: 1px solid rgba(180,40,40,0.25);
+}
+.wp-compare-col.good {
+  background: rgba(0,194,168,0.05); border: 1px solid rgba(0,194,168,0.28);
+}
+.wp-compare-col h4 {
+  margin: 0 0 14px; font-size: 0.74em; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 800; border: 0;
+}
+.wp-compare-col.bad h4 { color: #e8a09a; }
+.wp-compare-col.good h4 { color: #00d4b8; }
+.wp-compare-col ul { margin: 0; padding-left: 18px; color: #c6d4e3; line-height: 1.7; font-size: 0.94rem; }
+.wp-compare-col ul li { margin-bottom: 8px; }
+
+/* Final CTA */
+.wp-final-cta {
+  margin-top: 64px; padding: 40px clamp(20px,3vw,40px);
+  background: linear-gradient(135deg, rgba(0,194,168,0.08) 0%, rgba(0,163,255,0.04) 100%);
+  border: 1px solid rgba(0,194,168,0.28); border-radius: 14px;
+  text-align: center;
+}
+.wp-final-cta h3 { color: #f0f4f8; font-size: clamp(1.3rem,2.4vw,1.7rem); font-weight: 800; margin: 0 0 12px; border: 0; }
+.wp-final-cta p { color: #a8cce8; font-size: 1rem; line-height: 1.6; margin: 0 0 22px; }
+
+/* Role block */
+.wp-role-block {
+  margin: 48px 0; padding: 28px 28px;
+  background: rgba(15,23,42,0.5); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px;
+}
+.wp-role-block h3 { color: #f0f4f8; font-size: 1.2rem; margin: 0 0 8px; border: 0; }
+.wp-role-block > p { color: #a8cce8; font-size: 0.95rem; line-height: 1.6; margin: 0 0 18px; }
+.wp-role-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 12px; }
+.wp-role-card {
+  padding: 16px 18px; background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px; text-decoration: none; color: inherit; transition: border-color 0.15s, background 0.15s;
+}
+.wp-role-card:hover { border-color: rgba(0,194,168,0.4); background: rgba(0,194,168,0.04); }
+.wp-role-card b { display: block; color: #f0f4f8; font-size: 0.92rem; margin-bottom: 4px; }
+.wp-role-card span { display: block; color: #8fa9bb; font-size: 0.82rem; line-height: 1.45; }
+
+@media (max-width:600px) {
+  .wp-wrap { padding-left:18px; padding-right:18px; }
+  .wp-cta-row { flex-direction: column; }
+  .wp-cta-row a { width: 100%; justify-content: center; }
+}
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+<div id="reading-progress" aria-hidden="true"></div>
+
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v396 full-site-optimization-pass (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- v399 desktop-nav normalization: 7 primary items + More dropdown (2026-06-19) -->
+<!-- INCLUDE:HEADER -->
+<div id="hitl-notice" style="background:#0a1929;padding:4px 16px;text-align:center;font-size:12px;color:#4a5568;border-bottom:1px solid rgba(255,255,255,0.06);letter-spacing:0.01em;">Human-in-the-Loop required: licensed professionals verify all outputs before clinical or legal action</div>
+<header role="banner">
+  <div class="header-inner">
+    <a href="/index.html" class="logo" aria-label="Pocono AI Home">
+      <img src="/logo.svg?v=402" alt="" width="36" height="36" decoding="async" loading="eager" aria-hidden="true" style="display:inline-block;">
+      Pocono <span>AI</span>
+    </a>
+    <nav id="desktop-nav" aria-label="Main navigation">
+      <div class="nav-item"><a href="/index.html" class="nav-direct">Home</a></div>
+      <div class="nav-item"><a href="/for-physicians.html" class="nav-direct">Physicians</a></div>
+      <div class="nav-item"><a href="/for-attorneys.html" class="nav-direct">Attorneys</a></div>
+      <div class="nav-item"><a href="/sentinel-node.html" class="nav-direct nav-hub" style="color:#d5a94f;border:1px solid rgba(213,169,79,0.45);border-radius:999px;padding:6px 13px;">Sentinel Node</a></div>
+      <div class="nav-item"><a href="/living-memorials/" class="nav-direct">Living Echo</a></div>
+      <div class="nav-item"><a href="/contact.html" class="nav-direct">Contact</a></div>
+      <div class="nav-item" data-dropdown="menu-more">
+        <button type="button" class="nav-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="menu-more">More <span class="nav-chevron" aria-hidden="true">&#9662;</span></button>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <a href="/contact.html#pilot" class="nav-cta nav-cta-primary">Request a Pilot</a>
+      <button type="button" class="pa-search-trigger" data-search-open aria-label="Search (press / or Ctrl-K)" aria-haspopup="dialog" aria-expanded="false">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span class="pa-st-label">Search</span><kbd data-pa-keyhint>Ctrl K</kbd>
+      </button>
+      <button type="button" class="header-icon-btn" id="mobile-menu" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav-panel">
+        <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- "More" overflow dropdown — sibling of <header> so position:fixed escapes header's stacking context. Wired by nav.js via data-dropdown="menu-more". -->
+<div class="nav-dropdown" id="menu-more" aria-label="More navigation">
+  <p class="nav-dd-section">Products</p>
+  <a href="/engineering-drafting/">Drafting &amp; Engineering Edition</a>
+  <a href="/sentinel-home/">Sentinel Home Edition</a>
+  <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability — Assistive Tools &#x2605;</a>
+  <a href="/living-memorials/enterprise-estate-continuity.html">Enterprise Estate Continuity</a>
+  <p class="nav-dd-section">Capabilities</p>
+  <a href="/evidence-room.html">Evidence Room</a>
+  <a href="/push-button-deliverables.html">Push-Button Deliverables</a>
+  <a href="/pilot-readiness-kit.html">Pilot Kit</a>
+  <a href="/pilot-program.html">Pilot Program</a>
+  <a href="/how-it-works.html">How It Works</a>
+  <p class="nav-dd-section">Hubs &amp; Company</p>
+  <a href="/training.html">Training Hub</a>
+  <a href="/documentation-hub/">Document Hub</a>
+  <a href="/global/">Global Hub</a>
+  <a href="/investors-hub.html">Investor Hub</a>
+  <a href="/valuation-dashboard.html">Valuation Dashboard</a>
+  <a href="/about.html">About</a>
+  <p class="nav-dd-section">Trust &amp; Legal</p>
+  <a href="/transparency.html">Transparency</a>
+  <a href="/audit.html">Audit Log</a>
+  <a href="/privacy.html">Privacy</a>
+  <a href="/sitemap.html">Sitemap</a>
+</div>
+<!-- Site search is provided by the self-contained search.js asset (command palette: / or Ctrl/Cmd-K). -->
+
+<!-- Mobile panel: full-screen slide-in. v396 nav — hub tiles + grouped links + Sentinel Node + Engineering. -->
+<nav id="mobile-nav-panel" aria-label="Mobile navigation" aria-hidden="true" role="dialog" aria-modal="true">
+
+  <!-- Hub tiles: Sentinel Node, Documentation Hub, Training Hub, Global Hub -->
+  <div style="padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,0.07);">
+    <p style="font-size:0.65em;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.28);margin:0 0 10px;padding:0 2px;">Hubs</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <a href="/sentinel-node.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(213,169,79,0.1);border:1px solid rgba(213,169,79,0.35);border-radius:10px;color:#d5a94f;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Sentinel Node</a>
+      <a href="/documentation-hub/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(0,194,168,0.1);border:1px solid rgba(0,194,168,0.35);border-radius:10px;color:#00c2a8;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Docs Hub</a>
+      <a href="/training.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.35);border-radius:10px;color:#a78bfa;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Training Hub</a>
+      <a href="/global/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(122,240,220,0.07);border:1px solid rgba(122,240,220,0.3);border-radius:10px;color:#7af0dc;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Global Hub</a>
+    </div>
+  </div>
+
+  <!-- Core paths -->
+  <div class="mob-static-links">
+    <a href="/index.html">Home</a>
+    <a href="/for-physicians.html">Physicians</a>
+    <a href="/for-attorneys.html">Attorneys</a>
+    <a href="/engineering-drafting/">Engineering &amp; Drafting</a>
+    <a href="/pilot-program.html">Pilot Program</a>
+    <a href="/how-it-works.html">How It Works</a>
+    <a href="/trust.html">Trust &amp; Audit</a>
+    <a href="/pricing.html">Pricing</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/living-memorials/">Living Echo</a>
+    <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability</a>
+    <a href="/about.html">About</a>
+    <a href="/team.html" style="color:rgba(255,255,255,0.6);">Team &amp; Leadership</a>
+    <a href="/valuation-dashboard.html" style="color:rgba(255,255,255,0.6);">Valuation Dashboard</a>
+    <a href="/careers.html" style="color:rgba(255,255,255,0.6);">Careers</a>
+    <a href="/sentinel-demo.html" style="color:rgba(255,255,255,0.6);">Demo</a>
+    <a href="/sitemap.html" style="color:rgba(255,255,255,0.45);">Sitemap</a>
+    <a href="/transparency.html" style="color:rgba(255,255,255,0.45);">Transparency</a>
+    <a href="/privacy.html" style="color:rgba(255,255,255,0.45);">Privacy</a>
+  </div>
+
+  <a href="/contact.html#pilot" class="mob-cta">Request a Pilot</a>
+</nav>
+<!-- /INCLUDE:HEADER -->
+
+
+<main id="main-content" tabindex="-1">
+<span id="main" aria-hidden="true"></span>
+<div class="page-back-link"><a href="research.html" class="back-link-anchor">&#8592; Research &amp; Insights</a></div>
+
+  <article class="wp-wrap">
+
+    <span class="wp-eyebrow">White Paper &nbsp;&middot;&nbsp; Governance &nbsp;&middot;&nbsp; May 2026</span>
+
+    <h1 class="wp-hero-title">The Governance Receipt</h1>
+    <p class="wp-hero-sub">A Chain-of-Custody Framework for Accountable AI in Healthcare and Law</p>
+
+    <p class="wp-hero-lead">AI governance is moving from policy to proof. In healthcare and law, a fluent answer is not enough. Every consequential AI-assisted output needs a chain of custody: what was asked, what evidence was retrieved, what the system generated, who reviewed it, what changed, and whether sensitive data stayed local.</p>
+
+    <div class="wp-cta-row">
+      <a href="assets/pdfs/governance_receipt_whitepaper.pdf" class="wp-btn-primary" download>
+        &darr; Download the White Paper (PDF)
+      </a>
+      <a href="pilot-brief.html" class="wp-btn-secondary">
+        Apply for a Sentinel Node Pilot &rarr;
+      </a>
+    </div>
+
+    <div class="wp-receipt-card" role="img" aria-label="Infographic explaining the Governance Receipt model for accountable AI in healthcare and law, including prompt, evidence retrieval, AI output, human review, final output, and audit logging.">
+      <h3>The Governance Receipt &mdash; Eight Layers</h3>
+      <div class="wp-receipt-grid">
+        <div class="wp-receipt-item"><b>Identity</b><span>Who initiated and authenticated the event</span></div>
+        <div class="wp-receipt-item"><b>Task</b><span>Prompt, workflow, patient or matter context</span></div>
+        <div class="wp-receipt-item"><b>Evidence</b><span>Retrieved records, passages, policy versions</span></div>
+        <div class="wp-receipt-item"><b>Generation</b><span>Model, parameters, draft output produced</span></div>
+        <div class="wp-receipt-item"><b>Review</b><span>Named reviewer, decisions, edits, timestamp</span></div>
+        <div class="wp-receipt-item"><b>Output</b><span>Final message, letter, or export record</span></div>
+        <div class="wp-receipt-item"><b>Audit Trail</b><span>Tamper-evident event log for reconstruction</span></div>
+        <div class="wp-receipt-item"><b>Data Boundary</b><span>Where data stayed; third-party transmission status</span></div>
+      </div>
+    </div>
+
+    <div class="wp-section">
+      <h2>What the white paper covers</h2>
+      <ul>
+        <li>Why policy-only AI governance is insufficient in regulated environments</li>
+        <li>How prior authorization and legal-file workflows expose the chain-of-custody problem</li>
+        <li>What a governance receipt should include &mdash; the eight evidence layers</li>
+        <li>Why hallucination is only one failure mode (and not the worst one)</li>
+        <li>How local retrieval, local inference, human review, and audit logging create defensible AI workflows</li>
+        <li>How independent practices and small firms can adopt accountable AI without building enterprise AI teams</li>
+      </ul>
+    </div>
+
+    <div class="wp-pullquote">
+      No governance receipt, no accountable AI.
+    </div>
+
+    <div class="wp-section">
+      <h2>Black box vs. governance receipt</h2>
+      <p>The governance difference is easiest to see as a contrast between a black-box workflow and a receipt-producing workflow.</p>
+      <div class="wp-compare">
+        <div class="wp-compare-col bad">
+          <h4>Black-Box AI</h4>
+          <ul>
+            <li>Prompt &rarr; answer</li>
+            <li>No stable record of evidence used</li>
+            <li>Human review may be informal</li>
+            <li>Data path may be hard to prove</li>
+            <li>Useful, but difficult to defend</li>
+          </ul>
+        </div>
+        <div class="wp-compare-col good">
+          <h4>Governance-Receipt AI</h4>
+          <ul>
+            <li>Identity &rarr; task &rarr; evidence &rarr; draft &rarr; review &rarr; output &rarr; audit trail</li>
+            <li>Retrieved documents and citations preserved</li>
+            <li>Reviewer decision is captured</li>
+            <li>Data boundary is recorded</li>
+            <li>Useful <em>and</em> reconstructable</li>
+          </ul>
+        </div>
+      </div>
+      <p>A receipt does not guarantee perfection. It prevents blindness. When something matters, the organization can reconstruct the event instead of relying on memory, screenshots, or assumptions.</p>
+    </div>
+
+    <div class="wp-section">
+      <h2>Grounded in established standards</h2>
+      <p>The Governance Receipt framework aligns with published guidance from authoritative sources:</p>
+      <ul>
+        <li><strong>NIST AI RMF 1.0 and AI 600-1</strong> &mdash; trustworthy AI requires accountability, transparency, privacy, security, and explainability.</li>
+        <li><strong>HIPAA Security Rule, 45 C.F.R. &sect; 164.312(b)</strong> &mdash; systems using electronic protected health information require audit controls.</li>
+        <li><strong>HHS OCR guidance</strong> on third-party tracking and disclosure risks for regulated entities.</li>
+        <li><strong>ABA Formal Opinion 512</strong> &mdash; lawyers using generative AI must consider competence, confidentiality, communication, supervision, and reasonable fees.</li>
+      </ul>
+      <p>Policies say what people are supposed to do. A governance receipt shows what actually happened.</p>
+    </div>
+
+    <div class="wp-role-block">
+      <h3>Start with your role</h3>
+      <p>The white paper covers the framework. The pilot is where it becomes operational evidence.</p>
+      <div class="wp-role-grid">
+        <a href="for-physicians.html" class="wp-role-card">
+          <b>Physician?</b>
+          <span>See how Sentinel Node supports prior authorization, denials, and documentation workflows.</span>
+        </a>
+        <a href="for-attorneys.html" class="wp-role-card">
+          <b>Attorney?</b>
+          <span>See how local AI can support privileged legal work without surrendering review or control.</span>
+        </a>
+        <a href="executive-brief.html" class="wp-role-card">
+          <b>Investor?</b>
+          <span>See why evidence-preserving AI infrastructure is becoming a category.</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="wp-final-cta">
+      <h3>The white paper builds the case. The pilot proves it.</h3>
+      <p>A Sentinel Node pilot runs a scoped workflow, measures the operating evidence, and produces a real governance receipt for your environment.</p>
+      <div class="wp-cta-row" style="justify-content:center;margin:0;">
+        <a href="pilot-brief.html" class="wp-btn-primary">Apply for a Sentinel Node Pilot &rarr;</a>
+        <a href="assets/pdfs/governance_receipt_whitepaper.pdf" class="wp-btn-secondary" download>&darr; Download the White Paper</a>
+      </div>
+    </div>
+
+  </article>
+
+
+    <!-- v321: Related research callout — AI Near-Miss Doctrine -->
+    <section aria-label="Related research">
+      <div style="background:linear-gradient(160deg,rgba(10,115,210,0.08),rgba(5,22,34,0.85));border:1px solid rgba(10,115,210,0.22);border-left:3px solid #0A73D2;border-radius:0 10px 10px 0;padding:22px 24px;margin:24px 0;display:flex;flex-wrap:wrap;align-items:center;gap:16px;justify-content:space-between;">
+        <div style="flex:1 1 320px;min-width:260px;">
+          <p style="font-size:0.66em;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#5dade2;margin:0 0 6px;">Related Research &middot; Governance</p>
+          <p style="color:#fff;font-weight:700;font-size:0.98em;margin:0 0 4px;">AI Near-Miss Governance</p>
+          <p style="color:#D0DDE6;font-size:0.85em;line-height:1.6;margin:0;">The doctrine behind the receipt: a Level 0&ndash;5 incident model and Detect&rarr;Attest lifecycle for regulated AI.</p>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;flex-shrink:0;">
+          <a href="ai-near-miss-doctrine.html" style="display:inline-flex;align-items:center;gap:6px;padding:9px 16px;background:#0A73D2;color:#fff;font-size:0.82em;font-weight:700;border-radius:6px;text-decoration:none;">Read the Doctrine &rarr;</a>
+          <a href="Pocono_AI_The_AI_Near_Miss_Doctrine.pdf" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border:1px solid rgba(255,255,255,0.18);color:#D0DDE6;font-size:0.82em;font-weight:600;border-radius:6px;text-decoration:none;">Download PDF</a>
+        </div>
+      </div>
+    </section>
+
+</main>
+
+<!-- v385 root-relative nav fix (2026-06-17) -->
+<!-- v396 root-relative nav fix, Living Echo rebrand, Engineering & Drafting + Enterprise Estate Continuity links added (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v397 visual-mobile-QA + interest-form integration (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- INCLUDE:FOOTER -->
+<footer role="contentinfo" style="background:#051622;border-top:1px solid rgba(255,255,255,0.08);padding:40px 24px 28px;font-size:0.85em;color:#8899aa;">
+  <div style="max-width:1180px;margin:0 auto;">
+
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:0 0 28px;margin-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.07);">
+      <div style="max-width:560px;">
+        <p style="margin:0 0 6px;font-size:1.05em;font-weight:700;color:#fff;">Local AI infrastructure for regulated practices.</p>
+        <p style="margin:0;font-size:0.95em;line-height:1.5;">Drafts with citations. Human review required. Sensitive documents stay under practice control. Simple path, deep proof.</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="/contact.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;background:#00c2a8;color:#04111a;font-weight:700;text-decoration:none;font-size:0.95em;">Request Pilot</a>
+        <a href="/sentinel-demo.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;border:1px solid rgba(0,194,168,0.55);color:#00c2a8;font-weight:700;text-decoration:none;font-size:0.95em;">Watch Demo</a>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px 32px;margin-bottom:32px;text-align:left;">
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">For You</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/start-here.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Start Here (3 min)</a>
+          <a href="/for-physicians.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Physicians</a>
+          <a href="/for-attorneys.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Attorneys</a>
+          <a href="/engineering-drafting/" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Engineering &amp; Drafting Teams</a>
+          <a href="/pilot-program.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Pilot Program</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Installer Training</a>
+          <a href="/how-it-works.html" style="color:#8899aa;text-decoration:none;">How It Works</a>
+          <a href="/trust.html" style="color:#8899aa;text-decoration:none;">Trust &amp; Audit</a>
+          <a href="/pricing.html" style="color:#8899aa;text-decoration:none;">Pricing</a>
+          <a href="/sentinel-demo.html" style="color:#8899aa;text-decoration:none;">See the Demo</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Documentation Hub</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/documentation-hub/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Hub Home &mdash; Deep Proof</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">Installer Training</a>
+          <a href="/sentinel-node/installation-simulator.html" style="color:#8899aa;text-decoration:none;">&#8627; Installation Simulator</a>
+          <a href="/documentation-hub/clinical/" style="color:#8899aa;text-decoration:none;">Clinical Documentation</a>
+          <a href="/documentation-hub/legal/" style="color:#8899aa;text-decoration:none;">Legal Documentation</a>
+          <a href="/documentation-hub/technical/" style="color:#8899aa;text-decoration:none;">Technical Documentation</a>
+          <a href="/documentation-hub/governance/" style="color:#8899aa;text-decoration:none;">Governance &amp; Audit</a>
+          <a href="/documentation-hub/tools/" style="color:#8899aa;text-decoration:none;">Tools &amp; Simulators</a>
+          <a href="/documentation-hub/research/" style="color:#8899aa;text-decoration:none;">Research &amp; Essays</a>
+          <a href="/documentation-hub/transparency/" style="color:#8899aa;text-decoration:none;">Transparency</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Global Federated AI</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/global/" style="color:#7af0dc;text-decoration:none;font-weight:600;">Global Federated Hub</a>
+          <a href="/global/australia/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Australia</a>
+          <a href="/global/singapore/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Singapore</a>
+          <a href="/global/taiwan/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Taiwan</a>
+          <a href="/global/europe/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Europe</a>
+          <a href="/contact.html" style="color:#8899aa;text-decoration:none;">Partner Inquiry</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Company</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/about.html" style="color:#8899aa;text-decoration:none;">About Pocono AI</a>
+          <a href="/team.html" style="color:#8899aa;text-decoration:none;">Team &amp; Leadership</a>
+          <a href="/why-pocono-ai.html" style="color:#8899aa;text-decoration:none;">Why Pocono AI</a>
+          <a href="/founding-commercial-leadership.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Join Us</a>
+          <a href="/careers.html" style="color:#8899aa;text-decoration:none;">Careers</a>
+          <a href="/how-we-hire.html" style="color:#8899aa;text-decoration:none;">How We Hire</a>
+          <a href="/channel-partners.html" style="color:#8899aa;text-decoration:none;">Technical Partners (MSPs)</a>
+          <a href="/partners.html" style="color:#8899aa;text-decoration:none;">Academic Partnerships</a>
+          <a href="/contact.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Contact</a>
+          <a href="https://forms.gle/VQahnkjMfY6QNEMy8" target="_blank" rel="noopener noreferrer" style="color:#d5a94f;text-decoration:none;font-weight:600;">Interest List &#8599;</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Founder Projects</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/rehability/" style="color:#a78bfa;text-decoration:none;font-weight:700;">Rehability &#x2605;</a>
+          <a href="/rehability/marcus-memory-helper/" style="color:#a78bfa;text-decoration:none;font-weight:600;">&#8627; Marcus's Memory Helper</a>
+          <a href="/sentinel-home/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Sentinel Home Edition</a>
+          <a href="/living-memorials/" style="color:#8899aa;text-decoration:none;">Living Echo</a>
+          <a href="/living-memorials/marcus-odell/" style="color:#8899aa;text-decoration:none;">Marcus&rsquo;s Living Echo</a>
+          <a href="/living-memorials/enterprise-estate-continuity.html" style="color:#8899aa;text-decoration:none;">Enterprise Estate Continuity</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Resources &amp; Legal</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/sitemap.html" style="color:#8899aa;text-decoration:none;">All Pages (Sitemap)</a>
+          <a href="/audit.html" style="color:#8899aa;text-decoration:none;">Transparency &amp; Audit Log</a>
+          <a href="/maturity-disclosure.html" style="color:#8899aa;text-decoration:none;">What We Have / Don&rsquo;t Claim</a>
+          <a href="/plain.html" style="color:#8899aa;text-decoration:none;">Plain Language Guide</a>
+          <a href="/privacy.html" style="color:#8899aa;text-decoration:none;">Privacy</a>
+          <a href="/terms.html" style="color:#8899aa;text-decoration:none;">Terms</a>
+          <a href="/sla.html" style="color:#8899aa;text-decoration:none;">SLA</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:18px;margin-bottom:14px;">
+      <p style="margin:0;font-size:0.82em;line-height:1.6;color:#6f8295;max-width:1000px;">Pocono AI does not provide medical, legal, or engineering advice, does not practice medicine, law, or licensed engineering, and does not make clinical, legal, or engineering decisions. Outputs are drafts or support materials that require review by a qualified professional; final professional judgment remains with the licensed physician, attorney, or engineer. Tools and simulations on this site are educational and use synthetic data.</p>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:20px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+      <p style="margin:0;font-size:0.9em;">&copy; 2026 Pocono AI, LLC &nbsp;&#183;&nbsp; East Stroudsburg, PA &nbsp;&#183;&nbsp; <a href="mailto:marcus@poconoai.com" style="color:#8899aa;">marcus@poconoai.com</a> &nbsp;&#183;&nbsp; <a href="tel:+15705340602" style="color:#8899aa;">(570) 534-0602</a></p>
+      <p style="margin:0;font-size:0.88em;"><a href="/audit.html" style="color:#5dade2;text-decoration:none;">Transparency v402</a></p>
+    </div>
+  </div>
+</footer>
+<script src="/search.js?v=402" defer></script>
+<!-- /INCLUDE:FOOTER -->
+
+<script src="search-index.js?v=402" defer></script>
+<script src="nav.js?v=402" defer></script>
+<script src="pilot-cta.js?v=402" defer></script>
+</body>
+</html>

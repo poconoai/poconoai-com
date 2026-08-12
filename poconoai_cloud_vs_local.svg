@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" role="img" aria-labelledby="title desc">
+  <title id="title">Cloud AI vs. Pocono AI — A Side-by-Side Comparison</title>
+  <desc id="desc">Comparison table contrasting cloud AI services against Pocono AI's on-premises model across data residency, privilege protection, audit, telemetry, latency, and vendor dependency.</desc>
+
+  <defs>
+    <linearGradient id="cmpBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a0f1c"/>
+      <stop offset="100%" stop-color="#050810"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="520" fill="url(#cmpBg)"/>
+
+  <!-- Header -->
+  <text x="600" y="48" text-anchor="middle" font-family="'IBM Plex Sans', system-ui, sans-serif" font-size="22" font-weight="700" fill="#e8edf2" letter-spacing="-0.01em">Cloud AI vs. Pocono AI</text>
+  <text x="600" y="72" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="11" fill="#5b9cf6" letter-spacing="0.18em">SIX QUESTIONS REGULATED INDUSTRIES MUST ASK</text>
+
+  <!-- Two columns header -->
+  <g transform="translate(80, 110)">
+    <!-- Cloud column -->
+    <rect width="510" height="48" rx="4" fill="#1a1418" stroke="#6a3030"/>
+    <text x="255" y="30" text-anchor="middle" font-family="'IBM Plex Sans', sans-serif" font-size="16" font-weight="700" fill="#e85c5c" letter-spacing="0.05em">CLOUD AI SERVICES</text>
+
+    <!-- vs separator -->
+    <text x="540" y="32" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="12" fill="#5a6a7a" letter-spacing="0.2em">VS</text>
+
+    <!-- Pocono column -->
+    <rect x="530" y="0" width="510" height="48" rx="4" fill="#0d2418" stroke="#3fbf82"/>
+    <text x="785" y="30" text-anchor="middle" font-family="'IBM Plex Sans', sans-serif" font-size="16" font-weight="700" fill="#3fbf82" letter-spacing="0.05em">POCONO AI · SENTINEL NODE</text>
+  </g>
+
+  <!-- Row template fn — rendered as static rows below -->
+  <g font-family="'IBM Plex Sans', sans-serif" font-size="13">
+    <!-- Row 1: Data residency -->
+    <g transform="translate(80, 178)">
+      <text x="-10" y="14" text-anchor="end" font-family="'IBM Plex Mono', monospace" font-size="10" fill="#7a8a9a" letter-spacing="0.1em">01</text>
+      <rect width="510" height="38" rx="3" fill="#11141c" stroke="#2a2024" stroke-width="0.5"/>
+      <text x="16" y="24" fill="#a0a8b0">Data routed to vendor data centers</text>
+      <rect x="530" width="510" height="38" rx="3" fill="#0f1a16" stroke="#1a3a26" stroke-width="0.5"/>
+      <text x="546" y="24" fill="#c8d8e4">Data stays on your network. Always.</text>
+      <text x="1050" y="24" font-family="'IBM Plex Mono', monospace" font-size="10" fill="#5b9cf6" letter-spacing="0.1em">RESIDENCY</text>
+    </g>
+
+    <!-- Row 2: Privilege -->
+    <g transform="translate(80, 226)">
+      <text x="-10" y="14" text-anchor="end" font-family="'IBM Plex Mono', monospace" font-size="10" fill="#7a8a9a" letter-spacing="0.1em">02</text>
+      <rect width="510" height="38" rx="3" fill="#11141c" stroke="#2a2024" stroke-width="0.5"/>
+      <text x="16" y="24" fill="#a0a8b0">Third-party access may pierce privilege</text>
+      <rect x="530" width="510" height="38" rx="3" fill="#0f1a16" stroke="#1a3a26" stroke-width="0.5"/>
+      <text x="546" y="24" fill="#c8d8e4">Attorney-client privilege preserved end-to-end</text>
+      <text x="1050" y="24" font-family="'IBM Plex Mono', monospace" font-size="10" fill="#5b9cf6" letter-spacing="0.1em">PRIVILEGE</text>
+    </g>
+
+    <!-- Row 3: Audit -->
+    <g transform="translate(80, 274)">
+      <text x="-10" y="14" text-anchor="end" font-family="'IBM Plex Mono', monospace" font-size="10" fill="#7a8a9a" letter-spacing="0.1em">03</text>
+      <rect width="510" height="38" rx="3" fill="#11141c" stroke="#2a2024" stroke-width="0.5"/>
+      <text x="16" y="24" fill="#a0a8b0">Limited audit visibility; vendor-controlled logs</text>
+      <rect x="530" width="510" height="38" rx="3" fill="#0f1a16" stroke="#1a3a26" stroke-width="0.5"/>
+      <text x="546" y="24" fill="#c8d8e4">Immutable audit trail, owned by you</text>
+      <text x="1050" y="24" font-family="'IBM Plex Mono', monospace" font-size="10" fill="#5b9cf6" letter-spacing="0.1em">AUDIT</text>
+    </g>
+
+    <!-- Row 4: Telemetry -->
+    <g transform="translate(80, 322)">
+      <text x="-10" y="14" text-anchor="end" font-family="'IBM Plex Mono', monospace" font-size="10" fill="#7a8a9a" letter-spacing="0.1em">04</text>
+      <rect width="510" height="38" rx="3" fill="#11141c" stroke="#2a2024" stroke-width="0.5"/>
+      <text x="16" y="24" fill="#a0a8b0">Usage telemetry sent back to vendor</text>
+      <rect x="530" width="510" height="38" rx="3" fill="#0f1a16" stroke="#1a3a26" stroke-width="0.5"/>
+      <text x="546" y="24" fill="#c8d8e4">Zero telemetry. Air-gapped operation supported.</text>
+      <text x="1050" y="24" font-family="'IBM Plex Mono', monospace" font-size="10" fill="#5b9cf6" letter-spacing="0.1em">TELEMETRY</text>
+    </g>
+
+    <!-- Row 5: Latency / network -->
+    <g transform="translate(80, 370)">
+      <text x="-10" y="14" text-anchor="end" font-family="'IBM Plex Mono', monospace" font-size="10" fill="#7a8a9a" letter-spacing="0.1em">05</text>
+      <rect width="510" height="38" rx="3" fill="#11141c" stroke="#2a2024" stroke-width="0.5"/>
+      <text x="16" y="24" fill="#a0a8b0">Internet dependency; latency varies</text>
+      <rect x="530" width="510" height="38" rx="3" fill="#0f1a16" stroke="#1a3a26" stroke-width="0.5"/>
+      <text x="546" y="24" fill="#c8d8e4">Runs offline. Consistent local latency.</text>
+      <text x="1050" y="24" font-family="'IBM Plex Mono', monospace" font-size="10" fill="#5b9cf6" letter-spacing="0.1em">LATENCY</text>
+    </g>
+
+    <!-- Row 6: Lock-in -->
+    <g transform="translate(80, 418)">
+      <text x="-10" y="14" text-anchor="end" font-family="'IBM Plex Mono', monospace" font-size="10" fill="#7a8a9a" letter-spacing="0.1em">06</text>
+      <rect width="510" height="38" rx="3" fill="#11141c" stroke="#2a2024" stroke-width="0.5"/>
+      <text x="16" y="24" fill="#a0a8b0">Vendor lock-in; pricing &amp; ToS can change</text>
+      <rect x="530" width="510" height="38" rx="3" fill="#0f1a16" stroke="#1a3a26" stroke-width="0.5"/>
+      <text x="546" y="24" fill="#c8d8e4">You own the appliance. You own the workflow.</text>
+      <text x="1050" y="24" font-family="'IBM Plex Mono', monospace" font-size="10" fill="#5b9cf6" letter-spacing="0.1em">OWNERSHIP</text>
+    </g>
+  </g>
+
+  <!-- Footer -->
+  <text x="600" y="490" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="10" fill="#5a6a7a" letter-spacing="0.15em">BUILT FOR HEALTHCARE, LEGAL, AND REGULATED INDUSTRIES · POCONOAI.COM</text>
+</svg>

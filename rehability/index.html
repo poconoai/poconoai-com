@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en"><!-- v402 2026-07-06 CTO-COO-Valuation-Dashboard-full-site-stamp -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="description" content="Rehability is Pocono AI's accessibility-focused path: practical local AI tools that help people regain ability one workflow at a time. Built from lived experience.">
+<meta name="keywords" content="local AI accessibility tools, disability AI assistant, assistive AI, chronic illness support, memory helper AI, neurodivergent tools, caregiver AI tools, local-first AI disability, Rehability Pocono AI">
+<title>Rehability — Local Assistive AI, One Tool at a Time | Pocono AI</title>
+
+<meta property="og:title" content="Rehability — Local Assistive AI, One Tool at a Time | Pocono AI">
+<meta property="og:description" content="Practical local AI tools that help people regain ability one workflow at a time. Built from lived experience — designed first because the founder needed it.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Pocono AI">
+<meta property="og:url" content="https://poconoai.com/rehability/">
+<meta property="og:image" content="https://poconoai.com/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#04111a">
+
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="stylesheet" href="/styles.css?v=402">
+<link rel="stylesheet" href="/nav-v2026.css?v=402">
+<link rel="stylesheet" href="/brand-v292.css?v=402">
+<link rel="canonical" href="https://poconoai.com/rehability/">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Rehability — Local Assistive AI, One Tool at a Time",
+  "description": "Pocono AI's accessibility-focused plugin path. Practical local AI tools for people living with disability, chronic illness, pain, cognitive overload, or caregiver burden.",
+  "url": "https://poconoai.com/rehability/",
+  "isPartOf": { "@type": "WebSite", "url": "https://poconoai.com", "name": "Pocono AI, LLC" },
+  "publisher": { "@type": "Organization", "name": "Pocono AI, LLC", "url": "https://poconoai.com" },
+  "datePublished": "2026-06-25",
+  "dateModified": "2026-06-25"
+}
+</script>
+
+<style>
+/* ── Rehability — scoped .rh- design system ── */
+:root {
+  --rh-bg:        #04111a;
+  --rh-surface:   #060e1a;
+  --rh-card:      rgba(255,255,255,0.038);
+  --rh-border:    rgba(255,255,255,0.09);
+  --rh-purple:    #a78bfa;
+  --rh-purple-dim:rgba(167,139,250,0.15);
+  --rh-teal:      #00c2a8;
+  --rh-teal-dim:  rgba(0,194,168,0.13);
+  --rh-amber:     #f0a500;
+  --rh-amber-dim: rgba(240,165,0,0.12);
+  --rh-green:     #4ade80;
+  --rh-green-dim: rgba(74,222,128,0.12);
+  --rh-text:      #c8d8e4;
+  --rh-muted:     #7a8fa0;
+  --rh-max:       1080px;
+}
+body { background: var(--rh-bg); color: var(--rh-text); }
+.rh-wrap { max-width: var(--rh-max); margin: 0 auto; padding: 0 22px; }
+
+/* status badge */
+.rh-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  border-radius: 999px; padding: 5px 14px; font-size: 0.78em;
+  font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  margin-bottom: 22px;
+}
+.rh-badge-live {
+  background: var(--rh-green-dim); border: 1px solid rgba(74,222,128,0.35);
+  color: var(--rh-green);
+}
+.rh-badge-live::before { content: ''; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--rh-green); }
+.rh-badge-planned {
+  background: var(--rh-amber-dim); border: 1px solid rgba(240,165,0,0.30);
+  color: var(--rh-amber);
+}
+.rh-badge-planned::before { content: ''; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--rh-amber); }
+
+/* hero */
+.rh-hero {
+  padding: 80px 22px 64px; text-align: center;
+  border-bottom: 1px solid var(--rh-border);
+  background: radial-gradient(ellipse 800px 400px at 50% -80px, rgba(167,139,250,0.07), transparent);
+}
+.rh-hero h1 {
+  font-size: clamp(2.1rem, 5vw, 3.4rem); font-weight: 800; line-height: 1.15;
+  color: #fff; margin: 0 0 18px; letter-spacing: -0.02em;
+}
+.rh-hero h1 em { font-style: normal; color: var(--rh-purple); }
+.rh-hero .rh-sub {
+  font-size: clamp(1.05rem, 2.2vw, 1.25rem); color: var(--rh-muted);
+  max-width: 620px; margin: 0 auto 34px; line-height: 1.65;
+}
+.rh-ctas { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+.rh-btn-primary {
+  display: inline-flex; align-items: center; padding: 13px 28px;
+  border-radius: 999px; background: var(--rh-purple); color: #04111a;
+  font-weight: 700; text-decoration: none; font-size: 1em; transition: opacity .15s;
+}
+.rh-btn-primary:hover { opacity: .88; }
+.rh-btn-ghost {
+  display: inline-flex; align-items: center; padding: 12px 28px;
+  border-radius: 999px; border: 1px solid rgba(167,139,250,0.45);
+  color: var(--rh-purple); font-weight: 600; text-decoration: none; font-size: 1em;
+  transition: border-color .15s;
+}
+.rh-btn-ghost:hover { border-color: var(--rh-purple); }
+.rh-btn-teal {
+  display: inline-flex; align-items: center; padding: 13px 28px;
+  border-radius: 999px; background: var(--rh-teal); color: #04111a;
+  font-weight: 700; text-decoration: none; font-size: 1em; transition: opacity .15s;
+}
+.rh-btn-teal:hover { opacity: .88; }
+
+/* founder note */
+.rh-founder-note {
+  max-width: 680px; margin: 32px auto 0;
+  padding: 20px 24px; background: rgba(167,139,250,0.07);
+  border: 1px solid rgba(167,139,250,0.22); border-radius: 14px;
+  font-size: 0.93em; line-height: 1.65; color: var(--rh-muted); text-align: left;
+}
+.rh-founder-note strong { color: #fff; }
+
+/* sections */
+.rh-section { padding: 64px 22px; }
+.rh-section--alt { background: var(--rh-surface); }
+.rh-section-label {
+  display: block; font-size: 0.72em; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.15em; color: var(--rh-purple); margin-bottom: 12px;
+}
+.rh-section h2 {
+  font-size: clamp(1.5rem, 3.2vw, 2.1rem); font-weight: 800; color: #fff;
+  margin: 0 0 16px; letter-spacing: -0.015em;
+}
+.rh-lead {
+  font-size: clamp(1rem, 1.8vw, 1.12rem); color: var(--rh-muted);
+  line-height: 1.7; max-width: 760px; margin: 0 0 36px;
+}
+
+/* grid */
+.rh-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+.rh-grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; }
+
+/* cards */
+.rh-card {
+  background: var(--rh-card); border: 1px solid var(--rh-border);
+  border-radius: 14px; padding: 22px;
+}
+.rh-card h3 { font-size: 1em; font-weight: 700; color: #fff; margin: 0 0 8px; }
+.rh-card p { margin: 0; font-size: 0.93em; color: var(--rh-muted); line-height: 1.6; }
+.rh-card-icon {
+  width: 36px; height: 36px; margin-bottom: 12px;
+  color: var(--rh-purple); stroke-width: 1.7;
+}
+
+/* tool list */
+.rh-tool-list { display: flex; flex-direction: column; gap: 12px; }
+.rh-tool {
+  display: grid; grid-template-columns: auto 1fr auto; gap: 14px; align-items: start;
+  background: var(--rh-card); border: 1px solid var(--rh-border);
+  border-radius: 14px; padding: 18px 20px;
+}
+.rh-tool-icon {
+  font-size: 1.5rem; line-height: 1; padding-top: 2px;
+}
+.rh-tool-body h3 { font-size: 0.97em; font-weight: 700; color: #fff; margin: 0 0 4px; }
+.rh-tool-body p { margin: 0; font-size: 0.88em; color: var(--rh-muted); line-height: 1.55; }
+.rh-tool-pill {
+  display: inline-flex; align-items: center; padding: 4px 11px;
+  border-radius: 999px; font-size: 0.72em; font-weight: 700;
+  white-space: nowrap; letter-spacing: 0.04em;
+}
+.rh-pill-live { background: var(--rh-green-dim); color: var(--rh-green); border: 1px solid rgba(74,222,128,0.3); }
+.rh-pill-planned { background: var(--rh-amber-dim); color: var(--rh-amber); border: 1px solid rgba(240,165,0,0.3); }
+.rh-pill-next { background: var(--rh-purple-dim); color: var(--rh-purple); border: 1px solid rgba(167,139,250,0.3); }
+
+/* plugin arch */
+.rh-arch-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-top: 32px; }
+.rh-arch-card {
+  background: var(--rh-card); border: 1px solid var(--rh-border);
+  border-radius: 14px; padding: 20px; position: relative;
+}
+.rh-arch-card .label {
+  font-size: 0.68em; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--rh-teal); margin-bottom: 8px; display: block;
+}
+.rh-arch-card h3 { font-size: 0.95em; font-weight: 700; color: #fff; margin: 0 0 7px; }
+.rh-arch-card p { margin: 0; font-size: 0.87em; color: var(--rh-muted); line-height: 1.55; }
+
+/* call for tools */
+.rh-call {
+  background: linear-gradient(135deg, rgba(167,139,250,0.08), rgba(0,194,168,0.05));
+  border: 1px solid rgba(167,139,250,0.22); border-radius: 20px;
+  padding: 40px 32px; text-align: center;
+}
+.rh-call h2 { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 800; color: #fff; margin: 0 0 14px; }
+.rh-call p { color: var(--rh-muted); line-height: 1.7; max-width: 640px; margin: 0 auto 28px; }
+
+/* disclaimer */
+.rh-disclaimer {
+  margin-top: 40px; padding: 16px 20px;
+  border: 1px solid rgba(255,255,255,0.06); border-radius: 12px;
+  font-size: 0.83em; color: var(--rh-muted); line-height: 1.6;
+}
+
+/* chips */
+.rh-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+.rh-chip {
+  display: inline-flex; padding: 6px 13px;
+  background: rgba(167,139,250,0.08); border: 1px solid rgba(167,139,250,0.22);
+  border-radius: 999px; font-size: 0.82em; color: var(--rh-purple); font-weight: 600;
+}
+
+@media (max-width: 600px) {
+  .rh-hero { padding: 56px 18px 44px; }
+  .rh-section { padding: 44px 18px; }
+  .rh-tool { grid-template-columns: auto 1fr; }
+  .rh-tool-pill { display: none; }
+  .rh-call { padding: 28px 20px; }
+}
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link" style="position:absolute;left:-999px;top:0;background:var(--rh-purple);color:#04111a;padding:10px 18px;border-radius:0 0 12px 0;z-index:60;font-weight:700;">Skip to main content</a>
+
+<!-- HITL notice -->
+<div id="hitl-notice" style="background:#0a1929;padding:4px 16px;text-align:center;font-size:12px;color:#4a5568;border-bottom:1px solid rgba(255,255,255,0.06);letter-spacing:0.01em;">Human-in-the-Loop required: all outputs are drafts for personal or professional review — not clinical, legal, or medical decisions</div>
+
+<!-- Header -->
+<header role="banner">
+  <div class="header-inner">
+    <a href="/index.html" class="logo" aria-label="Pocono AI Home">
+      <img src="/logo.svg?v=402" alt="" width="36" height="36" decoding="async" loading="eager" aria-hidden="true" style="display:inline-block;">
+      Pocono <span>AI</span>
+    </a>
+    <nav id="desktop-nav" aria-label="Main navigation">
+      <div class="nav-item"><a href="/index.html" class="nav-direct">Home</a></div>
+      <div class="nav-item"><a href="/for-physicians.html" class="nav-direct">Physicians</a></div>
+      <div class="nav-item"><a href="/for-attorneys.html" class="nav-direct">Attorneys</a></div>
+      <div class="nav-item"><a href="/sentinel-node.html" class="nav-direct nav-hub" style="color:#d5a94f;border:1px solid rgba(213,169,79,0.45);border-radius:999px;padding:6px 13px;">Sentinel Node</a></div>
+      <div class="nav-item"><a href="/living-memorials/" class="nav-direct">Living Echo</a></div>
+      <div class="nav-item"><a href="/contact.html" class="nav-direct">Contact</a></div>
+      <div class="nav-item" data-dropdown="menu-more">
+        <button type="button" class="nav-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="menu-more">More <span class="nav-chevron" aria-hidden="true">&#9662;</span></button>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <a href="/contact.html" class="nav-cta nav-cta-primary">Get in Touch</a>
+      <button type="button" class="pa-search-trigger" data-search-open aria-label="Search (press / or Ctrl-K)" aria-haspopup="dialog" aria-expanded="false">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span class="pa-st-label">Search</span><kbd data-pa-keyhint>Ctrl K</kbd>
+      </button>
+      <button type="button" class="header-icon-btn" id="mobile-menu" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav-panel">
+        <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="nav-dropdown" id="menu-more" aria-label="More navigation">
+  <p class="nav-dd-section">Products</p>
+  <a href="/engineering-drafting/">Drafting &amp; Engineering Edition</a>
+  <a href="/sentinel-home/">Sentinel Home Edition</a>
+  <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability — Assistive Tools &#x2605;</a>
+  <a href="/living-memorials/enterprise-estate-continuity.html">Enterprise Estate Continuity</a>
+  <p class="nav-dd-section">Capabilities</p>
+  <a href="/evidence-room.html">Evidence Room</a>
+  <a href="/push-button-deliverables.html">Push-Button Deliverables</a>
+  <a href="/pilot-readiness-kit.html">Pilot Kit</a>
+  <a href="/pilot-program.html">Pilot Program</a>
+  <a href="/how-it-works.html">How It Works</a>
+  <p class="nav-dd-section">Hubs &amp; Company</p>
+  <a href="/training.html">Training Hub</a>
+  <a href="/documentation-hub/">Document Hub</a>
+  <a href="/global/">Global Hub</a>
+  <a href="/about.html">About</a>
+  <p class="nav-dd-section">Trust &amp; Legal</p>
+  <a href="/transparency.html">Transparency</a>
+  <a href="/audit.html">Audit Log</a>
+  <a href="/privacy.html">Privacy</a>
+  <a href="/sitemap.html">Sitemap</a>
+</div>
+
+<nav id="mobile-nav-panel" aria-label="Mobile navigation" aria-hidden="true" role="dialog" aria-modal="true">
+  <div style="padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,0.07);">
+    <p style="font-size:0.65em;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.28);margin:0 0 10px;padding:0 2px;">Hubs</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <a href="/sentinel-node.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(213,169,79,0.1);border:1px solid rgba(213,169,79,0.35);border-radius:10px;color:#d5a94f;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Sentinel Node</a>
+      <a href="/documentation-hub/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(0,194,168,0.1);border:1px solid rgba(0,194,168,0.35);border-radius:10px;color:#00c2a8;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Docs Hub</a>
+      <a href="/rehability/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.35);border-radius:10px;color:#a78bfa;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Rehability</a>
+      <a href="/global/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;background:rgba(122,240,220,0.07);border:1px solid rgba(122,240,220,0.3);border-radius:10px;color:#7af0dc;text-decoration:none;font-size:0.76em;font-weight:700;text-align:center;padding:8px 4px;line-height:1.3;">Global Hub</a>
+    </div>
+  </div>
+  <div class="mob-static-links">
+    <a href="/index.html">Home</a>
+    <a href="/for-physicians.html">Physicians</a>
+    <a href="/for-attorneys.html">Attorneys</a>
+    <a href="/engineering-drafting/">Engineering &amp; Drafting</a>
+    <a href="/pilot-program.html">Pilot Program</a>
+    <a href="/how-it-works.html">How It Works</a>
+    <a href="/trust.html">Trust &amp; Audit</a>
+    <a href="/pricing.html">Pricing</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/living-memorials/">Living Echo</a>
+    <a href="/rehability/" style="color:#a78bfa;font-weight:700;">Rehability</a>
+    <a href="/about.html">About</a>
+    <a href="/team.html" style="color:rgba(255,255,255,0.6);">Team &amp; Leadership</a>
+    <a href="/careers.html" style="color:rgba(255,255,255,0.6);">Careers</a>
+    <a href="/sitemap.html" style="color:rgba(255,255,255,0.45);">Sitemap</a>
+    <a href="/transparency.html" style="color:rgba(255,255,255,0.45);">Transparency</a>
+    <a href="/privacy.html" style="color:rgba(255,255,255,0.45);">Privacy</a>
+  </div>
+  <a href="/contact.html" class="mob-cta">Get in Touch</a>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════════════ MAIN -->
+<main id="main-content">
+
+<!-- Hero -->
+<section class="rh-hero">
+  <div class="rh-wrap">
+    <div class="rh-badge rh-badge-live">First plugin available</div>
+    <h1>Regain ability.<br><em>One tool at a time.</em></h1>
+    <p class="rh-sub">Rehability is Pocono AI's accessibility-focused path: practical, local-first AI tools for people living with disability, chronic illness, pain, cognitive overload, or caregiver burden.</p>
+    <div class="rh-ctas">
+      <a href="/rehability/marcus-memory-helper/" class="rh-btn-primary">Marcus's Memory Helper &rarr;</a>
+      <a href="#call-for-tools" class="rh-btn-ghost">Suggest a tool</a>
+    </div>
+    <div class="rh-founder-note">
+      <strong>A note from Marcus O'Dell, Founder:</strong> I built these tools first because I need them myself — while managing chronic pain, cognitive overload, and the daily difficulty of turning urgent thoughts into usable action. "Rehability" means helping people regain ability, one practical tool at a time. Designed by Marcus for Marcus, with AI assistance, then generalized so other disabled people can benefit. If the tools help me have more usable days, they might help you too.
+    </div>
+  </div>
+</section>
+
+<!-- What Rehability is -->
+<section class="rh-section" id="what-it-is">
+  <div class="rh-wrap">
+    <span class="rh-section-label">What This Is</span>
+    <h2>Not a promise to fix people.</h2>
+    <p class="rh-lead">Rehability is not a cure, a clinical treatment, or a replacement for professional care. It is a commitment to build tools that give people more usable days — practical local AI support for the workflows that get harder when life is hard.</p>
+
+    <div class="rh-grid">
+      <div class="rh-card">
+        <svg class="rh-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <h3>Local-first, private by design</h3>
+        <p>Your notes, symptoms, and documents stay on your device. No cloud. No third-party servers. No one reading your pain logs or appointment prep.</p>
+      </div>
+      <div class="rh-card">
+        <svg class="rh-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <h3>User-controlled, always</h3>
+        <p>You decide what gets captured, what gets shared, and what gets exported. Every tool requires your explicit action. Nothing leaves without your review.</p>
+      </div>
+      <div class="rh-card">
+        <svg class="rh-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <h3>Drafts, not decisions</h3>
+        <p>Every Rehability tool produces a draft. You — and any professional you involve — make the actual decisions. Human review is built in, not optional.</p>
+      </div>
+      <div class="rh-card">
+        <svg class="rh-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <h3>Built from lived experience</h3>
+        <p>These are not tools imagined by a healthy product team. They exist because someone who lives with disability needed them and built them. That matters.</p>
+      </div>
+      <div class="rh-card">
+        <svg class="rh-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+        <h3>Plugin-based structure</h3>
+        <p>Each tool is bounded, purposeful, and independent. New tools can be added without turning the whole product into a fragile monolith. Small tools matter when life is hard.</p>
+      </div>
+      <div class="rh-card">
+        <svg class="rh-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <h3>Accessibility-forward UI</h3>
+        <p>Large tap targets. High contrast. Plain language. Print-friendly output. Screen-reader labels. Designed for people who may be lying down, in pain, or using dictation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Current tools -->
+<section class="rh-section rh-section--alt" id="tools">
+  <div class="rh-wrap">
+    <span class="rh-section-label">Rehability Plugin Roadmap</span>
+    <h2>What's built. What's next.</h2>
+    <p class="rh-lead">Rehability is a plugin roadmap, not a monolith. The first plugin — Marcus's Memory Helper — is built and running. Future plugins follow the same model: bounded, purposeful, local-first.</p>
+
+    <!-- Plugin 1: Marcus's Memory Helper -->
+    <div style="margin-bottom:32px;">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+        <span style="font-size:0.7em;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#fff;background:rgba(74,222,128,0.12);border:1px solid rgba(74,222,128,0.3);border-radius:999px;padding:5px 14px;">Plugin 1 — Available Now</span>
+      </div>
+      <div style="background:rgba(167,139,250,0.07);border:1px solid rgba(167,139,250,0.22);border-radius:16px;padding:24px 24px 20px;">
+        <h3 style="font-size:1.15em;font-weight:800;color:#fff;margin:0 0 8px;">🧠 Marcus's Memory Helper</h3>
+        <p style="color:var(--rh-muted);line-height:1.65;margin:0 0 20px;font-size:0.95em;">The first plugin-style assistive tool under Rehability. Built for pain management, appointment prep, medication tracking, letter writing, daily memory, and call summaries — all local, all private, all draft-only until you review and approve.</p>
+        <div class="rh-tool-list">
+          <div class="rh-tool">
+            <div class="rh-tool-icon">🩺</div>
+            <div class="rh-tool-body">
+              <h3>Pain Episode Capture</h3>
+              <p>Record pain level, location, duration, triggers, and what helped — before you forget. Produces a plain-language note and a clinician-ready paragraph.</p>
+            </div>
+            <span class="rh-tool-pill rh-pill-live">Available</span>
+          </div>
+          <div class="rh-tool">
+            <div class="rh-tool-icon">📋</div>
+            <div class="rh-tool-body">
+              <h3>Medical Appointment Prep</h3>
+              <p>Turns recent notes into a structured visit package: top concerns, questions, agenda, one-page summary, and what to bring. You decide what matters clinically.</p>
+            </div>
+            <span class="rh-tool-pill rh-pill-live">Available</span>
+          </div>
+          <div class="rh-tool">
+            <div class="rh-tool-icon">✉️</div>
+            <div class="rh-tool-body">
+              <h3>Doctor / Advocate Letter Builder</h3>
+              <p>Draft letters to pain specialists, hospitals, payers, or patient advocates. Professional, factual, non-accusatory. Fax-friendly and email versions included.</p>
+            </div>
+            <span class="rh-tool-pill rh-pill-live">Available</span>
+          </div>
+          <div class="rh-tool">
+            <div class="rh-tool-icon">💊</div>
+            <div class="rh-tool-body">
+              <h3>Medication / Treatment Trial Tracker</h3>
+              <p>Track what you tried, dosing notes, effects, side effects, and timeline. Produces a comparison table and clinician briefing paragraph — patient-reported, not clinical interpretation.</p>
+            </div>
+            <span class="rh-tool-pill rh-pill-live">Available</span>
+          </div>
+          <div class="rh-tool">
+            <div class="rh-tool-icon">📓</div>
+            <div class="rh-tool-body">
+              <h3>Daily Memory Log</h3>
+              <p>Capture what happened, how you felt, tasks, and promises — structured so you can search it, review it, and carry it forward without losing a day of context.</p>
+            </div>
+            <span class="rh-tool-pill rh-pill-live">Available</span>
+          </div>
+          <div class="rh-tool">
+            <div class="rh-tool-icon">📞</div>
+            <div class="rh-tool-body">
+              <h3>Conversation / Call Summary</h3>
+              <p>Turns voice-to-text or rough notes from a call, appointment, or meeting into a clean summary with action items and follow-up tracking.</p>
+            </div>
+            <span class="rh-tool-pill rh-pill-live">Available</span>
+          </div>
+        </div>
+        <div style="margin-top:20px;">
+          <a href="/rehability/marcus-memory-helper/" class="rh-btn-primary" style="font-size:0.95em;">Full Memory Helper details &rarr;</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Plugin 2: Who's Who -->
+    <div style="margin-bottom:32px;">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+        <span style="font-size:0.7em;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--rh-amber);background:var(--rh-amber-dim);border:1px solid rgba(240,165,0,0.3);border-radius:999px;padding:5px 14px;">Plugin 2 — Coming Next</span>
+      </div>
+      <div style="background:var(--rh-card);border:1px solid var(--rh-border);border-radius:16px;padding:24px 24px 20px;">
+        <h3 style="font-size:1.15em;font-weight:800;color:#fff;margin:0 0 8px;">👤 Who's Who</h3>
+        <p style="color:var(--rh-muted);line-height:1.65;margin:0 0 12px;font-size:0.95em;">A personal recognition and context helper for people who have difficulty recognizing faces, names, roles, or relationships. Not surveillance. The goal is dignity: helping a user privately remember who someone is, how they know them, and what matters before a conversation.</p>
+        <div class="rh-chips">
+          <span class="rh-chip">Local-first people library</span>
+          <span class="rh-chip">User-controlled</span>
+          <span class="rh-chip">Consent-aware</span>
+          <span class="rh-chip">Not surveillance</span>
+          <span class="rh-chip">Not law enforcement</span>
+        </div>
+        <div style="margin-top:16px;">
+          <a href="/rehability/whos-who/" class="rh-btn-ghost" style="font-size:0.9em;">Read the Who's Who design brief &rarr;</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Planned tools -->
+    <div>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+        <span style="font-size:0.7em;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--rh-muted);background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);border-radius:999px;padding:5px 14px;">Future Plugins — Planned</span>
+      </div>
+      <div class="rh-grid">
+        <div class="rh-card" style="opacity:0.8;">
+          <h3>📂 Evidence Binder Builder</h3>
+          <p>Organize and export a structured binder of personal health, legal, or advocacy records — ready for a professional to review.</p>
+        </div>
+        <div class="rh-card" style="opacity:0.8;">
+          <h3>✅ Task Rescue / Next Step Tool</h3>
+          <p>When you've stalled on something, help you find the next single action without having to reload the whole context from scratch.</p>
+        </div>
+        <div class="rh-card" style="opacity:0.8;">
+          <h3>📚 Research Transfer Tool</h3>
+          <p>Summarize and transfer research from a session so it's preserved, searchable, and usable the next time — without losing what you learned.</p>
+        </div>
+        <div class="rh-card" style="opacity:0.8;">
+          <h3>🔨 Product Build Session Tool</h3>
+          <p>Structured session notes for building software, websites, or other technical projects — capturing decisions, blockers, and progress in a reusable format.</p>
+        </div>
+        <div class="rh-card" style="opacity:0.8;">
+          <h3>📤 Outreach Draft Tool</h3>
+          <p>Draft LinkedIn messages, emails, and professional outreach without losing the personal voice or the important detail under the cognitive load of composing.</p>
+        </div>
+        <div class="rh-card" style="opacity:0.8;">
+          <h3>🧠 Living Echo Memory Capture</h3>
+          <p>Bridge between personal memory logging and the Living Echo continuity archive — structured capture with clear consent and privacy controls.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Plugin architecture -->
+<section class="rh-section" id="architecture">
+  <div class="rh-wrap">
+    <span class="rh-section-label">Why Plugins</span>
+    <h2>Small tools. No fragile monolith.</h2>
+    <p class="rh-lead">Sentinel Home / Rehability is designed to support more tools over time without growing into an unmaintainable sprawl. Each plugin follows the same four rules.</p>
+    <div class="rh-arch-grid">
+      <div class="rh-arch-card">
+        <span class="label">Rule 1</span>
+        <h3>Bounded purpose</h3>
+        <p>Each tool does one thing well. Pain capture captures pain. Appointment prep prepares for appointments. A tool that tries to do everything does nothing reliably.</p>
+      </div>
+      <div class="rh-arch-card">
+        <span class="label">Rule 2</span>
+        <h3>Local-first where possible</h3>
+        <p>No network calls during a tool run unless the user has explicitly approved them. Your pain notes don't need to leave your device to be useful to you.</p>
+      </div>
+      <div class="rh-arch-card">
+        <span class="label">Rule 3</span>
+        <h3>User-controlled and privacy-preserving</h3>
+        <p>The user decides what's captured, what's exported, and what's shared. Tools don't make decisions on their own. Human review is required on every export.</p>
+      </div>
+      <div class="rh-arch-card">
+        <span class="label">Rule 4</span>
+        <h3>Draft-only output</h3>
+        <p>Rehability tools produce drafts, summaries, and support materials. They do not diagnose, prescribe, advise legally, or make final professional decisions.</p>
+      </div>
+    </div>
+    <div class="rh-chips" style="margin-top:28px;">
+      <span class="rh-chip">plugin.yaml manifest</span>
+      <span class="rh-chip">Port-isolated FastAPI worker</span>
+      <span class="rh-chip">Local SQLite storage</span>
+      <span class="rh-chip">human_review_required=True on all exports</span>
+      <span class="rh-chip">No cloud LLM calls</span>
+      <span class="rh-chip">Audit-forwarding to Core</span>
+    </div>
+  </div>
+</section>
+
+<!-- Call for tools -->
+<section class="rh-section rh-section--alt" id="call-for-tools">
+  <div class="rh-wrap">
+    <div class="rh-call">
+      <h2>What tool would help you regain ability?</h2>
+      <p>If you live with disability, chronic illness, memory difficulty, pain, cognitive overload, caregiver burden, or communication barriers — we want to know what practical tool would help you. Pocono AI is building Rehability one useful tool at a time, and we're not guessing about what people need.</p>
+      <p style="font-size:0.9em;color:var(--rh-muted);margin-bottom:28px;">Inviting: people living with disability or chronic illness &nbsp;·&nbsp; caregivers &nbsp;·&nbsp; clinicians &nbsp;·&nbsp; patient advocates &nbsp;·&nbsp; accessibility-minded builders</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
+        <a href="mailto:marcus@poconoai.com?subject=Rehability%20Tool%20Suggestion&body=Hi%20Marcus%2C%0A%0AHere%20is%20a%20tool%20that%20would%20help%20me%20%28or%20someone%20I%20support%29%20have%20more%20usable%20days%3A%0A%0A(Describe%20the%20situation%20and%20what%20you%20need.)" class="rh-btn-primary">Suggest a tool &rarr;</a>
+        <a href="https://forms.gle/VQahnkjMfY6QNEMy8" target="_blank" rel="noopener noreferrer" class="rh-btn-ghost">Join the interest list &#8599;</a>
+      </div>
+    </div>
+
+    <div class="rh-disclaimer">
+      <strong>Scope boundary:</strong> Rehability tools are personal memory, communication, and organizational support tools. They do not provide medical, clinical, diagnostic, legal, or professional advice. They do not replace clinical documentation systems, electronic health records, or professional judgment. All outputs are drafts that require human review before any action is taken. Emergency situations require emergency services — not this tool.
+    </div>
+  </div>
+</section>
+
+<!-- Related links -->
+<section class="rh-section">
+  <div class="rh-wrap">
+    <span class="rh-section-label">Related</span>
+    <h2>More from Pocono AI</h2>
+    <div class="rh-grid-2">
+      <a href="/sentinel-home/" style="display:block;text-decoration:none;">
+        <div class="rh-card" style="transition:border-color .15s;" onmouseover="this.style.borderColor='rgba(0,194,168,0.4)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.09)'">
+          <h3 style="color:var(--rh-teal);">Sentinel Home Edition &rarr;</h3>
+          <p>The full platform vision: a local AI node for the home, covering communication, executive function, memory, safety, and independence. Rehability is its first implemented layer.</p>
+        </div>
+      </a>
+      <a href="/rehability/marcus-memory-helper/" style="display:block;text-decoration:none;">
+        <div class="rh-card" style="transition:border-color .15s;" onmouseover="this.style.borderColor='rgba(167,139,250,0.4)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.09)'">
+          <h3 style="color:var(--rh-purple);">Marcus's Memory Helper &rarr;</h3>
+          <p>The first Rehability plugin. Six tools built and available: pain capture, appointment prep, letter builder, medication tracker, daily log, and call summary.</p>
+        </div>
+      </a>
+      <a href="/living-memorials/" style="display:block;text-decoration:none;">
+        <div class="rh-card" style="transition:border-color .15s;" onmouseover="this.style.borderColor='rgba(240,165,0,0.4)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.09)'">
+          <h3 style="color:var(--rh-amber);">Living Echo &rarr;</h3>
+          <p>A consent-first continuity platform for preserving knowledge, intent, and family guidance. Separate from Sentinel Node and Rehability, but connected through the same privacy-first values.</p>
+        </div>
+      </a>
+      <a href="/contact.html" style="display:block;text-decoration:none;">
+        <div class="rh-card" style="transition:border-color .15s;" onmouseover="this.style.borderColor='rgba(0,194,168,0.4)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.09)'">
+          <h3 style="color:var(--rh-teal);">Get in touch &rarr;</h3>
+          <p>Questions, suggestions, partnership inquiries, caregiver or clinician interest, or disability advocacy organizations — we want to hear from you.</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- Footer -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- v399 desktop-nav-normalization (2026-06-19) -->
+<!-- INCLUDE:FOOTER -->
+<footer role="contentinfo" style="background:#051622;border-top:1px solid rgba(255,255,255,0.08);padding:40px 24px 28px;font-size:0.85em;color:#8899aa;">
+  <div style="max-width:1180px;margin:0 auto;">
+
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:0 0 28px;margin-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.07);">
+      <div style="max-width:560px;">
+        <p style="margin:0 0 6px;font-size:1.05em;font-weight:700;color:#fff;">Local AI infrastructure for regulated practices.</p>
+        <p style="margin:0;font-size:0.95em;line-height:1.5;">Drafts with citations. Human review required. Sensitive documents stay under practice control. Simple path, deep proof.</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="/contact.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;background:#00c2a8;color:#04111a;font-weight:700;text-decoration:none;font-size:0.95em;">Request Pilot</a>
+        <a href="/sentinel-demo.html" style="display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;border:1px solid rgba(0,194,168,0.55);color:#00c2a8;font-weight:700;text-decoration:none;font-size:0.95em;">Watch Demo</a>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px 32px;margin-bottom:32px;text-align:left;">
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">For You</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/start-here.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Start Here (3 min)</a>
+          <a href="/for-physicians.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Physicians</a>
+          <a href="/for-attorneys.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Attorneys</a>
+          <a href="/engineering-drafting/" style="color:#00c2a8;text-decoration:none;font-weight:600;">For Engineering &amp; Drafting Teams</a>
+          <a href="/pilot-program.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Pilot Program</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">&#8627; Installer Training</a>
+          <a href="/how-it-works.html" style="color:#8899aa;text-decoration:none;">How It Works</a>
+          <a href="/trust.html" style="color:#8899aa;text-decoration:none;">Trust &amp; Audit</a>
+          <a href="/pricing.html" style="color:#8899aa;text-decoration:none;">Pricing</a>
+          <a href="/sentinel-demo.html" style="color:#8899aa;text-decoration:none;">See the Demo</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Documentation Hub</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/documentation-hub/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Hub Home &mdash; Deep Proof</a>
+          <a href="/training.html" style="color:#a78bfa;text-decoration:none;font-weight:600;">Training Hub</a>
+          <a href="/customer-training.html" style="color:#8899aa;text-decoration:none;">Customer Training</a>
+          <a href="/installer-training.html" style="color:#8899aa;text-decoration:none;">Installer Training</a>
+          <a href="/sentinel-node/installation-simulator.html" style="color:#8899aa;text-decoration:none;">&#8627; Installation Simulator</a>
+          <a href="/documentation-hub/clinical/" style="color:#8899aa;text-decoration:none;">Clinical Documentation</a>
+          <a href="/documentation-hub/legal/" style="color:#8899aa;text-decoration:none;">Legal Documentation</a>
+          <a href="/documentation-hub/technical/" style="color:#8899aa;text-decoration:none;">Technical Documentation</a>
+          <a href="/documentation-hub/governance/" style="color:#8899aa;text-decoration:none;">Governance &amp; Audit</a>
+          <a href="/documentation-hub/tools/" style="color:#8899aa;text-decoration:none;">Tools &amp; Simulators</a>
+          <a href="/documentation-hub/research/" style="color:#8899aa;text-decoration:none;">Research &amp; Essays</a>
+          <a href="/documentation-hub/transparency/" style="color:#8899aa;text-decoration:none;">Transparency</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Global Federated AI</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/global/" style="color:#7af0dc;text-decoration:none;font-weight:600;">Global Federated Hub</a>
+          <a href="/global/australia/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Australia</a>
+          <a href="/global/singapore/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Singapore</a>
+          <a href="/global/taiwan/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Taiwan</a>
+          <a href="/global/europe/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Europe</a>
+          <a href="/contact.html" style="color:#8899aa;text-decoration:none;">Partner Inquiry</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Company</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/about.html" style="color:#8899aa;text-decoration:none;">About Pocono AI</a>
+          <a href="/team.html" style="color:#8899aa;text-decoration:none;">Team &amp; Leadership</a>
+          <a href="/why-pocono-ai.html" style="color:#8899aa;text-decoration:none;">Why Pocono AI</a>
+          <a href="/founding-commercial-leadership.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Join Us</a>
+          <a href="/careers.html" style="color:#8899aa;text-decoration:none;">Careers</a>
+          <a href="/how-we-hire.html" style="color:#8899aa;text-decoration:none;">How We Hire</a>
+          <a href="/channel-partners.html" style="color:#8899aa;text-decoration:none;">Technical Partners (MSPs)</a>
+          <a href="/partners.html" style="color:#8899aa;text-decoration:none;">Academic Partnerships</a>
+          <a href="/contact.html" style="color:#00c2a8;text-decoration:none;font-weight:600;">Contact</a>
+          <a href="https://forms.gle/VQahnkjMfY6QNEMy8" target="_blank" rel="noopener noreferrer" style="color:#d5a94f;text-decoration:none;font-weight:600;">Interest List &#8599;</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Founder Projects</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/rehability/" style="color:#a78bfa;text-decoration:none;font-weight:700;">Rehability &#x2605;</a>
+          <a href="/rehability/marcus-memory-helper/" style="color:#a78bfa;text-decoration:none;font-weight:600;">&#8627; Marcus's Memory Helper</a>
+          <a href="/sentinel-home/" style="color:#00c2a8;text-decoration:none;font-weight:600;">Sentinel Home Edition</a>
+          <a href="/living-memorials/" style="color:#8899aa;text-decoration:none;">Living Echo</a>
+          <a href="/living-memorials/marcus-odell/" style="color:#8899aa;text-decoration:none;">Marcus&rsquo;s Living Echo</a>
+          <a href="/living-memorials/enterprise-estate-continuity.html" style="color:#8899aa;text-decoration:none;">Enterprise Estate Continuity</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="margin:0 0 10px;font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.35);">Resources &amp; Legal</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="/sitemap.html" style="color:#8899aa;text-decoration:none;">All Pages (Sitemap)</a>
+          <a href="/audit.html" style="color:#8899aa;text-decoration:none;">Transparency &amp; Audit Log</a>
+          <a href="/maturity-disclosure.html" style="color:#8899aa;text-decoration:none;">What We Have / Don&rsquo;t Claim</a>
+          <a href="/plain.html" style="color:#8899aa;text-decoration:none;">Plain Language Guide</a>
+          <a href="/privacy.html" style="color:#8899aa;text-decoration:none;">Privacy</a>
+          <a href="/terms.html" style="color:#8899aa;text-decoration:none;">Terms</a>
+          <a href="/sla.html" style="color:#8899aa;text-decoration:none;">SLA</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:18px;margin-bottom:14px;">
+      <p style="margin:0;font-size:0.82em;line-height:1.6;color:#6f8295;max-width:1000px;">Pocono AI does not provide medical, legal, or engineering advice, does not practice medicine, law, or licensed engineering, and does not make clinical, legal, or engineering decisions. Outputs are drafts or support materials that require review by a qualified professional; final professional judgment remains with the licensed physician, attorney, or engineer. Tools and simulations on this site are educational and use synthetic data.</p>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:20px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+      <p style="margin:0;font-size:0.9em;">&copy; 2026 Pocono AI, LLC &nbsp;&#183;&nbsp; East Stroudsburg, PA &nbsp;&#183;&nbsp; <a href="mailto:marcus@poconoai.com" style="color:#8899aa;">marcus@poconoai.com</a> &nbsp;&#183;&nbsp; <a href="tel:+15705340602" style="color:#8899aa;">(570) 534-0602</a></p>
+      <p style="margin:0;font-size:0.88em;"><a href="/audit.html" style="color:#5dade2;text-decoration:none;">Transparency v402</a></p>
+    </div>
+  </div>
+</footer>
+<script src="/search.js?v=402" defer></script>
+<!-- /INCLUDE:FOOTER -->
+
+<script src="/nav.js?v=402" defer></script>
+<script src="/search.js?v=402" defer></script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+<title id="title">Living Echo logo</title>
+<desc id="desc">A reverent circular mark with a soundwave, leaves, and a small guiding star above the words Living Echo.</desc>
+<rect width="1600" height="900" fill="#ffffff"/>
+<g transform="translate(800 270)">
+  <path d="M -180 0 A 180 180 0 1 1 120 135" fill="none" stroke="#12324a" stroke-width="14" stroke-linecap="round"/>
+  <path d="M 70 -150 A 170 170 0 0 1 172 -34" fill="none" stroke="#d5a94f" stroke-width="8" stroke-linecap="round" opacity="0.95"/>
+  <g fill="none" stroke="#6f9fa4" stroke-width="14" stroke-linecap="round">
+    <line x1="-100" y1="-8" x2="-100" y2="30"/>
+    <line x1="-70" y1="-45" x2="-70" y2="62"/>
+    <line x1="-40" y1="-80" x2="-40" y2="96"/>
+    <line x1="-10" y1="-116" x2="-10" y2="130"/>
+    <line x1="20" y1="-78" x2="20" y2="94"/>
+    <line x1="50" y1="-46" x2="50" y2="62"/>
+    <line x1="80" y1="-12" x2="80" y2="30"/>
+  </g>
+  <g fill="#7ca8a3">
+    <path d="M 112 90 C 142 56 174 60 204 72 C 174 98 147 108 112 90 Z"/>
+    <path d="M 136 142 C 172 116 205 128 232 148 C 196 168 165 170 136 142 Z"/>
+    <path d="M 89 151 C 116 114 111 80 93 53 C 67 91 63 123 89 151 Z"/>
+    <path d="M 44 173 C 74 138 70 104 55 78 C 25 115 20 146 44 173 Z"/>
+  </g>
+  <path d="M 15 -164 L 31 -122 L 73 -106 L 31 -90 L 15 -48 L -1 -90 L -43 -106 L -1 -122 Z" fill="#d5a94f"/>
+</g>
+<text x="800" y="630" text-anchor="middle" font-family="Aptos, Avenir Next, Helvetica, Arial, sans-serif" font-size="118" letter-spacing="-2" fill="#12324a">Living Echo</text>
+<g transform="translate(800 700)">
+  <line x1="-370" x2="-210" y1="0" y2="0" stroke="#d5a94f" stroke-width="5"/>
+  <line x1="210" x2="370" y1="0" y2="0" stroke="#d5a94f" stroke-width="5"/>
+  <text x="0" y="12" text-anchor="middle" font-family="Aptos, Avenir Next, Helvetica, Arial, sans-serif" font-size="38" letter-spacing="16" fill="#517d83">VOICES LIVE ON</text>
+</g>
+</svg>
